@@ -7,7 +7,17 @@ public class RoomScript : MonoBehaviour
 {
     [SerializeField] public Status status;
     [SerializeField] public string resourse;
+    [SerializeField] public GameObject leftDoor;
+    [SerializeField] public GameObject rightDoor;
+    [SerializeField] public bool hasLeftDoor;
+    [SerializeField] public bool hasRightDoor;
     private Coroutine work;
+
+    private void Start()
+    {
+        leftDoor.SetActive(hasLeftDoor);
+        rightDoor.SetActive(hasRightDoor);
+    }
 
     public void StartWork()
     {

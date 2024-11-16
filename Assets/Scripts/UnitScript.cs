@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UnitMove : MonoBehaviour
 {
-    [SerializeField] public bool isFollowing;
+    [SerializeField] public bool chased;
     [SerializeField] public float speed;
     private bool onLadder;
     private Rigidbody rb;
@@ -19,26 +19,16 @@ public class UnitMove : MonoBehaviour
     {
         onLadder = laddersAmount > 0;
 
-        if (isFollowing)
+        if (chased)
         {
             rb.useGravity = !onLadder;
             dir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical") * (onLadder ? 1f : 0f), 0f);
             rb.linearVelocity = new Vector3(speed * dir.x, speed * dir.y, 0f);
         }
-    }
-
-    private bool CheckLadder()
-    {
-        bool check = false;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 1f);
-        for (int i = 0; i < colliders.Length; i++)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (colliders[i].CompareTag("ladder_room"))
-            {
-                check = true;
-            }
+            
         }
-        return check;
     }
 
     private void OnTriggerEnter(Collider other)
