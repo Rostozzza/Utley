@@ -1,23 +1,35 @@
+using System;
+using System.Collections;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class RoomScript : MonoBehaviour
 {
-    public class Room
+    [SerializeField] public Status status;
+    [SerializeField] public string resourse;
+    [SerializeField] public bool repaired = true;
+    private Coroutine work;
+
+    public void StartWork()
     {
-        public int length;
-        public int height;
-        public Room() { length = 2; height = 1; }
-        public Room(int length, int height) { this.length = length; this.height = height; }
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+        work = StartCoroutine(WorkStatus());
     }
 
-    // Update is called once per frame
-    void Update()
+    public void InterruptWork()
     {
-        
+        StopCoroutine(work);
+    }
+
+    private IEnumerator WorkStatus()
+    {
+        status = Status.Busy;
+        yield return new WaitForSeconds(5f);
+        status = Status.Free;
+    }
+
+    public enum Status
+    {
+        Free,
+        Busy
     }
 }
