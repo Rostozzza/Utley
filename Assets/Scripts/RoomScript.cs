@@ -19,6 +19,10 @@ public class RoomScript : MonoBehaviour
         rightDoor.SetActive(hasRightDoor);
     }
 
+
+    /// <summary>
+    /// Начать работу за станцией
+    /// </summary>
     public void StartWork()
     {
         if (status == Status.Free)

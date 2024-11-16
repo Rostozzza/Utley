@@ -5,10 +5,13 @@ public class UnitMove : MonoBehaviour
 {
     [SerializeField] public bool chased;
     [SerializeField] public float speed;
+    [SerializeField] public bool isBusy;
     private bool onLadder;
     private Rigidbody rb;
     private Vector3 dir;
     private int laddersAmount;
+    private Jobs job;
+    private GameObject nearWorkStation;
 
     private void Start()
     {
@@ -21,13 +24,15 @@ public class UnitMove : MonoBehaviour
 
         if (chased)
         {
+            job = Jobs.None;
             rb.useGravity = !onLadder;
-            dir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical") * (onLadder ? 1f : 0f), 0f);
-            rb.linearVelocity = new Vector3(speed * dir.x, speed * dir.y, 0f);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            
+            dir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
+            rb.linearVelocity = new Vector3(speed * dir.x, onLadder ? speed * dir.y : rb.linearVelocity.y, 0f);
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                isBusy = true;
+                chased = false;
+            }
         }
     }
 
@@ -37,6 +42,10 @@ public class UnitMove : MonoBehaviour
         {
             laddersAmount++;
         }
+        else if (other.CompareTag("work_station"))
+        {
+            nearWorkStation = other.gameObject;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -45,5 +54,12 @@ public class UnitMove : MonoBehaviour
         {
             laddersAmount--;
         }
+    }
+
+    enum Jobs
+    {
+        None,
+        Energohoney,
+        Asterium
     }
 }

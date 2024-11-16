@@ -2,11 +2,24 @@ using UnityEngine;
 
 public class WorkStationScript : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("unit"))
+    //    {
+    //        //other.GetComponent<UnitScript>().
+    //    }
+    //}
+    [SerializeField] Works work;
+
+    public Works GetJob()
     {
-        if (other.CompareTag("unit"))
-        {
-            //other.GetComponent<UnitScript>().
-        }
+        return work;
+    }
+
+    public enum Works
+    {
+        None,
+        Energohoney,
+        Asterium
     }
 }
