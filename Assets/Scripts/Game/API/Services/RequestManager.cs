@@ -1,9 +1,9 @@
+// -*- coding: utf-8 -*-
 using System.Net.Http;
 using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-
 public class RequestManager
 {
 	public string UUID;
@@ -183,7 +183,7 @@ public class RequestManager
 	}
 
 	/// <summary>
-	/// Возвращает 
+	/// Возвращает логи
 	/// </summary>
 	/// <param name="name"></param>
 	/// <param name="shopName"></param>
