@@ -1,9 +1,9 @@
+// -*- coding: utf-8 -*-
 using System.Net.Http;
 using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-
 public class RequestManager
 {
 	public string UUID;
@@ -36,7 +36,7 @@ public class RequestManager
 	#region GET
 
 	/// <summary>
-	/// ¬озвращает список зарегистрированных игроков.
+	/// Returns list of all registered players
 	/// </summary>
 	/// <returns></returns>
 	/// <exception cref="Exception"></exception>
@@ -65,7 +65,7 @@ public class RequestManager
 
 
 	/// <summary>
-	/// ¬озвращает данные зарегистрированного игрока с сервера.
+	/// Returns a specific registered player by name
 	/// </summary>
 	/// <param name="name"></param>
 	/// <returns></returns>
@@ -80,7 +80,7 @@ public class RequestManager
 			var response = client.GetAsync(url).Result;
 			if (!response.IsSuccessStatusCode)
 			{
-				throw new Exception($"Failed to create a new player. Status code: {response.StatusCode}");
+				throw new Exception($"Failed to get selected player. Status code: {response.StatusCode}");
 			}
 			var responceBody = await response.Content.ReadAsStringAsync();
 			player = JsonConvert.DeserializeObject<Player>(responceBody);
@@ -89,12 +89,12 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			throw new Exception($"Failed to create a new player. Check your internet connection. Error details: {e.Message}");
+			throw new Exception($"Failed to get selected player. Check your internet connection. Error details: {e.Message}");
 		}
 	}
 
 	/// <summary>
-	/// ¬озвращает логи игрока с именем name.
+	/// Returns player's logs if present.
 	/// </summary>
 	/// <param name="name"></param>
 	/// <returns></returns>
@@ -109,7 +109,7 @@ public class RequestManager
 			var response = client.GetAsync(url).Result;
 			if (!response.IsSuccessStatusCode)
 			{
-				throw new Exception($"Failed to get player's shop. Status code: {response.StatusCode}");
+				throw new Exception($"Failed to get player's logs. Status code: {response.StatusCode}");
 			}
 			var responseBody = await response.Content.ReadAsStringAsync();
 			logs = JsonConvert.DeserializeObject<List<Log>>(responseBody);
@@ -118,12 +118,12 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			throw new Exception($"Failed to get player's shop. Check your internet connection. Error details: {e.Message}");
+			throw new Exception($"Failed to get player's logs. Check your internet connection. Error details: {e.Message}");
 		}
 	}
 
 	/// <summary>
-	/// ¬озвращает все магазины, принадлежащие игроку с именем name.
+	/// Returns all shops belonging to the player
 	/// </summary>
 	/// <param name="name"></param>
 	/// <returns></returns>
@@ -153,7 +153,7 @@ public class RequestManager
 	}
 
 	/// <summary>
-	/// ¬озвращает магазин с именем shopName принадлежащий игроку с именем name.
+	/// Returns a shop belonging to the player by name
 	/// </summary>
 	/// <param name="name"></param>
 	/// <param name="shopName"></param>
@@ -183,7 +183,7 @@ public class RequestManager
 	}
 
 	/// <summary>
-	/// ¬озвращает 
+	/// Returns all logs belonging to a selected player
 	/// </summary>
 	/// <param name="name"></param>
 	/// <param name="shopName"></param>
@@ -199,7 +199,7 @@ public class RequestManager
 			var response = client.GetAsync(url).Result;
 			if (!response.IsSuccessStatusCode)
 			{
-				throw new Exception($"Failed to get player's shop. Status code: {response.StatusCode}");
+				throw new Exception($"Failed to get shop's logs. Status code: {response.StatusCode}");
 			}
 			var responseBody = await response.Content.ReadAsStringAsync();
 			logs = JsonConvert.DeserializeObject<List<Log>>(responseBody);
@@ -208,7 +208,35 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			throw new Exception($"Failed to get player's shop. Check your internet connection. Error details: {e.Message}");
+			throw new Exception($"Failed to get shop's logs. Check your internet connection. Error details: {e.Message}");
+		}
+	}
+
+	/// <summary>
+	/// Returns all logs
+	/// </summary>
+	/// <returns></returns>
+	/// <exception cref="Exception"></exception>
+	public async Task<List<Log>> GetAllLogs()
+	{
+		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/logs/";
+		List<Log> logs = new List<Log>();
+		HttpClient client = new HttpClient();
+		try
+		{
+			var response = client.GetAsync(url).Result;
+			if (!response.IsSuccessStatusCode)
+			{
+				throw new Exception($"Failed to get logs. Status code: {response.StatusCode}");
+			}
+			var responseBody = await response.Content.ReadAsStringAsync();
+			logs = JsonConvert.DeserializeObject<List<Log>>(responseBody);
+
+			return logs;
+		}
+		catch (Exception e)
+		{
+			throw new Exception($"Failed to get logs. Check your internet connection. Error details: {e.Message}");
 		}
 	}
 	#endregion
