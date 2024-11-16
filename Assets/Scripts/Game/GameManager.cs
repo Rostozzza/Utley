@@ -1,11 +1,12 @@
-using System.Linq;
-using System.Security.Cryptography;
+using System.Collections.Generic;
 using UnityEngine;
+using API.Sevices.Mapper;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 	public static RequestManager RequestManager = new RequestManager();
+	public List<GameObject> bears = new List<GameObject>;
 
 	private int honey;
 	private int asteriy;
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
 	}
 	
 	/// <summary>
-	/// Возвращает текущее значение мёда на клиенте.
+	/// Returns amount of honey on current client
 	/// </summary>
 	/// <returns></returns>
 	public int GetHoney()
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
 	}
 	
 	/// <summary>
-	/// Возвращает текущее значение астерия на клиенте.
+	/// Returns amount of Asteriun on current client
 	/// </summary>
 	/// <returns></returns>
 	public int GetAsteriy()
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Изменяет количество мёда.
+	/// Changes amount of honey by given number
 	/// </summary>
 	/// <param name="amount"></param>
 	public void ChangeHoney(int amount)
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Изменяет количество астерия.
+	/// Changes amount of asterium by given number
 	/// </summary>
 	/// <param name="amount"></param>
 	public void ChangeAsteriy(int amount)
