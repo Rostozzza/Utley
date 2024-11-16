@@ -7,12 +7,14 @@ public class RoomScript : MonoBehaviour
 {
     [SerializeField] public Status status;
     [SerializeField] public string resourse;
-    [SerializeField] public bool repaired = true;
     private Coroutine work;
 
     public void StartWork()
     {
-        work = StartCoroutine(WorkStatus());
+        if (status == Status.Free)
+        {
+            work = StartCoroutine(WorkStatus());
+        }
     }
 
     public void InterruptWork()
@@ -30,6 +32,7 @@ public class RoomScript : MonoBehaviour
     public enum Status
     {
         Free,
-        Busy
+        Busy,
+        Destroyed
     }
 }
