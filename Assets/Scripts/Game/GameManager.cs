@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 	public static RequestManager RequestManager = new RequestManager();
 	public List<GameObject> bears = new List<GameObject>();
+	[SerializeField] private GameObject selectedUnit;
 
 	private int honey;
 	private int asteriy;
@@ -60,24 +61,54 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
+		InputHandler();
+	}
+
+	private void InputHandler()
+	{
 		if (Input.GetMouseButtonDown(0))
 		{
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out raycastHit, 100f))
-            {
-                if (raycastHit.transform != null)
-                {
-                    ClickedGameObject(raycastHit.transform.gameObject);
-                }
-            }
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			if (Physics.Raycast(ray, out raycastHit, 100f))
+			{
+				if (raycastHit.transform != null)
+				{
+					ClickedGameObject(raycastHit.transform.gameObject);
+				}
+			}
+		}
+		else if (Input.GetMouseButtonDown(1))
+		{
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			if (Physics.Raycast(ray, out raycastHit, 100f))
+			{
+				if (raycastHit.transform != null)
+				{
+					ClickedGameObject(raycastHit.transform.gameObject);
+				}
+			}
 		}
 	}
 
-	public void ClickedGameObject(GameObject gameObject)
+	private void RightClick(GameObject gameObject)
+	{
+		if (gameObject.CompareTag("room"))
+		{
+			selectedUnit.GetComponent<UnitMovement>().StopAllCoroutines();
+			selectedUnit.GetComponent<UnitMovement>().MoveToRoom(gameObject.GetComponent<RoomScript>());
+		}
+	}
+
+	private void ClickedGameObject(GameObject gameObject)
 	{
 		if (gameObject.CompareTag("unit"))
 		{
-			gameObject.GetComponent<UnitScript>().ChooseUnit();
+			//gameObject.GetComponent<UnitScript>().ChooseUnit();
+			selectedUnit = gameObject;
+		}
+		else
+		{
+			selectedUnit = null;
 		}
 	}
 }
