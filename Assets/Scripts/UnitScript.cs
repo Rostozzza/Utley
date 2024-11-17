@@ -1,8 +1,5 @@
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor.Callbacks;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class UnitScript : MonoBehaviour
 {
@@ -32,15 +29,45 @@ public class UnitScript : MonoBehaviour
             rb.useGravity = !onLadder;
             dir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
             rb.linearVelocity = new Vector3(speed * dir.x, onLadder ? speed * dir.y : rb.linearVelocity.y, 0f);
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && nearWorkStation != null)
             {
                 isBusy = true;
                 chased = false;
+                job = (Jobs)nearWorkStation.GetComponent<WorkStationScript>().GetJob();
             }
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 chased = false;
             }
+        }
+        else
+        {
+            if (job != Jobs.None)
+            {
+                StartCoroutine(WalkCycle());
+            }
+        }
+    }
+
+    private IEnumerator WalkCycle()
+    {
+        dir.x = Random.Range(0, 2) == 1 ? 1 : -1;
+        float previousX = transform.position.x - 1f;
+        while (job != Jobs.None)
+        {
+            float timer = 7f + Random.value;
+            dir.x *= -1f;
+            while (timer > 0f)
+            {
+                if (previousX == transform.position.x)
+                {
+                    yield return new WaitForSeconds(3f);
+
+                }
+                rb.linearVelocity = new Vector3(dir.x, onLadder ? speed * dir.y : rb.linearVelocity.y, 0f);
+                timer -= Time.deltaTime;
+            }
+            previousX = transform.position.x;
         }
     }
 
