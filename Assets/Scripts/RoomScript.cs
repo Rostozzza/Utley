@@ -21,6 +21,11 @@ public class RoomScript : MonoBehaviour
         rightDoor.SetActive(hasRightDoor);
     }
 
+    public void BuildRoom(GameObject button)
+    {
+        GameManager.Instance.QueueBuildPos(button);
+    }
+
 
     /// <summary>
     /// Start work at station ( calls coroutine, can be interrupted by InterruptWork() )
