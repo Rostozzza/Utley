@@ -12,6 +12,7 @@ public class UnitScript : MonoBehaviour
     private int laddersAmount;
     private Jobs job;
     private GameObject nearWorkStation;
+    private Coroutine randomWalk;
 
     private void Start()
     {
@@ -24,6 +25,12 @@ public class UnitScript : MonoBehaviour
 
         if (chased)
         {
+            Debug.Log(randomWalk);
+            if (randomWalk != null)
+            {
+                StopCoroutine(randomWalk);
+                randomWalk = null;
+            }
             Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
             job = Jobs.None;
             rb.useGravity = !onLadder;
@@ -42,33 +49,42 @@ public class UnitScript : MonoBehaviour
         }
         else
         {
-            if (job != Jobs.None)
+            if (randomWalk == null)
             {
-                StartCoroutine(WalkCycle());
+                randomWalk = StartCoroutine(WalkCycle());
+                Debug.Log("стартовали корутину");
             }
+            rb.useGravity = !onLadder;
+            rb.linearVelocity = new Vector3(dir.x, onLadder ? 0f : rb.linearVelocity.y, 0f);
         }
     }
 
     private IEnumerator WalkCycle()
     {
+        RaycastHit hit;
         dir.x = Random.Range(0, 2) == 1 ? 1 : -1;
-        float previousX = transform.position.x - 1f;
-        while (job != Jobs.None)
+        while (!chased)
         {
             float timer = 7f + Random.value;
-            dir.x *= -1f;
             while (timer > 0f)
             {
-                if (previousX == transform.position.x)
+                //rb.linearVelocity = new Vector3(dir.x, onLadder ? 0f : rb.linearVelocity.y, 0f);
+                // Uncomment if wanna see cool rays-detectors
+                Debug.DrawRay(transform.position, Vector3.right, Color.yellow); 
+                Debug.DrawRay(transform.position, Vector3.left, Color.yellow); 
+                if (((Physics.Raycast(transform.position, Vector3.right, out hit, 1f) && dir.x == 1f) || (Physics.Raycast(transform.position, Vector3.left, out hit, 1f) && dir.x == -1f)) && hit.transform.gameObject.layer == 0)
                 {
+                    Debug.Log("разворот");
                     yield return new WaitForSeconds(3f);
-
+                    break;
                 }
-                rb.linearVelocity = new Vector3(dir.x, onLadder ? speed * dir.y : rb.linearVelocity.y, 0f);
                 timer -= Time.deltaTime;
+                yield return null;
             }
-            previousX = transform.position.x;
+            dir.x *= -1f;
+            yield return null;
         }
+        yield return null;
     }
 
     private void OnTriggerEnter(Collider other)
