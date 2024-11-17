@@ -21,6 +21,11 @@ public class RoomScript : MonoBehaviour
         rightDoor.SetActive(hasRightDoor);
     }
 
+    public void BuildRoom(GameObject button)
+    {
+        GameManager.Instance.QueueBuildPos(button);
+    }
+
 
     /// <summary>
     /// Начать работу за станцией

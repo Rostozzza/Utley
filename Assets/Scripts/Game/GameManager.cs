@@ -1,13 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using API.Sevices.Mapper;
+using UnityEngine.Tilemaps;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+	public static GameManager Instance;
 	public static RequestManager RequestManager = new RequestManager();
+	public Tilemap tilemap;
 	public List<GameObject> bears = new List<GameObject>();
 	[SerializeField] private GameObject selectedUnit;
+	[SerializeField] private GameObject buildingScreen;
+	private GameObject queuedBuildPositon;
 
 	private int honey;
 	private int asteriy;
@@ -22,7 +27,57 @@ public class GameManager : MonoBehaviour
 			DontDestroyOnLoad(gameObject);
 		}
 	}
-	
+
+	public void QueueBuildPos(GameObject queuePos)
+	{
+		queuedBuildPositon = queuePos;
+		buildingScreen.SetActive(true);
+	}
+
+	public void SelectAndBuild(GameObject building)
+	{
+		var instance = Instantiate(building, queuedBuildPositon.transform.position, Quaternion.identity);
+		if (instance.TryGetComponent<RoomScript>(out var output))
+		{
+			output.connectedElevators = queuedBuildPositon.GetComponentInParent<RoomScript>().connectedElevators;
+			if (tilemap.HasTile(tilemap.WorldToCell(queuedBuildPositon.transform.parent.position) - new Vector3Int(2, 0, 0)))
+			{
+				var tile = tilemap.GetTile(tilemap.WorldToCell(queuedBuildPositon.transform.parent.position) - new Vector3Int(2, 0, 0));
+				if (tile.name.Contains("Elevator"))
+				{
+					var elevator = tile.GetComponentInParent<Elevator>();
+					elevator.connectedRooms.Add(output);
+					elevator.connectedElevators.Add(elevator.connectedElevators.Contains(output.connectedElevators[0]) ? (elevator.connectedElevators.Contains(output.connectedElevators[1]) ? null : output.connectedElevators[1]) : output.connectedElevators[0]);
+				}
+				else
+				{
+					var room = tilemap.GetTile(tilemap.WorldToCell(queuedBuildPositon.transform.parent.position) - new Vector3Int(2, 0, 0)).GetComponent<RoomScript>();
+					room.connectedElevators = output.connectedElevators;
+				}
+			}
+			else if (tilemap.HasTile(tilemap.WorldToCell(queuedBuildPositon.transform.parent.position) + new Vector3Int(1, 0, 0)))
+			{
+				var tile = tilemap.GetTile(tilemap.WorldToCell(queuedBuildPositon.transform.parent.position) + new Vector3Int(1, 0, 0));
+				if (tile.name.Contains("Elevator"))
+				{
+					var elevator = tile.GetComponentInParent<Elevator>();
+					elevator.connectedRooms.Add(output);
+					elevator.connectedElevators.Add(elevator.connectedElevators.Contains(output.connectedElevators[0]) ? (elevator.connectedElevators.Contains(output.connectedElevators[1]) ? null : output.connectedElevators[1]) : output.connectedElevators[0]);
+				}
+				else
+				{
+					var room = tilemap.GetTile(tilemap.WorldToCell(queuedBuildPositon.transform.parent.position) + new Vector3Int(1, 0, 0)).GetComponent<RoomScript>();
+					room.connectedElevators = output.connectedElevators;
+				}
+			}
+		}
+		else if (instance.TryGetComponent<Elevator>(out var elevatorOutput))
+		{
+
+			elevatorOutput.connectedRooms.Add(queuedBuildPositon.GetComponentInChildren<RoomScript>());
+		}
+	}
+
 	/// <summary>
 	/// Returns amount of honey on current client
 	/// </summary>
@@ -31,7 +86,7 @@ public class GameManager : MonoBehaviour
 	{
 		return honey;
 	}
-	
+
 	/// <summary>
 	/// Returns amount of Asteriun on current client
 	/// </summary>
@@ -84,7 +139,7 @@ public class GameManager : MonoBehaviour
 			{
 				if (raycastHit.transform != null)
 				{
-					ClickedGameObject(raycastHit.transform.gameObject);
+					RightClick(raycastHit.transform.gameObject);
 				}
 			}
 		}
