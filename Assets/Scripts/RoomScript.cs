@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System;
 using System.Collections;
 using UnityEditor.PackageManager;
@@ -11,6 +12,7 @@ public class RoomScript : MonoBehaviour
     [SerializeField] public GameObject rightDoor;
     [SerializeField] public bool hasLeftDoor;
     [SerializeField] public bool hasRightDoor;
+    public List<Elevator> connectedElevators;
     private Coroutine work;
 
     private void Start()
