@@ -6,10 +6,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 	public static RequestManager RequestManager = new RequestManager();
-	public List<GameObject> bears = new List<GameObject>;
+	public List<GameObject> bears = new List<GameObject>();
 
 	private int honey;
 	private int asteriy;
+
+	RaycastHit raycastHit;
 
 	public void Awake()
 	{
@@ -54,5 +56,28 @@ public class GameManager : MonoBehaviour
 	public void ChangeAsteriy(int amount)
 	{
 		asteriy += amount;
+	}
+
+	private void Update()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out raycastHit, 100f))
+            {
+                if (raycastHit.transform != null)
+                {
+                    ClickedGameObject(raycastHit.transform.gameObject);
+                }
+            }
+		}
+	}
+
+	public void ClickedGameObject(GameObject gameObject)
+	{
+		if (gameObject.CompareTag("unit"))
+		{
+			gameObject.GetComponent<UnitScript>().ChooseUnit();
+		}
 	}
 }

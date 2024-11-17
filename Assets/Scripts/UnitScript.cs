@@ -1,10 +1,13 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor.Callbacks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class UnitMove : MonoBehaviour
+public class UnitScript : MonoBehaviour
 {
     [SerializeField] public bool chased;
-    [SerializeField] public float speed;
+    [SerializeField] public float speed = 5f;
     [SerializeField] public bool isBusy;
     private bool onLadder;
     private Rigidbody rb;
@@ -24,6 +27,7 @@ public class UnitMove : MonoBehaviour
 
         if (chased)
         {
+            Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
             job = Jobs.None;
             rb.useGravity = !onLadder;
             dir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
@@ -31,6 +35,10 @@ public class UnitMove : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 isBusy = true;
+                chased = false;
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
                 chased = false;
             }
         }
@@ -54,6 +62,11 @@ public class UnitMove : MonoBehaviour
         {
             laddersAmount--;
         }
+    }
+
+    public void ChooseUnit()
+    {
+        chased = true;
     }
 
     enum Jobs
