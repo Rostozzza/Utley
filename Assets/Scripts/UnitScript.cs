@@ -31,7 +31,7 @@ public class UnitScript : MonoBehaviour
                 StopCoroutine(randomWalk);
                 randomWalk = null;
             }
-            Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
+            Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -20f);
             job = Jobs.None;
             rb.useGravity = !onLadder;
             dir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
