@@ -4,33 +4,13 @@ using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Text;
+
 public class RequestManager
 {
 	public string UUID;
 
 	#region PUT
-	public async Task<Player> CreatePlayer(string name)
-	{
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/";
-		using HttpClient client = new HttpClient();
-		var request = new HttpRequestMessage(HttpMethod.Post, url);
-		Player newPLayer = new Player();
-		request.Content.Headers.Add("name", name);
-		try
-		{
-			var response = client.SendAsync(request).Result;
-			if (!response.IsSuccessStatusCode)
-			{
-				throw new Exception($"Failed to create a new player. Status code: {response.StatusCode}");
-			}
-			var responceBody = await response.Content.ReadAsStringAsync();
-			return JsonConvert.DeserializeObject<Player>(responceBody);
-		}
-		catch (Exception e)
-		{
-			throw new Exception($"Failed to create a new player. Check your internet connection. Error details: {e.Message}");
-		}
-	}
 	#endregion
 
 	#region GET
@@ -106,7 +86,7 @@ public class RequestManager
 		HttpClient client = new HttpClient();
 		try
 		{
-			var response = client.GetAsync(url).Result;
+			var response = await client.GetAsync(url);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new Exception($"Failed to get player's logs. Status code: {response.StatusCode}");
@@ -242,7 +222,37 @@ public class RequestManager
 	#endregion
 
 	#region POST
+	/// <summary>
+	/// Creates a request for an API to create an player by name. Returns an instance of class "Player"
+	/// </summary>
+	/// <param name="name"></param>
+	/// <returns></returns>
+	/// <exception cref="Exception"></exception>
+	public async Task<Player> CreatePlayer(string name)
+	{
+		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/";
+		Player newPlayer = new Player();
+		newPlayer.Name = name;
+		using HttpClient client = new HttpClient();
+		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
+		request.Content = new StringContent(JsonConvert.SerializeObject(newPlayer),Encoding.UTF8, "application/json");
+		try
+		{
+			var response = await client.SendAsync(request);
+			if (!response.IsSuccessStatusCode)
+			{
+				throw new Exception($"Failed to create a new player. Status code: {response.StatusCode}");
+			}
 
+			var responseBody = await response.Content.ReadAsStringAsync();
+			newPlayer = JsonConvert.DeserializeObject<Player>(responseBody);
+			return newPlayer;
+		}
+		catch (Exception e)
+		{
+			throw new Exception($"Failed to create a new player. Check your internet connection. Error details: {e.Message}");
+		}
+	}
 	#endregion
 
 	#region DELETE
