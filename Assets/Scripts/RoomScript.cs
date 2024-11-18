@@ -7,7 +7,7 @@ using UnityEngine;
 public class RoomScript : MonoBehaviour
 {
     [SerializeField] public Status status;
-    [SerializeField] public Resources resourse;
+    [SerializeField] public Resources resource;
     [SerializeField] public GameObject leftDoor;
     [SerializeField] public GameObject rightDoor;
     [SerializeField] public bool hasLeftDoor;
@@ -15,11 +15,17 @@ public class RoomScript : MonoBehaviour
     public List<Elevator> connectedElevators;
     public List<RoomScript> connectedRooms;
     private Coroutine work;
+    [SerializeField] public Vector3[] walkPoints;
 
     private void Start()
     {
         leftDoor.SetActive(hasLeftDoor);
         rightDoor.SetActive(hasRightDoor);
+        /*switch (resource)
+        {
+            case Resources.Energohoney:
+                break;
+        }*/
     }
 
     public void BuildRoom(GameObject button)
@@ -52,7 +58,7 @@ public class RoomScript : MonoBehaviour
     {
         status = Status.Busy;
         yield return new WaitForSeconds(5f);
-        switch (resourse)
+        switch (resource)
         {
             case Resources.Energohoney:
                 GameManager.Instance.ChangeHoney(10);
