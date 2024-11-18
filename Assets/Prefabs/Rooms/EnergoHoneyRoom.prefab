@@ -62,11 +62,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: 0
-  resourse: 
+  resource: 0
   leftDoor: {fileID: 8254692536980482652}
   rightDoor: {fileID: 4292728100649235702}
   hasLeftDoor: 0
   hasRightDoor: 0
+  connectedElevators: []
+  connectedRooms: []
+  walkPoints: []
 --- !u!65 &2898520250293289566
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1004,7 +1007,7 @@ GameObject:
   - component: {fileID: 7963063243683989571}
   m_Layer: 0
   m_Name: Cube.007
-  m_TagString: Untagged
+  m_TagString: work_station
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1090,7 +1093,7 @@ GameObject:
   - component: {fileID: 8127537491112801520}
   m_Layer: 0
   m_Name: Cube.004
-  m_TagString: Untagged
+  m_TagString: work_station
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1176,7 +1179,7 @@ GameObject:
   - component: {fileID: 6847934133110415141}
   m_Layer: 0
   m_Name: Cube.010
-  m_TagString: Untagged
+  m_TagString: work_station
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
