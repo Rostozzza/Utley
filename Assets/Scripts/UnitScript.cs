@@ -13,6 +13,8 @@ public class UnitScript : MonoBehaviour
     private Jobs job;
     private GameObject nearWorkStation;
     private Coroutine randomWalk;
+    private Vector3[] walkPoints;
+    public bool selectable = true;
 
     private void Start()
     {
@@ -49,11 +51,11 @@ public class UnitScript : MonoBehaviour
         }
         else
         {
-            if (randomWalk == null)
-            {
-                randomWalk = StartCoroutine(WalkCycle());
-                Debug.Log("стартовали корутину");
-            }
+            //if (randomWalk == null)
+            //{
+            //    randomWalk = StartCoroutine(WalkCycle());
+            //    Debug.Log("стартовали корутину");
+            //}
             rb.useGravity = !onLadder;
             rb.linearVelocity = new Vector3(dir.x, onLadder ? 0f : rb.linearVelocity.y, 0f);
         }
@@ -110,6 +112,59 @@ public class UnitScript : MonoBehaviour
     public void ChooseUnit()
     {
         chased = true;
+    }
+
+    /// <summary>
+    /// Load walk points from room to unit
+    /// </summary>
+    /// <param name="points"></param>
+    public void PutWalkPoints(Vector3[] points)
+    {
+        walkPoints = points;
+    }
+
+    /// <summary>
+    /// Bear becomes busy and cannot be selected
+    /// </summary>
+    public void CannotBeSelected()
+    {
+        selectable = false;
+    }
+
+    /// <summary>
+    /// Bear becomes free and can be selected
+    /// </summary>
+    public void CanBeSelected()
+    {
+        selectable = true;
+    }
+
+    public void StartMoveInRoom(int roomType)
+    {
+
+        StartCoroutine(MoveInRoom(roomType));
+    }
+
+    public IEnumerator MoveInRoom(int roomType)
+    {
+        Vector3 chosenPoint;
+        switch (roomType)
+        {
+            case 0:
+                chosenPoint = walkPoints[Random.Range(0, walkPoints.Length - 1)];
+                while (chosenPoint.x - 0.1f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.1f)
+                {
+                    dir.x = Mathf.Sign(chosenPoint.x - transform.position.x);
+                    yield return null;
+                }
+                chosenPoint = walkPoints[3];
+                while (chosenPoint.x - 0.1f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.1f)
+                {
+                    dir.x = Mathf.Sign(chosenPoint.x - transform.position.x);
+                    yield return null;
+                }
+                break;
+        }
     }
 
     enum Jobs

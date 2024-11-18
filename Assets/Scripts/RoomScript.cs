@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using TMPro;
 
 public class RoomScript : MonoBehaviour
 {
@@ -15,10 +16,14 @@ public class RoomScript : MonoBehaviour
     public List<Elevator> connectedElevators;
     public List<RoomScript> connectedRooms;
     private Coroutine work;
-    [SerializeField] public Vector3[] walkPoints;
+    [SerializeField] private Transform[] rawWalkPoints; // for energohoney 1 - 3 is paseka, 4 is generator
+    private Vector3[] walkPoints;
+    [SerializeField] private TextMeshProUGUI timeShow;
+    private GameObject fixedBear;
 
     private void Start()
     {
+        walkPoints = Array.ConvertAll(rawWalkPoints, obj => obj.position);
         leftDoor.SetActive(hasLeftDoor);
         rightDoor.SetActive(hasRightDoor);
         /*switch (resource)
@@ -35,10 +40,12 @@ public class RoomScript : MonoBehaviour
 
 
     /// <summary>
-    /// Start work at station ( calls coroutine, can be interrupted by InterruptWork() )
+    /// Start work at station by bear ( calls coroutine, can be interrupted by InterruptWork() )
     /// </summary>
-    public void StartWork()
+    /// <param name="bear"></param>
+    public void StartWork(GameObject bear)
     {
+        fixedBear = bear;
         if (status == Status.Free)
         {
             work = StartCoroutine(WorkStatus());
@@ -52,22 +59,44 @@ public class RoomScript : MonoBehaviour
     {
         StopCoroutine(work);
         work = null;
+        fixedBear = null;
     }
 
     private IEnumerator WorkStatus()
     {
+        float timer;
         status = Status.Busy;
-        yield return new WaitForSeconds(5f);
+        fixedBear.GetComponent<UnitScript>().CannotBeSelected();
         switch (resource)
         {
             case Resources.Energohoney:
+                fixedBear.GetComponent<UnitScript>().StartMoveInRoom((int)Resources.Energohoney);
+                timer = 45f;
+                while (timer > 0)
+                {
+                    timeShow.text = SecondsToTimeToShow(timer);
+                    timer -= Time.deltaTime;
+                    yield return null;
+                }
                 GameManager.Instance.ChangeHoney(10);
                 break;
             case Resources.Asteriy:
                 GameManager.Instance.ChangeAsteriy(10);
                 break;
         }
+        fixedBear.GetComponent<UnitScript>().CanBeSelected();
+        fixedBear = null;
         status = Status.Free;
+    }
+
+    private string SecondsToTimeToShow(float seconds) // left - minutes, right - seconds. no hours
+    {
+        return (int)seconds / 60 + ":" + seconds % 60;
+    }
+
+    public Vector3[] GetWalkPoints()
+    {
+        return walkPoints;
     }
 
     public enum Resources
