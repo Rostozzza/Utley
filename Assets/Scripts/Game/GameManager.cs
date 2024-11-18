@@ -3,6 +3,7 @@ using UnityEngine;
 using API.Sevices.Mapper;
 using UnityEngine.Tilemaps;
 using Unity.VisualScripting;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
 	public List<GameObject> bears = new List<GameObject>();
 	[SerializeField] private GameObject selectedUnit;
 	[SerializeField] private GameObject buildingScreen;
+	[SerializeField] private GameObject floorPrefab;
 	private GameObject queuedBuildPositon;
 
 	private int honey;
@@ -37,44 +39,44 @@ public class GameManager : MonoBehaviour
 	public void SelectAndBuild(GameObject building)
 	{
 		var instance = Instantiate(building, queuedBuildPositon.transform.position, Quaternion.identity);
-		if (instance.TryGetComponent<RoomScript>(out var output))
+		if (instance.CompareTag("elevator"))
 		{
-			output.connectedElevators = queuedBuildPositon.GetComponentInParent<RoomScript>().connectedElevators;
-			if (tilemap.HasTile(tilemap.WorldToCell(queuedBuildPositon.transform.parent.position) - new Vector3Int(2, 0, 0)))
+			RaycastHit hit;
+			Ray rayLeft = new Ray(instance.transform.position,Vector3.left);
+			var elevator = instance.GetComponent<Elevator>();
+			if (queuedBuildPositon.transform.parent.parent.CompareTag("room"))
 			{
-				var tile = tilemap.GetTile(tilemap.WorldToCell(queuedBuildPositon.transform.parent.position) - new Vector3Int(2, 0, 0));
-				if (tile.name.Contains("Elevator"))
+				
+			}
+			if (Physics.Raycast(rayLeft, out hit, 6f))
+			{
+				if (hit.collider.CompareTag("room"))
 				{
-					var elevator = tile.GetComponentInParent<Elevator>();
-					elevator.connectedRooms.Add(output);
-					elevator.connectedElevators.Add(elevator.connectedElevators.Contains(output.connectedElevators[0]) ? (elevator.connectedElevators.Contains(output.connectedElevators[1]) ? null : output.connectedElevators[1]) : output.connectedElevators[0]);
-				}
-				else
-				{
-					var room = tilemap.GetTile(tilemap.WorldToCell(queuedBuildPositon.transform.parent.position) - new Vector3Int(2, 0, 0)).GetComponent<RoomScript>();
-					room.connectedElevators = output.connectedElevators;
+					foreach (var e in hit.transform.GetComponent<RoomScript>().connectedElevators)
+					{
+						e.connectedElevators.Add(instance.GetComponent<Elevator>());
+						instance.GetComponent<Elevator>().connectedElevators.Add(e);
+					}
+					hit.transform.GetComponent<RoomScript>().connectedElevators.Add(elevator);
+					elevator.connectedRooms.Add(hit.transform.GetComponent<RoomScript>());
+					elevator.connectedElevators.Add(elevator);
 				}
 			}
-			else if (tilemap.HasTile(tilemap.WorldToCell(queuedBuildPositon.transform.parent.position) + new Vector3Int(1, 0, 0)))
+			Ray rayRight = new Ray(instance.transform.position, Vector3.right);
+			if (Physics.Raycast(rayLeft, out hit, 12f))
 			{
-				var tile = tilemap.GetTile(tilemap.WorldToCell(queuedBuildPositon.transform.parent.position) + new Vector3Int(1, 0, 0));
-				if (tile.name.Contains("Elevator"))
+				if (hit.collider.CompareTag("room"))
 				{
-					var elevator = tile.GetComponentInParent<Elevator>();
-					elevator.connectedRooms.Add(output);
-					elevator.connectedElevators.Add(elevator.connectedElevators.Contains(output.connectedElevators[0]) ? (elevator.connectedElevators.Contains(output.connectedElevators[1]) ? null : output.connectedElevators[1]) : output.connectedElevators[0]);
-				}
-				else
-				{
-					var room = tilemap.GetTile(tilemap.WorldToCell(queuedBuildPositon.transform.parent.position) + new Vector3Int(1, 0, 0)).GetComponent<RoomScript>();
-					room.connectedElevators = output.connectedElevators;
+					foreach (var e in hit.transform.GetComponent<RoomScript>().connectedElevators)
+					{
+						e.connectedElevators.Add(instance.GetComponent<Elevator>());
+						instance.GetComponent<Elevator>().connectedElevators.Add(e);
+					}
+					hit.transform.GetComponent<RoomScript>().connectedElevators.Add(instance.GetComponent<Elevator>());
+					instance.GetComponent<Elevator>().connectedRooms.Add(hit.transform.GetComponent<RoomScript>());
+					instance.GetComponent<Elevator>().connectedElevators.Add(instance.GetComponent<Elevator>());
 				}
 			}
-		}
-		else if (instance.TryGetComponent<Elevator>(out var elevatorOutput))
-		{
-
-			elevatorOutput.connectedRooms.Add(queuedBuildPositon.GetComponentInChildren<RoomScript>());
 		}
 	}
 
