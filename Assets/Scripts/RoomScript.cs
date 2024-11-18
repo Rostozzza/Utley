@@ -13,6 +13,7 @@ public class RoomScript : MonoBehaviour
     [SerializeField] public bool hasLeftDoor;
     [SerializeField] public bool hasRightDoor;
     public List<Elevator> connectedElevators;
+    public List<RoomScript> connectedRooms;
     private Coroutine work;
 
     private void Start()
