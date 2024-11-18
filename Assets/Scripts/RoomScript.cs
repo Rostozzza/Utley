@@ -7,7 +7,7 @@ using UnityEngine;
 public class RoomScript : MonoBehaviour
 {
     [SerializeField] public Status status;
-    [SerializeField] public string resourse;
+    [SerializeField] public Resources resourse;
     [SerializeField] public GameObject leftDoor;
     [SerializeField] public GameObject rightDoor;
     [SerializeField] public bool hasLeftDoor;
@@ -29,7 +29,7 @@ public class RoomScript : MonoBehaviour
 
 
     /// <summary>
-    /// Начать работу за станцией
+    /// Start work at station ( calls coroutine, can be interrupted by InterruptWork() )
     /// </summary>
     public void StartWork()
     {
@@ -39,16 +39,35 @@ public class RoomScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Stops work
+    /// </summary>
     public void InterruptWork()
     {
         StopCoroutine(work);
+        work = null;
     }
 
     private IEnumerator WorkStatus()
     {
         status = Status.Busy;
         yield return new WaitForSeconds(5f);
+        switch (resourse)
+        {
+            case Resources.Energohoney:
+                GameManager.Instance.ChangeHoney(10);
+                break;
+            case Resources.Asteriy:
+                GameManager.Instance.ChangeAsteriy(10);
+                break;
+        }
         status = Status.Free;
+    }
+
+    public enum Resources
+    {
+        Energohoney,
+        Asteriy
     }
 
     public enum Status
