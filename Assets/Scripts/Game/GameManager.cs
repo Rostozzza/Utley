@@ -46,22 +46,29 @@ public class GameManager : MonoBehaviour
 	/// <param name="building"></param>
 	public void SelectAndBuild(GameObject building)
 	{
-		var instance = Instantiate(building, queuedBuildPositon.transform.position, Quaternion.identity);
+		var instance = Instantiate(building, queuedBuildPositon.transform.position-new Vector3(0,0, 3.46f), Quaternion.identity);
 		if (instance.CompareTag("elevator"))// trying to build elevator
 		{
+			Debug.Log("Placing elevator");
 			RaycastHit hit;
-			Ray rayLeft = new Ray(instance.transform.position,Vector3.left);
+			Ray rayLeft = new Ray(instance.transform.position,Vector3.left * 6f);
+			
 			var elevator = instance.GetComponent<Elevator>();
 			if (queuedBuildPositon.transform.parent.parent.CompareTag("elevator"))
 			{
-				elevator = queuedBuildPositon.transform.parent.parent.GetComponent<Elevator>();
+				Debug.Log("extending existing elevator");
+				elevator = queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>();
+				instance.transform.parent = elevator.transform;
+				Destroy(instance.GetComponent<Elevator>());
 			}
 			if (Physics.Raycast(rayLeft, out hit, 6f))
 			{
+				Debug.Log("Collision on left");
 				if (hit.collider.CompareTag("room"))
 				{
-					foreach (var e in hit.transform.GetComponent<RoomScript>().connectedElevators)
+					for (int i = 0; i < hit.transform.GetComponent<RoomScript>().connectedElevators.Count;i++)
 					{
+						Elevator e = hit.transform.GetComponent<RoomScript>().connectedElevators[i];
 						e.connectedElevators.Add(elevator);
 						instance.GetComponent<Elevator>().connectedElevators.Add(e);
 						foreach (var r in e.connectedRooms)
@@ -77,9 +84,11 @@ public class GameManager : MonoBehaviour
 					elevator.connectedElevators.Add(elevator);
 				}
 			}
-			Ray rayRight = new Ray(instance.transform.position, Vector3.right);
-			if (Physics.Raycast(rayLeft, out hit, 12f))
+			hit = new RaycastHit();
+			Ray rayRight = new Ray(instance.transform.position, Vector3.right * 6f);
+			if (Physics.Raycast(rayRight, out hit, 6f))
 			{
+				Debug.Log("Collision on right");
 				if (hit.collider.CompareTag("room"))
 				{
 					foreach (var e in hit.transform.GetComponent<RoomScript>().connectedElevators)
@@ -103,7 +112,8 @@ public class GameManager : MonoBehaviour
 		else if (instance.CompareTag("room"))
 		{
 			RaycastHit hit;
-			Ray rayLeft = new Ray(instance.transform.position, Vector3.left);
+			Ray rayLeft = new Ray(instance.transform.position, Vector3.left * 6f);
+			Debug.DrawRay(instance.transform.position, Vector3.left * 6f, Color.red, 15f);
 			var room = instance.GetComponent<RoomScript>();
 			RoomScript leftRoom = null;
 			RoomScript rightRoom = null;
@@ -111,20 +121,26 @@ public class GameManager : MonoBehaviour
 			Elevator rightElevator = null;
 			if (Physics.Raycast(rayLeft, out hit, 6f))
 			{
+				Debug.Log("Collision on left: " + hit.collider.name);
 				if (hit.collider.CompareTag("room"))
 				{
+					Debug.Log("Room on right");
 					leftRoom = hit.collider.GetComponent<RoomScript>();
 					room.connectedElevators.AddRange(leftRoom.connectedElevators);
 				}
 				else if (hit.collider.CompareTag("elevator"))
 				{
-					leftElevator = hit.collider.GetComponent<Elevator>();
+					Debug.Log("Elevator on left");
+					leftElevator = hit.collider.GetComponentInParent<Elevator>();
 					room.connectedElevators.Add(leftElevator);
 				}
 			}
-			Ray rayRight = new Ray(instance.transform.position, Vector3.right);
-			if (Physics.Raycast(rayLeft, out hit, 12f))
+			hit = new RaycastHit();
+			Ray rayRight = new Ray(instance.transform.position, Vector3.right * 6f);
+			Debug.DrawRay(instance.transform.position, Vector3.right * 6f, Color.red, 15f);
+			if (Physics.Raycast(rayRight, out hit, 12f))
 			{
+				Debug.Log("Collision on right: " + hit.collider.name);
 				if (hit.collider.CompareTag("room"))
 				{
 					rightRoom = hit.collider.GetComponent<RoomScript>();
@@ -132,7 +148,7 @@ public class GameManager : MonoBehaviour
 				}
 				else if (hit.collider.CompareTag("elevator"))
 				{
-					rightElevator = hit.collider.GetComponent<Elevator>();
+					rightElevator = hit.collider.GetComponentInParent<Elevator>();
 					room.connectedElevators.Add(rightElevator);
 				}
 			}

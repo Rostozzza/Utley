@@ -5,4 +5,9 @@ public class Elevator : MonoBehaviour
 {
     public List<Elevator> connectedElevators;
     public List<RoomScript> connectedRooms;
+
+    public void BuildElevator(GameObject point)
+    {
+        GameManager.Instance.QueueBuildPos(point);
+    }
 }

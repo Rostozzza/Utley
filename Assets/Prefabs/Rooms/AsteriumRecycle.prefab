@@ -464,7 +464,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8540255448794598305}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2212405224928843374}
+        m_TargetAssemblyTypeName: RoomScript, Assembly-CSharp
+        m_MethodName: BuildRoom
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1808190649482319277}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1874556540584288956
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,7 +683,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6139433562953975010}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2212405224928843374}
+        m_TargetAssemblyTypeName: RoomScript, Assembly-CSharp
+        m_MethodName: BuildRoom
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2492745562586233494}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3228974509038611214
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,9 +1518,10 @@ GameObject:
   - component: {fileID: 6413463778240722941}
   - component: {fileID: 3716220056007500293}
   - component: {fileID: 2212405224928843374}
+  - component: {fileID: 6881682886034302060}
   m_Layer: 0
   m_Name: AsteriumRecycle
-  m_TagString: Untagged
+  m_TagString: room
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1585,12 +1610,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: 0
-  resourse: 
+  resourse: 0
   leftDoor: {fileID: 7697326446249576725}
   rightDoor: {fileID: 6222399685666512922}
   hasLeftDoor: 0
   hasRightDoor: 0
   connectedElevators: []
+  connectedRooms: []
+--- !u!65 &6881682886034302060
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7578359609187239277}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.9911203, y: 3.5300038, z: 4.6055603}
+  m_Center: {x: 2.0044465, y: -0.006111264, z: -0.12833405}
 --- !u!1 &7680603216590664871
 GameObject:
   m_ObjectHideFlags: 0
