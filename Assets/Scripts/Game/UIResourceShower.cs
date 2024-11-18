@@ -10,6 +10,11 @@ public class UIResourceShower : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bearsAmountText;
     [SerializeField] private Slider temperatureSlider;
 
+    private void Start()
+    {
+        UpdateIndicators();
+    }
+
     /// <summary>
     /// Updates UI indicators (honey, asteriy, etc.)
     /// </summary>
