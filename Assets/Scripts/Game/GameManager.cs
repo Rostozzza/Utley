@@ -30,23 +30,31 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Saves position at "queuedBuildPosition"
+	/// </summary>
+	/// <param name="queuePos"></param>
 	public void QueueBuildPos(GameObject queuePos)
 	{
 		queuedBuildPositon = queuePos;
 		buildingScreen.SetActive(true);
 	}
 
+	/// <summary>
+	/// Builds a room from variable "building" at position of "queuedBuildPosition"
+	/// </summary>
+	/// <param name="building"></param>
 	public void SelectAndBuild(GameObject building)
 	{
 		var instance = Instantiate(building, queuedBuildPositon.transform.position, Quaternion.identity);
-		if (instance.CompareTag("elevator"))
+		if (instance.CompareTag("elevator"))// trying to build elevator
 		{
 			RaycastHit hit;
 			Ray rayLeft = new Ray(instance.transform.position,Vector3.left);
 			var elevator = instance.GetComponent<Elevator>();
-			if (queuedBuildPositon.transform.parent.parent.CompareTag("room"))
+			if (queuedBuildPositon.transform.parent.parent.CompareTag("elevator"))
 			{
-				
+				elevator = queuedBuildPositon.transform.parent.parent.GetComponent<Elevator>();
 			}
 			if (Physics.Raycast(rayLeft, out hit, 6f))
 			{
@@ -54,8 +62,15 @@ public class GameManager : MonoBehaviour
 				{
 					foreach (var e in hit.transform.GetComponent<RoomScript>().connectedElevators)
 					{
-						e.connectedElevators.Add(instance.GetComponent<Elevator>());
+						e.connectedElevators.Add(elevator);
 						instance.GetComponent<Elevator>().connectedElevators.Add(e);
+						foreach (var r in e.connectedRooms)
+						{
+							if (r.transform.position.y == hit.transform.position.y)
+							{
+								r.connectedElevators.Add(elevator);
+							}
+						}
 					}
 					hit.transform.GetComponent<RoomScript>().connectedElevators.Add(elevator);
 					elevator.connectedRooms.Add(hit.transform.GetComponent<RoomScript>());
@@ -69,13 +84,75 @@ public class GameManager : MonoBehaviour
 				{
 					foreach (var e in hit.transform.GetComponent<RoomScript>().connectedElevators)
 					{
-						e.connectedElevators.Add(instance.GetComponent<Elevator>());
+						e.connectedElevators.Add(elevator);
 						instance.GetComponent<Elevator>().connectedElevators.Add(e);
+						foreach (var r in e.connectedRooms)
+						{
+							if (r.transform.position.y == hit.transform.position.y)
+							{
+								r.connectedElevators.Add(elevator);
+							}
+						}
 					}
-					hit.transform.GetComponent<RoomScript>().connectedElevators.Add(instance.GetComponent<Elevator>());
-					instance.GetComponent<Elevator>().connectedRooms.Add(hit.transform.GetComponent<RoomScript>());
-					instance.GetComponent<Elevator>().connectedElevators.Add(instance.GetComponent<Elevator>());
+					hit.transform.GetComponent<RoomScript>().connectedElevators.Add(elevator);
+					elevator.connectedRooms.Add(hit.transform.GetComponent<RoomScript>());
+					elevator.connectedElevators.Add(elevator);
 				}
+			}
+		}
+		else if (instance.CompareTag("room"))
+		{
+			RaycastHit hit;
+			Ray rayLeft = new Ray(instance.transform.position, Vector3.left);
+			var room = instance.GetComponent<RoomScript>();
+			RoomScript leftRoom = null;
+			RoomScript rightRoom = null;
+			Elevator leftElevator = null;
+			Elevator rightElevator = null;
+			if (Physics.Raycast(rayLeft, out hit, 6f))
+			{
+				if (hit.collider.CompareTag("room"))
+				{
+					leftRoom = hit.collider.GetComponent<RoomScript>();
+					room.connectedElevators.AddRange(leftRoom.connectedElevators);
+				}
+				else if (hit.collider.CompareTag("elevator"))
+				{
+					leftElevator = hit.collider.GetComponent<Elevator>();
+					room.connectedElevators.Add(leftElevator);
+				}
+			}
+			Ray rayRight = new Ray(instance.transform.position, Vector3.right);
+			if (Physics.Raycast(rayLeft, out hit, 12f))
+			{
+				if (hit.collider.CompareTag("room"))
+				{
+					rightRoom = hit.collider.GetComponent<RoomScript>();
+					room.connectedElevators.AddRange(rightRoom.connectedElevators);
+				}
+				else if (hit.collider.CompareTag("elevator"))
+				{
+					rightElevator = hit.collider.GetComponent<Elevator>();
+					room.connectedElevators.Add(rightElevator);
+				}
+			}
+			if (rightElevator != null)
+			{
+				rightElevator.connectedElevators.AddRange(room.connectedElevators);
+				rightElevator.connectedRooms.Add(room);
+			}
+			if (leftElevator != null)
+			{
+				leftElevator.connectedElevators.AddRange(room.connectedElevators);
+				leftElevator.connectedRooms.Add(room);
+			}
+			if (leftRoom != null)
+			{
+				leftRoom.connectedElevators = room.connectedElevators;
+			}
+			if (rightRoom != null)
+			{
+				rightRoom.connectedElevators = room.connectedElevators;
 			}
 		}
 	}
