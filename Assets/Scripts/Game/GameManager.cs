@@ -4,6 +4,7 @@ using API.Sevices.Mapper;
 using UnityEngine.Tilemaps;
 using Unity.VisualScripting;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+using System.Linq.Expressions;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
 	public static RequestManager RequestManager = new RequestManager();
 	public Tilemap tilemap;
 	public List<GameObject> bears = new List<GameObject>();
+	[SerializeField] public UIResourceShower uiResourceShower;
 	[SerializeField] public GameObject selectedUnit;
 	[SerializeField] private GameObject buildingScreen;
 	[SerializeField] private GameObject floorPrefab;
@@ -263,9 +265,10 @@ public class GameManager : MonoBehaviour
 		{
 			// add move to work station
 			gameObject.GetComponentInParent<RoomScript>().StartWork(selectedUnit);
-			//Vector3[] transferWalkPoints =  gameObject.GetComponentInParent<RoomScript>().GetWalkPoints();
+			//Vector3[] transferWalkPoints = gameObject.GetComponentInParent<RoomScript>().GetWalkPoints();
 			//Debug.Log(transferWalkPoints);
-			selectedUnit.GetComponent<UnitScript>().PutWalkPoints(gameObject.GetComponentInParent<RoomScript>().GetWalkPoints());
+			//selectedUnit.GetComponent<UnitScript>().PutWalkPoints(gameObject.GetComponentInParent<RoomScript>().GetWalkPoints());
+			return;
 		}
 		if (gameObject.CompareTag("unit"))
 		{

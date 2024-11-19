@@ -16,15 +16,18 @@ public class RoomScript : MonoBehaviour
     public List<Elevator> connectedElevators;
     public List<RoomScript> connectedRooms;
     private Coroutine work;
-    [SerializeField] private Transform[] rawWalkPoints; // for energohoney 1 - 3 is paseka, 4 is generator
-    private Vector3[] walkPoints;
+    //[SerializeField] private Transform[] rawWalkPoints; // for energohoney 1 - 3 is paseka, 4 is generator
+    [SerializeField] private List<Transform> rawWalkPoints;
+    //private Vector3[] walkPoints;
+    private List<Vector3> walkPoints;
     [SerializeField] private TextMeshProUGUI timeShow;
     private GameObject fixedBear;
 
     private void Start()
     {
-        walkPoints = new Vector3[rawWalkPoints.Length];
-        walkPoints = Array.ConvertAll(rawWalkPoints, obj => obj.position);
+        //walkPoints = new Vector3[rawWalkPoints.Length];
+        //walkPoints = Array.ConvertAll(rawWalkPoints, obj => obj.position);
+        walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
         leftDoor.SetActive(hasLeftDoor);
         rightDoor.SetActive(hasRightDoor);
         /*switch (resource)
@@ -46,6 +49,7 @@ public class RoomScript : MonoBehaviour
     /// <param name="bear"></param>
     public void StartWork(GameObject bear)
     {
+        Debug.Log("начали работу");
         fixedBear = bear;
         if (status == Status.Free)
         {
@@ -65,13 +69,14 @@ public class RoomScript : MonoBehaviour
 
     private IEnumerator WorkStatus()
     {
+        Debug.Log("и даже корутину!");
         float timer;
         status = Status.Busy;
         fixedBear.GetComponent<UnitScript>().CannotBeSelected();
         switch (resource)
         {
             case Resources.Energohoney:
-                fixedBear.GetComponent<UnitScript>().StartMoveInRoom((int)Resources.Energohoney);
+                fixedBear.GetComponent<UnitScript>().StartMoveInRoom((int)Resources.Energohoney, GetWalkPoints());
                 timer = 45f;
                 while (timer > 0)
                 {
@@ -79,7 +84,9 @@ public class RoomScript : MonoBehaviour
                     timer -= Time.deltaTime;
                     yield return null;
                 }
+                timeShow.text = "";
                 GameManager.Instance.ChangeHoney(10);
+                GameManager.Instance.uiResourceShower.UpdateIndicators();
                 break;
             case Resources.Asteriy:
                 GameManager.Instance.ChangeAsteriy(10);
@@ -90,12 +97,12 @@ public class RoomScript : MonoBehaviour
         status = Status.Free;
     }
 
-    private string SecondsToTimeToShow(float seconds) // left - minutes, right - seconds. no hours
+    private string SecondsToTimeToShow(float seconds) // left - minutes, right - seconds. no hours.
     {
         return (int)seconds / 60 + ":" + (((int)seconds % 60 < 10) ? "0" + (int)seconds % 60 : (int)seconds % 60);
     }
 
-    public Vector3[] GetWalkPoints()
+    public List<Vector3> GetWalkPoints()
     {
         return walkPoints;
     }

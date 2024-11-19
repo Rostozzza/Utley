@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitScript : MonoBehaviour
@@ -13,7 +14,6 @@ public class UnitScript : MonoBehaviour
     private Jobs job;
     private GameObject nearWorkStation;
     private Coroutine randomWalk;
-    private Vector3[] walkPoints;
     public bool selectable = true;
 
     private void Start()
@@ -115,16 +115,6 @@ public class UnitScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Load walk points from room to unit
-    /// </summary>
-    /// <param name="points"></param>
-    public void PutWalkPoints(Vector3[] points)
-    {
-        walkPoints = new Vector3[points.Length];
-        walkPoints = points;
-    }
-
-    /// <summary>
     /// Bear becomes busy and cannot be selected
     /// </summary>
     public void CannotBeSelected()
@@ -140,28 +130,34 @@ public class UnitScript : MonoBehaviour
         selectable = true;
     }
 
-    public void StartMoveInRoom(int roomType)
+    public void StartMoveInRoom(int roomType, List<Vector3> points)
     {
-
-        StartCoroutine(MoveInRoom(roomType));
+        Debug.Log("начали движение по комнате");
+        StartCoroutine(MoveInRoom(roomType, points));
     }
 
-    public IEnumerator MoveInRoom(int roomType)
+    public IEnumerator MoveInRoom(int roomType, List<Vector3> walkPoints)
     {
+        Debug.Log("стартовали корутину движения");
         Vector3 chosenPoint;
         switch (roomType)
         {
             case 0:
-                chosenPoint = walkPoints[Random.Range(0, walkPoints.Length - 1)];
+                Debug.Log("выбрали поведениие");
+                Debug.Log(walkPoints);
+                chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
+                Debug.Log(chosenPoint);
                 while (chosenPoint.x - 0.1f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.1f)
                 {
-                    dir.x = Mathf.Sign(chosenPoint.x - transform.position.x);
+                    //dir.x = Mathf.Sign(chosenPoint.x - transform.position.x);
+                    transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
                     yield return null;
                 }
                 chosenPoint = walkPoints[3];
                 while (chosenPoint.x - 0.1f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.1f)
                 {
-                    dir.x = Mathf.Sign(chosenPoint.x - transform.position.x);
+                    //dir.x = Mathf.Sign(chosenPoint.x - transform.position.x);
+                    transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
                     yield return null;
                 }
                 break;
