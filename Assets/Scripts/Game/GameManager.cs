@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 	public static RequestManager RequestManager = new RequestManager();
 	public Tilemap tilemap;
 	public List<GameObject> bears = new List<GameObject>();
-	[SerializeField] private GameObject selectedUnit;
+	[SerializeField] public GameObject selectedUnit;
 	[SerializeField] private GameObject buildingScreen;
 	[SerializeField] private GameObject floorPrefab;
 	private GameObject queuedBuildPositon;
@@ -251,15 +251,15 @@ public class GameManager : MonoBehaviour
 
 	private void ClickedGameObject(GameObject gameObject)
 	{
-		Debug.Log("кликнули по " + gameObject.name);
+		Debug.Log("кликнули по " + gameObject.tag);
 		Debug.Log(gameObject.CompareTag("work_station") && selectedUnit != null);
 		if (gameObject.CompareTag("work_station") && selectedUnit != null)
 		{
 			// add move to work station
 			gameObject.GetComponentInParent<RoomScript>().StartWork(selectedUnit);
-			Vector3[] transferWalkPoints = gameObject.GetComponentInParent<RoomScript>().GetWalkPoints();
-			Debug.Log(transferWalkPoints);
-			selectedUnit.GetComponent<UnitScript>().PutWalkPoints(transferWalkPoints);
+			//Vector3[] transferWalkPoints =  gameObject.GetComponentInParent<RoomScript>().GetWalkPoints();
+			//Debug.Log(transferWalkPoints);
+			selectedUnit.GetComponent<UnitScript>().PutWalkPoints(gameObject.GetComponentInParent<RoomScript>().GetWalkPoints());
 		}
 		if (gameObject.CompareTag("unit"))
 		{

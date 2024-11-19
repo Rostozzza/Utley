@@ -23,6 +23,7 @@ public class RoomScript : MonoBehaviour
 
     private void Start()
     {
+        walkPoints = new Vector3[rawWalkPoints.Length];
         walkPoints = Array.ConvertAll(rawWalkPoints, obj => obj.position);
         leftDoor.SetActive(hasLeftDoor);
         rightDoor.SetActive(hasRightDoor);
@@ -91,7 +92,7 @@ public class RoomScript : MonoBehaviour
 
     private string SecondsToTimeToShow(float seconds) // left - minutes, right - seconds. no hours
     {
-        return (int)seconds / 60 + ":" + seconds % 60;
+        return (int)seconds / 60 + ":" + (((int)seconds % 60 < 10) ? "0" + (int)seconds % 60 : (int)seconds % 60);
     }
 
     public Vector3[] GetWalkPoints()

@@ -120,6 +120,7 @@ public class UnitScript : MonoBehaviour
     /// <param name="points"></param>
     public void PutWalkPoints(Vector3[] points)
     {
+        walkPoints = new Vector3[points.Length];
         walkPoints = points;
     }
 
