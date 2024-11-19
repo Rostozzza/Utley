@@ -22,6 +22,7 @@ public class RoomScript : MonoBehaviour
     private List<Vector3> walkPoints;
     [SerializeField] private TextMeshProUGUI timeShow;
     private GameObject fixedBear;
+    [SerializeField] private List<GameObject> workStationsToOutline;
 
     private void Start()
     {
@@ -30,11 +31,13 @@ public class RoomScript : MonoBehaviour
         walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
         leftDoor.SetActive(hasLeftDoor);
         rightDoor.SetActive(hasRightDoor);
-        /*switch (resource)
+        switch (resource)
         {
             case Resources.Energohoney:
+                GameManager.Instance.AddWorkStations(workStationsToOutline);
                 break;
-        }*/
+        }
+        
     }
 
     public void BuildRoom(GameObject button)

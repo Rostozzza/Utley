@@ -147,14 +147,15 @@ public class UnitScript : MonoBehaviour
                 Debug.Log(walkPoints);
                 chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
                 Debug.Log(chosenPoint);
-                while (chosenPoint.x - 0.1f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.1f)
+                while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f)) //(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f)(chosenPoint.x != transform.position.x)
                 {
                     //dir.x = Mathf.Sign(chosenPoint.x - transform.position.x);
                     transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
                     yield return null;
                 }
+                yield return new WaitForSeconds(3f);
                 chosenPoint = walkPoints[3];
-                while (chosenPoint.x - 0.1f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.1f)
+                while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f)) //(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f)
                 {
                     //dir.x = Mathf.Sign(chosenPoint.x - transform.position.x);
                     transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
