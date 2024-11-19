@@ -257,6 +257,16 @@ public class GameManager : MonoBehaviour
 
 	private void ClickedGameObject(GameObject gameObject)
 	{
+		Debug.Log("кликнули по " + gameObject.name);
+		Debug.Log(gameObject.CompareTag("work_station") && selectedUnit != null);
+		if (gameObject.CompareTag("work_station") && selectedUnit != null)
+		{
+			// add move to work station
+			gameObject.GetComponentInParent<RoomScript>().StartWork(selectedUnit);
+			Vector3[] transferWalkPoints = gameObject.GetComponentInParent<RoomScript>().GetWalkPoints();
+			Debug.Log(transferWalkPoints);
+			selectedUnit.GetComponent<UnitScript>().PutWalkPoints(transferWalkPoints);
+		}
 		if (gameObject.CompareTag("unit"))
 		{
 			//gameObject.GetComponent<UnitScript>().ChooseUnit();
