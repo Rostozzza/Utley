@@ -9,15 +9,25 @@ public class UnitMovement : MonoBehaviour
 	[SerializeField] private float speed;
 	[SerializeField] private RoomScript target;
 	[SerializeField] private Elevator currentElevator;
+	private Coroutine currentRoutine;
 
 	public void MoveToRoom(RoomScript target)
 	{
 		List<Elevator> branch = new List<Elevator>();
 		this.target = target;
+		if (currentRoutine != null)
+		{
+			StopCoroutine(currentRoutine);
+		}
 		if (target.connectedElevators.Contains(currentElevator))
 		{
+			if (target.transform.position.y == transform.position.y)
+			{
+				currentRoutine = StartCoroutine(MoveByOne());
+				return;
+			}
 			branch = new List<Elevator> { currentElevator };
-			StartCoroutine(Move(branch));
+			currentRoutine = StartCoroutine(Move(branch));
 			return;
 		}
 		foreach (var targetElevator in target.connectedElevators)
@@ -25,7 +35,29 @@ public class UnitMovement : MonoBehaviour
 			var result = GetBranch(targetElevator, currentElevator, branch);
 			branch = (result.Count < branch.Count ? branch = result : branch);
 		}
-		StartCoroutine(Move(branch));
+		var finalBranch = new List<Elevator> { currentElevator };
+		finalBranch.AddRange(branch);
+		currentRoutine = StartCoroutine(Move(finalBranch));
+	}
+
+	private IEnumerator MoveByOne()
+	{
+		if (target.transform.position.x < transform.position.x)
+		{
+			while (target.transform.position.x < transform.position.x)
+			{
+				transform.Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
+				yield return null;
+			}
+		}
+		else
+		{
+			while (target.transform.position.x > transform.position.x)
+			{
+				transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+				yield return null;
+			}
+		}
 	}
 
 	private IEnumerator Move(List<Elevator> path)

@@ -51,8 +51,8 @@ public class GameManager : MonoBehaviour
 		{
 			Debug.Log("Placing elevator");
 			RaycastHit hit;
-			Ray rayLeft = new Ray(instance.transform.position,Vector3.left * 6f);
-			
+			Ray rayLeft = new Ray(instance.transform.position, Vector3.left * 6f);
+
 			var elevator = instance.GetComponent<Elevator>();
 			if (queuedBuildPositon.transform.parent.parent.CompareTag("elevator"))
 			{
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
 				Debug.Log("Collision on left");
 				if (hit.collider.CompareTag("room"))
 				{
-					for (int i = 0; i < hit.transform.GetComponent<RoomScript>().connectedElevators.Count;i++)
+					for (int i = 0; i < hit.transform.GetComponent<RoomScript>().connectedElevators.Count; i++)
 					{
 						Elevator e = hit.transform.GetComponent<RoomScript>().connectedElevators[i];
 						e.connectedElevators.Add(elevator);
@@ -111,6 +111,10 @@ public class GameManager : MonoBehaviour
 		}
 		else if (instance.CompareTag("room"))
 		{
+			if (queuedBuildPositon.transform.position.x < queuedBuildPositon.transform.parent.parent.position.x)
+			{
+				instance.transform.Translate(Vector3.left * 4f);
+			}
 			RaycastHit hit;
 			Ray rayLeft = new Ray(instance.transform.position, Vector3.left * 6f);
 			Debug.DrawRay(instance.transform.position, Vector3.left * 6f, Color.red, 15f);
@@ -136,8 +140,9 @@ public class GameManager : MonoBehaviour
 				}
 			}
 			hit = new RaycastHit();
-			Ray rayRight = new Ray(instance.transform.position, Vector3.right * 6f);
-			Debug.DrawRay(instance.transform.position, Vector3.right * 6f, Color.red, 15f);
+			Ray rayRight = new Ray(instance.transform.position, Vector3.right * 12f);
+			Debug.DrawRay(instance.transform.position, Vector3.right * 12f, Color.red, 15f);
+			instance.layer = 2; 
 			if (Physics.Raycast(rayRight, out hit, 12f))
 			{
 				Debug.Log("Collision on right: " + hit.collider.name);
@@ -152,6 +157,7 @@ public class GameManager : MonoBehaviour
 					room.connectedElevators.Add(rightElevator);
 				}
 			}
+			instance.layer = 0;
 			if (rightElevator != null)
 			{
 				rightElevator.connectedElevators.AddRange(room.connectedElevators);
