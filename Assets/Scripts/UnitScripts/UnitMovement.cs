@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.Threading.Tasks;
 using System.Collections;
+using System.Linq;
 
 public class UnitMovement : MonoBehaviour
 {
@@ -33,7 +32,7 @@ public class UnitMovement : MonoBehaviour
 		foreach (var targetElevator in target.connectedElevators)
 		{
 			var result = GetBranch(targetElevator, currentElevator, branch);
-			branch = (result.Count < branch.Count ? branch = result : branch);
+			branch = (result.Count < branch.Count ? result : branch);
 		}
 		var finalBranch = new List<Elevator> { currentElevator };
 		finalBranch.AddRange(branch);
@@ -62,8 +61,10 @@ public class UnitMovement : MonoBehaviour
 
 	private IEnumerator Move(List<Elevator> path)
 	{
+		var newPath = path.Distinct().ToList();
+		Debug.Log(newPath.Count);
 		currentElevator = path[0];
-		foreach (Elevator e in path)
+		foreach (Elevator e in newPath)
 		{
 			if (e != currentElevator)
 			{
@@ -72,6 +73,7 @@ public class UnitMovement : MonoBehaviour
 					if (room.connectedElevators.Contains(currentElevator))
 					{
 						transform.position = new Vector3(transform.position.x, room.transform.position.y, transform.position.z);
+						Debug.Log("Breakage!");
 						break;
 					}
 				}
@@ -121,6 +123,10 @@ public class UnitMovement : MonoBehaviour
 		}
 		foreach (var i in elevator.connectedElevators)
 		{
+			if (i == elevator)
+			{
+				continue;
+			}
 			if (i.connectedElevators.Contains(targetElevator))
 			{
 				branch.Add(i);
@@ -134,7 +140,6 @@ public class UnitMovement : MonoBehaviour
 				return GetBranch(targetElevator, i, newBranch);
 			}
 		}
-		Debug.Log(branch.Count);
 		return null;
 	}
 }

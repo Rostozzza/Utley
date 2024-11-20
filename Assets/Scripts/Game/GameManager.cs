@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 using Unity.VisualScripting;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 using System.Linq.Expressions;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -93,8 +94,9 @@ public class GameManager : MonoBehaviour
 				Debug.Log("Collision on right");
 				if (hit.collider.CompareTag("room"))
 				{
-					foreach (var e in hit.transform.GetComponent<RoomScript>().connectedElevators)
+					for (int i = 0; i < hit.transform.GetComponent<RoomScript>().connectedElevators.Count; i++)
 					{
+						Elevator e = hit.transform.GetComponent<RoomScript>().connectedElevators[i];
 						e.connectedElevators.Add(elevator);
 						instance.GetComponent<Elevator>().connectedElevators.Add(e);
 						foreach (var r in e.connectedRooms)
@@ -110,6 +112,7 @@ public class GameManager : MonoBehaviour
 					elevator.connectedElevators.Add(elevator);
 				}
 			}
+			elevator.connectedElevators = elevator.connectedElevators.Distinct().ToList();
 		}
 		else if (instance.CompareTag("room"))
 		{
@@ -140,6 +143,7 @@ public class GameManager : MonoBehaviour
 					leftElevator = hit.collider.GetComponentInParent<Elevator>();
 					room.connectedElevators.Add(leftElevator);
 				}
+				room.connectedElevators = room.connectedElevators.Distinct().ToList();
 			}
 			hit = new RaycastHit();
 			Ray rayRight = new Ray(instance.transform.position, Vector3.right * 12f);
@@ -158,17 +162,20 @@ public class GameManager : MonoBehaviour
 					rightElevator = hit.collider.GetComponentInParent<Elevator>();
 					room.connectedElevators.Add(rightElevator);
 				}
+				room.connectedElevators = room.connectedElevators.Distinct().ToList();
 			}
 			instance.layer = 0;
 			if (rightElevator != null)
 			{
 				rightElevator.connectedElevators.AddRange(room.connectedElevators);
 				rightElevator.connectedRooms.Add(room);
+				rightElevator.connectedElevators = rightElevator.connectedElevators.Distinct().ToList();
 			}
 			if (leftElevator != null)
 			{
 				leftElevator.connectedElevators.AddRange(room.connectedElevators);
 				leftElevator.connectedRooms.Add(room);
+				leftElevator.connectedElevators = leftElevator.connectedElevators.Distinct().ToList();
 			}
 			if (leftRoom != null)
 			{
@@ -178,6 +185,7 @@ public class GameManager : MonoBehaviour
 			{
 				rightRoom.connectedElevators = room.connectedElevators;
 			}
+			
 		}
 	}
 
