@@ -1610,13 +1610,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: 0
-  resourse: 0
+  resource: 1
   leftDoor: {fileID: 7697326446249576725}
   rightDoor: {fileID: 6222399685666512922}
   hasLeftDoor: 0
   hasRightDoor: 0
   connectedElevators: []
   connectedRooms: []
+  rawWalkPoints: []
+  timeShow: {fileID: 0}
+  workStationsToOutline: []
+  isReadyForWork: 0
 --- !u!65 &6881682886034302060
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1636,8 +1640,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7.9911203, y: 3.5300038, z: 4.6055603}
-  m_Center: {x: 2.0044465, y: -0.006111264, z: -0.12833405}
+  m_Size: {x: 7.9911203, y: 3.5300038, z: 2.6521757}
+  m_Center: {x: 2.0044465, y: -0.006111264, z: 0.8483583}
 --- !u!1 &7680603216590664871
 GameObject:
   m_ObjectHideFlags: 0

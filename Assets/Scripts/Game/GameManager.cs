@@ -1,14 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
-using API.Sevices.Mapper;
+using UnityEngine.UI;
 using UnityEngine.Tilemaps;
-using Unity.VisualScripting;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
-using System.Linq.Expressions;
 using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
+	[Header("Cosmodrome settings")]
+	[SerializeField] private GameObject ui;
+	[SerializeField] private List<Image> asteriumRoomView;
+	[SerializeField] private List<RoomScript> asteriumRooms;
+	[SerializeField] private Transform asteriumViewGrid;
+	[SerializeField] private GameObject asteriumViewPrefab;
+	[Header("GameManager settings")]
 	public static GameManager Instance;
 	public static RequestManager RequestManager = new RequestManager();
 	public Tilemap tilemap;
@@ -22,6 +26,7 @@ public class GameManager : MonoBehaviour
 
 	private int honey;
 	private int asteriy;
+	private int rawAsterium;
 
 	RaycastHit raycastHit;
 
@@ -186,7 +191,12 @@ public class GameManager : MonoBehaviour
 			{
 				rightRoom.connectedElevators = room.connectedElevators;
 			}
-			
+			if (room.resource == RoomScript.Resources.Asteriy)
+			{
+				asteriumRooms.Add(room);
+				var newAsteriumView = Instantiate(asteriumViewPrefab,asteriumViewGrid);
+				asteriumRoomView.Add(newAsteriumView.GetComponent<Image>());
+			}
 		}
 	}
 
@@ -224,6 +234,28 @@ public class GameManager : MonoBehaviour
 	public void ChangeAsteriy(int amount)
 	{
 		asteriy += amount;
+	}
+
+	public bool FlyForRawAsterium()
+	{
+		if (rawAsterium < asteriumRoomView.Count)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public void DeliverRawAsterium()
+	{
+		rawAsterium++;
+		asteriumRooms[rawAsterium].isReadyForWork = true;
+		asteriumRoomView[rawAsterium].color = Color.blue;
+	}
+
+	public void WithdrawRawAsterium()
+	{
+		asteriumRoomView[rawAsterium].color = Color.grey;
+		rawAsterium--;
 	}
 
 	private void Update()
