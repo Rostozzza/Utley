@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private GameObject buildingScreen;
 	[SerializeField] private GameObject floorPrefab;
 	private GameObject queuedBuildPositon;
+	public List<GameObject> workStations; // keeps all workstations to address to them to outline when we choosing unit
 
 	private int honey;
 	private int asteriy;
@@ -241,6 +242,14 @@ public class GameManager : MonoBehaviour
 				{
 					ClickedGameObject(raycastHit.transform.gameObject);
 				}
+				else
+				{
+					OutlineWorkStations(false);
+				}
+			}
+			else
+			{
+				OutlineWorkStations(false);
 			}
 		}
 		else if (Input.GetMouseButtonDown(1))
@@ -251,6 +260,7 @@ public class GameManager : MonoBehaviour
 				if (raycastHit.transform != null)
 				{
 					RightClick(raycastHit.transform.gameObject);
+					OutlineWorkStations(false);
 				}
 			}
 		}
@@ -263,29 +273,58 @@ public class GameManager : MonoBehaviour
 			selectedUnit.GetComponent<UnitMovement>().StopAllCoroutines();
 			selectedUnit.GetComponent<UnitMovement>().MoveToRoom(gameObject.GetComponent<RoomScript>());
 		}
+		Debug.Log(gameObject.CompareTag("work_station") && selectedUnit != null);
+		if (gameObject.CompareTag("work_station") && selectedUnit != null)
+		{
+			// add move to work station ****************************************************************************************************************************
+			gameObject.GetComponentInParent<RoomScript>().StartWork(selectedUnit);
+			OutlineWorkStations(false);
+		}
 	}
 
 	private void ClickedGameObject(GameObject gameObject)
 	{
 		Debug.Log("кликнули по " + gameObject.tag);
-		Debug.Log(gameObject.CompareTag("work_station") && selectedUnit != null);
-		if (gameObject.CompareTag("work_station") && selectedUnit != null)
-		{
-			// add move to work station
-			gameObject.GetComponentInParent<RoomScript>().StartWork(selectedUnit);
-			//Vector3[] transferWalkPoints = gameObject.GetComponentInParent<RoomScript>().GetWalkPoints();
-			//Debug.Log(transferWalkPoints);
-			//selectedUnit.GetComponent<UnitScript>().PutWalkPoints(gameObject.GetComponentInParent<RoomScript>().GetWalkPoints());
-			return;
-		}
+		
 		if (gameObject.CompareTag("unit"))
 		{
 			//gameObject.GetComponent<UnitScript>().ChooseUnit();
 			selectedUnit = gameObject;
+			OutlineWorkStations(true);
 		}
 		else
 		{
 			selectedUnit = null;
+			OutlineWorkStations(false);
+		}
+		
+		
+	}
+
+	/// <summary>
+	/// Adds workstations to outline them when unit choosed
+	/// </summary>
+	/// <param name="stations"></param>
+	public void AddWorkStations(List<GameObject> stations)
+	{
+		workStations.AddRange(stations);
+	}
+
+	private void OutlineWorkStations(bool show)
+	{
+		if (workStations.Count > 0)
+		{
+			foreach (GameObject station in workStations)
+			{
+				if (show)
+				{
+					station.layer = 8;
+				}
+				else
+				{
+					station.layer = 0;
+				}
+			}
 		}
 	}
 }
