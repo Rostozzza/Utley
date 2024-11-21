@@ -57,16 +57,30 @@ public class RoomScript : MonoBehaviour
 	/// <param name="bear"></param>
 	public void StartWork(GameObject bear)
 	{
-		if (resource == Resources.Asteriy)
+        switch (resource)
+        {
+            case Resources.Energohoney:
+                break;
+            case Resources.Asteriy:
+                if (!isReadyForWork)
+                {
+                    Debug.Log("нету астерия!");
+                    return;
+                }
+                break;
+        }
+        Debug.Log("начали работу");
+        fixedBear = bear;
+		/*if (resource == Resources.Asteriy)
 		{
-			if (!isReadyForWork)
+            if (!isReadyForWork)
 			{
 				Debug.Log("нету астерия!");
 				return;
 			}
 			Debug.Log("начали работу");
 			fixedBear = bear;
-		}
+		}*/
 		if (status == Status.Free)
 		{
 			work = StartCoroutine(WorkStatus());
@@ -93,7 +107,7 @@ public class RoomScript : MonoBehaviour
 
 	private IEnumerator WorkStatus()
 	{
-		Debug.Log("и даже корутину!");
+		Debug.Log("и даже корутину!" + fixedBear);
 		float timer;
 		status = Status.Busy;
 		fixedBear.GetComponent<UnitScript>().CannotBeSelected();

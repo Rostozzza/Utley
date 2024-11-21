@@ -8,7 +8,7 @@ public class UnitMovement : MonoBehaviour
 	[SerializeField] private float speed;
 	[SerializeField] private RoomScript target;
 	[SerializeField] private Elevator currentElevator;
-	private Coroutine currentRoutine;
+	public Coroutine currentRoutine;
 
 	public void MoveToRoom(RoomScript target)
 	{
@@ -113,6 +113,7 @@ public class UnitMovement : MonoBehaviour
 				yield return null;
 			}
 		}
+		currentRoutine = null;
 	}
 
 	private List<Elevator> GetBranch(Elevator targetElevator, Elevator elevator, List<Elevator> branch)
