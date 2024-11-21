@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System;
 using System.Collections;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -69,7 +68,6 @@ public class RoomScript : MonoBehaviour
                 }
                 break;
         }
-        Debug.Log("начали работу");
         fixedBear = bear;
 		/*if (resource == Resources.Asteriy)
 		{
@@ -125,14 +123,13 @@ public class RoomScript : MonoBehaviour
 
 	private IEnumerator WorkStatus()
 	{
-		Debug.Log("и даже корутину!" + fixedBear);
 		float timer;
 		status = Status.Busy;
 		fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		switch (resource)
 		{
 			case Resources.Energohoney:
-				fixedBear.GetComponent<UnitScript>().StartMoveInRoom((int)Resources.Energohoney, GetWalkPoints(), this);
+				fixedBear.GetComponent<UnitScript>().StartMoveInRoom((int)Resources.Energohoney, GetWalkPoints(), this.gameObject);
 				timer = 45f;
 				while (timer > 0)
 				{

@@ -303,7 +303,6 @@ public class GameManager : MonoBehaviour
 	{
 		if (gameObject.CompareTag("work_station") && selectedUnit != null)
 		{
-			Debug.Log("начинаем работу");
 			StartCoroutine(WalkAndStartWork(selectedUnit, gameObject));
 			selectedUnit = null;
 			return;
@@ -363,7 +362,7 @@ public class GameManager : MonoBehaviour
 		{
 			foreach (GameObject station in workStations)
 			{
-				if (show)
+				if (show && station.GetComponentInParent<RoomScript>().status != RoomScript.Status.Busy)
 				{
 					station.layer = 8;
 				}

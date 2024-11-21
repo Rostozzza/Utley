@@ -130,20 +130,19 @@ public class UnitScript : MonoBehaviour
         selectable = true;
     }
 
-    public void StartMoveInRoom(int roomType, List<Vector3> points, RoomScript roomScript)
+    public void StartMoveInRoom(int roomType, List<Vector3> points, GameObject obj)
     {
-        Debug.Log("начали движение по комнате");
-        StartCoroutine(MoveInRoom(roomType, points, roomScript));
+        StartCoroutine(MoveInRoom(roomType, points, obj));
     }
 
-    public IEnumerator MoveInRoom(int roomType, List<Vector3> walkPoints, RoomScript roomScript)
+    public IEnumerator MoveInRoom(int roomType, List<Vector3> walkPoints, GameObject obj)
     {
-        Debug.Log("стартовали корутину движения");
         Vector3 chosenPoint;
+        Coroutine walkingCoroutine;
         switch (roomType)
         {
             case 0:
-                while (roomScript.status == RoomScript.Status.Busy)
+                /*while (obj.GetComponent<RoomScript>().status == RoomScript.Status.Busy)
                 {
                     chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
                     while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
@@ -160,8 +159,38 @@ public class UnitScript : MonoBehaviour
                         yield return null;
                     }
                     yield return new WaitForSeconds(3f);
+                }*/
+                walkingCoroutine = StartCoroutine(EnergohoneyWalkBehaviour(walkPoints, obj));
+                while (obj.GetComponent<RoomScript>().status == RoomScript.Status.Busy)
+                {
+                    yield return null;
                 }
+                StopCoroutine(walkingCoroutine);
+                walkingCoroutine = null;
                 break;
+        }
+    }
+
+    private IEnumerator EnergohoneyWalkBehaviour(List<Vector3> walkPoints, GameObject obj)
+    {
+        Vector3 chosenPoint;
+        while (obj.GetComponent<RoomScript>().status == RoomScript.Status.Busy)
+        {
+            chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
+            while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
+            {
+                transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
+                yield return null;
+            }
+            yield return new WaitForSeconds(5f);
+            chosenPoint = walkPoints[3];
+            while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
+            {
+                //dir.x = Mathf.Sign(chosenPoint.x - transform.position.x);
+                transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
+                yield return null;
+            }
+            yield return new WaitForSeconds(3f);
         }
     }
 
