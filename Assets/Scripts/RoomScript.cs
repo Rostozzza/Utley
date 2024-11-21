@@ -40,6 +40,9 @@ public class RoomScript : MonoBehaviour
 			case Resources.Energohoney:
 				GameManager.Instance.AddWorkStations(workStationsToOutline);
 				break;
+			case Resources.Cosmodrome:
+				GameManager.Instance.AddWorkStations(workStationsToOutline);
+				break;
 		}
 	}
 

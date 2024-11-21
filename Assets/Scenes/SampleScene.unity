@@ -772,6 +772,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensetive: 0.02
+--- !u!1 &360814001 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 875520400103360177, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+  m_PrefabInstance: {fileID: 3562911849079285420}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &360814005
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360814001}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.047829896, y: 0.03678581, z: 0.022645926}
+  m_Center: {x: 0.018589232, y: -0.00029941462, z: -0.0024243896}
 --- !u!1 &384778748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,6 +1308,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 622944332}
   m_CullTransparentMesh: 1
+--- !u!1001 &661242348
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 328577350032810797, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_Name
+      value: EnergoHoneyRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097626594887498254, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 29.353306
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097626594887498254, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4189242
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097626594887498254, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.407918
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097626594887498254, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097626594887498254, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097626594887498254, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097626594887498254, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097626594887498254, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097626594887498254, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097626594887498254, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
 --- !u!1001 &737861179
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2507,6 +2590,37 @@ MonoBehaviour:
   m_Spacing: {x: 0.06, y: 0.06}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!1 &1979849441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1979849442}
+  m_Layer: 0
+  m_Name: WorkPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1979849442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979849441}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.292, y: -0.734, z: -0.568}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3562911849079285423}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2101982846
 GameObject:
   m_ObjectHideFlags: 0
@@ -2572,6 +2686,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1691773150}
     m_Modifications:
+    - target: {fileID: 875520400103360177, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_TagString
+      value: work_station
+      objectReference: {fileID: 0}
     - target: {fileID: 3767274520511459582, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15
@@ -2616,12 +2734,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: complex_cosmodrome (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4540715411704343108, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_TagString
+      value: room
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3767274520511459582, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       insertIndex: -1
       addedObject: {fileID: 327177502}
+    - targetCorrespondingSourceObject: {fileID: 3767274520511459582, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1979849442}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4540715411704343108, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       insertIndex: -1
@@ -2635,6 +2760,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4540715411704343108, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3562911849079285425}
+    - targetCorrespondingSourceObject: {fileID: 875520400103360177, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 360814005}
   m_SourcePrefab: {fileID: 100100000, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
 --- !u!1 &3562911849079285421 stripped
 GameObject:
@@ -2688,9 +2816,11 @@ MonoBehaviour:
   connectedElevators:
   - {fileID: 737861180}
   connectedRooms: []
-  rawWalkPoints: []
+  rawWalkPoints:
+  - {fileID: 1979849442}
   timeShow: {fileID: 0}
-  workStationsToOutline: []
+  workStationsToOutline:
+  - {fileID: 360814001}
   isReadyForWork: 0
 --- !u!65 &3562911849079285425
 BoxCollider:
@@ -2745,3 +2875,4 @@ SceneRoots:
   - {fileID: 1691773150}
   - {fileID: 228737119}
   - {fileID: 2101982847}
+  - {fileID: 661242348}
