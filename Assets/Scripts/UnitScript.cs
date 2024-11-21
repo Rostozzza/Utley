@@ -25,40 +25,40 @@ public class UnitScript : MonoBehaviour
     {
         onLadder = laddersAmount > 0;
 
-        if (chased)
-        {
-            Debug.Log(randomWalk);
-            if (randomWalk != null)
-            {
-                StopCoroutine(randomWalk);
-                randomWalk = null;
-            }
-            Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -20f);
-            job = Jobs.None;
-            rb.useGravity = !onLadder;
-            dir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
-            rb.linearVelocity = new Vector3(speed * dir.x, onLadder ? speed * dir.y : rb.linearVelocity.y, 0f);
-            if (Input.GetKeyDown(KeyCode.E) && nearWorkStation != null)
-            {
-                isBusy = true;
-                chased = false;
-                job = (Jobs)nearWorkStation.GetComponent<WorkStationScript>().GetJob();
-            }
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                chased = false;
-            }
-        }
-        else
-        {
-            //if (randomWalk == null)
-            //{
-            //    randomWalk = StartCoroutine(WalkCycle());
-            //    Debug.Log("стартовали корутину");
-            //}
-            rb.useGravity = !onLadder;
-            rb.linearVelocity = new Vector3(dir.x, onLadder ? 0f : rb.linearVelocity.y, 0f);
-        }
+        //if (chased)
+        //{
+        //    Debug.Log(randomWalk);
+        //    if (randomWalk != null)
+        //    {
+        //        StopCoroutine(randomWalk);
+        //        randomWalk = null;
+        //    }
+        //    Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -20f);
+        //    job = Jobs.None;
+        //    rb.useGravity = !onLadder;
+        //    dir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
+        //    rb.linearVelocity = new Vector3(speed * dir.x, onLadder ? speed * dir.y : rb.linearVelocity.y, 0f);
+        //    if (Input.GetKeyDown(KeyCode.E) && nearWorkStation != null)
+        //    {
+        //        isBusy = true;
+        //        chased = false;
+        //        job = (Jobs)nearWorkStation.GetComponent<WorkStationScript>().GetJob();
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.Escape))
+        //    {
+        //        chased = false;
+        //    }
+        //}
+        //else
+        //{
+        //    //if (randomWalk == null)
+        //    //{
+        //    //    randomWalk = StartCoroutine(WalkCycle());
+        //    //    Debug.Log("стартовали корутину");
+        //    //}
+        //    rb.useGravity = !onLadder;
+        //    rb.linearVelocity = new Vector3(dir.x, onLadder ? 0f : rb.linearVelocity.y, 0f);
+        //}
     }
 
     private IEnumerator WalkCycle()
@@ -143,21 +143,24 @@ public class UnitScript : MonoBehaviour
         switch (roomType)
         {
             case 0:
-                Debug.Log("выбрали поведениие");
-                Debug.Log(walkPoints);
                 chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
-                Debug.Log(chosenPoint);
-                while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f)) //(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f)(chosenPoint.x != transform.position.x)
+                while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
+                {
+                    transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
+                    yield return null;
+                }
+                yield return new WaitForSeconds(5f);
+                chosenPoint = walkPoints[3];
+                while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
                 {
                     //dir.x = Mathf.Sign(chosenPoint.x - transform.position.x);
                     transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
                     yield return null;
                 }
                 yield return new WaitForSeconds(3f);
-                chosenPoint = walkPoints[3];
-                while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f)) //(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f)
+                chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
+                while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
                 {
-                    //dir.x = Mathf.Sign(chosenPoint.x - transform.position.x);
                     transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
                     yield return null;
                 }

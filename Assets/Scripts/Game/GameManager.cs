@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using System.Linq;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -300,18 +301,30 @@ public class GameManager : MonoBehaviour
 
 	private void RightClick(GameObject gameObject)
 	{
+		if (gameObject.CompareTag("work_station") && selectedUnit != null)
+		{
+			Debug.Log("начинаем работу");
+			StartCoroutine(WalkAndStartWork(selectedUnit, gameObject));
+			selectedUnit = null;
+			return;
+		}
 		if (gameObject.CompareTag("room"))
 		{
 			selectedUnit.GetComponent<UnitMovement>().StopAllCoroutines();
 			selectedUnit.GetComponent<UnitMovement>().MoveToRoom(gameObject.GetComponent<RoomScript>());
 		}
-		Debug.Log(gameObject.CompareTag("work_station") && selectedUnit != null);
-		if (gameObject.CompareTag("work_station") && selectedUnit != null)
+	}
+
+	private IEnumerator WalkAndStartWork(GameObject unit, GameObject obj) // needs to wait for walk and after we starting work
+	{
+		unit.GetComponent<UnitMovement>().StopAllCoroutines();
+		unit.GetComponent<UnitMovement>().MoveToRoom(obj.GetComponentInParent<RoomScript>());
+		while (unit.GetComponent<UnitMovement>().currentRoutine != null)
 		{
-			// add move to work station ****************************************************************************************************************************
-			gameObject.GetComponentInParent<RoomScript>().StartWork(selectedUnit);
-			OutlineWorkStations(false);
+			yield return null;
 		}
+		obj.GetComponentInParent<RoomScript>().StartWork(unit);
+		OutlineWorkStations(false);
 	}
 
 	private void ClickedGameObject(GameObject gameObject)
@@ -320,9 +333,11 @@ public class GameManager : MonoBehaviour
 		
 		if (gameObject.CompareTag("unit"))
 		{
-			//gameObject.GetComponent<UnitScript>().ChooseUnit();
-			selectedUnit = gameObject;
-			OutlineWorkStations(true);
+			if (gameObject.GetComponent<UnitScript>().selectable)
+			{
+				selectedUnit = gameObject;
+				OutlineWorkStations(true);
+			}
 		}
 		else
 		{
