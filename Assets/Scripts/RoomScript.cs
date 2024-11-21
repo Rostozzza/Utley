@@ -132,7 +132,7 @@ public class RoomScript : MonoBehaviour
 		switch (resource)
 		{
 			case Resources.Energohoney:
-				fixedBear.GetComponent<UnitScript>().StartMoveInRoom((int)Resources.Energohoney, GetWalkPoints());
+				fixedBear.GetComponent<UnitScript>().StartMoveInRoom((int)Resources.Energohoney, GetWalkPoints(), this);
 				timer = 45f;
 				while (timer > 0)
 				{
