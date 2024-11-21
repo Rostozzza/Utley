@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
 	private int honey;
 	private int asteriy;
-	private int rawAsterium;
+	private int rawAsterium = 0;
 
 	RaycastHit raycastHit;
 
@@ -249,8 +249,8 @@ public class GameManager : MonoBehaviour
 	public void DeliverRawAsterium()
 	{
 		rawAsterium++;
-		asteriumRooms[rawAsterium].isReadyForWork = true;
-		asteriumRoomView[rawAsterium].color = Color.blue;
+		asteriumRooms[rawAsterium-1].isReadyForWork = true;
+		asteriumRoomView[rawAsterium-1].color = Color.blue;
 	}
 
 	public void WithdrawRawAsterium()

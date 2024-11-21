@@ -23,7 +23,7 @@ public class RoomScript : MonoBehaviour
 	//private Vector3[] walkPoints;
 	private List<Vector3> walkPoints;
 	[SerializeField] private TextMeshProUGUI timeShow;
-	private GameObject fixedBear;
+	[SerializeField] private GameObject fixedBear;
 	[SerializeField] private List<GameObject> workStationsToOutline;
 	[Header("Asterium settings")]
 	public bool isReadyForWork = false;
@@ -81,6 +81,13 @@ public class RoomScript : MonoBehaviour
 			Debug.Log("начали работу");
 			fixedBear = bear;
 		}*/
+		if (resource == Resources.Cosmodrome)
+		{
+			status = Status.Busy;
+			fixedBear.GetComponent<UnitScript>().CannotBeSelected();
+			timeShow.transform.parent.gameObject.SetActive(true);
+			return;
+		}
 		if (status == Status.Free)
 		{
 			work = StartCoroutine(WorkStatus());
@@ -91,6 +98,7 @@ public class RoomScript : MonoBehaviour
 	{
 		if (GameManager.Instance.FlyForRawAsterium())
 		{
+			timeShow.gameObject.SetActive(true);
 			StartCoroutine(WorkStatus());
 		}
 	}
@@ -100,8 +108,18 @@ public class RoomScript : MonoBehaviour
 	/// </summary>
 	public void InterruptWork()
 	{
-		StopCoroutine(work);
+		if (work != null)
+		{
+			StopCoroutine(work);
+		}
 		work = null;
+		fixedBear.GetComponent<UnitScript>().CanBeSelected();
+		if (resource == Resources.Cosmodrome)
+		{
+			timeShow.gameObject.SetActive(false);
+			timeShow.transform.parent.gameObject.SetActive(false);
+			status = Status.Free;
+		}
 		fixedBear = null;
 	}
 
@@ -141,7 +159,8 @@ public class RoomScript : MonoBehaviour
 					yield return null;
 				}
 				GameManager.Instance.DeliverRawAsterium();
-				GameManager.Instance.uiResourceShower.UpdateIndicators();
+				timeShow.gameObject.SetActive(false);
+				timeShow.transform.parent.gameObject.SetActive(false);
 				break;
 		}
 		fixedBear.GetComponent<UnitScript>().CanBeSelected();
