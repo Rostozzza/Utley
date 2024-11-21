@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 346696127479692063}
   - component: {fileID: 2898520250293289566}
   - component: {fileID: 5805622377619484630}
+  - component: {fileID: 2937154685749528394}
   m_Layer: 0
   m_Name: EnergoHoneyRoom
-  m_TagString: Untagged
+  m_TagString: room
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,6 +125,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.997385, y: 0.20914578, z: 4.8761473}
   m_Center: {x: 1.9993954, y: 1.91, z: 0.00086152554}
+--- !u!65 &2937154685749528394
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328577350032810797}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.33073, y: 3.5300038, z: 0.7396884}
+  m_Center: {x: 1.9991848, y: -0.006111264, z: 1.8046019}
 --- !u!1 &786644269039244908
 GameObject:
   m_ObjectHideFlags: 0

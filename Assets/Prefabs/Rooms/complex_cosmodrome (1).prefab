@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: complex_cosmodrome (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
+      propertyPath: m_TagString
+      value: room
+      objectReference: {fileID: 0}
     - target: {fileID: 2287902867055187991, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.249999
@@ -119,5 +123,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 151184268124072345}
   m_SourcePrefab: {fileID: 100100000, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
+--- !u!1 &4540715411704343108 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
+  m_PrefabInstance: {fileID: 3729742771130095381}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &151184268124072345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4540715411704343108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e0ae0aa73ba0244590a29c933b0fe3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  status: 0
+  resource: 0
+  leftDoor: {fileID: 0}
+  rightDoor: {fileID: 0}
+  hasLeftDoor: 0
+  hasRightDoor: 0
+  connectedElevators: []
+  connectedRooms: []
+  rawWalkPoints: []
+  timeShow: {fileID: 0}
+  workStationsToOutline: []
+  isReadyForWork: 0
