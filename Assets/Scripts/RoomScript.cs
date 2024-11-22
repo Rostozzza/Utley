@@ -56,10 +56,10 @@ public class RoomScript : MonoBehaviour
 	/// <param name="bear"></param>
 	public void StartWork(GameObject bear)
 	{
-        switch (resource)
-        {
-            case Resources.Energohoney:
-                break;
+		switch (resource)
+		{
+			case Resources.Energohoney:
+				break;
 			case Resources.Asteriy:
 				work = StartCoroutine(WorkStatus());
 				return;
@@ -69,7 +69,7 @@ public class RoomScript : MonoBehaviour
 			work = StartCoroutine(WorkStatus());
 			return;
 		}
-        fixedBear = bear;
+		fixedBear = bear;
 		/*if (resource == Resources.Asteriy)
 		{
             if (!isReadyForWork)
@@ -134,7 +134,14 @@ public class RoomScript : MonoBehaviour
 		{
 			case Resources.Energohoney:
 				fixedBear.GetComponent<UnitScript>().StartMoveInRoom((int)Resources.Energohoney, GetWalkPoints(), this.gameObject);
-				timer = 45f;
+				if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
+				{
+					timer = 45f * (1 + fixedBear.GetComponent<UnitScript>().level * 0.5f);
+				}
+				else
+				{
+					timer = 45f * 1.25f;
+				}
 				while (timer > 0)
 				{
 					timeShow.text = SecondsToTimeToShow(timer);
