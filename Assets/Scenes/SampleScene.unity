@@ -1150,8 +1150,8 @@ MonoBehaviour:
   furSlot: {fileID: 0}
   topSlot: {fileID: 0}
   bottomSlot: {fileID: 0}
-  job: 0
-  level: 0
+  job: 3
+  level: 1
   fur: {fileID: 0}
   top: {fileID: 0}
   bottom: {fileID: 0}
@@ -2839,7 +2839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1070639619
 Transform:
   m_ObjectHideFlags: 0
@@ -4476,7 +4476,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2743876564508728058, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5643643438846625326, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+    - {fileID: 8843190631143911271, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}

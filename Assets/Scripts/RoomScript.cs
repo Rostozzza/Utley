@@ -136,7 +136,7 @@ public class RoomScript : MonoBehaviour
 				fixedBear.GetComponent<UnitScript>().StartMoveInRoom((int)Resources.Energohoney, GetWalkPoints(), this.gameObject);
 				if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
 				{
-					timer = 45f * (1 + fixedBear.GetComponent<UnitScript>().level * 0.5f);
+					timer = 45f * (1 - (fixedBear.GetComponent<UnitScript>().level * 0.5f));
 				}
 				else
 				{
@@ -162,7 +162,7 @@ public class RoomScript : MonoBehaviour
 				}
 				timeShow.text = "";
 				GameManager.Instance.WithdrawRawAsterium();
-				GameManager.Instance.ChangeAsteriy(10);
+				GameManager.Instance.ChangeAsteriy(20);
 				isReadyForWork = false;
 				//GameManager.Instance.uiResourceShower.UpdateIndicators();
 				break;
