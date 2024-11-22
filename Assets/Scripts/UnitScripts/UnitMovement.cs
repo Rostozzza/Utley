@@ -57,6 +57,7 @@ public class UnitMovement : MonoBehaviour
 				yield return null;
 			}
 		}
+		currentRoutine = null;
 	}
 
 	private IEnumerator Move(List<Elevator> path)

@@ -25,9 +25,9 @@ public class GameManager : MonoBehaviour
 	private GameObject queuedBuildPositon;
 	public List<GameObject> workStations; // keeps all workstations to address to them to outline when we choosing unit
 
-	private int honey;
-	private int asteriy;
-	private int rawAsterium = 0;
+	[SerializeField] private int honey;
+	[SerializeField] private int asteriy;
+	[SerializeField] private int rawAsterium = 0;
 
 	RaycastHit raycastHit;
 
@@ -250,13 +250,14 @@ public class GameManager : MonoBehaviour
 	{
 		rawAsterium++;
 		asteriumRooms[rawAsterium-1].isReadyForWork = true;
+		asteriumRooms[rawAsterium - 1].StartWork(gameObject);
 		asteriumRoomView[rawAsterium-1].color = Color.blue;
 	}
 
 	public void WithdrawRawAsterium()
 	{
-		asteriumRoomView[rawAsterium].color = Color.grey;
 		rawAsterium--;
+		asteriumRoomView[rawAsterium].color = Color.grey;
 	}
 
 	private void Update()

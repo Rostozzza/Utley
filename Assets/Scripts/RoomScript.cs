@@ -60,14 +60,15 @@ public class RoomScript : MonoBehaviour
         {
             case Resources.Energohoney:
                 break;
-            case Resources.Asteriy:
-                if (!isReadyForWork)
-                {
-                    Debug.Log("нету астерия!");
-                    return;
-                }
-                break;
-        }
+			case Resources.Asteriy:
+				work = StartCoroutine(WorkStatus());
+				return;
+		}
+		if (resource == Resources.Asteriy)
+		{
+			work = StartCoroutine(WorkStatus());
+			return;
+		}
         fixedBear = bear;
 		/*if (resource == Resources.Asteriy)
 		{
@@ -125,7 +126,10 @@ public class RoomScript : MonoBehaviour
 	{
 		float timer;
 		status = Status.Busy;
-		fixedBear.GetComponent<UnitScript>().CannotBeSelected();
+		if (resource != Resources.Asteriy)
+		{
+			fixedBear.GetComponent<UnitScript>().CannotBeSelected();
+		}
 		switch (resource)
 		{
 			case Resources.Energohoney:
@@ -142,13 +146,21 @@ public class RoomScript : MonoBehaviour
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
 				break;
 			case Resources.Asteriy:
+				timer = 45f;
+				while (timer > 0)
+				{
+					timeShow.text = SecondsToTimeToShow(timer);
+					timer -= Time.deltaTime;
+					yield return null;
+				}
+				timeShow.text = "";
 				GameManager.Instance.WithdrawRawAsterium();
 				GameManager.Instance.ChangeAsteriy(10);
 				isReadyForWork = false;
-				GameManager.Instance.uiResourceShower.UpdateIndicators();
+				//GameManager.Instance.uiResourceShower.UpdateIndicators();
 				break;
 			case Resources.Cosmodrome:
-				timer = 45f;
+				timer = 3f;
 				while (timer > 0)
 				{
 					timeShow.text = SecondsToTimeToShow(timer);
@@ -160,8 +172,11 @@ public class RoomScript : MonoBehaviour
 				timeShow.transform.parent.gameObject.SetActive(false);
 				break;
 		}
-		fixedBear.GetComponent<UnitScript>().CanBeSelected();
-		fixedBear = null;
+		if (fixedBear != null)
+		{
+			fixedBear.GetComponent<UnitScript>().CanBeSelected();
+			fixedBear = null;
+		}
 		status = Status.Free;
 	}
 

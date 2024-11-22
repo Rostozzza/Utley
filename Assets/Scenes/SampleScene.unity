@@ -4603,11 +4603,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4167620145723012171, guid: 9d4d4f6758ecb804ba46092e645c74e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.3942499
       objectReference: {fileID: 0}
     - target: {fileID: 4167620145723012171, guid: 9d4d4f6758ecb804ba46092e645c74e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.28719997
       objectReference: {fileID: 0}
     - target: {fileID: 4167620145723012171, guid: 9d4d4f6758ecb804ba46092e645c74e5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5372,6 +5372,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1691773150}
     m_Modifications:
+    - target: {fileID: 151184268124072345, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: resource
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 151184268124072345, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: timeShow
+      value: 
+      objectReference: {fileID: 1827810995}
     - target: {fileID: 875520400103360177, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_TagString
       value: work_station
@@ -5421,10 +5429,15 @@ PrefabInstance:
       value: complex_cosmodrome (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4540715411704343108, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540715411704343108, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_TagString
       value: room
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 151184268124072345, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3767274520511459582, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
