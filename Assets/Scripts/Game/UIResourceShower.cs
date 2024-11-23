@@ -22,7 +22,7 @@ public class UIResourceShower : MonoBehaviour
     {
         energoHoneyAmountText.text = Convert.ToString(GameManager.Instance.GetHoney());
         asteriyAmountText.text = Convert.ToString(GameManager.Instance.GetAsteriy());
-        bearsAmountText.text = "99/" + Convert.ToString(GameManager.Instance.bears.Count); // "99/" is temporarily - needs to know living rooms amount
+        bearsAmountText.text = Convert.ToString(GameManager.Instance.maxBearsAmount) + "/" + Convert.ToString(GameManager.Instance.bears.Count); // "99/" is temporarily - needs to know living rooms amount
         temperatureSlider.value = 1f; // ???
     }
 }

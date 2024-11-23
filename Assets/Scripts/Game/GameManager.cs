@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
 	private GameObject skyBG;
 	[SerializeField] private List<VideoClip> animatedBackgrounds;
 	public Season season;
+	public int maxBearsAmount = 3;
 
 	[SerializeField] private int honey;
 	[SerializeField] private int asteriy;
@@ -405,6 +406,10 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+    /// <summary>
+	/// Changes season with refreshing
+	/// </summary>
+	/// <param name="season"></param>
 	public void ChangeSeason(Season season)
 	{
 		this.season = season;
@@ -420,6 +425,56 @@ public class GameManager : MonoBehaviour
 			{
 				vp.Play();
 			}
+		}
+	}
+
+	public void ChangeMaxBearAmount(int amount)
+	{
+		maxBearsAmount += amount;
+		uiResourceShower.UpdateIndicators();
+	}
+
+	public void BoostThreeBears()
+	{
+		if (bears.Count < 3)
+		{
+			foreach (GameObject bear in bears)
+			{
+				bear.GetComponent<UnitScript>().isBoosted = true;
+			}
+		}
+		else
+		{
+			GameObject bearToBoost;
+			if (bears.GetRange(0, bears.Count / 3).ConvertAll(x => x.GetComponent<UnitScript>().isBoosted).Contains(false))
+			{
+				bearToBoost = bears[Random.Range(0, bears.Count / 3)];
+				while (bearToBoost.GetComponent<UnitScript>().isBoosted)
+				{
+					bearToBoost = bears[Random.Range(0, bears.Count / 3)];
+				}
+				bearToBoost.GetComponent<UnitScript>().isBoosted = true;
+			}
+			if (bears.GetRange(bears.Count / 3, (bears.Count / 3) * 2).ConvertAll(x => x.GetComponent<UnitScript>().isBoosted).Contains(false))
+			{
+				bearToBoost = bears[Random.Range(bears.Count / 3, (bears.Count / 3) * 2)];
+				while (bearToBoost.GetComponent<UnitScript>().isBoosted)
+				{
+					bearToBoost = bears[Random.Range(bears.Count / 3, (bears.Count / 3) * 2)];
+				}
+				bearToBoost.GetComponent<UnitScript>().isBoosted = true;
+			}
+			if (bears.GetRange((bears.Count / 3) * 2, bears.Count).ConvertAll(x => x.GetComponent<UnitScript>().isBoosted).Contains(false))
+			{
+				bearToBoost = bears[Random.Range((bears.Count / 3) * 2, bears.Count)];
+				while (bearToBoost.GetComponent<UnitScript>().isBoosted)
+				{
+					bearToBoost = bears[Random.Range((bears.Count / 3) * 2, bears.Count)];
+				}
+				bearToBoost.GetComponent<UnitScript>().isBoosted = true;
+			}
+			//bears[Random.Range(bears.Count / 3, (bears.Count / 3) * 2)].GetComponent<UnitScript>().isBoosted = true;
+			//bears[Random.Range((bears.Count / 3) * 2, bears.Count)].GetComponent<UnitScript>().isBoosted = true;
 		}
 	}
 
