@@ -445,31 +445,50 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
+			int c;
 			GameObject bearToBoost;
 			if (bears.GetRange(0, bears.Count / 3).ConvertAll(x => x.GetComponent<UnitScript>().isBoosted).Contains(false))
 			{
+				c = 0;
 				bearToBoost = bears[Random.Range(0, bears.Count / 3)];
 				while (bearToBoost.GetComponent<UnitScript>().isBoosted)
 				{
 					bearToBoost = bears[Random.Range(0, bears.Count / 3)];
+					c++;
+					if (c > 100)
+					{
+						break;
+					}
 				}
 				bearToBoost.GetComponent<UnitScript>().isBoosted = true;
 			}
 			if (bears.GetRange(bears.Count / 3, (bears.Count / 3) * 2).ConvertAll(x => x.GetComponent<UnitScript>().isBoosted).Contains(false))
 			{
+				c = 0;
 				bearToBoost = bears[Random.Range(bears.Count / 3, (bears.Count / 3) * 2)];
 				while (bearToBoost.GetComponent<UnitScript>().isBoosted)
 				{
 					bearToBoost = bears[Random.Range(bears.Count / 3, (bears.Count / 3) * 2)];
+					c++;
+					if (c > 100)
+					{
+						break;
+					}
 				}
 				bearToBoost.GetComponent<UnitScript>().isBoosted = true;
 			}
 			if (bears.GetRange((bears.Count / 3) * 2, bears.Count).ConvertAll(x => x.GetComponent<UnitScript>().isBoosted).Contains(false))
 			{
+				c = 0;
 				bearToBoost = bears[Random.Range((bears.Count / 3) * 2, bears.Count)];
 				while (bearToBoost.GetComponent<UnitScript>().isBoosted)
 				{
 					bearToBoost = bears[Random.Range((bears.Count / 3) * 2, bears.Count)];
+					c++;
+					if (c > 100)
+					{
+						break;
+					}
 				}
 				bearToBoost.GetComponent<UnitScript>().isBoosted = true;
 			}
