@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 using System.Linq;
 using System.Collections;
 using UnityEngine.Video;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
 		}
 		skyBG = GameObject.FindGameObjectWithTag("skyBG");
 		ChangeSeason(season);
+		StartCoroutine(ConstantDurabilityDamager(4));
 	}
 
 	/// <summary>
@@ -394,7 +396,7 @@ public class GameManager : MonoBehaviour
 		{
 			foreach (GameObject station in workStations)
 			{
-				if (show && station.GetComponentInParent<RoomScript>().status != RoomScript.Status.Busy)
+				if (show && station.GetComponentInParent<RoomScript>().status == RoomScript.Status.Free)
 				{
 					station.layer = 8;
 				}
@@ -494,6 +496,59 @@ public class GameManager : MonoBehaviour
 			}
 			//bears[Random.Range(bears.Count / 3, (bears.Count / 3) * 2)].GetComponent<UnitScript>().isBoosted = true;
 			//bears[Random.Range((bears.Count / 3) * 2, bears.Count)].GetComponent<UnitScript>().isBoosted = true;
+		}
+	}
+
+	private IEnumerator ConstantDurabilityDamager(int n)
+	{
+		while (true)
+		{
+			yield return new WaitForSeconds(10);
+			List<GameObject> interestRooms = new List<GameObject>();
+			foreach (GameObject room in allRooms)
+			{
+				if (room.TryGetComponent<RoomScript>(out RoomScript a) && a.status != RoomScript.Status.Destroyed)
+				{
+					interestRooms.Add(room);
+				}
+			}
+			List<GameObject> shuffleRooms = new List<GameObject>();
+			if (n > interestRooms.Count)
+			{
+				foreach (GameObject room in interestRooms)
+				{
+					shuffleRooms.Add(room);
+				}
+				//shuffleRooms = interestRooms.GetRange(0, interestRooms.Count);
+				Debug.Log(interestRooms.Count + "|" + shuffleRooms.Count);
+			}
+			else
+			{
+				foreach (GameObject room in interestRooms)
+				{
+					if (shuffleRooms.Count == 0)
+					{
+						shuffleRooms.Add(room);
+					}
+					else
+					{
+						shuffleRooms.Insert(Random.Range(0, shuffleRooms.Count), room);
+					}
+				}
+				shuffleRooms.RemoveRange(n, shuffleRooms.Count - n);
+				//shuffleRooms = shuffleRooms.GetRange(0, n);
+				Debug.Log(shuffleRooms);
+			}
+			//foreach (GameObject room in shuffleRooms)
+			//{
+			//	Debug.Log(room.name + "|" + room);
+			//	room.GetComponent<RoomScript>().ChangeDurability(-0.01f);
+			//}
+			// analogue
+			shuffleRooms.ForEach(delegate(GameObject room)
+			{
+				room.GetComponent<RoomScript>().ChangeDurability(-0.01f);
+			});
 		}
 	}
 

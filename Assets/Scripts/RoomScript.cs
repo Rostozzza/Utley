@@ -24,6 +24,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI timeShow;
 	[SerializeField] private GameObject fixedBear;
 	[SerializeField] private List<GameObject> workStationsToOutline;
+	[SerializeField] private float durability = 1f;
 	[Header("Asterium settings")]
 	public bool isReadyForWork = false;
 
@@ -57,27 +58,30 @@ public class RoomScript : MonoBehaviour
 	/// <param name="bear"></param>
 	public void StartWork(GameObject bear)
 	{
-		switch (resource)
+		if (status != Status.Destroyed)
 		{
-			case Resources.Energohoney:
-				break;
-			case Resources.Asteriy:
-				work = StartCoroutine(WorkStatus());
+			switch (resource)
+			{
+				case Resources.Energohoney:
+					break;
+				case Resources.Asteriy:
+					work = StartCoroutine(WorkStatus());
+					return;
+				case Resources.Bed:
+					break;
+			}
+			fixedBear = bear;
+			if (resource == Resources.Cosmodrome)
+			{
+				status = Status.Busy;
+				fixedBear.GetComponent<UnitScript>().CannotBeSelected();
+				timeShow.transform.parent.gameObject.SetActive(true);
 				return;
-			case Resources.Bed:
-				break;
-		}
-		fixedBear = bear;
-		if (resource == Resources.Cosmodrome)
-		{
-			status = Status.Busy;
-			fixedBear.GetComponent<UnitScript>().CannotBeSelected();
-			timeShow.transform.parent.gameObject.SetActive(true);
-			return;
-		}
-		if (status == Status.Free)
-		{
-			work = StartCoroutine(WorkStatus());
+			}
+			if (status == Status.Free)
+			{
+				work = StartCoroutine(WorkStatus());
+			}
 		}
 	}
 
@@ -208,6 +212,20 @@ public class RoomScript : MonoBehaviour
 	{
 		return walkPoints;
 	}
+
+	/// <summary>
+	/// Changes durability (wow) "-" to damage, "+" to heal
+	/// </summary>
+	/// <param name="hp"></param>
+	public void ChangeDurability(float hp)
+	{
+		durability += hp;
+		if (durability <= 0)
+		{
+			status = Status.Destroyed;
+		}
+	}
+
 	public enum Resources
 	{
 		Energohoney,
