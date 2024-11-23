@@ -21,16 +21,10 @@ public class UnitScript : MonoBehaviour
 	[Header("Bear Stats")]
 	public Qualification job;
 	public int level;
-<<<<<<< HEAD
-	private List<GameObject> fur;
-	public List<GameObject> up;
-	public List<GameObject> down;
-=======
 	public Mesh fur;
 	public Mesh top;
 	public Mesh bottom;
 	public bool isBoosted = false;
->>>>>>> f27a35a27bb4f6e0f92dad5afe06185b34b5f734
 
 	private void Start()
 	{

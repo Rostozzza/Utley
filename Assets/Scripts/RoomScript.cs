@@ -29,11 +29,7 @@ public class RoomScript : MonoBehaviour
 
 	private void Start()
 	{
-		//walkPoints = new Vector3[rawWalkPoints.Length];
-		//walkPoints = Array.ConvertAll(rawWalkPoints, obj => obj.position);
 		walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
-		//leftDoor.SetActive(hasLeftDoor);
-		//rightDoor.SetActive(hasRightDoor);
 		switch (resource)
 		{
 			case Resources.Energohoney:
@@ -41,6 +37,10 @@ public class RoomScript : MonoBehaviour
 				break;
 			case Resources.Cosmodrome:
 				GameManager.Instance.AddWorkStations(workStationsToOutline);
+				break;
+			case Resources.Bed:
+				GameManager.Instance.AddWorkStations(workStationsToOutline);
+				GameManager.Instance.ChangeMaxBearAmount(3);
 				break;
 		}
 	}
@@ -64,23 +64,10 @@ public class RoomScript : MonoBehaviour
 			case Resources.Asteriy:
 				work = StartCoroutine(WorkStatus());
 				return;
-		}
-		if (resource == Resources.Asteriy)
-		{
-			work = StartCoroutine(WorkStatus());
-			return;
+			case Resources.Bed:
+				break;
 		}
 		fixedBear = bear;
-		/*if (resource == Resources.Asteriy)
-		{
-            if (!isReadyForWork)
-			{
-				Debug.Log("нету астерия!");
-				return;
-			}
-			Debug.Log("начали работу");
-			fixedBear = bear;
-		}*/
 		if (resource == Resources.Cosmodrome)
 		{
 			status = Status.Busy;
@@ -134,7 +121,7 @@ public class RoomScript : MonoBehaviour
 		switch (resource)
 		{
 			case Resources.Energohoney:
-				fixedBear.GetComponent<UnitScript>().StartMoveInRoom((int)Resources.Energohoney, GetWalkPoints(), this.gameObject);
+				fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Energohoney, GetWalkPoints(), this.gameObject);
 				if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
 				{
 					timer = 45f * (1 - (fixedBear.GetComponent<UnitScript>().level * 0.5f));
@@ -142,6 +129,10 @@ public class RoomScript : MonoBehaviour
 				else
 				{
 					timer = 45f * 1.25f;
+				}
+				if (fixedBear.GetComponent<UnitScript>().isBoosted)
+				{
+					timer *= 0.9f;
 				}
 				while (timer > 0)
 				{
@@ -169,6 +160,10 @@ public class RoomScript : MonoBehaviour
 				break;
 			case Resources.Cosmodrome:
 				timer = 3f;
+				if (fixedBear.GetComponent<UnitScript>().isBoosted)
+				{
+					timer *= 0.9f;
+				}
 				while (timer > 0)
 				{
 					timeShow.text = SecondsToTimeToShow(timer);
@@ -178,6 +173,22 @@ public class RoomScript : MonoBehaviour
 				GameManager.Instance.DeliverRawAsterium();
 				timeShow.gameObject.SetActive(false);
 				timeShow.transform.parent.gameObject.SetActive(false);
+				break;
+			case Resources.Bed:
+				fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Bed, GetWalkPoints(), this.gameObject);
+				timer = 120f;
+				if (fixedBear.GetComponent<UnitScript>().isBoosted)
+				{
+					timer *= 0.9f;
+				}
+				while (timer > 0)
+				{
+					timeShow.text = SecondsToTimeToShow(timer);
+					timer -= Time.deltaTime;
+					yield return null;
+				}
+				timeShow.text = "";
+				GameManager.Instance.BoostThreeBears();
 				break;
 		}
 		if (fixedBear != null)
@@ -201,7 +212,8 @@ public class RoomScript : MonoBehaviour
 	{
 		Energohoney,
 		Asteriy,
-		Cosmodrome
+		Cosmodrome,
+		Bed
 	}
 
 	public enum Status
