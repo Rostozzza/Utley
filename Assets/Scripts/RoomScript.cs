@@ -48,6 +48,7 @@ public class RoomScript : MonoBehaviour
 	public void BuildRoom(GameObject button)
 	{
 		GameManager.Instance.QueueBuildPos(button);
+		GameManager.Instance.buildingScreen.SetActive(true);
 	}
 
 	/// <summary>
@@ -164,7 +165,7 @@ public class RoomScript : MonoBehaviour
 				GameManager.Instance.WithdrawRawAsterium();
 				GameManager.Instance.ChangeAsteriy(20);
 				isReadyForWork = false;
-				//GameManager.Instance.uiResourceShower.UpdateIndicators();
+				GameManager.Instance.uiResourceShower.UpdateIndicators();
 				break;
 			case Resources.Cosmodrome:
 				timer = 3f;

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private GameObject ui;
 	[SerializeField] private List<Image> asteriumRoomView;
 	[SerializeField] private List<RoomScript> asteriumRooms;
+	[SerializeField] private List<GameObject> allRooms;
 	[SerializeField] private Transform asteriumViewGrid;
 	[SerializeField] private GameObject asteriumViewPrefab;
 	[Header("GameManager settings")]
@@ -20,10 +21,12 @@ public class GameManager : MonoBehaviour
 	public List<GameObject> bears = new List<GameObject>();
 	[SerializeField] public UIResourceShower uiResourceShower;
 	[SerializeField] public GameObject selectedUnit;
-	[SerializeField] private GameObject buildingScreen;
+	public GameObject buildingScreen;
+	public GameObject elevatorBuildingScreen;
 	[SerializeField] private GameObject floorPrefab;
 	private GameObject queuedBuildPositon;
 	public List<GameObject> workStations; // keeps all workstations to address to them to outline when we choosing unit
+	private bool buildingMode;
 
 	[SerializeField] private int honey;
 	[SerializeField] private int asteriy;
@@ -47,7 +50,24 @@ public class GameManager : MonoBehaviour
 	public void QueueBuildPos(GameObject queuePos)
 	{
 		queuedBuildPositon = queuePos;
-		buildingScreen.SetActive(true);
+		buildingScreen.SetActive(false);
+		elevatorBuildingScreen.SetActive(false);
+	}
+
+	/// <summary>
+	/// Toggles building mode and all buttons;
+	/// </summary>
+	public void ToggleBuildingMode()
+	{
+		buildingMode = !buildingMode;
+		selectedUnit = null;
+		foreach (GameObject room in allRooms)
+		{
+			foreach(var button in room.GetComponentsInChildren<Button>(true))
+			{
+				button.gameObject.SetActive(buildingMode);
+			}
+		}
 	}
 
 	/// <summary>
@@ -199,6 +219,10 @@ public class GameManager : MonoBehaviour
 				asteriumRoomView.Add(newAsteriumView.GetComponent<Image>());
 			}
 		}
+		allRooms.Add(instance);
+		queuedBuildPositon = null;
+		buildingScreen.SetActive(false);
+		elevatorBuildingScreen.SetActive(false);
 	}
 
 	/// <summary>
@@ -331,7 +355,7 @@ public class GameManager : MonoBehaviour
 	{
 		Debug.Log("кликнули по " + gameObject.tag);
 		
-		if (gameObject.CompareTag("unit"))
+		if (gameObject.CompareTag("unit") && !buildingMode)
 		{
 			if (gameObject.GetComponent<UnitScript>().selectable)
 			{
