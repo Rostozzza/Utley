@@ -7,6 +7,7 @@ public class UnitScript : MonoBehaviour
 	[SerializeField] public bool chased;
 	[SerializeField] public float speed = 5f;
 	[SerializeField] public bool isBusy;
+    [SerializeField] private Animator animator;
 	private bool onLadder;
 	private Rigidbody rb;
 	private Vector3 dir;
@@ -184,13 +185,16 @@ public class UnitScript : MonoBehaviour
 		Vector3 chosenPoint;
 		while (obj.GetComponent<RoomScript>().status == RoomScript.Status.Busy)
 		{
+            State = States.Walk;
 			chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
 			while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
 			{
 				transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
 				yield return null;
 			}
+            State = States.Working;
 			yield return new WaitForSeconds(5f);
+            State = States.Walk;
 			chosenPoint = walkPoints[3];
 			while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
 			{
@@ -198,7 +202,21 @@ public class UnitScript : MonoBehaviour
 				transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
 				yield return null;
 			}
+            State = States.Working;
 			yield return new WaitForSeconds(3f);
 		}
 	}
+
+    public enum States
+    {
+        Idle,
+        Walk,
+        Working
+    }
+
+    public States State
+    {
+        get { return (States)animator.GetInteger("state"); }
+        set { animator.SetInteger("State", (int)value); }
+    }
 }

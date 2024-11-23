@@ -41,6 +41,7 @@ public class UnitMovement : MonoBehaviour
 
 	private IEnumerator MoveByOne()
 	{
+		gameObject.GetComponent<UnitScript>().State = UnitScript.States.Walk;
 		if (target.transform.position.x < transform.position.x)
 		{
 			while (target.transform.position.x < transform.position.x)
@@ -79,6 +80,7 @@ public class UnitMovement : MonoBehaviour
 					}
 				}
 			}
+			gameObject.GetComponent<UnitScript>().State = UnitScript.States.Walk;
 			if (e.transform.position.x < transform.position.x)
 			{
 				while (e.transform.position.x < transform.position.x)
@@ -98,6 +100,7 @@ public class UnitMovement : MonoBehaviour
 			currentElevator = e;
 		}
 		transform.position = new Vector3(transform.position.x, target.transform.position.y, transform.position.z);
+		gameObject.GetComponent<UnitScript>().State = UnitScript.States.Walk;
 		if (target.transform.position.x < transform.position.x)
 		{
 			while (target.transform.position.x < transform.position.x)
