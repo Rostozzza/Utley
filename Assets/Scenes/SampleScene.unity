@@ -4776,12 +4776,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1135390355}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.11935738, y: 0.11935738, z: 0.11935738}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1294434968}
+  m_Father: {fileID: 2108567262}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!328 &1135390357
 VideoPlayer:
@@ -4794,12 +4794,12 @@ VideoPlayer:
   m_VideoClip: {fileID: 32900000, guid: b669b8555f93fb04099ab7188c2c1da7, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 0}
+  m_TargetCamera: {fileID: 330585545}
   m_TargetTexture: {fileID: 0}
   m_TimeReference: 0
-  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialRenderer: {fileID: 2108567263}
   m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 2
+  m_RenderMode: 3
   m_AspectRatio: 5
   m_DataSource: 0
   m_TimeUpdateMode: 2
@@ -5419,7 +5419,6 @@ Transform:
   - {fileID: 242346800}
   - {fileID: 15912433}
   - {fileID: 1156270583}
-  - {fileID: 1135390356}
   - {fileID: 2108567262}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8017,6 +8016,11 @@ MonoBehaviour:
   elevatorBuildingScreen: {fileID: 1642775197}
   floorPrefab: {fileID: 0}
   workStations: []
+  animatedBackgrounds:
+  - {fileID: 32900000, guid: b669b8555f93fb04099ab7188c2c1da7, type: 3}
+  - {fileID: 32900000, guid: 4ef4af70a0a140f499193d66af7329f1, type: 3}
+  - {fileID: 32900000, guid: 9c78e99c3c3cf1e4c87d851fa371ac22, type: 3}
+  season: 0
   honey: 0
   asteriy: 0
   rawAsterium: 0
@@ -8124,7 +8128,7 @@ GameObject:
   - component: {fileID: 2108567263}
   m_Layer: 0
   m_Name: sky
-  m_TagString: Untagged
+  m_TagString: skyBG
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8141,7 +8145,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 30.5, z: 82.2}
   m_LocalScale: {x: 8.3782, y: 8.3782, z: 8.3782}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 1135390356}
   m_Father: {fileID: 1294434968}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2108567263
