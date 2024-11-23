@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using System.Linq;
 using System.Collections;
+using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class GameManager : MonoBehaviour
 	private GameObject queuedBuildPositon;
 	public List<GameObject> workStations; // keeps all workstations to address to them to outline when we choosing unit
 	private bool buildingMode;
+	private GameObject skyBG;
+	[SerializeField] private List<VideoClip> animatedBackgrounds;
+	public Season season;
 
 	[SerializeField] private int honey;
 	[SerializeField] private int asteriy;
@@ -41,6 +45,8 @@ public class GameManager : MonoBehaviour
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
 		}
+		skyBG = GameObject.FindGameObjectWithTag("skyBG");
+		ChangeSeason(season);
 	}
 
 	/// <summary>
@@ -397,5 +403,31 @@ public class GameManager : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	public void ChangeSeason(Season season)
+	{
+		this.season = season;
+		VideoPlayer vp = skyBG.GetComponentInChildren<VideoPlayer>();
+		if (season == Season.Calm)
+		{
+			vp.Stop();
+		}
+		else
+		{
+			vp.clip = animatedBackgrounds[(int)season - 1];
+			if (!vp.isPlaying)
+			{
+				vp.Play();
+			}
+		}
+	}
+
+	public enum Season
+	{
+		Calm,
+		Storm,
+		Freeze,
+		Blizzard
 	}
 }
