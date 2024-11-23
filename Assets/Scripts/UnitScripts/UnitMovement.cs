@@ -43,7 +43,7 @@ public class UnitMovement : MonoBehaviour
 	private IEnumerator MoveByOne()
 	{
 		GetComponentInChildren<Animator>().SetBool("Walk", true);
-		gameObject.GetComponent<UnitScript>().State = UnitScript.States.Walk;
+		//gameObject.GetComponent<UnitScript>().State = UnitScript.States.Walk;
 		if (target.transform.position.x < transform.position.x)
 		{
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, -90, 0);

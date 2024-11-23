@@ -175,7 +175,7 @@ public class UnitScript : MonoBehaviour
 	private IEnumerator BedroomWalkBehaviour(List<Vector3> walkPoints, GameObject obj)
 	{
 		Vector3 chosenPoint;
-		State = States.Walk;
+		//State = States.Walk;
 		chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
 		while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
 		{
@@ -190,16 +190,16 @@ public class UnitScript : MonoBehaviour
 		Vector3 chosenPoint;
 		while (obj.GetComponent<RoomScript>().status == RoomScript.Status.Busy)
 		{
-            State = States.Walk;
+            //State = States.Walk;
 			chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
 			while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
 			{
 				transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
 				yield return null;
 			}
-            State = States.Working;
+            //State = States.Working;
 			yield return new WaitForSeconds(5f);
-            State = States.Walk;
+            //State = States.Walk;
 			chosenPoint = walkPoints[3];
 			while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
 			{
@@ -207,7 +207,7 @@ public class UnitScript : MonoBehaviour
 				transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
 				yield return null;
 			}
-            State = States.Working;
+            //State = States.Working;
 			yield return new WaitForSeconds(3f);
 		}
 	}
@@ -219,9 +219,9 @@ public class UnitScript : MonoBehaviour
         Working
     }
 
-    public States State
-    {
-        get { return (States)animator.GetInteger("state"); }
-        set { animator.SetInteger("State", (int)value); }
-    }
+    //public States State
+    //{
+    //    get { return (States)animator.GetInteger("state"); }
+    //    set { animator.SetInteger("State", (int)value); }
+    //}
 }
