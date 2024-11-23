@@ -8,6 +8,7 @@ public class UnitMovement : MonoBehaviour
 	[SerializeField] private float speed;
 	[SerializeField] private RoomScript target;
 	[SerializeField] private Elevator currentElevator;
+	[SerializeField] private float offsetX = 1.24f;
 	public Coroutine currentRoutine;
 
 	public void MoveToRoom(RoomScript target)
@@ -41,28 +42,35 @@ public class UnitMovement : MonoBehaviour
 
 	private IEnumerator MoveByOne()
 	{
+		GetComponentInChildren<Animator>().SetBool("Walk", true);
 		gameObject.GetComponent<UnitScript>().State = UnitScript.States.Walk;
 		if (target.transform.position.x < transform.position.x)
 		{
-			while (target.transform.position.x < transform.position.x)
+			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, -90, 0);
+			while (target.transform.position.x + 1.24f < transform.position.x)
 			{
 				transform.Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
+
 				yield return null;
 			}
 		}
 		else
 		{
-			while (target.transform.position.x > transform.position.x)
+			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90, 0);
+			while (target.transform.position.x + 1.24f > transform.position.x)
 			{
 				transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+
 				yield return null;
 			}
 		}
 		currentRoutine = null;
+		GetComponentInChildren<Animator>().SetBool("Walk", false);
 	}
 
 	private IEnumerator Move(List<Elevator> path)
 	{
+		GetComponentInChildren<Animator>().SetBool("Walk", true);
 		var newPath = path.Distinct().ToList();
 		Debug.Log(newPath.Count);
 		currentElevator = path[0];
@@ -74,16 +82,37 @@ public class UnitMovement : MonoBehaviour
 				{
 					if (room.connectedElevators.Contains(currentElevator))
 					{
+						var directionElevator = room.transform.position.y;
+						GetComponentInChildren<Animator>().SetBool("Walk", false);
+						if (transform.position.y - target.transform.position.y > 0)
+						{
+							GetComponentInChildren<Animator>().SetBool("ClimbUp", true);
+						}
+						else
+						{
+							GetComponentInChildren<Animator>().SetBool("ClimbDown", true);
+						}
+						GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
+						yield return new WaitForSeconds(1.15f);
+						while (Vector3.Distance(transform.position, room.transform.position) > 0.1f)
+						{
+							transform.Translate(new Vector3(0, (room.transform.position.y - transform.position.y) * 100, 0).normalized * Time.deltaTime * speed / 2f);
+							yield return null;
+						}
 						transform.position = new Vector3(transform.position.x, room.transform.position.y, transform.position.z);
+						GetComponentInChildren<Animator>().SetBool("ClimbDown", false);
+						GetComponentInChildren<Animator>().SetBool("ClimbUp", false);
+						yield return new WaitForSeconds(1.28f);
 						Debug.Log("Breakage!");
 						break;
 					}
 				}
 			}
-			gameObject.GetComponent<UnitScript>().State = UnitScript.States.Walk;
-			if (e.transform.position.x < transform.position.x)
+			//gameObject.GetComponent<UnitScript>().State = UnitScript.States.Walk;
+			if (e.transform.position.x + 1.24f < transform.position.x)
 			{
-				while (e.transform.position.x < transform.position.x)
+				GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, -90, 0);
+				while (e.transform.position.x + 1.24f < transform.position.x)
 				{
 					transform.Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
 					yield return null;
@@ -91,7 +120,8 @@ public class UnitMovement : MonoBehaviour
 			}
 			else
 			{
-				while (e.transform.position.x > transform.position.x)
+				GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90, 0);
+				while (e.transform.position.x + 1.24f > transform.position.x)
 				{
 					transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
 					yield return null;
@@ -99,11 +129,33 @@ public class UnitMovement : MonoBehaviour
 			}
 			currentElevator = e;
 		}
-		transform.position = new Vector3(transform.position.x, target.transform.position.y, transform.position.z);
-		gameObject.GetComponent<UnitScript>().State = UnitScript.States.Walk;
-		if (target.transform.position.x < transform.position.x)
+
+		GetComponentInChildren<Animator>().SetBool("Walk", false);
+		if (transform.position.y - target.transform.position.y > 0)
 		{
-			while (target.transform.position.x < transform.position.x)
+			GetComponentInChildren<Animator>().SetBool("ClimbUp", true);
+		}
+		else
+		{
+			GetComponentInChildren<Animator>().SetBool("ClimbDown", true);
+		}
+		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
+		yield return new WaitForSeconds(1.15f);
+		while (Mathf.Abs(transform.position.y - target.transform.position.y) > 0.1f)
+		{
+			transform.Translate(new Vector3(0, (target.transform.position.y - transform.position.y) * 100, 0).normalized * Time.deltaTime * speed / 2f);
+			yield return null;
+		}
+		transform.position = new Vector3(transform.position.x, target.transform.position.y, transform.position.z);
+		GetComponentInChildren<Animator>().SetBool("ClimbDown", false);
+		GetComponentInChildren<Animator>().SetBool("ClimbUp", false);
+		yield return new WaitForSeconds(1.28f);
+		GetComponentInChildren<Animator>().SetBool("Walk", true);
+		//gameObject.GetComponent<UnitScript>().State = UnitScript.States.Walk;
+		if (target.transform.position.x + 1.24f < transform.position.x)
+		{
+			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, -90, 0);
+			while (target.transform.position.x + 1.24f < transform.position.x)
 			{
 				transform.Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
 				yield return null;
@@ -111,13 +163,15 @@ public class UnitMovement : MonoBehaviour
 		}
 		else
 		{
-			while (target.transform.position.x > transform.position.x)
+			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90, 0);
+			while (target.transform.position.x + 1.24f > transform.position.x)
 			{
 				transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
 				yield return null;
 			}
 		}
 		currentRoutine = null;
+		GetComponentInChildren<Animator>().SetBool("Walk", false);
 	}
 
 	private List<Elevator> GetBranch(Elevator targetElevator, Elevator elevator, List<Elevator> branch)
