@@ -54,7 +54,577 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Armature|climb
+      takeName: Armature|climb
+      internalID: 675385606668526950
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/butt
+        weight: 1
+      - path: Armature/butt/back_d
+        weight: 1
+      - path: Armature/butt/back_d/back_d_end
+        weight: 1
+      - path: Armature/butt/hip.L
+        weight: 1
+      - path: Armature/butt/hip.L/leg.L
+        weight: 1
+      - path: Armature/butt/hip.L/leg.L/foot1.L
+        weight: 1
+      - path: Armature/butt/hip.L/leg.L/foot1.L/foot2.L
+        weight: 1
+      - path: Armature/butt/hip.L/leg.L/foot1.L/foot2.L/foot2.L_end
+        weight: 1
+      - path: Armature/butt/hip.R
+        weight: 1
+      - path: Armature/butt/hip.R/leg.R
+        weight: 1
+      - path: Armature/butt/hip.R/leg.R/foot1.R
+        weight: 1
+      - path: Armature/butt/hip.R/leg.R/foot1.R/foot2.R
+        weight: 1
+      - path: Armature/butt/hip.R/leg.R/foot1.R/foot2.R/foot2.R_end
+        weight: 1
+      - path: Armature/k_back
+        weight: 1
+      - path: Armature/k_back/back_u
+        weight: 1
+      - path: Armature/k_back/back_u/neck
+        weight: 1
+      - path: Armature/k_back/back_u/neck/head
+        weight: 1
+      - path: Armature/k_back/back_u/neck/head/eye.L
+        weight: 1
+      - path: Armature/k_back/back_u/neck/head/eye.L/eye.L_end
+        weight: 1
+      - path: Armature/k_back/back_u/neck/head/eye.L/eyesL
+        weight: 1
+      - path: Armature/k_back/back_u/neck/head/eye.R
+        weight: 1
+      - path: Armature/k_back/back_u/neck/head/eye.R/eye.R_end
+        weight: 1
+      - path: Armature/k_back/back_u/neck/head/eye.R/eyesR
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L/finger1_1.L
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L/finger1_1.L/finger1_2.L
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L/finger1_1.L/finger1_2.L/finger1_3.L
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L/finger1_1.L/finger1_2.L/finger1_3.L/finger1_3.L_end
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L/finger2_1.L
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L/finger2_1.L/finger2_2.L
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L/finger2_1.L/finger2_2.L/finger2_2.L_end
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L/finger3_1.L
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L/finger3_1.L/finger3_2.L
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L/finger3_1.L/finger3_2.L/finger3_2.L_end
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L/finger4_1.L
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L/finger4_1.L/finger4_2.L
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L/finger4_1.L/finger4_2.L/finger4_2.L_end
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L/finger5_1.L
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L/finger5_1.L/finger5_2.L
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.L/arm1.L/arm2.L/hand.L/finger5_1.L/finger5_2.L/finger5_2.L_end
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R/finger1_1.R
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R/finger1_1.R/finger1_2.R
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R/finger1_1.R/finger1_2.R/finger1_3.R
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R/finger1_1.R/finger1_2.R/finger1_3.R/finger1_3.R_end
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R/finger2_1.R
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R/finger2_1.R/finger2_2.R
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R/finger2_1.R/finger2_2.R/finger2_2.R_end
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R/finger3_1.R
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R/finger3_1.R/finger3_2.R
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R/finger3_1.R/finger3_2.R/finger3_2.R_end
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R/finger4_1.R
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R/finger4_1.R/finger4_2.R
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R/finger4_1.R/finger4_2.R/finger4_2.R_end
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R/finger5_1.R
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R/finger5_1.R/finger5_2.R
+        weight: 1
+      - path: Armature/k_back/back_u/shoulder.R/arm1.R/arm2.R/hand.R/finger5_1.R/finger5_2.R/finger5_2.R_end
+        weight: 1
+      - path: Armature/k_foot_move.L
+        weight: 1
+      - path: Armature/k_foot_move.L/k_foot2.L
+        weight: 1
+      - path: Armature/k_foot_move.L/k_foot2.L/k_foot1.L
+        weight: 1
+      - path: Armature/k_foot_move.L/k_foot2.L/k_foot1.L/k_foot1.L_end
+        weight: 1
+      - path: Armature/k_foot_move.L/k_foot3.L
+        weight: 1
+      - path: Armature/k_foot_move.L/k_foot3.L/k_foot3.L_end
+        weight: 1
+      - path: Armature/k_foot_move.L/k_foot4.L
+        weight: 1
+      - path: Armature/k_foot_move.L/k_foot4.L/k_foot4.L_end
+        weight: 1
+      - path: Armature/k_foot_move.R
+        weight: 1
+      - path: Armature/k_foot_move.R/k_foot2.R
+        weight: 1
+      - path: Armature/k_foot_move.R/k_foot2.R/k_foot1.R
+        weight: 1
+      - path: Armature/k_foot_move.R/k_foot2.R/k_foot1.R/k_foot1.R_end
+        weight: 1
+      - path: Armature/k_foot_move.R/k_foot3.R
+        weight: 1
+      - path: Armature/k_foot_move.R/k_foot3.R/k_foot3.R_end
+        weight: 1
+      - path: Armature/k_foot_move.R/k_foot4.R
+        weight: 1
+      - path: Armature/k_foot_move.R/k_foot4.R/k_foot4.R_end
+        weight: 1
+      - path: Armature/k_hand_move.L
+        weight: 1
+      - path: Armature/k_hand_move.L/k_arm.L
+        weight: 1
+      - path: Armature/k_hand_move.L/k_arm.L/k_arm.L_end
+        weight: 1
+      - path: Armature/k_hand_move.L/k_hand.L
+        weight: 1
+      - path: Armature/k_hand_move.L/k_hand.L/k_hand.L_end
+        weight: 1
+      - path: Armature/k_hand_move.R
+        weight: 1
+      - path: Armature/k_hand_move.R/k_arm.R
+        weight: 1
+      - path: Armature/k_hand_move.R/k_arm.R/k_arm.R_end
+        weight: 1
+      - path: Armature/k_hand_move.R/k_hand.R
+        weight: 1
+      - path: Armature/k_hand_move.R/k_hand.R/k_hand.R_end
+        weight: 1
+      - path: Armature/k_head
+        weight: 1
+      - path: Armature/k_head/k_eyes
+        weight: 1
+      - path: Armature/k_head/k_eyes/k_eyes_end
+        weight: 1
+      - path: Armature/k_leg.L
+        weight: 1
+      - path: Armature/k_leg.L/k_leg.L_end
+        weight: 1
+      - path: Armature/k_leg.R
+        weight: 1
+      - path: Armature/k_leg.R/k_leg.R_end
+        weight: 1
+      - path: Armature/k_move
+        weight: 1
+      - path: Armature/k_move/k_move_end
+        weight: 1
+      - path: down1
+        weight: 1
+      - path: down2
+        weight: 1
+      - path: down3
+        weight: 1
+      - path: fur1
+        weight: 1
+      - path: fur2
+        weight: 1
+      - path: fur3
+        weight: 1
+      - path: fur4
+        weight: 1
+      - path: fur5
+        weight: 1
+      - path: up1
+        weight: 1
+      - path: up2
+        weight: 1
+      - path: up3
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|climb.001
+      takeName: Armature|climb.001
+      internalID: -6340628655456971512
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|climb_end
+      takeName: Armature|climb_end
+      internalID: 659408676824393875
+      firstFrame: 0
+      lastFrame: 88
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|climb_start
+      takeName: Armature|climb_start
+      internalID: -7525579979808892028
+      firstFrame: 0
+      lastFrame: 87
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|idle
+      takeName: Armature|idle
+      internalID: -1978303741906493279
+      firstFrame: 0
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|retopo|Take 001|BaseLayer
+      takeName: Armature|retopo|Take 001|BaseLayer
+      internalID: -1724030813714523966
+      firstFrame: 0
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|tpose
+      takeName: Armature|tpose
+      internalID: -126210440812934267
+      firstFrame: 0
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|tpose.001
+      takeName: Armature|tpose.001
+      internalID: 6219236885362343860
+      firstFrame: 0
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|walk
+      takeName: Armature|walk
+      internalID: -4799524434163024911
+      firstFrame: 0
+      lastFrame: 90
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|working
+      takeName: Armature|working
+      internalID: -4310237478409326193
+      firstFrame: 0
+      lastFrame: 129
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|working_end
+      takeName: Armature|working_end
+      internalID: 1875321353473738182
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|working_start
+      takeName: Armature|working_start
+      internalID: 1666019924673240771
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
