@@ -21,9 +21,16 @@ public class UnitScript : MonoBehaviour
 	[Header("Bear Stats")]
 	public Qualification job;
 	public int level;
+<<<<<<< HEAD
+	private List<GameObject> fur;
+	public List<GameObject> up;
+	public List<GameObject> down;
+=======
 	public Mesh fur;
 	public Mesh top;
 	public Mesh bottom;
+	public bool isBoosted = false;
+>>>>>>> f27a35a27bb4f6e0f92dad5afe06185b34b5f734
 
 	private void Start()
 	{
@@ -139,36 +146,18 @@ public class UnitScript : MonoBehaviour
 		selectable = true;
 	}
 
-	public void StartMoveInRoom(int roomType, List<Vector3> points, GameObject obj)
+	public void StartMoveInRoom(RoomScript.Resources roomType, List<Vector3> points, GameObject obj)
 	{
 		StartCoroutine(MoveInRoom(roomType, points, obj));
 	}
 
-	public IEnumerator MoveInRoom(int roomType, List<Vector3> walkPoints, GameObject obj)
+	public IEnumerator MoveInRoom(RoomScript.Resources roomType, List<Vector3> walkPoints, GameObject obj)
 	{
 		Vector3 chosenPoint;
 		Coroutine walkingCoroutine;
 		switch (roomType)
 		{
-			case 0:
-				/*while (obj.GetComponent<RoomScript>().status == RoomScript.Status.Busy)
-				{
-					chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
-					while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
-					{
-						transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
-						yield return null;
-					}
-					yield return new WaitForSeconds(5f);
-					chosenPoint = walkPoints[3];
-					while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
-					{
-						//dir.x = Mathf.Sign(chosenPoint.x - transform.position.x);
-						transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
-						yield return null;
-					}
-					yield return new WaitForSeconds(3f);
-				}*/
+			case RoomScript.Resources.Energohoney:
 				walkingCoroutine = StartCoroutine(EnergohoneyWalkBehaviour(walkPoints, obj));
 				while (obj.GetComponent<RoomScript>().status == RoomScript.Status.Busy)
 				{
@@ -177,7 +166,29 @@ public class UnitScript : MonoBehaviour
 				StopCoroutine(walkingCoroutine);
 				walkingCoroutine = null;
 				break;
+			case RoomScript.Resources.Bed:
+				walkingCoroutine = StartCoroutine(BedroomWalkBehaviour(walkPoints, obj));
+				while (obj.GetComponent<RoomScript>().status == RoomScript.Status.Busy)
+				{
+					yield return null;
+				}
+				StopCoroutine(walkingCoroutine);
+				walkingCoroutine = null;
+				break;
 		}
+	}
+
+	private IEnumerator BedroomWalkBehaviour(List<Vector3> walkPoints, GameObject obj)
+	{
+		Vector3 chosenPoint;
+		State = States.Walk;
+		chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
+		while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
+		{
+			transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
+			yield return null;
+		}
+		// move hands "working"
 	}
 
 	private IEnumerator EnergohoneyWalkBehaviour(List<Vector3> walkPoints, GameObject obj)

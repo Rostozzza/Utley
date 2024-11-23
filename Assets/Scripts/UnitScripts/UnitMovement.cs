@@ -41,28 +41,35 @@ public class UnitMovement : MonoBehaviour
 
 	private IEnumerator MoveByOne()
 	{
+		GetComponentInChildren<Animator>().SetBool("Walk", true);
 		gameObject.GetComponent<UnitScript>().State = UnitScript.States.Walk;
 		if (target.transform.position.x < transform.position.x)
 		{
+			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, -90, 0);
 			while (target.transform.position.x < transform.position.x)
 			{
 				transform.Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
+
 				yield return null;
 			}
 		}
 		else
 		{
+			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90, 0);
 			while (target.transform.position.x > transform.position.x)
 			{
 				transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+
 				yield return null;
 			}
 		}
 		currentRoutine = null;
+		GetComponentInChildren<Animator>().SetBool("Walk", false);
 	}
 
 	private IEnumerator Move(List<Elevator> path)
 	{
+		GetComponentInChildren<Animator>().SetBool("Walk", true);
 		var newPath = path.Distinct().ToList();
 		Debug.Log(newPath.Count);
 		currentElevator = path[0];
@@ -74,6 +81,13 @@ public class UnitMovement : MonoBehaviour
 				{
 					if (room.connectedElevators.Contains(currentElevator))
 					{
+						
+						var directionElevator = room.transform.position.y;
+						while (Vector3.Distance(transform.position, room.transform.position)> 0.1f)
+						{
+							transform.Translate(new Vector3(0, (room.transform.position.y - transform.position.y)*100,0).normalized);
+							yield return null;
+						}
 						transform.position = new Vector3(transform.position.x, room.transform.position.y, transform.position.z);
 						Debug.Log("Breakage!");
 						break;
@@ -83,6 +97,7 @@ public class UnitMovement : MonoBehaviour
 			gameObject.GetComponent<UnitScript>().State = UnitScript.States.Walk;
 			if (e.transform.position.x < transform.position.x)
 			{
+				GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, -90, 0);
 				while (e.transform.position.x < transform.position.x)
 				{
 					transform.Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
@@ -91,6 +106,7 @@ public class UnitMovement : MonoBehaviour
 			}
 			else
 			{
+				GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90, 0);
 				while (e.transform.position.x > transform.position.x)
 				{
 					transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
@@ -103,6 +119,7 @@ public class UnitMovement : MonoBehaviour
 		gameObject.GetComponent<UnitScript>().State = UnitScript.States.Walk;
 		if (target.transform.position.x < transform.position.x)
 		{
+			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, -90, 0);
 			while (target.transform.position.x < transform.position.x)
 			{
 				transform.Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
@@ -111,6 +128,7 @@ public class UnitMovement : MonoBehaviour
 		}
 		else
 		{
+			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90, 0);
 			while (target.transform.position.x > transform.position.x)
 			{
 				transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
@@ -118,6 +136,7 @@ public class UnitMovement : MonoBehaviour
 			}
 		}
 		currentRoutine = null;
+		GetComponentInChildren<Animator>().SetBool("Walk", false);
 	}
 
 	private List<Elevator> GetBranch(Elevator targetElevator, Elevator elevator, List<Elevator> branch)

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using System.Linq;
 using System.Collections;
+using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,6 +28,10 @@ public class GameManager : MonoBehaviour
 	private GameObject queuedBuildPositon;
 	public List<GameObject> workStations; // keeps all workstations to address to them to outline when we choosing unit
 	private bool buildingMode;
+	private GameObject skyBG;
+	[SerializeField] private List<VideoClip> animatedBackgrounds;
+	public Season season;
+	public int maxBearsAmount = 3;
 
 	[SerializeField] private int honey;
 	[SerializeField] private int asteriy;
@@ -41,6 +46,8 @@ public class GameManager : MonoBehaviour
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
 		}
+		skyBG = GameObject.FindGameObjectWithTag("skyBG");
+		ChangeSeason(season);
 	}
 
 	/// <summary>
@@ -397,5 +404,104 @@ public class GameManager : MonoBehaviour
 				}
 			}
 		}
+	}
+
+    /// <summary>
+	/// Changes season with refreshing
+	/// </summary>
+	/// <param name="season"></param>
+	public void ChangeSeason(Season season)
+	{
+		this.season = season;
+		VideoPlayer vp = skyBG.GetComponentInChildren<VideoPlayer>();
+		if (season == Season.Calm)
+		{
+			vp.Stop();
+		}
+		else
+		{
+			vp.clip = animatedBackgrounds[(int)season - 1];
+			if (!vp.isPlaying)
+			{
+				vp.Play();
+			}
+		}
+	}
+
+	public void ChangeMaxBearAmount(int amount)
+	{
+		maxBearsAmount += amount;
+		uiResourceShower.UpdateIndicators();
+	}
+
+	public void BoostThreeBears()
+	{
+		if (bears.Count < 3)
+		{
+			foreach (GameObject bear in bears)
+			{
+				bear.GetComponent<UnitScript>().isBoosted = true;
+			}
+		}
+		else
+		{
+			int c;
+			GameObject bearToBoost;
+			if (bears.GetRange(0, bears.Count / 3).ConvertAll(x => x.GetComponent<UnitScript>().isBoosted).Contains(false))
+			{
+				c = 0;
+				bearToBoost = bears[Random.Range(0, bears.Count / 3)];
+				while (bearToBoost.GetComponent<UnitScript>().isBoosted)
+				{
+					bearToBoost = bears[Random.Range(0, bears.Count / 3)];
+					c++;
+					if (c > 100)
+					{
+						break;
+					}
+				}
+				bearToBoost.GetComponent<UnitScript>().isBoosted = true;
+			}
+			if (bears.GetRange(bears.Count / 3, (bears.Count / 3) * 2).ConvertAll(x => x.GetComponent<UnitScript>().isBoosted).Contains(false))
+			{
+				c = 0;
+				bearToBoost = bears[Random.Range(bears.Count / 3, (bears.Count / 3) * 2)];
+				while (bearToBoost.GetComponent<UnitScript>().isBoosted)
+				{
+					bearToBoost = bears[Random.Range(bears.Count / 3, (bears.Count / 3) * 2)];
+					c++;
+					if (c > 100)
+					{
+						break;
+					}
+				}
+				bearToBoost.GetComponent<UnitScript>().isBoosted = true;
+			}
+			if (bears.GetRange((bears.Count / 3) * 2, bears.Count).ConvertAll(x => x.GetComponent<UnitScript>().isBoosted).Contains(false))
+			{
+				c = 0;
+				bearToBoost = bears[Random.Range((bears.Count / 3) * 2, bears.Count)];
+				while (bearToBoost.GetComponent<UnitScript>().isBoosted)
+				{
+					bearToBoost = bears[Random.Range((bears.Count / 3) * 2, bears.Count)];
+					c++;
+					if (c > 100)
+					{
+						break;
+					}
+				}
+				bearToBoost.GetComponent<UnitScript>().isBoosted = true;
+			}
+			//bears[Random.Range(bears.Count / 3, (bears.Count / 3) * 2)].GetComponent<UnitScript>().isBoosted = true;
+			//bears[Random.Range((bears.Count / 3) * 2, bears.Count)].GetComponent<UnitScript>().isBoosted = true;
+		}
+	}
+
+	public enum Season
+	{
+		Calm,
+		Storm,
+		Freeze,
+		Blizzard
 	}
 }
