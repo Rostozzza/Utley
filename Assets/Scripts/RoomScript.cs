@@ -52,6 +52,22 @@ public class RoomScript : MonoBehaviour
 		}
 	}
 
+	public void UpgradeRoom(GameObject button)
+	{
+		if (GameManager.Instance.GetHoney() <= (30 + 10 * (level - 1)))
+		{
+			GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)));
+			level += 1;
+			UpdateRoomHullView();
+			GameManager.Instance.uiResourceShower.UpdateIndicators();
+			if (level == 3)
+			{
+				button.GetComponent<Button>().enabled = false;
+				button.GetComponentInChildren<TextMeshProUGUI>().text = "Максимальный уровень!";
+			}
+		}
+	}
+
 	public void ToggleRoomStats(bool toggle)
 	{
 		roomStatsScreen.SetActive(toggle);
@@ -151,11 +167,11 @@ public class RoomScript : MonoBehaviour
 				fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Energohoney, GetWalkPoints(), this.gameObject);
 				if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
 				{
-					timer = 45f * (1 - (Mathf.FloorToInt(fixedBear.GetComponent<UnitScript>().level) * 0.5f));
+					timer = 45f *(1-0.25f*(level-1)) * (1 - (Mathf.FloorToInt(fixedBear.GetComponent<UnitScript>().level) * 0.5f));
 				}
 				else
 				{
-					timer = 45f * 1.25f;
+					timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
 				}
 				if (fixedBear.GetComponent<UnitScript>().isBoosted)
 				{
@@ -208,12 +224,11 @@ public class RoomScript : MonoBehaviour
 			case Resources.Bed:
 				if (fixedBear.GetComponent<UnitScript>().job == Qualification.creator)
 				{
-					timer = 45f * (1 - (Mathf.FloorToInt(fixedBear.GetComponent<UnitScript>().level) * 0.5f));
-					
+					timer = 45f * (1 - 0.25f * (level - 1)) * (1 - (Mathf.FloorToInt(fixedBear.GetComponent<UnitScript>().level) * 0.5f));
 				}
 				else
 				{
-					timer = 45f * 1.25f;
+					timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
 				}
 				fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Bed, GetWalkPoints(), this.gameObject);
 				timer = 120f;

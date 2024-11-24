@@ -1947,7 +1947,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1798306677295408798}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 346696127479692063}
+        m_TargetAssemblyTypeName: RoomScript, Assembly-CSharp
+        m_MethodName: UpgradeRoom
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 4597824480014041653}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4755626820237179006
 GameObject:
   m_ObjectHideFlags: 0
