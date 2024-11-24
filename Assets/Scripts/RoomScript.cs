@@ -47,7 +47,7 @@ public class RoomScript : MonoBehaviour
 				break;
 			case Resources.Bed:
 				GameManager.Instance.AddWorkStations(workStationsToOutline);
-				GameManager.Instance.ChangeMaxBearAmount(3);
+				GameManager.Instance.ChangeMaxBearAmount(6);
 				break;
 		}
 	}
@@ -260,6 +260,7 @@ public class RoomScript : MonoBehaviour
 			int timeToRepair = (int)((1 - durability) * 100 / 2);
 			StartCoroutine(Repair(timeToRepair));
 		}
+		GameManager.Instance.uiResourceShower.UpdateIndicators();
 	}
 
 	private IEnumerator Repair(int seconds)

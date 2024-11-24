@@ -609,9 +609,11 @@ public class GameManager : MonoBehaviour
 							break;
 					}
 				}
-				int honeyToEat = (int)(5 + n1 + 1.1 * n2 + 1.2 * n3);
-				ChangeHoney(-honeyToEat);
 			}
+			int honeyToEat = (int)(5 + n1 + 1.1 * n2 + 1.2 * n3);
+			Debug.Log("Съели мёда: " + honeyToEat);
+			ChangeHoney(-honeyToEat);
+			uiResourceShower.UpdateIndicators();
 		}
 	}
 
