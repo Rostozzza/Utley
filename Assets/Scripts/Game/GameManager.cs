@@ -404,6 +404,11 @@ public class GameManager : MonoBehaviour
 					selectedRoom = gameObject.GetComponent<RoomScript>();
 					selectedRoom.ToggleRoomStats(true);
 				}
+				else
+				{
+					selectedRoom = gameObject.GetComponent<RoomScript>();
+					selectedRoom.ToggleRoomStats(true);
+				}
 			}
 		}
 		
