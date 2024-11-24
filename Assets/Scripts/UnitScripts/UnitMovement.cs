@@ -94,7 +94,7 @@ public class UnitMovement : MonoBehaviour
 						}
 						GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
 						yield return new WaitForSeconds(1.15f);
-						while (Vector3.Distance(transform.position, room.transform.position) > 0.1f)
+						while (Mathf.Abs(transform.position.y-room.transform.position.y) > 0.1f)
 						{
 							transform.Translate(new Vector3(0, (room.transform.position.y - transform.position.y) * 100, 0).normalized * Time.deltaTime * speed / 2f);
 							yield return null;

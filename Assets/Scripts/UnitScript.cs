@@ -188,18 +188,26 @@ public class UnitScript : MonoBehaviour
 	private IEnumerator EnergohoneyWalkBehaviour(List<Vector3> walkPoints, GameObject obj)
 	{
 		Vector3 chosenPoint;
+		GetComponentInChildren<Animator>().StopPlayback();
+		GetComponentInChildren<Animator>().speed = 1f;
 		while (obj.GetComponent<RoomScript>().status == RoomScript.Status.Busy)
 		{
-            //State = States.Walk;
+			//State = States.Walk;
+			GetComponentInChildren<Animator>().speed = 1;
+			GetComponentInChildren<Animator>().SetBool("Walk", true);
 			chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
 			while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
 			{
 				transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
 				yield return null;
 			}
-            //State = States.Working;
+			GetComponentInChildren<Animator>().SetBool("Walk", false);
+			GetComponentInChildren<Animator>().SetBool("Work", true);
+			//State = States.Working;
 			yield return new WaitForSeconds(5f);
-            //State = States.Walk;
+			GetComponentInChildren<Animator>().SetBool("Work", false);
+			GetComponentInChildren<Animator>().SetBool("Walk", true);
+			//State = States.Walk;
 			chosenPoint = walkPoints[3];
 			while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
 			{
@@ -207,9 +215,13 @@ public class UnitScript : MonoBehaviour
 				transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
 				yield return null;
 			}
-            //State = States.Working;
+			GetComponentInChildren<Animator>().SetBool("Walk", false);
+			GetComponentInChildren<Animator>().SetBool("Work", true);
+			//State = States.Working;
 			yield return new WaitForSeconds(3f);
+			GetComponentInChildren<Animator>().SetBool("Work", false);
 		}
+		GetComponentInChildren<Animator>().speed = 3;
 	}
 
     public enum States

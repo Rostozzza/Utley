@@ -6753,7 +6753,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: AsteriumRecycle
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3098132873080183454, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+    - {fileID: 2772356205761673450, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -10297,6 +10299,7 @@ MonoBehaviour:
   fixedBear: {fileID: 0}
   workStationsToOutline:
   - {fileID: 360814001}
+  durability: 1
   isReadyForWork: 0
 --- !u!65 &3562911849079285425
 BoxCollider:
