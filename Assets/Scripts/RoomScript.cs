@@ -4,7 +4,6 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEditor.ShaderGraph.Internal;
 using System.Data;
 
 public class RoomScript : MonoBehaviour
@@ -27,12 +26,13 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI timeShow;
 	[SerializeField] private GameObject fixedBear;
 	[SerializeField] private List<GameObject> workStationsToOutline;
-	[SerializeField] private float durability = 1f;
-	[SerializeField] public int level = 1; // room lvl if want to change don't forget to change in GameManager.ConstantEnergohoneyConsumer()
-	public int depthLevel;
 	private TextMeshProUGUI hullPercentage;
 	private Transform hullBar;
 	private TextMeshProUGUI levelText;
+	[SerializeField] public float durability = 1f;
+	[SerializeField] public int level = 1;
+	[SerializeField] public int depthLevel;
+
 	[Header("Asterium settings")]
 	public bool isReadyForWork = false;
 
@@ -70,7 +70,7 @@ public class RoomScript : MonoBehaviour
 			if (level == 3)
 			{
 				button.GetComponent<Button>().enabled = false;
-				button.GetComponentInChildren<TextMeshProUGUI>().text = "Максимальный уровень!";
+				button.GetComponentInChildren<TextMeshProUGUI>().text = "РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅСЊ!";
 			}
 		}
 	}
@@ -88,8 +88,8 @@ public class RoomScript : MonoBehaviour
 		{
 			levelText.text += "I";
 		}
-		hullPercentage.text = $"{(durability / 1f) * 100f}%";
-		hullBar.localScale = new Vector3(durability / 1f, 1, 1);
+		roomStatsScreen.transform.Find("hull%").GetComponent<TextMeshProUGUI>().text = $"{Mathf.RoundToInt((durability / 1f) * 100f)}%";
+		roomStatsScreen.transform.Find("Hull").localScale = new Vector3(durability/1f,1,1);
 	}
 
 	public void BuildRoom(GameObject button)
@@ -191,7 +191,9 @@ public class RoomScript : MonoBehaviour
 					yield return null;
 				}
 				timeShow.text = "";
-				GameManager.Instance.ChangeHoney(10);
+				
+				int honeyToAdd = (GameManager.Instance.season != GameManager.Season.Storm) ? 10 : (int)(10 * (1 - 0.15f + 0.03f * GameManager.Instance.cycleNumber));
+				GameManager.Instance.ChangeHoney(honeyToAdd);
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
 				if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
 				{
@@ -286,6 +288,7 @@ public class RoomScript : MonoBehaviour
 		{
 			status = Status.Destroyed;
 		}
+		durability = Mathf.Clamp(durability, 0f, 1f);
 	}
 
     /// <summary>
