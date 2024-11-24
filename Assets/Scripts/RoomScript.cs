@@ -35,9 +35,10 @@ public class RoomScript : MonoBehaviour
 
 	[Header("Asterium settings")]
 	public bool isReadyForWork = false;
-
+	
 	private void Start()
 	{
+		Debug.Log("GOIDA");
 		walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
 		roomStatsScreen = transform.Find("RoomInfo").gameObject;
 		roomStatsScreen.SetActive(false);
