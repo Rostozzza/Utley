@@ -1765,7 +1765,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7573673315243161207}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 151184268124072345}
+        m_TargetAssemblyTypeName: RoomScript, Assembly-CSharp
+        m_MethodName: RepairRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &3729742771130095381
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1936,4 +1948,5 @@ MonoBehaviour:
   fixedBear: {fileID: 0}
   workStationsToOutline: []
   durability: 1
+  level: 1
   isReadyForWork: 0

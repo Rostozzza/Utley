@@ -703,7 +703,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4465817035346877906}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -2140221207334764481}
+        m_TargetAssemblyTypeName: RoomScript, Assembly-CSharp
+        m_MethodName: RepairRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1624425953209640426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1676,6 +1688,7 @@ MonoBehaviour:
   - {fileID: 855399141415612595}
   - {fileID: 1291082126541039619}
   durability: 1
+  level: 1
   isReadyForWork: 0
 --- !u!65 &1921077031688786394
 BoxCollider:
