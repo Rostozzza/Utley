@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEditor.ShaderGraph.Internal;
+using System.Data;
 
 public class RoomScript : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private GameObject fixedBear;
 	[SerializeField] private List<GameObject> workStationsToOutline;
 	[SerializeField] private float durability = 1f;
+	[SerializeField] public int level = 1; // room lvl if want to change don't forget to change in GameManager.ConstantEnergohoneyConsumer()
 	[Header("Asterium settings")]
 	public bool isReadyForWork = false;
 
