@@ -28,8 +28,11 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private GameObject fixedBear;
 	[SerializeField] private List<GameObject> workStationsToOutline;
 	[SerializeField] private float durability = 1f;
-	[SerializeField] public int level = 1;
-	[SerializeField] public int depthLevel;
+	[SerializeField] public int level = 1; // room lvl if want to change don't forget to change in GameManager.ConstantEnergohoneyConsumer()
+	public int depthLevel;
+	private TextMeshProUGUI hullPercentage;
+	private Transform hullBar;
+	private TextMeshProUGUI levelText;
 	[Header("Asterium settings")]
 	public bool isReadyForWork = false;
 
@@ -38,7 +41,9 @@ public class RoomScript : MonoBehaviour
 		walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
 		roomStatsScreen = transform.Find("RoomInfo").gameObject;
 		roomStatsScreen.SetActive(false);
-		depthLevel = (int)((2 - transform.position.y) / 4);
+		hullPercentage = roomStatsScreen.transform.Find("hull%").GetComponent<TextMeshProUGUI>();
+		levelText = roomStatsScreen.transform.Find("Level (1)").GetComponent<TextMeshProUGUI>();
+		hullBar = roomStatsScreen.transform.Find("Hull").transform;
 		switch (resource)
 		{
 			case Resources.Energohoney:
@@ -56,7 +61,7 @@ public class RoomScript : MonoBehaviour
 
 	public void UpgradeRoom(GameObject button)
 	{
-		if (GameManager.Instance.GetHoney() <= (30 + 10 * (level - 1)))
+		if (GameManager.Instance.GetHoney() >= (30 + 10 * (level - 1)))
 		{
 			GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)));
 			level += 1;
@@ -73,18 +78,18 @@ public class RoomScript : MonoBehaviour
 	public void ToggleRoomStats(bool toggle)
 	{
 		roomStatsScreen.SetActive(toggle);
-		roomStatsScreen.transform.Find("Level (1)").GetComponent<TextMeshProUGUI>().text = "";
-		for (int i = 0; i < level; i++)
-		{
-			roomStatsScreen.transform.Find("Level (1)").GetComponent<TextMeshProUGUI>().text += "I";
-		}
 		UpdateRoomHullView();
 	}
 
 	public void UpdateRoomHullView()
 	{
-		roomStatsScreen.transform.Find("hull%").GetComponent<TextMeshProUGUI>().text = $"{(durability / 1f) * 100f}%";
-		roomStatsScreen.transform.Find("Hull").localScale = new Vector3(durability/1f,1,1);
+		levelText.text = "";
+		for (int i = 0; i < level; i++)
+		{
+			levelText.text += "I";
+		}
+		hullPercentage.text = $"{(durability / 1f) * 100f}%";
+		hullBar.localScale = new Vector3(durability / 1f, 1, 1);
 	}
 
 	public void BuildRoom(GameObject button)
@@ -186,9 +191,7 @@ public class RoomScript : MonoBehaviour
 					yield return null;
 				}
 				timeShow.text = "";
-				
-				int honeyToAdd = (GameManager.Instance.season != GameManager.Season.Storm) ? 10 : 10 - 15 + 3 * GameManager.Instance.cycleNumber;
-				GameManager.Instance.ChangeHoney(honeyToAdd);
+				GameManager.Instance.ChangeHoney(10);
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
 				if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
 				{
