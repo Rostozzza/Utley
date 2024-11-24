@@ -23,21 +23,23 @@ public class GameManager : MonoBehaviour
 	public List<GameObject> bears = new List<GameObject>();
 	[SerializeField] public UIResourceShower uiResourceShower;
 	[SerializeField] public GameObject selectedUnit;
+	[Header("Building settings")]
 	public GameObject buildingScreen;
 	public GameObject elevatorBuildingScreen;
-	[SerializeField] private GameObject floorPrefab;
+	//[SerializeField] private GameObject floorPrefab;
 	private GameObject queuedBuildPositon;
 	public List<GameObject> workStations; // keeps all workstations to address to them to outline when we choosing unit
 	private bool buildingMode;
+	public RoomScript selectedRoom;
+	[Header("Phases settings")]
 	private GameObject skyBG;
 	[SerializeField] private List<VideoClip> animatedBackgrounds;
 	public Season season;
-	public int maxBearsAmount = 3;
-
+	[Header("Resourves")]
 	[SerializeField] private int honey;
 	[SerializeField] private int asteriy;
 	[SerializeField] private int rawAsterium = 0;
-
+	public int maxBearsAmount = 3;
 	RaycastHit raycastHit;
 
 	public void Awake()
@@ -70,6 +72,11 @@ public class GameManager : MonoBehaviour
 	{
 		buildingMode = !buildingMode;
 		selectedUnit = null;
+		if (selectedRoom != null)
+		{
+			selectedRoom.ToggleRoomStats(false);
+		}
+		selectedRoom = null;
 		foreach (GameObject room in allRooms)
 		{
 			foreach(var button in room.GetComponentsInChildren<Button>(true))
@@ -312,11 +319,19 @@ public class GameManager : MonoBehaviour
 				else
 				{
 					OutlineWorkStations(false);
+					
 				}
 			}
 			else
 			{
 				OutlineWorkStations(false);
+				selectedUnit = null;
+				if (selectedRoom != null)
+				{
+					selectedRoom.ToggleRoomStats(false);
+				}
+				selectedRoom = null;
+				selectedUnit = null;
 			}
 		}
 		else if (Input.GetMouseButtonDown(1))
@@ -376,6 +391,15 @@ public class GameManager : MonoBehaviour
 		{
 			selectedUnit = null;
 			OutlineWorkStations(false);
+			if (gameObject.CompareTag("room") && buildingMode)
+			{
+				if (selectedRoom != null)
+				{
+					selectedRoom.ToggleRoomStats(false);
+					selectedRoom = gameObject.GetComponent<RoomScript>();
+					selectedRoom.ToggleRoomStats(true);
+				}
+			}
 		}
 		
 		

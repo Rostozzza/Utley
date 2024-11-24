@@ -13,6 +13,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] public GameObject rightDoor;
 	[SerializeField] public bool hasLeftDoor;
 	[SerializeField] public bool hasRightDoor;
+	[SerializeField] private GameObject roomStatsScreen;
 
 	public List<Elevator> connectedElevators;
 	public List<RoomScript> connectedRooms;
@@ -44,6 +45,11 @@ public class RoomScript : MonoBehaviour
 				GameManager.Instance.ChangeMaxBearAmount(3);
 				break;
 		}
+	}
+
+	public void ToggleRoomStats(bool toggle)
+	{
+		roomStatsScreen.SetActive(toggle);
 	}
 
 	public void BuildRoom(GameObject button)
