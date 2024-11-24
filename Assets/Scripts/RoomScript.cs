@@ -36,6 +36,7 @@ public class RoomScript : MonoBehaviour
 	{
 		walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
 		roomStatsScreen = transform.Find("RoomInfo").gameObject;
+		roomStatsScreen.SetActive(false);
 		switch (resource)
 		{
 			case Resources.Energohoney:
@@ -54,6 +55,19 @@ public class RoomScript : MonoBehaviour
 	public void ToggleRoomStats(bool toggle)
 	{
 		roomStatsScreen.SetActive(toggle);
+		var levelText = roomStatsScreen.transform.Find("Level (1)").GetComponent<TextMeshProUGUI>().text;
+		levelText = "";
+		for (int i = 0; i < level; i++)
+		{
+			levelText += "I";
+		}
+		UpdateRoomHullView();
+	}
+
+	public void UpdateRoomHullView()
+	{
+		roomStatsScreen.transform.Find("Hull%").GetComponent<TextMeshProUGUI>().text = $"{(durability / 1f) * 100f}%";
+		roomStatsScreen.transform.Find("Hull").localScale = new Vector3(durability/1f,0,0);
 	}
 
 	public void BuildRoom(GameObject button)
