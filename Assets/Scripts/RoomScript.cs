@@ -38,7 +38,6 @@ public class RoomScript : MonoBehaviour
 	
 	private void Start()
 	{
-		Debug.Log("GOIDA");
 		walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
 		roomStatsScreen = transform.Find("RoomInfo").gameObject;
 		roomStatsScreen.SetActive(false);
@@ -119,6 +118,8 @@ public class RoomScript : MonoBehaviour
 					return;
 				case Resources.Bed:
 					break;
+				case Resources.Build:
+					break;
 			}
 			fixedBear = bear;
 			if (resource == Resources.Cosmodrome)
@@ -128,7 +129,7 @@ public class RoomScript : MonoBehaviour
 				timeShow.transform.parent.gameObject.SetActive(true);
 				return;
 			}
-			if (status == Status.Free)
+			if (status == Status.Free && resource != Resources.Build)
 			{
 				work = StartCoroutine(WorkStatus());
 			}
