@@ -6,6 +6,7 @@ using System.Linq;
 using System.Collections;
 using UnityEngine.Video;
 using Unity.VisualScripting;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
 	private GameObject skyBG;
 	[SerializeField] private List<VideoClip> animatedBackgrounds;
 	public Season season;
+	public int cycleNumber = 1;
 	[Header("Resourves")]
 	[SerializeField] private int honey;
 	[SerializeField] private int asteriy;
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour
 		ChangeSeason(season);
 		StartCoroutine(ConstantDurabilityDamager(4));
 		StartCoroutine(ConstantEnergohoneyConsumer());
+		StartCoroutine(ConstantSeasonChanger());
 
 		// DONT FORGET TO DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		asteriy = 100;
@@ -611,9 +614,78 @@ public class GameManager : MonoBehaviour
 				}
 			}
 			int honeyToEat = (int)(5 + n1 + 1.1 * n2 + 1.2 * n3);
+			if (season == Season.Freeze)
+			{
+				honeyToEat += 10 + 5; // * cycleNumber * 0.01f;
+			}
 			Debug.Log("Съели мёда: " + honeyToEat);
 			ChangeHoney(-honeyToEat);
 			uiResourceShower.UpdateIndicators();
+		}
+	}
+
+	private IEnumerator ConstantSeasonChanger()
+	{
+		while (true)
+		{
+			yield return new WaitForSeconds(75);
+			Debug.Log("Season Changed");
+			switch (season)
+			{
+				case Season.Tide:
+					ChangeSeason(Season.Calm);
+					cycleNumber++;
+					break;
+				case Season.Calm:
+					ChangeSeason(Season.Storm);
+					break;
+				case Season.Storm:
+					ChangeSeason(Season.Freeze);
+					break;
+				case Season.Freeze:
+					ChangeSeason(Season.Tide);
+					break;
+			}
+		}
+	}
+
+	public void DamageRoomsBySeason()
+	{
+		int n = Random.Range(3, 7);
+		List<GameObject> interestRooms = new List<GameObject>();
+		foreach (GameObject room in allRooms)
+		{
+			if (room.TryGetComponent<RoomScript>(out RoomScript a) && a.status != RoomScript.Status.Destroyed)
+			{
+				interestRooms.Add(room);
+			}
+		}
+		List<GameObject> shuffleRooms = new List<GameObject>();
+		if (n > interestRooms.Count)
+		{
+			foreach (GameObject room in interestRooms)
+			{
+				shuffleRooms.Add(room);
+			}
+		}
+		else
+		{
+			foreach (GameObject room in interestRooms)
+			{
+				if (shuffleRooms.Count == 0)
+				{
+					shuffleRooms.Add(room);
+				}
+				else
+				{
+					shuffleRooms.Insert(Random.Range(0, shuffleRooms.Count), room);
+				}
+			}
+			shuffleRooms.RemoveRange(n, shuffleRooms.Count - n);
+			shuffleRooms.ForEach(delegate(GameObject room)
+			{
+				room.GetComponent<RoomScript>().ChangeDurability(-(35 + 4 * cycleNumber - 2 * room.GetComponent<RoomScript>().depthLevel * 0.01f));
+			});
 		}
 	}
 
@@ -622,6 +694,6 @@ public class GameManager : MonoBehaviour
 		Calm,
 		Storm,
 		Freeze,
-		Blizzard
+		Tide
 	}
 }

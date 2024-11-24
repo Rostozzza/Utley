@@ -28,7 +28,8 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private GameObject fixedBear;
 	[SerializeField] private List<GameObject> workStationsToOutline;
 	[SerializeField] private float durability = 1f;
-	[SerializeField] public int level = 1; // room lvl if want to change don't forget to change in GameManager.ConstantEnergohoneyConsumer()
+	[SerializeField] public int level = 1;
+	[SerializeField] public int depthLevel;
 	[Header("Asterium settings")]
 	public bool isReadyForWork = false;
 
@@ -37,6 +38,7 @@ public class RoomScript : MonoBehaviour
 		walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
 		roomStatsScreen = transform.Find("RoomInfo").gameObject;
 		roomStatsScreen.SetActive(false);
+		depthLevel = (int)((2 - transform.position.y) / 4);
 		switch (resource)
 		{
 			case Resources.Energohoney:
@@ -168,7 +170,9 @@ public class RoomScript : MonoBehaviour
 					yield return null;
 				}
 				timeShow.text = "";
-				GameManager.Instance.ChangeHoney(10);
+				
+				int honeyToAdd = (GameManager.Instance.season != GameManager.Season.Storm) ? 10 : 10 - 15 + 3 * GameManager.Instance.cycleNumber;
+				GameManager.Instance.ChangeHoney(honeyToAdd);
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
 				break;
 			case Resources.Asteriy:
