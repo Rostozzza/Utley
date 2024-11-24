@@ -20,7 +20,7 @@ public class UnitScript : MonoBehaviour
 	public MeshRenderer bottomSlot;
 	[Header("Bear Stats")]
 	public Qualification job;
-	public int level;
+	public float level;
 	public Mesh fur;
 	public Mesh top;
 	public Mesh bottom;
@@ -117,6 +117,11 @@ public class UnitScript : MonoBehaviour
 		{
 			laddersAmount--;
 		}
+	}
+
+	public void LevelUpBear()
+	{
+		level = Mathf.Clamp(level+0.5f,1,5);
 	}
 
 	public void ChooseUnit()
