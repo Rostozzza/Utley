@@ -50,6 +50,10 @@ public class GameManager : MonoBehaviour
 		skyBG = GameObject.FindGameObjectWithTag("skyBG");
 		ChangeSeason(season);
 		StartCoroutine(ConstantDurabilityDamager(4));
+		
+		// DONT FORGET TO DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		asteriy = 100;
+		honey = 100;
 	}
 
 	/// <summary>
