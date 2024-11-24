@@ -35,6 +35,7 @@ public class RoomScript : MonoBehaviour
 	private void Start()
 	{
 		walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
+		roomStatsScreen = transform.Find("RoomInfo").gameObject;
 		switch (resource)
 		{
 			case Resources.Energohoney:
