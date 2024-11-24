@@ -55,19 +55,18 @@ public class RoomScript : MonoBehaviour
 	public void ToggleRoomStats(bool toggle)
 	{
 		roomStatsScreen.SetActive(toggle);
-		var levelText = roomStatsScreen.transform.Find("Level (1)").GetComponent<TextMeshProUGUI>().text;
-		levelText = "";
+		roomStatsScreen.transform.Find("Level (1)").GetComponent<TextMeshProUGUI>().text = "";
 		for (int i = 0; i < level; i++)
 		{
-			levelText += "I";
+			roomStatsScreen.transform.Find("Level (1)").GetComponent<TextMeshProUGUI>().text += "I";
 		}
 		UpdateRoomHullView();
 	}
 
 	public void UpdateRoomHullView()
 	{
-		roomStatsScreen.transform.Find("Hull%").GetComponent<TextMeshProUGUI>().text = $"{(durability / 1f) * 100f}%";
-		roomStatsScreen.transform.Find("Hull").localScale = new Vector3(durability/1f,0,0);
+		roomStatsScreen.transform.Find("hull%").GetComponent<TextMeshProUGUI>().text = $"{(durability / 1f) * 100f}%";
+		roomStatsScreen.transform.Find("Hull").localScale = new Vector3(durability/1f,1,1);
 	}
 
 	public void BuildRoom(GameObject button)
