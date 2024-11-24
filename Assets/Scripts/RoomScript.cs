@@ -4,7 +4,6 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEditor.ShaderGraph.Internal;
 using System.Data;
 
 public class RoomScript : MonoBehaviour
@@ -27,7 +26,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI timeShow;
 	[SerializeField] private GameObject fixedBear;
 	[SerializeField] private List<GameObject> workStationsToOutline;
-	[SerializeField] private float durability = 1f;
+	[SerializeField] public float durability = 1f;
 	[SerializeField] public int level = 1;
 	[SerializeField] public int depthLevel;
 	[Header("Asterium settings")]
@@ -65,7 +64,7 @@ public class RoomScript : MonoBehaviour
 			if (level == 3)
 			{
 				button.GetComponent<Button>().enabled = false;
-				button.GetComponentInChildren<TextMeshProUGUI>().text = "Максимальный уровень!";
+				button.GetComponentInChildren<TextMeshProUGUI>().text = "РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅСЊ!";
 			}
 		}
 	}
@@ -83,7 +82,7 @@ public class RoomScript : MonoBehaviour
 
 	public void UpdateRoomHullView()
 	{
-		roomStatsScreen.transform.Find("hull%").GetComponent<TextMeshProUGUI>().text = $"{(durability / 1f) * 100f}%";
+		roomStatsScreen.transform.Find("hull%").GetComponent<TextMeshProUGUI>().text = $"{Mathf.RoundToInt((durability / 1f) * 100f)}%";
 		roomStatsScreen.transform.Find("Hull").localScale = new Vector3(durability/1f,1,1);
 	}
 
@@ -187,7 +186,7 @@ public class RoomScript : MonoBehaviour
 				}
 				timeShow.text = "";
 				
-				int honeyToAdd = (GameManager.Instance.season != GameManager.Season.Storm) ? 10 : 10 - 15 + 3 * GameManager.Instance.cycleNumber;
+				int honeyToAdd = (GameManager.Instance.season != GameManager.Season.Storm) ? 10 : (int)(10 * (1 - 0.15f + 0.03f * GameManager.Instance.cycleNumber));
 				GameManager.Instance.ChangeHoney(honeyToAdd);
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
 				if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
@@ -283,6 +282,7 @@ public class RoomScript : MonoBehaviour
 		{
 			status = Status.Destroyed;
 		}
+		durability = Mathf.Clamp(durability, 0f, 1f);
 	}
 
     /// <summary>

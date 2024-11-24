@@ -3552,10 +3552,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 8579644920238721060, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 173426271292609831, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 1810469285}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
 --- !u!114 &737861180 stripped
@@ -7185,6 +7182,7 @@ Transform:
   m_Children:
   - {fileID: 384778749}
   - {fileID: 1587162178}
+  - {fileID: 1810469285}
   - {fileID: 1222266664}
   - {fileID: 3562911849079285423}
   m_Father: {fileID: 0}
@@ -7815,15 +7813,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1222266664}
+    m_TransformParent: {fileID: 1691773150}
     m_Modifications:
     - target: {fileID: 173426271292609831, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 173426271292609831, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 173426271292609831, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9198,11 +9196,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4167620145723012171, guid: 9d4d4f6758ecb804ba46092e645c74e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.3942499
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4167620145723012171, guid: 9d4d4f6758ecb804ba46092e645c74e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.28719997
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4167620145723012171, guid: 9d4d4f6758ecb804ba46092e645c74e5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10038,6 +10036,7 @@ MonoBehaviour:
   - {fileID: 32900000, guid: 4ef4af70a0a140f499193d66af7329f1, type: 3}
   - {fileID: 32900000, guid: 9c78e99c3c3cf1e4c87d851fa371ac22, type: 3}
   season: 0
+  cycleNumber: 1
   honey: 0
   asteriy: 0
   rawAsterium: 0
@@ -10386,6 +10385,7 @@ MonoBehaviour:
   - {fileID: 360814001}
   durability: 1
   level: 1
+  depthLevel: 0
   isReadyForWork: 0
 --- !u!65 &3562911849079285425
 BoxCollider:

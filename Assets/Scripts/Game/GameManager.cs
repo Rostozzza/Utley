@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private int honey;
 	[SerializeField] private int asteriy;
 	[SerializeField] private int rawAsterium = 0;
-	public int maxBearsAmount = 3;
+	public int maxBearsAmount;
 	RaycastHit raycastHit;
 
 	public void Awake()
@@ -274,6 +274,7 @@ public class GameManager : MonoBehaviour
 	public void ChangeHoney(int amount)
 	{
 		honey += amount;
+		honey = Mathf.Clamp(honey, -1, 999);
 	}
 
 	/// <summary>
@@ -283,6 +284,7 @@ public class GameManager : MonoBehaviour
 	public void ChangeAsteriy(int amount)
 	{
 		asteriy += amount;
+		asteriy = Mathf.Clamp(asteriy, -1, 999);
 	}
 
 	public bool FlyForRawAsterium()
@@ -573,8 +575,6 @@ public class GameManager : MonoBehaviour
 					}
 				}
 				shuffleRooms.RemoveRange(n, shuffleRooms.Count - n);
-				//shuffleRooms = shuffleRooms.GetRange(0, n);
-				Debug.Log(shuffleRooms);
 			}
 			//foreach (GameObject room in shuffleRooms)
 			//{
@@ -616,7 +616,7 @@ public class GameManager : MonoBehaviour
 			int honeyToEat = (int)(5 + n1 + 1.1 * n2 + 1.2 * n3);
 			if (season == Season.Freeze)
 			{
-				honeyToEat += 10 + 5; // * cycleNumber * 0.01f;
+				honeyToEat = (int)((float)honeyToEat * (1f + 0.1f + 0.05f * cycleNumber));
 			}
 			Debug.Log("Съели мёда: " + honeyToEat);
 			ChangeHoney(-honeyToEat);
@@ -644,6 +644,7 @@ public class GameManager : MonoBehaviour
 					break;
 				case Season.Freeze:
 					ChangeSeason(Season.Tide);
+					DamageRoomsBySeason();
 					break;
 			}
 		}
@@ -682,11 +683,13 @@ public class GameManager : MonoBehaviour
 				}
 			}
 			shuffleRooms.RemoveRange(n, shuffleRooms.Count - n);
-			shuffleRooms.ForEach(delegate(GameObject room)
-			{
-				room.GetComponent<RoomScript>().ChangeDurability(-(35 + 4 * cycleNumber - 2 * room.GetComponent<RoomScript>().depthLevel * 0.01f));
-			});
 		}
+		shuffleRooms.ForEach(delegate(GameObject room)
+		{
+			float damage = (0.35f + 0.04f * cycleNumber - 0.02f * room.GetComponent<RoomScript>().depthLevel) * room.GetComponent<RoomScript>().durability;
+			Debug.Log(room.name + " задамажен фазой на " + damage);
+			room.GetComponent<RoomScript>().ChangeDurability(-damage);
+		});
 	}
 
 	public enum Season
