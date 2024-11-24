@@ -23,8 +23,8 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private List<Transform> rawWalkPoints;
 	//private Vector3[] walkPoints;
 	private List<Vector3> walkPoints;
-	[SerializeField] private TextMeshProUGUI timeShow;
-	[SerializeField] private GameObject fixedBear;
+	[SerializeField] protected TextMeshProUGUI timeShow;
+	[SerializeField] protected GameObject fixedBear;
 	[SerializeField] private List<GameObject> workStationsToOutline;
 	private TextMeshProUGUI hullPercentage;
 	private Transform hullBar;
@@ -36,9 +36,8 @@ public class RoomScript : MonoBehaviour
 	[Header("Asterium settings")]
 	public bool isReadyForWork = false;
 	
-	private void Start()
+	protected virtual void Start()
 	{
-		Debug.Log("GOIDA");
 		walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
 		roomStatsScreen = transform.Find("RoomInfo").gameObject;
 		roomStatsScreen.SetActive(false);
@@ -96,7 +95,7 @@ public class RoomScript : MonoBehaviour
 		roomStatsScreen.transform.Find("Hull").localScale = new Vector3(durability/1f,1,1);
 	}
 
-	public void BuildRoom(GameObject button)
+	public virtual void BuildRoom(GameObject button)
 	{
 		GameManager.Instance.QueueBuildPos(button);
 		GameManager.Instance.buildingScreen.SetActive(true);
@@ -106,7 +105,7 @@ public class RoomScript : MonoBehaviour
 	/// Start work at station by bear ( calls coroutine, can be interrupted by InterruptWork() )
 	/// </summary>
 	/// <param name="bear"></param>
-	public void StartWork(GameObject bear)
+	public virtual void StartWork(GameObject bear)
 	{
 		if (status != Status.Destroyed)
 		{
@@ -147,7 +146,7 @@ public class RoomScript : MonoBehaviour
 	/// <summary>
 	/// Stops work
 	/// </summary>
-	public void InterruptWork()
+	public virtual void InterruptWork()
 	{
 		if (work != null)
 		{
@@ -164,7 +163,7 @@ public class RoomScript : MonoBehaviour
 		fixedBear = null;
 	}
 
-	private IEnumerator WorkStatus()
+	protected virtual IEnumerator WorkStatus()
 	{
 		float timer;
 		status = Status.Busy;
@@ -174,36 +173,6 @@ public class RoomScript : MonoBehaviour
 		}
 		switch (resource)
 		{
-			case Resources.Energohoney:
-				fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Energohoney, GetWalkPoints(), this.gameObject);
-				if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
-				{
-					timer = 45f *(1-0.25f*(level-1)) * (1 - (Mathf.FloorToInt(fixedBear.GetComponent<UnitScript>().level) * 0.5f));
-				}
-				else
-				{
-					timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
-				}
-				if (fixedBear.GetComponent<UnitScript>().isBoosted)
-				{
-					timer *= 0.9f;
-				}
-				while (timer > 0)
-				{
-					timeShow.text = SecondsToTimeToShow(timer);
-					timer -= Time.deltaTime;
-					yield return null;
-				}
-				timeShow.text = "";
-				
-				int honeyToAdd = (GameManager.Instance.season != GameManager.Season.Storm) ? 10 : (int)(10 * (1 - 0.15f + 0.03f * GameManager.Instance.cycleNumber));
-				GameManager.Instance.ChangeHoney(honeyToAdd);
-				GameManager.Instance.uiResourceShower.UpdateIndicators();
-				if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
-				{
-					fixedBear.GetComponent<UnitScript>().LevelUpBear();
-				}
-				break;
 			case Resources.Asteriy:
 				timer = 45f;
 				while (timer > 0)
@@ -234,34 +203,6 @@ public class RoomScript : MonoBehaviour
 				timeShow.gameObject.SetActive(false);
 				timeShow.transform.parent.gameObject.SetActive(false);
 				break;
-			case Resources.Bed:
-				if (fixedBear.GetComponent<UnitScript>().job == Qualification.creator)
-				{
-					timer = 45f * (1 - 0.25f * (level - 1)) * (1 - (Mathf.FloorToInt(fixedBear.GetComponent<UnitScript>().level) * 0.5f));
-				}
-				else
-				{
-					timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
-				}
-				fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Bed, GetWalkPoints(), this.gameObject);
-				timer = 120f;
-				if (fixedBear.GetComponent<UnitScript>().isBoosted)
-				{
-					timer *= 0.9f;
-				}
-				while (timer > 0)
-				{
-					timeShow.text = SecondsToTimeToShow(timer);
-					timer -= Time.deltaTime;
-					yield return null;
-				}
-				if (fixedBear.GetComponent<UnitScript>().job == Qualification.creator)
-				{
-					fixedBear.GetComponent<UnitScript>().LevelUpBear();
-				}
-				timeShow.text = "";
-				GameManager.Instance.BoostThreeBears();
-				break;
 		}
 		if (fixedBear != null)
 		{
@@ -271,7 +212,7 @@ public class RoomScript : MonoBehaviour
 		status = Status.Free;
 	}
 
-	private string SecondsToTimeToShow(float seconds) // left - minutes, right - seconds. no hours.
+	protected string SecondsToTimeToShow(float seconds) // left - minutes, right - seconds. no hours.
 	{
 		return (int)seconds / 60 + ":" + (((int)seconds % 60 < 10) ? "0" + (int)seconds % 60 : (int)seconds % 60);
 	}
@@ -321,7 +262,8 @@ public class RoomScript : MonoBehaviour
 		Asteriy,
 		Cosmodrome,
 		Bed,
-		Build
+		Build,
+		Supply
 	}
 
 	public enum Status
