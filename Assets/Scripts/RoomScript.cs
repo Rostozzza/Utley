@@ -26,18 +26,25 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI timeShow;
 	[SerializeField] private GameObject fixedBear;
 	[SerializeField] private List<GameObject> workStationsToOutline;
+	private TextMeshProUGUI hullPercentage;
+	private Transform hullBar;
+	private TextMeshProUGUI levelText;
 	[SerializeField] public float durability = 1f;
 	[SerializeField] public int level = 1;
 	[SerializeField] public int depthLevel;
+
 	[Header("Asterium settings")]
 	public bool isReadyForWork = false;
-
+	
 	private void Start()
 	{
+		Debug.Log("GOIDA");
 		walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
 		roomStatsScreen = transform.Find("RoomInfo").gameObject;
 		roomStatsScreen.SetActive(false);
-		depthLevel = (int)((2 - transform.position.y) / 4);
+		hullPercentage = roomStatsScreen.transform.Find("hull%").GetComponent<TextMeshProUGUI>();
+		levelText = roomStatsScreen.transform.Find("Level (1)").GetComponent<TextMeshProUGUI>();
+		hullBar = roomStatsScreen.transform.Find("Hull").transform;
 		switch (resource)
 		{
 			case Resources.Energohoney:
@@ -58,7 +65,7 @@ public class RoomScript : MonoBehaviour
 
 	public void UpgradeRoom(GameObject button)
 	{
-		if (GameManager.Instance.GetHoney() <= (30 + 10 * (level - 1)))
+		if (GameManager.Instance.GetHoney() >= (30 + 10 * (level - 1)))
 		{
 			GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)));
 			level += 1;
@@ -75,16 +82,16 @@ public class RoomScript : MonoBehaviour
 	public void ToggleRoomStats(bool toggle)
 	{
 		roomStatsScreen.SetActive(toggle);
-		roomStatsScreen.transform.Find("Level (1)").GetComponent<TextMeshProUGUI>().text = "";
-		for (int i = 0; i < level; i++)
-		{
-			roomStatsScreen.transform.Find("Level (1)").GetComponent<TextMeshProUGUI>().text += "I";
-		}
 		UpdateRoomHullView();
 	}
 
 	public void UpdateRoomHullView()
 	{
+		levelText.text = "";
+		for (int i = 0; i < level; i++)
+		{
+			levelText.text += "I";
+		}
 		roomStatsScreen.transform.Find("hull%").GetComponent<TextMeshProUGUI>().text = $"{Mathf.RoundToInt((durability / 1f) * 100f)}%";
 		roomStatsScreen.transform.Find("Hull").localScale = new Vector3(durability/1f,1,1);
 	}
