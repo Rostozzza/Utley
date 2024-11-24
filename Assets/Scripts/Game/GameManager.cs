@@ -362,7 +362,10 @@ public class GameManager : MonoBehaviour
 	{
 		if (gameObject.CompareTag("work_station") && selectedUnit != null)
 		{
-			StartCoroutine(WalkAndStartWork(selectedUnit, gameObject));
+			if (gameObject.GetComponentInParent<RoomScript>().resource != RoomScript.Resources.Build)
+			{
+				StartCoroutine(WalkAndStartWork(selectedUnit, gameObject));
+			}
 			selectedUnit = null;
 			return;
 		}

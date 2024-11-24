@@ -50,6 +50,9 @@ public class RoomScript : MonoBehaviour
 				GameManager.Instance.AddWorkStations(workStationsToOutline);
 				GameManager.Instance.ChangeMaxBearAmount(6);
 				break;
+			case Resources.Build:
+				GameManager.Instance.AddWorkStations(workStationsToOutline);
+				break;
 		}
 	}
 
@@ -310,7 +313,8 @@ public class RoomScript : MonoBehaviour
 		Energohoney,
 		Asteriy,
 		Cosmodrome,
-		Bed
+		Bed,
+		Build
 	}
 
 	public enum Status
