@@ -151,7 +151,7 @@ public class RoomScript : MonoBehaviour
 				fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Energohoney, GetWalkPoints(), this.gameObject);
 				if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
 				{
-					timer = 45f * (1 - (fixedBear.GetComponent<UnitScript>().level * 0.5f));
+					timer = 45f * (1 - (Mathf.FloorToInt(fixedBear.GetComponent<UnitScript>().level) * 0.5f));
 				}
 				else
 				{
@@ -170,6 +170,10 @@ public class RoomScript : MonoBehaviour
 				timeShow.text = "";
 				GameManager.Instance.ChangeHoney(10);
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
+				if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
+				{
+					fixedBear.GetComponent<UnitScript>().LevelUpBear();
+				}
 				break;
 			case Resources.Asteriy:
 				timer = 45f;
@@ -202,6 +206,15 @@ public class RoomScript : MonoBehaviour
 				timeShow.transform.parent.gameObject.SetActive(false);
 				break;
 			case Resources.Bed:
+				if (fixedBear.GetComponent<UnitScript>().job == Qualification.creator)
+				{
+					timer = 45f * (1 - (Mathf.FloorToInt(fixedBear.GetComponent<UnitScript>().level) * 0.5f));
+					
+				}
+				else
+				{
+					timer = 45f * 1.25f;
+				}
 				fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Bed, GetWalkPoints(), this.gameObject);
 				timer = 120f;
 				if (fixedBear.GetComponent<UnitScript>().isBoosted)
@@ -213,6 +226,10 @@ public class RoomScript : MonoBehaviour
 					timeShow.text = SecondsToTimeToShow(timer);
 					timer -= Time.deltaTime;
 					yield return null;
+				}
+				if (fixedBear.GetComponent<UnitScript>().job == Qualification.creator)
+				{
+					fixedBear.GetComponent<UnitScript>().LevelUpBear();
 				}
 				timeShow.text = "";
 				GameManager.Instance.BoostThreeBears();
