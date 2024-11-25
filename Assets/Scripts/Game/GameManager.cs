@@ -30,14 +30,16 @@ public class GameManager : MonoBehaviour
 	//[SerializeField] private GameObject floorPrefab;
 	private GameObject queuedBuildPositon;
 	public List<GameObject> workStations; // keeps all workstations to address to them to outline when we choosing unit
+	public List<GameObject> builderRooms;
 	private bool buildingMode;
+	public GameObject fixedBuilderRoom;
 	public RoomScript selectedRoom;
 	[Header("Phases settings")]
 	private GameObject skyBG;
 	[SerializeField] private List<VideoClip> animatedBackgrounds;
 	public Season season;
 	public int cycleNumber = 1;
-	[Header("Resourves")]
+	[Header("Resourсes")]
 	[SerializeField] private int honey;
 	[SerializeField] private int asteriy;
 	[SerializeField] private int rawAsterium = 0;
@@ -58,7 +60,7 @@ public class GameManager : MonoBehaviour
 		StartCoroutine(ConstantSeasonChanger());
 
 		// DONT FORGET TO DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		asteriy = 100;
+		asteriy = 600;
 		honey = 100;
 	}
 
@@ -80,7 +82,7 @@ public class GameManager : MonoBehaviour
 	{
 		buildingMode = !buildingMode;
 		selectedUnit = null;
-		if (selectedRoom != null)
+		if (selectedRoom)
 		{
 			selectedRoom.ToggleRoomStats(false);
 		}
@@ -99,6 +101,68 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	/// <param name="building"></param>
 	public void SelectAndBuild(GameObject building)
+	{
+		if (GetAsteriy() < 60)
+		{
+			queuedBuildPositon = null;
+			buildingScreen.SetActive(false);
+			elevatorBuildingScreen.SetActive(false);
+			return;
+		}
+		ChangeAsteriy(-60);
+		uiResourceShower.UpdateIndicators();
+
+		// goto room vvvvv
+		fixedBuilderRoom = null;
+		foreach (GameObject room in builderRooms)
+		{
+			if ((room.GetComponent<RoomScript>().status == RoomScript.Status.Free) && room.GetComponent<RoomScript>().fixedBear)
+			{
+				room.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Busy);
+				fixedBuilderRoom = room;
+				break;
+			}
+		}
+		if (fixedBuilderRoom == null)
+		{
+			Debug.Log("Нет свободных строительных комплексов!");
+			queuedBuildPositon = null;
+			buildingScreen.SetActive(false);
+			elevatorBuildingScreen.SetActive(false);
+			return;
+		}
+		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
+		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
+		if (building.CompareTag("elevator") && queuedBuildPositon.transform.parent.parent.CompareTag("elevator"))
+		{
+			float targetY = queuedBuildPositon.transform.parent.parent.position.y;
+			RoomScript builderTargetRoom = queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms[0];
+			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(builderTargetRoom);
+		}
+		else
+		{
+			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(queuedBuildPositon.transform.parent.parent.GetComponent<RoomScript>());
+		}
+		StartCoroutine(SelectAndBuildWaiter(building));
+		buildingScreen.SetActive(false);
+		elevatorBuildingScreen.SetActive(false);
+	}
+
+	private IEnumerator SelectAndBuildWaiter(GameObject building)
+	{
+		while (fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
+		{
+			yield return null;
+		}
+		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", true);
+		yield return new WaitForSeconds(5);
+		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
+		fixedBuilderRoom.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Free);
+		SelectAndBuildMainBlock(building);
+		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
+	}
+
+	private void SelectAndBuildMainBlock(GameObject building)
 	{
 		var instance = Instantiate(building, queuedBuildPositon.transform.position-new Vector3(0,0, 3.46f), Quaternion.identity);
 		if (instance.CompareTag("elevator"))// trying to build elevator
@@ -245,8 +309,6 @@ public class GameManager : MonoBehaviour
 		}
 		allRooms.Add(instance);
 		queuedBuildPositon = null;
-		buildingScreen.SetActive(false);
-		elevatorBuildingScreen.SetActive(false);
 	}
 
 	/// <summary>
@@ -365,6 +427,10 @@ public class GameManager : MonoBehaviour
 			if (gameObject.GetComponentInParent<RoomScript>().resource != RoomScript.Resources.Build)
 			{
 				StartCoroutine(WalkAndStartWork(selectedUnit, gameObject));
+			}
+			else
+			{
+				gameObject.GetComponentInParent<RoomScript>().fixedBear = selectedUnit;
 			}
 			selectedUnit = null;
 			return;

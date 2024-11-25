@@ -95,8 +95,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7608581450154739076}
-  - component: {fileID: -1271131762643480146}
   - component: {fileID: 1550860505669509525}
+  - component: {fileID: 1469887729993612399}
   m_Layer: 0
   m_Name: BuildRoom
   m_TagString: room
@@ -139,46 +139,6 @@ Transform:
   - {fileID: 1293682111689196063}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1271131762643480146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 499206874984719121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e0ae0aa73ba0244590a29c933b0fe3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  status: 0
-  resource: 0
-  leftDoor: {fileID: 0}
-  rightDoor: {fileID: 0}
-  hasLeftDoor: 0
-  hasRightDoor: 0
-  roomStatsScreen: {fileID: 0}
-  connectedElevators: []
-  connectedRooms: []
-  rawWalkPoints: []
-  timeShow: {fileID: 0}
-  fixedBear: {fileID: 0}
-  workStationsToOutline:
-  - {fileID: 408648279667390822}
-  - {fileID: 9157823319017968211}
-  - {fileID: 2217957422747804322}
-  - {fileID: 5096796634547472132}
-  - {fileID: 5360188197302079602}
-  - {fileID: 5041712961066972210}
-  - {fileID: 8304653967193928644}
-  - {fileID: 8038741983710768047}
-  - {fileID: 1382685552897238530}
-  - {fileID: 8958031894390564486}
-  - {fileID: 8316101245699592373}
-  durability: 1
-  level: 1
-  depthLevel: 0
-  isReadyForWork: 0
 --- !u!65 &1550860505669509525
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -200,6 +160,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.9911203, y: 3.5300038, z: 2.6521757}
   m_Center: {x: 2.0044465, y: -0.006111264, z: 0.8483583}
+--- !u!114 &1469887729993612399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499206874984719121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a14320225d6233a40a21cc2f3092e361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  status: 0
+  resource: 4
+  leftDoor: {fileID: 0}
+  rightDoor: {fileID: 0}
+  hasLeftDoor: 0
+  hasRightDoor: 0
+  roomStatsScreen: {fileID: 0}
+  connectedElevators: []
+  connectedRooms: []
+  rawWalkPoints: []
+  timeShow: {fileID: 0}
+  fixedBear: {fileID: 0}
+  workStationsToOutline:
+  - {fileID: 8316101245699592373}
+  - {fileID: 5180719534923703120}
+  durability: 1
+  level: 1
+  depthLevel: 0
+  isReadyForWork: 0
 --- !u!1 &1063710117667887597
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,7 +1350,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -1271131762643480146}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RoomScript, Assembly-CSharp
         m_MethodName: RepairRoom
         m_Mode: 1
@@ -1653,7 +1644,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -1271131762643480146}
+      - m_Target: {fileID: 1469887729993612399}
         m_TargetAssemblyTypeName: RoomScript, Assembly-CSharp
         m_MethodName: BuildRoom
         m_Mode: 2
@@ -2141,7 +2132,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -1271131762643480146}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RoomScript, Assembly-CSharp
         m_MethodName: UpgradeRoom
         m_Mode: 2
@@ -2435,7 +2426,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -1271131762643480146}
+      - m_Target: {fileID: 1469887729993612399}
         m_TargetAssemblyTypeName: RoomScript, Assembly-CSharp
         m_MethodName: BuildRoom
         m_Mode: 2

@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Data;
+using UnityEngine.AI;
 
 public class RoomScript : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class RoomScript : MonoBehaviour
 	//private Vector3[] walkPoints;
 	private List<Vector3> walkPoints;
 	[SerializeField] protected TextMeshProUGUI timeShow;
-	[SerializeField] protected GameObject fixedBear;
+	[SerializeField] public GameObject fixedBear;
 	[SerializeField] private List<GameObject> workStationsToOutline;
 	private TextMeshProUGUI hullPercentage;
 	private Transform hullBar;
@@ -46,18 +47,15 @@ public class RoomScript : MonoBehaviour
 		hullBar = roomStatsScreen.transform.Find("Hull").transform;
 		switch (resource)
 		{
-			case Resources.Energohoney:
-				GameManager.Instance.AddWorkStations(workStationsToOutline);
-				break;
-			case Resources.Cosmodrome:
-				GameManager.Instance.AddWorkStations(workStationsToOutline);
-				break;
 			case Resources.Bed:
 				GameManager.Instance.AddWorkStations(workStationsToOutline);
 				GameManager.Instance.ChangeMaxBearAmount(6);
 				break;
-			case Resources.Build:
-				GameManager.Instance.AddWorkStations(workStationsToOutline);
+			default:
+				if (workStationsToOutline.Count > 0)
+				{
+					GameManager.Instance.AddWorkStations(workStationsToOutline);
+				}
 				break;
 		}
 	}
@@ -256,6 +254,11 @@ public class RoomScript : MonoBehaviour
 	{
 		yield return new WaitForSeconds(seconds);
 		durability = 1f;
+	}
+
+    public void SetStatus(Status status)
+	{
+		this.status = status;
 	}
 
 	public enum Resources

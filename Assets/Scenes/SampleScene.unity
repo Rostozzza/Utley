@@ -5329,6 +5329,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182697370}
   m_CullTransparentMesh: 1
+--- !u!1 &1196657643 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 499206874984719121, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
+  m_PrefabInstance: {fileID: 195394982}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1202761585
 GameObject:
   m_ObjectHideFlags: 0
@@ -10169,6 +10174,7 @@ MonoBehaviour:
   allRooms:
   - {fileID: 1701141405}
   - {fileID: 2010418153}
+  - {fileID: 1196657643}
   asteriumViewGrid: {fileID: 1922845458}
   asteriumViewPrefab: {fileID: 4493363592815126592, guid: 9d4d4f6758ecb804ba46092e645c74e5, type: 3}
   tilemap: {fileID: 0}
@@ -10182,6 +10188,7 @@ MonoBehaviour:
   buildingScreen: {fileID: 1978496738}
   elevatorBuildingScreen: {fileID: 1642775197}
   workStations: []
+  builderRooms: []
   selectedRoom: {fileID: 0}
   animatedBackgrounds:
   - {fileID: 32900000, guid: b669b8555f93fb04099ab7188c2c1da7, type: 3}
@@ -10397,6 +10404,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: work_station
       objectReference: {fileID: 0}
+    - target: {fileID: 3562106560612395451, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3767274520511459582, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15
@@ -10538,6 +10549,7 @@ MonoBehaviour:
   durability: 1
   level: 1
   depthLevel: 0
+  fixedBuilderRoom: {fileID: 0}
   isReadyForWork: 0
 --- !u!65 &3562911849079285425
 BoxCollider:
