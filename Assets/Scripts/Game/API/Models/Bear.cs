@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum Qualification
@@ -10,6 +11,7 @@ public enum Qualification
 	creator
 }
 
+[Serializable]
 public class Bear
 {
 	public string Name { get; set; }
