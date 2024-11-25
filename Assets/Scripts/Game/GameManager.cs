@@ -143,28 +143,28 @@ public class GameManager : MonoBehaviour
 		{
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(queuedBuildPositon.transform.parent.parent.GetComponent<RoomScript>());
 		}
-		StartCoroutine(SelectAndBuildWaiter(building));
+		StartCoroutine(SelectAndBuildWaiter(building, fixedBuilderRoom, queuedBuildPositon.transform));
 		buildingScreen.SetActive(false);
 		elevatorBuildingScreen.SetActive(false);
 	}
 
-	private IEnumerator SelectAndBuildWaiter(GameObject building)
+	private IEnumerator SelectAndBuildWaiter(GameObject building, GameObject room, Transform point)
 	{
-		while (fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
+		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
 		{
 			yield return null;
 		}
-		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", true);
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", true);
 		yield return new WaitForSeconds(5);
-		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
-		fixedBuilderRoom.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Free);
-		SelectAndBuildMainBlock(building);
-		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
+		room.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Free);
+		SelectAndBuildMainBlock(building, point);
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 	}
 
-	private void SelectAndBuildMainBlock(GameObject building)
+	private void SelectAndBuildMainBlock(GameObject building, Transform point)
 	{
-		var instance = Instantiate(building, queuedBuildPositon.transform.position-new Vector3(0,0, 3.46f), Quaternion.identity);
+		var instance = Instantiate(building, point.position - new Vector3(0,0, 3.46f), Quaternion.identity);
 		if (instance.CompareTag("elevator"))// trying to build elevator
 		{
 			Debug.Log("Placing elevator");
@@ -172,10 +172,10 @@ public class GameManager : MonoBehaviour
 			Ray rayLeft = new Ray(instance.transform.position, Vector3.left * 6f);
 
 			var elevator = instance.GetComponent<Elevator>();
-			if (queuedBuildPositon.transform.parent.parent.CompareTag("elevator"))
+			if (point.parent.parent.CompareTag("elevator"))
 			{
 				Debug.Log("extending existing elevator");
-				elevator = queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>();
+				elevator = point.parent.GetComponentInParent<Elevator>();
 				instance.transform.parent = elevator.transform;
 				Destroy(instance.GetComponent<Elevator>());
 			}
@@ -231,7 +231,7 @@ public class GameManager : MonoBehaviour
 		}
 		else if (instance.CompareTag("room"))
 		{
-			if (queuedBuildPositon.transform.position.x < queuedBuildPositon.transform.parent.parent.position.x)
+			if (point.position.x < point.parent.parent.position.x)
 			{
 				instance.transform.Translate(Vector3.left * 4f);
 			}

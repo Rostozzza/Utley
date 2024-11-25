@@ -43,8 +43,8 @@ public class UnitScript : MonoBehaviour
 
 	private void UpdateStatsScreen()
 	{
-		nameField.text = bearModel.Name;
-		qualificationField.text = bearModel.Qualification.ToString();
+		//nameField.text = bearModel.Name;
+		//qualificationField.text = bearModel.Qualification.ToString();
 		switch (level)
 		{
 			case 1:

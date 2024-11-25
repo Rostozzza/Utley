@@ -62,18 +62,50 @@ public class RoomScript : MonoBehaviour
 
 	public void UpgradeRoom(GameObject button)
 	{
+		GameObject fixedBuilderRoom = null;
+		foreach (GameObject room in GameManager.Instance.builderRooms)
+		{
+			if ((room.GetComponent<RoomScript>().status == Status.Free) && room.GetComponent<RoomScript>().fixedBear)
+			{
+				room.GetComponent<RoomScript>().SetStatus(Status.Busy);
+				fixedBuilderRoom = room;
+				break;
+			}
+		}
+		if (fixedBuilderRoom == null)
+		{
+			Debug.Log("Нет свободных строительных комплексов!");
+			return;
+		}
+		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
+		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
+		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
+
 		if (GameManager.Instance.GetHoney() >= (30 + 10 * (level - 1)))
 		{
 			GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)));
-			level += 1;
-			UpdateRoomHullView();
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
-			if (level == 3)
-			{
-				button.GetComponent<Button>().enabled = false;
-				button.GetComponentInChildren<TextMeshProUGUI>().text = "Максимальный уровень!";
-			}
+			StartCoroutine(Upgrade(button, fixedBuilderRoom));
 		}
+	}
+
+	private IEnumerator Upgrade(GameObject button, GameObject room)
+	{
+		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
+		{
+			yield return null;
+		}
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", true);
+		yield return new WaitForSeconds(5);
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
+		level += 1;
+		if (level == 3)
+		{
+			button.GetComponent<Button>().enabled = false;
+			button.GetComponentInChildren<TextMeshProUGUI>().text = "Максимальный уровень!";
+		}
+		UpdateRoomHullView();
+		yield return null;
 	}
 
 	public void ToggleRoomStats(bool toggle)
@@ -234,6 +266,7 @@ public class RoomScript : MonoBehaviour
 			status = Status.Destroyed;
 		}
 		durability = Mathf.Clamp(durability, 0f, 1f);
+		UpdateRoomHullView();
 	}
 
     /// <summary>
@@ -241,18 +274,44 @@ public class RoomScript : MonoBehaviour
 	/// </summary>
 	public void RepairRoom()
 	{
+		GameObject fixedBuilderRoom = null;
+		foreach (GameObject room in GameManager.Instance.builderRooms)
+		{
+			if ((room.GetComponent<RoomScript>().status == Status.Free) && room.GetComponent<RoomScript>().fixedBear)
+			{
+				room.GetComponent<RoomScript>().SetStatus(Status.Busy);
+				fixedBuilderRoom = room;
+				break;
+			}
+		}
+		if (fixedBuilderRoom == null)
+		{
+			Debug.Log("Нет свободных строительных комплексов!");
+			return;
+		}
+		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
+		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
+		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
+
+        
 		if (GameManager.Instance.GetAsteriy() >= 10)
 		{
 			GameManager.Instance.ChangeAsteriy(-10);
+			GameManager.Instance.uiResourceShower.UpdateIndicators();
 			int timeToRepair = (int)((1 - durability) * 100 / 2);
-			StartCoroutine(Repair(timeToRepair));
+			StartCoroutine(Repair(timeToRepair, fixedBuilderRoom));
 		}
-		GameManager.Instance.uiResourceShower.UpdateIndicators();
 	}
 
-	private IEnumerator Repair(int seconds)
+	private IEnumerator Repair(int time, GameObject room)
 	{
-		yield return new WaitForSeconds(seconds);
+		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
+		{
+			yield return null;
+		}
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", true);
+		yield return new WaitForSeconds(time);
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
 		durability = 1f;
 	}
 

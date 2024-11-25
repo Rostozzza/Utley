@@ -13618,7 +13618,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041C\u0430\u043A\u0441\u0438\u043C \u041A\u0430\u0446"
+  m_text: "\u041C\u0430\u043A\u0441\u0438\u043C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -18007,6 +18007,7 @@ MonoBehaviour:
   elevatorBuildingScreen: {fileID: 1642775197}
   workStations: []
   builderRooms: []
+  fixedBuilderRoom: {fileID: 0}
   selectedRoom: {fileID: 0}
   animatedBackgrounds:
   - {fileID: 32900000, guid: b669b8555f93fb04099ab7188c2c1da7, type: 3}
@@ -18640,7 +18641,6 @@ MonoBehaviour:
   durability: 1
   level: 1
   depthLevel: 0
-  fixedBuilderRoom: {fileID: 0}
   isReadyForWork: 0
 --- !u!65 &3562911849079285425
 BoxCollider:
