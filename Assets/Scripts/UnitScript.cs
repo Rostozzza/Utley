@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UnitScript : MonoBehaviour
@@ -25,50 +26,48 @@ public class UnitScript : MonoBehaviour
 	public Mesh top;
 	public Mesh bottom;
 	public bool isBoosted = false;
+	public Bear bearModel;
+	[Header("Bear UI")]
+	[SerializeField] private GameObject statsScreen;
+	[SerializeField] private TextMeshProUGUI nameField;
+	[SerializeField] private TextMeshProUGUI qualificationField;
+	[SerializeField] private TextMeshProUGUI levelField;
+	[SerializeField] private Transform effectsGrid;
 
 	private void Start()
 	{
 		rb = GetComponent<Rigidbody>();
+		bearModel = new Bear { Name = "Барак Обама",Qualification = Qualification.beekeeper};//DONT FORGET TO MAKE JSON SAVE/LOAD SYSTEM!
+		UpdateStatsScreen();
+	}
+
+	private void UpdateStatsScreen()
+	{
+		nameField.text = bearModel.Name;
+		qualificationField.text = bearModel.Qualification.ToString();
+		switch (level)
+		{
+			case 1:
+				levelField.text = "I";
+				break;
+			case 2:
+				levelField.text = "II";
+				break;
+			case 3:
+				levelField.text = "III";
+				break;
+			case 4:
+				levelField.text = "IV";
+				break;
+			case 5:
+				levelField.text = "V";
+				break;
+		}
 	}
 
 	private void Update()
 	{
 		onLadder = laddersAmount > 0;
-
-		//if (chased)
-		//{
-		//    Debug.Log(randomWalk);
-		//    if (randomWalk != null)
-		//    {
-		//        StopCoroutine(randomWalk);
-		//        randomWalk = null;
-		//    }
-		//    Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -20f);
-		//    job = Jobs.None;
-		//    rb.useGravity = !onLadder;
-		//    dir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
-		//    rb.linearVelocity = new Vector3(speed * dir.x, onLadder ? speed * dir.y : rb.linearVelocity.y, 0f);
-		//    if (Input.GetKeyDown(KeyCode.E) && nearWorkStation != null)
-		//    {
-		//        isBusy = true;
-		//        chased = false;
-		//        job = (Jobs)nearWorkStation.GetComponent<WorkStationScript>().GetJob();
-		//    }
-		//    if (Input.GetKeyDown(KeyCode.Escape))
-		//    {
-		//        chased = false;
-		//    }
-		//}
-		//else
-		//{
-		//    //if (randomWalk == null)
-		//    //{
-		//    //    randomWalk = StartCoroutine(WalkCycle());
-		//    //    Debug.Log("стартовали корутину");
-		//    //}
-		//    rb.useGravity = !onLadder;
-		//    rb.linearVelocity = new Vector3(dir.x, onLadder ? 0f : rb.linearVelocity.y, 0f);
-		//
 	}
 
 	private IEnumerator WalkCycle()
@@ -235,10 +234,4 @@ public class UnitScript : MonoBehaviour
         Walk,
         Working
     }
-
-    //public States State
-    //{
-    //    get { return (States)animator.GetInteger("state"); }
-    //    set { animator.SetInteger("State", (int)value); }
-    //}
 }
