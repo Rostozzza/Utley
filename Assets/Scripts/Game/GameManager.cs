@@ -145,13 +145,22 @@ public class GameManager : MonoBehaviour
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
 		if (building.CompareTag("elevator") && queuedBuildPositon.transform.parent.parent.CompareTag("elevator"))
 		{
-			float targetY = queuedBuildPositon.transform.parent.parent.position.y;
-			RoomScript builderTargetRoom = queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms[0];
-			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(builderTargetRoom);
+			float minLen = Vector3.Distance(queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms[0].transform.position, queuedBuildPositon.transform.position);
+			RoomScript nearestRoom = queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms.OrderBy(x => x.transform.position.y).ToList()[0];
+			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(nearestRoom);
 		}
 		else
 		{
-			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(queuedBuildPositon.transform.parent.parent.GetComponent<RoomScript>());
+			if (queuedBuildPositon.transform.parent.parent.transform.CompareTag("elevator"))
+			{
+				float minLen = Vector3.Distance(queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms[0].transform.position, queuedBuildPositon.transform.position);
+				RoomScript nearestRoom = queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms.OrderBy(x => x.transform.position.y).ToList()[0];
+				fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(nearestRoom);
+			}
+			else
+			{
+				fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(queuedBuildPositon.transform.parent.parent.GetComponent<RoomScript>());
+			}
 		}
 		StartCoroutine(SelectAndBuildWaiter(building, fixedBuilderRoom, queuedBuildPositon.transform));
 		buildingScreen.SetActive(false);
