@@ -10,11 +10,14 @@ using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
+	[Header("Player settings")]
+	public string playerName;
+	public Player playerModel;
 	[Header("Cosmodrome settings")]
 	[SerializeField] private GameObject ui;
 	[SerializeField] private List<Image> asteriumRoomView;
 	[SerializeField] private List<RoomScript> asteriumRooms;
-	[SerializeField] private List<GameObject> allRooms;
+	public List<GameObject> allRooms;
 	[SerializeField] private Transform asteriumViewGrid;
 	[SerializeField] private GameObject asteriumViewPrefab;
 	[Header("GameManager settings")]
@@ -24,6 +27,7 @@ public class GameManager : MonoBehaviour
 	public List<GameObject> bears = new List<GameObject>();
 	[SerializeField] public UIResourceShower uiResourceShower;
 	[SerializeField] public GameObject selectedUnit;
+	[SerializeField] private GameObject emptyBearPrefab;
 	[Header("Building settings")]
 	public GameObject buildingScreen;
 	public GameObject elevatorBuildingScreen;
@@ -31,9 +35,11 @@ public class GameManager : MonoBehaviour
 	private GameObject queuedBuildPositon;
 	public List<GameObject> workStations; // keeps all workstations to address to them to outline when we choosing unit
 	public List<GameObject> builderRooms;
+	public List<Elevator> allElevators;
 	private bool buildingMode;
 	public GameObject fixedBuilderRoom;
 	public RoomScript selectedRoom;
+	[SerializeField] private List<GameObject> allPossibleRooms;
 	[Header("Phases settings")]
 	private GameObject skyBG;
 	[SerializeField] private List<VideoClip> animatedBackgrounds;
@@ -45,6 +51,19 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private int rawAsterium = 0;
 	public int maxBearsAmount;
 	RaycastHit raycastHit;
+
+	public void LoadBearFromModel(Bear model)
+	{
+		var newBear = Instantiate(emptyBearPrefab);
+		newBear.GetComponent<UnitScript>().LoadDataFromModel(model);
+		bears.Add(newBear);
+	}
+
+	public void LoadRoomFromModel(Room room)
+	{
+		var newRoom = Instantiate(allPossibleRooms.Where(x => x.gameObject.name == room.Type).ToList()[0],new Vector3(room.Coordinates[0], room.Coordinates[1], room.Coordinates[2]),Quaternion.identity);
+		allRooms.Add(newRoom);
+	}
 
 	public void Awake()
 	{
@@ -89,7 +108,7 @@ public class GameManager : MonoBehaviour
 		selectedRoom = null;
 		foreach (GameObject room in allRooms)
 		{
-			foreach(var button in room.GetComponentsInChildren<Button>(true))
+			foreach (var button in room.GetComponentsInChildren<Button>(true))
 			{
 				button.gameObject.SetActive(buildingMode);
 			}
@@ -164,7 +183,7 @@ public class GameManager : MonoBehaviour
 
 	private void SelectAndBuildMainBlock(GameObject building, Transform point)
 	{
-		var instance = Instantiate(building, point.position - new Vector3(0,0, 3.46f), Quaternion.identity);
+		var instance = Instantiate(building, point.position - new Vector3(0, 0, 3.46f), Quaternion.identity);
 		if (instance.CompareTag("elevator"))// trying to build elevator
 		{
 			Debug.Log("Placing elevator");
@@ -263,7 +282,7 @@ public class GameManager : MonoBehaviour
 			hit = new RaycastHit();
 			Ray rayRight = new Ray(instance.transform.position, Vector3.right * 12f);
 			Debug.DrawRay(instance.transform.position, Vector3.right * 12f, Color.red, 15f);
-			instance.layer = 2; 
+			instance.layer = 2;
 			if (Physics.Raycast(rayRight, out hit, 12f))
 			{
 				Debug.Log("Collision on right: " + hit.collider.name);
@@ -303,7 +322,7 @@ public class GameManager : MonoBehaviour
 			if (room.resource == RoomScript.Resources.Asteriy)
 			{
 				asteriumRooms.Add(room);
-				var newAsteriumView = Instantiate(asteriumViewPrefab,asteriumViewGrid);
+				var newAsteriumView = Instantiate(asteriumViewPrefab, asteriumViewGrid);
 				asteriumRoomView.Add(newAsteriumView.GetComponent<Image>());
 			}
 		}
@@ -361,9 +380,9 @@ public class GameManager : MonoBehaviour
 	public void DeliverRawAsterium()
 	{
 		rawAsterium++;
-		asteriumRooms[rawAsterium-1].isReadyForWork = true;
+		asteriumRooms[rawAsterium - 1].isReadyForWork = true;
 		asteriumRooms[rawAsterium - 1].StartWork(gameObject);
-		asteriumRoomView[rawAsterium-1].color = Color.blue;
+		asteriumRoomView[rawAsterium - 1].color = Color.blue;
 	}
 
 	public void WithdrawRawAsterium()
@@ -391,7 +410,7 @@ public class GameManager : MonoBehaviour
 				else
 				{
 					OutlineWorkStations(false);
-					
+
 				}
 			}
 			else
@@ -457,7 +476,7 @@ public class GameManager : MonoBehaviour
 	private void ClickedGameObject(GameObject gameObject)
 	{
 		Debug.Log("кликнули по " + gameObject.tag);
-		
+
 		if (gameObject.CompareTag("unit") && !buildingMode)
 		{
 			if (gameObject.GetComponent<UnitScript>().selectable)
@@ -485,8 +504,8 @@ public class GameManager : MonoBehaviour
 				}
 			}
 		}
-		
-		
+
+
 	}
 
 	/// <summary>
@@ -516,7 +535,7 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-    /// <summary>
+	/// <summary>
 	/// Changes season with refreshing
 	/// </summary>
 	/// <param name="season"></param>
@@ -651,7 +670,7 @@ public class GameManager : MonoBehaviour
 			//	room.GetComponent<RoomScript>().ChangeDurability(-0.01f);
 			//}
 			// analogue
-			shuffleRooms.ForEach(delegate(GameObject room)
+			shuffleRooms.ForEach(delegate (GameObject room)
 			{
 				room.GetComponent<RoomScript>().ChangeDurability(-0.01f);
 			});
@@ -753,7 +772,7 @@ public class GameManager : MonoBehaviour
 			}
 			shuffleRooms.RemoveRange(n, shuffleRooms.Count - n);
 		}
-		shuffleRooms.ForEach(delegate(GameObject room)
+		shuffleRooms.ForEach(delegate (GameObject room)
 		{
 			float damage = (0.35f + 0.04f * cycleNumber - 0.02f * room.GetComponent<RoomScript>().depthLevel) * room.GetComponent<RoomScript>().durability;
 			Debug.Log(room.name + " задамажен фазой на " + damage);
