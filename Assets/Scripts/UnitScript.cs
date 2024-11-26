@@ -41,6 +41,12 @@ public class UnitScript : MonoBehaviour
 		UpdateStatsScreen();
 	}
 
+	public void LoadDataFromModel(Bear model)
+	{
+		bearModel = model;
+		//Load and set nessesary data from current model;
+	}
+
 	private void UpdateStatsScreen()
 	{
 		//nameField.text = bearModel.Name;

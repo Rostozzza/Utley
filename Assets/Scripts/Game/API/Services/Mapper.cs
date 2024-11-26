@@ -1,4 +1,8 @@
 ﻿
+using Newtonsoft.Json;
+using NUnit.Framework;
+using Unity.VisualScripting;
+
 namespace API.Sevices.Mapper
 {
 	public class Mapper
@@ -9,8 +13,7 @@ namespace API.Sevices.Mapper
 		/// <returns></returns>
 		public string BearToString(Bear toConvert)
 		{
-			string result = $"{toConvert.Name} {toConvert.Qualification}";
-			return result;
+			return JsonConvert.SerializeObject(toConvert);
 		}
 
 		/// <summary>
@@ -20,12 +23,7 @@ namespace API.Sevices.Mapper
 		/// <returns></returns>
 		public Bear StringToBear(string toConvert)
 		{
-			string[] splittedString = toConvert.Split(' ');
-			Bear result = new Bear
-			{
-				Name = splittedString[0],
-				Qualification = (Qualification)int.Parse(splittedString[1])
-			};
+			Bear result = JsonConvert.DeserializeObject<Bear>(toConvert);
 			return result;
 		}
 	}
