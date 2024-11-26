@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
 		StartCoroutine(ConstantDurabilityDamager(4));
 		StartCoroutine(ConstantEnergohoneyConsumer());
 		StartCoroutine(ConstantSeasonChanger());
+		ChangeSeason(Season.Calm);
 
 		// DONT FORGET TO DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		asteriy = 600;
@@ -112,6 +113,15 @@ public class GameManager : MonoBehaviour
 			{
 				button.gameObject.SetActive(buildingMode);
 			}
+		}
+		if (buildingMode)
+		{
+		}
+		else
+		{
+			queuedBuildPositon = null;
+			buildingScreen.SetActive(false);
+			elevatorBuildingScreen.SetActive(false);
 		}
 	}
 
@@ -154,13 +164,22 @@ public class GameManager : MonoBehaviour
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
 		if (building.CompareTag("elevator") && queuedBuildPositon.transform.parent.parent.CompareTag("elevator"))
 		{
-			float targetY = queuedBuildPositon.transform.parent.parent.position.y;
-			RoomScript builderTargetRoom = queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms[0];
-			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(builderTargetRoom);
+			float minLen = Vector3.Distance(queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms[0].transform.position, queuedBuildPositon.transform.position);
+			RoomScript nearestRoom = queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms.OrderBy(x => x.transform.position.y).ToList()[0];
+			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(nearestRoom);
 		}
 		else
 		{
-			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(queuedBuildPositon.transform.parent.parent.GetComponent<RoomScript>());
+			if (queuedBuildPositon.transform.parent.parent.transform.CompareTag("elevator"))
+			{
+				float minLen = Vector3.Distance(queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms[0].transform.position, queuedBuildPositon.transform.position);
+				RoomScript nearestRoom = queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms.OrderBy(x => x.transform.position.y).ToList()[0];
+				fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(nearestRoom);
+			}
+			else
+			{
+				fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(queuedBuildPositon.transform.parent.parent.GetComponent<RoomScript>());
+			}
 		}
 		StartCoroutine(SelectAndBuildWaiter(building, fixedBuilderRoom, queuedBuildPositon.transform));
 		buildingScreen.SetActive(false);
@@ -183,7 +202,7 @@ public class GameManager : MonoBehaviour
 
 	private void SelectAndBuildMainBlock(GameObject building, Transform point)
 	{
-		var instance = Instantiate(building, point.position - new Vector3(0, 0, 3.46f), Quaternion.identity);
+		var instance = Instantiate(building, point.position - new Vector3(0,0, 3.46f - 5f), Quaternion.identity);
 		if (instance.CompareTag("elevator"))// trying to build elevator
 		{
 			Debug.Log("Placing elevator");
@@ -543,17 +562,10 @@ public class GameManager : MonoBehaviour
 	{
 		this.season = season;
 		VideoPlayer vp = skyBG.GetComponentInChildren<VideoPlayer>();
-		if (season == Season.Calm)
+		vp.clip = animatedBackgrounds[(int)season];
+		if (!vp.isPlaying)
 		{
-			vp.Stop();
-		}
-		else
-		{
-			vp.clip = animatedBackgrounds[(int)season - 1];
-			if (!vp.isPlaying)
-			{
-				vp.Play();
-			}
+			vp.Play();
 		}
 	}
 
