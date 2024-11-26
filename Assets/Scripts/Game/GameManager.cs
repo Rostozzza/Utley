@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour
 		StartCoroutine(ConstantEnergohoneyConsumer());
 		StartCoroutine(ConstantSeasonChanger());
 		ChangeSeason(Season.Calm);
+		ToggleBuildingMode();
+		ToggleBuildingMode();
 
 		// DONT FORGET TO DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		asteriy = 600;

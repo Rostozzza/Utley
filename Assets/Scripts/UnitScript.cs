@@ -72,29 +72,52 @@ public class UnitScript : MonoBehaviour
 
 	private IEnumerator WalkCycle()
 	{
-		RaycastHit hit;
 		dir.x = Random.Range(0, 2) == 1 ? 1 : -1;
-		while (!chased)
+		float timer = 7f + Random.value;
+		while (timer > 0f)
 		{
-			float timer = 7f + Random.value;
-			while (timer > 0f)
+			//rb.linearVelocity = new Vector3(dir.x, onLadder ? 0f : rb.linearVelocity.y, 0f);
+			// Uncomment if wanna see cool rays-detectors
+			Debug.DrawRay(transform.position, Vector3.right, Color.yellow);
+			Debug.DrawRay(transform.position, Vector3.left, Color.yellow);
+			
+			RaycastHit hit;
+			if (dir.x == 1)
 			{
-				//rb.linearVelocity = new Vector3(dir.x, onLadder ? 0f : rb.linearVelocity.y, 0f);
-				// Uncomment if wanna see cool rays-detectors
-				Debug.DrawRay(transform.position, Vector3.right, Color.yellow);
-				Debug.DrawRay(transform.position, Vector3.left, Color.yellow);
-				if (((Physics.Raycast(transform.position, Vector3.right, out hit, 1f) && dir.x == 1f) || (Physics.Raycast(transform.position, Vector3.left, out hit, 1f) && dir.x == -1f)) && hit.transform.gameObject.layer == 0)
+				Ray rayR = new Ray(transform.position, Vector3.right);
+				if (Physics.Raycast(rayR, out hit, 1f))
+				{
+					transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+				}
+				else
 				{
 					Debug.Log("разворот");
 					yield return new WaitForSeconds(3f);
 					break;
 				}
-				timer -= Time.deltaTime;
-				yield return null;
 			}
-			dir.x *= -1f;
+			else if (dir.x == -1)
+			{
+				Ray rayL = new Ray(transform.position, Vector3.left);
+				if (Physics.Raycast(rayL, out hit, 1f))
+				{
+					transform.Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
+				}
+				else
+				{
+					Debug.Log("разворот");
+					yield return new WaitForSeconds(3f);
+					break;
+				}
+			}
+			
+			//if (((Physics.Raycast(transform.position, Vector3.right, out hit, 1f) && dir.x == 1f) || (Physics.Raycast(transform.position, Vector3.left, out hit, 1f) && dir.x == -1f)) && hit.transform.gameObject.layer == 0)
+			//{
+			//}
+			timer -= Time.deltaTime;
 			yield return null;
 		}
+		dir.x *= -1f;
 		yield return null;
 	}
 
@@ -196,32 +219,31 @@ public class UnitScript : MonoBehaviour
 		GetComponentInChildren<Animator>().speed = 1f;
 		while (obj.GetComponent<RoomScript>().status == RoomScript.Status.Busy)
 		{
-			//State = States.Walk;
 			GetComponentInChildren<Animator>().speed = 1;
 			GetComponentInChildren<Animator>().SetBool("Walk", true);
 			chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
+			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(chosenPoint.x - transform.position.x), 0);
 			while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
 			{
 				transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
 				yield return null;
 			}
 			GetComponentInChildren<Animator>().SetBool("Walk", false);
+			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
 			GetComponentInChildren<Animator>().SetBool("Work", true);
-			//State = States.Working;
 			yield return new WaitForSeconds(5f);
 			GetComponentInChildren<Animator>().SetBool("Work", false);
 			GetComponentInChildren<Animator>().SetBool("Walk", true);
-			//State = States.Walk;
 			chosenPoint = walkPoints[3];
+			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(chosenPoint.x - transform.position.x), 0);
 			while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
 			{
-				//dir.x = Mathf.Sign(chosenPoint.x - transform.position.x);
 				transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
 				yield return null;
 			}
 			GetComponentInChildren<Animator>().SetBool("Walk", false);
+			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
 			GetComponentInChildren<Animator>().SetBool("Work", true);
-			//State = States.Working;
 			yield return new WaitForSeconds(3f);
 			GetComponentInChildren<Animator>().SetBool("Work", false);
 		}

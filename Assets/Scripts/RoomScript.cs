@@ -234,6 +234,7 @@ public class RoomScript : MonoBehaviour
 				GameManager.Instance.DeliverRawAsterium();
 				timeShow.gameObject.SetActive(false);
 				timeShow.transform.parent.gameObject.SetActive(false);
+				fixedBear.GetComponent<UnitScript>().CanBeSelected();
 				break;
 		}
 		if (fixedBear != null)
