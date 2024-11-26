@@ -16931,7 +16931,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '-'
+  m_text: /
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16958,8 +16958,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 77.2
+  m_fontSizeBase: 77.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -17512,6 +17512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b5ddc0a14ec55f46845de9f20e77422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: 
   ui: {fileID: 327177501}
   asteriumRoomView:
   - {fileID: 1880772356}
@@ -17531,12 +17532,15 @@ MonoBehaviour:
   - {fileID: 1703134537}
   uiResourceShower: {fileID: 1893337891}
   selectedUnit: {fileID: 0}
+  emptyBearPrefab: {fileID: 0}
   buildingScreen: {fileID: 1428568829}
   elevatorBuildingScreen: {fileID: 1642775197}
   workStations: []
   builderRooms: []
+  allElevators: []
   fixedBuilderRoom: {fileID: 0}
   selectedRoom: {fileID: 0}
+  allPossibleRooms: []
   animatedBackgrounds:
   - {fileID: 32900000, guid: a95661173318c95448f008d3d4e6ffa7, type: 3}
   - {fileID: 32900000, guid: b999e04773acc1c42a3b57a56fcdaee9, type: 3}
