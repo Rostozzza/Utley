@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
 		StartCoroutine(ConstantDurabilityDamager(4));
 		StartCoroutine(ConstantEnergohoneyConsumer());
 		StartCoroutine(ConstantSeasonChanger());
+		ChangeSeason(Season.Calm);
 
 		// DONT FORGET TO DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		asteriy = 600;
@@ -93,6 +94,15 @@ public class GameManager : MonoBehaviour
 			{
 				button.gameObject.SetActive(buildingMode);
 			}
+		}
+		if (buildingMode)
+		{
+		}
+		else
+		{
+			queuedBuildPositon = null;
+			buildingScreen.SetActive(false);
+			elevatorBuildingScreen.SetActive(false);
 		}
 	}
 
@@ -164,7 +174,7 @@ public class GameManager : MonoBehaviour
 
 	private void SelectAndBuildMainBlock(GameObject building, Transform point)
 	{
-		var instance = Instantiate(building, point.position - new Vector3(0,0, 3.46f), Quaternion.identity);
+		var instance = Instantiate(building, point.position - new Vector3(0,0, 3.46f - 5f), Quaternion.identity);
 		if (instance.CompareTag("elevator"))// trying to build elevator
 		{
 			Debug.Log("Placing elevator");
@@ -524,17 +534,10 @@ public class GameManager : MonoBehaviour
 	{
 		this.season = season;
 		VideoPlayer vp = skyBG.GetComponentInChildren<VideoPlayer>();
-		if (season == Season.Calm)
+		vp.clip = animatedBackgrounds[(int)season];
+		if (!vp.isPlaying)
 		{
-			vp.Stop();
-		}
-		else
-		{
-			vp.clip = animatedBackgrounds[(int)season - 1];
-			if (!vp.isPlaying)
-			{
-				vp.Play();
-			}
+			vp.Play();
 		}
 	}
 
