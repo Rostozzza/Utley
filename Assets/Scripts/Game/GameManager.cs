@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
 	private GameObject skyBG;
 	[SerializeField] private List<VideoClip> animatedBackgrounds;
 	public Season season;
+	public Mode mode;
 	public int cycleNumber = 1;
 	[Header("Resourсes")]
 	[SerializeField] private int honey;
@@ -142,8 +143,8 @@ public class GameManager : MonoBehaviour
 		StartCoroutine(ConstantEnergohoneyConsumer());
 		StartCoroutine(ConstantSeasonChanger());
 		ChangeSeason(Season.Calm);
-		ToggleBuildingMode();
-		ToggleBuildingMode();
+		SetModeByButton(1);
+		SetModeByButton(1);
 
 		// DONT FORGET TO DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		asteriy = 600;
@@ -164,23 +165,24 @@ public class GameManager : MonoBehaviour
 	/// <summary>
 	/// Toggles building mode and all buttons;
 	/// </summary>
-	public void ToggleBuildingMode()
+	public void SetMode(Mode mode)
 	{
-		buildingMode = !buildingMode;
+		this.mode = mode;
 		selectedUnit = null;
 		if (selectedRoom)
 		{
 			selectedRoom.ToggleRoomStats(false);
+			selectedRoom.ToggleBuildStats(false);
 		}
 		selectedRoom = null;
 		foreach (GameObject room in allRooms)
 		{
 			foreach (var button in room.GetComponentsInChildren<Button>(true))
 			{
-				button.gameObject.SetActive(buildingMode);
+				button.gameObject.SetActive(mode == Mode.Build);
 			}
 		}
-		if (buildingMode)
+		if (mode == Mode.Build)
 		{
 		}
 		else
@@ -188,6 +190,30 @@ public class GameManager : MonoBehaviour
 			queuedBuildPositon = null;
 			buildingScreen.SetActive(false);
 			elevatorBuildingScreen.SetActive(false);
+		}
+		if (mode == Mode.Info)
+		{
+		}
+		else
+		{
+			bears.ForEach(x => x.GetComponent<UnitScript>().SetStatsScreen(false));
+		}
+	}
+
+	public void SetMode(int mode)
+	{
+		SetMode((Mode)mode);
+	}
+
+	public void SetModeByButton(int mode)
+	{
+		if (this.mode == (Mode)mode)
+		{
+			SetMode(Mode.None);
+		}
+		else
+		{
+			SetMode((Mode)mode);
 		}
 	}
 
@@ -510,6 +536,7 @@ public class GameManager : MonoBehaviour
 				if (selectedRoom != null)
 				{
 					selectedRoom.ToggleRoomStats(false);
+					selectedRoom.ToggleBuildStats(false);
 				}
 				selectedRoom = null;
 				selectedUnit = null;
@@ -567,30 +594,57 @@ public class GameManager : MonoBehaviour
 	{
 		Debug.Log("кликнули по " + gameObject.tag);
 
-		if (gameObject.CompareTag("unit") && !buildingMode)
+		if (gameObject.CompareTag("unit"))
 		{
 			if (gameObject.GetComponent<UnitScript>().selectable)
 			{
-				selectedUnit = gameObject;
-				OutlineWorkStations(true);
+				switch (mode)
+				{
+					case Mode.None:
+						selectedUnit = gameObject;
+						OutlineWorkStations(true);
+						break;
+					case Mode.Info:
+						gameObject.GetComponent<UnitScript>().SetStatsScreen();
+						break;
+				}
 			}
 		}
 		else
 		{
+			//selectedUnit.GetComponent<UnitScript>().SetStatsScreen(false);
 			selectedUnit = null;
 			OutlineWorkStations(false);
-			if (gameObject.CompareTag("room") && buildingMode)
+			if (gameObject.CompareTag("room"))
 			{
-				if (selectedRoom != null)
+				switch (mode)
 				{
-					selectedRoom.ToggleRoomStats(false);
-					selectedRoom = gameObject.GetComponent<RoomScript>();
-					selectedRoom.ToggleRoomStats(true);
-				}
-				else
-				{
-					selectedRoom = gameObject.GetComponent<RoomScript>();
-					selectedRoom.ToggleRoomStats(true);
+					case Mode.Build:
+						if (selectedRoom != null)
+						{
+							selectedRoom.ToggleBuildStats(false);
+							selectedRoom = gameObject.GetComponent<RoomScript>();
+							selectedRoom.ToggleBuildStats(true);
+						}
+						else
+						{
+							selectedRoom = gameObject.GetComponent<RoomScript>();
+							selectedRoom.ToggleBuildStats(true);
+						}
+						break;
+					case Mode.Info:
+						if (selectedRoom != null)
+						{
+							selectedRoom.ToggleRoomStats(false);
+							selectedRoom = gameObject.GetComponent<RoomScript>();
+							selectedRoom.ToggleRoomStats(true);
+						}
+						else
+						{
+							selectedRoom = gameObject.GetComponent<RoomScript>();
+							selectedRoom.ToggleRoomStats(true);
+						}
+						break;
 				}
 			}
 		}
@@ -868,5 +922,12 @@ public class GameManager : MonoBehaviour
 		Storm,
 		Freeze,
 		Tide
+	}
+
+	public enum Mode
+	{
+		None,
+		Build,
+		Info
 	}
 }
