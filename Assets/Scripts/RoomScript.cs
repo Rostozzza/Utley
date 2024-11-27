@@ -16,6 +16,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] public bool hasLeftDoor;
 	[SerializeField] public bool hasRightDoor;
 	[SerializeField] private GameObject roomStatsScreen;
+	public Room roomModel;
 
 	public List<Elevator> connectedElevators;
 	public List<RoomScript> connectedRooms;

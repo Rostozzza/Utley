@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Tilemaps;
 using System.Linq;
 using System.Collections;
 using UnityEngine.Video;
+using Newtonsoft.Json;
 using Unity.VisualScripting;
-using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,8 +21,8 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private GameObject asteriumViewPrefab;
 	[Header("GameManager settings")]
 	public static GameManager Instance;
-	public static RequestManager RequestManager = new RequestManager();
-	public Tilemap tilemap;
+	public static JsonManager JsonManager = new JsonManager();
+	public GameObject elevatorPrefab;
 	public List<GameObject> bears = new List<GameObject>();
 	[SerializeField] public UIResourceShower uiResourceShower;
 	[SerializeField] public GameObject selectedUnit;
@@ -35,7 +34,6 @@ public class GameManager : MonoBehaviour
 	private GameObject queuedBuildPositon;
 	public List<GameObject> workStations; // keeps all workstations to address to them to outline when we choosing unit
 	public List<GameObject> builderRooms;
-	public List<Elevator> allElevators;
 	private bool buildingMode;
 	public GameObject fixedBuilderRoom;
 	public RoomScript selectedRoom;
@@ -59,10 +57,76 @@ public class GameManager : MonoBehaviour
 		bears.Add(newBear);
 	}
 
-	public void LoadRoomFromModel(Room room)
+	public void DebugPlayerSave()
 	{
-		var newRoom = Instantiate(allPossibleRooms.Where(x => x.gameObject.name == room.Type).ToList()[0],new Vector3(room.Coordinates[0], room.Coordinates[1], room.Coordinates[2]),Quaternion.identity);
-		allRooms.Add(newRoom);
+		string savedTestPlayer = JsonManager.SavePlayerToJson("Obama");
+		Debug.Log(savedTestPlayer);
+	}
+
+	public void DebugLoadPlayer(string player)
+	{
+		JsonManager.LoadPlayerFromModel(JsonConvert.DeserializeObject<Player>(player));
+	}
+
+	public bool LoadRoomFromModel(Room room)
+	{
+		try
+		{
+			var newRoom = Instantiate(allPossibleRooms.First(x => room.Type.Contains(x.gameObject.name)), new Vector3(room.Coordinates[0], room.Coordinates[1], room.Coordinates[2]), Quaternion.identity);
+			newRoom.GetComponent<RoomScript>().roomModel = room;
+			allRooms.Add(newRoom);
+			return true;
+		}
+		catch
+		{
+			return false;
+		}
+	}
+
+	public bool LoadElevatorFromModel(ElevatorModel model)
+	{
+		try
+		{
+			var newElevator = Instantiate(elevatorPrefab, new Vector3(model.Coordinates[0], model.Coordinates[1], model.Coordinates[2]), Quaternion.identity);
+			newElevator.GetComponent<Elevator>().elevatorModel = model;
+			allRooms.Add(newElevator);
+			for (int i = 0; i < model.BlocksUp; i++)
+			{
+				var newBlock = Instantiate(elevatorPrefab, new Vector3(model.Coordinates[0], model.Coordinates[1], model.Coordinates[2]), Quaternion.identity);
+				Destroy(newBlock.GetComponent<Elevator>());
+				newBlock.transform.parent = newElevator.transform;
+				newBlock.transform.Translate(new Vector3(0,(i+1) * 4,0));
+			}
+			for (int i = 0; i < model.BlocksDown; i++)
+			{
+				var newBlock = Instantiate(elevatorPrefab, new Vector3(model.Coordinates[0], model.Coordinates[1], model.Coordinates[2]), Quaternion.identity);
+				Destroy(newBlock.GetComponent<Elevator>());
+				newBlock.transform.parent = newElevator.transform;
+				newBlock.transform.Translate(new Vector3(0, (i + 1) * -4, 0));
+			}
+			return true;
+		}
+		catch
+		{
+			return false;
+		}
+	}
+
+	public void AssembleBase()
+	{
+		var roomScripts = allRooms.Where(x => x.GetComponent<RoomScript>()).ToList();
+		var elevatorScripts = allRooms.Where(x => x.GetComponent<Elevator>()).ToList();
+		foreach (GameObject room in roomScripts)
+		{
+			var roomScript = room.GetComponent<RoomScript>();
+			roomScript.connectedElevators = roomScript.roomModel.ConnectedElevators.Select(x => allRooms[x].GetComponent<Elevator>()).ToList();
+		}
+		foreach (GameObject elevator in elevatorScripts)
+		{
+			var elevatorScript = elevator.GetComponent<Elevator>();
+			elevatorScript.connectedElevators = elevatorScript.elevatorModel.ConnectedElevators.Select(x => allRooms[x].GetComponent<Elevator>()).ToList();
+			elevatorScript.connectedRooms = elevatorScript.elevatorModel.ConnectedRooms.Select(x => allRooms[x].GetComponent<RoomScript>()).ToList();
+		}
 	}
 
 	public void Awake()
@@ -347,8 +411,13 @@ public class GameManager : MonoBehaviour
 				asteriumRoomView.Add(newAsteriumView.GetComponent<Image>());
 			}
 		}
-		allRooms.Add(instance);
+		if (queuedBuildPositon.transform.parent.parent.tag=="elevator" && queuedBuildPositon.transform.parent.parent.position.y != instance.transform.position.y && instance.tag == "elevator")
+		{
+			queuedBuildPositon = null;
+			return;
+		}
 		queuedBuildPositon = null;
+		allRooms.Add(instance);
 	}
 
 	/// <summary>
