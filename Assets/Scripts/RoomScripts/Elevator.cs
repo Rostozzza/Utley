@@ -5,6 +5,7 @@ public class Elevator : MonoBehaviour
 {
     public List<Elevator> connectedElevators;
     public List<RoomScript> connectedRooms;
+    public ElevatorModel elevatorModel;
 
     public void BuildElevator(GameObject point)
     {
