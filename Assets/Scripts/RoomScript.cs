@@ -168,7 +168,7 @@ public class RoomScript : MonoBehaviour
 
 	public void StartCosmodromeWork()
 	{
-		if (GameManager.Instance.FlyForRawAsterium())
+		if (GameManager.Instance.FlyForRawAsterium() && GameManager.Instance.season != GameManager.Season.Tide)
 		{
 			timeShow.gameObject.SetActive(true);
 			StartCoroutine(WorkStatus());
@@ -199,6 +199,7 @@ public class RoomScript : MonoBehaviour
 	{
 		float timer;
 		status = Status.Busy;
+		fixedBear.GetComponent<UnitScript>().SetBusy(true);
 		if (resource != Resources.Asteriy)
 		{
 			fixedBear.GetComponent<UnitScript>().CannotBeSelected();
@@ -237,6 +238,7 @@ public class RoomScript : MonoBehaviour
 				fixedBear.GetComponent<UnitScript>().CanBeSelected();
 				break;
 		}
+		fixedBear.GetComponent<UnitScript>().SetBusy(false);
 		if (fixedBear != null)
 		{
 			fixedBear.GetComponent<UnitScript>().CanBeSelected();

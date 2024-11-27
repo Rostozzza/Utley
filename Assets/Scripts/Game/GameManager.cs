@@ -661,7 +661,6 @@ public class GameManager : MonoBehaviour
 					shuffleRooms.Add(room);
 				}
 				//shuffleRooms = interestRooms.GetRange(0, interestRooms.Count);
-				Debug.Log(interestRooms.Count + "|" + shuffleRooms.Count);
 			}
 			else
 			{
@@ -730,7 +729,7 @@ public class GameManager : MonoBehaviour
 	{
 		while (true)
 		{
-			yield return new WaitForSeconds(75);
+			yield return new WaitForSeconds(75); //default 75
 			Debug.Log("Season Changed");
 			switch (season)
 			{

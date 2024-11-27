@@ -27,6 +27,7 @@ public class UnitScript : MonoBehaviour
 	public Mesh bottom;
 	public bool isBoosted = false;
 	public Bear bearModel;
+	public bool isBearBusy = false;
 	[Header("Bear UI")]
 	[SerializeField] private GameObject statsScreen;
 	[SerializeField] private TextMeshProUGUI nameField;
@@ -36,9 +37,10 @@ public class UnitScript : MonoBehaviour
 
 	private void Start()
 	{
-		rb = GetComponent<Rigidbody>();
+		//rb = GetComponent<Rigidbody>();
 		bearModel = new Bear { Name = "Барак Обама",Qualification = Qualification.beekeeper};//DONT FORGET TO MAKE JSON SAVE/LOAD SYSTEM!
 		UpdateStatsScreen();
+		//StartCoroutine(WalkCycle());
 	}
 
 	public void LoadDataFromModel(Bear model)
@@ -74,57 +76,111 @@ public class UnitScript : MonoBehaviour
 	private void Update()
 	{
 		onLadder = laddersAmount > 0;
+		if (GetComponent<UnitMovement>().currentRoutine == null && !isBearBusy && randomWalk == null)
+		{
+			randomWalk = StartCoroutine(WalkCycle());
+		}
+		else if ((GetComponent<UnitMovement>().currentRoutine != null || isBearBusy) && randomWalk != null)
+		{
+			StopCoroutine(randomWalk);
+			randomWalk = null;
+			GetComponentInChildren<Animator>().speed = 1f;
+		}
 	}
 
 	private IEnumerator WalkCycle()
 	{
-		dir.x = Random.Range(0, 2) == 1 ? 1 : -1;
-		float timer = 7f + Random.value;
-		while (timer > 0f)
+		yield return new WaitForSeconds(2 + Random.value * 3f);
+		float startX = transform.position.x;
+		while (true)
 		{
-			//rb.linearVelocity = new Vector3(dir.x, onLadder ? 0f : rb.linearVelocity.y, 0f);
-			// Uncomment if wanna see cool rays-detectors
-			Debug.DrawRay(transform.position, Vector3.right, Color.yellow);
-			Debug.DrawRay(transform.position, Vector3.left, Color.yellow);
-			
-			RaycastHit hit;
-			if (dir.x == 1)
+			float randPosToWalkX = startX + 2f + ((Random.value - 0.5f) * 5);
+			GetComponentInChildren<Animator>().speed = 0.2f;
+			GetComponentInChildren<Animator>().SetBool("Walk", true);
+			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(randPosToWalkX - transform.position.x), 0);
+			while (!(randPosToWalkX - 0.01f <= transform.position.x && transform.position.x <= randPosToWalkX + 0.01f))
 			{
-				Ray rayR = new Ray(transform.position, Vector3.right);
-				if (Physics.Raycast(rayR, out hit, 1f))
-				{
-					transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
-				}
-				else
-				{
-					Debug.Log("разворот");
-					yield return new WaitForSeconds(3f);
-					break;
-				}
+				transform.Translate(new Vector3(Mathf.Sign(randPosToWalkX - transform.position.x), 0, 0) * Time.deltaTime);
+				yield return null;
 			}
-			else if (dir.x == -1)
-			{
-				Ray rayL = new Ray(transform.position, Vector3.left);
-				if (Physics.Raycast(rayL, out hit, 1f))
-				{
-					transform.Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
-				}
-				else
-				{
-					Debug.Log("разворот");
-					yield return new WaitForSeconds(3f);
-					break;
-				}
-			}
-			
-			//if (((Physics.Raycast(transform.position, Vector3.right, out hit, 1f) && dir.x == 1f) || (Physics.Raycast(transform.position, Vector3.left, out hit, 1f) && dir.x == -1f)) && hit.transform.gameObject.layer == 0)
-			//{
-			//}
-			timer -= Time.deltaTime;
-			yield return null;
+			GetComponentInChildren<Animator>().SetBool("Walk", false);
+			yield return new WaitForSeconds(2 + Random.value * 5);
 		}
-		dir.x *= -1f;
-		yield return null;
+		
+		/*float timer = Random.value * 8;
+		while (true)
+		{
+			if (GetComponent<UnitMovement>().currentRoutine == null && !isBearBusy)
+			{
+				GameObject lastRoom = null;
+				while (timer > 0f)
+				{
+					//rb.linearVelocity = new Vector3(dir.x, onLadder ? 0f : rb.linearVelocity.y, 0f);
+					// Uncomment if wanna see cool rays-detectors
+					Debug.DrawRay(transform.position, Vector3.right * 3, Color.red);
+					Debug.DrawRay(transform.position, Vector3.left * 3, Color.green);
+					
+					RaycastHit hit;
+					if (dir.x == 1)
+					{
+						Ray rayR = new Ray(transform.position, Vector3.right * 20);
+						Ray rayL = new Ray(transform.position + Vector3.right, Vector3.left * 20);
+						if (Physics.Raycast(rayR, out hit, 20f, ~0))
+						{
+							transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime);
+							lastRoom = hit.collider.gameObject;
+						}
+						else
+						{
+							//Debug.Log("" + lastRoom + " | " + Physics.Raycast(rayL, out hit, lastRoom.CompareTag("elevator") ? 0.5f : 3f, ~0));
+							if (lastRoom && Physics.Raycast(rayL, out hit, lastRoom.CompareTag("elevator") ? 0.5f : 3f, ~0))
+							{
+								transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime);
+							}
+							else
+							{
+								Debug.Log("разворот");
+								yield return new WaitForSeconds(3f);
+								break;
+							}
+						}
+					}
+					else if (dir.x == -1)
+					{
+						Ray rayR = new Ray(transform.position + Vector3.left, Vector3.right * 20);
+						Ray rayL = new Ray(transform.position, Vector3.left * 20);
+						if (Physics.Raycast(rayL, out hit, 20f, ~0))
+						{
+							transform.Translate(new Vector3(-1, 0, 0) * Time.deltaTime);
+							lastRoom = hit.collider.gameObject;
+						}
+						else
+						{
+							//Debug.Log("" + lastRoom + " | " + Physics.Raycast(rayR, out hit, lastRoom.CompareTag("elevator") ? 1f : 3f, ~0));
+							if (lastRoom && Physics.Raycast(rayR, out hit, lastRoom.CompareTag("elevator") ? 0.5f : 3f, ~0))
+							{
+								transform.Translate(new Vector3(-1, 0, 0) * Time.deltaTime);
+							}
+							else
+							{
+								Debug.Log("разворот");
+								yield return new WaitForSeconds(3f);
+								break;
+							}
+						}
+					}
+					
+					//if (((Physics.Raycast(transform.position, Vector3.right, out hit, 1f) && dir.x == 1f) || (Physics.Raycast(transform.position, Vector3.left, out hit, 1f) && dir.x == -1f)) && hit.transform.gameObject.layer == 0)
+					//{
+					//}
+					timer -= Time.deltaTime;
+					yield return null;
+				}
+				timer = 7f + Random.value;
+				dir.x = Random.Range(0, 2) == 1 ? 1 : -1;
+				yield return null;
+			}
+		}*/
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -254,6 +310,11 @@ public class UnitScript : MonoBehaviour
 			GetComponentInChildren<Animator>().SetBool("Work", false);
 		}
 		GetComponentInChildren<Animator>().speed = 3;
+	}
+
+	public void SetBusy(bool isBusy)
+	{
+		isBearBusy = isBusy;
 	}
 
     public enum States
