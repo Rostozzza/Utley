@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using System;
 using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Data;
 using UnityEngine.AI;
+using System.Linq;
 
 public class RoomScript : MonoBehaviour
 {
@@ -35,6 +35,9 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] public float durability = 1f;
 	[SerializeField] public int level = 1;
 	[SerializeField] public int depthLevel;
+	[SerializeField] private List<GameObject> sparks;
+	[SerializeField] private List<GameObject> lamps;
+	private Color defaultLampColor;
 
 	[Header("Asterium settings")]
 	public bool isReadyForWork = false;
@@ -49,6 +52,11 @@ public class RoomScript : MonoBehaviour
 		hullPercentage = roomStatsScreen.transform.Find("hull%").GetComponent<TextMeshProUGUI>();
 		levelText = roomStatsScreen.transform.Find("Level (1)").GetComponent<TextMeshProUGUI>();
 		hullBar = roomStatsScreen.transform.Find("Hull").transform;
+		lamps = GameObject.FindGameObjectsWithTag("room_lamp").ToList();
+		lamps.ForEach(x => x.GetComponent<Renderer>().material.EnableKeyword("_EMISSION"));
+		sparks = GameObject.FindGameObjectsWithTag("room_spark").ToList();
+		//foreach (GameObject spark in sparks) spark.SetActive(false);
+		defaultLampColor = lamps[0].GetComponent<Renderer>().material.color;
 		foreach (var button in GetComponentsInChildren<Button>())
 		{
 			button.gameObject.SetActive(GameManager.Instance.mode == GameManager.Mode.Build);
@@ -66,6 +74,7 @@ public class RoomScript : MonoBehaviour
 				}
 				break;
 		}
+		sparks.ForEach(y => y.SetActive(false));
 	}
 
 	public void UpgradeRoom(GameObject button)
@@ -277,13 +286,67 @@ public class RoomScript : MonoBehaviour
 	/// <param name="hp"></param>
 	public void ChangeDurability(float hp)
 	{
+		Coroutine blinks = null;
 		durability += hp;
 		if (durability <= 0)
 		{
 			status = Status.Destroyed;
 		}
 		durability = Mathf.Clamp(durability, 0f, 1f);
+		if (durability > 0.5f)
+		{
+			sparks.ForEach(y => y.SetActive(false));
+			lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", defaultLampColor));
+			if (blinks != null)
+			{
+				StopCoroutine(blinks);
+				blinks = null;
+			}
+		}
+		else if (durability > 0.3f)
+		{
+			if (blinks == null)
+			{
+				blinks = StartCoroutine(LampsBlinking());
+			}
+		}
+		else if (durability > 0.15f)
+		{
+			sparks.ForEach(y => y.SetActive(true));
+			if (blinks == null)
+			{
+				blinks = StartCoroutine(LampsBlinking());
+			}
+		}
+		else if (durability > 0)
+		{
+			sparks.ForEach(y => y.SetActive(false));
+			if (blinks != null)
+			{
+				StopCoroutine(blinks);
+				blinks = null;
+			}
+			lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red));
+		}
+		else 
+		{
+			lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black));
+		}
 		UpdateRoomHullView();
+	}
+
+	private IEnumerator LampsBlinking()
+	{
+		while (true)
+		{
+			for (int i = 0; i < Random.Range(0, 3); i++)
+			{
+				lamps.ForEach(x => x.GetComponent<Renderer>().material.DisableKeyword("_EMISSION"));
+				yield return new WaitForSeconds(Random.value / 2);
+				lamps.ForEach(x => x.GetComponent<Renderer>().material.EnableKeyword("_EMISSION"));
+			}
+			yield return new WaitForSeconds(5 + Random.value * 5);
+		}
 	}
 
     /// <summary>
