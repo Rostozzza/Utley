@@ -16,8 +16,11 @@ public class JsonManager
 		string path = $"Assets/Resources/Players/{playerName}.json";
 		playerModel.Resources.Add("rooms", SerializeRooms());
 		playerModel.Resources.Add("elevators", SerializeElevators());
+		playerModel.Resources.Add("honey",GameManager.Instance.GetHoney().ToString());
+		playerModel.Resources.Add("asterium", GameManager.Instance.GetAsteriy().ToString());
 		return JsonConvert.SerializeObject(playerModel);
 	}
+
 
 	private string SerializeRooms()
 	{
