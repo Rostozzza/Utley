@@ -317,6 +317,21 @@ public class UnitScript : MonoBehaviour
 		isBearBusy = isBusy;
 	}
 
+	public void SetStatsScreen(bool set)
+	{
+		if (statsScreen)
+		{
+			statsScreen.SetActive(set);
+		}
+	}
+	public void SetStatsScreen()
+	{
+		if (statsScreen)
+		{
+			statsScreen.SetActive(!statsScreen.activeSelf);
+		}
+	}
+
     public enum States
     {
         Idle,

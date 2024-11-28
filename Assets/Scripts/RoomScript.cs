@@ -16,6 +16,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] public bool hasLeftDoor;
 	[SerializeField] public bool hasRightDoor;
 	[SerializeField] private GameObject roomStatsScreen;
+	[SerializeField] private GameObject roomBuildScreen;
 	public Room roomModel;
 
 	public List<Elevator> connectedElevators;
@@ -43,6 +44,8 @@ public class RoomScript : MonoBehaviour
 		walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
 		roomStatsScreen = transform.Find("RoomInfo").gameObject;
 		roomStatsScreen.SetActive(false);
+		roomBuildScreen = transform.Find("RoomBuildMode").gameObject;
+		roomBuildScreen.SetActive(false);
 		hullPercentage = roomStatsScreen.transform.Find("hull%").GetComponent<TextMeshProUGUI>();
 		levelText = roomStatsScreen.transform.Find("Level (1)").GetComponent<TextMeshProUGUI>();
 		hullBar = roomStatsScreen.transform.Find("Hull").transform;
@@ -114,6 +117,12 @@ public class RoomScript : MonoBehaviour
 		roomStatsScreen.SetActive(toggle);
 		UpdateRoomHullView();
 	}
+
+	public void ToggleBuildStats(bool toggle)
+	{
+		roomBuildScreen.SetActive(toggle);
+	}
+
 
 	public void UpdateRoomHullView()
 	{
