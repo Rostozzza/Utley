@@ -49,6 +49,10 @@ public class RoomScript : MonoBehaviour
 		hullPercentage = roomStatsScreen.transform.Find("hull%").GetComponent<TextMeshProUGUI>();
 		levelText = roomStatsScreen.transform.Find("Level (1)").GetComponent<TextMeshProUGUI>();
 		hullBar = roomStatsScreen.transform.Find("Hull").transform;
+		foreach (var button in GetComponentsInChildren<Button>())
+		{
+			button.gameObject.SetActive(GameManager.Instance.mode == GameManager.Mode.Build);
+		}
 		switch (resource)
 		{
 			case Resources.Bed:
@@ -209,9 +213,9 @@ public class RoomScript : MonoBehaviour
 	{
 		float timer;
 		status = Status.Busy;
-		fixedBear.GetComponent<UnitScript>().SetBusy(true);
 		if (resource != Resources.Asteriy)
 		{
+			fixedBear.GetComponent<UnitScript>().SetBusy(true);
 			fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		}
 		switch (resource)

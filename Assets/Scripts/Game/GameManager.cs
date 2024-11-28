@@ -554,6 +554,11 @@ public class GameManager : MonoBehaviour
 				}
 			}
 		}
+		else if (Input.GetKeyDown(KeyCode.Escape) && (buildingScreen.activeSelf || elevatorBuildingScreen.activeSelf))
+		{
+			buildingScreen.SetActive(false);
+			elevatorBuildingScreen.SetActive(false);
+		}
 	}
 
 	private void RightClick(GameObject gameObject)
