@@ -76,11 +76,11 @@ public class UnitScript : MonoBehaviour
 	private void Update()
 	{
 		onLadder = laddersAmount > 0;
-		if (GetComponent<UnitMovement>().currentRoutine == null && !isBearBusy && randomWalk == null)
+		if (GetComponent<UnitMovement>().currentRoutine == null && !isBearBusy && randomWalk == null && !GetComponentInChildren<Animator>().GetBool("Work"))
 		{
 			randomWalk = StartCoroutine(WalkCycle());
 		}
-		else if ((GetComponent<UnitMovement>().currentRoutine != null || isBearBusy) && randomWalk != null)
+		else if ((GetComponent<UnitMovement>().currentRoutine != null || isBearBusy || GetComponentInChildren<Animator>().GetBool("Work")) && randomWalk != null)
 		{
 			StopCoroutine(randomWalk);
 			randomWalk = null;
