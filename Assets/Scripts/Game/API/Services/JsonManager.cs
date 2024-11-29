@@ -1,26 +1,57 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class JsonManager
 {
 	RequestManager requestManager = new RequestManager();
 
-	public string SavePlayerToJson(string playerName)
+	public Player SavePlayerToJson(string playerName)
 	{
 		Player playerModel = new Player();
 		playerModel.Name = playerName;
 		playerModel.Resources = new Dictionary<string, string>();
-		//var bearsToSave = JsonConvert.SerializeObject(GameManager.Instance.bears.Select(x => x.GetComponent<UnitScript>().bearModel).ToList());
-		//playerModel.Resources.Add("bears", bearsToSave);
-		string path = $"Assets/Resources/Players/{playerName}.json";
+		var bearsToSave = JsonConvert.SerializeObject(GameManager.Instance.bears.Select(x => x.GetComponent<UnitScript>().bearModel).ToList());
+		playerModel.Resources.Add("bears", bearsToSave);
+		string path = $"{Application.persistentDataPath} + /{playerName}.json";
 		playerModel.Resources.Add("rooms", SerializeRooms());
 		playerModel.Resources.Add("elevators", SerializeElevators());
-		playerModel.Resources.Add("honey",GameManager.Instance.GetHoney().ToString());
+		playerModel.Resources.Add("honey", GameManager.Instance.GetHoney().ToString());
 		playerModel.Resources.Add("asterium", GameManager.Instance.GetAsteriy().ToString());
-		return JsonConvert.SerializeObject(playerModel);
+
+		string serializedPlayer = JsonConvert.SerializeObject(playerModel);
+		File.WriteAllText(path,serializedPlayer);
+		if (requestManager.GetAllPlayers().Result.FirstOrDefault(x => x.Name == playerName) != null)
+		{
+			var rerponce = requestManager.UpdatePlayerResources(playerName,playerModel.Resources).Result;
+		}
+		else
+		{
+			var responce = requestManager.CreatePlayer(playerModel);
+		}
+		return playerModel;
 	}
 
+	public void CreateLog(Log log)
+	{
+		string path = $"{Application.persistentDataPath} + /{log.Comment}.json";
+		requestManager.CreateLog(log).Wait();
+	}
+
+	public Shop InitializeShop()
+	{
+		Shop shop = new Shop
+		{
+			Name = "SpaceshipShop",
+			Resources = new Dictionary<string, int>()
+		};
+		shop.Resources.Add("asterium", 300);
+		shop.Resources.Add("bears", 100);
+		return shop;
+	}
 
 	private string SerializeRooms()
 	{
@@ -60,14 +91,14 @@ public class JsonManager
 	public void LoadPlayerFromModel(Player model)
 	{
 		GameManager.Instance.playerModel = model;
-		//var bearsToAdd = JsonConvert.DeserializeObject<List<Bear>>(model.Resources["bears"]);
-		//if (bearsToAdd != null)
-		//{
-		//	foreach (var bear in bearsToAdd)
-		//	{
-		//		GameManager.Instance.LoadBearFromModel(bear);
-		//	}
-		//}
+		var bearsToAdd = JsonConvert.DeserializeObject<List<Bear>>(model.Resources["bears"]);
+		if (bearsToAdd != null)
+		{
+			foreach (var bear in bearsToAdd)
+			{
+				GameManager.Instance.LoadBearFromModel(bear);
+			}
+		}
 		var rooms = JsonConvert.DeserializeObject<List<Room>>(model.Resources["rooms"]);
 		var elevators = JsonConvert.DeserializeObject<List<ElevatorModel>>(model.Resources["elevators"]);
 		for (int i = 0; i < rooms.Count + elevators.Count; i++)

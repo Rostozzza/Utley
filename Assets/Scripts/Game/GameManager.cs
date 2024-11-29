@@ -5,7 +5,6 @@ using System.Linq;
 using System.Collections;
 using UnityEngine.Video;
 using Newtonsoft.Json;
-using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -60,8 +59,7 @@ public class GameManager : MonoBehaviour
 
 	public void DebugPlayerSave()
 	{
-		string savedTestPlayer = JsonManager.SavePlayerToJson("Obama");
-		Debug.Log(savedTestPlayer);
+		JsonManager.SavePlayerToJson("Obama");
 	}
 
 	public void DebugLoadPlayer(string player)
@@ -472,6 +470,7 @@ public class GameManager : MonoBehaviour
 	{
 		honey += amount;
 		honey = Mathf.Clamp(honey, -1, 999);
+		JsonManager.SavePlayerToJson(playerName);
 	}
 
 	/// <summary>
@@ -482,6 +481,7 @@ public class GameManager : MonoBehaviour
 	{
 		asteriy += amount;
 		asteriy = Mathf.Clamp(asteriy, -1, 999);
+		JsonManager.SavePlayerToJson(playerName);
 	}
 
 	public bool FlyForRawAsterium()
@@ -842,6 +842,16 @@ public class GameManager : MonoBehaviour
 			{
 				honeyToEat = (int)((float)honeyToEat * (1f + 0.1f + 0.05f * cycleNumber));
 			}
+			var model = JsonManager.SavePlayerToJson(playerName);
+			Dictionary<string, int> changedResources = new Dictionary<string, int>();
+			changedResources.Add("honey",-honeyToEat);
+			JsonManager.CreateLog(new Log
+			{
+				Comment = $"Complex deplicted {honeyToEat} energohoney",
+				PlayerName = playerName,
+				ShopName = null,
+				ResourcesChanged = changedResources
+			});
 			Debug.Log("Съели мёда: " + honeyToEat);
 			ChangeHoney(-honeyToEat);
 			uiResourceShower.UpdateIndicators();
