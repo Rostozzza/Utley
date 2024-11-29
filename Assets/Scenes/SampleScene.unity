@@ -1403,6 +1403,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 499206874984719121, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1469887729993612399, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
       propertyPath: connectedElevators.Array.size
       value: 1
@@ -7427,7 +7431,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1042143471
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12185,7 +12189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1724428824
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12225,17 +12229,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: i
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 17e6a45a562aaaf46af6a98e4e580485, type: 2}
+  m_sharedMaterial: {fileID: 235508042702513954, guid: 17e6a45a562aaaf46af6a98e4e580485, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4279684607
+  m_fontColor: {r: 1, g: 0.8039216, b: 0.08627451, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -16311,6 +16315,7 @@ MonoBehaviour:
   depthLevel: 0
   sparks: []
   lamps: []
+  baseOfRoom: {fileID: 0}
   isReadyForWork: 0
 --- !u!65 &3562911849079285425
 BoxCollider:

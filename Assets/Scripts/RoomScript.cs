@@ -35,9 +35,11 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] public float durability = 1f;
 	[SerializeField] public int level = 1;
 	[SerializeField] public int depthLevel;
-	[SerializeField] private List<GameObject> sparks;
+	[SerializeField] private List<ParticleSystem> sparks;
 	[SerializeField] private List<GameObject> lamps;
+	[SerializeField] private GameObject baseOfRoom;
 	private Color defaultLampColor;
+	private Color defaultBaseColor;
 
 	[Header("Asterium settings")]
 	public bool isReadyForWork = false;
@@ -52,11 +54,12 @@ public class RoomScript : MonoBehaviour
 		hullPercentage = roomStatsScreen.transform.Find("hull%").GetComponent<TextMeshProUGUI>();
 		levelText = roomStatsScreen.transform.Find("Level (1)").GetComponent<TextMeshProUGUI>();
 		hullBar = roomStatsScreen.transform.Find("Hull").transform;
-		lamps = GameObject.FindGameObjectsWithTag("room_lamp").ToList();
+		lamps = GameObject.FindGameObjectsWithTag("room_lamp").ToList().FindAll(g => g.transform.parent.IsChildOf(transform));
 		lamps.ForEach(x => x.GetComponent<Renderer>().material.EnableKeyword("_EMISSION"));
-		sparks = GameObject.FindGameObjectsWithTag("room_spark").ToList();
-		//foreach (GameObject spark in sparks) spark.SetActive(false);
+		sparks = transform.GetComponentsInChildren<ParticleSystem>().ToList();
 		defaultLampColor = lamps[0].GetComponent<Renderer>().material.color;
+		baseOfRoom = transform.Find("base").gameObject;
+		defaultBaseColor = baseOfRoom.GetComponent<Renderer>().material.color;
 		foreach (var button in GetComponentsInChildren<Button>())
 		{
 			button.gameObject.SetActive(GameManager.Instance.mode == GameManager.Mode.Build);
@@ -74,7 +77,7 @@ public class RoomScript : MonoBehaviour
 				}
 				break;
 		}
-		sparks.ForEach(y => y.SetActive(false));
+		sparks.ForEach(y => y.Stop());
 	}
 
 	public void UpgradeRoom(GameObject button)
@@ -295,16 +298,19 @@ public class RoomScript : MonoBehaviour
 		durability = Mathf.Clamp(durability, 0f, 1f);
 		if (durability > 0.5f)
 		{
-			sparks.ForEach(y => y.SetActive(false));
+			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", defaultBaseColor);
+			sparks.ForEach(x => x.Stop());
 			lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", defaultLampColor));
 			if (blinks != null)
 			{
 				StopCoroutine(blinks);
 				blinks = null;
+				lamps.ForEach(x => x.GetComponent<Renderer>().material.EnableKeyword("_EMISSION"));
 			}
 		}
 		else if (durability > 0.3f)
 		{
+			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.yellow);
 			if (blinks == null)
 			{
 				blinks = StartCoroutine(LampsBlinking());
@@ -312,21 +318,24 @@ public class RoomScript : MonoBehaviour
 		}
 		else if (durability > 0.15f)
 		{
-			sparks.ForEach(y => y.SetActive(true));
+			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red);
 			if (blinks == null)
 			{
+				sparks.ForEach(z => z.Play());
 				blinks = StartCoroutine(LampsBlinking());
 			}
 		}
 		else if (durability > 0)
 		{
-			sparks.ForEach(y => y.SetActive(false));
+			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+			sparks.ForEach(x => x.Stop());
+			lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red));
 			if (blinks != null)
 			{
 				StopCoroutine(blinks);
 				blinks = null;
+				lamps.ForEach(x => x.GetComponent<Renderer>().material.EnableKeyword("_EMISSION"));
 			}
-			lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red));
 		}
 		else 
 		{
@@ -342,7 +351,7 @@ public class RoomScript : MonoBehaviour
 			for (int i = 0; i < Random.Range(0, 3); i++)
 			{
 				lamps.ForEach(x => x.GetComponent<Renderer>().material.DisableKeyword("_EMISSION"));
-				yield return new WaitForSeconds(Random.value / 2);
+				yield return new WaitForSeconds(Random.value / 4);
 				lamps.ForEach(x => x.GetComponent<Renderer>().material.EnableKeyword("_EMISSION"));
 			}
 			yield return new WaitForSeconds(5 + Random.value * 5);

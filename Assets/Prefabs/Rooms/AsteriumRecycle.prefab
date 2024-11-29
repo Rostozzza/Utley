@@ -12533,7 +12533,7 @@ GameObject:
   - component: {fileID: 9156433562565189456}
   m_Layer: 0
   m_Name: Lamp
-  m_TagString: Untagged
+  m_TagString: room_lamp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18359,6 +18359,7 @@ MonoBehaviour:
   depthLevel: 0
   sparks: []
   lamps: []
+  baseOfRoom: {fileID: 0}
   isReadyForWork: 0
 --- !u!65 &6881682886034302060
 BoxCollider:
@@ -18663,7 +18664,7 @@ GameObject:
   - component: {fileID: 6841083776957806055}
   m_Layer: 0
   m_Name: Lamp
-  m_TagString: Untagged
+  m_TagString: room_lamp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
