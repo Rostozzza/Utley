@@ -3,7 +3,12 @@ guid: 4c9ec59eab4c62a4e993afab0270a62f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: complex_ladder
+    second: {fileID: 2100000, guid: 1b8ddf504d0605a4889d59ef361488ad, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

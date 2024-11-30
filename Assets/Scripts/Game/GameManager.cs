@@ -182,6 +182,7 @@ public class GameManager : MonoBehaviour
 		}
 		if (mode == Mode.Build)
 		{
+			Camera.main.GetComponent<CameraController>().CameraMove();
 		}
 		else
 		{
@@ -517,7 +518,7 @@ public class GameManager : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			if (Physics.Raycast(ray, out raycastHit, 100f))
+			if (Physics.Raycast(ray, out raycastHit, 100f) && !buildingScreen.activeSelf)
 			{
 				if (raycastHit.transform != null)
 				{
@@ -545,7 +546,7 @@ public class GameManager : MonoBehaviour
 		else if (Input.GetMouseButtonDown(1))
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			if (Physics.Raycast(ray, out raycastHit, 100f))
+			if (Physics.Raycast(ray, out raycastHit, 100f) && !buildingScreen.activeSelf)
 			{
 				if (raycastHit.transform != null)
 				{
@@ -711,7 +712,7 @@ public class GameManager : MonoBehaviour
 		{
 			foreach (GameObject bear in bears)
 			{
-				bear.GetComponent<UnitScript>().isBoosted = true;
+				bear.GetComponent<UnitScript>().Boost();
 			}
 		}
 		else
@@ -731,7 +732,7 @@ public class GameManager : MonoBehaviour
 						break;
 					}
 				}
-				bearToBoost.GetComponent<UnitScript>().isBoosted = true;
+				bearToBoost.GetComponent<UnitScript>().Boost();
 			}
 			if (bears.GetRange(bears.Count / 3, (bears.Count / 3) * 2).ConvertAll(x => x.GetComponent<UnitScript>().isBoosted).Contains(false))
 			{
@@ -746,7 +747,7 @@ public class GameManager : MonoBehaviour
 						break;
 					}
 				}
-				bearToBoost.GetComponent<UnitScript>().isBoosted = true;
+				bearToBoost.GetComponent<UnitScript>().Boost();
 			}
 			if (bears.GetRange((bears.Count / 3) * 2, bears.Count).ConvertAll(x => x.GetComponent<UnitScript>().isBoosted).Contains(false))
 			{
@@ -761,7 +762,7 @@ public class GameManager : MonoBehaviour
 						break;
 					}
 				}
-				bearToBoost.GetComponent<UnitScript>().isBoosted = true;
+				bearToBoost.GetComponent<UnitScript>().Boost();
 			}
 			//bears[Random.Range(bears.Count / 3, (bears.Count / 3) * 2)].GetComponent<UnitScript>().isBoosted = true;
 			//bears[Random.Range((bears.Count / 3) * 2, bears.Count)].GetComponent<UnitScript>().isBoosted = true;
