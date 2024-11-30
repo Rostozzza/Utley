@@ -5,12 +5,71 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Text;
+using UnityEngine;
 
 public class RequestManager
 {
 	public string UUID;
 
 	#region PUT
+	/// <summary>
+	/// Sends request for updating specified player resources
+	/// </summary>
+	/// <param name="username"></param>
+	/// <param name="resources"></param>
+	/// <returns></returns>
+	/// <exception cref="Exception"></exception>
+	public async Task<Dictionary<string,string>> UpdatePlayerResources(string username, Dictionary<string,string> resources)
+	{
+		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/";
+		using HttpClient client = new HttpClient();
+		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, url);
+		request.Content = new StringContent(JsonConvert.SerializeObject(resources), Encoding.UTF8, "application/json");
+		try
+		{
+			var response = await client.SendAsync(request);
+			if (!response.IsSuccessStatusCode)
+			{
+				Debug.Log($"Failed to update player resources. Status code: {response.StatusCode}");
+				return null;
+			}
+
+			var responseBody = await response.Content.ReadAsStringAsync();
+			var responseResources = JsonConvert.DeserializeObject<Dictionary<string,string>>(responseBody);
+			return responseResources;
+		}
+		catch (Exception e)
+		{
+			Debug.Log($"Failed to update player resources. Check your internet connection. Error details: {e.Message}");
+			return null;
+		}
+	}
+
+	public async Task<Dictionary<string, string>> UpdatePlayerResources(string username,string shopName, Dictionary<string, string> resources)
+	{
+		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/shops/{shopName}/";
+		using HttpClient client = new HttpClient();
+		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, url);
+		request.Content = new StringContent(JsonConvert.SerializeObject(resources), Encoding.UTF8, "application/json");
+		try
+		{
+			var response = await client.SendAsync(request);
+			if (!response.IsSuccessStatusCode)
+			{
+				Debug.Log($"Failed to update player's shop resources. Status code: {response.StatusCode}");
+				return null;
+			}
+
+			var responseBody = await response.Content.ReadAsStringAsync();
+			var responseResources = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseBody);
+			return responseResources;
+		}
+		catch (Exception e)
+		{
+			Debug.Log($"Failed to update player's shop resources. Check your internet connection. Error details: {e.Message}");
+			return null;
+		}
+	}
 	#endregion
 
 	#region GET
@@ -30,16 +89,17 @@ public class RequestManager
 			var response = client.GetAsync(url).Result;
 			if (!response.IsSuccessStatusCode)
 			{
-				throw new Exception($"Failed to create a new player. Status code: {response.StatusCode}");
+				Debug.Log($"Failed to create a new player. Status code: {response.StatusCode}");
+				return null;
 			}
 			var responceBody = await response.Content.ReadAsStringAsync();
 			players = JsonConvert.DeserializeObject<List<Player>>(responceBody);
-
 			return players;
 		}
 		catch (Exception e)
 		{
-			throw new Exception($"Failed to create a new player. Check your internet connection. Error details: {e.Message}");
+			Debug.Log($"Failed to create a new player. Check your internet connection. Error details: {e.Message}");
+			return null;
 		}
 	}
 
@@ -60,7 +120,8 @@ public class RequestManager
 			var response = client.GetAsync(url).Result;
 			if (!response.IsSuccessStatusCode)
 			{
-				throw new Exception($"Failed to get selected player. Status code: {response.StatusCode}");
+				Debug.Log($"Failed to get selected player. Status code: {response.StatusCode}");
+				return null;
 			}
 			var responceBody = await response.Content.ReadAsStringAsync();
 			player = JsonConvert.DeserializeObject<Player>(responceBody);
@@ -69,7 +130,8 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			throw new Exception($"Failed to get selected player. Check your internet connection. Error details: {e.Message}");
+			Debug.Log($"Failed to get selected player. Check your internet connection. Error details: {e.Message}");
+			return null;
 		}
 	}
 
@@ -89,7 +151,8 @@ public class RequestManager
 			var response = await client.GetAsync(url);
 			if (!response.IsSuccessStatusCode)
 			{
-				throw new Exception($"Failed to get player's logs. Status code: {response.StatusCode}");
+				Debug.Log($"Failed to get player's logs. Status code: {response.StatusCode}");
+				return null;
 			}
 			var responseBody = await response.Content.ReadAsStringAsync();
 			logs = JsonConvert.DeserializeObject<List<Log>>(responseBody);
@@ -98,7 +161,8 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			throw new Exception($"Failed to get player's logs. Check your internet connection. Error details: {e.Message}");
+			Debug.Log($"Failed to get player's logs. Check your internet connection. Error details: {e.Message}");
+			return null;
 		}
 	}
 
@@ -119,7 +183,8 @@ public class RequestManager
 			var response = client.GetAsync(url).Result;
 			if (!response.IsSuccessStatusCode)
 			{
-				throw new Exception($"Failed to get player's shops. Status code: {response.StatusCode}");
+				Debug.Log($"Failed to get player's shops. Status code: {response.StatusCode}");
+				return null;
 			}
 			var responseBody = await response.Content.ReadAsStringAsync();
 			shops = JsonConvert.DeserializeObject<List<Shop>>(responseBody);
@@ -128,7 +193,8 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			throw new Exception($"Failed to get player's shops. Check your internet connection. Error details: {e.Message}");
+			Debug.Log($"Failed to get player's shops. Check your internet connection. Error details: {e.Message}");
+			return null;
 		}
 	}
 
@@ -149,7 +215,8 @@ public class RequestManager
 			var response = client.GetAsync(url).Result;
 			if (!response.IsSuccessStatusCode)
 			{
-				throw new Exception($"Failed to get player's shop. Status code: {response.StatusCode}");
+				Debug.Log($"Failed to get player's shop. Status code: {response.StatusCode}");
+				return null;
 			}
 			var responseBody = await response.Content.ReadAsStringAsync();
 			shop = JsonConvert.DeserializeObject<Shop>(responseBody);
@@ -158,7 +225,8 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			throw new Exception($"Failed to get player's shop. Check your internet connection. Error details: {e.Message}");
+			Debug.Log($"Failed to get player's shop. Check your internet connection. Error details: {e.Message}");
+			return null;
 		}
 	}
 
@@ -179,7 +247,8 @@ public class RequestManager
 			var response = client.GetAsync(url).Result;
 			if (!response.IsSuccessStatusCode)
 			{
-				throw new Exception($"Failed to get shop's logs. Status code: {response.StatusCode}");
+				Debug.Log($"Failed to get shop's logs. Status code: {response.StatusCode}");
+				return null;
 			}
 			var responseBody = await response.Content.ReadAsStringAsync();
 			logs = JsonConvert.DeserializeObject<List<Log>>(responseBody);
@@ -188,7 +257,8 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			throw new Exception($"Failed to get shop's logs. Check your internet connection. Error details: {e.Message}");
+			Debug.Log($"Failed to get shop's logs. Check your internet connection. Error details: {e.Message}");
+			return null;
 		}
 	}
 
@@ -207,7 +277,8 @@ public class RequestManager
 			var response = client.GetAsync(url).Result;
 			if (!response.IsSuccessStatusCode)
 			{
-				throw new Exception($"Failed to get logs. Status code: {response.StatusCode}");
+				Debug.Log($"Failed to get logs. Status code: {response.StatusCode}");
+				return null;
 			}
 			var responseBody = await response.Content.ReadAsStringAsync();
 			logs = JsonConvert.DeserializeObject<List<Log>>(responseBody);
@@ -216,7 +287,8 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			throw new Exception($"Failed to get logs. Check your internet connection. Error details: {e.Message}");
+			Debug.Log($"Failed to get logs. Check your internet connection. Error details: {e.Message}");
+			return null;
 		}
 	}
 	#endregion
@@ -228,20 +300,19 @@ public class RequestManager
 	/// <param name="name"></param>
 	/// <returns></returns>
 	/// <exception cref="Exception"></exception>
-	public async Task<Player> CreatePlayer(string name)
+	public async Task<Player> CreatePlayer(Player newPlayer)
 	{
 		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/";
-		Player newPlayer = new Player();
-		newPlayer.Name = name;
 		using HttpClient client = new HttpClient();
 		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
-		request.Content = new StringContent(JsonConvert.SerializeObject(newPlayer),Encoding.UTF8, "application/json");
+		request.Content = new StringContent(JsonConvert.SerializeObject(newPlayer), Encoding.UTF8, "application/json");
 		try
 		{
 			var response = await client.SendAsync(request);
 			if (!response.IsSuccessStatusCode)
 			{
-				throw new Exception($"Failed to create a new player. Status code: {response.StatusCode}");
+				Debug.Log($"Failed to create a new player. Status code: {response.StatusCode}");
+				return null;
 			}
 
 			var responseBody = await response.Content.ReadAsStringAsync();
@@ -250,12 +321,149 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			throw new Exception($"Failed to create a new player. Check your internet connection. Error details: {e.Message}");
+			Debug.Log($"Failed to create a new player. Check your internet connection. Error details: {e.Message}");
+			return null;
+		}
+	}
+
+
+	/// <summary>
+	/// Creates a request for an API to create new log;
+	/// </summary>
+	/// <param name="comment"></param>
+	/// <returns></returns>
+	/// <exception cref="Exception"></exception>
+	public async Task<Log> CreateLog(Log log)
+	{
+		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/logs/";
+		using HttpClient client = new HttpClient();
+		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
+		request.Content = new StringContent(JsonConvert.SerializeObject(log), Encoding.UTF8, "application/json");
+		try
+		{
+			var response = await client.SendAsync(request);
+			if (!response.IsSuccessStatusCode)
+			{
+				Debug.Log($"Failed to create a new log. Status code: {response.StatusCode}");
+				return null;
+			}
+			Log responceLog;
+			var responseBody = await response.Content.ReadAsStringAsync();
+			responceLog = JsonConvert.DeserializeObject<Log>(responseBody);
+			return responceLog;
+		}
+		catch (Exception e)
+		{
+			Debug.Log($"Failed to create a new log. Check your internet connection. Error details: {e.Message}");
+			return null;
+		}
+	}
+
+
+	/// <summary>
+	/// Creates shop for an selected player;
+	/// </summary>
+	/// <param name="username"></param>
+	/// <param name="shop"></param>
+	/// <returns></returns>
+	/// <exception cref="Exception"></exception>
+	public async Task<Shop> CreateShop(string username, Shop shop)
+	{
+		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/shops/";
+		using HttpClient client = new HttpClient();
+		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
+		request.Content = new StringContent(JsonConvert.SerializeObject(shop), Encoding.UTF8, "application/json");
+		try
+		{
+			var response = await client.SendAsync(request);
+			if (!response.IsSuccessStatusCode)
+			{
+				Debug.Log($"Failed to create a new shop. Status code: {response.StatusCode}");
+				return null;
+			}
+			Shop responceLog;
+			var responseBody = await response.Content.ReadAsStringAsync();
+			responceLog = JsonConvert.DeserializeObject<Shop>(responseBody);
+			Mathf.PerlinNoise1D(Time.time);
+			return responceLog;
+		}
+		catch (Exception e)
+		{
+			Debug.Log($"Failed to create a new shop. Check your internet connection. Error details: {e.Message}");
+			return null;
+		}
+	}
+
+	/// <summary>
+	/// Creates player-tied log;
+	/// </summary>
+	/// <param name="playerLog"></param>
+	/// <returns></returns>
+	/// <exception cref="Exception"></exception>
+	public async Task<Log> CreateShopLog(Log playerLog)
+	{
+		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/logs/";
+		using HttpClient client = new HttpClient();
+		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
+		request.Content = new StringContent(JsonConvert.SerializeObject(playerLog), Encoding.UTF8, "application/json");
+		try
+		{
+			var response = await client.SendAsync(request);
+			if (!response.IsSuccessStatusCode)
+			{
+				Debug.Log($"Failed to create a new log. Status code: {response.StatusCode}");
+				return null;
+			}
+			Log responceLog;
+			var responseBody = await response.Content.ReadAsStringAsync();
+			responceLog = JsonConvert.DeserializeObject<Log>(responseBody);
+			return responceLog;
+		}
+		catch (Exception e)
+		{
+			Debug.Log($"Failed to create a new log. Check your internet connection. Error details: {e.Message}");
+			return null;
 		}
 	}
 	#endregion
 
 	#region DELETE
+	public async Task DeletePlayer(string username)
+	{
+		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/";
+		using HttpClient client = new HttpClient();
+		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, url);
+		try
+		{
+			var response = await client.SendAsync(request);
+			if (!response.IsSuccessStatusCode)
+			{
+				Debug.Log($"Failed to delete player. Status code: {response.StatusCode}");
+			}
+		}
+		catch (Exception e)
+		{
+			Debug.Log($"Failed to delete player. Check your internet connection. Error details: {e.Message}");
+		}
+	}
 
+	public async Task DeletePlayer(string username,string shopName)
+	{
+		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/shops/{shopName}/";
+		using HttpClient client = new HttpClient();
+		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, url);
+		try
+		{
+			var response = await client.SendAsync(request);
+			if (!response.IsSuccessStatusCode)
+			{
+				Debug.Log($"Failed to delete player's shop. Status code: {response.StatusCode}");
+			}
+		}
+		catch (Exception e)
+		{
+			Debug.Log($"Failed to delete player's shop. Check your internet connection. Error details: {e.Message}");
+		}
+	}
 	#endregion
 }
