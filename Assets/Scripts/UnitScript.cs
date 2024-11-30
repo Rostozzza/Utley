@@ -26,6 +26,7 @@ public class UnitScript : MonoBehaviour
 	public Mesh top;
 	public Mesh bottom;
 	public bool isBoosted = false;
+	private Coroutine boostHolder = null;
 	public Bear bearModel;
 	public bool isBearBusy = false;
 	[Header("Bear UI")]
@@ -106,81 +107,6 @@ public class UnitScript : MonoBehaviour
 			GetComponentInChildren<Animator>().SetBool("Walk", false);
 			yield return new WaitForSeconds(2 + Random.value * 5);
 		}
-		
-		/*float timer = Random.value * 8;
-		while (true)
-		{
-			if (GetComponent<UnitMovement>().currentRoutine == null && !isBearBusy)
-			{
-				GameObject lastRoom = null;
-				while (timer > 0f)
-				{
-					//rb.linearVelocity = new Vector3(dir.x, onLadder ? 0f : rb.linearVelocity.y, 0f);
-					// Uncomment if wanna see cool rays-detectors
-					Debug.DrawRay(transform.position, Vector3.right * 3, Color.red);
-					Debug.DrawRay(transform.position, Vector3.left * 3, Color.green);
-					
-					RaycastHit hit;
-					if (dir.x == 1)
-					{
-						Ray rayR = new Ray(transform.position, Vector3.right * 20);
-						Ray rayL = new Ray(transform.position + Vector3.right, Vector3.left * 20);
-						if (Physics.Raycast(rayR, out hit, 20f, ~0))
-						{
-							transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime);
-							lastRoom = hit.collider.gameObject;
-						}
-						else
-						{
-							//Debug.Log("" + lastRoom + " | " + Physics.Raycast(rayL, out hit, lastRoom.CompareTag("elevator") ? 0.5f : 3f, ~0));
-							if (lastRoom && Physics.Raycast(rayL, out hit, lastRoom.CompareTag("elevator") ? 0.5f : 3f, ~0))
-							{
-								transform.Translate(new Vector3(1, 0, 0) * Time.deltaTime);
-							}
-							else
-							{
-								Debug.Log("разворот");
-								yield return new WaitForSeconds(3f);
-								break;
-							}
-						}
-					}
-					else if (dir.x == -1)
-					{
-						Ray rayR = new Ray(transform.position + Vector3.left, Vector3.right * 20);
-						Ray rayL = new Ray(transform.position, Vector3.left * 20);
-						if (Physics.Raycast(rayL, out hit, 20f, ~0))
-						{
-							transform.Translate(new Vector3(-1, 0, 0) * Time.deltaTime);
-							lastRoom = hit.collider.gameObject;
-						}
-						else
-						{
-							//Debug.Log("" + lastRoom + " | " + Physics.Raycast(rayR, out hit, lastRoom.CompareTag("elevator") ? 1f : 3f, ~0));
-							if (lastRoom && Physics.Raycast(rayR, out hit, lastRoom.CompareTag("elevator") ? 0.5f : 3f, ~0))
-							{
-								transform.Translate(new Vector3(-1, 0, 0) * Time.deltaTime);
-							}
-							else
-							{
-								Debug.Log("разворот");
-								yield return new WaitForSeconds(3f);
-								break;
-							}
-						}
-					}
-					
-					//if (((Physics.Raycast(transform.position, Vector3.right, out hit, 1f) && dir.x == 1f) || (Physics.Raycast(transform.position, Vector3.left, out hit, 1f) && dir.x == -1f)) && hit.transform.gameObject.layer == 0)
-					//{
-					//}
-					timer -= Time.deltaTime;
-					yield return null;
-				}
-				timer = 7f + Random.value;
-				dir.x = Random.Range(0, 2) == 1 ? 1 : -1;
-				yield return null;
-			}
-		}*/
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -315,6 +241,22 @@ public class UnitScript : MonoBehaviour
 	public void SetBusy(bool isBusy)
 	{
 		isBearBusy = isBusy;
+	}
+
+	public void Boost()
+	{
+		if (boostHolder != null)
+		{
+			StopCoroutine(boostHolder);
+		}
+		boostHolder = StartCoroutine(BoostTimer());
+	} 
+
+	private IEnumerator BoostTimer()
+	{
+		isBoosted = true;
+		yield return new WaitForSeconds(150);
+		isBoosted = false;
 	}
 
 	public void SetStatsScreen(bool set)
