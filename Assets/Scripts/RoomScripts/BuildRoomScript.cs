@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BuildRoomScript : MonoBehaviour
 {
+    [SerializeField] private GameObject elevator;
     public void BuildRoom(GameObject point)
     {
         GameManager.Instance.QueueBuildPos(point);
@@ -10,6 +11,7 @@ public class BuildRoomScript : MonoBehaviour
     public void BuildElevator(GameObject point)
     {
 		GameManager.Instance.QueueBuildPos(point);
-        GameManager.Instance.elevatorBuildingScreen.SetActive(true);
+        //GameManager.Instance.elevatorBuildingScreen.SetActive(true);
+        GameManager.Instance.SelectAndBuild(elevator);
 	}
 }

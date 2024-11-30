@@ -7,6 +7,7 @@ public class BedRoom : RoomScript
 	{
 		float timer;
 		status = Status.Busy;
+		animator.SetTrigger("StartWork");
 		//!borrowed part!//
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.creator)
 		{
@@ -41,5 +42,6 @@ public class BedRoom : RoomScript
 			fixedBear = null;
 		}
 		status = Status.Free;
+		animator.SetTrigger("EndWork");
 	}
 }

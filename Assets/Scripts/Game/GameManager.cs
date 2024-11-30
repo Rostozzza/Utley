@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 
 	public void DebugPlayerSave()
 	{
-		JsonManager.SavePlayerToJson("Obama");
+		//JsonManager.SavePlayerToJson("Obama");
 	}
 
 	public void DebugLoadPlayer(string player)
@@ -471,7 +471,7 @@ public class GameManager : MonoBehaviour
 	{
 		honey += amount;
 		honey = Mathf.Clamp(honey, -1, 999);
-		JsonManager.SavePlayerToJson(playerName);
+		//JsonManager.SavePlayerToJson(playerName);
 	}
 
 	/// <summary>
@@ -482,7 +482,7 @@ public class GameManager : MonoBehaviour
 	{
 		asteriy += amount;
 		asteriy = Mathf.Clamp(asteriy, -1, 999);
-		JsonManager.SavePlayerToJson(playerName);
+		//JsonManager.SavePlayerToJson(playerName);
 	}
 
 	public bool FlyForRawAsterium()
@@ -651,6 +651,20 @@ public class GameManager : MonoBehaviour
 							selectedRoom.ToggleRoomStats(true);
 						}
 						break;
+				}
+			}
+			else if (gameObject.CompareTag("work_station") && mode == Mode.Info)
+			{
+				if (selectedRoom != null)
+				{
+					selectedRoom.ToggleRoomStats(false);
+					selectedRoom = gameObject.GetComponentInParent<RoomScript>();
+					selectedRoom.ToggleRoomStats(true);
+				}
+				else
+				{
+					selectedRoom = gameObject.GetComponentInParent<RoomScript>();
+					selectedRoom.ToggleRoomStats(true);
 				}
 			}
 		}
@@ -848,16 +862,16 @@ public class GameManager : MonoBehaviour
 			{
 				honeyToEat = (int)((float)honeyToEat * (1f + 0.1f + 0.05f * cycleNumber));
 			}
-			var model = JsonManager.SavePlayerToJson(playerName);
-			Dictionary<string, int> changedResources = new Dictionary<string, int>();
-			changedResources.Add("honey",-honeyToEat);
-			JsonManager.CreateLog(new Log
-			{
-				Comment = $"Complex deplicted {honeyToEat} energohoney",
-				PlayerName = playerName,
-				ShopName = null,
-				ResourcesChanged = changedResources
-			});
+			//var model = JsonManager.SavePlayerToJson(playerName);
+			//Dictionary<string, int> changedResources = new Dictionary<string, int>();
+			//changedResources.Add("honey",-honeyToEat);
+			//JsonManager.CreateLog(new Log
+			//{
+			//	Comment = $"Complex deplicted {honeyToEat} energohoney",
+			//	PlayerName = playerName,
+			//	ShopName = null,
+			//	ResourcesChanged = changedResources
+			//});
 			Debug.Log("Съели мёда: " + honeyToEat);
 			ChangeHoney(-honeyToEat);
 			uiResourceShower.UpdateIndicators();

@@ -96,7 +96,7 @@ public class UnitScript : MonoBehaviour
 		while (true)
 		{
 			float randPosToWalkX = startX + 2f + ((Random.value - 0.5f) * 5);
-			GetComponentInChildren<Animator>().speed = 0.2f;
+			GetComponentInChildren<Animator>().speed = 0.4f;
 			GetComponentInChildren<Animator>().SetBool("Walk", true);
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(randPosToWalkX - transform.position.x), 0);
 			while (!(randPosToWalkX - 0.01f <= transform.position.x && transform.position.x <= randPosToWalkX + 0.01f))
