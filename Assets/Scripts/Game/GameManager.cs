@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 	public List<GameObject> bears = new List<GameObject>();
 	[SerializeField] public UIResourceShower uiResourceShower;
 	[SerializeField] public RoomStatusListController roomStatusListController;
+	[SerializeField] public BearStatusListController bearStatusListController;
 	[SerializeField] public GameObject globalVolume;
 	[SerializeField] public GameObject selectedUnit;
 	[SerializeField] private GameObject emptyBearPrefab;
@@ -141,6 +142,7 @@ public class GameManager : MonoBehaviour
 
 	public void Awake()
 	{
+		//Time.timeScale = 20;
 		if (Instance == null)
 		{
 			Instance = this;
@@ -605,7 +607,7 @@ public class GameManager : MonoBehaviour
 				else
 				{
 					OutlineWorkStations(false);
-
+					bears.ForEach(x => x.GetComponent<UnitScript>().SetMarker(false));
 				}
 			}
 			else
@@ -676,9 +678,10 @@ public class GameManager : MonoBehaviour
 		OutlineWorkStations(false);
 	}
 
-	private void ClickedGameObject(GameObject gameObject)
+	public void ClickedGameObject(GameObject gameObject)
 	{
 		Debug.Log("кликнули по " + gameObject.tag);
+		bears.ForEach(x => x.GetComponent<UnitScript>().SetMarker(false));
 
 		if (gameObject.CompareTag("unit"))
 		{
@@ -687,9 +690,8 @@ public class GameManager : MonoBehaviour
 				switch (mode)
 				{
 					case Mode.None:
-						if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
 						selectedUnit = gameObject;
-						gameObject.GetComponent<UnitScript>().SetMarker(true);
+						selectedUnit.GetComponent<UnitScript>().SetMarker(true);
 						OutlineWorkStations(true);
 						break;
 					case Mode.Info:
