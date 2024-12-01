@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Text;
 using UnityEngine;
+using System.Security.Cryptography;
 
 public class RequestManager
 {
-	public string UUID;
+	public string UUID = "85820b3e-e70b-4696-9954-dbed1d942244";
 
 	#region PUT
 	/// <summary>
@@ -19,12 +20,13 @@ public class RequestManager
 	/// <param name="resources"></param>
 	/// <returns></returns>
 	/// <exception cref="Exception"></exception>
-	public async Task<Dictionary<string,string>> UpdatePlayerResources(string username, Dictionary<string,string> resources)
+	public async Task<Dictionary<string, string>> UpdatePlayerResources(string username, Dictionary<string, string> resources)
 	{
 		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/";
 		using HttpClient client = new HttpClient();
 		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, url);
 		request.Content = new StringContent(JsonConvert.SerializeObject(resources), Encoding.UTF8, "application/json");
+		Debug.Log(JsonConvert.SerializeObject(resources));
 		try
 		{
 			var response = await client.SendAsync(request);
@@ -35,7 +37,7 @@ public class RequestManager
 			}
 
 			var responseBody = await response.Content.ReadAsStringAsync();
-			var responseResources = JsonConvert.DeserializeObject<Dictionary<string,string>>(responseBody);
+			var responseResources = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseBody);
 			return responseResources;
 		}
 		catch (Exception e)
@@ -45,7 +47,7 @@ public class RequestManager
 		}
 	}
 
-	public async Task<Dictionary<string, string>> UpdatePlayerResources(string username,string shopName, Dictionary<string, string> resources)
+	public async Task<Dictionary<string, string>> UpdatePlayerResources(string username, string shopName, Dictionary<string, string> resources)
 	{
 		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/shops/{shopName}/";
 		using HttpClient client = new HttpClient();
@@ -311,7 +313,7 @@ public class RequestManager
 			var response = await client.SendAsync(request);
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to create a new player. Status code: {response.StatusCode}");
+				Debug.Log($"Failed to create a new player. Status code: {response.StatusCode}. model: {response.Content.ReadAsStringAsync().Result}");
 				return null;
 			}
 
@@ -325,7 +327,6 @@ public class RequestManager
 			return null;
 		}
 	}
-
 
 	/// <summary>
 	/// Creates a request for an API to create new log;
@@ -358,7 +359,6 @@ public class RequestManager
 			return null;
 		}
 	}
-
 
 	/// <summary>
 	/// Creates shop for an selected player;
@@ -447,7 +447,7 @@ public class RequestManager
 		}
 	}
 
-	public async Task DeletePlayer(string username,string shopName)
+	public async Task DeletePlayer(string username, string shopName)
 	{
 		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/shops/{shopName}/";
 		using HttpClient client = new HttpClient();
@@ -466,4 +466,33 @@ public class RequestManager
 		}
 	}
 	#endregion
+
+	//DO NOT FUCKING USE THIS FUNCTION! OR ELSE I WILL FIND YOU AND YOUR ENTIER BLOODLINE WILL BE EXTERMINATED :3
+	public async Task<string> GeenrateUUID()
+	{
+		var teamName = "BoyZBand";
+		var talantId = "51123";
+		var apiUrl = "https://2025.nti-gamedev.ru/api/games/";
+		var nonce = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
+		var signatureInput = talantId + nonce;
+		string signature;
+		using (var md5 = MD5.Create())
+		{
+			var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(signatureInput));
+			signature = BitConverter.ToString(hash).Replace("-", "").ToLower();
+		}
+		using var client = new HttpClient();
+		var request = new HttpRequestMessage(HttpMethod.Post, apiUrl);
+		request.Headers.Add("Nonce", nonce);
+		request.Headers.Add("Talant-Id", talantId);
+		request.Headers.Add("Signature", signature);
+		var requestBody = new
+		{
+			team_name = teamName
+		};
+		string jsonBody = JsonConvert.SerializeObject(requestBody);
+		request.Content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+		var response = await client.SendAsync(request);
+		return response.Content.ReadAsStringAsync().Result;
+	}
 }
