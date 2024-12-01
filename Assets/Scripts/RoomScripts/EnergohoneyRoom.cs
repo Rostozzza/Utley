@@ -8,6 +8,7 @@ public class EnergohoneyRoom : RoomScript
 	{
 		float timer;
 		status = Status.Busy;
+		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("StartWork");
 		//!borrowed part!//
 		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Energohoney, GetWalkPoints(), this.gameObject);
@@ -45,6 +46,7 @@ public class EnergohoneyRoom : RoomScript
 			fixedBear = null;
 		}
 		status = Status.Free;
+		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("EndWork");
 	}
 }

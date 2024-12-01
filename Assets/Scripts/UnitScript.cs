@@ -35,10 +35,12 @@ public class UnitScript : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI qualificationField;
 	[SerializeField] private TextMeshProUGUI levelField;
 	[SerializeField] private Transform effectsGrid;
+	[SerializeField] private SpriteRenderer marker;
 
 	private void Start()
 	{
-		//rb = GetComponent<Rigidbody>();
+		marker = transform.Find("Marker").GetComponent<SpriteRenderer>();
+		SetMarker(false);
 		bearModel = new Bear { Name = "Барак Обама",Qualification = Qualification.beekeeper};//DONT FORGET TO MAKE JSON SAVE/LOAD SYSTEM!
 		UpdateStatsScreen();
 		//StartCoroutine(WalkCycle());
@@ -256,6 +258,11 @@ public class UnitScript : MonoBehaviour
 		isBoosted = true;
 		yield return new WaitForSeconds(150);
 		isBoosted = false;
+	}
+
+	public void SetMarker(bool set)
+	{
+		marker.enabled = set;
 	}
 
 	public void SetStatsScreen(bool set)

@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 	public GameObject elevatorPrefab;
 	public List<GameObject> bears = new List<GameObject>();
 	[SerializeField] public UIResourceShower uiResourceShower;
+	[SerializeField] public RoomStatusListController roomStatusListController;
 	[SerializeField] public GameObject globalVolume;
 	[SerializeField] public GameObject selectedUnit;
 	[SerializeField] private GameObject emptyBearPrefab;
@@ -633,6 +634,7 @@ public class GameManager : MonoBehaviour
 			{
 				gameObject.GetComponentInParent<RoomScript>().fixedBear = selectedUnit;
 			}
+			if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
 			selectedUnit = null;
 			return;
 		}
@@ -666,7 +668,9 @@ public class GameManager : MonoBehaviour
 				switch (mode)
 				{
 					case Mode.None:
+						if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
 						selectedUnit = gameObject;
+						gameObject.GetComponent<UnitScript>().SetMarker(true);
 						OutlineWorkStations(true);
 						break;
 					case Mode.Info:
@@ -678,6 +682,7 @@ public class GameManager : MonoBehaviour
 		else
 		{
 			//selectedUnit.GetComponent<UnitScript>().SetStatsScreen(false);
+			if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
 			selectedUnit = null;
 			OutlineWorkStations(false);
 			if (gameObject.CompareTag("room"))
