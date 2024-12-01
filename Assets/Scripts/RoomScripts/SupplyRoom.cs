@@ -9,15 +9,16 @@ public class SupplyRoom : RoomScript
 {
 	[SerializeField] List<GameObject> graphs;
 	private TMP_InputField currentAnswerField;
-	[SerializeField]private List<GameObject> poweredRooms;
+	GameObject graph;
+	[SerializeField] private List<GameObject> poweredRooms;
 
-    protected override void Start()
-    {
-        base.Start();
+	protected override void Start()
+	{
+		base.Start();
 		Enpower();
-    }
+	}
 
-    private async Task GetRoomsToEnpower()
+	private async Task GetRoomsToEnpower()
 	{
 		var horizontalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 16.5f
 																	&& x.transform.position.y == transform.position.y).ToList();
@@ -42,13 +43,13 @@ public class SupplyRoom : RoomScript
 		}
 	}
 
-	private void InitializeGraph()
+	public void InitializeGraph()
 	{
-		int randNum = Random.Range(0,graphs.Count);
-		GameObject graph = graphs[randNum];
+		int randNum = Random.Range(0, graphs.Count);
+		graph = graphs[randNum];
 		currentAnswerField = graph.GetComponentsInChildren<TMP_InputField>().First(x => x.gameObject.tag == "answerField");
 		graph.SetActive(true);
-		Time.timeScale = 0;
+		Time.timeScale = 1;
 	}
 
 	public void SolveGraph(int answer)
@@ -69,6 +70,23 @@ public class SupplyRoom : RoomScript
 				}
 			}
 		}
+		else
+		{
+			StartCoroutine(BlinkRed());
+		}
+	}
+
+	private IEnumerator BlinkRed()
+	{
+		var inputFields = graph.GetComponentsInChildren<TMP_InputField>();
+		for (int i = 0; i < 10; i++)
+		{
+			inputFields.Select(x => x.textComponent.color = Color.red);
+			yield return new WaitForSeconds(0.1f);
+			inputFields.Select(x => x.textComponent.color = Color.white);
+			yield return new WaitForSeconds(0.1f);
+		}
+		inputFields.Select(x => x.text = "");
 	}
 
 	public async void Awake()

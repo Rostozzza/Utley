@@ -206,7 +206,6 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
-			queuedBuildPositon = null;
 			buildingScreen.SetActive(false);
 			elevatorBuildingScreen.SetActive(false);
 		}
@@ -414,6 +413,10 @@ public class GameManager : MonoBehaviour
 			if (point.position.x < point.parent.parent.position.x)
 			{
 				instance.transform.Translate(Vector3.left * 4f);
+			}
+			if (instance.TryGetComponent(out SupplyRoom supply))
+			{
+				supply.InitializeGraph();
 			}
 			RaycastHit hit;
 			Ray rayLeft = new Ray(instance.transform.position, Vector3.left * 6f);
