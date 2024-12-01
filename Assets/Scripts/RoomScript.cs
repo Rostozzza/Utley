@@ -250,7 +250,7 @@ public class RoomScript : MonoBehaviour
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
 				break;
 			case Resources.Cosmodrome:
-				timer = 3f;
+				timer = 45f;
 				if (fixedBear.GetComponent<UnitScript>().isBoosted)
 				{
 					timer *= 0.9f;

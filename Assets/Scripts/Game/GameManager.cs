@@ -144,6 +144,8 @@ public class GameManager : MonoBehaviour
 			Instance = this;
 			//DontDestroyOnLoad(gameObject);
 		}
+		asteriy = 100;
+		honey = 100;
 		skyBG = GameObject.FindGameObjectWithTag("skyBG");
 		StartCoroutine(ConstantDurabilityDamager(4));
 		StartCoroutine(ConstantEnergohoneyConsumer());
@@ -494,9 +496,10 @@ public class GameManager : MonoBehaviour
 	/// <returns></returns>
 	public async Task<int> GetHoney()
 	{
-		var model = await RequestManager.GetPlayer(playerName);
-		playerModel = model;
-		return int.Parse(model.resources["honey"]);
+		//var model = await RequestManager.GetPlayer(playerName);
+		//playerModel = model;
+		//return int.Parse(model.resources["honey"]);
+		return honey;
 	}
 
 	/// <summary>
@@ -505,35 +508,40 @@ public class GameManager : MonoBehaviour
 	/// <returns></returns>
 	public async Task<int> GetAsteriy()
 	{
-		var model = await RequestManager.GetPlayer(playerName);
-		playerModel = model;
-		return int.Parse(model.resources["honey"]);
+		//var model = await RequestManager.GetPlayer(playerName);
+		//playerModel = model;
+		//return int.Parse(model.resources["honey"]);
+		return asteriy;
 	}
 
 	/// <summary>
 	/// Changes amount of honey by given number
 	/// </summary>
 	/// <param name="amount"></param>
-	public async void ChangeHoney(int amount)
+	public async Task ChangeHoney(int amount)
 	{
-		int serverHoney = await GetHoney();
+		/*int serverHoney = await GetHoney();
 		serverHoney += amount;
 		serverHoney = Mathf.Clamp(serverHoney, -1, 999);
 		honey = serverHoney;
-		await JsonManager.SavePlayerToJson(playerName);
+		await JsonManager.SavePlayerToJson(playerName);*/
+		honey += amount;
+		honey = Mathf.Clamp(honey, -1, 999);
 	}
 
 	/// <summary>
 	/// Changes amount of asterium by given number
 	/// </summary>
 	/// <param name="amount"></param>
-	public async void ChangeAsteriy(int amount)
+	public async Task ChangeAsteriy(int amount)
 	{
-		int serverAsterium = await GetAsteriy();
-		serverAsterium += amount;
-		serverAsterium = Mathf.Clamp(serverAsterium, -1, 999);
-		asteriy = serverAsterium;
-		await JsonManager.SavePlayerToJson(playerName);
+		//int serverAsterium = await GetAsteriy();
+		//serverAsterium += amount;
+		//serverAsterium = Mathf.Clamp(serverAsterium, -1, 999);
+		//asteriy = serverAsterium;
+		//await JsonManager.SavePlayerToJson(playerName);
+		asteriy+= amount;
+		asteriy = Mathf.Clamp(asteriy, -1, 999);
 	}
 
 	public bool FlyForRawAsterium()

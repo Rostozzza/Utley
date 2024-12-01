@@ -25,8 +25,8 @@ public class UIResourceShower : MonoBehaviour
     /// </summary>
     public void UpdateIndicators()
     {
-        energoHoneyAmountText.text = Convert.ToString(GameManager.Instance.GetHoney());
-        asteriyAmountText.text = Convert.ToString(GameManager.Instance.GetAsteriy());
+        energoHoneyAmountText.text = Convert.ToString(GameManager.Instance.GetHoney().Result);
+        asteriyAmountText.text = Convert.ToString(GameManager.Instance.GetAsteriy().Result);
         bearsAmountText.text = Convert.ToString(GameManager.Instance.bears.Count) + "/" + Convert.ToString(GameManager.Instance.maxBearsAmount);
         temperatureSlider.value = 1f; // ???
     }

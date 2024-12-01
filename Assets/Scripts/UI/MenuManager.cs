@@ -114,7 +114,7 @@ public class MenuManager : MonoBehaviour
 		loadingView.SetActive(true);
 		mainMenuScreen.SetActive(false);
 		await SceneManager.LoadSceneAsync(1);
-		Time.timeScale = 0f;
+		/*Time.timeScale = 0f;
 		GameManager.Instance.playerName = currentPLayerName;
 		var requestedPlayer = await RequestManager.GetPlayer(currentPLayerName);
 		if (requestedPlayer == null)
@@ -123,7 +123,7 @@ public class MenuManager : MonoBehaviour
 			loadingView.SetActive(false);
 			return;
 		}
-		JsonManager.LoadPlayerFromModel(requestedPlayer);
+		JsonManager.LoadPlayerFromModel(requestedPlayer);*/
 		loadingView.SetActive(false);
 		Time.timeScale = 1f;
 	}

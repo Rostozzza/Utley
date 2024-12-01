@@ -1,9 +1,16 @@
-﻿
+﻿using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using System.Linq;
 
 public class SupplyRoom : RoomScript
 {
+	[SerializeField] List<GameObject> graphs;
+	private void GetRoomsToEnpower()
+	{
+		GameManager.Instance.allRooms.Where(x => x.transform.position.x - transform.position.x <= 4*2);
+	}
+
 	protected override IEnumerator WorkStatus()
 	{
 		float timer;
@@ -35,7 +42,6 @@ public class SupplyRoom : RoomScript
 			fixedBear.GetComponent<UnitScript>().LevelUpBear();
 		}
 		timeShow.text = "";
-		GameManager.Instance.BoostThreeBears();
 		//!borrowed part!//
 		if (fixedBear != null)
 		{
