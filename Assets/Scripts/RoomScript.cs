@@ -41,10 +41,16 @@ public class RoomScript : MonoBehaviour
 	private Color defaultLampColor;
 	private Color defaultBaseColor;
 	protected Animator animator;
+	public bool isEnpowered = false;
 	protected RoomStatusController statusPanel;
 
 	[Header("Asterium settings")]
 	public bool isReadyForWork = false;
+
+	public void Enpower()
+	{
+		isEnpowered = true;
+	}
 	
 	protected virtual void Start()
 	{
@@ -81,6 +87,13 @@ public class RoomScript : MonoBehaviour
 				}
 				break;
 		}
+		if (!isEnpowered)
+		{
+			lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black));
+			lamps.ForEach(z => z.GetComponentInChildren<Light>().enabled = false);
+			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+			UpdateRoomHullView();
+		}
 		sparks.ForEach(y => y.Stop());
 	}
 
@@ -107,7 +120,7 @@ public class RoomScript : MonoBehaviour
 
 		if (await GameManager.Instance.GetHoney() >= (30 + 10 * (level - 1)))
 		{
-			GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)));
+			await GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)));
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
 			StartCoroutine(Upgrade(button, fixedBuilderRoom));
 		}
@@ -167,7 +180,7 @@ public class RoomScript : MonoBehaviour
 	/// <param name="bear"></param>
 	public virtual void StartWork(GameObject bear)
 	{
-		if (status != Status.Destroyed)
+		if (status != Status.Destroyed && isEnpowered)
 		{
 			switch (resource)
 			{
@@ -309,7 +322,14 @@ public class RoomScript : MonoBehaviour
 		durability = Mathf.Clamp(durability, 0f, 1f);
 		
 		statusPanel.UpdateDurability(durability);
-		if (durability > 0.5f)
+        if (!isEnpowered)
+        {
+			lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black));
+			lamps.ForEach(z => z.GetComponentInChildren<Light>().enabled = false);
+			UpdateRoomHullView();
+			return;
+		}
+        if (durability > 0.5f)
 		{
 			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", defaultBaseColor);
 			sparks.ForEach(x => x.Stop());

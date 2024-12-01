@@ -1,14 +1,16 @@
 ﻿using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
 	public static MenuManager Instance;
 
-	JsonManager JsonManager = new JsonManager();
-	RequestManager RequestManager = new RequestManager();
+	JsonManager JsonManager = new JsonManager(false);
+	RequestManager RequestManager = new RequestManager(false);
 	private string currentPLayerName;
 	[SerializeField] private TextMeshProUGUI currentPlayerField;
 	[SerializeField] private GameObject loadingView;
@@ -21,11 +23,46 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private GameObject registrationScreen;
 	[SerializeField] private GameObject loginScreen;
 	[SerializeField] private GameObject mainMenuScreen;
+	[SerializeField] private GameObject pauseScreen;
 	[Header("Inputs")]
 	[SerializeField] private TMP_InputField registrationUsernameField;
 	[SerializeField] private TMP_InputField registrationPasswordField;
 	[SerializeField] private TMP_InputField loginUsernameField;
 	[SerializeField] private TMP_InputField loginPasswordField;
+	[Header("Audio")]
+	[SerializeField] private AudioMixer mixer;
+	[SerializeField] private Slider masterSlider;
+	[SerializeField] private Slider SFXSlider;
+	[SerializeField] private Slider musicSlider;
+	[Header("API")]
+	public bool isAPIActive;
+
+	public void SetMasterVolume()
+	{
+		float volume = masterSlider.value;
+		mixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
+	}
+
+	public void SetSFXVolume()
+	{
+		float volume = SFXSlider.value;
+		mixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
+	}
+
+	public void SetMusicVolume()
+	{
+		float volume = musicSlider.value;
+		mixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
+	}
+
+	public void ActivateAPI()
+	{
+		isAPIActive = true;
+	}
+	public void DeactivateAPI()
+	{
+		isAPIActive = false;
+	}
 
 	public void Awake()
 	{
@@ -45,6 +82,26 @@ public class MenuManager : MonoBehaviour
 			startingScreen.SetActive(false);
 			mainMenuScreen.SetActive(true);
 		}
+	}
+
+	public void Pause()
+	{
+		if (SceneManager.GetActiveScene().buildIndex != 1)
+		{
+			return;
+		}
+		pauseScreen.SetActive(true);
+		Time.timeScale = 0f;
+	}
+
+	public void Resume()
+	{
+		if (SceneManager.GetActiveScene().buildIndex != 1)
+		{
+			return;
+		}
+		pauseScreen.SetActive(false);
+		Time.timeScale = 1f;
 	}
 
 	public void Quit()
@@ -85,7 +142,7 @@ public class MenuManager : MonoBehaviour
 			return;
 		}
 		currentPLayerName = loginUsernameField.text;
-		PlayerPrefs.SetString("currentPlayer",currentPLayerName);
+		PlayerPrefs.SetString("currentPlayer", currentPLayerName);
 		currentPlayerField.text = currentPLayerName;
 		loginScreen.SetActive(false);
 		mainMenuScreen.SetActive(true);
@@ -95,7 +152,7 @@ public class MenuManager : MonoBehaviour
 	{
 		if (currentPLayerName != null)
 		{
-			PlayerPrefs.SetString("currentPlayer","");
+			PlayerPrefs.SetString("currentPlayer", "");
 			currentPlayerField.text = "";
 			currentPLayerName = null;
 			mainMenuScreen.SetActive(false);
@@ -114,17 +171,23 @@ public class MenuManager : MonoBehaviour
 		loadingView.SetActive(true);
 		mainMenuScreen.SetActive(false);
 		await SceneManager.LoadSceneAsync(1);
-		/*Time.timeScale = 0f;
-		GameManager.Instance.playerName = currentPLayerName;
-		var requestedPlayer = await RequestManager.GetPlayer(currentPLayerName);
-		if (requestedPlayer == null)
+		if (isAPIActive)
 		{
-			Debug.Log("No player present!");
-			loadingView.SetActive(false);
-			return;
+			Time.timeScale = 0f;
+			GameManager.Instance.playerName = currentPLayerName;
+			GameManager.Instance.isAPIActive = isAPIActive;
+			GameManager.Instance.JsonManager = new JsonManager(isAPIActive);
+			GameManager.Instance.RequestManager = new RequestManager(isAPIActive);
+			var requestedPlayer = await RequestManager.GetPlayer(currentPLayerName);
+			if (requestedPlayer == null)
+			{
+				Debug.Log("No player present!");
+				loadingView.SetActive(false);
+				return;
+			}
+			JsonManager.LoadPlayerFromModel(requestedPlayer);
 		}
-		JsonManager.LoadPlayerFromModel(requestedPlayer);*/
-		loadingView.SetActive(false);
 		Time.timeScale = 1f;
+		loadingView.SetActive(false);
 	}
 }
