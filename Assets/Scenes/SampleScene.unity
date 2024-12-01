@@ -293,7 +293,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 522920299}
   m_Direction: 2
   m_Value: 1.0000002
-  m_Size: 0.21674684
+  m_Size: 0.21674685
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -764,12 +764,12 @@ GameObject:
   - component: {fileID: 73273329}
   - component: {fileID: 73273328}
   m_Layer: 5
-  m_Name: Research
+  m_Name: Supply
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &73273327
 RectTransform:
   m_ObjectHideFlags: 0
@@ -838,7 +838,7 @@ MonoBehaviour:
         m_MethodName: SelectAndBuild
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 4403103844846354448, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -11092,7 +11092,7 @@ GameObject:
   - component: {fileID: 1428568832}
   - component: {fileID: 1428568831}
   m_Layer: 5
-  m_Name: Scroll View
+  m_Name: AllBuildingsScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18565,6 +18565,7 @@ MonoBehaviour:
   sparks: []
   lamps: []
   baseOfRoom: {fileID: 0}
+  isEnpowered: 1
   isReadyForWork: 0
 --- !u!65 &3562911849079285425
 BoxCollider:

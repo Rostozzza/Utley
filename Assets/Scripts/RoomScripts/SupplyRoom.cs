@@ -2,13 +2,71 @@
 using System.Collections;
 using UnityEngine;
 using System.Linq;
+using TMPro;
+using System.Threading.Tasks;
 
 public class SupplyRoom : RoomScript
 {
 	[SerializeField] List<GameObject> graphs;
-	private void GetRoomsToEnpower()
+	private TMP_InputField currentAnswerField;
+	[SerializeField]private List<GameObject> poweredRooms;
+	private async Task GetRoomsToEnpower()
 	{
-		GameManager.Instance.allRooms.Where(x => x.transform.position.x - transform.position.x <= 4*2);
+		var horizontalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 16.5f
+																	&& x.transform.position.y == transform.position.y).ToList();
+		var verticalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.y - transform.position.y) <= 8.5f
+																	&& x.transform.position.x == transform.position.x).ToList();
+		var diagonalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 8.5f
+																	&& Mathf.Abs(x.transform.position.y - transform.position.y) <= 4.5f).ToList();
+		poweredRooms = horizontalRooms;
+		poweredRooms.AddRange(verticalRooms);
+		poweredRooms.AddRange(diagonalRooms);
+		foreach (var room in poweredRooms)
+		{
+			RoomScript roomScript;
+			if (room.TryGetComponent(out roomScript))
+			{
+				roomScript.Enpower();
+			}
+			else
+			{
+				continue;
+			}
+		}
+	}
+
+	private void InitializeGraph()
+	{
+		int randNum = Random.Range(0,graphs.Count);
+		GameObject graph = graphs[randNum];
+		currentAnswerField = graph.GetComponentsInChildren<TMP_InputField>().First(x => x.gameObject.tag == "answerField");
+		graph.SetActive(true);
+		Time.timeScale = 0;
+	}
+
+	public void SolveGraph(int answer)
+	{
+		if (answer == int.Parse(currentAnswerField.text))
+		{
+			foreach (var room in poweredRooms)
+			{
+				RoomScript roomScript;
+				if (room.TryGetComponent(out roomScript))
+				{
+					roomScript.Enpower();
+					roomScript.ChangeDurability(0);
+				}
+				else
+				{
+					continue;
+				}
+			}
+		}
+	}
+
+	public async void Awake()
+	{
+		await GetRoomsToEnpower();
 	}
 
 	protected override IEnumerator WorkStatus()
@@ -25,7 +83,7 @@ public class SupplyRoom : RoomScript
 		{
 			timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
 		}
-		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Bed, GetWalkPoints(), this.gameObject);
+		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Supply, GetWalkPoints(), this.gameObject);
 		timer = 120f;
 		if (fixedBear.GetComponent<UnitScript>().isBoosted)
 		{
