@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
 		}
 		if (!isAPIActive)
 		{
-			asteriy = 100;
+			asteriy = 600;
 			honey = 100;
 		}
 		skyBG = GameObject.FindGameObjectWithTag("skyBG");
@@ -278,10 +278,6 @@ public class GameManager : MonoBehaviour
 			elevatorBuildingScreen.SetActive(false);
 			return;
 		}
-		ChangeAsteriy(-60);
-		uiResourceShower.UpdateIndicators();
-
-		// goto room vvvvv
 		fixedBuilderRoom = null;
 		foreach (GameObject room in builderRooms)
 		{
@@ -300,6 +296,10 @@ public class GameManager : MonoBehaviour
 			elevatorBuildingScreen.SetActive(false);
 			return;
 		}
+		ChangeAsteriy(-60);
+		uiResourceShower.UpdateIndicators();
+
+		// goto room vvvvv
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
 		if (building.CompareTag("elevator") && queuedBuildPositon.transform.parent.parent.CompareTag("elevator"))
@@ -672,6 +672,7 @@ public class GameManager : MonoBehaviour
 			yield return null;
 		}
 		obj.GetComponentInParent<RoomScript>().StartWork(unit);
+		unit.GetComponent<UnitScript>().SetMarker(false);
 		OutlineWorkStations(false);
 	}
 
