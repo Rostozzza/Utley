@@ -7,9 +7,11 @@ public class RoomStatusController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI roomName;
     [SerializeField] private TextMeshProUGUI durabilityShow;
     [SerializeField] private TextMeshProUGUI stateShow;
+    [SerializeField] private GameObject obj;
 
-    public void Init(string name, float durability, RoomScript.Status status)
+    public void Init(GameObject obj, string name, float durability, RoomScript.Status status)
     {
+        this.obj = obj;
         roomName.text = name;
         durabilityShow.text = DurabilityToText(durability);
         stateShow.text = StatusToText(status);
@@ -43,5 +45,10 @@ public class RoomStatusController : MonoBehaviour
     public void UpdateStatus(RoomScript.Status status)
     {
         stateShow.text = StatusToText(status);
+    }
+
+    public void MoveToObject()
+    {
+        Camera.main.GetComponent<CameraController>().MoveToPoint(obj.transform.position);
     }
 }

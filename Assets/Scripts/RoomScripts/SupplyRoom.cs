@@ -10,7 +10,14 @@ public class SupplyRoom : RoomScript
 	[SerializeField] List<GameObject> graphs;
 	private TMP_InputField currentAnswerField;
 	[SerializeField]private List<GameObject> poweredRooms;
-	private async Task GetRoomsToEnpower()
+
+    protected override void Start()
+    {
+        base.Start();
+		Enpower();
+    }
+
+    private async Task GetRoomsToEnpower()
 	{
 		var horizontalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 16.5f
 																	&& x.transform.position.y == transform.position.y).ToList();
@@ -74,6 +81,7 @@ public class SupplyRoom : RoomScript
 		float timer;
 		status = Status.Busy;
 		statusPanel.UpdateStatus(status);
+		fixedBear.GetComponent<UnitScript>().SetBusy(true);
 		animator.SetTrigger("StartWork");
 		//!borrowed part!//
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.coder)
@@ -101,6 +109,7 @@ public class SupplyRoom : RoomScript
 			fixedBear.GetComponent<UnitScript>().LevelUpBear();
 		}
 		timeShow.text = "";
+		fixedBear.GetComponent<UnitScript>().SetBusy(false);
 		//!borrowed part!//
 		if (fixedBear != null)
 		{

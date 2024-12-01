@@ -10,17 +10,20 @@ public class PointerHint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GameManager.Instance.uiResourceShower.ShowHint(hintType);
+        if (hintType != HintType.DontScroll) GameManager.Instance.uiResourceShower.ShowHint(hintType);
+        else Camera.main.GetComponent<CameraController>().SetScroll(false);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        GameManager.Instance.uiResourceShower.HideHint(hintType);
+        if (hintType != HintType.DontScroll) GameManager.Instance.uiResourceShower.HideHint(hintType);
+        else Camera.main.GetComponent<CameraController>().SetScroll(true);
     }
 
     public enum HintType
     {
         Energohoney,
-        Temperature
+        Temperature,
+        DontScroll
     } 
 }

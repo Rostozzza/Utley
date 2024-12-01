@@ -1,8 +1,5 @@
-using TMPro.Examples;
-using Unity.Mathematics;
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
@@ -10,6 +7,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float zoom = -20;
     private int left, top, right, bottom;
     private bool needToMoveByMousePos; 
+    private bool isScroll = true;
+    Coroutine moving = null;
 
     private void Start()
     {
@@ -34,8 +33,7 @@ public class CameraController : MonoBehaviour
             }
             CameraMove();
         }
-
-        if (Input.mouseScrollDelta.y != 0)
+        if (Input.mouseScrollDelta.y != 0 && isScroll)
         {
             zoom = GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(Input.mouseScrollDelta.y + zoom, -20, -10);
             CameraMove();
@@ -49,5 +47,34 @@ public class CameraController : MonoBehaviour
         Mathf.Clamp(Camera.main.transform.position.y, -19f, 17.5f), 
         GameManager.Instance.mode == GameManager.Mode.Build ? -20f : zoom
         );
+    }
+
+    public void MoveToPoint(Vector2 pos)
+    {
+        if (moving != null)
+        {
+            StopCoroutine(moving);
+        }
+        moving = StartCoroutine(SmoothMove(pos));
+    }
+
+    private IEnumerator SmoothMove(Vector2 pos)
+    {
+        while (Vector2.Distance(transform.position, pos) > 0.1f)
+        {
+            transform.position = Vector3.Lerp(transform.position, new Vector3(pos.x, pos.y, transform.position.z), Time.deltaTime * 5);
+            yield return null;
+        }
+        moving = null;
+    }
+
+    //private bool IsTouch()
+    //{
+    //    return EventSystem.current.IsPointerOverGameObject();
+    //}
+
+    public void SetScroll(bool set)
+    {
+        isScroll = set;
     }
 }

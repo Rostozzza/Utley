@@ -50,6 +50,7 @@ public class RoomScript : MonoBehaviour
 	public void Enpower()
 	{
 		isEnpowered = true;
+		ChangeDurability(0);
 	}
 	
 	protected virtual void Start()
@@ -245,6 +246,7 @@ public class RoomScript : MonoBehaviour
 		float timer;
 		status = Status.Busy;
 		statusPanel.UpdateStatus(status);
+		fixedBear.GetComponent<UnitScript>().SetBusy(true);
 		animator.SetTrigger("StartWork");
 		if (resource != Resources.Asteriy)
 		{
@@ -324,8 +326,7 @@ public class RoomScript : MonoBehaviour
 		statusPanel.UpdateDurability(durability);
         if (!isEnpowered)
         {
-			lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black));
-			lamps.ForEach(z => z.GetComponentInChildren<Light>().enabled = false);
+			SetLampsOn(false);
 			UpdateRoomHullView();
 			return;
 		}
@@ -333,48 +334,50 @@ public class RoomScript : MonoBehaviour
 		{
 			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", defaultBaseColor);
 			sparks.ForEach(x => x.Stop());
-			lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", defaultLampColor));
-			lamps.ForEach(z => z.GetComponentInChildren<Light>().enabled = true);
+			SetLampsColor(defaultLampColor);
+			SetLampsOn(true);
 			if (blinks != null)
 			{
 				StopCoroutine(blinks);
 				blinks = null;
-				lamps.ForEach(x => x.GetComponent<Renderer>().material.EnableKeyword("_EMISSION"));
 			}
 		}
 		else if (durability > 0.3f)
 		{
+			SetLampsColor(defaultLampColor);
+			SetLampsOn(true);
 			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.yellow);
-			if (blinks == null)
-			{
-				blinks = StartCoroutine(LampsBlinking());
-			}
+			sparks.ForEach(x => x.Stop());
+			blinks ??= StartCoroutine(LampsBlinking());
 		}
 		else if (durability > 0.15f)
 		{
+			SetLampsColor(defaultLampColor);
+			SetLampsOn(true);
 			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red);
-			if (blinks == null)
-			{
-				sparks.ForEach(z => z.Play());
-				blinks = StartCoroutine(LampsBlinking());
-			}
+			sparks.ForEach(x => x.Play());
+			blinks ??= StartCoroutine(LampsBlinking());
 		}
 		else if (durability > 0)
 		{
 			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
 			sparks.ForEach(x => x.Stop());
-			lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red));
+			SetLampsColor(Color.red);
+			SetLampsOn(true);
 			if (blinks != null)
 			{
 				StopCoroutine(blinks);
 				blinks = null;
-				lamps.ForEach(x => x.GetComponent<Renderer>().material.EnableKeyword("_EMISSION"));
 			}
 		}
 		else 
 		{
-			lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black));
-			lamps.ForEach(z => z.GetComponentInChildren<Light>().enabled = false);
+			SetLampsOn(false);
+			if (blinks != null)
+			{
+				StopCoroutine(blinks);
+				blinks = null;
+			}
 		}
 		UpdateRoomHullView();
 	}
@@ -385,14 +388,31 @@ public class RoomScript : MonoBehaviour
 		{
 			for (int i = 0; i < Random.Range(0, 3); i++)
 			{
-				lamps.ForEach(x => x.GetComponent<Renderer>().material.DisableKeyword("_EMISSION"));
-				lamps.ForEach(y => y.GetComponentInChildren<Light>().enabled = false);
+				SetLampsOn(false);
 				yield return new WaitForSeconds(Random.value / 4);
-				lamps.ForEach(x => x.GetComponent<Renderer>().material.EnableKeyword("_EMISSION"));
-				lamps.ForEach(y => y.GetComponentInChildren<Light>().enabled = true);
+				SetLampsOn(true);
 			}
 			yield return new WaitForSeconds(5 + Random.value * 5);
 		}
+	}
+
+	private void SetLampsOn(bool set)
+	{
+		if (set)
+		{
+			lamps.ForEach(x => x.GetComponent<Renderer>().material.EnableKeyword("_EMISSION"));
+			lamps.ForEach(y => y.GetComponentInChildren<Light>().enabled = true);
+		}
+		else
+		{
+			lamps.ForEach(x => x.GetComponent<Renderer>().material.DisableKeyword("_EMISSION"));
+			lamps.ForEach(y => y.GetComponentInChildren<Light>().enabled = false);
+		}
+	}
+
+	private void SetLampsColor(Color color)
+	{
+		lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", color));
 	}
 
     /// <summary>

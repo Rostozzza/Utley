@@ -8,6 +8,7 @@ public class BedRoom : RoomScript
 		float timer;
 		status = Status.Busy;
 		statusPanel.UpdateStatus(status);
+		fixedBear.GetComponent<UnitScript>().SetBusy(true);
 		animator.SetTrigger("StartWork");
 		//!borrowed part!//
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.creator)
@@ -36,6 +37,7 @@ public class BedRoom : RoomScript
 		}
 		timeShow.text = "";
 		GameManager.Instance.BoostThreeBears();
+		fixedBear.GetComponent<UnitScript>().SetBusy(false);
 		//!borrowed part!//
 		if (fixedBear != null)
 		{

@@ -29,6 +29,7 @@ public class UnitScript : MonoBehaviour
 	private Coroutine boostHolder = null;
 	public Bear bearModel;
 	public bool isBearBusy = false;
+	private BearStatusController statusPanel;
 	[Header("Bear UI")]
 	[SerializeField] private GameObject statsScreen;
 	[SerializeField] private TextMeshProUGUI nameField;
@@ -39,6 +40,7 @@ public class UnitScript : MonoBehaviour
 
 	private void Start()
 	{
+		statusPanel = GameManager.Instance.bearStatusListController.CreateBearStatus(this);
 		marker = transform.Find("Marker").GetComponent<SpriteRenderer>();
 		SetMarker(false);
 		bearModel = new Bear { Name = "Барак Обама",Qualification = Qualification.beekeeper};//DONT FORGET TO MAKE JSON SAVE/LOAD SYSTEM!
@@ -242,6 +244,7 @@ public class UnitScript : MonoBehaviour
 	public void SetBusy(bool isBusy)
 	{
 		isBearBusy = isBusy;
+		statusPanel.UpdateState(isBusy);
 	}
 
 	public void Boost()
