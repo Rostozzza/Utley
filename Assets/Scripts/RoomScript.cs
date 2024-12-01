@@ -80,7 +80,7 @@ public class RoomScript : MonoBehaviour
 		sparks.ForEach(y => y.Stop());
 	}
 
-	public void UpgradeRoom(GameObject button)
+	public async void UpgradeRoom(GameObject button)
 	{
 		GameObject fixedBuilderRoom = null;
 		foreach (GameObject room in GameManager.Instance.builderRooms)
@@ -101,7 +101,7 @@ public class RoomScript : MonoBehaviour
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
 
-		if (GameManager.Instance.GetHoney() >= (30 + 10 * (level - 1)))
+		if (await GameManager.Instance.GetHoney() >= (30 + 10 * (level - 1)))
 		{
 			GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)));
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
@@ -361,7 +361,7 @@ public class RoomScript : MonoBehaviour
     /// <summary>
 	/// Repairs room to full for 10 asterium
 	/// </summary>
-	public void RepairRoom()
+	public async void RepairRoom()
 	{
 		GameObject fixedBuilderRoom = null;
 		foreach (GameObject room in GameManager.Instance.builderRooms)
@@ -383,7 +383,7 @@ public class RoomScript : MonoBehaviour
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
 
         
-		if (GameManager.Instance.GetAsteriy() >= 10)
+		if (await GameManager.Instance.GetAsteriy() >= 10)
 		{
 			GameManager.Instance.ChangeAsteriy(-10);
 			GameManager.Instance.uiResourceShower.UpdateIndicators();

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections;
 using UnityEngine.Video;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private GameObject asteriumViewPrefab;
 	[Header("GameManager settings")]
 	public static GameManager Instance;
-	public static JsonManager JsonManager = new JsonManager();
+	public JsonManager JsonManager = new JsonManager();
+	public RequestManager RequestManager = new RequestManager();
 	public GameObject elevatorPrefab;
 	public List<GameObject> bears = new List<GameObject>();
 	[SerializeField] public UIResourceShower uiResourceShower;
@@ -133,7 +135,7 @@ public class GameManager : MonoBehaviour
 		if (Instance == null)
 		{
 			Instance = this;
-			DontDestroyOnLoad(gameObject);
+			//DontDestroyOnLoad(gameObject);
 		}
 		skyBG = GameObject.FindGameObjectWithTag("skyBG");
 		ChangeSeason(season);
@@ -143,10 +145,6 @@ public class GameManager : MonoBehaviour
 		ChangeSeason(Season.Calm);
 		SetModeByButton(1);
 		SetModeByButton(1);
-
-		// DONT FORGET TO DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		asteriy = 600;
-		honey = 100;
 	}
 
 	/// <summary>
@@ -220,9 +218,9 @@ public class GameManager : MonoBehaviour
 	/// Builds a room from variable "building" at position of "queuedBuildPosition"
 	/// </summary>
 	/// <param name="building"></param>
-	public void SelectAndBuild(GameObject building)
+	public async void SelectAndBuild(GameObject building)
 	{
-		if (GetAsteriy() < 60)
+		if (await GetAsteriy() < 60)
 		{
 			queuedBuildPositon = null;
 			buildingScreen.SetActive(false);
@@ -291,7 +289,7 @@ public class GameManager : MonoBehaviour
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 	}
 
-	private void SelectAndBuildMainBlock(GameObject building, Transform point)
+	private async void SelectAndBuildMainBlock(GameObject building, Transform point)
 	{
 		var instance = Instantiate(building, point.position - new Vector3(0,0, 3.46f - 5f), Quaternion.identity);
 		if (instance.CompareTag("elevator"))// trying to build elevator
@@ -443,46 +441,55 @@ public class GameManager : MonoBehaviour
 		}
 		queuedBuildPositon = null;
 		allRooms.Add(instance);
+		await JsonManager.SavePlayerToJson(playerName);
 	}
 
 	/// <summary>
 	/// Returns amount of honey on current client
 	/// </summary>
 	/// <returns></returns>
-	public int GetHoney()
+	public async Task<int> GetHoney()
 	{
-		return honey;
+		var model = await RequestManager.GetPlayer(playerName);
+		playerModel = model;
+		return int.Parse(model.resources["honey"]);
 	}
 
 	/// <summary>
 	/// Returns amount of Asteriun on current client
 	/// </summary>
 	/// <returns></returns>
-	public int GetAsteriy()
+	public async Task<int> GetAsteriy()
 	{
-		return asteriy;
+		var model = await RequestManager.GetPlayer(playerName);
+		playerModel = model;
+		return int.Parse(model.resources["honey"]);
 	}
 
 	/// <summary>
 	/// Changes amount of honey by given number
 	/// </summary>
 	/// <param name="amount"></param>
-	public void ChangeHoney(int amount)
+	public async void ChangeHoney(int amount)
 	{
-		honey += amount;
-		honey = Mathf.Clamp(honey, -1, 999);
-		JsonManager.SavePlayerToJson(playerName);
+		int serverHoney = await GetHoney();
+		serverHoney += amount;
+		serverHoney = Mathf.Clamp(serverHoney, -1, 999);
+		honey = serverHoney;
+		await JsonManager.SavePlayerToJson(playerName);
 	}
 
 	/// <summary>
 	/// Changes amount of asterium by given number
 	/// </summary>
 	/// <param name="amount"></param>
-	public void ChangeAsteriy(int amount)
+	public async void ChangeAsteriy(int amount)
 	{
-		asteriy += amount;
-		asteriy = Mathf.Clamp(asteriy, -1, 999);
-		JsonManager.SavePlayerToJson(playerName);
+		int serverAsterium = await GetAsteriy();
+		serverAsterium += amount;
+		serverAsterium = Mathf.Clamp(serverAsterium, -1, 999);
+		asteriy = serverAsterium;
+		await JsonManager.SavePlayerToJson(playerName);
 	}
 
 	public bool FlyForRawAsterium()
@@ -824,44 +831,49 @@ public class GameManager : MonoBehaviour
 		while (true)
 		{
 			yield return new WaitForSeconds(60);
-			int n1 = 0, n2 = 0, n3 = 0;
-			foreach (GameObject room in allRooms)
+			
+		}
+	}
+
+	private async void ConsumeEnergohoney()
+	{
+		int n1 = 0, n2 = 0, n3 = 0;
+		foreach (GameObject room in allRooms)
+		{
+			if (room.TryGetComponent<RoomScript>(out RoomScript roomScript))
 			{
-				if (room.TryGetComponent<RoomScript>(out RoomScript roomScript))
+				switch (roomScript.level)
 				{
-					switch (roomScript.level)
-					{
-						case 1:
-							n1++;
-							break;
-						case 2:
-							n2++;
-							break;
-						case 3:
-							n3++;
-							break;
-					}
+					case 1:
+						n1++;
+						break;
+					case 2:
+						n2++;
+						break;
+					case 3:
+						n3++;
+						break;
 				}
 			}
-			int honeyToEat = (int)(5 + n1 + 1.1 * n2 + 1.2 * n3);
-			if (season == Season.Freeze)
-			{
-				honeyToEat = (int)((float)honeyToEat * (1f + 0.1f + 0.05f * cycleNumber));
-			}
-			var model = JsonManager.SavePlayerToJson(playerName);
-			Dictionary<string, int> changedResources = new Dictionary<string, int>();
-			changedResources.Add("honey",-honeyToEat);
-			JsonManager.CreateLog(new Log
-			{
-				Comment = $"Complex deplicted {honeyToEat} energohoney",
-				PlayerName = playerName,
-				ShopName = null,
-				ResourcesChanged = changedResources
-			});
-			Debug.Log("Съели мёда: " + honeyToEat);
-			ChangeHoney(-honeyToEat);
-			uiResourceShower.UpdateIndicators();
 		}
+		int honeyToEat = (int)(5 + n1 + 1.1 * n2 + 1.2 * n3);
+		if (season == Season.Freeze)
+		{
+			honeyToEat = (int)((float)honeyToEat * (1f + 0.1f + 0.05f * cycleNumber));
+		}
+		var model = JsonManager.SavePlayerToJson(playerName);
+		Dictionary<string, int> changedResources = new Dictionary<string, int>();
+		changedResources.Add("honey", -honeyToEat);
+		JsonManager.CreateLog(new Log
+		{
+			Comment = $"Complex deplicted {honeyToEat} energohoney",
+			PlayerName = playerName,
+			ShopName = null,
+			ResourcesChanged = changedResources
+		});
+		Debug.Log("Съели мёда: " + honeyToEat);
+		ChangeHoney(-honeyToEat);
+		uiResourceShower.UpdateIndicators();
 	}
 
 	private IEnumerator ConstantSeasonChanger()

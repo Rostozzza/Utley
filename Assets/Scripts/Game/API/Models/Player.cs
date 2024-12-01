@@ -3,6 +3,6 @@ using UnityEngine;
 
 public class Player
 {
-	public string Name { get; set; }
-	public Dictionary<string, string> Resources { get; set; }
+	public string name { get; set; }
+	public Dictionary<string, string> resources { get; set; }
 }
