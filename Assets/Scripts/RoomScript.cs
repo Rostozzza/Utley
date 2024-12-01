@@ -42,6 +42,7 @@ public class RoomScript : MonoBehaviour
 	private Color defaultBaseColor;
 	protected Animator animator;
 	public bool isEnpowered = false;
+	protected RoomStatusController statusPanel;
 
 	[Header("Asterium settings")]
 	public bool isReadyForWork = false;
@@ -53,6 +54,7 @@ public class RoomScript : MonoBehaviour
 	
 	protected virtual void Start()
 	{
+		statusPanel = GameManager.Instance.roomStatusListController.CreateRoomStatus(this);
 		animator = GetComponentInChildren<Animator>();
 		walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
 		roomStatsScreen = transform.Find("RoomInfo").gameObject;
@@ -196,6 +198,7 @@ public class RoomScript : MonoBehaviour
 			if (resource == Resources.Cosmodrome)
 			{
 				status = Status.Busy;
+				statusPanel.UpdateStatus(status);
 				fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 				timeShow.transform.parent.gameObject.SetActive(true);
 				return;
@@ -232,6 +235,7 @@ public class RoomScript : MonoBehaviour
 			timeShow.gameObject.SetActive(false);
 			timeShow.transform.parent.gameObject.SetActive(false);
 			status = Status.Free;
+			statusPanel.UpdateStatus(status);
 		}
 		fixedBear = null;
 	}
@@ -240,6 +244,7 @@ public class RoomScript : MonoBehaviour
 	{
 		float timer;
 		status = Status.Busy;
+		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("StartWork");
 		if (resource != Resources.Asteriy)
 		{
@@ -287,6 +292,7 @@ public class RoomScript : MonoBehaviour
 			fixedBear = null;
 		}
 		status = Status.Free;
+		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("EndWork");
 	}
 
@@ -311,8 +317,11 @@ public class RoomScript : MonoBehaviour
 		if (durability <= 0)
 		{
 			status = Status.Destroyed;
+			statusPanel.UpdateStatus(status);
 		}
 		durability = Mathf.Clamp(durability, 0f, 1f);
+		
+		statusPanel.UpdateDurability(durability);
         if (!isEnpowered)
         {
 			lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black));
@@ -435,6 +444,7 @@ public class RoomScript : MonoBehaviour
     public void SetStatus(Status status)
 	{
 		this.status = status;
+		statusPanel.UpdateStatus(status);
 	}
 
 	public enum Resources
