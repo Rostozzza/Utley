@@ -845,7 +845,7 @@ public class GameManager : MonoBehaviour
 		while (true)
 		{
 			yield return new WaitForSeconds(60);
-			
+			ConsumeEnergohoney();
 		}
 	}
 
@@ -875,7 +875,7 @@ public class GameManager : MonoBehaviour
 		{
 			honeyToEat = (int)((float)honeyToEat * (1f + 0.1f + 0.05f * cycleNumber));
 		}
-		var model = JsonManager.SavePlayerToJson(playerName);
+		var model = await JsonManager.SavePlayerToJson(playerName);
 		Dictionary<string, int> changedResources = new Dictionary<string, int>();
 		changedResources.Add("honey", -honeyToEat);
 		JsonManager.CreateLog(new Log
