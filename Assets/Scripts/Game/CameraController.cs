@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
         {
             if (needToMoveByMousePos)
             {
-                Camera.main.transform.position += (Input.mousePosition - new Vector3(right / 2, top / 2)).normalized * sensetive * 1f;
+                Camera.main.transform.position += (Input.mousePosition - new Vector3(right / 2, top / 2)).normalized * sensetive * 3f;
             }
             else
             {

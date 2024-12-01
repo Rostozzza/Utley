@@ -305,6 +305,7 @@ public class RoomScript : MonoBehaviour
 			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", defaultBaseColor);
 			sparks.ForEach(x => x.Stop());
 			lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", defaultLampColor));
+			lamps.ForEach(z => z.GetComponentInChildren<Light>().enabled = true);
 			if (blinks != null)
 			{
 				StopCoroutine(blinks);
@@ -344,6 +345,7 @@ public class RoomScript : MonoBehaviour
 		else 
 		{
 			lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black));
+			lamps.ForEach(z => z.GetComponentInChildren<Light>().enabled = false);
 		}
 		UpdateRoomHullView();
 	}
@@ -355,8 +357,10 @@ public class RoomScript : MonoBehaviour
 			for (int i = 0; i < Random.Range(0, 3); i++)
 			{
 				lamps.ForEach(x => x.GetComponent<Renderer>().material.DisableKeyword("_EMISSION"));
+				lamps.ForEach(y => y.GetComponentInChildren<Light>().enabled = false);
 				yield return new WaitForSeconds(Random.value / 4);
 				lamps.ForEach(x => x.GetComponent<Renderer>().material.EnableKeyword("_EMISSION"));
+				lamps.ForEach(y => y.GetComponentInChildren<Light>().enabled = true);
 			}
 			yield return new WaitForSeconds(5 + Random.value * 5);
 		}

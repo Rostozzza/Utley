@@ -5,6 +5,8 @@ using System.Linq;
 using System.Collections;
 using UnityEngine.Video;
 using Newtonsoft.Json;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,8 +26,14 @@ public class GameManager : MonoBehaviour
 	public GameObject elevatorPrefab;
 	public List<GameObject> bears = new List<GameObject>();
 	[SerializeField] public UIResourceShower uiResourceShower;
+	[SerializeField] public GameObject globalVolume;
 	[SerializeField] public GameObject selectedUnit;
 	[SerializeField] private GameObject emptyBearPrefab;
+	[SerializeField] private Sprite defaultBuildButton;
+	[SerializeField] private Sprite selectedBuildButton;
+	[SerializeField] private Sprite defaultInfoButton;
+	[SerializeField] private Sprite selectedInfoButton;
+
 	[Header("Building settings")]
 	public GameObject buildingScreen;
 	public GameObject elevatorBuildingScreen;
@@ -39,7 +47,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private List<GameObject> allPossibleRooms;
 	[Header("Phases settings")]
 	private GameObject skyBG;
-	[SerializeField] private List<VideoClip> animatedBackgrounds;
+	[SerializeField] private List<GameObject> animatedBackgrounds;
 	public Season season;
 	public Mode mode;
 	public int cycleNumber = 1;
@@ -136,7 +144,6 @@ public class GameManager : MonoBehaviour
 			DontDestroyOnLoad(gameObject);
 		}
 		skyBG = GameObject.FindGameObjectWithTag("skyBG");
-		ChangeSeason(season);
 		StartCoroutine(ConstantDurabilityDamager(4));
 		StartCoroutine(ConstantEnergohoneyConsumer());
 		StartCoroutine(ConstantSeasonChanger());
@@ -165,6 +172,7 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	public void SetMode(Mode mode)
 	{
+		globalVolume.GetComponent<Volume>().profile.TryGet(out Vignette vignette);
 		this.mode = mode;
 		selectedUnit = null;
 		if (selectedRoom)
@@ -180,8 +188,14 @@ public class GameManager : MonoBehaviour
 				button.gameObject.SetActive(mode == Mode.Build);
 			}
 		}
+		if (mode == Mode.None)
+		{
+			vignette.intensity.value = 0f;
+		}
 		if (mode == Mode.Build)
 		{
+			vignette.intensity.value = 0.27f;
+			vignette.color.value = Color.black;
 			Camera.main.GetComponent<CameraController>().CameraMove();
 		}
 		else
@@ -192,6 +206,8 @@ public class GameManager : MonoBehaviour
 		}
 		if (mode == Mode.Info)
 		{
+			vignette.intensity.value = 0.27f;
+			vignette.color.value = Color.blue;
 		}
 		else
 		{
@@ -206,12 +222,41 @@ public class GameManager : MonoBehaviour
 
 	public void SetModeByButton(int mode)
 	{
+		Image buildButton = GameObject.FindGameObjectWithTag("build_button").GetComponent<Image>();
+		Image infoButton = GameObject.FindGameObjectWithTag("info_button").GetComponent<Image>();
 		if (this.mode == (Mode)mode)
 		{
+			switch (this.mode)
+			{
+				case Mode.Build:
+					buildButton.sprite = defaultBuildButton;
+					break;
+				case Mode.Info:
+					infoButton.sprite = defaultInfoButton;
+					break;
+			}
 			SetMode(Mode.None);
 		}
 		else
 		{
+			switch (this.mode)
+			{
+				case Mode.Build:
+					buildButton.sprite = defaultBuildButton;
+					break;
+				case Mode.Info:
+					infoButton.sprite = defaultInfoButton;
+					break;
+			}
+			switch ((Mode)mode)
+			{
+				case Mode.Build:
+					buildButton.sprite = selectedBuildButton;
+					break;
+				case Mode.Info:
+					infoButton.sprite = selectedInfoButton;
+					break;
+			}
 			SetMode((Mode)mode);
 		}
 	}
@@ -705,13 +750,46 @@ public class GameManager : MonoBehaviour
 	/// <param name="season"></param>
 	public void ChangeSeason(Season season)
 	{
-		this.season = season;
-		VideoPlayer vp = skyBG.GetComponentInChildren<VideoPlayer>();
-		vp.clip = animatedBackgrounds[(int)season];
-		if (!vp.isPlaying)
+		if (this.season == season)
 		{
-			vp.Play();
+			SpriteRenderer sprite = animatedBackgrounds[(int)season].GetComponent<SpriteRenderer>();
+			sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1);
 		}
+		else
+		{
+			StartCoroutine(SmoothTransition(animatedBackgrounds[(int)this.season], animatedBackgrounds[(int)season]));
+		}
+		this.season = season;
+	}
+
+	private IEnumerator SmoothTransition(GameObject previous, GameObject next)
+	{
+		yield return StartCoroutine(TransitionShow(next));
+		yield return StartCoroutine(TransitionHide(previous));
+	}
+
+	private IEnumerator TransitionShow(GameObject obj)
+	{
+		float timer = 0;
+		do
+		{
+			SpriteRenderer sprite = obj.GetComponent<SpriteRenderer>();
+			sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, Mathf.Lerp(0, 1, timer + Time.deltaTime));
+			timer += Time.deltaTime;
+			yield return null;
+		} while (timer < 1);
+	}
+
+	private IEnumerator TransitionHide(GameObject obj)
+	{
+		float timer = 0;
+		do
+		{
+			SpriteRenderer sprite = obj.GetComponent<SpriteRenderer>();
+			sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, Mathf.Lerp(1, 0, timer + Time.deltaTime));
+			timer += Time.deltaTime;
+			yield return null;
+		} while (timer < 1);
 	}
 
 	public void ChangeMaxBearAmount(int amount)

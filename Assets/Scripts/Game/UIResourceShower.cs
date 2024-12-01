@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,10 +10,14 @@ public class UIResourceShower : MonoBehaviour
     [SerializeField] private TextMeshProUGUI asteriyAmountText;
     [SerializeField] private TextMeshProUGUI bearsAmountText;
     [SerializeField] private Slider temperatureSlider;
+    [SerializeField] private GameObject honeyReducePanel;
+    [SerializeField] private GameObject temperaturePanel;
 
     private void Start()
     {
         UpdateIndicators();
+        honeyReducePanel.SetActive(false);
+        temperaturePanel.SetActive(false);
     }
 
     /// <summary>
@@ -22,7 +27,55 @@ public class UIResourceShower : MonoBehaviour
     {
         energoHoneyAmountText.text = Convert.ToString(GameManager.Instance.GetHoney());
         asteriyAmountText.text = Convert.ToString(GameManager.Instance.GetAsteriy());
-        bearsAmountText.text = Convert.ToString(GameManager.Instance.bears.Count) + "/" + Convert.ToString(GameManager.Instance.maxBearsAmount); // "99/" is temporarily - needs to know living rooms amount
+        bearsAmountText.text = Convert.ToString(GameManager.Instance.bears.Count) + "/" + Convert.ToString(GameManager.Instance.maxBearsAmount);
         temperatureSlider.value = 1f; // ???
+    }
+
+    public void ShowHint(PointerHint.HintType hintType)
+    {
+        switch (hintType)
+        {
+            case PointerHint.HintType.Energohoney:
+                int n1 = 0, n2 = 0, n3 = 0;
+                foreach (GameObject room in GameManager.Instance.allRooms)
+                {
+                    if (room.TryGetComponent<RoomScript>(out RoomScript roomScript))
+                    {
+                        switch (roomScript.level)
+                        {
+                            case 1:
+                                n1++;
+                                break;
+                            case 2:
+                                n2++;
+                                break;
+                            case 3:
+                                n3++;
+                                break;
+                        }
+                    }
+                }
+                int honeyToEat = (int)(5 + n1 + 1.1 * n2 + 1.2 * n3);
+                honeyReducePanel.SetActive(true);
+                honeyReducePanel.GetComponentInChildren<TextMeshProUGUI>().text = Convert.ToString(honeyToEat);
+                break;
+            case PointerHint.HintType.Temperature:
+                temperaturePanel.GetComponentInChildren<TextMeshProUGUI>().text = Convert.ToString(15) + " °C";
+                temperaturePanel.SetActive(true);
+                break;
+        }
+    }
+
+    public void HideHint(PointerHint.HintType hintType)
+    {
+        switch (hintType)
+        {
+            case PointerHint.HintType.Energohoney:
+                honeyReducePanel.SetActive(false);
+                break;
+            case PointerHint.HintType.Temperature:
+                temperaturePanel.SetActive(false);
+                break;
+        }
     }
 }

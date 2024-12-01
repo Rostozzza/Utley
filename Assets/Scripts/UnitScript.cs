@@ -162,7 +162,6 @@ public class UnitScript : MonoBehaviour
 
 	public IEnumerator MoveInRoom(RoomScript.Resources roomType, List<Vector3> walkPoints, GameObject obj)
 	{
-		Vector3 chosenPoint;
 		Coroutine walkingCoroutine;
 		switch (roomType)
 		{
