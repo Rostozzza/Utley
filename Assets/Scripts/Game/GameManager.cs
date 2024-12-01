@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 	[Header("Player settings")]
 	public string playerName;
 	public Player playerModel;
+	public bool isAPIActive;
 	[Header("Cosmodrome settings")]
 	[SerializeField] private GameObject ui;
 	[SerializeField] private List<Image> asteriumRoomView;
@@ -22,8 +23,8 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private GameObject asteriumViewPrefab;
 	[Header("GameManager settings")]
 	public static GameManager Instance;
-	public JsonManager JsonManager = new JsonManager();
-	public RequestManager RequestManager = new RequestManager();
+	public JsonManager JsonManager;
+	public RequestManager RequestManager;
 	public GameObject elevatorPrefab;
 	public List<GameObject> bears = new List<GameObject>();
 	[SerializeField] public UIResourceShower uiResourceShower;
@@ -103,7 +104,7 @@ public class GameManager : MonoBehaviour
 				var newBlock = Instantiate(elevatorPrefab, new Vector3(model.Coordinates[0], model.Coordinates[1], model.Coordinates[2]), Quaternion.identity);
 				Destroy(newBlock.GetComponent<Elevator>());
 				newBlock.transform.parent = newElevator.transform;
-				newBlock.transform.Translate(new Vector3(0,(i+1) * 4,0));
+				newBlock.transform.Translate(new Vector3(0, (i + 1) * 4, 0));
 			}
 			for (int i = 0; i < model.BlocksDown; i++)
 			{
@@ -144,8 +145,11 @@ public class GameManager : MonoBehaviour
 			Instance = this;
 			//DontDestroyOnLoad(gameObject);
 		}
-		asteriy = 100;
-		honey = 100;
+		if (!isAPIActive)
+		{
+			asteriy = 100;
+			honey = 100;
+		}
 		skyBG = GameObject.FindGameObjectWithTag("skyBG");
 		StartCoroutine(ConstantDurabilityDamager(4));
 		StartCoroutine(ConstantEnergohoneyConsumer());
@@ -337,7 +341,7 @@ public class GameManager : MonoBehaviour
 
 	private async void SelectAndBuildMainBlock(GameObject building, Transform point)
 	{
-		var instance = Instantiate(building, point.position - new Vector3(0,0, 3.46f - 5f), Quaternion.identity);
+		var instance = Instantiate(building, point.position - new Vector3(0, 0, 3.46f - 5f), Quaternion.identity);
 		if (instance.CompareTag("elevator"))// trying to build elevator
 		{
 			Debug.Log("Placing elevator");
@@ -480,7 +484,7 @@ public class GameManager : MonoBehaviour
 				asteriumRoomView.Add(newAsteriumView.GetComponent<Image>());
 			}
 		}
-		if (queuedBuildPositon.transform.parent.parent.tag=="elevator" && queuedBuildPositon.transform.parent.parent.position.y != instance.transform.position.y && instance.tag == "elevator")
+		if (queuedBuildPositon.transform.parent.parent.tag == "elevator" && queuedBuildPositon.transform.parent.parent.position.y != instance.transform.position.y && instance.tag == "elevator")
 		{
 			queuedBuildPositon = null;
 			return;
@@ -496,9 +500,12 @@ public class GameManager : MonoBehaviour
 	/// <returns></returns>
 	public async Task<int> GetHoney()
 	{
-		//var model = await RequestManager.GetPlayer(playerName);
-		//playerModel = model;
-		//return int.Parse(model.resources["honey"]);
+		if (isAPIActive)
+		{
+			var model = await RequestManager.GetPlayer(playerName);
+			playerModel = model;
+			return int.Parse(model.resources["honey"]);
+		}
 		return honey;
 	}
 
@@ -508,9 +515,12 @@ public class GameManager : MonoBehaviour
 	/// <returns></returns>
 	public async Task<int> GetAsteriy()
 	{
-		//var model = await RequestManager.GetPlayer(playerName);
-		//playerModel = model;
-		//return int.Parse(model.resources["honey"]);
+		if (isAPIActive)
+		{
+			var model = await RequestManager.GetPlayer(playerName);
+			playerModel = model;
+			return int.Parse(model.resources["asterium"]);
+		}
 		return asteriy;
 	}
 
@@ -520,11 +530,15 @@ public class GameManager : MonoBehaviour
 	/// <param name="amount"></param>
 	public async Task ChangeHoney(int amount)
 	{
-		/*int serverHoney = await GetHoney();
-		serverHoney += amount;
-		serverHoney = Mathf.Clamp(serverHoney, -1, 999);
-		honey = serverHoney;
-		await JsonManager.SavePlayerToJson(playerName);*/
+		if (isAPIActive)
+		{
+			int serverHoney = await GetHoney();
+			serverHoney += amount;
+			serverHoney = Mathf.Clamp(serverHoney, -1, 999);
+			honey = serverHoney;
+			await JsonManager.SavePlayerToJson(playerName);
+			return;
+		}
 		honey += amount;
 		honey = Mathf.Clamp(honey, -1, 999);
 	}
@@ -535,12 +549,16 @@ public class GameManager : MonoBehaviour
 	/// <param name="amount"></param>
 	public async Task ChangeAsteriy(int amount)
 	{
-		//int serverAsterium = await GetAsteriy();
-		//serverAsterium += amount;
-		//serverAsterium = Mathf.Clamp(serverAsterium, -1, 999);
-		//asteriy = serverAsterium;
-		//await JsonManager.SavePlayerToJson(playerName);
-		asteriy+= amount;
+		if (isAPIActive)
+		{
+			int serverAsterium = await GetAsteriy();
+			serverAsterium += amount;
+			serverAsterium = Mathf.Clamp(serverAsterium, -1, 999);
+			asteriy = serverAsterium;
+			await JsonManager.SavePlayerToJson(playerName);
+			return;
+		}
+		asteriy += amount;
 		asteriy = Mathf.Clamp(asteriy, -1, 999);
 	}
 

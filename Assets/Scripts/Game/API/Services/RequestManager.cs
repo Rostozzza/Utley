@@ -11,6 +11,12 @@ using System.Security.Cryptography;
 public class RequestManager
 {
 	public string UUID = "85820b3e-e70b-4696-9954-dbed1d942244";
+	public bool isAPIActive;
+
+	public RequestManager(bool isAPIActive)
+	{
+		this.isAPIActive = isAPIActive;
+	}
 
 	#region PUT
 	/// <summary>

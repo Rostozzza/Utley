@@ -7,7 +7,14 @@ using UnityEngine;
 
 public class JsonManager
 {
-	RequestManager requestManager = new RequestManager();
+	RequestManager requestManager;
+	public bool isAPIActive;
+
+	public JsonManager(bool isAPIActive)
+	{
+		this.isAPIActive = isAPIActive;
+		requestManager = new RequestManager(isAPIActive);
+	}
 
 	public async Task<Player> SavePlayerToJson(string playerName)
 	{
