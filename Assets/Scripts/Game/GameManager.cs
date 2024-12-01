@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
 
 	public void DebugPlayerSave()
 	{
-		JsonManager.SavePlayerToJson("Obama");
+		//JsonManager.SavePlayerToJson("Obama");
 	}
 
 	public void DebugLoadPlayer(string player)
@@ -658,6 +658,20 @@ public class GameManager : MonoBehaviour
 							selectedRoom.ToggleRoomStats(true);
 						}
 						break;
+				}
+			}
+			else if (gameObject.CompareTag("work_station") && mode == Mode.Info)
+			{
+				if (selectedRoom != null)
+				{
+					selectedRoom.ToggleRoomStats(false);
+					selectedRoom = gameObject.GetComponentInParent<RoomScript>();
+					selectedRoom.ToggleRoomStats(true);
+				}
+				else
+				{
+					selectedRoom = gameObject.GetComponentInParent<RoomScript>();
+					selectedRoom.ToggleRoomStats(true);
 				}
 			}
 		}

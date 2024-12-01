@@ -8,6 +8,7 @@ public class SupplyRoom : RoomScript
 	{
 		float timer;
 		status = Status.Busy;
+		animator.SetTrigger("StartWork");
 		//!borrowed part!//
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.coder)
 		{
@@ -42,5 +43,6 @@ public class SupplyRoom : RoomScript
 			fixedBear = null;
 		}
 		status = Status.Free;
+		animator.SetTrigger("EndWork");
 	}
 }

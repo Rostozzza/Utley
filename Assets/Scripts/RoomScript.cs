@@ -40,12 +40,14 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private GameObject baseOfRoom;
 	private Color defaultLampColor;
 	private Color defaultBaseColor;
+	protected Animator animator;
 
 	[Header("Asterium settings")]
 	public bool isReadyForWork = false;
 	
 	protected virtual void Start()
 	{
+		animator = GetComponentInChildren<Animator>();
 		walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
 		roomStatsScreen = transform.Find("RoomInfo").gameObject;
 		roomStatsScreen.SetActive(false);
@@ -225,6 +227,7 @@ public class RoomScript : MonoBehaviour
 	{
 		float timer;
 		status = Status.Busy;
+		animator.SetTrigger("StartWork");
 		if (resource != Resources.Asteriy)
 		{
 			fixedBear.GetComponent<UnitScript>().SetBusy(true);
@@ -271,6 +274,7 @@ public class RoomScript : MonoBehaviour
 			fixedBear = null;
 		}
 		status = Status.Free;
+		animator.SetTrigger("EndWork");
 	}
 
 	protected string SecondsToTimeToShow(float seconds) // left - minutes, right - seconds. no hours.
