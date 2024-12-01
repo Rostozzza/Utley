@@ -111,7 +111,6 @@ public class RequestManager
 		}
 	}
 
-
 	/// <summary>
 	/// Returns a specific registered player by name
 	/// </summary>
@@ -125,7 +124,7 @@ public class RequestManager
 		HttpClient client = new HttpClient();
 		try
 		{
-			var response = client.GetAsync(url).Result;
+			var response = await client.GetAsync(url);
 			if (!response.IsSuccessStatusCode)
 			{
 				Debug.Log($"Failed to get selected player. Status code: {response.StatusCode}");

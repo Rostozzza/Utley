@@ -9,8 +9,8 @@ public class MenuManager : MonoBehaviour
 {
 	public static MenuManager Instance;
 
-	JsonManager JsonManager = new JsonManager(false);
-	RequestManager RequestManager = new RequestManager(false);
+	JsonManager JsonManager = new JsonManager(true);
+	RequestManager RequestManager = new RequestManager(true);
 	private string currentPLayerName;
 	[SerializeField] private TextMeshProUGUI currentPlayerField;
 	[SerializeField] private GameObject loadingView;
@@ -104,9 +104,28 @@ public class MenuManager : MonoBehaviour
 		Time.timeScale = 1f;
 	}
 
+	public void ToMenu()
+	{
+		SceneManager.LoadSceneAsync(0);
+		pauseScreen.SetActive(false);
+		Time.timeScale = 1f;
+		mainMenuScreen.SetActive(true);
+	}
+
 	public void Quit()
 	{
 		Application.Quit();
+	}
+
+	public void Update()
+	{
+		if (SceneManager.GetActiveScene().buildIndex == 1)
+		{
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{
+				Pause();
+			}
+		}
 	}
 
 	public async void Registrate()
@@ -166,19 +185,24 @@ public class MenuManager : MonoBehaviour
 		Debug.Log(await RequestManager.GeenrateUUID());
 	}
 
-	public async void ContinueGame()
+	public void ContinueGame()
+	{
+		ContinueGameAsync();
+	}
+
+	private async Task ContinueGameAsync()
 	{
 		loadingView.SetActive(true);
 		mainMenuScreen.SetActive(false);
-		await SceneManager.LoadSceneAsync(1);
+		SceneManager.LoadScene(1);
 		if (isAPIActive)
 		{
-			Time.timeScale = 0f;
 			GameManager.Instance.playerName = currentPLayerName;
 			GameManager.Instance.isAPIActive = isAPIActive;
 			GameManager.Instance.JsonManager = new JsonManager(isAPIActive);
 			GameManager.Instance.RequestManager = new RequestManager(isAPIActive);
 			var requestedPlayer = await RequestManager.GetPlayer(currentPLayerName);
+			Time.timeScale = 0f;
 			if (requestedPlayer == null)
 			{
 				Debug.Log("No player present!");
