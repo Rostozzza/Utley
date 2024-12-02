@@ -34,9 +34,13 @@ public class SupplyRoom : RoomScript
 		poweredRooms = horizontalRooms;
 		poweredRooms.AddRange(verticalRooms);
 		poweredRooms.AddRange(diagonalRooms);
-		foreach (var room in poweredRooms)
+		foreach (var room in poweredRooms.Distinct())
 		{
-			RoomScript roomScript;
+			Debug.Log(room.name);
+		}
+		foreach (var room in poweredRooms.Distinct().ToList())
+		{
+			RoomScript roomScript = null;
 			if (room.TryGetComponent(out roomScript))
 			{
 				roomScript.Enpower();
