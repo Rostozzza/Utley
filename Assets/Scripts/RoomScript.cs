@@ -51,6 +51,7 @@ public class RoomScript : MonoBehaviour
 	{
 		isEnpowered = true;
 		ChangeDurability(0);
+		Debug.Log($"Empowered roon {gameObject.name}");
 	}
 	
 	protected virtual void Start()
@@ -372,7 +373,7 @@ public class RoomScript : MonoBehaviour
 		else if (durability > 0f)
 		{
 			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
-			sparks.ForEach(x => x.Stop());
+			sparks.ForEach(x => x.Play());
 			SetLampsColor(Color.red);
 			SetLampsOn(true);
 			if (blinks != null)

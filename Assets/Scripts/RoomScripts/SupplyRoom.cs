@@ -38,13 +38,10 @@ public class SupplyRoom : RoomScript
 		{
 			Debug.Log(room.name);
 		}
-		foreach (var room in poweredRooms.Distinct().ToList())
+		foreach (var room in poweredRooms.Select(x=>x.GetComponent<RoomScript>()).ToList())
 		{
-			room.GetComponent<RoomScript>().Enpower();
-			if(room.TryGetComponent<BuilderRoom>(out BuilderRoom bRoom))
-			{
-				bRoom.Enpower();
-			}
+			room.Enpower();
+			Debug.Log($"Trying to empower {room.name}");
 		}
 		try
 		{
