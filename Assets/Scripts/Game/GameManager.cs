@@ -643,6 +643,30 @@ public class GameManager : MonoBehaviour
 			buildingScreen.SetActive(false);
 			elevatorBuildingScreen.SetActive(false);
 		}
+
+		
+	}
+
+	private bool MouseOnTarget(GameObject target, bool isTutorial)
+	{
+		if (!isTutorial) return true;
+
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		if (Physics.Raycast(ray, out raycastHit, 100f))
+		{
+			if (raycastHit.transform != null)
+			{
+				return target == raycastHit.transform.gameObject;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	private void RightClick(GameObject gameObject)
