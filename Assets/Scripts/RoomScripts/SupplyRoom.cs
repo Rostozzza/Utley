@@ -9,13 +9,13 @@ public class SupplyRoom : RoomScript
 {
 	[SerializeField] List<GameObject> graphs;
 	private TMP_InputField currentAnswerField;
+
 	GameObject graph;
 	[SerializeField] private List<GameObject> poweredRooms;
 
 	protected override void Start()
 	{
 		base.Start();
-		Enpower();
 	}
 
 	private async Task GetRoomsToEnpower()
@@ -41,6 +41,7 @@ public class SupplyRoom : RoomScript
 				continue;
 			}
 		}
+		Destroy(graph);
 	}
 
 	public void InitializeGraph()
@@ -54,44 +55,43 @@ public class SupplyRoom : RoomScript
 
 	public void SolveGraph(int answer)
 	{
-		if (answer == int.Parse(currentAnswerField.text))
+		try
 		{
-			foreach (var room in poweredRooms)
+			if (answer == int.Parse(currentAnswerField.text.ToString()))
 			{
-				RoomScript roomScript;
-				if (room.TryGetComponent(out roomScript))
-				{
-					roomScript.Enpower();
-					roomScript.ChangeDurability(0);
-				}
-				else
-				{
-					continue;
-				}
+				GetRoomsToEnpower();
+			}
+			else
+			{
+				StartCoroutine(BlinkRed());
 			}
 		}
-		else
+		catch
 		{
-			StartCoroutine(BlinkRed());
+			//StartCoroutine(BlinkRed());
 		}
 	}
 
 	private IEnumerator BlinkRed()
 	{
 		var inputFields = graph.GetComponentsInChildren<TMP_InputField>();
+		Debug.Log(inputFields.Length);
 		for (int i = 0; i < 10; i++)
 		{
-			inputFields.Select(x => x.textComponent.color = Color.red);
+			foreach (var inputField in inputFields)
+			{
+				inputField.textComponent.color = Color.red;
+			}
 			yield return new WaitForSeconds(0.1f);
-			inputFields.Select(x => x.textComponent.color = Color.white);
+			foreach (var inputField in inputFields)
+			{
+				inputField.textComponent.color = Color.white;
+			}
 			yield return new WaitForSeconds(0.1f);
+
 		}
 		inputFields.Select(x => x.text = "");
-	}
-
-	public async void Awake()
-	{
-		await GetRoomsToEnpower();
+		yield return null;
 	}
 
 	protected override IEnumerator WorkStatus()

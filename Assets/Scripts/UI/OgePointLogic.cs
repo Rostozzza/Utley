@@ -23,7 +23,7 @@ public class OgePointLogic : MonoBehaviour
 	{
 		foreach (OgePointLogic point in connectedPoints)
 		{
-			var lineInstance = Instantiate(line).GetComponent<LineRenderer>();
+			var lineInstance = Instantiate(line,transform).GetComponent<LineRenderer>();
 			lineInstance.useWorldSpace = true;
 			lineInstance.SetPosition(0, transform.position);
 			lineInstance.SetPosition(1, point.transform.position);

@@ -990,7 +990,7 @@ public class GameManager : MonoBehaviour
 	private async void ConsumeEnergohoney()
 	{
 		int n1 = 0, n2 = 0, n3 = 0;
-		foreach (GameObject room in allRooms)
+		foreach (GameObject room in allRooms.Where(x => x.TryGetComponent(out RoomScript roomSctipt) && roomSctipt.isEnpowered))
 		{
 			if (room.TryGetComponent<RoomScript>(out RoomScript roomScript))
 			{
@@ -1013,16 +1013,19 @@ public class GameManager : MonoBehaviour
 		{
 			honeyToEat = (int)((float)honeyToEat * (1f + 0.1f + 0.05f * cycleNumber));
 		}
-		var model = await JsonManager.SavePlayerToJson(playerName);
-		Dictionary<string, int> changedResources = new Dictionary<string, int>();
-		changedResources.Add("honey", -honeyToEat);
-		JsonManager.CreateLog(new Log
+		if (isAPIActive)
 		{
-			Comment = $"Complex deplicted {honeyToEat} energohoney",
-			PlayerName = playerName,
-			ShopName = null,
-			ResourcesChanged = changedResources
-		});
+			var model = await JsonManager.SavePlayerToJson(playerName);
+			Dictionary<string, int> changedResources = new Dictionary<string, int>();
+			changedResources.Add("honey", -honeyToEat);
+			JsonManager.CreateLog(new Log
+			{
+				Comment = $"Complex deplicted {honeyToEat} energohoney",
+				PlayerName = playerName,
+				ShopName = null,
+				ResourcesChanged = changedResources
+			});
+		}
 		Debug.Log("Съели мёда: " + honeyToEat);
 		ChangeHoney(-honeyToEat);
 		uiResourceShower.UpdateIndicators();
