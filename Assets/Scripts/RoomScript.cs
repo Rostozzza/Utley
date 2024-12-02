@@ -246,7 +246,6 @@ public class RoomScript : MonoBehaviour
 		float timer;
 		status = Status.Busy;
 		statusPanel.UpdateStatus(status);
-		fixedBear.GetComponent<UnitScript>().SetBusy(true);
 		animator.SetTrigger("StartWork");
 		if (resource != Resources.Asteriy)
 		{
@@ -287,7 +286,10 @@ public class RoomScript : MonoBehaviour
 				fixedBear.GetComponent<UnitScript>().CanBeSelected();
 				break;
 		}
-		fixedBear.GetComponent<UnitScript>().SetBusy(false);
+		if (resource != Resources.Asteriy)
+		{
+			fixedBear.GetComponent<UnitScript>().SetBusy(false);
+		}
 		if (fixedBear != null)
 		{
 			fixedBear.GetComponent<UnitScript>().CanBeSelected();
@@ -320,6 +322,15 @@ public class RoomScript : MonoBehaviour
 		{
 			status = Status.Destroyed;
 			statusPanel.UpdateStatus(status);
+			SetLampsOn(false);
+			if (blinks != null)
+			{
+				StopCoroutine(blinks);
+				blinks = null;
+			}
+			durability = Mathf.Clamp(durability, 0f, 1f);
+			UpdateRoomHullView();
+			return;
 		}
 		durability = Mathf.Clamp(durability, 0f, 1f);
 		
@@ -358,7 +369,7 @@ public class RoomScript : MonoBehaviour
 			sparks.ForEach(x => x.Play());
 			blinks ??= StartCoroutine(LampsBlinking());
 		}
-		else if (durability > 0)
+		else if (durability > 0f)
 		{
 			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
 			sparks.ForEach(x => x.Stop());

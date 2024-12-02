@@ -18,7 +18,7 @@ public class SupplyRoom : RoomScript
 		base.Start();
 	}
 
-	private async Task GetRoomsToEnpower()
+	public async Task GetRoomsToEnpower()
 	{
 		var horizontalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 16.5f
 																	&& x.transform.position.y == transform.position.y).ToList();
@@ -41,7 +41,11 @@ public class SupplyRoom : RoomScript
 				continue;
 			}
 		}
-		Destroy(graph);
+		try
+		{
+			Destroy(graph);
+		}
+		catch { }
 	}
 
 	public void InitializeGraph()

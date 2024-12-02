@@ -489,6 +489,7 @@ public class GameManager : MonoBehaviour
 				var newAsteriumView = Instantiate(asteriumViewPrefab, asteriumViewGrid);
 				asteriumRoomView.Add(newAsteriumView.GetComponent<Image>());
 			}
+			allRooms.Where(x => x.TryGetComponent(out SupplyRoom supplyRoomInstance)).Select(y => y.GetComponent<SupplyRoom>().GetRoomsToEnpower());
 		}
 		if (queuedBuildPositon.transform.parent.parent.tag == "elevator" && queuedBuildPositon.transform.parent.parent.position.y != instance.transform.position.y && instance.tag == "elevator")
 		{
@@ -497,7 +498,10 @@ public class GameManager : MonoBehaviour
 		}
 		queuedBuildPositon = null;
 		allRooms.Add(instance);
-		await JsonManager.SavePlayerToJson(playerName);
+		if (isAPIActive)
+		{
+			await JsonManager.SavePlayerToJson(playerName);
+		}
 	}
 
 	/// <summary>
