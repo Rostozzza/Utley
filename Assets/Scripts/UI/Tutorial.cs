@@ -19,15 +19,15 @@ public class Tutorial : MonoBehaviour
         ShowNextPage();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return) && !isHide)
-        {
-            ShowNextPage();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Return) && !isHide)
+    //    {
+    //        ShowNextPage();
+    //    }
+    //}
 
-    private void ShowNextPage()
+    public void ShowNextPage()
     {
         if (pageNumber == 0)
         {

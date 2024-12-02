@@ -643,8 +643,6 @@ public class GameManager : MonoBehaviour
 			buildingScreen.SetActive(false);
 			elevatorBuildingScreen.SetActive(false);
 		}
-
-		
 	}
 
 	private bool MouseOnTarget(GameObject target, bool isTutorial)
