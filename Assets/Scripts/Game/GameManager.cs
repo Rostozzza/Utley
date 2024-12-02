@@ -351,7 +351,7 @@ public class GameManager : MonoBehaviour
 			Ray rayLeft = new Ray(instance.transform.position, Vector3.left * 6f);
 
 			var elevator = instance.GetComponent<Elevator>();
-			if (point.parent.parent.CompareTag("elevator"))
+			if (point.parent.parent.CompareTag("elevator") && !queuedBuildPositon.name.Contains("Gen"))
 			{
 				Debug.Log("extending existing elevator");
 				elevator = point.parent.GetComponentInParent<Elevator>();
@@ -489,7 +489,6 @@ public class GameManager : MonoBehaviour
 				var newAsteriumView = Instantiate(asteriumViewPrefab, asteriumViewGrid);
 				asteriumRoomView.Add(newAsteriumView.GetComponent<Image>());
 			}
-			allRooms.Where(x => x.TryGetComponent(out SupplyRoom supplyRoomInstance)).Select(y => y.GetComponent<SupplyRoom>().GetRoomsToEnpower());
 		}
 		if (queuedBuildPositon.transform.parent.parent.tag == "elevator" && queuedBuildPositon.transform.parent.parent.position.y != instance.transform.position.y && instance.tag == "elevator")
 		{
@@ -498,6 +497,7 @@ public class GameManager : MonoBehaviour
 		}
 		queuedBuildPositon = null;
 		allRooms.Add(instance);
+		allRooms.Where(x => x.GetComponent<SupplyRoom>()).ToList().ForEach(y => y.GetComponent<SupplyRoom>().GetRoomsToEnpower());
 		if (isAPIActive)
 		{
 			await JsonManager.SavePlayerToJson(playerName);
