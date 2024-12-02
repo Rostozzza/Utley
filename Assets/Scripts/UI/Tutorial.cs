@@ -31,9 +31,9 @@ public class Tutorial : MonoBehaviour
     {
         if (pageNumber == 0)
         {
-            StartCoroutine(TaskMove(pages[pageNumber], new Vector3(pages[pageNumber].transform.position.x, 
-                                                                   pages[pageNumber].transform.position.y + 176, 
-                                                                   pages[pageNumber].transform.position.z)));
+            StartCoroutine(TaskMove(pages[pageNumber], GameObject.FindGameObjectWithTag("target_tutorial_pos").transform.position)); //new Vector3(pages[pageNumber].transform.position.x, 
+                                                       //            pages[pageNumber].transform.position.y + 176, 
+                                                       //            pages[pageNumber].transform.position.z)));
             pageNumber++;
         }
         else
@@ -49,9 +49,9 @@ public class Tutorial : MonoBehaviour
             }
             else
             {
-                StartCoroutine(TaskSequence(pages[pageNumber - 1], pages[pageNumber], new Vector3(pages[pageNumber].transform.position.x, 
-                                                                                                  pages[pageNumber].transform.position.y + 176, 
-                                                                                                  pages[pageNumber].transform.position.z)));
+                StartCoroutine(TaskSequence(pages[pageNumber - 1], pages[pageNumber], GameObject.FindGameObjectWithTag("target_tutorial_pos").transform.position));//new Vector3(pages[pageNumber].transform.position.x, 
+                                                                                      //            pages[pageNumber].transform.position.y + 176, 
+                                                                                      //            pages[pageNumber].transform.position.z)));
             }
             
         }

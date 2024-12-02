@@ -9,6 +9,7 @@ public class SupplyRoom : RoomScript
 {
 	[SerializeField] List<GameObject> graphs;
 	private TMP_InputField currentAnswerField;
+	public bool isSoft = false;
 
 	GameObject graph;
 	[SerializeField] private List<GameObject> poweredRooms;
@@ -16,22 +17,30 @@ public class SupplyRoom : RoomScript
 	protected override void Start()
 	{
 		base.Start();
+		if (isSoft)
+		{
+			GetRoomsToEnpower();
+		}
 	}
 
 	public async Task GetRoomsToEnpower()
 	{
-		var horizontalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 16.5f
+		var horizontalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 17f
 																	&& x.transform.position.y == transform.position.y).ToList();
-		var verticalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.y - transform.position.y) <= 8.5f
+		var verticalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.y - transform.position.y) <= 9f
 																	&& x.transform.position.x == transform.position.x).ToList();
-		var diagonalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 8.5f
-																	&& Mathf.Abs(x.transform.position.y - transform.position.y) <= 4.5f).ToList();
+		var diagonalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 9f
+																	&& Mathf.Abs(x.transform.position.y - transform.position.y) <= 5f).ToList();
 		poweredRooms = horizontalRooms;
 		poweredRooms.AddRange(verticalRooms);
 		poweredRooms.AddRange(diagonalRooms);
-		foreach (var room in poweredRooms)
+		foreach (var room in poweredRooms.Distinct())
 		{
-			RoomScript roomScript;
+			Debug.Log(room.name);
+		}
+		foreach (var room in poweredRooms.Distinct().ToList())
+		{
+			RoomScript roomScript = null;
 			if (room.TryGetComponent(out roomScript))
 			{
 				roomScript.Enpower();
