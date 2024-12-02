@@ -12,12 +12,18 @@ public class UIResourceShower : MonoBehaviour
     [SerializeField] private Slider temperatureSlider;
     [SerializeField] private GameObject honeyReducePanel;
     [SerializeField] private GameObject temperaturePanel;
+    [SerializeField] private GameObject honeyReduceDynamic;
+    [SerializeField] private GameObject temperatureDynamic;
+    [SerializeField] private GameObject asteriumPanel;
+    [SerializeField] private GameObject bearPanel;
 
     private void Start()
     {
         UpdateIndicators();
         honeyReducePanel.SetActive(false);
         temperaturePanel.SetActive(false);
+        asteriumPanel.SetActive(false);
+        bearPanel.SetActive(false);
     }
 
     /// <summary>
@@ -57,11 +63,18 @@ public class UIResourceShower : MonoBehaviour
                 }
                 int honeyToEat = (int)(5 + n1 + 1.1 * n2 + 1.2 * n3);
                 honeyReducePanel.SetActive(true);
-                honeyReducePanel.GetComponentInChildren<TextMeshProUGUI>().text = Convert.ToString(honeyToEat);
+                honeyReduceDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString(honeyToEat);
                 break;
+
             case PointerHint.HintType.Temperature:
-                temperaturePanel.GetComponentInChildren<TextMeshProUGUI>().text = Convert.ToString(15) + " °C";
                 temperaturePanel.SetActive(true);
+                temperatureDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString(15) + " °C";
+                break;
+            case PointerHint.HintType.Asterium:
+                asteriumPanel.SetActive(true);
+                break;
+            case PointerHint.HintType.Bear:
+                bearPanel.SetActive(true);
                 break;
         }
     }
@@ -75,6 +88,12 @@ public class UIResourceShower : MonoBehaviour
                 break;
             case PointerHint.HintType.Temperature:
                 temperaturePanel.SetActive(false);
+                break;
+            case PointerHint.HintType.Asterium:
+                asteriumPanel.SetActive(false);
+                break;
+            case PointerHint.HintType.Bear:
+                bearPanel.SetActive(false);
                 break;
         }
     }

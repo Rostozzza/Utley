@@ -24,6 +24,8 @@ public class PointerHint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         Energohoney,
         Temperature,
+        Asterium,
+        Bear,
         DontScroll
     } 
 }
