@@ -47,7 +47,7 @@ public class RoomScript : MonoBehaviour
 	[Header("Asterium settings")]
 	public bool isReadyForWork = false;
 
-	public void Enpower()
+	public virtual void Enpower()
 	{
 		isEnpowered = true;
 		ChangeDurability(0);

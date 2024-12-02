@@ -26,11 +26,11 @@ public class SupplyRoom : RoomScript
 	public async Task GetRoomsToEnpower()
 	{
 		var horizontalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 17f
-																	&& x.transform.position.y == transform.position.y).ToList();
+																	&& x.transform.position.y == transform.position.y && x.GetComponent<RoomScript>()).ToList();
 		var verticalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.y - transform.position.y) <= 9f
-																	&& x.transform.position.x == transform.position.x).ToList();
+																	&& x.transform.position.x == transform.position.x && x.GetComponent<RoomScript>()).ToList();
 		var diagonalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 9f
-																	&& Mathf.Abs(x.transform.position.y - transform.position.y) <= 5f).ToList();
+																	&& Mathf.Abs(x.transform.position.y - transform.position.y) <= 5f && x.GetComponent<RoomScript>()).ToList();
 		poweredRooms = horizontalRooms;
 		poweredRooms.AddRange(verticalRooms);
 		poweredRooms.AddRange(diagonalRooms);
@@ -40,14 +40,10 @@ public class SupplyRoom : RoomScript
 		}
 		foreach (var room in poweredRooms.Distinct().ToList())
 		{
-			RoomScript roomScript = null;
-			if (room.TryGetComponent(out roomScript))
+			room.GetComponent<RoomScript>().Enpower();
+			if(room.TryGetComponent<BuilderRoom>(out BuilderRoom bRoom))
 			{
-				roomScript.Enpower();
-			}
-			else
-			{
-				continue;
+				bRoom.Enpower();
 			}
 		}
 		try
