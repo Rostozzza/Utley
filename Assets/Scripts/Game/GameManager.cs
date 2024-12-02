@@ -649,6 +649,28 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	private bool MouseOnTarget(GameObject target, bool isTutorial)
+	{
+		if (!isTutorial) return true;
+
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		if (Physics.Raycast(ray, out raycastHit, 100f))
+		{
+			if (raycastHit.transform != null)
+			{
+				return target == raycastHit.transform.gameObject;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	private void RightClick(GameObject gameObject)
 	{
 		if (gameObject.CompareTag("work_station") && selectedUnit != null)
