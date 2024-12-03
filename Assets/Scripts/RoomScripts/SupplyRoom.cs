@@ -107,6 +107,7 @@ public class SupplyRoom : RoomScript
 		statusPanel.UpdateStatus(status);
 		fixedBear.GetComponent<UnitScript>().SetBusy(true);
 		animator.SetTrigger("StartWork");
+		fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		//!borrowed part!//
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.coder)
 		{
@@ -142,6 +143,7 @@ public class SupplyRoom : RoomScript
 		}
 		status = Status.Free;
 		statusPanel.UpdateStatus(status);
+		fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		animator.SetTrigger("EndWork");
 		audioSource.Stop();
 	}

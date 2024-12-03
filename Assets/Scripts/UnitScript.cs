@@ -188,7 +188,28 @@ public class UnitScript : MonoBehaviour
 				StopCoroutine(walkingCoroutine);
 				walkingCoroutine = null;
 				break;
+			case RoomScript.Resources.Build:
+				walkingCoroutine = StartCoroutine(BuildBehaviour(obj));
+				while (obj.GetComponent<BuilderRoom>().GetWait())
+				{
+					yield return null;
+				}
+				StopCoroutine(walkingCoroutine);
+				GetComponentInChildren<Animator>().SetBool("Work", false);
+				walkingCoroutine = null;
+				break;
 		}
+	}
+
+	private IEnumerator BuildBehaviour(GameObject obj)
+	{
+		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
+		GetComponentInChildren<Animator>().SetBool("Work", true);
+		while (obj.GetComponent<BuilderRoom>().GetWait())
+		{
+			yield return null;
+		}
+		GetComponentInChildren<Animator>().SetBool("Work", false);
 	}
 
 	private IEnumerator BedroomWalkBehaviour(List<Vector3> walkPoints, GameObject obj)

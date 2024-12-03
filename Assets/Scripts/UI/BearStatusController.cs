@@ -17,6 +17,7 @@ public class BearStatusController : MonoBehaviour
         levelShow.text = Convert.ToString(level);
         jobShow.text = QualificationToText(job);
         stateShow.text = isBearBusy ? "Работает" : "Не занят";
+        GameManager.Instance.AddBearToMove(this);
     }
 
     private string QualificationToText(Qualification job)
