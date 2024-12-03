@@ -301,6 +301,14 @@ public class RoomScript : MonoBehaviour
 		animator.SetTrigger("EndWork");
 	}
 
+	protected void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("unit"))
+		{
+			other.GetComponent<UnitMovement>().currentRoom = this;
+		}
+	}
+
 	protected string SecondsToTimeToShow(float seconds) // left - minutes, right - seconds. no hours.
 	{
 		return (int)seconds / 60 + ":" + (((int)seconds % 60 < 10) ? "0" + (int)seconds % 60 : (int)seconds % 60);

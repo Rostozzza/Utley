@@ -8,6 +8,7 @@ public class UnitMovement : MonoBehaviour
 	[SerializeField] private float speed;
 	[SerializeField] private RoomScript target;
 	[SerializeField] private Elevator currentElevator;
+	public RoomScript currentRoom;
 	[SerializeField] private float offsetX = 1.24f;
 	public Coroutine currentRoutine;
 
@@ -32,12 +33,17 @@ public class UnitMovement : MonoBehaviour
 		}
 		foreach (var targetElevator in target.connectedElevators)
 		{
-			var result = GetBranch(targetElevator, currentElevator, branch);
-			branch = (result.Count < branch.Count ? result : branch);
+			foreach (var startElevator in currentRoom.connectedElevators)
+			{
+				Debug.Log("--------Pair:--------");
+				var result = GetBranch(targetElevator, startElevator, new List<Elevator> { startElevator}).Distinct().ToList();
+				result.ForEach(e => { Debug.Log(e.name); });
+				branch = ((result.Count < branch.Count && result.Count > 0) || branch.Count == 0) ? result : branch;
+			}
 		}
-		var finalBranch = new List<Elevator> { currentElevator };
-		finalBranch.AddRange(branch);
-		currentRoutine = StartCoroutine(Move(finalBranch));
+		Debug.Log($"Selected brach:");
+		branch.ForEach(e => { Debug.Log(e.name); });
+		currentRoutine = StartCoroutine(Move(branch));
 	}
 
 	private IEnumerator MoveByOne()
@@ -71,6 +77,7 @@ public class UnitMovement : MonoBehaviour
 	private IEnumerator Move(List<Elevator> path)
 	{
 		GetComponentInChildren<Animator>().SetBool("Walk", true);
+		Debug.Log($"Before distinction: {path.Count}");
 		var newPath = path.Distinct().ToList();
 		Debug.Log(newPath.Count);
 		currentElevator = path[0];
@@ -176,7 +183,7 @@ public class UnitMovement : MonoBehaviour
 
 	private List<Elevator> GetBranch(Elevator targetElevator, Elevator elevator, List<Elevator> branch)
 	{
-		if (elevator == targetElevator)
+		if (elevator.gameObject == targetElevator.gameObject)
 		{
 			return new List<Elevator> { elevator };
 		}
@@ -200,5 +207,10 @@ public class UnitMovement : MonoBehaviour
 			}
 		}
 		return null;
+	}
+
+	private void Start()
+	{
+		Time.timeScale = 5;
 	}
 }

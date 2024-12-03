@@ -3,11 +3,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using System.Collections;
-using UnityEngine.Video;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+
 public class GameManager : MonoBehaviour
 {
 	[Header("Player settings")]
@@ -297,7 +297,7 @@ public class GameManager : MonoBehaviour
 			elevatorBuildingScreen.SetActive(false);
 			return;
 		}
-		ChangeAsteriy(-60);
+		await ChangeAsteriy(-60);
 		uiResourceShower.UpdateIndicators();
 
 		// goto room vvvvv
@@ -341,7 +341,7 @@ public class GameManager : MonoBehaviour
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 	}
 
-	private async void SelectAndBuildMainBlock(GameObject building, Transform point)
+	private async Task SelectAndBuildMainBlock(GameObject building, Transform point)
 	{
 		var instance = Instantiate(building, point.position - new Vector3(0, 0, 3.46f - 5f), Quaternion.identity);
 		if (instance.CompareTag("elevator"))// trying to build elevator
