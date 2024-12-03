@@ -145,6 +145,7 @@ public class SupplyRoom : RoomScript
 		statusPanel.UpdateStatus(status);
 		fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		animator.SetTrigger("EndWork");
+		fixedBear.GetComponent<UnitScript>().SetBusy(false);
 		audioSource.Stop();
 	}
 }

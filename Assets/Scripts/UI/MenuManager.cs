@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -200,19 +201,30 @@ public class MenuManager : MonoBehaviour
 		ContinueGameAsync();
 	}
 
+	private IEnumerator LoadingScreenCoroutine()
+	{
+		var operation = SceneManager.LoadSceneAsync(1);
+		while (!operation.isDone)
+		{
+			Debug.Log(operation.progress);
+			yield return null;
+		}
+	}
+
 	private async Task ContinueGameAsync()
 	{
 		buttonsToHide.ForEach(x => x.SetActive(false));
 		buttonsToShow.ForEach(x => x.SetActive(true));
 		loadingView.SetActive(true);
 		mainMenuScreen.SetActive(false);
-		SceneManager.LoadScene(1);
+		var loading = LoadingScreenCoroutine();
 		if (isAPIActive)
 		{
 			GameManager.Instance.playerName = currentPLayerName;
 			GameManager.Instance.isAPIActive = isAPIActive;
 			GameManager.Instance.JsonManager = new JsonManager(isAPIActive);
 			GameManager.Instance.RequestManager = new RequestManager(isAPIActive);
+			await JsonManager.InitializeShop(currentPLayerName);
 			var requestedPlayer = await RequestManager.GetPlayer(currentPLayerName);
 			Time.timeScale = 0f;
 			if (requestedPlayer == null)

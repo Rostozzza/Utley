@@ -38,13 +38,18 @@ public class UnitScript : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI levelField;
 	[SerializeField] private Transform effectsGrid;
 	[SerializeField] private SpriteRenderer marker;
+	[SerializeField] private string Name;
+
+	private void Awake()
+	{
+		bearModel.Name = Name;
+	}
 
 	private void Start()
 	{
 		statusPanel = GameManager.Instance.bearStatusListController.CreateBearStatus(this);
 		marker = transform.Find("Marker").GetComponent<SpriteRenderer>();
 		SetMarker(false);
-		bearModel = new Bear { Name = "Барак Обама",Qualification = Qualification.beekeeper};//DONT FORGET TO MAKE JSON SAVE/LOAD SYSTEM!
 		UpdateStatsScreen();
 		//StartCoroutine(WalkCycle());
 	}
@@ -267,6 +272,8 @@ public class UnitScript : MonoBehaviour
 	{
 		isBearBusy = isBusy;
 		statusPanel.UpdateState(isBusy);
+		GetComponentInChildren<Animator>().SetBool("Work", false);
+		GetComponentInChildren<Animator>().SetBool("Walk", false);
 	}
 
 	public void Boost()

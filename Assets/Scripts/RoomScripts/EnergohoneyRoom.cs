@@ -50,6 +50,7 @@ public class EnergohoneyRoom : RoomScript
 		fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		status = Status.Free;
 		statusPanel.UpdateStatus(status);
+		fixedBear.GetComponent<UnitScript>().SetBusy(false);
 		animator.SetTrigger("EndWork");
 		audioSource.Stop();
 	}

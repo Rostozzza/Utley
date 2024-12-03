@@ -76,15 +76,19 @@ public class JsonManager
 		requestManager.CreateLog(log).Wait();
 	}
 
-	public Shop InitializeShop()
+	public async Task<Shop> InitializeShop(string player)
 	{
 		Shop shop = new Shop
 		{
-			Name = "SpaceshipShop",
-			Resources = new Dictionary<string, int>()
+			name = "SpaceshipShop",
+			resources = new Dictionary<string, int>()
 		};
-		shop.Resources.Add("asterium", 300);
-		shop.Resources.Add("bears", 100);
+		shop.resources.Add("asterium", 300);
+		shop.resources.Add("bears", 100);
+		if (isAPIActive)
+		{
+			await requestManager.CreateShop(player,shop);
+		}
 		return shop;
 	}
 
