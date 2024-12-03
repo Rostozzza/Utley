@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class BedRoom : RoomScript
 {
@@ -10,6 +11,7 @@ public class BedRoom : RoomScript
 		statusPanel.UpdateStatus(status);
 		fixedBear.GetComponent<UnitScript>().SetBusy(true);
 		animator.SetTrigger("StartWork");
+
 		//!borrowed part!//
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.creator)
 		{
@@ -47,5 +49,6 @@ public class BedRoom : RoomScript
 		status = Status.Free;
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("EndWork");
+		audioSource.Stop();
 	}
 }

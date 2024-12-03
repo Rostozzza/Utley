@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -24,6 +25,8 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private GameObject loginScreen;
 	[SerializeField] private GameObject mainMenuScreen;
 	[SerializeField] private GameObject pauseScreen;
+	[SerializeField] private List<GameObject> buttonsToHide;
+	[SerializeField] private List<GameObject> buttonsToShow;
 	[Header("Inputs")]
 	[SerializeField] private TMP_InputField registrationUsernameField;
 	[SerializeField] private TMP_InputField registrationPasswordField;
@@ -34,6 +37,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private Slider masterSlider;
 	[SerializeField] private Slider SFXSlider;
 	[SerializeField] private Slider musicSlider;
+	[SerializeField] private AudioMixerGroup musicGroup;
 	[Header("API")]
 	public bool isAPIActive;
 
@@ -90,8 +94,10 @@ public class MenuManager : MonoBehaviour
 		{
 			return;
 		}
+		
 		pauseScreen.SetActive(true);
 		Time.timeScale = 0f;
+		mixer.SetFloat("Lowpass",500f);
 	}
 
 	public void Resume()
@@ -102,14 +108,18 @@ public class MenuManager : MonoBehaviour
 		}
 		pauseScreen.SetActive(false);
 		Time.timeScale = 1f;
+		mixer.SetFloat("Lowpass", 22000f);
 	}
 
 	public void ToMenu()
 	{
-		SceneManager.LoadSceneAsync(0);
+		SceneManager.LoadScene(0);
 		pauseScreen.SetActive(false);
 		Time.timeScale = 1f;
 		mainMenuScreen.SetActive(true);
+		mixer.SetFloat("Lowpass", 22000f);
+		buttonsToHide.ForEach(x => x.SetActive(true));
+		buttonsToShow.ForEach(x => x.SetActive(false));
 	}
 
 	public void Quit()
@@ -192,6 +202,8 @@ public class MenuManager : MonoBehaviour
 
 	private async Task ContinueGameAsync()
 	{
+		buttonsToHide.ForEach(x => x.SetActive(false));
+		buttonsToShow.ForEach(x => x.SetActive(true));
 		loadingView.SetActive(true);
 		mainMenuScreen.SetActive(false);
 		SceneManager.LoadScene(1);

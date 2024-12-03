@@ -209,9 +209,4 @@ public class UnitMovement : MonoBehaviour
 		}
 		return null;
 	}
-
-	private void Start()
-	{
-		Time.timeScale = 5;
-	}
 }

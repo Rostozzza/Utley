@@ -43,8 +43,10 @@ public class RoomScript : MonoBehaviour
 	protected Animator animator;
 	public bool isEnpowered = false;
 	protected RoomStatusController statusPanel;
-
-	[Header("Asterium settings")]
+	[Header("Audio Settings")]
+	[SerializeField] protected AudioSource audioSource;
+	[SerializeField] protected AudioClip workSound;
+	[Header("Asterium Settings")]
 	public bool isReadyForWork = false;
 
 	public virtual void Enpower()
@@ -56,6 +58,7 @@ public class RoomScript : MonoBehaviour
 	
 	protected virtual void Start()
 	{
+		audioSource = GetComponent<AudioSource>();
 		statusPanel = GameManager.Instance.roomStatusListController.CreateRoomStatus(this);
 		animator = GetComponentInChildren<Animator>();
 		walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
@@ -81,14 +84,32 @@ public class RoomScript : MonoBehaviour
 			case Resources.Bed:
 				GameManager.Instance.AddWorkStations(workStationsToOutline);
 				GameManager.Instance.ChangeMaxBearAmount(6);
+				workSound = SoundManager.Instance.livingRoomWorkSound;
+				break;
+			case Resources.Asteriy:
+				workSound = SoundManager.Instance.asteriumWorkSound;
+				break;
+			case Resources.Cosmodrome:
+				workSound = SoundManager.Instance.cosmodromeWorkSound;
+				break;
+			case Resources.Supply:
+				workSound = SoundManager.Instance.supplyRoomWorkSound;
+				break;
+			case Resources.Build:
+				workSound = SoundManager.Instance.builderRoomWorkSound;
+				break;
+			case Resources.Energohoney:
+				workSound = SoundManager.Instance.energohoneyRoomWorkSound;
 				break;
 			default:
+				
 				if (workStationsToOutline.Count > 0)
 				{
 					GameManager.Instance.AddWorkStations(workStationsToOutline);
 				}
 				break;
 		}
+		audioSource.clip = workSound;
 		if (!isEnpowered)
 		{
 			lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black));
@@ -190,6 +211,7 @@ public class RoomScript : MonoBehaviour
 					break;
 				case Resources.Asteriy:
 					work = StartCoroutine(WorkStatus());
+					audioSource.Play();
 					return;
 				case Resources.Bed:
 					break;
@@ -208,6 +230,7 @@ public class RoomScript : MonoBehaviour
 			if (status == Status.Free && resource != Resources.Build)
 			{
 				work = StartCoroutine(WorkStatus());
+				audioSource.Play();
 			}
 		}
 	}
@@ -299,6 +322,7 @@ public class RoomScript : MonoBehaviour
 		status = Status.Free;
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("EndWork");
+		audioSource.Stop();
 	}
 
 	protected void OnTriggerEnter(Collider other)

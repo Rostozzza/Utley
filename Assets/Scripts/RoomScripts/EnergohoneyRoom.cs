@@ -49,5 +49,6 @@ public class EnergohoneyRoom : RoomScript
 		status = Status.Free;
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("EndWork");
+		audioSource.Stop();
 	}
 }
