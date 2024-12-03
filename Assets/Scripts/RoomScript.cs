@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.Data;
 using UnityEngine.AI;
 using System.Linq;
+using System.Threading.Tasks;
 
 public class RoomScript : MonoBehaviour
 {
@@ -236,6 +237,15 @@ public class RoomScript : MonoBehaviour
 	}
 
 	public void StartCosmodromeWork()
+	{
+		if (GameManager.Instance.FlyForRawAsterium() && GameManager.Instance.season != GameManager.Season.Tide)
+		{
+			timeShow.gameObject.SetActive(true);
+			StartCoroutine(WorkStatus());
+		}
+	}
+
+	public async Task StartShopWork()
 	{
 		if (GameManager.Instance.FlyForRawAsterium() && GameManager.Instance.season != GameManager.Season.Tide)
 		{

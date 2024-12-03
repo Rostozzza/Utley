@@ -11,7 +11,6 @@ public class BedRoom : RoomScript
 		statusPanel.UpdateStatus(status);
 		fixedBear.GetComponent<UnitScript>().SetBusy(true);
 		animator.SetTrigger("StartWork");
-
 		//!borrowed part!//
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.creator)
 		{
