@@ -217,14 +217,15 @@ public class MenuManager : MonoBehaviour
 		buttonsToShow.ForEach(x => x.SetActive(true));
 		loadingView.SetActive(true);
 		mainMenuScreen.SetActive(false);
-		var loading = LoadingScreenCoroutine();
+		//var loading = LoadingScreenCoroutine();
+		SceneManager.LoadScene(1);
 		if (isAPIActive)
 		{
 			GameManager.Instance.playerName = currentPLayerName;
 			GameManager.Instance.isAPIActive = isAPIActive;
 			GameManager.Instance.JsonManager = new JsonManager(isAPIActive);
 			GameManager.Instance.RequestManager = new RequestManager(isAPIActive);
-			await JsonManager.InitializeShop(currentPLayerName);
+			//await JsonManager.InitializeShop(currentPLayerName);
 			var requestedPlayer = await RequestManager.GetPlayer(currentPLayerName);
 			Time.timeScale = 0f;
 			if (requestedPlayer == null)

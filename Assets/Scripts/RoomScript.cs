@@ -512,6 +512,7 @@ public class RoomScript : MonoBehaviour
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", true);
 		yield return new WaitForSeconds(time);
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
+		room.GetComponent<RoomScript>().SetStatus(Status.Free);
 		durability = 1f;
 	}
 
