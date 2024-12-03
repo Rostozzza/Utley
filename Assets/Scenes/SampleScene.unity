@@ -16285,6 +16285,10 @@ PrefabInstance:
       value: room_spark
       objectReference: {fileID: 0}
     - target: {fileID: 2212405224928843374, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: isEnpowered
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212405224928843374, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
       propertyPath: isReadyForWork
       value: 0
       objectReference: {fileID: 0}
@@ -22861,6 +22865,7 @@ MonoBehaviour:
   selectedBuildButton: {fileID: 21300000, guid: 47b791acb87fbef49a2fa78527908f9c, type: 3}
   defaultInfoButton: {fileID: 21300000, guid: 2f0e7735dcfde3b48a64c9af2e3732bd, type: 3}
   selectedInfoButton: {fileID: 21300000, guid: 36695263d0fa2fb4d822fae7af8e7d29, type: 3}
+  bearsToMoveOn: []
   buildingScreen: {fileID: 1428568829}
   elevatorBuildingScreen: {fileID: 1642775197}
   workStations: []

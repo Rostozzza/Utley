@@ -579,14 +579,7 @@ public class GameManager : MonoBehaviour
 		asteriy = Mathf.Clamp(asteriy, -1, 999);
 	}
 
-	public bool FlyForRawAsterium()
-	{
-		if (rawAsterium < asteriumRoomView.Count)
-		{
-			return true;
-		}
-		return false;
-	}
+	public bool FlyForRawAsterium() => rawAsterium < asteriumRooms.Where(x => x.GetComponent<RoomScript>().isEnpowered).ToList().Count;
 
 	public void DeliverRawAsterium()
 	{
