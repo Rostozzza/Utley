@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private Sprite selectedBuildButton;
 	[SerializeField] private Sprite defaultInfoButton;
 	[SerializeField] private Sprite selectedInfoButton;
+	[SerializeField] private List<BearStatusController> bearsToMoveOn;
 
 	[Header("Building settings")]
 	public GameObject buildingScreen;
@@ -282,7 +283,7 @@ public class GameManager : MonoBehaviour
 		fixedBuilderRoom = null;
 		foreach (GameObject room in builderRooms)
 		{
-			if ((room.GetComponent<RoomScript>().status == RoomScript.Status.Free) && room.GetComponent<RoomScript>().fixedBear)
+			if (room.GetComponent<BuilderRoom>().GetWait() && room.GetComponent<BuilderRoom>().fixedBear)
 			{
 				room.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Busy);
 				fixedBuilderRoom = room;
@@ -303,6 +304,7 @@ public class GameManager : MonoBehaviour
 		// goto room vvvvv
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
+		fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
 		if (building.CompareTag("elevator") && queuedBuildPositon.transform.parent.parent.CompareTag("elevator"))
 		{
 			float minLen = Vector3.Distance(queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms[0].transform.position, queuedBuildPositon.transform.position);
@@ -338,6 +340,11 @@ public class GameManager : MonoBehaviour
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
 		room.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Free);
 		SelectAndBuildMainBlock(building, point);
+		StartCoroutine(WalkAndStartWork(room.GetComponent<BuilderRoom>().fixedBear, room));
+		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
+		{
+			yield return null;
+		}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 	}
 
@@ -647,6 +654,23 @@ public class GameManager : MonoBehaviour
 			buildingScreen.SetActive(false);
 			elevatorBuildingScreen.SetActive(false);
 		}
+
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			bearsToMoveOn[0].MoveToObject();
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			bearsToMoveOn[1].MoveToObject();
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			bearsToMoveOn[2].MoveToObject();
+		}
+		else if (Input.GetKeyDown(KeyCode.Alpha4))
+		{
+			bearsToMoveOn[3].MoveToObject();
+		}
 	}
 
 	private bool MouseOnTarget(GameObject target, bool isTutorial)
@@ -675,14 +699,11 @@ public class GameManager : MonoBehaviour
 	{
 		if (gameObject.CompareTag("work_station") && selectedUnit != null)
 		{
-			if (gameObject.GetComponentInParent<RoomScript>().resource != RoomScript.Resources.Build)
-			{
-				StartCoroutine(WalkAndStartWork(selectedUnit, gameObject));
-			}
-			else
+			if (gameObject.GetComponentInParent<RoomScript>().resource == RoomScript.Resources.Build)
 			{
 				gameObject.GetComponentInParent<RoomScript>().fixedBear = selectedUnit;
 			}
+			StartCoroutine(WalkAndStartWork(selectedUnit, gameObject));
 			if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
 			selectedUnit = null;
 			return;
@@ -702,6 +723,7 @@ public class GameManager : MonoBehaviour
 		{
 			yield return null;
 		}
+		if (obj.GetComponentInParent<RoomScript>().resource == RoomScript.Resources.Build) obj.GetComponentInParent<BuilderRoom>().SetWait(true);
 		obj.GetComponentInParent<RoomScript>().StartWork(unit);
 		unit.GetComponent<UnitScript>().SetMarker(false);
 		OutlineWorkStations(false);
@@ -1099,6 +1121,11 @@ public class GameManager : MonoBehaviour
 			Debug.Log(room.name + " задамажен фазой на " + damage);
 			room.GetComponent<RoomScript>().ChangeDurability(-damage);
 		});
+	}
+
+	public void AddBearToMove(BearStatusController bear)
+	{
+		bearsToMoveOn.Add(bear);
 	}
 
 	public enum Season

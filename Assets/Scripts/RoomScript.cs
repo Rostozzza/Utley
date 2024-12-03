@@ -103,7 +103,6 @@ public class RoomScript : MonoBehaviour
 				workSound = SoundManager.Instance.energohoneyRoomWorkSound;
 				break;
 			default:
-				
 				if (workStationsToOutline.Count > 0)
 				{
 					GameManager.Instance.AddWorkStations(workStationsToOutline);
@@ -228,7 +227,7 @@ public class RoomScript : MonoBehaviour
 				timeShow.transform.parent.gameObject.SetActive(true);
 				return;
 			}
-			if (status == Status.Free && resource != Resources.Build)
+			if (status == Status.Free)// && resource != Resources.Build)
 			{
 				work = StartCoroutine(WorkStatus());
 				audioSource.Play();

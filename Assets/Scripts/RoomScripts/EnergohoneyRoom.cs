@@ -10,6 +10,7 @@ public class EnergohoneyRoom : RoomScript
 		statusPanel.UpdateStatus(status);
 		fixedBear.GetComponent<UnitScript>().SetBusy(true);
 		animator.SetTrigger("StartWork");
+		fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		//!borrowed part!//
 		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Energohoney, GetWalkPoints(), this.gameObject);
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
@@ -46,6 +47,7 @@ public class EnergohoneyRoom : RoomScript
 			fixedBear.GetComponent<UnitScript>().CanBeSelected();
 			fixedBear = null;
 		}
+		fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		status = Status.Free;
 		statusPanel.UpdateStatus(status);
 		fixedBear.GetComponent<UnitScript>().SetBusy(false);
