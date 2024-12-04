@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     private bool needToMoveByMousePos; 
     private bool isScroll = true;
     Coroutine moving = null;
+    Coroutine changingZoom = null;
 
     private void Start()
     {
@@ -43,15 +44,35 @@ public class CameraController : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    zoom = GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(zoom++, -20, -10);
+                    changingZoom ??= StartCoroutine(ZoomChange(1, KeyCode.UpArrow));
                 }
                 else if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    zoom = GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(zoom--, -20, -10);
+                    changingZoom ??= StartCoroutine(ZoomChange(-1, KeyCode.DownArrow));
                 }
             }
             CameraMove();
         }
+    }
+
+    private IEnumerator ZoomChange(float value, KeyCode keyCode)
+    {
+        zoom += value * Time.deltaTime * 10;
+        CameraMove();
+        while (Input.GetKey(keyCode))
+        {
+            //float timer = 0.2f;
+            //while (timer > 0)
+            //{
+            //    if (!Input.GetKey(keyCode)) break;
+            //    yield return null;
+            //    timer -= Time.deltaTime;
+            //}
+            zoom += value * Time.deltaTime * 10;
+            CameraMove();
+            yield return null;
+        }
+        changingZoom = null;
     }
 
     public void CameraMove()
@@ -59,7 +80,7 @@ public class CameraController : MonoBehaviour
         Camera.main.transform.position = new Vector3(
         Mathf.Clamp(Camera.main.transform.position.x, -25f, 25f), 
         Mathf.Clamp(Camera.main.transform.position.y, -19f, 17.5f), 
-        GameManager.Instance.mode == GameManager.Mode.Build ? -20f : zoom
+        GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(zoom, -20, -10)
         );
     }
 

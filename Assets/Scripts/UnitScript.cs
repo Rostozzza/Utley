@@ -334,6 +334,7 @@ public class UnitScript : MonoBehaviour
 	public void SetWorkStr(string set)
 	{
 		strFromWork = set;
+		statusPanel.UpdateWorkStr(strFromWork);
 	}
 
     public enum States

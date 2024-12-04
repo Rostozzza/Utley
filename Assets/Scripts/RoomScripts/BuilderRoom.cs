@@ -20,6 +20,7 @@ public class BuilderRoom : RoomScript
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("StartWork");
 		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Build, new List<Vector3>(), this.gameObject);
+		fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
         fixedBear.GetComponent<UnitScript>().CanBeSelected();
 
         while (wait)
@@ -31,6 +32,7 @@ public class BuilderRoom : RoomScript
 		status = Status.Free;
         fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		statusPanel.UpdateStatus(status);
+		//fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 		animator.SetTrigger("EndWork");
 		audioSource.Stop();
         fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
@@ -49,6 +51,7 @@ public class BuilderRoom : RoomScript
         {
             fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		    status = Status.Free;
+		    fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 		    animator.SetTrigger("EndWork");
 		    audioSource.Stop();
             InterruptWork();

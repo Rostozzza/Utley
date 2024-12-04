@@ -91,21 +91,21 @@ public class RoomScript : MonoBehaviour
 		switch (resource)
 		{
 			case Resources.Bed:
-				workStr = "Заправляет кровати";
+				workStr = "Прокачиваем медведей";
 				GameManager.Instance.AddWorkStations(workStationsToOutline);
 				GameManager.Instance.ChangeMaxBearAmount(6);
 				workSound = SoundManager.Instance.livingRoomWorkSound;
 				break;
 			case Resources.Asteriy:
-				workStr = "Перерабатывает астерий";
+				workStr = "Переработка астерия";
 				workSound = SoundManager.Instance.asteriumWorkSound;
 				break;
 			case Resources.Cosmodrome:
-				workStr = "Улетел за астерием";
+				workStr = "Добыча астерия";
 				workSound = SoundManager.Instance.cosmodromeWorkSound;
 				break;
 			case Resources.Supply:
-				workStr = "Распределяет ресурсы";
+				workStr = "Монтаж сетей";
 				workSound = SoundManager.Instance.supplyRoomWorkSound;
 				break;
 			case Resources.Build:
@@ -113,9 +113,10 @@ public class RoomScript : MonoBehaviour
 				workSound = SoundManager.Instance.builderRoomWorkSound;
 				break;
 			case Resources.Energohoney:
-				workStr = "Добывает мед";
+				workStr = "Cинтез энергомеда";
 				workSound = SoundManager.Instance.energohoneyRoomWorkSound;
 				break;
+			// in case Research - workStr = "Исследуем технологии"
 			default:
 				if (workStationsToOutline.Count > 0)
 				{
@@ -376,6 +377,7 @@ public class RoomScript : MonoBehaviour
 		}
 		status = Status.Free;
 		statusPanel.UpdateStatus(status);
+		fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 		animator.SetTrigger("EndWork");
 		audioSource.Stop();
 	}
