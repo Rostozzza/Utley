@@ -751,16 +751,19 @@ public class GameManager : MonoBehaviour
 
 	public void WalkAndWork(GameObject unit, GameObject obj)
 	{
-		//if (builderRooms.Any(x => x.GetComponent<BuilderRoom>().fixedBear == unit) && !builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == unit).ToList()[0].GetComponent<BuilderRoom>().GetWait())
-		//{
-		//	return;
-		//}
-		//if (builderRooms.Any(x => x.GetComponent<BuilderRoom>().fixedBear == unit)) builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == unit).ToList()[0].GetComponent<BuilderRoom>().SetWait(false);
 		StartCoroutine(WalkAndStartWork(unit,obj));
 	}
 
 	private IEnumerator WalkAndStartWork(GameObject unit, GameObject obj) // needs to wait for walk and after we starting work
 	{
+		//if (builderRooms.Any(x => x.GetComponent<BuilderRoom>().fixedBear == unit) && !builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == unit).ToList()[0].GetComponent<BuilderRoom>().GetWait())
+		//{
+		//	if (builderRooms.Any(x => x.GetComponent<BuilderRoom>().fixedBear == unit)) 
+		//	{
+		//		builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == unit).ToList()[0].GetComponent<BuilderRoom>().SetWait(false);
+		//		builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == unit).ToList()[0].GetComponent<BuilderRoom>().InterruptWork();
+		//	}
+		//}
 		unit.GetComponent<UnitMovement>().StopAllCoroutines();
 		unit.GetComponent<UnitMovement>().MoveToRoom(obj.GetComponentInParent<RoomScript>());
 		if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
