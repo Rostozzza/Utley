@@ -3,8 +3,6 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System.Data;
-using UnityEngine.AI;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -53,6 +51,13 @@ public class RoomScript : MonoBehaviour
 	public bool isReadyForWork = false;
 
 	public virtual void Enpower()
+	{
+		isEnpowered = true;
+		ChangeDurability(0);
+		Debug.Log($"Empowered roon {gameObject.name}");
+	}
+
+	public virtual void Unpower()
 	{
 		isEnpowered = true;
 		ChangeDurability(0);
@@ -388,7 +393,7 @@ public class RoomScript : MonoBehaviour
 	/// Changes durability (wow) "-" to damage, "+" to heal
 	/// </summary>
 	/// <param name="hp"></param>
-	public void ChangeDurability(float hp)
+	public virtual void ChangeDurability(float hp)
 	{
 		if (resource != Resources.Build) durability += hp;
 		if (durability <= 0)

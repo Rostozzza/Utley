@@ -1,8 +1,5 @@
 ﻿
 using Newtonsoft.Json;
-using NUnit.Framework;
-using Unity.VisualScripting;
-
 namespace API.Sevices.Mapper
 {
 	public class Mapper

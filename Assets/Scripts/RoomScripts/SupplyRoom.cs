@@ -50,6 +50,46 @@ public class SupplyRoom : RoomScript
 		catch { }
 	}
 
+	public async Task GetRoomsToUnpower()
+	{
+		var horizontalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 17f
+																	&& x.transform.position.y == transform.position.y && x.GetComponent<RoomScript>()).ToList();
+		var verticalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.y - transform.position.y) <= 9f
+																	&& x.transform.position.x == transform.position.x && x.GetComponent<RoomScript>()).ToList();
+		var diagonalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 9f
+																	&& Mathf.Abs(x.transform.position.y - transform.position.y) <= 5f && x.GetComponent<RoomScript>()).ToList();
+		poweredRooms = horizontalRooms;
+		poweredRooms.AddRange(verticalRooms);
+		poweredRooms.AddRange(diagonalRooms);
+		foreach (var room in poweredRooms.Distinct())
+		{
+			Debug.Log(room.name);
+		}
+		foreach (var room in poweredRooms.Select(x => x.GetComponent<RoomScript>()).ToList())
+		{
+			room.Unpower();
+			Debug.Log($"Trying to empower {room.name}");
+		}
+		try
+		{
+			Destroy(graph);
+		}
+		catch { }
+	}
+
+	public override void ChangeDurability(float hp)
+	{
+		if (status == Status.Destroyed || hp <= durability)
+		{
+			GetRoomsToUnpower();
+		}
+		else
+		{
+			GetRoomsToEnpower();
+		}
+		base.ChangeDurability(hp);
+	}
+
 	public void InitializeGraph()
 	{
 		int randNum = Random.Range(0, graphs.Count);

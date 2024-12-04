@@ -24,7 +24,8 @@ public class BuilderRoom : RoomScript
 
         while (wait)
         {
-            yield return null;
+			HideButton();
+			yield return null;
         }
         
 		status = Status.Free;
@@ -33,6 +34,7 @@ public class BuilderRoom : RoomScript
 		animator.SetTrigger("EndWork");
 		audioSource.Stop();
         fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
+        //ShowButton();
     }
     
     public void SetWait(bool set)
