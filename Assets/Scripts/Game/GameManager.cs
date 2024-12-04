@@ -551,13 +551,13 @@ public class GameManager : MonoBehaviour
 		{
 			int serverHoney = await GetHoney();
 			serverHoney += amount;
-			serverHoney = Mathf.Clamp(serverHoney, -1, 999);
+			serverHoney = Mathf.Clamp(serverHoney, 0, 999);
 			honey = serverHoney;
 			await JsonManager.SavePlayerToJson(playerName);
 			return;
 		}
 		honey += amount;
-		honey = Mathf.Clamp(honey, -1, 999);
+		honey = Mathf.Clamp(honey, 0, 999);
 	}
 
 	/// <summary>
@@ -570,13 +570,13 @@ public class GameManager : MonoBehaviour
 		{
 			int serverAsterium = await GetAsteriy();
 			serverAsterium += amount;
-			serverAsterium = Mathf.Clamp(serverAsterium, -1, 999);
+			serverAsterium = Mathf.Clamp(serverAsterium, 0, 999);
 			asteriy = serverAsterium;
 			await JsonManager.SavePlayerToJson(playerName);
 			return;
 		}
 		asteriy += amount;
-		asteriy = Mathf.Clamp(asteriy, -1, 999);
+		asteriy = Mathf.Clamp(asteriy, 0, 999);
 	}
 
 	public bool FlyForRawAsterium() => rawAsterium < asteriumRooms.Where(x => x.GetComponent<RoomScript>().isEnpowered).ToList().Count;
@@ -602,7 +602,7 @@ public class GameManager : MonoBehaviour
 
 	private void InputHandler()
 	{
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonDown(0) && false) //off
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out raycastHit, 100f) && !buildingScreen.activeSelf)
@@ -630,7 +630,7 @@ public class GameManager : MonoBehaviour
 				selectedUnit = null;
 			}
 		}
-		else if (Input.GetMouseButtonDown(1))
+		else if (Input.GetMouseButtonDown(1) && false) //off
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out raycastHit, 100f) && !buildingScreen.activeSelf)

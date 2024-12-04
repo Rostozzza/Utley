@@ -532,6 +532,7 @@ public class RoomScript : MonoBehaviour
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
 		room.GetComponent<RoomScript>().SetStatus(Status.Free);
 		durability = 1f;
+		ChangeDurability(0);
 	}
 
     public void SetStatus(Status status)
