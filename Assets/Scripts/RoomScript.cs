@@ -498,7 +498,7 @@ public class RoomScript : MonoBehaviour
 		GameObject fixedBuilderRoom = null;
 		foreach (GameObject room in GameManager.Instance.builderRooms)
 		{
-			if ((room.GetComponent<RoomScript>().status == Status.Free) && room.GetComponent<RoomScript>().fixedBear)
+			if (room.GetComponent<BuilderRoom>().GetWait() && room.GetComponent<RoomScript>().fixedBear)
 			{
 				room.GetComponent<RoomScript>().SetStatus(Status.Busy);
 				fixedBuilderRoom = room;
@@ -536,6 +536,12 @@ public class RoomScript : MonoBehaviour
 		room.GetComponent<RoomScript>().SetStatus(Status.Free);
 		durability = 1f;
 		ChangeDurability(0);
+		StartCoroutine(GameManager.Instance.WalkAndStartWork(room.GetComponent<BuilderRoom>().fixedBear, room));
+		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
+		{
+			yield return null;
+		}
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 	}
 
     public void SetStatus(Status status)
