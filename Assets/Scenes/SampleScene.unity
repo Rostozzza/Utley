@@ -20,12 +20,12 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.335849, g: 0.335849, b: 0.335849, a: 1}
+  m_AmbientSkyColor: {r: 0.13962269, g: 0.13962269, b: 0.13962269, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
-  m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.41960785, g: 0.47843137, b: 0.627451, a: 1}
+  m_AmbientIntensity: 0.62
+  m_AmbientMode: 3
+  m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 410087040}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 9df6486cf679eef459533d941e30892f, type: 2}
+  m_LightingDataAsset: {fileID: 0}
   m_LightingSettings: {fileID: 4890085278179872738, guid: b33c50c8f9d9e504dab0aa1a49e24b66, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -611,6 +611,14 @@ PrefabInstance:
     - target: {fileID: 4403103844846354448, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
       propertyPath: m_Name
       value: SupplyRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 4651979387170411296, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5567482617383232383, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7410566657196924022, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1918,9 +1926,17 @@ PrefabInstance:
       propertyPath: 'connectedElevators.Array.data[0]'
       value: 
       objectReference: {fileID: 737861180}
+    - target: {fileID: 1796900286312091380, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2861380098175265383, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843901736332672904, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5039432847486761651, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
       propertyPath: m_Size.y
@@ -4033,7 +4049,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4490565, g: 0.4490565, b: 0.4490565, a: 1}
   m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
@@ -4077,7 +4093,7 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 5000
+  m_ColorTemperature: 20000
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -4096,13 +4112,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.7135203, y: -0.17445557, z: 0.19118717, w: 0.65107715}
+  m_LocalPosition: {x: 1.7, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 95.24, y: -30, z: 0}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5290,6 +5306,10 @@ PrefabInstance:
       propertyPath: 'connectedElevators.Array.data[0]'
       value: 
       objectReference: {fileID: 737861180}
+    - target: {fileID: 1871731902070241174, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3619905054894839651, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
       propertyPath: m_Name
       value: LivingRoom
@@ -5333,6 +5353,10 @@ PrefabInstance:
     - target: {fileID: 6564441876188099931, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347816820653399335, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11150,6 +11174,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 513843572550399554, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 830986390404833867, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1326660275818640259, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
       propertyPath: m_Volume
       value: 0.5
@@ -14397,6 +14429,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2711997747166926409, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197293802033969619, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7403409793845794150, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
       propertyPath: isEnpowered
       value: 1
@@ -16324,6 +16364,14 @@ PrefabInstance:
       propertyPath: 'connectedElevators.Array.data[0]'
       value: 
       objectReference: {fileID: 737861180}
+    - target: {fileID: 3181230920621169470, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3181230920621169470, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3708533381873575428, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
       propertyPath: m_TagString
       value: room_spark
@@ -16335,6 +16383,10 @@ PrefabInstance:
     - target: {fileID: 5660998347327301849, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
       propertyPath: m_TagString
       value: room_lamp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6222399685666512922, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6683865015705750852, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
       propertyPath: m_TagString
@@ -16352,9 +16404,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7142227021176165825, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7241502815381382635, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7578359609187239277, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
       propertyPath: m_Name
       value: AsteriumRecycle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7752754145954463192, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: m_CastShadows
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8348611839528488915, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
       propertyPath: m_TagString
@@ -16367,6 +16431,10 @@ PrefabInstance:
     - target: {fileID: 8448755545643332021, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
       propertyPath: m_Intensity
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8448755545643332021, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9156433562565189456, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
       propertyPath: m_CastShadows
@@ -23327,6 +23395,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: work_station
       objectReference: {fileID: 0}
+    - target: {fileID: 1932895824936753730, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3562106560612395451, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -23390,6 +23462,10 @@ PrefabInstance:
     - target: {fileID: 8088909969174393020, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8450719950578455945, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 151184268124072345, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}

@@ -13,7 +13,7 @@ public class MenuManager : MonoBehaviour
 
 	JsonManager JsonManager = new JsonManager(true);
 	RequestManager RequestManager = new RequestManager(true);
-	private string currentPLayerName;
+	[SerializeField] private string currentPLayerName;
 	[SerializeField] private TextMeshProUGUI currentPlayerField;
 	[SerializeField] private GameObject loadingView;
 	[Header("Game message settings")]
@@ -95,10 +95,10 @@ public class MenuManager : MonoBehaviour
 		{
 			return;
 		}
-		
+
 		pauseScreen.SetActive(true);
 		Time.timeScale = 0f;
-		mixer.SetFloat("Lowpass",500f);
+		mixer.SetFloat("Lowpass", 500f);
 	}
 
 	public void Resume()
@@ -209,6 +209,26 @@ public class MenuManager : MonoBehaviour
 			Debug.Log(operation.progress);
 			yield return null;
 		}
+		if (isAPIActive)
+		{
+			GameManager.Instance.playerName = currentPLayerName;
+			GameManager.Instance.isAPIActive = isAPIActive;
+			GameManager.Instance.JsonManager = new JsonManager(isAPIActive);
+			GameManager.Instance.RequestManager = new RequestManager(isAPIActive);
+
+			//await JsonManager.InitializeShop(currentPLayerName);
+			var requestedPlayer = RequestManager.GetPlayer(currentPLayerName).Result;
+			Time.timeScale = 0f;
+			if (requestedPlayer == null)
+			{
+				Debug.Log("No player present!");
+				loadingView.SetActive(false);
+				yield return null;
+			}
+			JsonManager.LoadPlayerFromModel(requestedPlayer);
+		}
+		Time.timeScale = 1f;
+		loadingView.SetActive(false);
 	}
 
 	private async Task ContinueGameAsync()
@@ -217,26 +237,8 @@ public class MenuManager : MonoBehaviour
 		buttonsToShow.ForEach(x => x.SetActive(true));
 		loadingView.SetActive(true);
 		mainMenuScreen.SetActive(false);
-		//var loading = LoadingScreenCoroutine();
-		SceneManager.LoadScene(1);
-		if (isAPIActive)
-		{
-			GameManager.Instance.playerName = currentPLayerName;
-			GameManager.Instance.isAPIActive = isAPIActive;
-			GameManager.Instance.JsonManager = new JsonManager(isAPIActive);
-			GameManager.Instance.RequestManager = new RequestManager(isAPIActive);
-			//await JsonManager.InitializeShop(currentPLayerName);
-			var requestedPlayer = await RequestManager.GetPlayer(currentPLayerName);
-			Time.timeScale = 0f;
-			if (requestedPlayer == null)
-			{
-				Debug.Log("No player present!");
-				loadingView.SetActive(false);
-				return;
-			}
-			JsonManager.LoadPlayerFromModel(requestedPlayer);
-		}
-		Time.timeScale = 1f;
-		loadingView.SetActive(false);
+		var loading = StartCoroutine(LoadingScreenCoroutine());
+		//SceneManager.LoadSceneAsync(1);
+		
 	}
 }
