@@ -602,7 +602,7 @@ public class GameManager : MonoBehaviour
 
 	private void InputHandler()
 	{
-		if (Input.GetMouseButtonDown(0) && false) //off
+		if (Input.GetMouseButtonDown(0)) //off
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out raycastHit, 100f) && !buildingScreen.activeSelf)
@@ -630,7 +630,7 @@ public class GameManager : MonoBehaviour
 				selectedUnit = null;
 			}
 		}
-		else if (Input.GetMouseButtonDown(1) && false) //off
+		else if (Input.GetMouseButtonDown(1)) //off
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out raycastHit, 100f) && !buildingScreen.activeSelf)
@@ -650,19 +650,55 @@ public class GameManager : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
-			bearsToMoveOn[0].MoveToObject();
+			if (selectedUnit != bearsToMoveOn[0].GetBearObj())
+			{
+				bearsToMoveOn[0].MoveToObject();
+			}
+			else
+			{
+				selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+				selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+				selectedUnit = null;
+			}
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
-			bearsToMoveOn[1].MoveToObject();
+			if (selectedUnit != bearsToMoveOn[1].GetBearObj())
+			{
+				bearsToMoveOn[1].MoveToObject();
+			}
+			else
+			{
+				selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+				selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+				selectedUnit = null;
+			}
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha3))
 		{
-			bearsToMoveOn[2].MoveToObject();
+			if (selectedUnit != bearsToMoveOn[2].GetBearObj())
+			{
+				bearsToMoveOn[2].MoveToObject();
+			}
+			else
+			{
+				selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+				selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+				selectedUnit = null;
+			}
 		}
 		else if (Input.GetKeyDown(KeyCode.Alpha4))
 		{
-			bearsToMoveOn[3].MoveToObject();
+			if (selectedUnit != bearsToMoveOn[3].GetBearObj())
+			{
+				bearsToMoveOn[3].MoveToObject();
+			}
+			else
+			{
+				selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+				selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+				selectedUnit = null;
+			}
 		}
 	}
 

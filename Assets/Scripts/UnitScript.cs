@@ -295,6 +295,7 @@ public class UnitScript : MonoBehaviour
 	public void SetMarker(bool set)
 	{
 		marker.enabled = set;
+		statusPanel.SetSelect(set);
 	}
 
 	public void SetStatsScreen(bool set)
@@ -310,6 +311,11 @@ public class UnitScript : MonoBehaviour
 		{
 			statsScreen.SetActive(!statsScreen.activeSelf);
 		}
+	}
+
+	public BearStatusController GetStatusPanel()
+	{
+		return statusPanel;
 	}
 
     public enum States

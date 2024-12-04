@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class BearStatusController : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class BearStatusController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI jobShow;
     [SerializeField] private TextMeshProUGUI stateShow;
     [SerializeField] private GameObject obj;
+    [SerializeField] private Image avatar;
+    [SerializeField] private bool isSelected = false;
 
     public void Init(GameObject obj, string name, int level, Qualification job, bool isBearBusy)
     {
@@ -53,7 +56,26 @@ public class BearStatusController : MonoBehaviour
 
     public void MoveToObject()
     {
+        SetSelect(true);
         Camera.main.GetComponent<CameraController>().MoveToPoint(obj.transform.position);
         GameManager.Instance.ClickedGameObject(obj);
+    }
+
+    public GameObject GetBearObj()
+    {
+        return obj;
+    }
+
+    public void SetSelect(bool set)
+    {
+        isSelected = set;
+        if (set)
+        {
+            avatar.color = Color.white;
+        }
+        else
+        {
+            avatar.color = new Color(0.5f, 0.5f, 0.5f);
+        }
     }
 }
