@@ -181,7 +181,12 @@ public class GameManager : MonoBehaviour
 	{
 		globalVolume.GetComponent<Volume>().profile.TryGet(out Vignette vignette);
 		this.mode = mode;
-		selectedUnit = null;
+		if (selectedUnit != null)
+		{
+			selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+			selectedUnit = null;
+		}
+		HideAllAssignButtons();
 		if (selectedRoom)
 		{
 			selectedRoom.ToggleRoomStats(false);
@@ -803,10 +808,6 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
-			//selectedUnit.GetComponent<UnitScript>().SetStatsScreen(false);
-			//if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
-			//selectedUnit = null;
-			OutlineWorkStations(false);
 			if (gameObject.CompareTag("room"))
 			{
 				switch (mode)
