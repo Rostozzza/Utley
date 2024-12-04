@@ -26,7 +26,7 @@ public class JsonManager
 		string path = $"{Application.persistentDataPath} + /{playerName}.json";
 		playerModel.resources.Add("rooms", SerializeRooms().ToString());
 		playerModel.resources.Add("elevators", SerializeElevators().ToString());
-		int honey = await GameManager.Instance.GetHoney();
+		float honey = await GameManager.Instance.GetHoney();
 		int asterium = await GameManager.Instance.GetAsteriy();
 		playerModel.resources.Add("honey", honey.ToString());
 		playerModel.resources.Add("asterium", asterium.ToString());
