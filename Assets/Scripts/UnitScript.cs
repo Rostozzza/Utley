@@ -165,6 +165,13 @@ public class UnitScript : MonoBehaviour
 		selectable = true;
 	}
 
+	public void SelectUnit()
+	{
+		GameManager.Instance.selectedUnit = gameObject;
+		GameManager.Instance.ShowAvailableAssignments();
+		SetMarker(true);
+	}
+
 	public void StartMoveInRoom(RoomScript.Resources roomType, List<Vector3> points, GameObject obj)
 	{
 		StartCoroutine(MoveInRoom(roomType, points, obj));

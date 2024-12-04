@@ -1950,6 +1950,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5766715292568392119, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7339609668221275391, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
       propertyPath: m_Volume
       value: 0.5
@@ -23276,6 +23280,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2123148486}
   m_CullTransparentMesh: 1
+--- !u!1 &2144542702 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 201630722402361656, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+  m_PrefabInstance: {fileID: 3562911849079285420}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2146649784
 GameObject:
   m_ObjectHideFlags: 0
@@ -23387,6 +23396,10 @@ PrefabInstance:
       propertyPath: timeShow
       value: 
       objectReference: {fileID: 1827810995}
+    - target: {fileID: 201630722402361656, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 479214506458574639, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -23462,6 +23475,14 @@ PrefabInstance:
     - target: {fileID: 8088909969174393020, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8245512489511231163, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3562911849079285424}
+    - target: {fileID: 8245512489511231163, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AssignWorkForSelectedBear
       objectReference: {fileID: 0}
     - target: {fileID: 8450719950578455945, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_Shadows.m_Type
@@ -23561,6 +23582,7 @@ MonoBehaviour:
   lamps: []
   baseOfRoom: {fileID: 0}
   isEnpowered: 1
+  assignmentButton: {fileID: 2144542702}
   audioSource: {fileID: 0}
   workSound: {fileID: 0}
   isReadyForWork: 0
