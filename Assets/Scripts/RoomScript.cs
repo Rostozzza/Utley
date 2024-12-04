@@ -302,6 +302,7 @@ public class RoomScript : MonoBehaviour
 			StopCoroutine(work);
 		}
 		work = null;
+
 		fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		if (resource == Resources.Cosmodrome)
 		{
@@ -469,6 +470,8 @@ public class RoomScript : MonoBehaviour
 				StopCoroutine(blinks);
 				blinks = null;
 			}
+			InterruptWork();
+			animator.SetTrigger("EndWork");
 		}
 		UpdateRoomHullView();
 	}
@@ -561,6 +564,7 @@ public class RoomScript : MonoBehaviour
 		ChangeDurability(0);
 		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
+		status = Status.Free;
 	}
 
     public void SetStatus(Status status)
