@@ -149,7 +149,7 @@ public class RoomScript : MonoBehaviour
 		GameObject fixedBuilderRoom = null;
 		foreach (GameObject room in GameManager.Instance.builderRooms)
 		{
-			if ((room.GetComponent<RoomScript>().status == Status.Free) && room.GetComponent<RoomScript>().fixedBear)
+			if (room.GetComponent<BuilderRoom>().GetWait() && room.GetComponent<RoomScript>().fixedBear)
 			{
 				room.GetComponent<RoomScript>().SetStatus(Status.Busy);
 				fixedBuilderRoom = room;
@@ -157,6 +157,11 @@ public class RoomScript : MonoBehaviour
 			}
 		}
 		if (fixedBuilderRoom == null)
+		{
+			Debug.Log("Нет свободных строительных комплексов!");
+			return;
+		}
+		else if (!fixedBuilderRoom.GetComponent<BuilderRoom>().GetWait())
 		{
 			Debug.Log("Нет свободных строительных комплексов!");
 			return;
@@ -169,6 +174,7 @@ public class RoomScript : MonoBehaviour
 		{
 			await GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)));
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
+			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
 			StartCoroutine(Upgrade(button, fixedBuilderRoom));
 		}
 	}
@@ -189,6 +195,8 @@ public class RoomScript : MonoBehaviour
 			button.GetComponentInChildren<TextMeshProUGUI>().text = "Максимальный уровень!";
 		}
 		UpdateRoomHullView();
+		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		yield return null;
 	}
 
@@ -543,10 +551,6 @@ public class RoomScript : MonoBehaviour
 		durability = 1f;
 		ChangeDurability(0);
 		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
-		//while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
-		//{
-		//	yield return null;
-		//}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 	}
 

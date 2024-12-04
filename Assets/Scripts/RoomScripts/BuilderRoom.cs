@@ -28,6 +28,7 @@ public class BuilderRoom : RoomScript
         }
         
 		status = Status.Free;
+        fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("EndWork");
 		audioSource.Stop();

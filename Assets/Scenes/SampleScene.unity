@@ -23473,10 +23473,18 @@ PrefabInstance:
     - target: {fileID: 6285336071209994797, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 3562911849079285424}
+    - target: {fileID: 6285336071209994797, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RepairRoom
       objectReference: {fileID: 0}
     - target: {fileID: 8088909969174393020, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 3562911849079285424}
+    - target: {fileID: 8088909969174393020, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpgradeRoom
       objectReference: {fileID: 0}
     - target: {fileID: 8245512489511231163, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
