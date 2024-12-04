@@ -12,14 +12,16 @@ public class BearStatusController : MonoBehaviour
     [SerializeField] private GameObject obj;
     [SerializeField] private Image avatar;
     [SerializeField] private bool isSelected = false;
+    [SerializeField] private TextMeshProUGUI workStrShow;
 
-    public void Init(GameObject obj, string name, int level, Qualification job, bool isBearBusy)
+    public void Init(GameObject obj, string name, int level, Qualification job, bool isBearBusy, string workText)
     {
         this.obj = obj;
         bearName.text = name;
         levelShow.text = Convert.ToString(level);
         jobShow.text = QualificationToText(job);
-        stateShow.text = isBearBusy ? "Работает" : "Не занят";
+        //stateShow.text = isBearBusy ? "Работает" : "Не занят";
+        workStrShow.text = workText;
         GameManager.Instance.AddBearToMove(this);
     }
 
@@ -51,7 +53,7 @@ public class BearStatusController : MonoBehaviour
 
     public void UpdateState(bool isBearBusy)
     {
-        stateShow.text = isBearBusy ? "Работает" : "Не занят";
+        //stateShow.text = isBearBusy ? "Работает" : "Не занят";
     }
 
     public void MoveToObject()
@@ -77,5 +79,10 @@ public class BearStatusController : MonoBehaviour
         {
             avatar.color = new Color(0.5f, 0.5f, 0.5f);
         }
+    }
+
+    public void UpdateWorkStr(string str)
+    {
+        workStrShow.text = str;
     }
 }

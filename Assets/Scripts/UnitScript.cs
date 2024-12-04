@@ -39,6 +39,7 @@ public class UnitScript : MonoBehaviour
 	[SerializeField] private Transform effectsGrid;
 	[SerializeField] private SpriteRenderer marker;
 	[SerializeField] private string Name;
+	[SerializeField] private string strFromWork = "Не занят";
 
 	private void Awake()
 	{
@@ -323,6 +324,16 @@ public class UnitScript : MonoBehaviour
 	public BearStatusController GetStatusPanel()
 	{
 		return statusPanel;
+	}
+
+	public string GetWorkStr()
+	{
+		return strFromWork;
+	}
+
+	public void SetWorkStr(string set)
+	{
+		strFromWork = set;
 	}
 
     public enum States

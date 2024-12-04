@@ -42,6 +42,7 @@ public class RoomScript : MonoBehaviour
 	protected Animator animator;
 	public bool isEnpowered = false;
 	protected RoomStatusController statusPanel;
+	protected string workStr;
 	[SerializeField] private GameObject assignmentButton;
 	Coroutine blinks = null;
 	[Header("Audio Settings")]
@@ -90,23 +91,29 @@ public class RoomScript : MonoBehaviour
 		switch (resource)
 		{
 			case Resources.Bed:
+				workStr = "Заправляет кровати";
 				GameManager.Instance.AddWorkStations(workStationsToOutline);
 				GameManager.Instance.ChangeMaxBearAmount(6);
 				workSound = SoundManager.Instance.livingRoomWorkSound;
 				break;
 			case Resources.Asteriy:
+				workStr = "Перерабатывает астерий";
 				workSound = SoundManager.Instance.asteriumWorkSound;
 				break;
 			case Resources.Cosmodrome:
+				workStr = "Улетел за астерием";
 				workSound = SoundManager.Instance.cosmodromeWorkSound;
 				break;
 			case Resources.Supply:
+				workStr = "Распределяет ресурсы";
 				workSound = SoundManager.Instance.supplyRoomWorkSound;
 				break;
 			case Resources.Build:
+				workStr = "Строит";
 				workSound = SoundManager.Instance.builderRoomWorkSound;
 				break;
 			case Resources.Energohoney:
+				workStr = "Добывает мед";
 				workSound = SoundManager.Instance.energohoneyRoomWorkSound;
 				break;
 			default:
@@ -255,6 +262,7 @@ public class RoomScript : MonoBehaviour
 					break;
 			}
 			fixedBear = bear;
+			fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 			if (resource == Resources.Cosmodrome)
 			{
 				status = Status.Busy;
@@ -317,6 +325,7 @@ public class RoomScript : MonoBehaviour
 		status = Status.Busy;
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("StartWork");
+		fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 		if (resource != Resources.Asteriy)
 		{
 			fixedBear.GetComponent<UnitScript>().SetBusy(true);
