@@ -68,7 +68,6 @@ public class SupplyRoom : RoomScript
 		foreach (var room in poweredRooms.Select(x => x.GetComponent<RoomScript>()).ToList())
 		{
 			room.Unpower();
-			Debug.Log($"Trying to empower {room.name}");
 		}
 		try
 		{
@@ -79,13 +78,9 @@ public class SupplyRoom : RoomScript
 
 	public override void ChangeDurability(float hp)
 	{
-		if (status == Status.Destroyed || hp <= durability)
+		if (status == Status.Destroyed || durability <= 0)
 		{
 			GetRoomsToUnpower();
-		}
-		else
-		{
-			GetRoomsToEnpower();
 		}
 		base.ChangeDurability(hp);
 	}
