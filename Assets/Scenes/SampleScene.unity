@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 41419220}
   m_Layer: 0
   m_Name: Close
-  m_TagString: Untagged
+  m_TagString: assignment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10723,7 +10723,7 @@ MonoBehaviour:
   m_text: "\u0414\u043E\u0431\u044B\u0442\u044C \u0430\u0441\u0442\u0435\u0440\u0438\u0443\u043C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 17e6a45a562aaaf46af6a98e4e580485, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 235508042702513954, guid: 17e6a45a562aaaf46af6a98e4e580485, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10747,7 +10747,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.25
+  m_fontSize: 0.2
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13640,7 +13640,7 @@ GameObject:
   - component: {fileID: 1321783237}
   m_Layer: 0
   m_Name: SendForAsterium
-  m_TagString: Untagged
+  m_TagString: assignment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21054,11 +21054,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4167620145723012171, guid: 9d4d4f6758ecb804ba46092e645c74e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.3942499
       objectReference: {fileID: 0}
     - target: {fileID: 4167620145723012171, guid: 9d4d4f6758ecb804ba46092e645c74e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.28719997
       objectReference: {fileID: 0}
     - target: {fileID: 4167620145723012171, guid: 9d4d4f6758ecb804ba46092e645c74e5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -22919,6 +22919,7 @@ MonoBehaviour:
   - {fileID: 2061067860}
   - {fileID: 557004524}
   - {fileID: 50985220}
+  - {fileID: 3562911849079285421}
   asteriumViewGrid: {fileID: 1922845458}
   asteriumViewPrefab: {fileID: 4493363592815126592, guid: 9d4d4f6758ecb804ba46092e645c74e5, type: 3}
   elevatorPrefab: {fileID: 0}

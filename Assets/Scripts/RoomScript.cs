@@ -137,7 +137,10 @@ public class RoomScript : MonoBehaviour
 
 	public void HideButton()
 	{
-		assignmentButton.SetActive(false);
+		if (resource != Resources.Asteriy)
+		{
+			assignmentButton.SetActive(false);
+		}
 	}
 
 	public async void UpgradeRoom(GameObject button)
