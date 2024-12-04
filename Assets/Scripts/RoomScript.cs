@@ -44,6 +44,7 @@ public class RoomScript : MonoBehaviour
 	protected Animator animator;
 	public bool isEnpowered = false;
 	protected RoomStatusController statusPanel;
+	[SerializeField] private GameObject assignmentButton;
 	[Header("Audio Settings")]
 	[SerializeField] protected AudioSource audioSource;
 	[SerializeField] protected AudioClip workSound;
@@ -120,6 +121,28 @@ public class RoomScript : MonoBehaviour
 		sparks.ForEach(y => y.Stop());
 	}
 
+	public void AssignWorkForSelectedBear()
+	{
+		GameManager.Instance.WalkAndWork(GameManager.Instance.selectedUnit, gameObject);
+		GameManager.Instance.HideAllAssignButtons();
+	}
+
+	public void ShowButton()
+	{
+		if (isEnpowered && status == Status.Free && durability > 0 && resource != Resources.Asteriy)
+		{
+			assignmentButton.SetActive(true);
+		}
+	}
+
+	public void HideButton()
+	{
+		if (resource != Resources.Asteriy)
+		{
+			assignmentButton.SetActive(false);
+		}
+	}
+
 	public async void UpgradeRoom(GameObject button)
 	{
 		GameObject fixedBuilderRoom = null;
@@ -178,7 +201,6 @@ public class RoomScript : MonoBehaviour
 	{
 		roomBuildScreen.SetActive(toggle);
 	}
-
 
 	public void UpdateRoomHullView()
 	{

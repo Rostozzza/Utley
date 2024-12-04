@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 41419220}
   m_Layer: 0
   m_Name: Close
-  m_TagString: Untagged
+  m_TagString: assignment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1947,6 +1947,10 @@ PrefabInstance:
       value: 0.013568332
       objectReference: {fileID: 0}
     - target: {fileID: 5180719534923703120, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766715292568392119, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -10719,7 +10723,7 @@ MonoBehaviour:
   m_text: "\u0414\u043E\u0431\u044B\u0442\u044C \u0430\u0441\u0442\u0435\u0440\u0438\u0443\u043C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 17e6a45a562aaaf46af6a98e4e580485, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 235508042702513954, guid: 17e6a45a562aaaf46af6a98e4e580485, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10743,7 +10747,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.25
+  m_fontSize: 0.2
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13636,7 +13640,7 @@ GameObject:
   - component: {fileID: 1321783237}
   m_Layer: 0
   m_Name: SendForAsterium
-  m_TagString: Untagged
+  m_TagString: assignment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21050,11 +21054,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4167620145723012171, guid: 9d4d4f6758ecb804ba46092e645c74e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.3942499
       objectReference: {fileID: 0}
     - target: {fileID: 4167620145723012171, guid: 9d4d4f6758ecb804ba46092e645c74e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.28719997
       objectReference: {fileID: 0}
     - target: {fileID: 4167620145723012171, guid: 9d4d4f6758ecb804ba46092e645c74e5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -22915,6 +22919,7 @@ MonoBehaviour:
   - {fileID: 2061067860}
   - {fileID: 557004524}
   - {fileID: 50985220}
+  - {fileID: 3562911849079285421}
   asteriumViewGrid: {fileID: 1922845458}
   asteriumViewPrefab: {fileID: 4493363592815126592, guid: 9d4d4f6758ecb804ba46092e645c74e5, type: 3}
   elevatorPrefab: {fileID: 0}
@@ -23276,6 +23281,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2123148486}
   m_CullTransparentMesh: 1
+--- !u!1 &2144542702 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 201630722402361656, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+  m_PrefabInstance: {fileID: 3562911849079285420}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2146649784
 GameObject:
   m_ObjectHideFlags: 0
@@ -23387,6 +23397,10 @@ PrefabInstance:
       propertyPath: timeShow
       value: 
       objectReference: {fileID: 1827810995}
+    - target: {fileID: 201630722402361656, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 479214506458574639, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -23462,6 +23476,14 @@ PrefabInstance:
     - target: {fileID: 8088909969174393020, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8245512489511231163, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3562911849079285424}
+    - target: {fileID: 8245512489511231163, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AssignWorkForSelectedBear
       objectReference: {fileID: 0}
     - target: {fileID: 8450719950578455945, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_Shadows.m_Type
@@ -23561,6 +23583,7 @@ MonoBehaviour:
   lamps: []
   baseOfRoom: {fileID: 0}
   isEnpowered: 1
+  assignmentButton: {fileID: 2144542702}
   audioSource: {fileID: 0}
   workSound: {fileID: 0}
   isReadyForWork: 0

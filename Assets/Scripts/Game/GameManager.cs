@@ -190,7 +190,7 @@ public class GameManager : MonoBehaviour
 		selectedRoom = null;
 		foreach (GameObject room in allRooms)
 		{
-			foreach (var button in room.GetComponentsInChildren<Button>(true))
+			foreach (var button in room.GetComponentsInChildren<Button>(true).Where(x => !x.CompareTag("assignment")).ToList())
 			{
 				button.gameObject.SetActive(mode == Mode.Build);
 			}
@@ -726,17 +726,17 @@ public class GameManager : MonoBehaviour
 
 	private void RightClick(GameObject gameObject)
 	{
-		if (gameObject.CompareTag("work_station") && selectedUnit != null)
-		{
-			if (gameObject.GetComponentInParent<RoomScript>().resource == RoomScript.Resources.Build)
-			{
-				gameObject.GetComponentInParent<RoomScript>().fixedBear = selectedUnit;
-			}
-			StartCoroutine(WalkAndStartWork(selectedUnit, gameObject));
-			if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
-			selectedUnit = null;
-			return;
-		}
+		//if (gameObject.CompareTag("work_station") && selectedUnit != null)
+		//{
+		//	if (gameObject.GetComponentInParent<RoomScript>().resource == RoomScript.Resources.Build)
+		//	{
+		//		gameObject.GetComponentInParent<RoomScript>().fixedBear = selectedUnit;
+		//	}
+		//	StartCoroutine(WalkAndStartWork(selectedUnit, gameObject));
+		//	if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+		//	selectedUnit = null;
+		//	return;
+		//}
 		if (gameObject.CompareTag("room"))
 		{
 			selectedUnit.GetComponent<UnitMovement>().StopAllCoroutines();
@@ -744,10 +744,18 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	public void WalkAndWork(GameObject unit, GameObject obj)
+	{
+		StartCoroutine(WalkAndStartWork(unit,obj));
+	}
+
 	private IEnumerator WalkAndStartWork(GameObject unit, GameObject obj) // needs to wait for walk and after we starting work
 	{
 		unit.GetComponent<UnitMovement>().StopAllCoroutines();
 		unit.GetComponent<UnitMovement>().MoveToRoom(obj.GetComponentInParent<RoomScript>());
+		if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+
+		selectedUnit = null;
 		while (unit.GetComponent<UnitMovement>().currentRoutine != null)
 		{
 			yield return null;
@@ -756,6 +764,16 @@ public class GameManager : MonoBehaviour
 		obj.GetComponentInParent<RoomScript>().StartWork(unit);
 		unit.GetComponent<UnitScript>().SetMarker(false);
 		OutlineWorkStations(false);
+	}
+
+	public void HideAllAssignButtons()
+	{
+		allRooms.Where(x => x.GetComponent<RoomScript>()).ToList().ForEach(y => y.GetComponent<RoomScript>().HideButton());
+	}
+
+	public void ShowAvailableAssignments()
+	{
+		allRooms.Where(x => x.GetComponent<RoomScript>()).ToList().ForEach(y => y.GetComponent<RoomScript>().ShowButton());
 	}
 
 	public void ClickedGameObject(GameObject gameObject)
@@ -770,9 +788,7 @@ public class GameManager : MonoBehaviour
 				switch (mode)
 				{
 					case Mode.None:
-						selectedUnit = gameObject;
-						selectedUnit.GetComponent<UnitScript>().SetMarker(true);
-						OutlineWorkStations(true);
+						gameObject.GetComponent<UnitScript>().SelectUnit();
 						break;
 					case Mode.Info:
 						gameObject.GetComponent<UnitScript>().SetStatsScreen();
@@ -783,8 +799,8 @@ public class GameManager : MonoBehaviour
 		else
 		{
 			//selectedUnit.GetComponent<UnitScript>().SetStatsScreen(false);
-			if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
-			selectedUnit = null;
+			//if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+			//selectedUnit = null;
 			OutlineWorkStations(false);
 			if (gameObject.CompareTag("room"))
 			{
