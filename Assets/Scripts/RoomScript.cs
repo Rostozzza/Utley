@@ -496,6 +496,7 @@ public class RoomScript : MonoBehaviour
 	private void SetLampsColor(Color color)
 	{
 		lamps.ForEach(y => y.GetComponent<Renderer>().material.SetColor("_EmissionColor", color));
+		lamps.ForEach(x => x.GetComponentInChildren<Light>().color = color);
 	}
 
     /// <summary>
