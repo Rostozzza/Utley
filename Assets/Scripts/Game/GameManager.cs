@@ -751,7 +751,12 @@ public class GameManager : MonoBehaviour
 
 	public void WalkAndWork(GameObject unit, GameObject obj)
 	{
-		StartCoroutine(WalkAndStartWork(unit, obj));
+		//if (builderRooms.Any(x => x.GetComponent<BuilderRoom>().fixedBear == unit) && !builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == unit).ToList()[0].GetComponent<BuilderRoom>().GetWait())
+		//{
+		//	return;
+		//}
+		//if (builderRooms.Any(x => x.GetComponent<BuilderRoom>().fixedBear == unit)) builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == unit).ToList()[0].GetComponent<BuilderRoom>().SetWait(false);
+		StartCoroutine(WalkAndStartWork(unit,obj));
 	}
 
 	private IEnumerator WalkAndStartWork(GameObject unit, GameObject obj) // needs to wait for walk and after we starting work

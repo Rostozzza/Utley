@@ -507,6 +507,11 @@ public class RoomScript : MonoBehaviour
 		}
 		if (fixedBuilderRoom == null)
 		{
+			Debug.Log("Медведь занят!");
+			return;
+		}
+		else if (!fixedBuilderRoom.GetComponent<BuilderRoom>().GetWait())
+		{
 			Debug.Log("Нет свободных строительных комплексов!");
 			return;
 		}
@@ -520,6 +525,7 @@ public class RoomScript : MonoBehaviour
 			GameManager.Instance.ChangeAsteriy(-10);
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
 			int timeToRepair = (int)((1 - durability) * 100 / 2);
+			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
 			StartCoroutine(Repair(timeToRepair, fixedBuilderRoom));
 		}
 	}
@@ -537,10 +543,10 @@ public class RoomScript : MonoBehaviour
 		durability = 1f;
 		ChangeDurability(0);
 		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
-		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
-		{
-			yield return null;
-		}
+		//while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
+		//{
+		//	yield return null;
+		//}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 	}
 
