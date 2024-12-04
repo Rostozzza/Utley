@@ -710,6 +710,9 @@ public class GameManager : MonoBehaviour
 				selectedUnit = null;
 			}
 		}
+
+		if (Input.GetKeyDown(KeyCode.B)) SetModeByButton((int)Mode.Build);
+		else if (Input.GetKeyDown(KeyCode.I)) SetModeByButton((int)Mode.Info);
 	}
 
 	private bool MouseOnTarget(GameObject target, bool isTutorial)
@@ -1020,7 +1023,7 @@ public class GameManager : MonoBehaviour
 			List<GameObject> interestRooms = new List<GameObject>();
 			foreach (GameObject room in allRooms)
 			{
-				if (room.TryGetComponent<RoomScript>(out RoomScript a) && a.status != RoomScript.Status.Destroyed)
+				if (room.TryGetComponent<RoomScript>(out RoomScript a) && a.status != RoomScript.Status.Destroyed && a.resource != RoomScript.Resources.Build)
 				{
 					interestRooms.Add(room);
 				}

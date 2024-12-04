@@ -389,7 +389,7 @@ public class RoomScript : MonoBehaviour
 	/// <param name="hp"></param>
 	public void ChangeDurability(float hp)
 	{
-		durability += hp;
+		if (resource != Resources.Build) durability += hp;
 		if (durability <= 0)
 		{
 			status = Status.Destroyed;
