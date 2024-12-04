@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
 	public Mode mode;
 	public int cycleNumber = 1;
 	[Header("Resourсes")]
-	[SerializeField] private int honey;
+	[SerializeField] private float honey;
 	[SerializeField] private int asteriy;
 	[SerializeField] private int rawAsterium = 0;
 	public int maxBearsAmount;
@@ -520,7 +520,7 @@ public class GameManager : MonoBehaviour
 	/// Returns amount of honey on current client
 	/// </summary>
 	/// <returns></returns>
-	public async Task<int> GetHoney()
+	public async Task<float> GetHoney()
 	{
 		if (isAPIActive)
 		{
@@ -550,11 +550,11 @@ public class GameManager : MonoBehaviour
 	/// Changes amount of honey by given number
 	/// </summary>
 	/// <param name="amount"></param>
-	public async Task ChangeHoney(int amount)
+	public async Task ChangeHoney(float amount)
 	{
 		if (isAPIActive)
 		{
-			int serverHoney = await GetHoney();
+			float serverHoney = await GetHoney();
 			serverHoney += amount;
 			serverHoney = Mathf.Clamp(serverHoney, 0, 999);
 			honey = serverHoney;
@@ -1069,7 +1069,7 @@ public class GameManager : MonoBehaviour
 	{
 		while (true)
 		{
-			yield return new WaitForSeconds(60);
+			yield return new WaitForSeconds(1);
 			ConsumeEnergohoney();
 		}
 	}
@@ -1095,15 +1095,15 @@ public class GameManager : MonoBehaviour
 				}
 			}
 		}
-		int honeyToEat = (int)(5 + n1 + 1.1 * n2 + 1.2 * n3);
+		float honeyToEat = (float)(5 + n1 + 1.05 * n2 + 1.1 * n3) / 60f;
 		if (season == Season.Freeze)
 		{
-			honeyToEat = (int)((float)honeyToEat * (1f + 0.1f + 0.05f * cycleNumber));
+			honeyToEat *= 1f + 0.1f + 0.05f * cycleNumber;
 		}
 		if (isAPIActive)
 		{
 			var model = await JsonManager.SavePlayerToJson(playerName);
-			Dictionary<string, int> changedResources = new Dictionary<string, int>();
+			Dictionary<string, float> changedResources = new Dictionary<string, float>();
 			changedResources.Add("honey", -honeyToEat);
 			JsonManager.CreateLog(new Log
 			{

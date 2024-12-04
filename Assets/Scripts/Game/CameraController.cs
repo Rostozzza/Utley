@@ -33,9 +33,23 @@ public class CameraController : MonoBehaviour
             }
             CameraMove();
         }
-        if (Input.mouseScrollDelta.y != 0 && isScroll)
+        if ((Input.mouseScrollDelta.y != 0 && isScroll) || (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)))
         {
-            zoom = GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(Input.mouseScrollDelta.y + zoom, -20, -10);
+            if (Input.mouseScrollDelta.y != 0 && isScroll)
+            {
+                zoom = GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(Input.mouseScrollDelta.y + zoom, -20, -10);
+            }
+            else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    zoom = GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(zoom++, -20, -10);
+                }
+                else if (Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    zoom = GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(zoom--, -20, -10);
+                }
+            }
             CameraMove();
         }
     }

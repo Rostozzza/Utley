@@ -31,7 +31,7 @@ public class UIResourceShower : MonoBehaviour
     /// </summary>
     public void UpdateIndicators()
     {
-        energoHoneyAmountText.text = Convert.ToString(GameManager.Instance.GetHoney().Result);
+        energoHoneyAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.GetHoney().Result));
         asteriyAmountText.text = Convert.ToString(GameManager.Instance.GetAsteriy().Result);
         bearsAmountText.text = Convert.ToString(GameManager.Instance.bears.Count) + "/" + Convert.ToString(GameManager.Instance.maxBearsAmount);
         temperatureSlider.value = 1f; // ???
@@ -61,7 +61,7 @@ public class UIResourceShower : MonoBehaviour
                         }
                     }
                 }
-                int honeyToEat = (int)(5 + n1 + 1.1 * n2 + 1.2 * n3);
+                int honeyToEat = (int)(5 + n1 + 1.05 * n2 + 1.1 * n3);
                 honeyReducePanel.SetActive(true);
                 honeyReduceDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString(honeyToEat);
                 break;
