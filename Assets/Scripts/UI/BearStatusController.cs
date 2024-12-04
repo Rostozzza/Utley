@@ -53,7 +53,7 @@ public class BearStatusController : MonoBehaviour
 
     public void UpdateState(bool isBearBusy)
     {
-        stateShow.text = isBearBusy ? "Работает" : "Не занят";
+        //stateShow.text = isBearBusy ? "Работает" : "Не занят";
     }
 
     public void MoveToObject()
