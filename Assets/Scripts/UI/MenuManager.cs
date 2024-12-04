@@ -24,6 +24,8 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private GameObject startingScreen;
 	[SerializeField] private GameObject registrationScreen;
 	[SerializeField] private GameObject loginScreen;
+	[SerializeField] private GameObject loadingScreen;
+	[SerializeField] private Slider loadingBar;
 	[SerializeField] private GameObject mainMenuScreen;
 	[SerializeField] private GameObject pauseScreen;
 	[SerializeField] private List<GameObject> buttonsToHide;
@@ -114,9 +116,22 @@ public class MenuManager : MonoBehaviour
 
 	public void ToMenu()
 	{
-		SceneManager.LoadScene(0);
+		SceneManager.LoadSceneAsync(0);
 		pauseScreen.SetActive(false);
-		Time.timeScale = 1f;
+		StartCoroutine(ToMenuCoroutine());
+	}
+
+	private IEnumerator ToMenuCoroutine()
+	{
+		var operation = SceneManager.LoadSceneAsync(0);
+		loadingScreen.SetActive(true);
+		while (!operation.isDone)
+		{
+			loadingBar.value = (operation.progress / 0.9f);
+			yield return null;
+		}
+		loadingBar.value = 0;
+		loadingScreen.SetActive(false);
 		mainMenuScreen.SetActive(true);
 		mixer.SetFloat("Lowpass", 22000f);
 		buttonsToHide.ForEach(x => x.SetActive(true));
@@ -204,11 +219,14 @@ public class MenuManager : MonoBehaviour
 	private IEnumerator LoadingScreenCoroutine()
 	{
 		var operation = SceneManager.LoadSceneAsync(1);
+		loadingScreen.SetActive(true);
 		while (!operation.isDone)
 		{
-			Debug.Log(operation.progress);
+			loadingBar.value = (operation.progress / 0.9f);
 			yield return null;
 		}
+		loadingBar.value = 0;
+		loadingScreen.SetActive(false);
 		if (isAPIActive)
 		{
 			GameManager.Instance.playerName = currentPLayerName;

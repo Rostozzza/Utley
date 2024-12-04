@@ -45,6 +45,7 @@ public class RoomScript : MonoBehaviour
 	public bool isEnpowered = false;
 	protected RoomStatusController statusPanel;
 	[SerializeField] private GameObject assignmentButton;
+	Coroutine blinks = null;
 	[Header("Audio Settings")]
 	[SerializeField] protected AudioSource audioSource;
 	[SerializeField] protected AudioClip workSound;
@@ -388,7 +389,6 @@ public class RoomScript : MonoBehaviour
 	/// <param name="hp"></param>
 	public void ChangeDurability(float hp)
 	{
-		Coroutine blinks = null;
 		durability += hp;
 		if (durability <= 0)
 		{

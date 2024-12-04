@@ -620,6 +620,7 @@ public class GameManager : MonoBehaviour
 				{
 					OutlineWorkStations(false);
 					bears.ForEach(x => x.GetComponent<UnitScript>().SetMarker(false));
+					HideAllAssignButtons();
 				}
 			}
 			else
@@ -663,6 +664,7 @@ public class GameManager : MonoBehaviour
 			{
 				selectedUnit.GetComponent<UnitScript>().SetMarker(false);
 				selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+				HideAllAssignButtons();
 				selectedUnit = null;
 			}
 		}
@@ -676,6 +678,7 @@ public class GameManager : MonoBehaviour
 			{
 				selectedUnit.GetComponent<UnitScript>().SetMarker(false);
 				selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+				HideAllAssignButtons();
 				selectedUnit = null;
 			}
 		}
@@ -689,6 +692,7 @@ public class GameManager : MonoBehaviour
 			{
 				selectedUnit.GetComponent<UnitScript>().SetMarker(false);
 				selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+				HideAllAssignButtons();
 				selectedUnit = null;
 			}
 		}
@@ -702,6 +706,7 @@ public class GameManager : MonoBehaviour
 			{
 				selectedUnit.GetComponent<UnitScript>().SetMarker(false);
 				selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+				HideAllAssignButtons();
 				selectedUnit = null;
 			}
 		}
@@ -793,7 +798,6 @@ public class GameManager : MonoBehaviour
 	{
 		Debug.Log("кликнули по " + gameObject.tag);
 		bears.ForEach(x => x.GetComponent<UnitScript>().SetMarker(false));
-
 		if (gameObject.CompareTag("unit"))
 		{
 			if (gameObject.GetComponent<UnitScript>().selectable)
