@@ -60,7 +60,7 @@ public class RoomScript : MonoBehaviour
 
 	public virtual void Unpower()
 	{
-		isEnpowered = true;
+		isEnpowered = false;
 		ChangeDurability(0);
 		Debug.Log($"Empowered roon {gameObject.name}");
 	}
