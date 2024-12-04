@@ -536,7 +536,7 @@ public class RoomScript : MonoBehaviour
 		room.GetComponent<RoomScript>().SetStatus(Status.Free);
 		durability = 1f;
 		ChangeDurability(0);
-		StartCoroutine(GameManager.Instance.WalkAndStartWork(room.GetComponent<BuilderRoom>().fixedBear, room));
+		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
 		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
 		{
 			yield return null;
