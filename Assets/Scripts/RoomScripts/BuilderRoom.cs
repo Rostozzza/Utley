@@ -20,7 +20,7 @@ public class BuilderRoom : RoomScript
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("StartWork");
 		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Build, new List<Vector3>(), this.gameObject);
-        fixedBear.GetComponent<UnitScript>().CannotBeSelected();
+        fixedBear.GetComponent<UnitScript>().CanBeSelected();
 
         while (wait)
         {
@@ -32,11 +32,25 @@ public class BuilderRoom : RoomScript
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("EndWork");
 		audioSource.Stop();
+        fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
     }
     
     public void SetWait(bool set)
     {
         wait = set;
+    }
+
+    public void SetWait(bool set, bool needToLeave)
+    {
+        wait = set;
+        if (needToLeave)
+        {
+            fixedBear.GetComponent<UnitScript>().CanBeSelected();
+		    status = Status.Free;
+		    animator.SetTrigger("EndWork");
+		    audioSource.Stop();
+            InterruptWork();
+        }
     }
 
     public bool GetWait()
