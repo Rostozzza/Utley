@@ -1161,52 +1161,57 @@ public class GameManager : MonoBehaviour
 					break;
 				case Season.Freeze:
 					ChangeSeason(Season.Tide);
-					DamageRoomsBySeason();
+					StartCoroutine(DamageRoomsBySeason());
 					break;
 			}
 		}
 	}
 
-	public void DamageRoomsBySeason()
+	public IEnumerator DamageRoomsBySeason()
 	{
-		int n = Random.Range(3, 7);
-		List<GameObject> interestRooms = new List<GameObject>();
-		foreach (GameObject room in allRooms)
+		for (int i = 0; i < 5; i++)
 		{
-			if (room.TryGetComponent<RoomScript>(out RoomScript a) && a.status != RoomScript.Status.Destroyed)
+			int n = Random.Range(3, 7);
+			List<GameObject> interestRooms = new List<GameObject>();
+			foreach (GameObject room in allRooms)
 			{
-				interestRooms.Add(room);
+				if (room.TryGetComponent<RoomScript>(out RoomScript a) && a.status != RoomScript.Status.Destroyed)
+				{
+					interestRooms.Add(room);
+				}
 			}
-		}
-		List<GameObject> shuffleRooms = new List<GameObject>();
-		if (n > interestRooms.Count)
-		{
-			foreach (GameObject room in interestRooms)
+			List<GameObject> shuffleRooms = new List<GameObject>();
+			if (n > interestRooms.Count)
 			{
-				shuffleRooms.Add(room);
-			}
-		}
-		else
-		{
-			foreach (GameObject room in interestRooms)
-			{
-				if (shuffleRooms.Count == 0)
+				foreach (GameObject room in interestRooms)
 				{
 					shuffleRooms.Add(room);
 				}
-				else
-				{
-					shuffleRooms.Insert(Random.Range(0, shuffleRooms.Count), room);
-				}
 			}
-			shuffleRooms.RemoveRange(n, shuffleRooms.Count - n);
+			else
+			{
+				foreach (GameObject room in interestRooms)
+				{
+					if (shuffleRooms.Count == 0)
+					{
+						shuffleRooms.Add(room);
+					}
+					else
+					{
+						shuffleRooms.Insert(Random.Range(0, shuffleRooms.Count), room);
+					}
+				}
+				shuffleRooms.RemoveRange(n, shuffleRooms.Count - n);
+			}
+			shuffleRooms.ForEach(delegate (GameObject room)
+			{
+				float damage = (0.35f + 0.04f * cycleNumber - 0.02f * room.GetComponent<RoomScript>().depthLevel) * room.GetComponent<RoomScript>().durability;
+				Debug.Log(room.name + " задамажен фазой на " + damage);
+				room.GetComponent<RoomScript>().ChangeDurability(-damage);
+			});
+			Camera.main.GetComponent<CameraShake>().MeteorImpact();
+			yield return new WaitForSeconds(6f);
 		}
-		shuffleRooms.ForEach(delegate (GameObject room)
-		{
-			float damage = (0.35f + 0.04f * cycleNumber - 0.02f * room.GetComponent<RoomScript>().depthLevel) * room.GetComponent<RoomScript>().durability;
-			Debug.Log(room.name + " задамажен фазой на " + damage);
-			room.GetComponent<RoomScript>().ChangeDurability(-damage);
-		});
 	}
 
 	public void AddBearToMove(BearStatusController bear)

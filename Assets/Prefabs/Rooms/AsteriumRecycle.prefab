@@ -22036,7 +22036,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -28226,6 +28226,7 @@ MonoBehaviour:
   assignmentButton: {fileID: 0}
   audioSource: {fileID: 0}
   workSound: {fileID: 0}
+  progressBar: {fileID: 0}
   isReadyForWork: 0
 --- !u!65 &6881682886034302060
 BoxCollider:
@@ -28736,8 +28737,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.0026}
-  m_SizeDelta: {x: 5.4547, y: 0.5502}
+  m_AnchoredPosition: {x: -0.0355, y: -0.0139}
+  m_SizeDelta: {x: 7.4632, y: 3.6544}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3157390206437797987
 CanvasRenderer:
