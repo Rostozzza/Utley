@@ -25,12 +25,10 @@ public class CameraShake : MonoBehaviour
 
 	private IEnumerator ImpactCoroutine()
 	{
-		volume.profile.TryGet(out ChromaticAberration abberation);
 		soundTransform.Translate(transform.position.x + Random.Range(-xRange,xRange),0,0);
 		audioSource.PlayOneShot(SoundManager.Instance.impactSound);
 		var timer = length;
 		Vector3 startPos = transform.position;
-		abberation.intensity.value = abberationIntensity;
 		while (timer > 0)
 		{
 			timer -= Time.deltaTime;
@@ -38,13 +36,20 @@ public class CameraShake : MonoBehaviour
 			//transform.position = startPos + Random.insideUnitSphere * force;
 			yield return null;
 		}
-		timer = abberationLength;
-		var abberationDrain = (1f - abberationLength) / abberationLength;
+		//transform.position = startPos;
+	}
+	private IEnumerator AbberationDrain()
+	{
+		volume.profile.TryGet(out ChromaticAberration abberation);
+		abberation.intensity.value = abberationIntensity;
+		var timer = abberationLength;
+		var abberationDrain = (1f - abberationIntensity) / abberationLength;
 		while (timer > 0)
 		{
 			timer -= Time.deltaTime;
 			abberation.intensity.value -= abberationDrain;
+			yield return null;
 		}
-		//transform.position = startPos;
+		abberation.intensity.value = 0;
 	}
 }

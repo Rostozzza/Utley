@@ -55,7 +55,7 @@ public class UnitScript : MonoBehaviour
 		statusPanel = GameManager.Instance.bearStatusListController.CreateBearStatus(this);
 		marker = transform.Find("Marker").GetComponent<SpriteRenderer>();
 		SetMarker(false);
-		UpdateStatsScreen();
+		//UpdateStatsScreen();
 		statusPanel.UpdateLevel(level);
 		//StartCoroutine(WalkCycle());
 	}
