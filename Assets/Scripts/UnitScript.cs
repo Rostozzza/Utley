@@ -148,6 +148,7 @@ public class UnitScript : MonoBehaviour
 	{
 		level = Mathf.Clamp(level+0.5f,1,5);
 		statusPanel.UpdateLevel(level);
+		expParticle.SetActive(false);
 		statusPanel.UpdateLoveWork(false);
 	}
 
