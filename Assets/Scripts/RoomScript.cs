@@ -48,6 +48,7 @@ public class RoomScript : MonoBehaviour
 	[Header("Audio Settings")]
 	[SerializeField] protected AudioSource audioSource;
 	[SerializeField] protected AudioClip workSound;
+	[Header("Progress bar")]
 	[Header("Asterium Settings")]
 	public bool isReadyForWork = false;
 
@@ -370,6 +371,10 @@ public class RoomScript : MonoBehaviour
 				{
 					timeShow.text = SecondsToTimeToShow(timer);
 					timer -= Time.deltaTime;
+					if (timer <= 13.31f)
+					{
+						animator.SetTrigger("EndWork");
+					}
 					yield return null;
 				}
 				GameManager.Instance.DeliverRawAsterium();
@@ -394,7 +399,10 @@ public class RoomScript : MonoBehaviour
 		}
 		status = Status.Free;
 		statusPanel.UpdateStatus(status);
-		animator.SetTrigger("EndWork");
+		if (resource != Resources.Cosmodrome)
+		{
+			animator.SetTrigger("EndWork");
+		}
 		audioSource.Stop();
 	}
 

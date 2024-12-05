@@ -43,6 +43,7 @@ public class UnitScript : MonoBehaviour
 	[SerializeField] public Sprite avatar;
 	[Header("VFX")]
 	public GameObject expParticle;
+	[SerializeField] private ParticleSystem boostParticle;
 
 	private void Awake()
 	{
@@ -297,6 +298,7 @@ public class UnitScript : MonoBehaviour
 		{
 			StopCoroutine(boostHolder);
 		}
+		boostParticle.Play();
 		boostHolder = StartCoroutine(BoostTimer());
 	} 
 
@@ -305,6 +307,7 @@ public class UnitScript : MonoBehaviour
 		isBoosted = true;
 		yield return new WaitForSeconds(150);
 		isBoosted = false;
+		boostParticle.Stop();
 	}
 
 	public void SetMarker(bool set)
