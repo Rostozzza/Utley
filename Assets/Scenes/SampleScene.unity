@@ -8424,7 +8424,6 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
-  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8564,23 +8563,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensetive: 0.02
   zoom: -20
---- !u!114 &330585549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7156c70ceb93440b59c2921e9ebf75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 5
-  length: 0.5
-  volume: {fileID: 832575518}
-  abberationLength: 0.5
-  abberationIntensity: 1
 --- !u!1 &337378648
 GameObject:
   m_ObjectHideFlags: 0
@@ -11064,8 +11046,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 159.4, y: 7.9085}
-  m_SizeDelta: {x: 27.106, y: 15.817}
+  m_AnchoredPosition: {x: 109.7, y: 7.9085}
+  m_SizeDelta: {x: 125.4, y: 15.817}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &541170453
 MonoBehaviour:
@@ -16997,6 +16979,10 @@ PrefabInstance:
     - target: {fileID: 1590128806196019732, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2006967905245955146, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
+      propertyPath: resource
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2006967905245955146, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
       propertyPath: connectedElevators.Array.size
@@ -32214,7 +32200,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1867842574
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32940,10 +32926,15 @@ MonoBehaviour:
   temperatureDynamic: {fileID: 627600316}
   asteriumPanel: {fileID: 451918631}
   bearPanel: {fileID: 1032845230}
-  icon: {fileID: 0}
-  seasonHeader: {fileID: 0}
-  seasonTimeLeft: {fileID: 0}
-  seasonDiscription: {fileID: 0}
+  icon: {fileID: 2055255900}
+  seasonHeader: {fileID: 241183640}
+  seasonTimeLeft: {fileID: 2050808781}
+  seasonDiscription: {fileID: 1342690591}
+  icons:
+  - {fileID: 21300000, guid: 0cfefd2a39bb6104ab880d93b4c6fd2a, type: 3}
+  - {fileID: 21300000, guid: ad9948ce775ef9c488c27d3a78f2ccb2, type: 3}
+  - {fileID: 21300000, guid: 9aaf1ec6a576a6c4a84ff4bf2c6a271d, type: 3}
+  - {fileID: 21300000, guid: 6275d86e0eda555439f38265e2e2f9ac, type: 3}
   timeLeft: {fileID: 0}
 --- !u!1 &1914179992
 GameObject:
@@ -34201,7 +34192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.8039216, b: 0.08627451, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -34645,6 +34636,7 @@ MonoBehaviour:
   selectedInfoButton: {fileID: 21300000, guid: 36695263d0fa2fb4d822fae7af8e7d29, type: 3}
   bearsToMoveOn: []
   isGraphUsing: 0
+  seasonTimeLeft: 0
   buildingScreen: {fileID: 1428568829}
   elevatorBuildingScreen: {fileID: 1642775197}
   workStations: []
@@ -34692,6 +34684,7 @@ MonoBehaviour:
   seasonHeader: {fileID: 0}
   seasonTimeLeft: {fileID: 0}
   seasonDiscription: {fileID: 0}
+  icons: []
   timeLeft: {fileID: 0}
 --- !u!1 &2106276487
 GameObject:
@@ -35659,6 +35652,7 @@ MonoBehaviour:
   assignmentButton: {fileID: 2144542702}
   audioSource: {fileID: 0}
   workSound: {fileID: 0}
+  progressBar: {fileID: 0}
   isReadyForWork: 0
 --- !u!65 &3562911849079285425
 BoxCollider:
