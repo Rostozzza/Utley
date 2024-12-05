@@ -1244,6 +1244,7 @@ public class GameManager : MonoBehaviour
 			{
 				temperature += 10f / 30f;
 			}
+			MenuManager.Instance.ShowLoseScreen();
 			temperature = Mathf.Clamp(temperature, -25, 20);
 			yield return new WaitForSeconds(1);
 		}

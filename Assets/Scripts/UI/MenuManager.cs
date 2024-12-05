@@ -30,6 +30,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private GameObject pauseScreen;
 	[SerializeField] private List<GameObject> buttonsToHide;
 	[SerializeField] private List<GameObject> buttonsToShow;
+	[SerializeField] private GameObject loseScreen;
 	[Header("Inputs")]
 	[SerializeField] private TMP_InputField registrationUsernameField;
 	[SerializeField] private TMP_InputField registrationPasswordField;
@@ -62,6 +63,25 @@ public class MenuManager : MonoBehaviour
 		mixer.SetFloat("MusicVolume", volume < 0.01f ? -80 : Mathf.Log10(volume) * 20);
 	}
 
+	public void ShowLoseScreen()
+	{
+		loseScreen.SetActive(true);
+		StartCoroutine(LoseScreenFadeIn());
+	}
+
+	private IEnumerator LoseScreenFadeIn()
+	{
+		var group = loseScreen.GetComponent<CanvasGroup>();
+		while (true)
+		{
+			group.alpha += Time.deltaTime*2f;
+			if (group.alpha >= 1f)
+			{
+				break;
+			}
+			yield return null;
+		}
+	}
 	public void ActivateAPI()
 	{
 		isAPIActive = true;
@@ -116,6 +136,8 @@ public class MenuManager : MonoBehaviour
 
 	public void ToMenu()
 	{
+		loseScreen.SetActive(false);
+		loseScreen.GetComponent<CanvasGroup>().alpha = 0f;
 		SceneManager.LoadSceneAsync(0);
 		pauseScreen.SetActive(false);
 		StartCoroutine(ToMenuCoroutine());
@@ -257,6 +279,6 @@ public class MenuManager : MonoBehaviour
 		mainMenuScreen.SetActive(false);
 		var loading = StartCoroutine(LoadingScreenCoroutine());
 		//SceneManager.LoadSceneAsync(1);
-		
+
 	}
 }
