@@ -17,6 +17,7 @@ public class EnergohoneyRoom : RoomScript
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
 		{
 			timer = 45f * (1 - 0.25f * (level - 1)) * (1 - (Mathf.FloorToInt(fixedBear.GetComponent<UnitScript>().level) * 0.5f));
+			fixedBear.GetComponent<UnitScript>().expParticle.SetActive(true);
 			fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
 		}
 		else

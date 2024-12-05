@@ -28147,6 +28147,7 @@ MonoBehaviour:
   lamps: []
   baseOfRoom: {fileID: 0}
   isEnpowered: 0
+  assignmentButton: {fileID: 0}
   audioSource: {fileID: 0}
   workSound: {fileID: 0}
   isReadyForWork: 0
@@ -29224,7 +29225,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 106763555f03da540880a0f13e4103af, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 1238764926802362523}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 106763555f03da540880a0f13e4103af, type: 3}
       insertIndex: -1
@@ -29262,3 +29266,65 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1001 &6498967427414337533
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1380038667678185219}
+    m_Modifications:
+    - target: {fileID: 5404322104249755494, guid: c8a4f3e9f2fc6b64a933f0b27d2df153, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.977
+      objectReference: {fileID: 0}
+    - target: {fileID: 5404322104249755494, guid: c8a4f3e9f2fc6b64a933f0b27d2df153, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.312
+      objectReference: {fileID: 0}
+    - target: {fileID: 5404322104249755494, guid: c8a4f3e9f2fc6b64a933f0b27d2df153, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.678
+      objectReference: {fileID: 0}
+    - target: {fileID: 5404322104249755494, guid: c8a4f3e9f2fc6b64a933f0b27d2df153, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5404322104249755494, guid: c8a4f3e9f2fc6b64a933f0b27d2df153, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5404322104249755494, guid: c8a4f3e9f2fc6b64a933f0b27d2df153, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5404322104249755494, guid: c8a4f3e9f2fc6b64a933f0b27d2df153, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5404322104249755494, guid: c8a4f3e9f2fc6b64a933f0b27d2df153, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5404322104249755494, guid: c8a4f3e9f2fc6b64a933f0b27d2df153, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5404322104249755494, guid: c8a4f3e9f2fc6b64a933f0b27d2df153, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731829421786666257, guid: c8a4f3e9f2fc6b64a933f0b27d2df153, type: 3}
+      propertyPath: m_Name
+      value: SparkAsterium
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c8a4f3e9f2fc6b64a933f0b27d2df153, type: 3}
+--- !u!4 &1238764926802362523 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5404322104249755494, guid: c8a4f3e9f2fc6b64a933f0b27d2df153, type: 3}
+  m_PrefabInstance: {fileID: 6498967427414337533}
+  m_PrefabAsset: {fileID: 0}

@@ -327,9 +327,10 @@ public class RoomScript : MonoBehaviour
 		status = Status.Busy;
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("StartWork");
-		fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 		if (resource != Resources.Asteriy)
 		{
+
+			fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 			fixedBear.GetComponent<UnitScript>().SetBusy(true);
 			fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		}
