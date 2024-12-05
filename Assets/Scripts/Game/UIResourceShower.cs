@@ -33,6 +33,7 @@ public class UIResourceShower : MonoBehaviour
         temperaturePanel.SetActive(false);
         asteriumPanel.SetActive(false);
         bearPanel.SetActive(false);
+        StartCoroutine(TimeChanger());
     }
 
     /// <summary>
@@ -71,13 +72,13 @@ public class UIResourceShower : MonoBehaviour
         }
     }
 
-    private IEnumerator TimeChanger(int timer)
+    private IEnumerator TimeChanger()
     {
-        while (timer > 0)
+        while (true)
         {
-            yield return new WaitForSeconds(1);
-            timer -= 1;
-            seasonTimeLeft.text = Convert.ToString(timer);
+            yield return new WaitForSeconds(0.5f);
+            seasonTimeLeft.text = "Ещё " + Convert.ToString((int)GameManager.Instance.GetSeasonTimeLeft()) + " с.";
+            timeLeft.text = "Время до конца смены: " + Convert.ToString((int)GameManager.Instance.GetTimeLeft()) + " с.";
             yield return null;
         }
     }
@@ -87,13 +88,13 @@ public class UIResourceShower : MonoBehaviour
         switch (season)
         {
             case GameManager.Season.Calm:
-                return "Эффектов нет.";
+                return "Эффектов нет";
             case GameManager.Season.Storm:
-                return "Снижение выработки энергомеда.";
+                return $"Снижение выработки энергомеда на {15 + 3 * GameManager.Instance.cycleNumber}%";
             case GameManager.Season.Freeze:
-                return "Увеличение потребления энергомеда.";
+                return $"Увеличение потребления энергомеда на {10 + 5 * GameManager.Instance.cycleNumber}%\nУвеличение скорости падения температуры на 25%";
             case GameManager.Season.Tide:
-                return "Взаимодействие с космодромом для добычи астерия невозможно.";
+                return "Невозможность отправить космический корабль\nБыстрая потеря прочности у комплексов";
             default:
                 return "Неизвестная фаза";
         }
