@@ -237,6 +237,14 @@ public class RoomScript : MonoBehaviour
 		UpdateRoomHullView();
 	}
 
+	//public void UpdateBuildView()
+	//{
+	//	if (GameManager.Instance.GetHoney().Result < (30 + 10 * (level - 1)))
+	//	{
+			
+	//	}
+	//}
+
 	public void ToggleBuildStats(bool toggle)
 	{
 		if (!progressBar.transform.parent.gameObject.active && !upgradeBar.transform.parent.gameObject.active)

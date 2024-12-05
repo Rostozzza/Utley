@@ -28,9 +28,10 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private Slider loadingBar;
 	[SerializeField] private GameObject mainMenuScreen;
 	[SerializeField] private GameObject pauseScreen;
+	[SerializeField] private GameObject loseScreen;
+	[SerializeField] private GameObject winScreen;
 	[SerializeField] private List<GameObject> buttonsToHide;
 	[SerializeField] private List<GameObject> buttonsToShow;
-	[SerializeField] private GameObject loseScreen;
 	[Header("Inputs")]
 	[SerializeField] private TMP_InputField registrationUsernameField;
 	[SerializeField] private TMP_InputField registrationPasswordField;
@@ -82,6 +83,28 @@ public class MenuManager : MonoBehaviour
 			yield return null;
 		}
 	}
+
+	public void ShowWinScreen()
+	{
+		winScreen.SetActive(true);
+		StartCoroutine(WinScreenFadeIn());
+	}
+
+	private IEnumerator WinScreenFadeIn()
+	{
+		var group = winScreen.GetComponent<CanvasGroup>();
+		while (true)
+		{
+			group.alpha += Time.deltaTime * 2f;
+			if (group.alpha >= 1f)
+			{
+				break;
+			}
+			yield return null;
+		}
+		Time.timeScale = 0f;
+	}
+
 	public void ActivateAPI()
 	{
 		isAPIActive = true;
@@ -97,6 +120,10 @@ public class MenuManager : MonoBehaviour
 		{
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
+		}
+		else
+		{
+			Destroy(gameObject);
 		}
 	}
 
@@ -138,7 +165,8 @@ public class MenuManager : MonoBehaviour
 	{
 		loseScreen.SetActive(false);
 		loseScreen.GetComponent<CanvasGroup>().alpha = 0f;
-		SceneManager.LoadSceneAsync(0);
+		winScreen.SetActive(false);
+		winScreen.GetComponent<CanvasGroup>().alpha = 0f;
 		pauseScreen.SetActive(false);
 		StartCoroutine(ToMenuCoroutine());
 	}
