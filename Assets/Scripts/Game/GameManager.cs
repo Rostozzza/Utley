@@ -1233,11 +1233,11 @@ public class GameManager : MonoBehaviour
 			{
 				if (season == Season.Freeze)
 				{
-					temperature -= 5f / 30f * 1.25f;
+					temperature -= 0.5f * 1.25f;
 				}
 				else
 				{
-					temperature -= 5f / 30f;
+					temperature -= 0.5f / 30f;
 				}
 			}
 			else
