@@ -21,6 +21,7 @@ public class CameraShake : MonoBehaviour
 	public void MeteorImpact()
 	{
 		StartCoroutine(ImpactCoroutine());
+		StartCoroutine(AbberationDrain());
 	}
 
 	private IEnumerator ImpactCoroutine()
