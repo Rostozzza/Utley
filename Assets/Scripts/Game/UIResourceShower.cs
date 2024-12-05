@@ -16,6 +16,13 @@ public class UIResourceShower : MonoBehaviour
     [SerializeField] private GameObject asteriumPanel;
     [SerializeField] private GameObject bearPanel;
 
+    [Header("Bars with info")]
+    [SerializeField] private Image icon;
+    [SerializeField] private TextMeshProUGUI seasonHeader;
+    [SerializeField] private TextMeshProUGUI seasonTimeLeft;
+    [SerializeField] private TextMeshProUGUI seasonDiscription;
+    [SerializeField] private TextMeshProUGUI timeLeft;
+
     private void Start()
     {
         UpdateIndicators();

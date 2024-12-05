@@ -30,4 +30,14 @@ public class OgePointLogic : MonoBehaviour
 			point.sourcePoints.Add(this);
 		}
 	}
+
+	public void SetIsUsing(bool set)
+	{
+		GameManager.Instance.SetIsGraphUsing(set);
+	}
+
+	private void OnDestroy()
+	{
+		GameManager.Instance.SetIsGraphUsing(false);
+	}
 }
