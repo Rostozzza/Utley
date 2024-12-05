@@ -41,6 +41,8 @@ public class UnitScript : MonoBehaviour
 	[SerializeField] private string Name;
 	[SerializeField] private string strFromWork = "Не занят";
 	[SerializeField] public Sprite avatar;
+	[Header("VFX")]
+	public GameObject expParticle;
 
 	private void Awake()
 	{

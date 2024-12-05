@@ -17,6 +17,7 @@ public class BedRoom : RoomScript
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.creator)
 		{
 			timer = 45f * (1 - 0.25f * (level - 1)) * (1 - 0.05f * fixedBear.GetComponent<UnitScript>().level);
+			fixedBear.GetComponent<UnitScript>().expParticle.SetActive(true);
 			fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
 		}
 		else
