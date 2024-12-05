@@ -8424,6 +8424,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8563,6 +8564,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensetive: 0.02
   zoom: -20
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7156c70ceb93440b59c2921e9ebf75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 5
+  length: 0.5
+  volume: {fileID: 832575518}
+  abberationLength: 0.5
+  abberationIntensity: 1
 --- !u!1 &337378648
 GameObject:
   m_ObjectHideFlags: 0
@@ -32922,6 +32940,11 @@ MonoBehaviour:
   temperatureDynamic: {fileID: 627600316}
   asteriumPanel: {fileID: 451918631}
   bearPanel: {fileID: 1032845230}
+  icon: {fileID: 0}
+  seasonHeader: {fileID: 0}
+  seasonTimeLeft: {fileID: 0}
+  seasonDiscription: {fileID: 0}
+  timeLeft: {fileID: 0}
 --- !u!1 &1914179992
 GameObject:
   m_ObjectHideFlags: 0
@@ -34621,6 +34644,7 @@ MonoBehaviour:
   defaultInfoButton: {fileID: 21300000, guid: 2f0e7735dcfde3b48a64c9af2e3732bd, type: 3}
   selectedInfoButton: {fileID: 21300000, guid: 36695263d0fa2fb4d822fae7af8e7d29, type: 3}
   bearsToMoveOn: []
+  isGraphUsing: 0
   buildingScreen: {fileID: 1428568829}
   elevatorBuildingScreen: {fileID: 1642775197}
   workStations: []
@@ -34664,6 +34688,11 @@ MonoBehaviour:
   temperatureDynamic: {fileID: 0}
   asteriumPanel: {fileID: 0}
   bearPanel: {fileID: 0}
+  icon: {fileID: 0}
+  seasonHeader: {fileID: 0}
+  seasonTimeLeft: {fileID: 0}
+  seasonDiscription: {fileID: 0}
+  timeLeft: {fileID: 0}
 --- !u!1 &2106276487
 GameObject:
   m_ObjectHideFlags: 0

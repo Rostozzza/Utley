@@ -49,6 +49,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] protected AudioSource audioSource;
 	[SerializeField] protected AudioClip workSound;
 	[Header("Progress bar")]
+	[SerializeField] private Image progressBar;
 	[Header("Asterium Settings")]
 	public bool isReadyForWork = false;
 
@@ -286,7 +287,6 @@ public class RoomScript : MonoBehaviour
 	{
 		if (GameManager.Instance.FlyForRawAsterium() && GameManager.Instance.season != GameManager.Season.Tide)
 		{
-			fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 			timeShow.gameObject.SetActive(true);
 			StartCoroutine(WorkStatus());
 		}
@@ -332,7 +332,7 @@ public class RoomScript : MonoBehaviour
 		if (resource != Resources.Asteriy)
 		{
 
-			if (resource != Resources.Cosmodrome) fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
+			fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 			fixedBear.GetComponent<UnitScript>().SetBusy(true);
 			fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		}
@@ -375,15 +375,15 @@ public class RoomScript : MonoBehaviour
 					if (timer <= 13.31f)
 					{
 						animator.SetTrigger("EndWork");
+						Debug.Log("stop animation!");
 					}
 					yield return null;
 				}
 				GameManager.Instance.DeliverRawAsterium();
-				if (fixedBear.GetComponent<UnitScript>().job == Qualification.researcher)
+				if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
 				{
 					fixedBear.GetComponent<UnitScript>().LevelUpBear();
 				}
-				fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 				timeShow.gameObject.SetActive(false);
 				timeShow.transform.parent.gameObject.SetActive(false);
 				fixedBear.GetComponent<UnitScript>().CanBeSelected();
@@ -591,7 +591,15 @@ public class RoomScript : MonoBehaviour
 			yield return null;
 		}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", true);
-		yield return new WaitForSeconds(time);
+		var newTimer = (float)time;
+		progressBar.transform.parent.gameObject.SetActive(true);
+		while (newTimer > 0)
+		{
+			newTimer -= Time.deltaTime;
+			//progressBar.fillAmount = newTimer / (float)time;
+			yield return null;
+		}
+		progressBar.transform.parent.gameObject.SetActive(false);
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
 		room.GetComponent<RoomScript>().SetStatus(Status.Free);
 		durability = 1f;
