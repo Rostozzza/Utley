@@ -13,6 +13,8 @@ public class SoundManager : MonoBehaviour
 	public AudioClip supplyRoomWorkSound;
 	public AudioClip energohoneyRoomWorkSound;
 	public AudioClip builderRoomWorkSound;
+	[Header("Environment")]
+	public AudioClip impactSound;
 
 	private void Awake()
 	{

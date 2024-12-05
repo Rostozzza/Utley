@@ -6,6 +6,10 @@ using UnityEngine.Rendering.Universal;
 
 public class CameraShake : MonoBehaviour
 {
+	[Header("AudioSettings")]
+	[SerializeField] private float xRange;
+	[SerializeField] private Transform soundTransform;
+	[SerializeField] private AudioSource audioSource;
 	[Header("Shake settings")]
 	[SerializeField] private float force;
 	[SerializeField] private float length;
@@ -22,6 +26,8 @@ public class CameraShake : MonoBehaviour
 	private IEnumerator ImpactCoroutine()
 	{
 		volume.profile.TryGet(out ChromaticAberration abberation);
+		soundTransform.Translate(transform.position.x + Random.Range(-xRange,xRange),0,0);
+		audioSource.PlayOneShot(SoundManager.Instance.impactSound);
 		var timer = length;
 		Vector3 startPos = transform.position;
 		abberation.intensity.value = abberationIntensity;

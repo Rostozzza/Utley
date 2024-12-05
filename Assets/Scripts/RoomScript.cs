@@ -596,7 +596,7 @@ public class RoomScript : MonoBehaviour
 		while (newTimer > 0)
 		{
 			newTimer -= Time.deltaTime;
-			//progressBar.fillAmount = newTimer / (float)time;
+			progressBar.fillAmount = 1 - (newTimer / (float)time);
 			yield return null;
 		}
 		progressBar.transform.parent.gameObject.SetActive(false);
