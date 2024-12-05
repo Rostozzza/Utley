@@ -182,12 +182,12 @@ public class RoomScript : MonoBehaviour
 			Debug.Log("Нет свободных строительных комплексов!");
 			return;
 		}
-		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
-		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
-		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
 
 		if (await GameManager.Instance.GetHoney() >= (30 + 10 * (level - 1)))
 		{
+			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
+			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
+			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
 			await GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)));
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
@@ -237,13 +237,21 @@ public class RoomScript : MonoBehaviour
 		UpdateRoomHullView();
 	}
 
-	//public void UpdateBuildView()
-	//{
-	//	if (GameManager.Instance.GetHoney().Result < (30 + 10 * (level - 1)))
-	//	{
-			
-	//	}
-	//}
+	public void UpdateUpgradeView()
+	{
+		var currentHoney = GameManager.Instance.GetHoney().Result;
+		var desiredButton = roomBuildScreen.GetComponentsInChildren<TextMeshProUGUI>().First(x => x.transform.parent.name.Contains("Improve"));
+		if (currentHoney < (30 + 10 * (level - 1)))
+		{
+			//desiredButton.GetComponent<Button>() = false;
+			desiredButton.text = $"Не хватает {(int)((30 + 10 * (level - 1))-currentHoney)} энергомёда!";
+		}
+		else
+		{
+			desiredButton.GetComponent<Button>().enabled = true;
+			desiredButton.text = $"Улучшить";
+		}
+	}
 
 	public void ToggleBuildStats(bool toggle)
 	{
