@@ -352,6 +352,16 @@ public class RoomScript : MonoBehaviour
 				break;
 			case Resources.Cosmodrome:
 				timer = 45f;
+				//(1 - 0.05f * fixedBear.GetComponent<UnitScript>().level)
+				if (fixedBear.GetComponent<UnitScript>().job == Qualification.researcher)
+				{
+					timer = 45f * (1 - 0.25f * (level - 1)) * (1 - 0.05f * fixedBear.GetComponent<UnitScript>().level);
+					fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
+				}
+				else
+				{
+					timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
+				}
 				if (fixedBear.GetComponent<UnitScript>().isBoosted)
 				{
 					timer *= 0.9f;

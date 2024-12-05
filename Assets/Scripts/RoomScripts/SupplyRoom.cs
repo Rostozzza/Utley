@@ -146,7 +146,7 @@ public class SupplyRoom : RoomScript
 		//!borrowed part!//
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.coder)
 		{
-			timer = 45f * (1 - 0.25f * (level - 1)) * (1 - (Mathf.FloorToInt(fixedBear.GetComponent<UnitScript>().level) * 0.5f));
+			timer = 45f * (1 - 0.25f * (level - 1)) * (1 - 0.05f * fixedBear.GetComponent<UnitScript>().level);
 			fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
 		}
 		else
