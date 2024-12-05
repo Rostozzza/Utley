@@ -51,11 +51,11 @@ public class CameraController : MonoBehaviour
     private IEnumerator ZoomChange()
     {
         int value;
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
             value = 1;
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.DownArrow))
         {
             value = -1;
         }
@@ -65,7 +65,7 @@ public class CameraController : MonoBehaviour
         }
         zoom += value * Time.deltaTime * 10;
         CameraMove();
-        while (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        while ((Input.GetKey(KeyCode.UpArrow) && value == 1) || (Input.GetKey(KeyCode.DownArrow) && value == -1))
         {
 
             zoom += value * Time.deltaTime * 10;

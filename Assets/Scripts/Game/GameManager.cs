@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private bool isGraphUsing = false;
 	[SerializeField] private float timeLeft = 480f;
 	[SerializeField] private float seasonTimeLeft;
+	[SerializeField] private float temperature = 20;
 
 	[Header("Building settings")]
 	public GameObject buildingScreen;
@@ -163,6 +164,7 @@ public class GameManager : MonoBehaviour
 		StartCoroutine(ConstantDurabilityDamager(4));
 		StartCoroutine(ConstantEnergohoneyConsumer());
 		StartCoroutine(ConstantSeasonChanger());
+		StartCoroutine(ConstantTemperatureController());
 		ChangeSeason(Season.Calm);
 		SetModeByButton(1);
 		SetModeByButton(1);
@@ -1223,6 +1225,30 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	private IEnumerator ConstantTemperatureController()
+	{
+		while (true)
+		{
+			if (honey <= 0)
+			{
+				if (season == Season.Freeze)
+				{
+					temperature -= 5f / 30f * 1.25f;
+				}
+				else
+				{
+					temperature -= 5f / 30f;
+				}
+			}
+			else
+			{
+				temperature += 10f / 30f;
+			}
+			temperature = Mathf.Clamp(temperature, -25, 20);
+			yield return new WaitForSeconds(1);
+		}
+	}
+
 	public void AddBearToMove(BearStatusController bear)
 	{
 		bearsToMoveOn.Add(bear);
@@ -1241,6 +1267,11 @@ public class GameManager : MonoBehaviour
 	public float GetTimeLeft()
 	{
 		return timeLeft;
+	}
+
+	public float GetTemperature()
+	{
+		return temperature;
 	}
 
 	public enum Season
