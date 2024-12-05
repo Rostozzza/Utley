@@ -50,6 +50,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] protected AudioClip workSound;
 	[Header("Progress bar")]
 	[SerializeField] private Image progressBar;
+	[SerializeField] private Image upgradeBar;
 	[Header("Asterium Settings")]
 	public bool isReadyForWork = false;
 
@@ -196,13 +197,30 @@ public class RoomScript : MonoBehaviour
 
 	private IEnumerator Upgrade(GameObject button, GameObject room)
 	{
+		upgradeBar.transform.parent.gameObject.SetActive(true);
+		roomBuildScreen.SetActive(false);
 		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
 		{
 			yield return null;
 		}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", true);
-		yield return new WaitForSeconds(5);
+		float time = 5f;
+		var newTimer = (float)time;
+		while (newTimer > 0)
+		{
+			newTimer -= Time.deltaTime;
+			upgradeBar.fillAmount = 1 - (newTimer / (float)time);
+			yield return null;
+		}
+		upgradeBar.transform.parent.gameObject.SetActive(false);
+		upgradeBar.fillAmount = 0;
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
+		room.GetComponent<RoomScript>().SetStatus(Status.Free);
+		durability = 1f;
+		ChangeDurability(0);
+		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
+		status = Status.Free;
 		level += 1;
 		if (level == 3)
 		{
@@ -210,8 +228,6 @@ public class RoomScript : MonoBehaviour
 			button.GetComponentInChildren<TextMeshProUGUI>().text = "Максимальный уровень!";
 		}
 		UpdateRoomHullView();
-		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
-		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		yield return null;
 	}
 
@@ -223,7 +239,7 @@ public class RoomScript : MonoBehaviour
 
 	public void ToggleBuildStats(bool toggle)
 	{
-		if (!progressBar.transform.parent.gameObject.active)
+		if (!progressBar.transform.parent.gameObject.active && !upgradeBar.transform.parent.gameObject.active)
 		{
 			roomBuildScreen.SetActive(toggle);
 		}
