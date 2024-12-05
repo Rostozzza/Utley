@@ -624,6 +624,10 @@ public class GameManager : MonoBehaviour
 	private void Update()
 	{
 		InputHandler();
+		if (timeLeft <= 0)
+		{
+			MenuManager.Instance.ShowWinScreen();
+		}
 		timeLeft -= Time.deltaTime;
 	}
 
