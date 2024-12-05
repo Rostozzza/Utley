@@ -32,7 +32,7 @@ public class CameraShake : MonoBehaviour
 		while (timer > 0)
 		{
 			timer -= Time.deltaTime;
-			transform.position = transform.position + Random.insideUnitSphere * force;
+			transform.position = (Vector2)transform.position + Random.insideUnitCircle * force;
 			//transform.position = startPos + Random.insideUnitSphere * force;
 			yield return null;
 		}
