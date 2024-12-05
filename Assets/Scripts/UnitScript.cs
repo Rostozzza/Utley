@@ -40,6 +40,7 @@ public class UnitScript : MonoBehaviour
 	[SerializeField] private SpriteRenderer marker;
 	[SerializeField] private string Name;
 	[SerializeField] private string strFromWork = "Не занят";
+	[SerializeField] public Sprite avatar;
 
 	private void Awake()
 	{
@@ -52,6 +53,7 @@ public class UnitScript : MonoBehaviour
 		marker = transform.Find("Marker").GetComponent<SpriteRenderer>();
 		SetMarker(false);
 		UpdateStatsScreen();
+		statusPanel.UpdateLevel(level);
 		//StartCoroutine(WalkCycle());
 	}
 
@@ -143,6 +145,8 @@ public class UnitScript : MonoBehaviour
 	public void LevelUpBear()
 	{
 		level = Mathf.Clamp(level+0.5f,1,5);
+		statusPanel.UpdateLevel(level);
+		statusPanel.UpdateLoveWork(false);
 	}
 
 	public void ChooseUnit()

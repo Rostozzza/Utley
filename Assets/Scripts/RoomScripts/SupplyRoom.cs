@@ -147,6 +147,7 @@ public class SupplyRoom : RoomScript
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.coder)
 		{
 			timer = 45f * (1 - 0.25f * (level - 1)) * (1 - (Mathf.FloorToInt(fixedBear.GetComponent<UnitScript>().level) * 0.5f));
+			fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
 		}
 		else
 		{
@@ -171,6 +172,7 @@ public class SupplyRoom : RoomScript
 		timeShow.text = "";
 		fixedBear.GetComponent<UnitScript>().SetBusy(false);
 		//!borrowed part!//
+		fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 		if (fixedBear != null)
 		{
 			fixedBear.GetComponent<UnitScript>().CanBeSelected();

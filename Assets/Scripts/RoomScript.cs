@@ -264,6 +264,7 @@ public class RoomScript : MonoBehaviour
 			}
 			fixedBear = bear;
 			fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
+			fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(false);
 			if (resource == Resources.Cosmodrome)
 			{
 				status = Status.Busy;

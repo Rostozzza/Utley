@@ -12,7 +12,7 @@ public class BearStatusListController : MonoBehaviour
         Bear model = obj.bearModel;
         GameObject instantiateBearPanel = Instantiate(panelPrefab, content);
         bears.Add(instantiateBearPanel);
-        instantiateBearPanel.GetComponent<BearStatusController>().Init(obj.gameObject, model.Name, model.Level, model.Qualification, obj.isBearBusy, obj.GetWorkStr());
+        instantiateBearPanel.GetComponent<BearStatusController>().Init(obj.gameObject, model.Name, obj.level, obj.job, obj.isBearBusy, obj.GetWorkStr(), obj.avatar);
         return instantiateBearPanel.GetComponent<BearStatusController>();
     }
 }

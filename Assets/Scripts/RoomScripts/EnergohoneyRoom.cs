@@ -17,6 +17,7 @@ public class EnergohoneyRoom : RoomScript
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
 		{
 			timer = 45f * (1 - 0.25f * (level - 1)) * (1 - (Mathf.FloorToInt(fixedBear.GetComponent<UnitScript>().level) * 0.5f));
+			fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
 		}
 		else
 		{
@@ -43,6 +44,7 @@ public class EnergohoneyRoom : RoomScript
 		}
 		fixedBear.GetComponent<UnitScript>().SetBusy(false);
 		//!borrowed part!//
+		fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 		if (fixedBear != null)
 		{
 			fixedBear.GetComponent<UnitScript>().CanBeSelected();
@@ -50,7 +52,6 @@ public class EnergohoneyRoom : RoomScript
 		}
 		status = Status.Free;
 		statusPanel.UpdateStatus(status);
-		fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 		animator.SetTrigger("EndWork");
 		audioSource.Stop();
 	}
