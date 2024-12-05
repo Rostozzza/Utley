@@ -373,6 +373,10 @@ public class RoomScript : MonoBehaviour
 					yield return null;
 				}
 				GameManager.Instance.DeliverRawAsterium();
+				if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
+				{
+					fixedBear.GetComponent<UnitScript>().LevelUpBear();
+				}
 				timeShow.gameObject.SetActive(false);
 				timeShow.transform.parent.gameObject.SetActive(false);
 				fixedBear.GetComponent<UnitScript>().CanBeSelected();
