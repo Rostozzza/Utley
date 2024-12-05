@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private bool isGraphUsing = false;
 	[SerializeField] private float timeLeft = 480f;
 	[SerializeField] private float seasonTimeLeft;
-	[SerializeField] private float temperature = 20;
+	[SerializeField] private float temperature = 20f;
 
 	[Header("Building settings")]
 	public GameObject buildingScreen;
@@ -1233,20 +1233,24 @@ public class GameManager : MonoBehaviour
 			{
 				if (season == Season.Freeze)
 				{
-					temperature -= 0.5f * 1.25f;
+					temperature -= 0.5f * 1.25f * Time.deltaTime;
 				}
 				else
 				{
-					temperature -= 0.5f / 30f;
+					temperature -= 0.5f * Time.deltaTime;
 				}
 			}
 			else
 			{
-				temperature += 10f / 30f;
+				temperature += 10f / 30f * Time.deltaTime;
 			}
-			MenuManager.Instance.ShowLoseScreen();
+			if (temperature <= -25f)
+			{
+				Debug.Log("ПОРАЖЕНИЕ");
+				MenuManager.Instance.ShowLoseScreen();
+			}
 			temperature = Mathf.Clamp(temperature, -25, 20);
-			yield return new WaitForSeconds(1);
+			yield return null;
 		}
 	}
 

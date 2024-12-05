@@ -34,6 +34,7 @@ public class UIResourceShower : MonoBehaviour
         asteriumPanel.SetActive(false);
         bearPanel.SetActive(false);
         StartCoroutine(TimeChanger());
+        StartCoroutine(TemperatureChanger());
     }
 
     /// <summary>
@@ -44,7 +45,6 @@ public class UIResourceShower : MonoBehaviour
         energoHoneyAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.GetHoney().Result));
         asteriyAmountText.text = Convert.ToString(GameManager.Instance.GetAsteriy().Result);
         bearsAmountText.text = Convert.ToString(GameManager.Instance.bears.Count) + "/" + Convert.ToString(GameManager.Instance.maxBearsAmount);
-        temperatureSlider.value = (GameManager.Instance.GetTemperature() + 25f) / 45f;
     }
 
     public void UpdateBarsStatuses()
@@ -53,6 +53,16 @@ public class UIResourceShower : MonoBehaviour
         seasonHeader.text = SeasonToHeaderText(GameManager.Instance.season);
         //seasonTimeLeft.text = "Ещё " + Convert.ToString((int)GameManager.Instance.GetSeasonTimeLeft()) + " с.";
         seasonDiscription.text = SeasonToDiscriptionText(GameManager.Instance.season);
+    }
+
+    private IEnumerator TemperatureChanger()
+    {
+        while (true)
+        {
+            temperatureSlider.value = (GameManager.Instance.GetTemperature() + 25f) / 45f;
+            temperatureDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)GameManager.Instance.GetTemperature()) + " °C";
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
     private string SeasonToHeaderText(GameManager.Season season)
@@ -135,7 +145,7 @@ public class UIResourceShower : MonoBehaviour
 
             case PointerHint.HintType.Temperature:
                 temperaturePanel.SetActive(true);
-                temperatureDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString(15) + " °C";
+                temperatureDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)GameManager.Instance.GetTemperature()) + " °C";
                 break;
             case PointerHint.HintType.Asterium:
                 asteriumPanel.SetActive(true);
