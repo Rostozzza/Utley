@@ -31,6 +31,8 @@ public class RoomStatusListController : MonoBehaviour
                 return "Комплекс строительства";
             case RoomScript.Resources.Supply:
                 return "Комплекс снабжения";
+            case RoomScript.Resources.Research:
+                return "Комната исследования";
             default:
                 return "Неизвестный тип";
         }

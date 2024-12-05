@@ -614,7 +614,8 @@ public class RoomScript : MonoBehaviour
 		Cosmodrome,
 		Bed,
 		Build,
-		Supply
+		Supply,
+		Research
 	}
 
 	public enum Status

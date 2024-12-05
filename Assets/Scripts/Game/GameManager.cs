@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private Sprite selectedInfoButton;
 	[SerializeField] private List<BearStatusController> bearsToMoveOn;
 	[SerializeField] private bool isGraphUsing = false;
+	[SerializeField] private float seasonTimeLeft;
 
 	[Header("Building settings")]
 	public GameObject buildingScreen;
@@ -1145,7 +1146,13 @@ public class GameManager : MonoBehaviour
 	{
 		while (true)
 		{
-			yield return new WaitForSeconds(75); //default 75
+			uiResourceShower.UpdateBarsStatuses();
+			seasonTimeLeft = 30f;
+			while (seasonTimeLeft > 0)
+			{
+				seasonTimeLeft -= Time.deltaTime;
+				yield return null;
+			}
 			Debug.Log("Season Changed");
 			switch (season)
 			{
@@ -1217,6 +1224,11 @@ public class GameManager : MonoBehaviour
 	public void SetIsGraphUsing(bool set)
 	{
 		isGraphUsing = set;
+	}
+
+	public float GetSeasonTimeLeft()
+	{
+		return seasonTimeLeft;
 	}
 
 	public enum Season
