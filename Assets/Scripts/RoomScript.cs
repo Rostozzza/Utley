@@ -223,7 +223,10 @@ public class RoomScript : MonoBehaviour
 
 	public void ToggleBuildStats(bool toggle)
 	{
-		roomBuildScreen.SetActive(toggle);
+		if (!progressBar.transform.parent.gameObject.active)
+		{
+			roomBuildScreen.SetActive(toggle);
+		}
 	}
 
 	public void UpdateRoomHullView()
@@ -372,13 +375,20 @@ public class RoomScript : MonoBehaviour
 				{
 					timeShow.text = SecondsToTimeToShow(timer);
 					timer -= Time.deltaTime;
-					if (timer <= 13.31f)
+					if (timer <= 10f)
 					{
 						animator.SetTrigger("EndWork");
-						Debug.Log("stop animation!");
+						break;
 					}
 					yield return null;
 				}
+				while (timer > 0)
+				{
+					timeShow.text = SecondsToTimeToShow(timer);
+					timer -= Time.deltaTime;
+					yield return null;
+				}
+
 				GameManager.Instance.DeliverRawAsterium();
 				if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
 				{
@@ -586,13 +596,14 @@ public class RoomScript : MonoBehaviour
 
 	private IEnumerator Repair(int time, GameObject room)
 	{
+		roomBuildScreen.SetActive(false);
+		progressBar.transform.parent.gameObject.SetActive(true);
 		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
 		{
 			yield return null;
 		}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", true);
 		var newTimer = (float)time;
-		progressBar.transform.parent.gameObject.SetActive(true);
 		while (newTimer > 0)
 		{
 			newTimer -= Time.deltaTime;
@@ -600,6 +611,7 @@ public class RoomScript : MonoBehaviour
 			yield return null;
 		}
 		progressBar.transform.parent.gameObject.SetActive(false);
+		progressBar.fillAmount = 0;
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
 		room.GetComponent<RoomScript>().SetStatus(Status.Free);
 		durability = 1f;
