@@ -13,15 +13,21 @@ public class BearStatusController : MonoBehaviour
     [SerializeField] private Image avatar;
     [SerializeField] private bool isSelected = false;
     [SerializeField] private TextMeshProUGUI workStrShow;
+    [SerializeField] private Slider LvlSlider;
+    [SerializeField] private Image loveWorkImage;
+    [SerializeField] private Sprite[] UpArrow;
 
-    public void Init(GameObject obj, string name, int level, Qualification job, bool isBearBusy, string workText)
+    public void Init(GameObject obj, string name, float level, Qualification job, bool isBearBusy, string workText, Sprite avatar)
     {
         this.obj = obj;
         bearName.text = name;
-        levelShow.text = Convert.ToString(level);
+        levelShow.text = Convert.ToString((int)level);
         jobShow.text = QualificationToText(job);
         //stateShow.text = isBearBusy ? "Работает" : "Не занят";
         workStrShow.text = workText;
+        this.avatar.sprite = avatar;
+        LvlSlider.value = level % 1;
+        loveWorkImage.sprite = UpArrow[0];
         GameManager.Instance.AddBearToMove(this);
     }
 
@@ -46,9 +52,17 @@ public class BearStatusController : MonoBehaviour
         }
     }
 
-    public void UpdateLevel(int level)
+    public void UpdateLevel(float level)
     {
-        levelShow.text = Convert.ToString(level);
+        levelShow.text = Convert.ToString((int)level);
+        if (level == 5)
+        {
+            LvlSlider.value = 1;
+        }
+        else
+        {
+            LvlSlider.value = level % 1;
+        }
     }
 
     public void UpdateState(bool isBearBusy)
@@ -83,6 +97,19 @@ public class BearStatusController : MonoBehaviour
 
     public void UpdateWorkStr(string str)
     {
+        if (str == "Не занят")
+        {
+            workStrShow.color = Color.white;
+        }
+        else
+        {
+            workStrShow.color = (Color.red + Color.yellow) / 2f;
+        }
         workStrShow.text = str;
+    }
+
+    public void UpdateLoveWork(bool update)
+    {
+        loveWorkImage.sprite = UpArrow[update ? 1 : 0];
     }
 }

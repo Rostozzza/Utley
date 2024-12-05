@@ -11,11 +11,13 @@ public class BedRoom : RoomScript
 		statusPanel.UpdateStatus(status);
 		fixedBear.GetComponent<UnitScript>().SetBusy(true);
 		fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
+		//fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(false);
 		animator.SetTrigger("StartWork");
 		//!borrowed part!//
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.creator)
 		{
 			timer = 45f * (1 - 0.25f * (level - 1)) * (1 - (Mathf.FloorToInt(fixedBear.GetComponent<UnitScript>().level) * 0.5f));
+			fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
 		}
 		else
 		{
@@ -40,6 +42,7 @@ public class BedRoom : RoomScript
 		timeShow.text = "";
 		GameManager.Instance.BoostThreeBears();
 		fixedBear.GetComponent<UnitScript>().SetBusy(false);
+		fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 		//!borrowed part!//
 		if (fixedBear != null)
 		{
@@ -48,7 +51,6 @@ public class BedRoom : RoomScript
 		}
 		status = Status.Free;
 		statusPanel.UpdateStatus(status);
-		fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 		animator.SetTrigger("EndWork");
 		audioSource.Stop();
 	}

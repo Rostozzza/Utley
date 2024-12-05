@@ -817,7 +817,13 @@ public class GameManager : MonoBehaviour
 						gameObject.GetComponent<UnitScript>().SelectUnit();
 						break;
 					case Mode.Info:
-						gameObject.GetComponent<UnitScript>().SetStatsScreen();
+						SetModeByButton((int)Mode.None);
+						gameObject.GetComponent<UnitScript>().SelectUnit();
+						//gameObject.GetComponent<UnitScript>().SetStatsScreen();
+						break;
+					case Mode.Build:
+						SetModeByButton((int)Mode.None);
+						gameObject.GetComponent<UnitScript>().SelectUnit();
 						break;
 				}
 			}

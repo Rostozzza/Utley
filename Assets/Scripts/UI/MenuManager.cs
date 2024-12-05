@@ -47,19 +47,19 @@ public class MenuManager : MonoBehaviour
 	public void SetMasterVolume()
 	{
 		float volume = masterSlider.value;
-		mixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
+		mixer.SetFloat("MasterVolume", volume < 0.01f ? -80 : Mathf.Log10(volume) * 20);
 	}
 
 	public void SetSFXVolume()
 	{
 		float volume = SFXSlider.value;
-		mixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
+		mixer.SetFloat("SFXVolume", volume < 0.01f ? -80 : Mathf.Log10(volume) * 20);
 	}
 
 	public void SetMusicVolume()
 	{
 		float volume = musicSlider.value;
-		mixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
+		mixer.SetFloat("MusicVolume", volume < 0.01f ? -80 : Mathf.Log10(volume) * 20);
 	}
 
 	public void ActivateAPI()
