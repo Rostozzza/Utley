@@ -15,6 +15,7 @@ public class UIResourceShower : MonoBehaviour
     [SerializeField] private GameObject temperaturePanel;
     [SerializeField] private GameObject honeyReduceDynamic;
     [SerializeField] private GameObject temperatureDynamic;
+    [SerializeField] private GameObject temperatureDynamic2;
     [SerializeField] private GameObject asteriumPanel;
     [SerializeField] private GameObject bearPanel;
 
@@ -61,6 +62,7 @@ public class UIResourceShower : MonoBehaviour
         {
             temperatureSlider.value = (GameManager.Instance.GetTemperature() + 25f) / 45f;
             temperatureDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)GameManager.Instance.GetTemperature()) + " °C";
+            temperatureDynamic2.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)GameManager.Instance.GetTemperature()) + " °C";
             yield return new WaitForSeconds(0.1f);
         }
     }

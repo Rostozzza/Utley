@@ -11,7 +11,7 @@ public class RoomStatusListController : MonoBehaviour
     {
         GameObject instantiateRoomPanel = Instantiate(panelPrefab, content);
         rooms.Add(instantiateRoomPanel);
-        instantiateRoomPanel.GetComponent<RoomStatusController>().Init(obj.gameObject, ResourcesTypeToName(obj.resource), obj.durability, obj.status);
+        instantiateRoomPanel.GetComponent<RoomStatusController>().Init(obj.gameObject, ResourcesTypeToName(obj.resource), obj.durability, obj.status, obj.resource);
         return instantiateRoomPanel.GetComponent<RoomStatusController>();
     }
 
