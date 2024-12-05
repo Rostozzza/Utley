@@ -9570,6 +9570,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 415327866}
   m_CullTransparentMesh: 1
+--- !u!114 &426583670 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8446779388434495133, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+  m_PrefabInstance: {fileID: 3562911849079285420}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &438377825
 GameObject:
   m_ObjectHideFlags: 0
@@ -35646,6 +35657,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: room
       objectReference: {fileID: 0}
+    - target: {fileID: 4879527601486597470, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 11.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 4879527601486597470, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.02515
+      objectReference: {fileID: 0}
     - target: {fileID: 6263814534707674368, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -3.5078968e-14
@@ -35824,6 +35843,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   workSound: {fileID: 0}
   progressBar: {fileID: 342364301}
+  upgradeBar: {fileID: 426583670}
   isReadyForWork: 0
 --- !u!65 &3562911849079285425
 BoxCollider:
