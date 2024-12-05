@@ -20179,9 +20179,9 @@ MonoBehaviour:
   m_fontSize: 7
   m_fontSizeBase: 7
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 5
+  m_fontSizeMax: 7
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -21307,8 +21307,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "350 c. \u0434\u043E \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044F
-    \u0433\u043B\u043E\u0431. \u0437\u0430\u0434\u0430\u0447\u0438"
+  m_text: "\u0412\u0440\u0435\u043C\u044F \u0434\u043E \u043A\u043E\u043D\u0446\u0430
+    \u0441\u043C\u0435\u043D\u044B: 480 \u0441."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -33085,7 +33085,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ad9948ce775ef9c488c27d3a78f2ccb2, type: 3}
   - {fileID: 21300000, guid: 9aaf1ec6a576a6c4a84ff4bf2c6a271d, type: 3}
   - {fileID: 21300000, guid: 6275d86e0eda555439f38265e2e2f9ac, type: 3}
-  timeLeft: {fileID: 0}
+  timeLeft: {fileID: 1459592661}
 --- !u!1 &1914179992
 GameObject:
   m_ObjectHideFlags: 0
@@ -34786,6 +34786,7 @@ MonoBehaviour:
   selectedInfoButton: {fileID: 21300000, guid: 36695263d0fa2fb4d822fae7af8e7d29, type: 3}
   bearsToMoveOn: []
   isGraphUsing: 0
+  timeLeft: 480
   seasonTimeLeft: 0
   buildingScreen: {fileID: 1428568829}
   elevatorBuildingScreen: {fileID: 1642775197}

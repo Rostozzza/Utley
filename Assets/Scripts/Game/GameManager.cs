@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private Sprite selectedInfoButton;
 	[SerializeField] private List<BearStatusController> bearsToMoveOn;
 	[SerializeField] private bool isGraphUsing = false;
+	[SerializeField] private float timeLeft = 480f;
 	[SerializeField] private float seasonTimeLeft;
 
 	[Header("Building settings")]
@@ -621,6 +622,7 @@ public class GameManager : MonoBehaviour
 	private void Update()
 	{
 		InputHandler();
+		timeLeft -= Time.deltaTime;
 	}
 
 	private void InputHandler()
@@ -1234,6 +1236,11 @@ public class GameManager : MonoBehaviour
 	public float GetSeasonTimeLeft()
 	{
 		return seasonTimeLeft;
+	}
+
+	public float GetTimeLeft()
+	{
+		return timeLeft;
 	}
 
 	public enum Season

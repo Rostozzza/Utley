@@ -42,32 +42,32 @@ public class CameraController : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
             {
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-                    changingZoom ??= StartCoroutine(ZoomChange(1, KeyCode.UpArrow));
-                }
-                else if (Input.GetKeyDown(KeyCode.DownArrow))
-                {
-                    changingZoom ??= StartCoroutine(ZoomChange(-1, KeyCode.DownArrow));
-                }
+                changingZoom ??= StartCoroutine(ZoomChange());
             }
             CameraMove();
         }
     }
 
-    private IEnumerator ZoomChange(float value, KeyCode keyCode)
+    private IEnumerator ZoomChange()
     {
+        int value;
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            value = 1;
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            value = -1;
+        }
+        else
+        {
+            value = 0;
+        }
         zoom += value * Time.deltaTime * 10;
         CameraMove();
-        while (Input.GetKey(keyCode))
+        while (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            //float timer = 0.2f;
-            //while (timer > 0)
-            //{
-            //    if (!Input.GetKey(keyCode)) break;
-            //    yield return null;
-            //    timer -= Time.deltaTime;
-            //}
+
             zoom += value * Time.deltaTime * 10;
             CameraMove();
             yield return null;
