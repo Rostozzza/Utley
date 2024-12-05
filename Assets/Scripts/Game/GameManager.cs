@@ -343,9 +343,17 @@ public class GameManager : MonoBehaviour
 			yield return null;
 		}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", true);
-		if (building.CompareTag("elevator"))
+		Instantiate(buildingParticle, queuedBuildPositon.transform.position, Quaternion.identity);
+		if (!building.CompareTag("elevator"))
 		{
-			Instantiate(buildingParticle, queuedBuildPositon.transform.position, Quaternion.identity);
+			if (queuedBuildPositon.transform.position.x < queuedBuildPositon.transform.parent.parent.position.x)
+			{
+				Instantiate(buildingParticle, queuedBuildPositon.transform.position + Vector3.left * 4f, Quaternion.identity);
+			}
+			else
+			{
+				Instantiate(buildingParticle, queuedBuildPositon.transform.position + Vector3.right * 4f, Quaternion.identity);
+			}
 		}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
 		yield return new WaitForSeconds(5);
@@ -764,7 +772,7 @@ public class GameManager : MonoBehaviour
 			selectedUnit.GetComponent<UnitMovement>().MoveToRoom(gameObject.GetComponent<RoomScript>());
 			if (builderRooms.Any(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit) && builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit).ToList()[0].GetComponent<BuilderRoom>().GetWait())
 			{
-				if (builderRooms.Any(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit)) 
+				if (builderRooms.Any(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit))
 				{
 					builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit).ToList()[0].GetComponent<BuilderRoom>().SetWait(false, true);
 					//builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == unit).ToList()[0].GetComponent<BuilderRoom>().InterruptWork();
@@ -775,7 +783,7 @@ public class GameManager : MonoBehaviour
 
 	public void WalkAndWork(GameObject unit, GameObject obj)
 	{
-		StartCoroutine(WalkAndStartWork(unit,obj));
+		StartCoroutine(WalkAndStartWork(unit, obj));
 	}
 
 	private IEnumerator WalkAndStartWork(GameObject unit, GameObject obj) // needs to wait for walk and after we starting work

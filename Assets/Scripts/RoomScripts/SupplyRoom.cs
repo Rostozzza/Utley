@@ -65,7 +65,7 @@ public class SupplyRoom : RoomScript
 		{
 			Debug.Log(room.name);
 		}
-		foreach (var room in poweredRooms.Select(x => x.GetComponent<RoomScript>()).ToList())
+		foreach (var room in poweredRooms.Distinct().Where(x => x != gameObject).Select(x => x.GetComponent<RoomScript>()).ToList())
 		{
 			room.Unpower();
 		}
@@ -78,7 +78,7 @@ public class SupplyRoom : RoomScript
 
 	public override void ChangeDurability(float hp)
 	{
-		if (status == Status.Destroyed || durability <= 0)
+		if (durability <= hp)
 		{
 			GetRoomsToUnpower();
 		}
