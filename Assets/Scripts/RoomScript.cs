@@ -80,7 +80,7 @@ public class RoomScript : MonoBehaviour
 		hullBar = roomStatsScreen.transform.Find("Hull").transform;
 		lamps = GameObject.FindGameObjectsWithTag("room_lamp").ToList().FindAll(g => g.transform.parent.IsChildOf(transform));
 		lamps.ForEach(x => x.GetComponent<Renderer>().material.EnableKeyword("_EMISSION"));
-		sparks = transform.GetComponentsInChildren<ParticleSystem>().ToList();
+		sparks = transform.GetComponentsInChildren<ParticleSystem>().Where(x=>!x.CompareTag("permanentParticle")).ToList();
 		defaultLampColor = lamps[0].GetComponent<Renderer>().material.color;
 		baseOfRoom = transform.Find("base").gameObject;
 		defaultBaseColor = baseOfRoom.GetComponent<Renderer>().material.color;
@@ -372,12 +372,12 @@ public class RoomScript : MonoBehaviour
 		}
 		if (fixedBear != null)
 		{
+			fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 			fixedBear.GetComponent<UnitScript>().CanBeSelected();
 			fixedBear = null;
 		}
 		status = Status.Free;
 		statusPanel.UpdateStatus(status);
-		fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 		animator.SetTrigger("EndWork");
 		audioSource.Stop();
 	}

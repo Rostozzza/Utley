@@ -62,6 +62,8 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private int rawAsterium = 0;
 	public int maxBearsAmount;
 	RaycastHit raycastHit;
+	[Header("Effects")]
+	[SerializeField] private GameObject buildingParticle;
 
 	public void LoadBearFromModel(Bear model)
 	{
@@ -341,6 +343,10 @@ public class GameManager : MonoBehaviour
 			yield return null;
 		}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", true);
+		if (building.CompareTag("elevator"))
+		{
+			Instantiate(buildingParticle, queuedBuildPositon.transform.position, Quaternion.identity);
+		}
 		yield return new WaitForSeconds(5);
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
 		room.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Free);
