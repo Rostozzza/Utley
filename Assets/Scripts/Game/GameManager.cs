@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private Sprite defaultInfoButton;
 	[SerializeField] private Sprite selectedInfoButton;
 	[SerializeField] private List<BearStatusController> bearsToMoveOn;
+	[SerializeField] private bool isGraphUsing = false;
 
 	[Header("Building settings")]
 	public GameObject buildingScreen;
@@ -355,7 +356,9 @@ public class GameManager : MonoBehaviour
 				Instantiate(buildingParticle, queuedBuildPositon.transform.position + Vector3.right * 4f, Quaternion.identity);
 			}
 		}
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
 		yield return new WaitForSeconds(5);
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().LevelUpBear();
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
 		room.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Free);
 		SelectAndBuildMainBlock(building, point);
@@ -668,7 +671,7 @@ public class GameManager : MonoBehaviour
 			elevatorBuildingScreen.SetActive(false);
 		}
 
-		if (Input.GetKeyDown(KeyCode.Alpha1))
+		if (Input.GetKeyDown(KeyCode.Alpha1) && !isGraphUsing)
 		{
 			if (selectedUnit != bearsToMoveOn[0].GetBearObj())
 			{
@@ -682,7 +685,7 @@ public class GameManager : MonoBehaviour
 				selectedUnit = null;
 			}
 		}
-		else if (Input.GetKeyDown(KeyCode.Alpha2))
+		else if (Input.GetKeyDown(KeyCode.Alpha2) && !isGraphUsing)
 		{
 			if (selectedUnit != bearsToMoveOn[1].GetBearObj())
 			{
@@ -696,7 +699,7 @@ public class GameManager : MonoBehaviour
 				selectedUnit = null;
 			}
 		}
-		else if (Input.GetKeyDown(KeyCode.Alpha3))
+		else if (Input.GetKeyDown(KeyCode.Alpha3) && !isGraphUsing)
 		{
 			if (selectedUnit != bearsToMoveOn[2].GetBearObj())
 			{
@@ -710,7 +713,7 @@ public class GameManager : MonoBehaviour
 				selectedUnit = null;
 			}
 		}
-		else if (Input.GetKeyDown(KeyCode.Alpha4))
+		else if (Input.GetKeyDown(KeyCode.Alpha4) && !isGraphUsing)
 		{
 			if (selectedUnit != bearsToMoveOn[3].GetBearObj())
 			{
@@ -1209,6 +1212,11 @@ public class GameManager : MonoBehaviour
 	public void AddBearToMove(BearStatusController bear)
 	{
 		bearsToMoveOn.Add(bear);
+	}
+
+	public void SetIsGraphUsing(bool set)
+	{
+		isGraphUsing = set;
 	}
 
 	public enum Season

@@ -95,9 +95,11 @@ public class CameraController : MonoBehaviour
 
     private IEnumerator SmoothMove(Vector2 pos)
     {
-        while (Vector2.Distance(transform.position, pos) > 0.1f)
+        float timer = 0.75f;
+        while (Vector2.Distance(transform.position, pos) > 0.1f && timer > 0)
         {
             transform.position = Vector3.Lerp(transform.position, new Vector3(pos.x, pos.y, transform.position.z), Time.deltaTime * 5);
+            timer -= Time.deltaTime;
             yield return null;
         }
         moving = null;
