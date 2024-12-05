@@ -347,7 +347,9 @@ public class GameManager : MonoBehaviour
 		{
 			Instantiate(buildingParticle, queuedBuildPositon.transform.position, Quaternion.identity);
 		}
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
 		yield return new WaitForSeconds(5);
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().LevelUpBear();
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
 		room.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Free);
 		SelectAndBuildMainBlock(building, point);

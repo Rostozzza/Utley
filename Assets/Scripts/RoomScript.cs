@@ -285,6 +285,7 @@ public class RoomScript : MonoBehaviour
 	{
 		if (GameManager.Instance.FlyForRawAsterium() && GameManager.Instance.season != GameManager.Season.Tide)
 		{
+			fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 			timeShow.gameObject.SetActive(true);
 			StartCoroutine(WorkStatus());
 		}
@@ -330,7 +331,7 @@ public class RoomScript : MonoBehaviour
 		if (resource != Resources.Asteriy)
 		{
 
-			fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
+			if (resource != Resources.Cosmodrome) fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 			fixedBear.GetComponent<UnitScript>().SetBusy(true);
 			fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		}
@@ -373,10 +374,11 @@ public class RoomScript : MonoBehaviour
 					yield return null;
 				}
 				GameManager.Instance.DeliverRawAsterium();
-				if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
+				if (fixedBear.GetComponent<UnitScript>().job == Qualification.researcher)
 				{
 					fixedBear.GetComponent<UnitScript>().LevelUpBear();
 				}
+				fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 				timeShow.gameObject.SetActive(false);
 				timeShow.transform.parent.gameObject.SetActive(false);
 				fixedBear.GetComponent<UnitScript>().CanBeSelected();
