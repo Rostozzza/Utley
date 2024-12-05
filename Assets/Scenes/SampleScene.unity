@@ -8730,6 +8730,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4237338455438677537, guid: f1a5d73b02f50b34e947a54f2c99eeb3, type: 3}
   m_PrefabInstance: {fileID: 337495359}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &342364301 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4088837013308186573, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+  m_PrefabInstance: {fileID: 3562911849079285420}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &344176316
 GameObject:
   m_ObjectHideFlags: 0
@@ -19515,7 +19526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1275020785
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35694,6 +35705,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 92.82568
       objectReference: {fileID: 0}
+    - target: {fileID: 9029501905995364116, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 11.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 9029501905995364116, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.0000097156
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 151184268124072345, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
     m_RemovedGameObjects: []
@@ -35803,7 +35822,7 @@ MonoBehaviour:
   assignmentButton: {fileID: 2144542702}
   audioSource: {fileID: 0}
   workSound: {fileID: 0}
-  progressBar: {fileID: 0}
+  progressBar: {fileID: 342364301}
   isReadyForWork: 0
 --- !u!65 &3562911849079285425
 BoxCollider:
