@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 using System.Net;
 using System.Collections;
 using UnityEngine.Networking;
+using static UnityEditor.MaterialProperty;
 
 public class RequestManager
 {
@@ -535,6 +536,10 @@ public class RequestManager
 				GameManager.Instance.playerModel = player;;
 				GameManager.Instance.asteriy = int.Parse(player.resources["asterium"]);
 				GameManager.Instance.honey = float.Parse(player.resources["honey"]);
+				GameManager.Instance.honey = float.Parse(player.resources["ursowaks"]);
+				GameManager.Instance.honey = float.Parse(player.resources["astroluminite"]);
+				GameManager.Instance.honey = float.Parse(player.resources["prototype"]);
+				GameManager.Instance.honey = float.Parse(player.resources["HNY"]);
 			}
 			yield return null;
 		}
