@@ -283,10 +283,18 @@ public class GameManager : MonoBehaviour
 	/// <param name="building"></param>
 	public async void SelectAndBuild(GameObject building)
 	{
+		SelectAndBuildAsync(building).Wait();
+	}
+
+	public async Task SelectAndBuildAsync(GameObject building)
+	{
+		var currentAsterium = await GetAsteriy();
 		if (!building.CompareTag("elevator"))
 		{
 			RoomScript roomScript = building.GetComponent<RoomScript>();
-			if (GetAsteriy().Result < roomScript.asteriumCost && GetHoney().Result < roomScript.honeyCost && GetAstroluminite().Result < roomScript.astroluminiteCost)
+			var currentHoney = await GetHoney();
+			var currentAstroluminite = await GetAstroluminite();
+			if (currentAsterium < roomScript.asteriumCost && currentHoney < roomScript.honeyCost && currentAstroluminite < roomScript.astroluminiteCost)
 			{
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
@@ -315,21 +323,21 @@ public class GameManager : MonoBehaviour
 
 			if (roomScript.asteriumCost > 0)
 			{
-				ChangeAsteriy(-roomScript.asteriumCost).Wait();
+				await ChangeAsteriy(-roomScript.asteriumCost);
 			}
 			if (roomScript.honeyCost > 0)
 			{
-				ChangeHoney(-roomScript.honeyCost).Wait();
+				await ChangeHoney(-roomScript.honeyCost);
 			}
 			if (roomScript.astroluminiteCost > 0)
 			{
-				ChangeAstroluminite(-roomScript.astroluminiteCost).Wait();
+				await ChangeAstroluminite(-roomScript.astroluminiteCost);
 			}
 			uiResourceShower.UpdateIndicators();
 		}
 		else
 		{
-			if (GetAsteriy().Result < 10)
+			if (currentAsterium < 10)
 			{
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
@@ -354,9 +362,9 @@ public class GameManager : MonoBehaviour
 				elevatorBuildingScreen.SetActive(false);
 				return;
 			}
-			ChangeAsteriy(-10).Wait();
+			await ChangeAsteriy(-10);
 		}
-		
+
 		// goto room vvvvv
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
@@ -420,7 +428,6 @@ public class GameManager : MonoBehaviour
 
 	private async Task SelectAndBuildMainBlock(GameObject building, Transform point)
 	{
-
 		var instance = Instantiate(building, point.position - new Vector3(0, 0, 3.46f - 5f), Quaternion.identity);
 		if (instance.CompareTag("elevator"))// trying to build elevator
 		{

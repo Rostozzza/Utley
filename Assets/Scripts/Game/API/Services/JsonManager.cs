@@ -64,10 +64,10 @@ public class JsonManager
 		return rerponce;
 	}
 
-	public void CreateLog(Log log)
+	public async Task CreateLog(Log log)
 	{
 		string path = $"{Application.persistentDataPath} + /{log.Comment}.json";
-		requestManager.CreateLog(log).Wait();
+		await requestManager.CreateLog(log);
 	}
 
 	public async Task<Shop> InitializeShop(string player)
