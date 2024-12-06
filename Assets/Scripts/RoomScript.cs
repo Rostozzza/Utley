@@ -42,7 +42,7 @@ public class RoomScript : MonoBehaviour
 	protected Animator animator;
 	public bool isEnpowered = false;
 	protected RoomStatusController statusPanel;
-	protected string workStr;
+	public string workStr;
 	[SerializeField] private GameObject assignmentButton;
 	Coroutine blinks = null;
 	[Header("Audio Settings")]

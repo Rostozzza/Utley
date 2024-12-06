@@ -14,6 +14,7 @@ public class RoomStatusController : MonoBehaviour
     [SerializeField] private Image icon;
     [SerializeField] private List<Sprite> icons;
     private Color defaultColor;
+    private string workStr;
 
     private void Start()
     {
@@ -46,12 +47,17 @@ public class RoomStatusController : MonoBehaviour
             case RoomScript.Status.Destroyed:
                 return "Сломан";
             case RoomScript.Status.Busy:
-                return "Работает";
+                return WorkStr();
             case RoomScript.Status.Free:
                 return "Простаивает";
             default:
                 return "Неизвестный статус";
         }
+    }
+
+    private string WorkStr()
+    {
+        return obj.GetComponent<RoomScript>().workStr;
     }
 
     public void UpdateDurability(float durability)
