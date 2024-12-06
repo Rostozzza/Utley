@@ -379,15 +379,33 @@ public class GameManager : MonoBehaviour
 
 			if (roomScript.asteriumCost > 0)
 			{
-				await ChangeAsteriy(-roomScript.asteriumCost);
+				await ChangeAsteriy(-roomScript.asteriumCost,new Log
+				{
+					comment = $"Consumed {Mathf.Abs(roomScript.asteriumCost)} asterium from player {playerName} for building {roomScript.gameObject.name}",
+					player_name = playerName,
+					 
+					resources_changed = new Dictionary<string, float> { { "asterium", -roomScript.asteriumCost } }
+				});
 			}
 			if (roomScript.honeyCost > 0)
 			{
-				await ChangeHoney(-roomScript.honeyCost);
+				await ChangeHoney(-roomScript.honeyCost,new Log
+				{
+					comment = $"Consumed {Mathf.Abs(roomScript.honeyCost)} honey from player {playerName} for building {roomScript.gameObject.name}",
+					player_name = playerName,
+					 
+					resources_changed = new Dictionary<string, float> { {"honey",-roomScript.honeyCost } }
+				});
 			}
 			if (roomScript.astroluminiteCost > 0)
 			{
-				await ChangeAstroluminite(-roomScript.astroluminiteCost);
+				await ChangeAstroluminite(-roomScript.astroluminiteCost,new Log
+				{
+					comment = $"Consumed {Mathf.Abs(roomScript.astroluminiteCost)} astroluminite from player {playerName} for building {roomScript.gameObject.name}",
+					player_name = playerName,
+					 
+					resources_changed = new Dictionary<string, float> { { "astroluminite", -roomScript.astroluminiteCost } }
+				});
 			}
 			uiResourceShower.UpdateIndicators();
 		}
@@ -419,7 +437,13 @@ public class GameManager : MonoBehaviour
 				elevatorBuildingScreen.SetActive(false);
 				return;
 			}
-			await ChangeAsteriy(-10);
+			await ChangeAsteriy(-10, new Log
+			{
+				comment = $"Consumed 10 asterium from player {playerName} for building an elevator",
+				player_name = playerName,
+				 
+				resources_changed = new Dictionary<string, float> { { "asterium", -10 } }
+			});
 		}
 
 		// goto room vvvvv
@@ -733,7 +757,7 @@ public class GameManager : MonoBehaviour
 	/// Changes amount of honey by given number
 	/// </summary>
 	/// <param name="amount"></param>
-	public async Task ChangeHoney(float amount)
+	public async Task ChangeHoney(float amount,Log log)
 	{
 		if (isAPIActive && (honey + amount < Mathf.Floor(honey) || amount > 0))
 		{
@@ -742,6 +766,7 @@ public class GameManager : MonoBehaviour
 			serverHoney = Mathf.Clamp(serverHoney, 0, 999);
 			honey = serverHoney;
 			await JsonManager.SavePlayerToJson(playerName);
+			await JsonManager.CreateLog(log);
 			return;
 		}
 		honey += amount;
@@ -752,7 +777,7 @@ public class GameManager : MonoBehaviour
 	/// Changes amount of asterium by given number
 	/// </summary>
 	/// <param name="amount"></param>
-	public async Task ChangeAsteriy(int amount)
+	public async Task ChangeAsteriy(int amount,Log log)
 	{
 		if (isAPIActive)
 		{
@@ -761,13 +786,14 @@ public class GameManager : MonoBehaviour
 			serverAsterium = Mathf.Clamp(serverAsterium, 0, 999);
 			asteriy = serverAsterium;
 			await JsonManager.SavePlayerToJson(playerName);
+			await JsonManager.CreateLog(log);
 			return;
 		}
 		asteriy += amount;
 		asteriy = Mathf.Clamp(asteriy, 0, 999);
 	}
 
-	public async Task ChangeAstroluminite(float amount)
+	public async Task ChangeAstroluminite(float amount,Log log)
 	{
 		if (isAPIActive)
 		{
@@ -776,13 +802,14 @@ public class GameManager : MonoBehaviour
 			serverAstroluminite = Mathf.Clamp(serverAstroluminite, 0, 999);
 			astroluminite = serverAstroluminite;
 			await JsonManager.SavePlayerToJson(playerName);
+			await JsonManager.CreateLog(log);
 			return;
 		}
 		astroluminite += amount;
 		astroluminite = Mathf.Clamp(astroluminite, 0, 999);
 	}
 
-	public async Task ChangeUrsowaks(float amount)
+	public async Task ChangeUrsowaks(float amount,Log log)
 	{
 		if (isAPIActive)
 		{
@@ -791,13 +818,14 @@ public class GameManager : MonoBehaviour
 			serverUrsowaks = Mathf.Clamp(serverUrsowaks, 0, 999);
 			ursowaks = serverUrsowaks;
 			await JsonManager.SavePlayerToJson(playerName);
+			await JsonManager.CreateLog(log);
 			return;
 		}
 		ursowaks += amount;
 		ursowaks = Mathf.Clamp(ursowaks, 0, 999);
 	}
 
-	public async Task ChangePrototype(float amount)
+	public async Task ChangePrototype(float amount,Log log)
 	{
 		if (isAPIActive)
 		{
@@ -806,13 +834,14 @@ public class GameManager : MonoBehaviour
 			serverPrototype = Mathf.Clamp(serverPrototype, 0, 999);
 			prototype = serverPrototype;
 			await JsonManager.SavePlayerToJson(playerName);
+			await JsonManager.CreateLog(log);
 			return;
 		}
 		prototype += amount;
 		prototype = Mathf.Clamp(prototype, 0, 999);
 	}
 
-	public async Task ChangeHNY(float amount)
+	public async Task ChangeHNY(float amount,Log log)
 	{
 		if (isAPIActive)
 		{
@@ -821,6 +850,7 @@ public class GameManager : MonoBehaviour
 			serverHNY = Mathf.Clamp(serverHNY, 0, 999);
 			HNY = serverHNY;
 			await JsonManager.SavePlayerToJson(playerName);
+			await JsonManager.CreateLog(log);
 			return;
 		}
 		HNY += amount;
@@ -1368,7 +1398,11 @@ public class GameManager : MonoBehaviour
 			//	ResourcesChanged = changedResources
 			//});
 		}
-		await ChangeHoney(-honeyToEat);
+		await ChangeHoney(-honeyToEat,new Log {
+			comment = $"Deplicted honey for maintaining facility temperature of player {playerName}",
+			 
+			player_name = playerName
+		});
 		//Debug.Log("Съели мёда: " + honeyToEat);
 		uiResourceShower.UpdateIndicators();
 	}

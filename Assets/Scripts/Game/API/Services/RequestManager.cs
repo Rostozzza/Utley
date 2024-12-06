@@ -485,34 +485,7 @@ public class RequestManager
 	#endregion
 
 	//DO NOT FUCKING USE THIS FUNCTION! OR ELSE I WILL FIND YOU AND YOUR ENTIER BLOODLINE WILL BE EXTERMINATED :3
-	public async Task<string> GeenrateUUID()
-	{
-		var teamName = "BoyZBand";
-		var talantId = "51123";
-		var apiUrl = "https://2025.nti-gamedev.ru/api/games/";
-		var nonce = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
-		var signatureInput = talantId + nonce;
-		string signature;
-		using (var md5 = MD5.Create())
-		{
-			var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(signatureInput));
-			signature = BitConverter.ToString(hash).Replace("-", "").ToLower();
-		}
-		using var client = new HttpClient();
-		var request = new HttpRequestMessage(HttpMethod.Post, apiUrl);
-		request.Headers.Add("Nonce", nonce);
-		request.Headers.Add("Talant-Id", talantId);
-		request.Headers.Add("Signature", signature);
-		var requestBody = new
-		{
-			team_name = teamName
-		};
-		string jsonBody = JsonConvert.SerializeObject(requestBody);
-		request.Content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
-		var response = await client.SendAsync(request);
-		return response.Content.ReadAsStringAsync().Result;
-	}
-	//TRYING OUT COROUTINES FOR NETCODE
+	//TRYING OUT COROUTINES FOR NETCODE. STOLEN FROM UNITY'S ORIGINAL IMPLEMENTATION OF UNITYWEBREQUEST
 	public IEnumerator GetPlayerEnum(string name)
 	{
 		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{name}/";

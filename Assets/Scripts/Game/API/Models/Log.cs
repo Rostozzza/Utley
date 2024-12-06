@@ -2,8 +2,8 @@
 
 public class Log
 {
-	public string Comment { get; set; }
-	public string PlayerName { get; set; }
-	public string ShopName {  get; set; }
-	public Dictionary<string, float> ResourcesChanged { get; set; }
+	public string comment { get; set; }
+	public string player_name { get; set; }
+	public string shop_name {  get; set; }
+	public Dictionary<string, float> resources_changed { get; set; }
 }

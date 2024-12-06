@@ -80,7 +80,7 @@ public class JsonManager
 
 	public async Task CreateLog(Log log)
 	{
-		string path = $"{Application.persistentDataPath} + /{log.Comment}.json";
+		//string path = $"{Application.persistentDataPath} + /{log.Comment}.json";
 		await requestManager.CreateLog(log);
 	}
 

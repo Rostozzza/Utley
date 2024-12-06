@@ -54,6 +54,12 @@ public class EnergohoneyRoom : RoomScript
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("EndWork");
 		audioSource.Stop();
-		GameManager.Instance.ChangeHoney(honeyToAdd);
+		GameManager.Instance.ChangeHoney(honeyToAdd, new Log
+		{
+			comment = $"Added {honeyToAdd} honey to player {GameManager.Instance.playerName} for working on apiary",
+			player_name = GameManager.Instance.playerName,
+			resources_changed = new System.Collections.Generic.Dictionary<string, float> { {"honey",honeyToAdd } },
+			 
+		});
 	}
 }

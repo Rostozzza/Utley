@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System;
 
 using Random = UnityEngine.Random;
+using UnityEngine.Rendering.Universal;
 
 public class RoomScript : MonoBehaviour
 {
@@ -75,7 +76,7 @@ public class RoomScript : MonoBehaviour
 		ChangeDurability(0);
 		Debug.Log($"Empowered roon {gameObject.name}");
 	}
-	
+
 	protected virtual void Start()
 	{
 		audioSource = GetComponent<AudioSource>();
@@ -91,7 +92,7 @@ public class RoomScript : MonoBehaviour
 		hullBar = roomStatsScreen.transform.Find("Hull").transform;
 		lamps = GameObject.FindGameObjectsWithTag("room_lamp").ToList().FindAll(g => g.transform.parent.IsChildOf(transform));
 		lamps.ForEach(x => x.GetComponent<Renderer>().material.EnableKeyword("_EMISSION"));
-		sparks = transform.GetComponentsInChildren<ParticleSystem>().Where(x=>!x.CompareTag("permanentParticle")).ToList();
+		sparks = transform.GetComponentsInChildren<ParticleSystem>().Where(x => !x.CompareTag("permanentParticle")).ToList();
 		defaultLampColor = lamps[0].GetComponent<Renderer>().material.color;
 		baseOfRoom = transform.Find("base").gameObject;
 		defaultBaseColor = baseOfRoom.GetComponent<Renderer>().material.color;
@@ -131,13 +132,13 @@ public class RoomScript : MonoBehaviour
 				workStr = "Исследуем технологии";
 				workSound = SoundManager.Instance.energohoneyRoomWorkSound;
 				break;
-			// in case Research - workStr = "Исследуем технологии"
-			//default:
-			//	if (workStationsToOutline.Count > 0)
-			//	{
-			//		GameManager.Instance.AddWorkStations(workStationsToOutline);
-			//	}
-			//	break;
+				// in case Research - workStr = "Исследуем технологии"
+				//default:
+				//	if (workStationsToOutline.Count > 0)
+				//	{
+				//		GameManager.Instance.AddWorkStations(workStationsToOutline);
+				//	}
+				//	break;
 		}
 		audioSource.clip = workSound;
 		if (!isEnpowered)
@@ -200,7 +201,13 @@ public class RoomScript : MonoBehaviour
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
-			await GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)));
+			await GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)), new Log
+			{
+				comment = $"Consumed {(30 + 10 * (level - 1))} honey for upgrading {this.name} room",
+				 
+				player_name = GameManager.Instance.playerName,
+				resources_changed = new Dictionary<string, float> { { "honey", -(30 + 10 * (level - 1)) } }
+			});
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
 			StartCoroutine(Upgrade(button, fixedBuilderRoom));
@@ -293,7 +300,7 @@ public class RoomScript : MonoBehaviour
 		}
 		catch (Exception e)
 		{
-			Debug.Log($"An error occured during hull update! Error details: {e.Message}");		
+			Debug.Log($"An error occured during hull update! Error details: {e.Message}");
 		}
 	}
 
@@ -428,7 +435,13 @@ public class RoomScript : MonoBehaviour
 				}
 				timeShow.text = "";
 				GameManager.Instance.WithdrawRawAsterium();
-				GameManager.Instance.ChangeAsteriy(20);
+				GameManager.Instance.ChangeAsteriy(20,new Log
+				{
+					comment = $"Added 20 asterium to player {GameManager.Instance.playerName} for processing raw asterium from spaceship",
+					player_name = GameManager.Instance.playerName,
+					 
+					resources_changed = new Dictionary<string, float> { { "asterium", 20 } }
+				});
 				isReadyForWork = false;
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
 				break;
@@ -474,7 +487,13 @@ public class RoomScript : MonoBehaviour
 						GameManager.Instance.DeliverRawAsterium();
 						break;
 					case FlyForType.Astroluminite:
-						GameManager.Instance.ChangeAstroluminite(8);
+						GameManager.Instance.ChangeAstroluminite(8,new Log
+						{
+							comment = $"Added 8 astroluminite to player {GameManager.Instance.playerName} from spaceship",
+							player_name = GameManager.Instance.playerName,
+							 
+							resources_changed = new Dictionary<string, float> { { "astroluminite",8 } }
+						});
 						break;
 				}
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
@@ -555,8 +574,8 @@ public class RoomScript : MonoBehaviour
 		{
 			Debug.Log("No statusPanel present at this moment!");
 		}
-        if (!isEnpowered)
-        {
+		if (!isEnpowered)
+		{
 			SetLampsOn(false);
 			UpdateRoomHullView();
 			return;
@@ -656,7 +675,7 @@ public class RoomScript : MonoBehaviour
 		lamps.ForEach(x => x.GetComponentInChildren<Light>().color = color);
 	}
 
-    /// <summary>
+	/// <summary>
 	/// Repairs room to full for 10 asterium
 	/// </summary>
 	public async void RepairRoom()
@@ -685,10 +704,16 @@ public class RoomScript : MonoBehaviour
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
 
-        
+
 		if (await GameManager.Instance.GetAsteriy() >= 10)
 		{
-			GameManager.Instance.ChangeAsteriy(-10);
+			GameManager.Instance.ChangeAsteriy(-10,new Log
+			{
+				comment = $"Consumed 10 asterium from player {GameManager.Instance.playerName} to repair {gameObject.name} room",
+				player_name = GameManager.Instance.playerName,
+				 
+				resources_changed = new Dictionary<string, float> { { "asterium", -10} }
+			});
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
 			int timeToRepair = (int)((1 - durability) * 100 / 2);
 			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
@@ -723,7 +748,7 @@ public class RoomScript : MonoBehaviour
 		status = Status.Free;
 	}
 
-    public void SetStatus(Status status)
+	public void SetStatus(Status status)
 	{
 		this.status = status;
 		statusPanel.UpdateStatus(status);
