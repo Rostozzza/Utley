@@ -68,6 +68,9 @@ public class GameManager : MonoBehaviour
 	[SerializeField] public float honey;
 	[SerializeField] public int asteriy;
 	[SerializeField] public float astroluminite;
+	[SerializeField] public float ursowaks;
+	[SerializeField] public float prototype;
+	[SerializeField] public float HNY;
 	[SerializeField] private int rawAsterium = 0;
 	public int maxBearsAmount;
 	RaycastHit raycastHit;
@@ -688,6 +691,21 @@ public class GameManager : MonoBehaviour
 		return astroluminite;
 	}
 
+	public async Task<float> GetUrsowaks()
+	{
+		return ursowaks;
+	}
+
+	public async Task<float> GetPrototype()
+	{
+		return prototype;
+	}
+
+	public async Task<float> GetHNY()
+	{
+		return HNY;
+	}
+
 	/// <summary>
 	/// Changes amount of honey by given number
 	/// </summary>
@@ -735,6 +753,24 @@ public class GameManager : MonoBehaviour
 	{
 		astroluminite += amount;
 		astroluminite = Mathf.Clamp(astroluminite, 0, 999);
+	}
+
+	public async Task ChangeUrsowaks(float amount)
+	{
+		ursowaks += amount;
+		ursowaks = Mathf.Clamp(ursowaks, 0, 999);
+	}
+
+	public async Task ChangePrototype(float amount)
+	{
+		prototype += amount;
+		prototype = Mathf.Clamp(prototype, 0, 999);
+	}
+
+	public async Task ChangeHNY(float amount)
+	{
+		HNY += amount;
+		HNY = Mathf.Clamp(HNY, 0, 999);
 	}
 
 	public bool FlyForRawAsterium() => rawAsterium < asteriumRooms.Where(x => x.GetComponent<RoomScript>().isEnpowered).ToList().Count;

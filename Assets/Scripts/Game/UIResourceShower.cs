@@ -49,8 +49,8 @@ public class UIResourceShower : MonoBehaviour
         energoHoneyAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.honey));
         asteriyAmountText.text = Convert.ToString(GameManager.Instance.asteriy);
         astroluminiteAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.astroluminite));
-        ursowaksAmountText.text = Convert.ToString(0);
-        prototypeAmountText.text = Convert.ToString(0);
+        ursowaksAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.ursowaks));
+        prototypeAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.prototype));
         bearsAmountText.text = Convert.ToString(GameManager.Instance.bears.Count) + "/" + Convert.ToString(GameManager.Instance.maxBearsAmount);
     }
 
