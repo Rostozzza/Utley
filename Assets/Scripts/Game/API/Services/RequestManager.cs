@@ -50,6 +50,7 @@ public class RequestManager
 			}
 
 			var responseBody = await response.Content.ReadAsStringAsync();
+			Debug.Log($"Saved resources: {responseBody}");
 			var responseResources = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseBody);
 			return responseResources;
 		}
@@ -532,6 +533,8 @@ public class RequestManager
 			{
 				GameManager.Instance.playerName = name;
 				GameManager.Instance.playerModel = player;
+				GameManager.Instance.asteriy = int.Parse(player.resources["asterium"]);
+				GameManager.Instance.honey = float.Parse(player.resources["honey"]);
 			}
 			yield return null;
 		}

@@ -150,16 +150,6 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	public void Start()
-	{
-		if (!isAPIActive)
-		{
-			//asteriy = 600;
-			//honey = 100;
-			//astroluminite = 20;
-		}
-	}
-
 	public void Awake()
 	{
 		//Time.timeScale = 20;
@@ -562,12 +552,10 @@ public class GameManager : MonoBehaviour
 	{
 		if (isAPIActive)
 		{
-			Debug.Log("trying to get player...");
 			var model = await RequestManager.GetPlayer(playerName);
 			playerModel = model;
-			Debug.Log(float.Parse(model.resources["honey"].Replace('.', ',')));
+			honey = float.Parse(model.resources["honey"].Replace('.', ','));
 			return float.Parse(model.resources["honey"].Replace('.', ','));
-
 		}
 		return honey;
 	}
@@ -582,6 +570,7 @@ public class GameManager : MonoBehaviour
 		{
 			var model = await RequestManager.GetPlayer(playerName);
 			playerModel = model;
+			this.asteriy = int.Parse(model.resources["asterium"]);
 			return int.Parse(model.resources["asterium"]);
 		}
 		return asteriy;
@@ -593,20 +582,22 @@ public class GameManager : MonoBehaviour
 	/// <param name="amount"></param>
 	public async Task ChangeHoney(float amount)
 	{
-		Debug.Log("Trying to check integer");
-		if (isAPIActive && honey + amount < Mathf.Floor(honey))
+		if (isAPIActive && (honey + amount < Mathf.Floor(honey) || amount > 0))
 		{
 			float serverHoney = await GetHoney();
-			Debug.Log($"server honey: {serverHoney}");
 			serverHoney += amount;
 			serverHoney = Mathf.Clamp(serverHoney, 0, 999);
 			honey = serverHoney;
-			Debug.Log($"trying to update honey..");
 			await JsonManager.SavePlayerToJson(playerName);
 			return;
 		}
 		honey += amount;
 		honey = Mathf.Clamp(honey, 0, 999);
+	}
+
+	public void ChangeHoneySync()
+	{
+
 	}
 
 	/// <summary>

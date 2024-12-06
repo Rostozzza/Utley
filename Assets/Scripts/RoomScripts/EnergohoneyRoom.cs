@@ -37,7 +37,6 @@ public class EnergohoneyRoom : RoomScript
 		timeShow.text = "";
 
 		int honeyToAdd = (GameManager.Instance.season != GameManager.Season.Storm) ? 10 : (int)(10 * (1 - 0.15f + 0.03f * GameManager.Instance.cycleNumber));
-		GameManager.Instance.ChangeHoney(honeyToAdd);
 		GameManager.Instance.uiResourceShower.UpdateIndicators();
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
 		{
@@ -55,5 +54,6 @@ public class EnergohoneyRoom : RoomScript
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("EndWork");
 		audioSource.Stop();
+		GameManager.Instance.ChangeHoney(honeyToAdd);
 	}
 }

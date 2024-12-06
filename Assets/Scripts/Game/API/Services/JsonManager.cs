@@ -29,7 +29,6 @@ public class JsonManager
 		float honey = GameManager.Instance.honey;
 		int asterium = GameManager.Instance.asteriy;
 		playerModel.resources.Add("honey", honey.ToString());
-		Debug.Log(honey.ToString());
 		playerModel.resources.Add("asterium", asterium.ToString());
 		playerModel.resources.Add("password", GameManager.Instance.playerModel.resources["password"]);
 

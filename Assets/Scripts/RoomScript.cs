@@ -240,11 +240,11 @@ public class RoomScript : MonoBehaviour
 		UpdateRoomHullView();
 	}
 
-	public void UpdateUpgradeView()
+	public async void UpdateUpgradeView()
 	{
 		if (level < 3)
 		{
-			var currentHoney = GameManager.Instance.GetHoney().Result;
+			var currentHoney = await GameManager.Instance.GetHoney();
 			var desiredButton = roomBuildScreen.GetComponentsInChildren<TextMeshProUGUI>(true).First(x => x.transform.parent.name.Contains("Improve"));
 			if (currentHoney < (30 + 10 * (level - 1)))
 			{
