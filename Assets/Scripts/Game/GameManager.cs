@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private float timeLeft = 480f;
 	[SerializeField] private float seasonTimeLeft;
 	[SerializeField] private float temperature = 20f;
+	[SerializeField] private float timePast = 0f;
 
 	[Header("Building settings")]
 	public GameObject buildingScreen;

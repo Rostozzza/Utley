@@ -32,6 +32,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private GameObject winScreen;
 	[SerializeField] private List<GameObject> buttonsToHide;
 	[SerializeField] private List<GameObject> buttonsToShow;
+	[SerializeField] private List<TextMeshProUGUI> scores;
 	[Header("Inputs")]
 	[SerializeField] private TMP_InputField registrationUsernameField;
 	[SerializeField] private TMP_InputField registrationPasswordField;
@@ -104,6 +105,20 @@ public class MenuManager : MonoBehaviour
 		}
 		Time.timeScale = 0f;
 	}
+
+	//private async int CountScore()
+	//{
+	//	GameManager game = GameManager.Instance;
+	//	return (int)(
+	//	await game.GetAsteriy() * 10f +
+	//	await game.GetHoney() * 15f + 
+	//	(game.allRooms.Count - 7) * 500f +
+	//	0 * 80f +
+	//	0 * 480f + 
+	//	0 * 48f + 
+	//	0 * 400f + 0
+	//	);
+	//}
 
 	public void ActivateAPI()
 	{
