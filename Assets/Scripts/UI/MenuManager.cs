@@ -122,7 +122,7 @@ public class MenuManager : MonoBehaviour
 		int scoreRooms = (int)((game.allRooms.Count - 7) * 500f);
 		int scoreHNY = (int)(0 * 80f);
 		int scoreScienceSample = (int)(0 * 480f);
-		int scoreAstroluminite = (int)(0 * 48f);
+		int scoreAstroluminite = (int)(await game.GetAstroluminite() * 48f);
 		int scoreUrsowax = (int)(0 * 400f);
 		int scoreTime = (int)(game.GetTimePast() * 10f);
 		int scoreDurabilitySum = (int)(game.allRooms.Where(x => !x.CompareTag("elevator")).ToList().ConvertAll(y => y.GetComponent<RoomScript>().durability).Sum() * 100f * 10f); // all rooms without elevators multiplyes by 100 to get % and by 10 to get score

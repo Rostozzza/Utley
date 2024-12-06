@@ -11,6 +11,8 @@ public class UIResourceShower : MonoBehaviour
     [SerializeField] private TextMeshProUGUI asteriyAmountText;
     [SerializeField] private TextMeshProUGUI bearsAmountText;
     [SerializeField] private TextMeshProUGUI astroluminiteAmountText;
+    [SerializeField] private TextMeshProUGUI ursowaksAmountText;
+    [SerializeField] private TextMeshProUGUI prototypeAmountText;
     [SerializeField] private Slider temperatureSlider;
     [SerializeField] private GameObject honeyReducePanel;
     [SerializeField] private GameObject temperaturePanel;
@@ -47,6 +49,8 @@ public class UIResourceShower : MonoBehaviour
         energoHoneyAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.honey));
         asteriyAmountText.text = Convert.ToString(GameManager.Instance.asteriy);
         astroluminiteAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.astroluminite));
+        ursowaksAmountText.text = Convert.ToString(0);
+        prototypeAmountText.text = Convert.ToString(0);
         bearsAmountText.text = Convert.ToString(GameManager.Instance.bears.Count) + "/" + Convert.ToString(GameManager.Instance.maxBearsAmount);
     }
 

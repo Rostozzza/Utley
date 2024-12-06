@@ -15501,7 +15501,7 @@ GameObject:
   m_Component:
   - component: {fileID: 754544262}
   m_Layer: 5
-  m_Name: EnergoHoneyResource (2)
+  m_Name: UrsowaksResource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35755,6 +35755,8 @@ MonoBehaviour:
   asteriyAmountText: {fileID: 1914179994}
   bearsAmountText: {fileID: 751139724}
   astroluminiteAmountText: {fileID: 2020124736}
+  ursowaksAmountText: {fileID: 732703800}
+  prototypeAmountText: {fileID: 1249832754}
   temperatureSlider: {fileID: 2524824}
   honeyReducePanel: {fileID: 1867842573}
   temperaturePanel: {fileID: 1598374361}
@@ -37732,7 +37734,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2066092294}
   m_Layer: 5
-  m_Name: AsteriyResource (1)
+  m_Name: Prototype
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38120,6 +38122,8 @@ MonoBehaviour:
   asteriyAmountText: {fileID: 1914179994}
   bearsAmountText: {fileID: 751139724}
   astroluminiteAmountText: {fileID: 0}
+  ursowaksAmountText: {fileID: 0}
+  prototypeAmountText: {fileID: 0}
   temperatureSlider: {fileID: 2524824}
   honeyReducePanel: {fileID: 0}
   temperaturePanel: {fileID: 0}
@@ -38852,6 +38856,14 @@ PrefabInstance:
       value: 89.98022
       objectReference: {fileID: 0}
     - target: {fileID: 1932895824936753730, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932895824936753730, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932895824936753730, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_Shadows.m_Type
       value: 1
       objectReference: {fileID: 0}
@@ -39042,6 +39054,14 @@ PrefabInstance:
     - target: {fileID: 8450719950578455945, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_Shadows.m_Type
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613448160458721141, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.000001501431
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613448160458721141, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0000004174506
       objectReference: {fileID: 0}
     - target: {fileID: 8782228618297586916, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
