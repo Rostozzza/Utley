@@ -344,11 +344,12 @@ public class MenuManager : MonoBehaviour
 		else
 		{
 			yield return RequestManager.GetPlayerEnum(currentPLayerName);
+			//Debug.Log(GameManager.Instance.playerModel.resources["elevators"]);
 			GameManager.Instance.isAPIActive = isAPIActive;
 			GameManager.Instance.JsonManager = new JsonManager(isAPIActive);
 			GameManager.Instance.RequestManager = new RequestManager(isAPIActive);
-			JsonManager.LoadPlayerFromModel(GameManager.Instance.playerModel);
 			loadingBar.value = 0;
+			GameManager.Instance.JsonManager.LoadPlayerFromModel(GameManager.Instance.playerModel);
 			loadingScreen.SetActive(false);
 			Time.timeScale = 1f;
 			loadingView.SetActive(false);
