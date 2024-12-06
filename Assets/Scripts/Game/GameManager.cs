@@ -82,11 +82,6 @@ public class GameManager : MonoBehaviour
 		allRooms.Where(x => x.GetComponent<SupplyRoom>() && x.GetComponent<SupplyRoom>().durability > 0).ToList().ForEach(y => y.GetComponent<SupplyRoom>().GetRoomsToEnpower());
 	}
 
-	public void SetAsteriumViews()
-	{
-
-	}
-
 	public void KillAllBuildings()
 	{
 		foreach (var room in allRooms)
@@ -688,21 +683,49 @@ public class GameManager : MonoBehaviour
 
 	public async Task<float> GetAstroluminite()
 	{
+		if (isAPIActive)
+		{
+			var model = await RequestManager.GetPlayer(playerName);
+			playerModel = model;
+			astroluminite = float.Parse(model.resources["astroluminite"].Replace('.', ','));
+			return float.Parse(model.resources["astroluminite"].Replace('.', ','));
+		}
 		return astroluminite;
 	}
 
 	public async Task<float> GetUrsowaks()
 	{
+		if (isAPIActive)
+		{
+			var model = await RequestManager.GetPlayer(playerName);
+			playerModel = model;
+			ursowaks = float.Parse(model.resources["ursowaks"].Replace('.', ','));
+			return float.Parse(model.resources["ursowaks"].Replace('.', ','));
+		}
 		return ursowaks;
 	}
 
 	public async Task<float> GetPrototype()
 	{
+		if (isAPIActive)
+		{
+			var model = await RequestManager.GetPlayer(playerName);
+			playerModel = model;
+			prototype = float.Parse(model.resources["prototype"].Replace('.', ','));
+			return float.Parse(model.resources["prototype"].Replace('.', ','));
+		}
 		return prototype;
 	}
 
 	public async Task<float> GetHNY()
 	{
+		if (isAPIActive)
+		{
+			var model = await RequestManager.GetPlayer(playerName);
+			playerModel = model;
+			HNY = float.Parse(model.resources["HNY"].Replace('.', ','));
+			return float.Parse(model.resources["HNY"].Replace('.', ','));
+		}
 		return HNY;
 	}
 
@@ -723,11 +746,6 @@ public class GameManager : MonoBehaviour
 		}
 		honey += amount;
 		honey = Mathf.Clamp(honey, 0, 999);
-	}
-
-	public void ChangeHoneySync()
-	{
-
 	}
 
 	/// <summary>
@@ -751,24 +769,60 @@ public class GameManager : MonoBehaviour
 
 	public async Task ChangeAstroluminite(float amount)
 	{
+		if (isAPIActive)
+		{
+			float serverAstroluminite = await GetAstroluminite();
+			serverAstroluminite += amount;
+			serverAstroluminite = Mathf.Clamp(serverAstroluminite, 0, 999);
+			astroluminite = serverAstroluminite;
+			await JsonManager.SavePlayerToJson(playerName);
+			return;
+		}
 		astroluminite += amount;
 		astroluminite = Mathf.Clamp(astroluminite, 0, 999);
 	}
 
 	public async Task ChangeUrsowaks(float amount)
 	{
+		if (isAPIActive)
+		{
+			float serverUrsowaks = await GetUrsowaks();
+			serverUrsowaks += amount;
+			serverUrsowaks = Mathf.Clamp(serverUrsowaks, 0, 999);
+			ursowaks = serverUrsowaks;
+			await JsonManager.SavePlayerToJson(playerName);
+			return;
+		}
 		ursowaks += amount;
 		ursowaks = Mathf.Clamp(ursowaks, 0, 999);
 	}
 
 	public async Task ChangePrototype(float amount)
 	{
+		if (isAPIActive)
+		{
+			float serverPrototype = await GetPrototype();
+			serverPrototype += amount;
+			serverPrototype = Mathf.Clamp(serverPrototype, 0, 999);
+			prototype = serverPrototype;
+			await JsonManager.SavePlayerToJson(playerName);
+			return;
+		}
 		prototype += amount;
 		prototype = Mathf.Clamp(prototype, 0, 999);
 	}
 
 	public async Task ChangeHNY(float amount)
 	{
+		if (isAPIActive)
+		{
+			float serverHNY = await GetHNY();
+			serverHNY += amount;
+			serverHNY = Mathf.Clamp(serverHNY, 0, 999);
+			HNY = serverHNY;
+			await JsonManager.SavePlayerToJson(playerName);
+			return;
+		}
 		HNY += amount;
 		HNY = Mathf.Clamp(HNY, 0, 999);
 	}

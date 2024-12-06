@@ -29,8 +29,16 @@ public class JsonManager
 		playerModel.resources.Add("elevators", SerializeElevators().ToString());
 		float honey = GameManager.Instance.honey;
 		int asterium = GameManager.Instance.asteriy;
+		float ursowaks = GameManager.Instance.ursowaks;
+		float astroluminite = GameManager.Instance.astroluminite;
+		float prototype = GameManager.Instance.prototype;
+		float HNY = GameManager.Instance.HNY;
 		playerModel.resources.Add("honey", honey.ToString());
 		playerModel.resources.Add("asterium", asterium.ToString());
+		playerModel.resources.Add("ursowaks", ursowaks.ToString());
+		playerModel.resources.Add("astroluminite", astroluminite.ToString());
+		playerModel.resources.Add("prototype", prototype.ToString());
+		playerModel.resources.Add("HNY", HNY.ToString());
 		playerModel.resources.Add("password", GameManager.Instance.playerModel.resources["password"]);
 
 		string serializedPlayer = JsonConvert.SerializeObject(playerModel);
@@ -57,7 +65,12 @@ public class JsonManager
 
 		playerModel.resources.Add("honey", "100");
 		playerModel.resources.Add("asterium", "100");
+		playerModel.resources.Add("ursowaks", "0");
+		playerModel.resources.Add("astroluminite", "0");
+		playerModel.resources.Add("prototype", "0");
+		playerModel.resources.Add("HNY", "0");
 		playerModel.resources.Add("password", password);
+
 
 		string serializedPlayer = JsonConvert.SerializeObject(playerModel);
 		//File.WriteAllText(path, serializedPlayer);
@@ -78,8 +91,7 @@ public class JsonManager
 			name = "SpaceshipShop",
 			resources = new Dictionary<string, int>()
 		};
-		shop.resources.Add("asterium", 300);
-		shop.resources.Add("bears", 100);
+		shop.resources.Add("bears", 3);
 		if (isAPIActive)
 		{
 			await requestManager.CreateShop(player, shop);
