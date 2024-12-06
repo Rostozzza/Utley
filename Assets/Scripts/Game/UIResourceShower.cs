@@ -90,7 +90,7 @@ public class UIResourceShower : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             seasonTimeLeft.text = "Ещё " + Convert.ToString((int)GameManager.Instance.GetSeasonTimeLeft()) + " с.";
-            timeLeft.text = "Время до конца смены: " + Convert.ToString((int)GameManager.Instance.GetTimeLeft()) + " с.";
+            timeLeft.text = "Время до конца\nсмены: " + Convert.ToString((int)GameManager.Instance.GetTimeLeft()) + " с.";
             yield return null;
         }
     }
