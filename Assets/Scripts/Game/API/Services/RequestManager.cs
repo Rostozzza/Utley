@@ -30,12 +30,14 @@ public class RequestManager
 	/// <param name="resources"></param>
 	/// <returns></returns>
 	/// <exception cref="Exception"></exception>
-	public async Task UpdatePlayerResources(string username, Dictionary<string, string> resources)
+	public async Task<Dictionary<string,string>> UpdatePlayerResources(string username, Dictionary<string, string> resources)
 	{
 		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/";
 		using HttpClient client = new HttpClient();
 		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, url);
-		string resourcesToUpdateFormatted = "{\"resources\": " + JsonConvert.SerializeObject(resources) + "}";
+		Dictionary<string,Dictionary<string,string>> jsonBody = new Dictionary<string, Dictionary<string, string>>();
+		jsonBody.Add("resources",resources);	
+		string resourcesToUpdateFormatted = JsonConvert.SerializeObject(jsonBody);
 		request.Content = new StringContent(resourcesToUpdateFormatted, Encoding.UTF8, "application/json");
 		Debug.Log(resourcesToUpdateFormatted);
 		try
@@ -44,17 +46,17 @@ public class RequestManager
 			if (!response.IsSuccessStatusCode)
 			{
 				Debug.Log($"Failed to update player resources. Status code: {response.StatusCode}");
-				return;
+				return null;
 			}
 
-			//var responseBody = await response.Content.ReadAsStringAsync();
-			//var responseResources = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseBody);
-			return;
+			var responseBody = await response.Content.ReadAsStringAsync();
+			var responseResources = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseBody);
+			return responseResources;
 		}
 		catch (Exception e)
 		{
 			Debug.Log($"Failed to update player resources. Check your internet connection. Error details: {e.Message}");
-			return;
+			return null;
 		}
 	}
 
@@ -126,18 +128,21 @@ public class RequestManager
 	{
 		Player player = new Player();
 		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{name}/";
-		HttpClient client = new HttpClient();
+		using HttpClient client = new HttpClient();
 		try
 		{
+			//Debug.Log($"Awaiting responce for player {name}..");
 			var response = await client.GetAsync(url);
+			//Debug.Log("Got responce!");
 			if (!response.IsSuccessStatusCode)
 			{
 				Debug.Log($"Failed to get selected player. Status code: {response.StatusCode}");
 				return null;
 			}
 			var responceBody = await response.Content.ReadAsStringAsync();
+			//Debug.Log(responceBody);
 			player = JsonConvert.DeserializeObject<Player>(responceBody);
-
+			//Debug.Log(float.Parse(player.resources["honey"]));
 			return player;
 		}
 		catch (Exception e)

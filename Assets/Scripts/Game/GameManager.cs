@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
 	[Header("Resourсes")]
 	[SerializeField] public float honey;
 	[SerializeField] public int asteriy;
-	[SerializeField] private float astroluminite;
+	[SerializeField] public float astroluminite;
 	[SerializeField] private int rawAsterium = 0;
 	public int maxBearsAmount;
 	RaycastHit raycastHit;
@@ -154,9 +154,9 @@ public class GameManager : MonoBehaviour
 	{
 		if (!isAPIActive)
 		{
-			asteriy = 600;
-			honey = 100;
-			astroluminite = 20;
+			//asteriy = 600;
+			//honey = 100;
+			//astroluminite = 20;
 		}
 	}
 
@@ -562,9 +562,12 @@ public class GameManager : MonoBehaviour
 	{
 		if (isAPIActive)
 		{
+			Debug.Log("trying to get player...");
 			var model = await RequestManager.GetPlayer(playerName);
 			playerModel = model;
-			return float.Parse(model.resources["honey"]);
+			Debug.Log(float.Parse(model.resources["honey"].Replace('.', ',')));
+			return float.Parse(model.resources["honey"].Replace('.', ','));
+
 		}
 		return honey;
 	}
@@ -590,12 +593,15 @@ public class GameManager : MonoBehaviour
 	/// <param name="amount"></param>
 	public async Task ChangeHoney(float amount)
 	{
-		if (isAPIActive)
+		Debug.Log("Trying to check integer");
+		if (isAPIActive && honey + amount < Mathf.Floor(honey))
 		{
 			float serverHoney = await GetHoney();
+			Debug.Log($"server honey: {serverHoney}");
 			serverHoney += amount;
 			serverHoney = Mathf.Clamp(serverHoney, 0, 999);
 			honey = serverHoney;
+			Debug.Log($"trying to update honey..");
 			await JsonManager.SavePlayerToJson(playerName);
 			return;
 		}
@@ -1163,8 +1169,8 @@ public class GameManager : MonoBehaviour
 			//	ResourcesChanged = changedResources
 			//});
 		}
-		Debug.Log("Съели мёда: " + honeyToEat);
 		await ChangeHoney(-honeyToEat);
+		//Debug.Log("Съели мёда: " + honeyToEat);
 		uiResourceShower.UpdateIndicators();
 	}
 
@@ -1238,7 +1244,7 @@ public class GameManager : MonoBehaviour
 			}
 			shuffleRooms.ForEach(delegate (GameObject room)
 			{
-				float damage = (0.35f/5f + 0.04f * cycleNumber - 0.02f * room.GetComponent<RoomScript>().depthLevel) * room.GetComponent<RoomScript>().durability;
+				float damage = (0.35f / 5f + 0.04f * cycleNumber - 0.02f * room.GetComponent<RoomScript>().depthLevel) * room.GetComponent<RoomScript>().durability;
 				Debug.Log(room.name + " задамажен фазой на " + damage);
 				room.GetComponent<RoomScript>().ChangeDurability(-damage);
 			});
