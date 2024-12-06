@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -106,19 +108,38 @@ public class MenuManager : MonoBehaviour
 		Time.timeScale = 0f;
 	}
 
-	//private async int CountScore()
-	//{
-	//	GameManager game = GameManager.Instance;
-	//	return (int)(
-	//	await game.GetAsteriy() * 10f +
-	//	await game.GetHoney() * 15f + 
-	//	(game.allRooms.Count - 7) * 500f +
-	//	0 * 80f +
-	//	0 * 480f + 
-	//	0 * 48f + 
-	//	0 * 400f + 0
-	//	);
-	//}
+	private async void CountScoreAndShow()
+	{
+		GameManager game = GameManager.Instance;
+
+		int scoreAsteriy = (int)(await game.GetAsteriy() * 10f);
+		int scoreHoney = (int)(await game.GetHoney() * 15f);
+		int scoreRooms = (int)((game.allRooms.Count - 7) * 500f);
+		int scoreHNY = (int)(0 * 80f);
+		int scoreScienceSample = (int)(0 * 480f);
+		int scoreAstroluminite = (int)(0 * 48f);
+		int scoreUrsowax = (int)(0 * 400f);
+		int scoreTime = (int)(game.GetTimePast() * 10f);
+		int scoreDurabilitySum = (int)(game.allRooms.Where(x => !x.CompareTag("elevator")).ToList().ConvertAll(y => y.GetComponent<RoomScript>().durability).Sum() * 100f * 10f); // all rooms without elevators multiplyes by 100 to get % and by 10 to get score
+		int scoreBearsLevelsSum = (int)(game.bears.ConvertAll(x => x.GetComponent<UnitScript>().level).Sum() * 500f);
+
+		int total = scoreAsteriy + scoreHoney + scoreRooms + scoreHNY + scoreScienceSample + scoreAstroluminite + scoreUrsowax + scoreTime + scoreDurabilitySum + scoreBearsLevelsSum;
+
+		//\\//\\//\\//\\//\\//\\//\\//\\//\\
+		
+		scores[0].text = Convert.ToString(scoreAsteriy);
+		scores[1].text = Convert.ToString(scoreHoney);
+		scores[2].text = Convert.ToString(scoreRooms);
+		scores[3].text = Convert.ToString(scoreHNY);
+		scores[4].text = Convert.ToString(scoreScienceSample);
+		scores[5].text = Convert.ToString(scoreAstroluminite);
+		scores[6].text = Convert.ToString(scoreUrsowax);
+		scores[7].text = Convert.ToString(scoreTime);
+		scores[8].text = Convert.ToString(scoreDurabilitySum);
+		scores[9].text = Convert.ToString(scoreBearsLevelsSum);
+
+		scores[10].text = Convert.ToString(total);
+	}
 
 	public void ActivateAPI()
 	{

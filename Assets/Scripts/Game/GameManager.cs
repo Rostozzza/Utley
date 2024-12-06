@@ -630,6 +630,7 @@ public class GameManager : MonoBehaviour
 			MenuManager.Instance.ShowWinScreen();
 		}
 		timeLeft -= Time.deltaTime;
+		timePast += Time.deltaTime;
 	}
 
 	private void InputHandler()
@@ -1282,6 +1283,11 @@ public class GameManager : MonoBehaviour
 	public float GetTemperature()
 	{
 		return temperature;
+	}
+
+	public float GetTimePast()
+	{
+		return timePast;
 	}
 
 	public enum Season
