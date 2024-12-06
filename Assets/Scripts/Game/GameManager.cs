@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using System;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -72,6 +74,39 @@ public class GameManager : MonoBehaviour
 	[Header("Effects")]
 	[SerializeField] private GameObject buildingParticle;
 
+	public void EnpowerAllRooms()
+	{
+		allRooms.Where(x => x.GetComponent<SupplyRoom>() && x.GetComponent<SupplyRoom>().durability > 0).ToList().ForEach(y => y.GetComponent<SupplyRoom>().GetRoomsToEnpower());
+	}
+
+	public void SetAsteriumViews()
+	{
+
+	}
+
+	public void KillAllBuildings()
+	{
+		foreach (var room in allRooms)
+		{
+			Destroy(room);
+		}
+		allRooms.Clear();
+		allRooms = new List<GameObject>();
+		asteriumRooms.Clear();
+		builderRooms.Clear();
+		asteriumRoomView.Clear();
+	}
+
+	public void KillAllBears()
+	{
+		foreach (var bear in bears)
+		{
+			Destroy(bear);
+		}
+		bears.Clear();
+		bears = new List<GameObject>();
+	}
+
 	public void LoadBearFromModel(Bear model)
 	{
 		var newBear = Instantiate(emptyBearPrefab);
@@ -95,11 +130,30 @@ public class GameManager : MonoBehaviour
 		{
 			var newRoom = Instantiate(allPossibleRooms.First(x => room.Type.Contains(x.gameObject.name)), new Vector3(room.Coordinates[0], room.Coordinates[1], room.Coordinates[2]), Quaternion.identity);
 			newRoom.GetComponent<RoomScript>().roomModel = room;
+			Debug.Log(room.Durability);
+			newRoom.GetComponent<RoomScript>().durability = room.Durability;
+			newRoom.GetComponent<RoomScript>().level = room.Level;
+			if (newRoom.GetComponent<RoomScript>().resource == RoomScript.Resources.Cosmodrome)
+			{
+				ui = newRoom.GetComponentsInChildren<Canvas>().First(x => x.CompareTag("cosmodromeCanvas")).gameObject;
+				asteriumViewGrid = ui.GetComponentInChildren<GridLayoutGroup>(true).transform;
+			}
+			if (newRoom.GetComponent<RoomScript>().resource == RoomScript.Resources.Asteriy)
+			{
+				asteriumRooms.Add(newRoom.GetComponent<RoomScript>());
+				var newAsteriumView = Instantiate(asteriumViewPrefab, asteriumViewGrid);
+				asteriumRoomView.Add(newAsteriumView.GetComponent<Image>());
+			}
 			allRooms.Add(newRoom);
+			//if (newRoom.GetComponent<SupplyRoom>())
+			//{
+			//	newRoom.GetComponent<SupplyRoom>().ChangeDurability(0);
+			//}
 			return true;
 		}
-		catch
+		catch (Exception e)
 		{
+			Debug.Log(e.Message);
 			return false;
 		}
 	}
@@ -723,14 +777,14 @@ public class GameManager : MonoBehaviour
 				}
 				else
 				{
-					OutlineWorkStations(false);
+					//OutlineWorkStations(false);
 					bears.ForEach(x => x.GetComponent<UnitScript>().SetMarker(false));
 					HideAllAssignButtons();
 				}
 			}
 			else
 			{
-				OutlineWorkStations(false);
+				//OutlineWorkStations(false);
 				selectedUnit = null;
 				if (selectedRoom != null)
 				{
@@ -749,7 +803,7 @@ public class GameManager : MonoBehaviour
 				if (raycastHit.transform != null)
 				{
 					RightClick(raycastHit.transform.gameObject);
-					OutlineWorkStations(false);
+					//OutlineWorkStations(false);
 				}
 			}
 		}

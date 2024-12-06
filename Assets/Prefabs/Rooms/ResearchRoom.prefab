@@ -1447,12 +1447,15 @@ MonoBehaviour:
   rightDoor: {fileID: 516562580323866995}
   hasLeftDoor: 0
   hasRightDoor: 0
-  roomStatsScreen: {fileID: 0}
-  roomBuildScreen: {fileID: 0}
+  roomStatsScreen: {fileID: 1792317140130636360}
+  roomBuildScreen: {fileID: 4565953569171360137}
+  asteriumCost: 0
+  honeyCost: 0
+  astroluminiteCost: 0
   connectedElevators: []
   connectedRooms: []
   rawWalkPoints: []
-  timeShow: {fileID: 0}
+  timeShow: {fileID: 897598803701678991}
   fixedBear: {fileID: 0}
   workStationsToOutline: []
   durability: 1
@@ -1462,11 +1465,14 @@ MonoBehaviour:
   lamps: []
   baseOfRoom: {fileID: 0}
   isEnpowered: 0
+  workStr: 
   assignmentButton: {fileID: 8031665954644742973}
   audioSource: {fileID: 0}
   workSound: {fileID: 0}
   progressBar: {fileID: 537949834007620251}
   upgradeBar: {fileID: 6362744408619956302}
+  flyForType: 0
+  cosmodromeSelectScreen: {fileID: 0}
   isReadyForWork: 0
 --- !u!65 &5295884649459452863
 BoxCollider:

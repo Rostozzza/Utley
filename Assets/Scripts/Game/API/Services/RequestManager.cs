@@ -51,8 +51,8 @@ public class RequestManager
 
 			var responseBody = await response.Content.ReadAsStringAsync();
 			Debug.Log($"Saved resources: {responseBody}");
-			var responseResources = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseBody);
-			return responseResources;
+			//var responseResources = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseBody);
+			return null;
 		}
 		catch (Exception e)
 		{
@@ -532,7 +532,7 @@ public class RequestManager
 			if (isAPIActive)
 			{
 				GameManager.Instance.playerName = name;
-				GameManager.Instance.playerModel = player;
+				GameManager.Instance.playerModel = player;;
 				GameManager.Instance.asteriy = int.Parse(player.resources["asterium"]);
 				GameManager.Instance.honey = float.Parse(player.resources["honey"]);
 			}

@@ -19,11 +19,11 @@ public class SupplyRoom : RoomScript
 		base.Start();
 		if (isSoft)
 		{
-			GetRoomsToEnpower().Wait();
+			GetRoomsToEnpower();
 		}
 	}
 
-	public async Task GetRoomsToEnpower()
+	public void GetRoomsToEnpower()
 	{
 		var horizontalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 17f
 																	&& x.transform.position.y == transform.position.y && x.GetComponent<RoomScript>()).ToList();
@@ -34,14 +34,14 @@ public class SupplyRoom : RoomScript
 		poweredRooms = horizontalRooms;
 		poweredRooms.AddRange(verticalRooms);
 		poweredRooms.AddRange(diagonalRooms);
-		foreach (var room in poweredRooms.Distinct())
+		foreach (var room in poweredRooms.Distinct().ToList())
 		{
 			Debug.Log(room.name);
 		}
-		foreach (var room in poweredRooms.Select(x=>x.GetComponent<RoomScript>()).ToList())
+		foreach (var room in poweredRooms.Distinct().ToList())
 		{
-			room.Enpower();
 			Debug.Log($"Trying to empower {room.name}");
+			room.GetComponent<RoomScript>().Enpower();
 		}
 		try
 		{
@@ -81,6 +81,10 @@ public class SupplyRoom : RoomScript
 		if (durability <= hp)
 		{
 			GetRoomsToUnpower();
+		}
+		if (hp > 0)
+		{
+			GetRoomsToEnpower();
 		}
 		base.ChangeDurability(hp);
 	}

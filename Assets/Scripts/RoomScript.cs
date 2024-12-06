@@ -128,12 +128,12 @@ public class RoomScript : MonoBehaviour
 				workSound = SoundManager.Instance.energohoneyRoomWorkSound;
 				break;
 			// in case Research - workStr = "Исследуем технологии"
-			default:
-				if (workStationsToOutline.Count > 0)
-				{
-					GameManager.Instance.AddWorkStations(workStationsToOutline);
-				}
-				break;
+			//default:
+			//	if (workStationsToOutline.Count > 0)
+			//	{
+			//		GameManager.Instance.AddWorkStations(workStationsToOutline);
+			//	}
+			//	break;
 		}
 		audioSource.clip = workSound;
 		if (!isEnpowered)
@@ -277,13 +277,20 @@ public class RoomScript : MonoBehaviour
 
 	public void UpdateRoomHullView()
 	{
-		levelText.text = "";
-		for (int i = 0; i < level; i++)
+		try
 		{
-			levelText.text += "I";
+			levelText.text = "";
+			for (int i = 0; i < level; i++)
+			{
+				levelText.text += "I";
+			}
+			roomStatsScreen.transform.Find("hull%").GetComponent<TextMeshProUGUI>().text = $"{Mathf.RoundToInt((durability / 1f) * 100f)}%";
+			roomStatsScreen.transform.Find("Hull").localScale = new Vector3(durability / 1f, 1, 1);
 		}
-		roomStatsScreen.transform.Find("hull%").GetComponent<TextMeshProUGUI>().text = $"{Mathf.RoundToInt((durability / 1f) * 100f)}%";
-		roomStatsScreen.transform.Find("Hull").localScale = new Vector3(durability/1f,1,1);
+		catch (Exception e)
+		{
+			Debug.Log($"An error occured during hull update! Error details: {e.Message}");		
+		}
 	}
 
 	public virtual void BuildRoom(GameObject button)
@@ -536,64 +543,77 @@ public class RoomScript : MonoBehaviour
 			return;
 		}
 		durability = Mathf.Clamp(durability, 0f, 1f);
-		
-		statusPanel.UpdateDurability(durability);
+		try
+		{
+			statusPanel.UpdateDurability(durability);
+		}
+		catch (Exception e)
+		{
+			Debug.Log("No statusPanel present at this moment!");
+		}
         if (!isEnpowered)
         {
 			SetLampsOn(false);
 			UpdateRoomHullView();
 			return;
 		}
-        if (durability > 0.5f)
+		try
 		{
-			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", defaultBaseColor);
-			sparks.ForEach(x => x.Stop());
-			SetLampsColor(defaultLampColor);
-			SetLampsOn(true);
-			if (blinks != null)
+			if (durability > 0.5f)
 			{
-				StopCoroutine(blinks);
-				blinks = null;
+				baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", defaultBaseColor);
+				sparks.ForEach(x => x.Stop());
+				SetLampsColor(defaultLampColor);
+				SetLampsOn(true);
+				if (blinks != null)
+				{
+					StopCoroutine(blinks);
+					blinks = null;
+				}
+			}
+			else if (durability > 0.3f)
+			{
+				SetLampsColor(defaultLampColor);
+				SetLampsOn(true);
+				baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.yellow);
+				sparks.ForEach(x => x.Stop());
+				blinks ??= StartCoroutine(LampsBlinking());
+			}
+			else if (durability > 0.15f)
+			{
+				SetLampsColor(defaultLampColor);
+				SetLampsOn(true);
+				baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red);
+				sparks.ForEach(x => x.Play());
+				blinks ??= StartCoroutine(LampsBlinking());
+			}
+			else if (durability > 0f)
+			{
+				baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+				sparks.ForEach(x => x.Play());
+				SetLampsColor(Color.red);
+				SetLampsOn(true);
+				if (blinks != null)
+				{
+					StopCoroutine(blinks);
+					blinks = null;
+				}
+			}
+			else
+			{
+				SetLampsOn(false);
+				if (blinks != null)
+				{
+					StopCoroutine(blinks);
+					blinks = null;
+				}
+				InterruptWork();
+				animator.SetTrigger("EndWork");
 			}
 		}
-		else if (durability > 0.3f)
+		catch (Exception e)
 		{
-			SetLampsColor(defaultLampColor);
-			SetLampsOn(true);
-			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.yellow);
-			sparks.ForEach(x => x.Stop());
-			blinks ??= StartCoroutine(LampsBlinking());
-		}
-		else if (durability > 0.15f)
-		{
-			SetLampsColor(defaultLampColor);
-			SetLampsOn(true);
-			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red);
-			sparks.ForEach(x => x.Play());
-			blinks ??= StartCoroutine(LampsBlinking());
-		}
-		else if (durability > 0f)
-		{
-			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
-			sparks.ForEach(x => x.Play());
-			SetLampsColor(Color.red);
-			SetLampsOn(true);
-			if (blinks != null)
-			{
-				StopCoroutine(blinks);
-				blinks = null;
-			}
-		}
-		else 
-		{
-			SetLampsOn(false);
-			if (blinks != null)
-			{
-				StopCoroutine(blinks);
-				blinks = null;
-			}
-			InterruptWork();
-			animator.SetTrigger("EndWork");
+			Debug.Log($"An error occured during durability change! Error details: {e.Message}");
 		}
 		UpdateRoomHullView();
 	}

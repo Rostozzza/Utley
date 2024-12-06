@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,8 +25,8 @@ public class JsonManager
 		var bearsToSave = JsonConvert.SerializeObject(GameManager.Instance.bears.Select(x => x.GetComponent<UnitScript>().bearModel).ToList());
 		//playerModel.resources.Add("bears", bearsToSave);
 		string path = $"{Application.persistentDataPath} + /{playerName}.json";
-		//playerModel.resources.Add("rooms", SerializeRooms().ToString());
-		//playerModel.resources.Add("elevators", SerializeElevators().ToString());
+		playerModel.resources.Add("rooms", SerializeRooms().ToString());
+		playerModel.resources.Add("elevators", SerializeElevators().ToString());
 		float honey = GameManager.Instance.honey;
 		int asterium = GameManager.Instance.asteriy;
 		playerModel.resources.Add("honey", honey.ToString());
@@ -51,8 +52,8 @@ public class JsonManager
 		//playerModel.Resources.Add("bears", bearsToSave);
 		string path = $"{Application.persistentDataPath} + /{playerName}.json";
 
-		//playerModel.Resources.Add("rooms", SerializeRooms());
-		//playerModel.Resources.Add("elevators", SerializeElevators());
+		playerModel.resources.Add("rooms", "[{\"Type\":\"AsteriumRecycle\",\"Level\":1,\"Coordinates\":[-2.8,10.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":0},{\"Type\":\"BuildRoom\",\"Level\":1,\"Coordinates\":[-2.8,2.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":2},{\"Type\":\"EnergoHoneyRoom\",\"Level\":1,\"Coordinates\":[-10.8,10.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":3},{\"Type\":\"ResearchRoom\",\"Level\":1,\"Coordinates\":[-18.8,10.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":4},{\"Type\":\"SupplyRoom\",\"Level\":1,\"Coordinates\":[-2.8,6.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":5},{\"Type\":\"LivingRoom\",\"Level\":1,\"Coordinates\":[-10.8,6.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":6},{\"Type\":\"complex_cosmodrome (1)\",\"Level\":1,\"Coordinates\":[-5.8,14.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":7}]");
+		playerModel.resources.Add("elevators", "[{\"Coordinates\":[5.2,10.0,0.0],\"ConnectedElevators\":[1],\"ConnectedRooms\":[0,2,5,7],\"BlocksUp\":1,\"BlocksDown\":2,\"Index\":1}]");
 
 		playerModel.resources.Add("honey", "100");
 		playerModel.resources.Add("asterium", "100");
@@ -96,6 +97,7 @@ public class JsonManager
 				Coordinates = new List<float> { room.transform.position.x, room.transform.position.y, room.transform.position.z },
 				Index = GameManager.Instance.allRooms.IndexOf(room.gameObject),
 				ConnectedElevators = GameManager.Instance.allRooms.Where(x => x.GetComponent<Elevator>()).Select(y => GameManager.Instance.allRooms.IndexOf(y)).ToList(),
+				Durability = room.durability,
 				Level = room.level,
 				Type = room.gameObject.name
 			};
@@ -126,6 +128,7 @@ public class JsonManager
 	{
 		GameManager.Instance.playerModel = model;
 		/*var bearsToAdd = JsonConvert.DeserializeObject<List<Bear>>(model.Resources["bears"]);
+		 GameManager.Instance.KillAllBears();
 		if (bearsToAdd != null)
 		{
 			foreach (var bear in bearsToAdd)
@@ -133,31 +136,36 @@ public class JsonManager
 				GameManager.Instance.LoadBearFromModel(bear);
 			}
 		}*/
-		try
+
+		GameManager.Instance.KillAllBuildings();
+		//try
+		//{
+		var rooms = JsonConvert.DeserializeObject<List<Room>>(model.resources["rooms"]);
+		var elevators = JsonConvert.DeserializeObject<List<ElevatorModel>>(model.resources["elevators"]);
+		Debug.Log($"rooms: {rooms.Count}");
+		Debug.Log($"elevators: {elevators.Count}");
+		for (int i = 0; i < rooms.Count + elevators.Count; i++)
 		{
-			var rooms = JsonConvert.DeserializeObject<List<Room>>(model.resources["rooms"]);
-			var elevators = JsonConvert.DeserializeObject<List<ElevatorModel>>(model.resources["elevators"]);
-			for (int i = 0; i < rooms.Count + elevators.Count; i++)
+			try
 			{
-				try
+				if (GameManager.Instance.LoadRoomFromModel(rooms.First(x => x.Index == i)))
 				{
-					if (GameManager.Instance.LoadRoomFromModel(rooms.First(x => x.Index == i)))
-					{
-						continue;
-					}
-					else
-					{
-						GameManager.Instance.LoadElevatorFromModel(elevators.First(x => x.Index == i));
-						continue;
-					}
+					continue;
 				}
-				catch
+				else
 				{
 					GameManager.Instance.LoadElevatorFromModel(elevators.First(x => x.Index == i));
+					continue;
 				}
 			}
-			GameManager.Instance.AssembleBase();
+			catch
+			{
+				GameManager.Instance.LoadElevatorFromModel(elevators.First(x => x.Index == i));
+			}
 		}
-		catch { Debug.Log("no rooms to spawn!"); }
+		GameManager.Instance.AssembleBase();
+		GameManager.Instance.EnpowerAllRooms();
+		//}
+		//catch (Exception e) { Debug.Log($"Exception dropped! {e.Message}"); }
 	}
 }
