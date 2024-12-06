@@ -239,22 +239,28 @@ public class RoomScript : MonoBehaviour
 
 	public void UpdateUpgradeView()
 	{
-		var currentHoney = GameManager.Instance.GetHoney().Result;
-		var desiredButton = roomBuildScreen.GetComponentsInChildren<TextMeshProUGUI>().First(x => x.transform.parent.name.Contains("Improve"));
-		if (currentHoney < (30 + 10 * (level - 1)))
+		if (level < 3)
 		{
-			//desiredButton.GetComponent<Button>() = false;
-			desiredButton.text = $"Не хватает {(int)((30 + 10 * (level - 1))-currentHoney)} энергомёда!";
-		}
-		else
-		{
-			desiredButton.GetComponent<Button>().enabled = true;
-			desiredButton.text = $"Улучшить";
+			var currentHoney = GameManager.Instance.GetHoney().Result;
+			var desiredButton = roomBuildScreen.GetComponentsInChildren<TextMeshProUGUI>(true).First(x => x.transform.parent.name.Contains("Improve"));
+			if (currentHoney < (30 + 10 * (level - 1)))
+			{
+				//desiredButton.GetComponent<Button>() = false;
+				desiredButton.text = $"Не хватает {(int)((30 + 10 * (level - 1)) - currentHoney)} энергомёда!";
+			}
+			else
+			{
+				desiredButton.text = $"Улучшить";
+			}
 		}
 	}
 
 	public void ToggleBuildStats(bool toggle)
 	{
+		if (level < 3)
+		{
+			UpdateUpgradeView();
+		}
 		if (!progressBar.transform.parent.gameObject.active && !upgradeBar.transform.parent.gameObject.active)
 		{
 			roomBuildScreen.SetActive(toggle);

@@ -44,11 +44,11 @@ public class CameraShake : MonoBehaviour
 		volume.profile.TryGet(out ChromaticAberration abberation);
 		abberation.intensity.value = abberationIntensity;
 		var timer = abberationLength;
-		var abberationDrain = (1f - abberationIntensity) / abberationLength;
+		var abberationDrain = (abberationIntensity) / abberationLength;
 		while (timer > 0)
 		{
 			timer -= Time.deltaTime;
-			abberation.intensity.value -= abberationDrain;
+			abberation.intensity.Override(abberation.intensity.value - abberationDrain * Time.deltaTime);
 			yield return null;
 		}
 		abberation.intensity.value = 0;

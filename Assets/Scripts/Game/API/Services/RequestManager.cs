@@ -452,7 +452,7 @@ public class RequestManager
 		}
 	}
 
-	public async Task DeletePlayer(string username, string shopName)
+	public async Task DeletePlayerShop(string username, string shopName)
 	{
 		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/shops/{shopName}/";
 		using HttpClient client = new HttpClient();
