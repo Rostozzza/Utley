@@ -59,6 +59,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private Image upgradeBar;
 	[Header("Asterium Settings")]
 	[SerializeField] private FlyForType flyForType;
+	[SerializeField] private GameObject cosmodromeSelectScreen;
 	public bool isReadyForWork = false;
 
 	public virtual void Enpower()
@@ -320,7 +321,7 @@ public class RoomScript : MonoBehaviour
 				status = Status.Busy;
 				statusPanel.UpdateStatus(status);
 				fixedBear.GetComponent<UnitScript>().CannotBeSelected();
-				timeShow.transform.parent.gameObject.SetActive(true);
+				cosmodromeSelectScreen.SetActive(true);
 				return;
 			}
 			if (status == Status.Free)// && resource != Resources.Build)
@@ -385,7 +386,7 @@ public class RoomScript : MonoBehaviour
 		if (resource == Resources.Cosmodrome)
 		{
 			timeShow.gameObject.SetActive(false);
-			timeShow.transform.parent.gameObject.SetActive(false);
+			cosmodromeSelectScreen.SetActive(false);
 			status = Status.Free;
 			statusPanel.UpdateStatus(status);
 		}
@@ -421,6 +422,7 @@ public class RoomScript : MonoBehaviour
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
 				break;
 			case Resources.Cosmodrome:
+				cosmodromeSelectScreen.SetActive(false);
 				fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 				timer = 45f;
 				//(1 - 0.05f * fixedBear.GetComponent<UnitScript>().level)
@@ -471,7 +473,7 @@ public class RoomScript : MonoBehaviour
 					fixedBear.GetComponent<UnitScript>().LevelUpBear();
 				}
 				timeShow.gameObject.SetActive(false);
-				timeShow.transform.parent.gameObject.SetActive(false);
+				cosmodromeSelectScreen.SetActive(false);
 				fixedBear.GetComponent<UnitScript>().CanBeSelected();
 				break;
 		}
