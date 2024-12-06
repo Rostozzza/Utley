@@ -19,7 +19,7 @@ public class SupplyRoom : RoomScript
 		base.Start();
 		if (isSoft)
 		{
-			GetRoomsToEnpower();
+			GetRoomsToEnpower().Wait();
 		}
 	}
 
