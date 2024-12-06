@@ -35,6 +35,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private List<GameObject> buttonsToHide;
 	[SerializeField] private List<GameObject> buttonsToShow;
 	[SerializeField] private List<TextMeshProUGUI> scores;
+	//[SerializeField] private List<TextMeshProUGUI> scores;
 	[Header("Inputs")]
 	[SerializeField] private TMP_InputField registrationUsernameField;
 	[SerializeField] private TMP_InputField registrationPasswordField;
@@ -69,6 +70,8 @@ public class MenuManager : MonoBehaviour
 
 	public void ShowLoseScreen()
 	{
+		GameManager.Instance.SetIsGameRunning(false);
+		CountScoreAndUpdate();
 		loseScreen.SetActive(true);
 		StartCoroutine(LoseScreenFadeIn());
 	}
@@ -89,6 +92,8 @@ public class MenuManager : MonoBehaviour
 
 	public void ShowWinScreen()
 	{
+		GameManager.Instance.SetIsGameRunning(false);
+		CountScoreAndUpdate();
 		winScreen.SetActive(true);
 		StartCoroutine(WinScreenFadeIn());
 	}
@@ -108,7 +113,7 @@ public class MenuManager : MonoBehaviour
 		Time.timeScale = 0f;
 	}
 
-	private async void CountScoreAndShow()
+	private async void CountScoreAndUpdate()
 	{
 		GameManager game = GameManager.Instance;
 
@@ -123,22 +128,24 @@ public class MenuManager : MonoBehaviour
 		int scoreDurabilitySum = (int)(game.allRooms.Where(x => !x.CompareTag("elevator")).ToList().ConvertAll(y => y.GetComponent<RoomScript>().durability).Sum() * 100f * 10f); // all rooms without elevators multiplyes by 100 to get % and by 10 to get score
 		int scoreBearsLevelsSum = (int)(game.bears.ConvertAll(x => x.GetComponent<UnitScript>().level).Sum() * 500f);
 
-		int total = scoreAsteriy + scoreHoney + scoreRooms + scoreHNY + scoreScienceSample + scoreAstroluminite + scoreUrsowax + scoreTime + scoreDurabilitySum + scoreBearsLevelsSum;
+		int scoreTotal = scoreAsteriy + scoreHoney + scoreRooms + scoreHNY + scoreScienceSample + scoreAstroluminite + scoreUrsowax + scoreTime + scoreDurabilitySum + scoreBearsLevelsSum;
 
 		//\\//\\//\\//\\//\\//\\//\\//\\//\\
 		
-		scores[0].text = Convert.ToString(scoreAsteriy);
-		scores[1].text = Convert.ToString(scoreHoney);
-		scores[2].text = Convert.ToString(scoreRooms);
-		scores[3].text = Convert.ToString(scoreHNY);
-		scores[4].text = Convert.ToString(scoreScienceSample);
-		scores[5].text = Convert.ToString(scoreAstroluminite);
-		scores[6].text = Convert.ToString(scoreUrsowax);
-		scores[7].text = Convert.ToString(scoreTime);
-		scores[8].text = Convert.ToString(scoreDurabilitySum);
-		scores[9].text = Convert.ToString(scoreBearsLevelsSum);
+		//scores[0].text = Convert.ToString(scoreAsteriy);
+		//scores[1].text = Convert.ToString(scoreHoney);
+		//scores[2].text = Convert.ToString(scoreRooms);
+		//scores[3].text = Convert.ToString(scoreHNY);
+		//scores[4].text = Convert.ToString(scoreScienceSample);
+		//scores[5].text = Convert.ToString(scoreAstroluminite);
+		//scores[6].text = Convert.ToString(scoreUrsowax);
+		//scores[7].text = Convert.ToString(scoreTime);
+		//scores[8].text = Convert.ToString(scoreDurabilitySum);
+		//scores[9].text = Convert.ToString(scoreBearsLevelsSum);
+//
+		//scores[10].text = Convert.ToString(total);
 
-		scores[10].text = Convert.ToString(total);
+		scores.ForEach(x => x.text = $"Итого очков:\n\nОстаток астерия: {scoreAsteriy, 16}\nОстаток энергомеда: {scoreHoney, 13}\nПостройка комплексов: {scoreRooms, 11}\nОстаток М.Е.Д.: {scoreHNY, 17}\nОстаток образцов: {scoreScienceSample, 15}\nОстаток астролуминита: {scoreAstroluminite, 10}\nОстаток урсовокс: {scoreUrsowax, 15}\nДлина смены: {scoreTime, 20}\nОстаток прочности: {scoreDurabilitySum, 14}\nУровень команды: {scoreBearsLevelsSum, 16}\n\nИтого: {scoreTotal, 26}");
 	}
 
 	public void ActivateAPI()

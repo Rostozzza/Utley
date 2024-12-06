@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private float seasonTimeLeft;
 	[SerializeField] private float temperature = 20f;
 	[SerializeField] private float timePast = 0f;
+	[SerializeField] private bool isGameRunning = true;
 
 	[Header("Building settings")]
 	public GameObject buildingScreen;
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
 	[Header("Resourсes")]
 	[SerializeField] private float honey;
 	[SerializeField] private int asteriy;
+	[SerializeField] private float astroluminite;
 	[SerializeField] private int rawAsterium = 0;
 	public int maxBearsAmount;
 	RaycastHit raycastHit;
@@ -160,6 +162,7 @@ public class GameManager : MonoBehaviour
 		{
 			asteriy = 600;
 			honey = 100;
+			astroluminite = 20;
 		}
 		skyBG = GameObject.FindGameObjectWithTag("skyBG");
 		StartCoroutine(ConstantDurabilityDamager(4));
@@ -286,7 +289,8 @@ public class GameManager : MonoBehaviour
 	/// <param name="building"></param>
 	public async void SelectAndBuild(GameObject building)
 	{
-		if (await GetAsteriy() < 60)
+		RoomScript roomScript = building.GetComponent<RoomScript>();
+		if (await GetAsteriy() < roomScript.asteriumCost && await GetHoney() < roomScript.honeyCost)
 		{
 			queuedBuildPositon = null;
 			buildingScreen.SetActive(false);
@@ -311,7 +315,14 @@ public class GameManager : MonoBehaviour
 			elevatorBuildingScreen.SetActive(false);
 			return;
 		}
-		await ChangeAsteriy(-60);
+		if (roomScript.asteriumCost > 0)
+		{
+			await ChangeAsteriy(-roomScript.asteriumCost);
+		}
+		if (roomScript.honeyCost > 0)
+		{
+			await ChangeHoney(-roomScript.honeyCost);
+		}
 		uiResourceShower.UpdateIndicators();
 
 		// goto room vvvvv
@@ -377,6 +388,7 @@ public class GameManager : MonoBehaviour
 
 	private async Task SelectAndBuildMainBlock(GameObject building, Transform point)
 	{
+
 		var instance = Instantiate(building, point.position - new Vector3(0, 0, 3.46f - 5f), Quaternion.identity);
 		if (instance.CompareTag("elevator"))// trying to build elevator
 		{
@@ -625,7 +637,7 @@ public class GameManager : MonoBehaviour
 	private void Update()
 	{
 		InputHandler();
-		if (timeLeft <= 0)
+		if (timeLeft <= 0 && isGameRunning)
 		{
 			MenuManager.Instance.ShowWinScreen();
 		}
@@ -1250,7 +1262,7 @@ public class GameManager : MonoBehaviour
 			{
 				temperature += 10f / 30f * Time.deltaTime;
 			}
-			if (temperature <= -25f)
+			if (temperature <= -25f && isGameRunning)
 			{
 				Debug.Log("ПОРАЖЕНИЕ");
 				MenuManager.Instance.ShowLoseScreen();
@@ -1288,6 +1300,11 @@ public class GameManager : MonoBehaviour
 	public float GetTimePast()
 	{
 		return timePast;
+	}
+
+	public void SetIsGameRunning(bool set)
+	{
+		isGameRunning = set;
 	}
 
 	public enum Season

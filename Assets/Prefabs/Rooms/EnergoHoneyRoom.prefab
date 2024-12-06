@@ -409,6 +409,9 @@ MonoBehaviour:
   hasRightDoor: 0
   roomStatsScreen: {fileID: 0}
   roomBuildScreen: {fileID: 0}
+  asteriumCost: 20
+  honeyCost: 25
+  astroluminiteCost: 1
   connectedElevators: []
   connectedRooms: []
   rawWalkPoints:
@@ -429,6 +432,7 @@ MonoBehaviour:
   lamps: []
   baseOfRoom: {fileID: 0}
   isEnpowered: 0
+  workStr: 
   assignmentButton: {fileID: 4026933532760048727}
   audioSource: {fileID: 0}
   workSound: {fileID: 0}
