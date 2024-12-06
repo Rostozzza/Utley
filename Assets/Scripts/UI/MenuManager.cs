@@ -223,6 +223,11 @@ public class MenuManager : MonoBehaviour
 		buttonsToHide.ForEach(x => x.SetActive(true));
 		buttonsToShow.ForEach(x => x.SetActive(false));
 		Time.timeScale = 1f;
+		loseScreen.SetActive(false);
+		loseScreen.GetComponent<CanvasGroup>().alpha = 0f;
+		winScreen.SetActive(false);
+		winScreen.GetComponent<CanvasGroup>().alpha = 0f;
+		pauseScreen.SetActive(false);
 		loadingView.SetActive(false);
 	}
 
@@ -301,7 +306,7 @@ public class MenuManager : MonoBehaviour
 
 	public void ContinueGame()
 	{
-		ContinueGameAsync();
+		ContinueGameAsync().Wait();
 	}
 
 	private IEnumerator LoadingScreenCoroutine()
@@ -313,8 +318,21 @@ public class MenuManager : MonoBehaviour
 			loadingBar.value = (operation.progress / 0.9f);
 			yield return null;
 		}
-		loadingBar.value = 0;
-		loadingScreen.SetActive(false);
+		if (!isAPIActive)
+		{
+			loadingBar.value = 0;
+			loadingScreen.SetActive(false);
+			Time.timeScale = 1f;
+			loadingView.SetActive(false);
+		}
+		else
+		{
+			LoadPlayerAsync().Wait();
+		}
+	}
+
+	private async Task LoadPlayerAsync()
+	{
 		if (isAPIActive)
 		{
 			GameManager.Instance.playerName = currentPLayerName;
@@ -323,16 +341,17 @@ public class MenuManager : MonoBehaviour
 			GameManager.Instance.RequestManager = new RequestManager(isAPIActive);
 
 			//await JsonManager.InitializeShop(currentPLayerName);
-			var requestedPlayer = RequestManager.GetPlayer(currentPLayerName).Result;
-			Time.timeScale = 0f;
+			var requestedPlayer = await RequestManager.GetPlayer(currentPLayerName);
 			if (requestedPlayer == null)
 			{
 				Debug.Log("No player present!");
 				loadingView.SetActive(false);
-				yield return null;
+				return;
 			}
 			JsonManager.LoadPlayerFromModel(requestedPlayer);
 		}
+		loadingBar.value = 0;
+		loadingScreen.SetActive(false);
 		Time.timeScale = 1f;
 		loadingView.SetActive(false);
 	}

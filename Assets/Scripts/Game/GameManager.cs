@@ -531,7 +531,7 @@ public class GameManager : MonoBehaviour
 		}
 		queuedBuildPositon = null;
 		allRooms.Add(instance);
-		allRooms.Where(x => x.GetComponent<SupplyRoom>()).ToList().ForEach(y => y.GetComponent<SupplyRoom>().GetRoomsToEnpower());
+		allRooms.Where(x => x.GetComponent<SupplyRoom>()).ToList().ForEach(y => y.GetComponent<SupplyRoom>().GetRoomsToEnpower().Wait());
 		if (isAPIActive)
 		{
 			await JsonManager.SavePlayerToJson(playerName);
@@ -548,7 +548,7 @@ public class GameManager : MonoBehaviour
 		{
 			var model = await RequestManager.GetPlayer(playerName);
 			playerModel = model;
-			return int.Parse(model.resources["honey"]);
+			return float.Parse(model.resources["honey"]);
 		}
 		return honey;
 	}
@@ -1148,7 +1148,7 @@ public class GameManager : MonoBehaviour
 			});
 		}
 		Debug.Log("Съели мёда: " + honeyToEat);
-		ChangeHoney(-honeyToEat);
+		ChangeHoney(-honeyToEat).Wait();
 		uiResourceShower.UpdateIndicators();
 	}
 
