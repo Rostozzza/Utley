@@ -18579,6 +18579,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResearchRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 2139772726859667698, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2902201022600142777, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
+      propertyPath: m_TagString
+      value: assignment
+      objectReference: {fileID: 0}
+    - target: {fileID: 5193309106974260902, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
+      propertyPath: m_TagString
+      value: assignment
+      objectReference: {fileID: 0}
+    - target: {fileID: 5580336183026862948, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
+      propertyPath: connectedElevators.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5580336183026862948, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
+      propertyPath: 'connectedElevators.Array.data[0]'
+      value: 
+      objectReference: {fileID: 737861180}
+    - target: {fileID: 8925133713180909613, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1430369312771629700, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
     - {fileID: 3438680222628645298, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
@@ -38103,6 +38127,9 @@ MonoBehaviour:
   honey: 0
   asteriy: 0
   astroluminite: 0
+  ursowaks: 0
+  prototype: 0
+  HNY: 0
   rawAsterium: 0
   maxBearsAmount: 0
   buildingParticle: {fileID: 3200611271252789984, guid: 43120e4d75082c745a38a3d1f1594a25, type: 3}

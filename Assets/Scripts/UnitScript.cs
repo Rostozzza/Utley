@@ -219,6 +219,8 @@ public class UnitScript : MonoBehaviour
 				GetComponentInChildren<Animator>().SetBool("Work", false);
 				walkingCoroutine = null;
 				break;
+			case RoomScript.Resources.Research:
+				break;
 		}
 	}
 

@@ -127,6 +127,10 @@ public class RoomScript : MonoBehaviour
 				workStr = "Cинтез энергомеда";
 				workSound = SoundManager.Instance.energohoneyRoomWorkSound;
 				break;
+			case Resources.Research:
+				workStr = "Исследуем технологии";
+				workSound = SoundManager.Instance.energohoneyRoomWorkSound;
+				break;
 			// in case Research - workStr = "Исследуем технологии"
 			default:
 				if (workStationsToOutline.Count > 0)
@@ -463,7 +467,7 @@ public class RoomScript : MonoBehaviour
 						GameManager.Instance.DeliverRawAsterium();
 						break;
 					case FlyForType.Astroluminite:
-						GameManager.Instance.ChangeAstroluminite(5);
+						GameManager.Instance.ChangeAstroluminite(8);
 						break;
 				}
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
