@@ -186,6 +186,8 @@ public class MenuManager : MonoBehaviour
 		mixer.SetFloat("Lowpass", 22000f);
 		buttonsToHide.ForEach(x => x.SetActive(true));
 		buttonsToShow.ForEach(x => x.SetActive(false));
+		Time.timeScale = 1f;
+		loadingView.SetActive(false);
 	}
 
 	public void Quit()
@@ -307,6 +309,5 @@ public class MenuManager : MonoBehaviour
 		mainMenuScreen.SetActive(false);
 		var loading = StartCoroutine(LoadingScreenCoroutine());
 		//SceneManager.LoadSceneAsync(1);
-
 	}
 }

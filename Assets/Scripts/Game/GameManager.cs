@@ -149,7 +149,6 @@ public class GameManager : MonoBehaviour
 
 	public void Awake()
 	{
-		Time.timeScale = 20;
 		if (Instance == null)
 		{
 			Instance = this;
