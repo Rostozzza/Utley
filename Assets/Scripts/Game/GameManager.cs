@@ -283,12 +283,15 @@ public class GameManager : MonoBehaviour
 	/// <param name="building"></param>
 	public async void SelectAndBuild(GameObject building)
 	{
-		SelectAndBuildAsync(building).Wait();
+		await SelectAndBuildAsync(building);
+		Debug.Log("NoT DEAD");
 	}
 
 	public async Task SelectAndBuildAsync(GameObject building)
 	{
 		var currentAsterium = await GetAsteriy();
+		Debug.Log("NoT DEAD");
+		queuedBuildPositon.GetComponent<Button>().interactable = false;
 		if (!building.CompareTag("elevator"))
 		{
 			RoomScript roomScript = building.GetComponent<RoomScript>();
@@ -299,6 +302,7 @@ public class GameManager : MonoBehaviour
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
 				elevatorBuildingScreen.SetActive(false);
+				queuedBuildPositon.GetComponent<Button>().interactable = true;
 				return;
 			}
 
@@ -342,6 +346,7 @@ public class GameManager : MonoBehaviour
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
 				elevatorBuildingScreen.SetActive(false);
+				queuedBuildPositon.GetComponent<Button>().interactable = true;
 				return;
 			}
 			fixedBuilderRoom = null;
@@ -389,6 +394,7 @@ public class GameManager : MonoBehaviour
 			}
 		}
 		StartCoroutine(SelectAndBuildWaiter(building, fixedBuilderRoom, queuedBuildPositon.transform));
+		Debug.Log("NoT DEAD");
 		buildingScreen.SetActive(false);
 		elevatorBuildingScreen.SetActive(false);
 	}
@@ -418,6 +424,7 @@ public class GameManager : MonoBehaviour
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
 		room.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Free);
 		SelectAndBuildMainBlock(building, point).Wait();
+		Debug.Log("NoT DEAD after building");
 		StartCoroutine(WalkAndStartWork(room.GetComponent<BuilderRoom>().fixedBear, room));
 		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
 		{
@@ -585,7 +592,8 @@ public class GameManager : MonoBehaviour
 		allRooms.Where(x => x.GetComponent<SupplyRoom>()).ToList().ForEach(y => y.GetComponent<SupplyRoom>().GetRoomsToEnpower());
 		if (isAPIActive)
 		{
-			await JsonManager.SavePlayerToJson(playerName);
+			//await JsonManager.SavePlayerToJson(playerName);
+			Debug.Log("NoT DEAD after saving");
 		}
 	}
 
