@@ -339,6 +339,7 @@ public class MenuManager : MonoBehaviour
 			GameManager.Instance.asteriy = 600;
 			GameManager.Instance.honey = 100;
 			GameManager.Instance.astroluminite = 20;
+			GameManager.Instance.uiResourceShower.UpdateIndicators();
 		}
 		else
 		{

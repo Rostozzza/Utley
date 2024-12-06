@@ -166,7 +166,6 @@ public class GameManager : MonoBehaviour
 		ChangeSeason(Season.Calm);
 		SetModeByButton(1);
 		SetModeByButton(1);
-		uiResourceShower.UpdateIndicators();
 	}
 
 	/// <summary>
