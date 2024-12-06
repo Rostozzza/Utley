@@ -28,22 +28,21 @@ public class JsonManager
 		//playerModel.resources.Add("elevators", SerializeElevators().ToString());
 		float honey = GameManager.Instance.honey;
 		int asterium = GameManager.Instance.asteriy;
-		playerModel.resources.Add("honey", honey.ToString().Replace(",", "."));
-		Debug.Log(honey.ToString().Replace(",","."));
+		playerModel.resources.Add("honey", honey.ToString());
 		playerModel.resources.Add("asterium", asterium.ToString());
 		playerModel.resources.Add("password", GameManager.Instance.playerModel.resources["password"]);
 
 		string serializedPlayer = JsonConvert.SerializeObject(playerModel);
 		//File.WriteAllText(path,serializedPlayer);
-		var allPlayers = await requestManager.GetAllPlayers();
-		if (allPlayers.FirstOrDefault(x => x.name == playerName) != null)
-		{
-			await requestManager.UpdatePlayerResources(playerName,playerModel.resources);
-		}
+		//var allPlayers = await requestManager.GetAllPlayers();
+		//if (allPlayers.FirstOrDefault(x => x.name == playerName) != null)
+		//{
+		await requestManager.UpdatePlayerResources(playerName, playerModel.resources);
+		//}
 		return playerModel;
 	}
 
-	public async Task<Player> CreateNewPlayer(string playerName,string password)
+	public async Task<Player> CreateNewPlayer(string playerName, string password)
 	{
 		Player playerModel = new Player();
 		playerModel.name = playerName;
@@ -57,7 +56,7 @@ public class JsonManager
 
 		playerModel.resources.Add("honey", "100");
 		playerModel.resources.Add("asterium", "100");
-		playerModel.resources.Add("password",password);
+		playerModel.resources.Add("password", password);
 
 		string serializedPlayer = JsonConvert.SerializeObject(playerModel);
 		//File.WriteAllText(path, serializedPlayer);
@@ -82,7 +81,7 @@ public class JsonManager
 		shop.resources.Add("bears", 100);
 		if (isAPIActive)
 		{
-			await requestManager.CreateShop(player,shop);
+			await requestManager.CreateShop(player, shop);
 		}
 		return shop;
 	}

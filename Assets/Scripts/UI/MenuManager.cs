@@ -336,6 +336,9 @@ public class MenuManager : MonoBehaviour
 			loadingScreen.SetActive(false);
 			Time.timeScale = 1f;
 			loadingView.SetActive(false);
+			GameManager.Instance.asteriy = 600;
+			GameManager.Instance.honey = 100;
+			GameManager.Instance.astroluminite = 20;
 		}
 		else
 		{
