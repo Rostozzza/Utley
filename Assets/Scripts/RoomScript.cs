@@ -5,6 +5,9 @@ using TMPro;
 using UnityEngine.UI;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
+
+using Random = UnityEngine.Random;
 
 public class RoomScript : MonoBehaviour
 {
@@ -55,6 +58,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private Image progressBar;
 	[SerializeField] private Image upgradeBar;
 	[Header("Asterium Settings")]
+	[SerializeField] private FlyForType flyForType;
 	public bool isReadyForWork = false;
 
 	public virtual void Enpower()
@@ -327,13 +331,34 @@ public class RoomScript : MonoBehaviour
 		}
 	}
 
-	public void StartCosmodromeWork()
+	public void StartCosmodromeWork(int type)
 	{
-		if (GameManager.Instance.FlyForRawAsterium() && GameManager.Instance.season != GameManager.Season.Tide)
+		switch (type)
 		{
-			timeShow.gameObject.SetActive(true);
-			StartCoroutine(WorkStatus());
+			case 0: // Asteriy
+				if (GameManager.Instance.FlyForRawAsterium() && GameManager.Instance.season != GameManager.Season.Tide)
+				{
+					timeShow.gameObject.SetActive(true);
+					flyForType = FlyForType.Asterium;
+					StartCoroutine(WorkStatus());
+				}
+				break;
+			case 1: // Astroluminite
+				if (GameManager.Instance.season != GameManager.Season.Tide)
+				{
+					timeShow.gameObject.SetActive(true);
+					flyForType = FlyForType.Astroluminite;
+					StartCoroutine(WorkStatus());
+				}
+				break;
 		}
+	}
+
+	public enum FlyForType
+	{
+		None,
+		Asterium,
+		Astroluminite
 	}
 
 	public async Task StartShopWork()
@@ -375,8 +400,7 @@ public class RoomScript : MonoBehaviour
 		animator.SetTrigger("StartWork");
 		if (resource != Resources.Asteriy)
 		{
-
-			fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
+			if (resource != Resources.Cosmodrome) fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 			fixedBear.GetComponent<UnitScript>().SetBusy(true);
 			fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		}
@@ -397,6 +421,7 @@ public class RoomScript : MonoBehaviour
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
 				break;
 			case Resources.Cosmodrome:
+				fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 				timer = 45f;
 				//(1 - 0.05f * fixedBear.GetComponent<UnitScript>().level)
 				if (fixedBear.GetComponent<UnitScript>().job == Qualification.researcher)
@@ -430,8 +455,18 @@ public class RoomScript : MonoBehaviour
 					yield return null;
 				}
 
-				GameManager.Instance.DeliverRawAsterium();
-				if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
+				switch (flyForType)
+				{
+					case FlyForType.Asterium:
+						GameManager.Instance.DeliverRawAsterium();
+						break;
+					case FlyForType.Astroluminite:
+						GameManager.Instance.ChangeAstroluminite(5);
+						break;
+				}
+				GameManager.Instance.uiResourceShower.UpdateIndicators();
+
+				if (fixedBear.GetComponent<UnitScript>().job == Qualification.researcher)
 				{
 					fixedBear.GetComponent<UnitScript>().LevelUpBear();
 				}

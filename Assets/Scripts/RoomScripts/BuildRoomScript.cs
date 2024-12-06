@@ -8,7 +8,7 @@ public class BuildRoomScript : MonoBehaviour
         GameManager.Instance.QueueBuildPos(point);
         GameManager.Instance.buildingScreen.SetActive(true);
     }
-    public void BuildElevator(GameObject point)
+    public async void BuildElevator(GameObject point)
     {
 		GameManager.Instance.QueueBuildPos(point);
         //GameManager.Instance.elevatorBuildingScreen.SetActive(true);

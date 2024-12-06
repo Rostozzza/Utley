@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
 	[Header("Resourсes")]
 	[SerializeField] public float honey;
 	[SerializeField] public int asteriy;
-	[SerializeField] private float astroluminite;
+	[SerializeField] public float astroluminite;
 	[SerializeField] private int rawAsterium = 0;
 	public int maxBearsAmount;
 	RaycastHit raycastHit;
@@ -158,6 +158,7 @@ public class GameManager : MonoBehaviour
 			honey = 100;
 			astroluminite = 20;
 		}
+		uiResourceShower.UpdateIndicators();
 	}
 
 	public void Awake()
@@ -291,44 +292,82 @@ public class GameManager : MonoBehaviour
 	/// Builds a room from variable "building" at position of "queuedBuildPosition"
 	/// </summary>
 	/// <param name="building"></param>
-	public async Task SelectAndBuild(GameObject building)
+	public async void SelectAndBuild(GameObject building)
 	{
-		RoomScript roomScript = building.GetComponent<RoomScript>();
-		if (await GetAsteriy() < roomScript.asteriumCost && await GetHoney() < roomScript.honeyCost)
+		if (!building.CompareTag("elevator"))
 		{
-			queuedBuildPositon = null;
-			buildingScreen.SetActive(false);
-			elevatorBuildingScreen.SetActive(false);
-			return;
-		}
-		fixedBuilderRoom = null;
-		foreach (GameObject room in builderRooms)
-		{
-			if (room.GetComponent<BuilderRoom>().GetWait() && room.GetComponent<BuilderRoom>().fixedBear)
+			RoomScript roomScript = building.GetComponent<RoomScript>();
+			if (GetAsteriy().Result < roomScript.asteriumCost && GetHoney().Result < roomScript.honeyCost && GetAstroluminite().Result < roomScript.astroluminiteCost)
 			{
-				room.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Busy);
-				fixedBuilderRoom = room;
-				break;
+				queuedBuildPositon = null;
+				buildingScreen.SetActive(false);
+				elevatorBuildingScreen.SetActive(false);
+				return;
 			}
-		}
-		if (fixedBuilderRoom == null)
-		{
-			Debug.Log("Нет свободных строительных комплексов!");
-			queuedBuildPositon = null;
-			buildingScreen.SetActive(false);
-			elevatorBuildingScreen.SetActive(false);
-			return;
-		}
-		if (roomScript.asteriumCost > 0)
-		{
-			await ChangeAsteriy(-roomScript.asteriumCost);
-		}
-		if (roomScript.honeyCost > 0)
-		{
-			await ChangeHoney(-roomScript.honeyCost);
-		}
-		uiResourceShower.UpdateIndicators();
 
+			fixedBuilderRoom = null;
+			foreach (GameObject room in builderRooms)
+			{
+				if (room.GetComponent<BuilderRoom>().GetWait() && room.GetComponent<BuilderRoom>().fixedBear)
+				{
+					room.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Busy);
+					fixedBuilderRoom = room;
+					break;
+				}
+			}
+			if (fixedBuilderRoom == null)
+			{
+				Debug.Log("Нет свободных строительных комплексов!");
+				queuedBuildPositon = null;
+				buildingScreen.SetActive(false);
+				elevatorBuildingScreen.SetActive(false);
+				return;
+			}
+
+			if (roomScript.asteriumCost > 0)
+			{
+				ChangeAsteriy(-roomScript.asteriumCost).Wait();
+			}
+			if (roomScript.honeyCost > 0)
+			{
+				ChangeHoney(-roomScript.honeyCost).Wait();
+			}
+			if (roomScript.astroluminiteCost > 0)
+			{
+				ChangeAstroluminite(-roomScript.astroluminiteCost).Wait();
+			}
+			uiResourceShower.UpdateIndicators();
+		}
+		else
+		{
+			if (GetAsteriy().Result < 10)
+			{
+				queuedBuildPositon = null;
+				buildingScreen.SetActive(false);
+				elevatorBuildingScreen.SetActive(false);
+				return;
+			}
+			fixedBuilderRoom = null;
+			foreach (GameObject room in builderRooms)
+			{
+				if (room.GetComponent<BuilderRoom>().GetWait() && room.GetComponent<BuilderRoom>().fixedBear)
+				{
+					room.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Busy);
+					fixedBuilderRoom = room;
+					break;
+				}
+			}
+			if (fixedBuilderRoom == null)
+			{
+				Debug.Log("Нет свободных строительных комплексов!");
+				queuedBuildPositon = null;
+				buildingScreen.SetActive(false);
+				elevatorBuildingScreen.SetActive(false);
+				return;
+			}
+			ChangeAsteriy(-10).Wait();
+		}
+		
 		// goto room vvvvv
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
@@ -547,7 +586,7 @@ public class GameManager : MonoBehaviour
 		}
 		queuedBuildPositon = null;
 		allRooms.Add(instance);
-		allRooms.Where(x => x.GetComponent<SupplyRoom>()).ToList().ForEach(y => y.GetComponent<SupplyRoom>().GetRoomsToEnpower().Wait());
+		allRooms.Where(x => x.GetComponent<SupplyRoom>()).ToList().ForEach(y => y.GetComponent<SupplyRoom>().GetRoomsToEnpower());
 		if (isAPIActive)
 		{
 			await JsonManager.SavePlayerToJson(playerName);
@@ -582,6 +621,11 @@ public class GameManager : MonoBehaviour
 			return int.Parse(model.resources["asterium"]);
 		}
 		return asteriy;
+	}
+
+	public async Task<float> GetAstroluminite()
+	{
+		return astroluminite;
 	}
 
 	/// <summary>
@@ -622,6 +666,12 @@ public class GameManager : MonoBehaviour
 		asteriy = Mathf.Clamp(asteriy, 0, 999);
 	}
 
+	public async Task ChangeAstroluminite(float amount)
+	{
+		astroluminite += amount;
+		astroluminite = Mathf.Clamp(astroluminite, 0, 999);
+	}
+
 	public bool FlyForRawAsterium() => rawAsterium < asteriumRooms.Where(x => x.GetComponent<RoomScript>().isEnpowered).ToList().Count;
 
 	public void DeliverRawAsterium()
@@ -629,7 +679,7 @@ public class GameManager : MonoBehaviour
 		rawAsterium++;
 		asteriumRooms[rawAsterium - 1].isReadyForWork = true;
 		asteriumRooms[rawAsterium - 1].StartWork(gameObject);
-		asteriumRoomView[rawAsterium - 1].color = Color.blue;
+		asteriumRoomView[rawAsterium - 1].color = (Color.red + Color.yellow) / 2f;
 	}
 
 	public void WithdrawRawAsterium()
