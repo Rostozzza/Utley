@@ -17,6 +17,9 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private GameObject roomStatsScreen;
 	[SerializeField] private GameObject roomBuildScreen;
 	public Room roomModel;
+	[SerializeField] public int asteriumCost;
+	[SerializeField] public int honeyCost;
+	[SerializeField] public int astroluminiteCost;
 
 	public List<Elevator> connectedElevators;
 	public List<RoomScript> connectedRooms;
