@@ -43,8 +43,8 @@ public class UIResourceShower : MonoBehaviour
     /// </summary>
     public void UpdateIndicators()
     {
-        energoHoneyAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.GetHoney().Result));
-        asteriyAmountText.text = Convert.ToString(GameManager.Instance.GetAsteriy().Result);
+        energoHoneyAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.honey));
+        asteriyAmountText.text = Convert.ToString(GameManager.Instance.asteriy);
         bearsAmountText.text = Convert.ToString(GameManager.Instance.bears.Count) + "/" + Convert.ToString(GameManager.Instance.maxBearsAmount);
     }
 

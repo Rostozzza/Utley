@@ -24,11 +24,12 @@ public class JsonManager
 		var bearsToSave = JsonConvert.SerializeObject(GameManager.Instance.bears.Select(x => x.GetComponent<UnitScript>().bearModel).ToList());
 		//playerModel.resources.Add("bears", bearsToSave);
 		string path = $"{Application.persistentDataPath} + /{playerName}.json";
-		playerModel.resources.Add("rooms", SerializeRooms().ToString());
-		playerModel.resources.Add("elevators", SerializeElevators().ToString());
-		float honey = await GameManager.Instance.GetHoney();
-		int asterium = await GameManager.Instance.GetAsteriy();
-		playerModel.resources.Add("honey", honey.ToString());
+		//playerModel.resources.Add("rooms", SerializeRooms().ToString());
+		//playerModel.resources.Add("elevators", SerializeElevators().ToString());
+		float honey = GameManager.Instance.honey;
+		int asterium = GameManager.Instance.asteriy;
+		playerModel.resources.Add("honey", honey.ToString().Replace(",", "."));
+		Debug.Log(honey.ToString().Replace(",","."));
 		playerModel.resources.Add("asterium", asterium.ToString());
 		playerModel.resources.Add("password", GameManager.Instance.playerModel.resources["password"]);
 
@@ -37,8 +38,7 @@ public class JsonManager
 		var allPlayers = await requestManager.GetAllPlayers();
 		if (allPlayers.FirstOrDefault(x => x.name == playerName) != null)
 		{
-			Debug.Log(JsonConvert.SerializeObject(playerModel));
-			var rerponce = await requestManager.UpdatePlayerResources(playerName,playerModel.resources);
+			await requestManager.UpdatePlayerResources(playerName,playerModel.resources);
 		}
 		return playerModel;
 	}
@@ -61,11 +61,6 @@ public class JsonManager
 
 		string serializedPlayer = JsonConvert.SerializeObject(playerModel);
 		//File.WriteAllText(path, serializedPlayer);
-		if (requestManager.GetAllPlayers().Result.FirstOrDefault(x => x.name == playerName) != null)
-		{
-			Debug.Log("Player already exists!");
-			return null;
-		}
 		var rerponce = await requestManager.CreatePlayer(playerModel);
 		return rerponce;
 	}

@@ -7,11 +7,15 @@ using Newtonsoft.Json;
 using System.Text;
 using UnityEngine;
 using System.Security.Cryptography;
+using System.Net;
+using System.Collections;
+using UnityEngine.Networking;
 
 public class RequestManager
 {
 	public string UUID = "85820b3e-e70b-4696-9954-dbed1d942244";
 	public bool isAPIActive;
+	public GameManager gameManagerInstance;
 
 	public RequestManager(bool isAPIActive)
 	{
@@ -26,34 +30,35 @@ public class RequestManager
 	/// <param name="resources"></param>
 	/// <returns></returns>
 	/// <exception cref="Exception"></exception>
-	public async Task<Dictionary<string, string>> UpdatePlayerResources(string username, Dictionary<string, string> resources)
+	public async Task UpdatePlayerResources(string username, Dictionary<string, string> resources)
 	{
 		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/";
 		using HttpClient client = new HttpClient();
 		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, url);
-		request.Content = new StringContent(JsonConvert.SerializeObject(resources), Encoding.UTF8, "application/json");
-		Debug.Log(JsonConvert.SerializeObject(resources));
+		string resourcesToUpdateFormatted = "{\"resources\": " + JsonConvert.SerializeObject(resources) + "}";
+		request.Content = new StringContent(resourcesToUpdateFormatted, Encoding.UTF8, "application/json");
+		Debug.Log(resourcesToUpdateFormatted);
 		try
 		{
 			var response = await client.SendAsync(request);
 			if (!response.IsSuccessStatusCode)
 			{
 				Debug.Log($"Failed to update player resources. Status code: {response.StatusCode}");
-				return null;
+				return;
 			}
 
-			var responseBody = await response.Content.ReadAsStringAsync();
-			var responseResources = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseBody);
-			return responseResources;
+			//var responseBody = await response.Content.ReadAsStringAsync();
+			//var responseResources = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseBody);
+			return;
 		}
 		catch (Exception e)
 		{
 			Debug.Log($"Failed to update player resources. Check your internet connection. Error details: {e.Message}");
-			return null;
+			return;
 		}
 	}
 
-	public async Task<Dictionary<string, string>> UpdatePlayerResources(string username, string shopName, Dictionary<string, string> resources)
+	public async Task<Dictionary<string, string>> UpdateShopResources(string username, string shopName, Dictionary<string, string> resources)
 	{
 		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/shops/{shopName}/";
 		using HttpClient client = new HttpClient();
@@ -94,7 +99,7 @@ public class RequestManager
 		HttpClient client = new HttpClient();
 		try
 		{
-			var response = client.GetAsync(url).Result;
+			var response = await client.GetAsync(url);
 			if (!response.IsSuccessStatusCode)
 			{
 				Debug.Log($"Failed to create a new player. Status code: {response.StatusCode}");
@@ -187,7 +192,7 @@ public class RequestManager
 
 		try
 		{
-			var response = client.GetAsync(url).Result;
+			var response = await client.GetAsync(url);
 			if (!response.IsSuccessStatusCode)
 			{
 				Debug.Log($"Failed to get player's shops. Status code: {response.StatusCode}");
@@ -219,7 +224,7 @@ public class RequestManager
 		HttpClient client = new HttpClient();
 		try
 		{
-			var response = client.GetAsync(url).Result;
+			var response = await client.GetAsync(url);
 			if (!response.IsSuccessStatusCode)
 			{
 				Debug.Log($"Failed to get player's shop. Status code: {response.StatusCode}");
@@ -251,7 +256,7 @@ public class RequestManager
 		HttpClient client = new HttpClient();
 		try
 		{
-			var response = client.GetAsync(url).Result;
+			var response = await client.GetAsync(url);
 			if (!response.IsSuccessStatusCode)
 			{
 				Debug.Log($"Failed to get shop's logs. Status code: {response.StatusCode}");
@@ -318,7 +323,7 @@ public class RequestManager
 			var response = await client.SendAsync(request);
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to create a new player. Status code: {response.StatusCode}. model: {response.Content.ReadAsStringAsync().Result}");
+				Debug.Log($"Failed to create a new player. Status code: {response.StatusCode}. model: {response.StatusCode}");
 				return null;
 			}
 
@@ -499,5 +504,31 @@ public class RequestManager
 		request.Content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
 		var response = await client.SendAsync(request);
 		return response.Content.ReadAsStringAsync().Result;
+	}
+	//TRYING OUT COROUTINES FOR NETCODE
+	public IEnumerator GetPlayerEnum(string name)
+	{
+		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{name}/";
+		UnityWebRequest request = UnityWebRequest.Get(url);
+
+		yield return request.SendWebRequest();
+
+		if (request.result != UnityWebRequest.Result.Success)
+		{
+			Debug.Log(request.error);
+			yield return null;
+		}
+		else
+		{
+			// Show results as text
+			Debug.Log(request.downloadHandler.text);
+			var player = JsonConvert.DeserializeObject<Player>(request.downloadHandler.text);
+			if (isAPIActive)
+			{
+				GameManager.Instance.playerName = name;
+				GameManager.Instance.playerModel = player;
+			}
+			yield return null;
+		}
 	}
 }

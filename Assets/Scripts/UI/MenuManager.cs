@@ -232,7 +232,8 @@ public class MenuManager : MonoBehaviour
 		var requestedPlayer = await RequestManager.GetPlayer(registrationUsernameField.text);
 		if (requestedPlayer == null)
 		{
-			Player newPLayer = await JsonManager.CreateNewPlayer(registrationUsernameField.text, registrationPasswordField.text);
+			Debug.Log("Initializing player creation..");
+			await JsonManager.CreateNewPlayer(registrationUsernameField.text, registrationPasswordField.text);
 		}
 		else
 		{
@@ -285,7 +286,11 @@ public class MenuManager : MonoBehaviour
 
 	public void ContinueGame()
 	{
-		ContinueGameAsync().Wait();
+		buttonsToHide.ForEach(x => x.SetActive(false));
+		buttonsToShow.ForEach(x => x.SetActive(true));
+		loadingView.SetActive(true);
+		mainMenuScreen.SetActive(false);
+		StartCoroutine(LoadingScreenCoroutine());
 	}
 
 	private IEnumerator LoadingScreenCoroutine()
@@ -306,33 +311,16 @@ public class MenuManager : MonoBehaviour
 		}
 		else
 		{
-			LoadPlayerAsync().Wait();
-		}
-	}
-
-	private async Task LoadPlayerAsync()
-	{
-		if (isAPIActive)
-		{
-			GameManager.Instance.playerName = currentPLayerName;
+			yield return RequestManager.GetPlayerEnum(currentPLayerName);
 			GameManager.Instance.isAPIActive = isAPIActive;
 			GameManager.Instance.JsonManager = new JsonManager(isAPIActive);
 			GameManager.Instance.RequestManager = new RequestManager(isAPIActive);
-
-			//await JsonManager.InitializeShop(currentPLayerName);
-			var requestedPlayer = await RequestManager.GetPlayer(currentPLayerName);
-			if (requestedPlayer == null)
-			{
-				Debug.Log("No player present!");
-				loadingView.SetActive(false);
-				return;
-			}
-			JsonManager.LoadPlayerFromModel(requestedPlayer);
+			JsonManager.LoadPlayerFromModel(GameManager.Instance.playerModel);
+			loadingBar.value = 0;
+			loadingScreen.SetActive(false);
+			Time.timeScale = 1f;
+			loadingView.SetActive(false);
 		}
-		loadingBar.value = 0;
-		loadingScreen.SetActive(false);
-		Time.timeScale = 1f;
-		loadingView.SetActive(false);
 	}
 
 	private async Task ContinueGameAsync()
@@ -341,7 +329,7 @@ public class MenuManager : MonoBehaviour
 		buttonsToShow.ForEach(x => x.SetActive(true));
 		loadingView.SetActive(true);
 		mainMenuScreen.SetActive(false);
-		var loading = StartCoroutine(LoadingScreenCoroutine());
+		StartCoroutine(LoadingScreenCoroutine());
 		//SceneManager.LoadSceneAsync(1);
 	}
 }

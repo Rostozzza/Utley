@@ -62,8 +62,8 @@ public class GameManager : MonoBehaviour
 	public Mode mode;
 	public int cycleNumber = 1;
 	[Header("Resourсes")]
-	[SerializeField] private float honey;
-	[SerializeField] private int asteriy;
+	[SerializeField] public float honey;
+	[SerializeField] public int asteriy;
 	[SerializeField] private int rawAsterium = 0;
 	public int maxBearsAmount;
 	RaycastHit raycastHit;
@@ -148,6 +148,15 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	public void Start()
+	{
+		if (!isAPIActive)
+		{
+			asteriy = 600;
+			honey = 100;
+		}
+	}
+
 	public void Awake()
 	{
 		//Time.timeScale = 20;
@@ -155,11 +164,6 @@ public class GameManager : MonoBehaviour
 		{
 			Instance = this;
 			//DontDestroyOnLoad(gameObject);
-		}
-		if (!isAPIActive)
-		{
-			asteriy = 600;
-			honey = 100;
 		}
 		skyBG = GameObject.FindGameObjectWithTag("skyBG");
 		StartCoroutine(ConstantDurabilityDamager(4));
@@ -284,7 +288,7 @@ public class GameManager : MonoBehaviour
 	/// Builds a room from variable "building" at position of "queuedBuildPosition"
 	/// </summary>
 	/// <param name="building"></param>
-	public async void SelectAndBuild(GameObject building)
+	public async Task SelectAndBuild(GameObject building)
 	{
 		if (await GetAsteriy() < 60)
 		{
@@ -366,7 +370,7 @@ public class GameManager : MonoBehaviour
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().LevelUpBear();
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
 		room.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Free);
-		SelectAndBuildMainBlock(building, point);
+		SelectAndBuildMainBlock(building, point).Wait();
 		StartCoroutine(WalkAndStartWork(room.GetComponent<BuilderRoom>().fixedBear, room));
 		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
 		{
@@ -1107,7 +1111,7 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	private async void ConsumeEnergohoney()
+	private async Task ConsumeEnergohoney()
 	{
 		int n1 = 0, n2 = 0, n3 = 0;
 		foreach (GameObject room in allRooms.Where(x => x.TryGetComponent(out RoomScript roomSctipt) && roomSctipt.isEnpowered))
@@ -1135,19 +1139,19 @@ public class GameManager : MonoBehaviour
 		}
 		if (isAPIActive)
 		{
-			var model = await JsonManager.SavePlayerToJson(playerName);
+			//var model = await JsonManager.SavePlayerToJson(playerName);
 			Dictionary<string, float> changedResources = new Dictionary<string, float>();
 			changedResources.Add("honey", -honeyToEat);
-			JsonManager.CreateLog(new Log
-			{
-				Comment = $"Complex deplicted {honeyToEat} energohoney",
-				PlayerName = playerName,
-				ShopName = null,
-				ResourcesChanged = changedResources
-			});
+			//JsonManager.CreateLog(new Log
+			//{
+			//	Comment = $"Complex deplicted {honeyToEat} energohoney",
+			//	PlayerName = playerName,
+			//	ShopName = null,
+			//	ResourcesChanged = changedResources
+			//});
 		}
 		Debug.Log("Съели мёда: " + honeyToEat);
-		ChangeHoney(-honeyToEat).Wait();
+		await ChangeHoney(-honeyToEat);
 		uiResourceShower.UpdateIndicators();
 	}
 
