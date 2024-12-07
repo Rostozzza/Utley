@@ -665,7 +665,10 @@ public class GameManager : MonoBehaviour
 		}
 		queuedBuildPositon = null;
 		allRooms.Add(instance);
-		allRooms.Where(x => x.GetComponent<SupplyRoom>()).ToList().ForEach(y => y.GetComponent<SupplyRoom>().GetRoomsToEnpower());
+		if (!instance.TryGetComponent<SupplyRoom>(out SupplyRoom s))
+		{
+			allRooms.Where(x => x.GetComponent<SupplyRoom>()).ToList().ForEach(y => y.GetComponent<SupplyRoom>().GetRoomsToEnpower());
+		}
 		if (isAPIActive)
 		{
 			//await JsonManager.SavePlayerToJson(playerName);
