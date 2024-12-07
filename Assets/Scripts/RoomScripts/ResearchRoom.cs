@@ -105,6 +105,7 @@ public class ResearchRoom : RoomScript
 		status = Status.Busy;
 		statusPanel.UpdateStatus(status);
 		fixedBear.GetComponent<UnitScript>().SetBusy(true);
+		fixedBear.GetComponent<UnitScript>().StartResearching();
 		fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 		animator.SetTrigger("StartWork");
 		fixedBear.GetComponent<UnitScript>().CannotBeSelected();
@@ -163,7 +164,7 @@ public class ResearchRoom : RoomScript
 			fixedBear.GetComponent<UnitScript>().LevelUpBear();
 		}
 		fixedBear.GetComponent<UnitScript>().SetBusy(false);
-
+		fixedBear.GetComponent<UnitScript>().StopResearching();
 
 
 		//!borrowed part!//

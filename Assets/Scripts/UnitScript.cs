@@ -43,7 +43,10 @@ public class UnitScript : MonoBehaviour
 	[SerializeField] public Sprite avatar;
 	[Header("VFX")]
 	public GameObject expParticle;
+	[SerializeField] private ParticleSystem freezeParticle;
+	[SerializeField] private ParticleSystem breathParticle;
 	[SerializeField] private ParticleSystem boostParticle;
+	[SerializeField] private ParticleSystem researchParticle;
 
 	private void Awake()
 	{
@@ -303,6 +306,36 @@ public class UnitScript : MonoBehaviour
 		boostParticle.Play();
 		boostHolder = StartCoroutine(BoostTimer());
 	} 
+
+	public void StartBreath()
+	{
+		breathParticle.Play();
+	}
+
+	public void StopBreath()
+	{
+		breathParticle.Stop();
+	}
+
+	public void StartFreezing()
+	{
+		freezeParticle.Play();
+	}
+
+	public void StopFreezing()
+	{
+		freezeParticle.Play();
+	}
+
+	public void StartResearching()
+	{
+		researchParticle.Play();
+	}
+
+	public void StopResearching()
+	{
+		researchParticle.Stop();
+	}
 
 	private IEnumerator BoostTimer()
 	{
