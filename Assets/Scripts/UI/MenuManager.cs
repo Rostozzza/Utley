@@ -307,10 +307,10 @@ public class MenuManager : MonoBehaviour
 	}
 
 	//DO NOT USE!
-	public async void CreateGAme()
-	{
-		//Debug.Log(await RequestManager.GenerateUUID());
-	}
+	//public async void CreateGAme()
+	//{
+	//	Debug.Log(await RequestManager.GeenrateUUID());
+	//}
 
 	public void ContinueGame()
 	{

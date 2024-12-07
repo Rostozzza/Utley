@@ -16,6 +16,7 @@ public class SupplyRoom : RoomScript
 
 	protected override void Start()
 	{
+		isEnpowered = true;
 		base.Start();
 		if (isSoft)
 		{
@@ -93,11 +94,6 @@ public class SupplyRoom : RoomScript
 		{
 			Debug.Log("ОТПИТЫВАЕТ");
 			GetRoomsToUnpower();
-		}
-		if (hp == 0 && !isEnpowered)
-		{
-			Debug.Log("ЗАПИТЫВАЕТ");
-			GetRoomsToEnpower();
 		}
 		base.ChangeDurability(hp);
 	}
