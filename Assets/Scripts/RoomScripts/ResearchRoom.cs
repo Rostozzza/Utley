@@ -95,7 +95,6 @@ public class ResearchRoom : RoomScript
 				}
 				yield return ChangeResources(0, -3, "ursowaks");
 				break;
-				break;
 			default:
 				break;
 		}
@@ -110,7 +109,7 @@ public class ResearchRoom : RoomScript
 		animator.SetTrigger("StartWork");
 		fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		//!borrowed part!//
-		//fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Research, GetWalkPoints(), this.gameObject);
+		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Research, GetWalkPoints(), this.gameObject);
 
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.bioengineer)
 		{
