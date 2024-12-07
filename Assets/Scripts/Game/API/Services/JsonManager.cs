@@ -69,6 +69,7 @@ public class JsonManager
 		playerModel.resources.Add("astroluminite", "0");
 		playerModel.resources.Add("prototype", "0");
 		playerModel.resources.Add("HNY", "0");
+		playerModel.resources.Add("playerBears", "4");
 		playerModel.resources.Add("password", password);
 
 
@@ -88,15 +89,51 @@ public class JsonManager
 	{
 		Shop shop = new Shop
 		{
-			name = "SpaceshipShop",
+			name = "HNYShop",
 			resources = new Dictionary<string, int>()
 		};
-		shop.resources.Add("bears", 3);
+		shop.resources.Add("bears", 4);
+		shop.resources.Add("time", 60);
+		shop.resources.Add("honey",300);
+		shop.resources.Add("temperatureBoost",1);
 		if (isAPIActive)
 		{
 			await requestManager.CreateShop(player, shop);
 		}
 		return shop;
+	}
+
+	public async Task<Shop> SaveShopToJson(string shopName)
+	{
+		Shop shopModel = new Shop();
+		shopModel.name = shopName;
+		shopModel.resources = new Dictionary<string, int>();
+		ShopManager shopController = ShopManager.Instance;
+		var shopHoney = shopController.honey;
+		var shopBears = shopController.bears;
+		var shopTime = shopController.time;
+		var shopTemperatureBoost = shopController.temperatureBoost;
+
+		shopModel.resources.Add("honey", shopHoney);
+		shopModel.resources.Add("bears", shopBears);
+		shopModel.resources.Add("time", shopTime);
+		shopModel.resources.Add("temperatureBoost",shopTemperatureBoost);
+
+		string serializedShop = JsonConvert.SerializeObject(shopModel);
+		//File.WriteAllText(path,serializedPlayer);
+		//var allPlayers = await requestManager.GetAllPlayers();
+		//if (allPlayers.FirstOrDefault(x => x.name == playerName) != null)
+		//{
+		await requestManager.UpdateShopResources(GameManager.Instance.playerName, shopModel.name, shopModel.resources);
+		//}
+		return shopModel;
+	}
+
+	public async Task<Shop> GetShopModel(string shopName)
+	{
+		Shop requestedShop = await requestManager.GetPlayerShop(GameManager.Instance.playerName, shopName);
+		ShopManager.Instance.model = requestedShop;
+		return requestedShop;
 	}
 
 	private string SerializeRooms()
