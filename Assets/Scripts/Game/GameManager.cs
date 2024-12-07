@@ -76,6 +76,8 @@ public class GameManager : MonoBehaviour
 	RaycastHit raycastHit;
 	[Header("Effects")]
 	[SerializeField] private GameObject buildingParticle;
+	private bool isCold = false;
+	private bool isFreezing = false;
 
 	public void EnpowerAllRooms()
 	{
@@ -1503,10 +1505,30 @@ public class GameManager : MonoBehaviour
 				{
 					temperature -= 0.5f * Time.deltaTime;
 				}
+				if (!isCold && temperature <= 0f)
+				{
+					isCold = true;
+					bears.ForEach(x => x.GetComponent<UnitScript>().StartBreath());
+				}
+				if (!isFreezing && temperature <= -10f)
+				{
+					isFreezing = true;
+					bears.ForEach(x => x.GetComponent<UnitScript>().StartFreezing());
+				}
 			}
 			else
 			{
 				temperature += 10f / 30f * Time.deltaTime;
+				if (isCold && temperature >= 0f)
+				{
+					isCold = false;
+					bears.ForEach(x => x.GetComponent<UnitScript>().StopBreath());
+				}
+				if (isFreezing && temperature >= -10f)
+				{
+					isFreezing = false;
+					bears.ForEach(x => x.GetComponent<UnitScript>().StopFreezing());
+				}
 			}
 			if (temperature <= -25f && isGameRunning)
 			{
