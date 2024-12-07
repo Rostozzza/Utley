@@ -61,7 +61,7 @@ public class RequestManager
 		}
 	}
 
-	public async Task<Dictionary<string, string>> UpdateShopResources(string username, string shopName, Dictionary<string, string> resources)
+	public async Task<Dictionary<string, int>> UpdateShopResources(string username, string shopName, Dictionary<string, int> resources)
 	{
 		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/shops/{shopName}/";
 		using HttpClient client = new HttpClient();
@@ -77,7 +77,7 @@ public class RequestManager
 			}
 
 			var responseBody = await response.Content.ReadAsStringAsync();
-			var responseResources = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseBody);
+			var responseResources = JsonConvert.DeserializeObject<Dictionary<string, int>>(responseBody);
 			return responseResources;
 		}
 		catch (Exception e)

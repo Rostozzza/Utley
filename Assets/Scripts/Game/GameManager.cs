@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private float temperature = 20f;
 	[SerializeField] private float timePast = 0f;
 	[SerializeField] private bool isGameRunning = true;
-
 	[Header("Building settings")]
 	public GameObject buildingScreen;
 	public GameObject elevatorBuildingScreen;
@@ -72,6 +71,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] public float prototype;
 	[SerializeField] public float HNY;
 	[SerializeField] private int rawAsterium = 0;
+	[SerializeField] public int playerBears;
 	public int maxBearsAmount;
 	RaycastHit raycastHit;
 	[Header("Effects")]
@@ -852,7 +852,7 @@ public class GameManager : MonoBehaviour
 		{
 			float serverHNY = await GetHNY();
 			serverHNY += amount;
-			serverHNY = Mathf.Clamp(serverHNY, 0, 999);
+			serverHNY = Mathf.Clamp(serverHNY, -999, 999);
 			HNY = serverHNY;
 			await JsonManager.SavePlayerToJson(playerName);
 			await JsonManager.CreateLog(log);
