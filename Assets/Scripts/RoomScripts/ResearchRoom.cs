@@ -55,7 +55,7 @@ public class ResearchRoom : RoomScript
 		haveAstroluminte = await GameManager.Instance.GetAstroluminite();
 	}
 
-	private async Task ChangeResources(int asteriy, float astroluminite,string creatingResource)
+	private async Task ChangeResources(int asteriy, float astroluminite, string creatingResource)
 	{
 		await GameManager.Instance.ChangeAsteriy(asteriy, new Log
 		{
@@ -86,9 +86,15 @@ public class ResearchRoom : RoomScript
 				{
 					yield break;
 				}
-				yield return ChangeResources(0, -5,"ursowaks");
+				yield return ChangeResources(0, -5, "ursowaks");
 				break;
 			case Type.Prototype:
+				if (haveAstroluminte < 3)
+				{
+					yield break;
+				}
+				yield return ChangeResources(0, -3, "ursowaks");
+				break;
 				break;
 			default:
 				break;

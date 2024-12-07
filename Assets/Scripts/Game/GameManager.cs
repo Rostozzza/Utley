@@ -891,7 +891,7 @@ public class GameManager : MonoBehaviour
 
 	private void InputHandler()
 	{
-		if (Input.GetMouseButtonDown(0)) //off
+		if (Input.GetMouseButtonUp(0)) //off
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out raycastHit, 100f) && !buildingScreen.activeSelf)
@@ -1056,6 +1056,7 @@ public class GameManager : MonoBehaviour
 
 	private IEnumerator WalkAndStartWork(GameObject unit, GameObject obj) // needs to wait for walk and after we starting work
 	{
+		Debug.Log(unit + "|" + obj);
 		unit.GetComponent<UnitMovement>().StopAllCoroutines();
 		unit.GetComponent<UnitMovement>().MoveToRoom(obj.GetComponentInParent<RoomScript>());
 		if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
