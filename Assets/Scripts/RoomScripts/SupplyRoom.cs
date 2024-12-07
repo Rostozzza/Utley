@@ -36,10 +36,18 @@ public class SupplyRoom : RoomScript
 		poweredRooms.AddRange(diagonalRooms);
 		foreach (var room in poweredRooms.Distinct().ToList())
 		{
+			if (room.GetComponent<RoomScript>() == this)
+			{
+				continue;
+			}
 			Debug.Log(room.name);
 		}
 		foreach (var room in poweredRooms.Distinct().ToList())
 		{
+			if (room.GetComponent<RoomScript>() == this)
+			{
+				continue;
+			}
 			Debug.Log($"Trying to empower {room.name}");
 			room.GetComponent<RoomScript>().Enpower();
 		}
@@ -63,27 +71,32 @@ public class SupplyRoom : RoomScript
 		poweredRooms.AddRange(diagonalRooms);
 		foreach (var room in poweredRooms.Distinct())
 		{
+			if (room.GetComponent<RoomScript>() == this)
+			{
+				continue;
+			}
 			Debug.Log(room.name);
 		}
 		foreach (var room in poweredRooms.Distinct().Where(x => x != gameObject).Select(x => x.GetComponent<RoomScript>()).ToList())
 		{
+			if (room.GetComponent<RoomScript>() == this)
+			{
+				continue;
+			}
 			room.Unpower();
 		}
-		try
-		{
-			Destroy(graph);
-		}
-		catch { }
 	}
 
 	public override void ChangeDurability(float hp)
 	{
-		if (durability <= hp)
+		if (durability < hp)
 		{
+			Debug.Log("ОТПИТЫВАЕТ");
 			GetRoomsToUnpower();
 		}
-		if (hp > 0)
+		if (hp == 0 && !isEnpowered)
 		{
+			Debug.Log("ЗАПИТЫВАЕТ");
 			GetRoomsToEnpower();
 		}
 		base.ChangeDurability(hp);
@@ -91,6 +104,7 @@ public class SupplyRoom : RoomScript
 
 	public void InitializeGraph()
 	{
+		Debug.Log("ГРАФЫ СТРОИТ");
 		int randNum = Random.Range(0, graphs.Count);
 		graph = graphs[randNum];
 		currentAnswerField = graph.GetComponentsInChildren<TMP_InputField>().First(x => x.gameObject.tag == "answerField");

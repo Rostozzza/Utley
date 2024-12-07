@@ -10,7 +10,6 @@ using System.Security.Cryptography;
 using System.Net;
 using System.Collections;
 using UnityEngine.Networking;
-using static UnityEditor.MaterialProperty;
 
 public class RequestManager
 {
