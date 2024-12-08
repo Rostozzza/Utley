@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using System;
 
 public class ShopManager : MonoBehaviour
 {
@@ -53,7 +54,7 @@ public class ShopManager : MonoBehaviour
 				GameManager.Instance.JsonManager.GetShopModel("HNYShop");
 				return;
 			}
-			HNYField.text = GameManager.Instance.HNY.ToString();
+			HNYField.text = Math.Round(GameManager.Instance.HNY, 2).ToString();
 		}
 		else
 		{
@@ -70,7 +71,7 @@ public class ShopManager : MonoBehaviour
 		{
 			yield return null;
 		}
-		HNYField.text = GameManager.Instance.HNY.ToString();
+		HNYField.text = Math.Round(GameManager.Instance.HNY, 2).ToString();
 		shopName = model.name;
 		bears = model.resources["bears"];
 		honey = model.resources["honey"];

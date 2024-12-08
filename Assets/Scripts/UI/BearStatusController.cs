@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.UI;
+using System.Collections;
 
 public class BearStatusController : MonoBehaviour
 {
@@ -88,11 +89,19 @@ public class BearStatusController : MonoBehaviour
         if (set)
         {
             avatar.color = Color.white;
+            StartCoroutine(WaitFrameBeforeSelect());
         }
         else
         {
             avatar.color = new Color(0.5f, 0.5f, 0.5f);
         }
+    }
+
+    private IEnumerator WaitFrameBeforeSelect()
+    {
+        yield return null;
+        yield return null;
+        GameManager.Instance.selectedUnit = obj;
     }
 
     public void UpdateWorkStr(string str)
