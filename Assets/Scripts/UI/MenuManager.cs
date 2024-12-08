@@ -389,7 +389,7 @@ public class MenuManager : MonoBehaviour
 
 	private IEnumerator LoadingScreenCoroutine(int state)
 	{
-		if (state == 0)
+		if (state == 1)
 		{
 			yield return Cutscene2();
 		}
