@@ -91,7 +91,7 @@ public class JsonManager
 			name = "HNYShop",
 			resources = new Dictionary<string, int>()
 		};
-		shop.resources.Add("bears", 4);
+		shop.resources.Add("bears", 2);
 		shop.resources.Add("time", 1);
 		shop.resources.Add("honey", 300);
 		shop.resources.Add("temperatureBoost", 1);
