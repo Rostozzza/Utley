@@ -19,7 +19,7 @@ public class BearStatusListController : MonoBehaviour
     {
         foreach (BearStatusController panel in GetComponentsInChildren<BearStatusController>())
         {
-            Destroy(panel.gameObject,1);
+            Destroy(panel.gameObject,0.1f);
         }
     }
 }

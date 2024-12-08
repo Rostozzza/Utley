@@ -74,6 +74,19 @@ public class UnitMovement : MonoBehaviour
 		GetComponentInChildren<Animator>().SetBool("Walk", false);
 	}
 
+	public void UpdateCurrentElevator()
+	{
+		try
+		{
+			currentElevator = currentRoom.connectedElevators[0];
+		}
+		catch
+		{
+			Debug.Log("Couldnt update current elevator for unit");
+		}
+	}
+
+
 	private IEnumerator Move(List<Elevator> path)
 	{
 		GetComponentInChildren<Animator>().SetBool("Walk", true);

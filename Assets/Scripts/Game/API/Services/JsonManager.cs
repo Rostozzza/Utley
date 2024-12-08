@@ -70,7 +70,7 @@ public class JsonManager
 		playerModel.resources.Add("astroluminite", "0");
 		playerModel.resources.Add("prototype", "0");
 		playerModel.resources.Add("HNY", "0");
-		playerModel.resources.Add("playerBears", "4");
+		playerModel.resources.Add("bears", "4");
 		playerModel.resources.Add("password", password);
 		string serializedPlayer = JsonConvert.SerializeObject(playerModel);
 		//File.WriteAllText(path, serializedPlayer);
@@ -217,6 +217,7 @@ public class JsonManager
 		}
 		GameManager.Instance.AssembleBase();
 		GameManager.Instance.EnpowerAllRooms();
+		GameManager.Instance.LoadAllBears();
 		//}
 		//catch (Exception e) { Debug.Log($"Exception dropped! {e.Message}"); }
 	}
