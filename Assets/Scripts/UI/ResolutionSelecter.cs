@@ -36,5 +36,6 @@ public class ResolutionSelecter : MonoBehaviour
 		Resolution resolution = resolutions[index];
 		Screen.SetResolution(resolution.width, resolution.height, true);
 		PlayerPrefs.SetInt("SavedResolution",index);
+		Camera.main.GetComponent<CameraController>().InitPixels();
 	}
 }

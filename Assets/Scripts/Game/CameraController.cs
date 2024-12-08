@@ -13,6 +13,11 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        InitPixels();
+    }
+
+    public void InitPixels()
+    {
         left = 0;
         right = Camera.main.pixelWidth;
         top = Camera.main.pixelHeight;

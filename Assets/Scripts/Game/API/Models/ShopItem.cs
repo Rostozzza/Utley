@@ -255,6 +255,6 @@ public class ShopItem : MonoBehaviour
 			});
 			UpdateFields();
 		}
-		ShopManager.Instance.HNYField.text = (await GameManager.Instance.GetHNY()).ToString();
+		ShopManager.Instance.HNYField.text = Math.Round((await GameManager.Instance.GetHNY()), 2).ToString();
 	}
 }
