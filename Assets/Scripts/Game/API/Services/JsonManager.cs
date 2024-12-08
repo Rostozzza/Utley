@@ -38,6 +38,7 @@ public class JsonManager
 		playerModel.resources.Add("ursowaks", ursowaks.ToString());
 		playerModel.resources.Add("astroluminite", astroluminite.ToString());
 		playerModel.resources.Add("prototype", prototype.ToString());
+		playerModel.resources.Add("bears", GameManager.Instance.playerBears.ToString());
 		playerModel.resources.Add("HNY", HNY.ToString());
 		playerModel.resources.Add("password", GameManager.Instance.playerModel.resources["password"]);
 

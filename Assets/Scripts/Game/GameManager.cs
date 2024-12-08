@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 	public RequestManager RequestManager;
 	public GameObject elevatorPrefab;
 	public List<GameObject> bears = new List<GameObject>();
+	public List<GameObject> bearsToSpawn = new List<GameObject>();
 	[SerializeField] public UIResourceShower uiResourceShower;
 	[SerializeField] public RoomStatusListController roomStatusListController;
 	[SerializeField] public BearStatusListController bearStatusListController;
@@ -98,6 +99,18 @@ public class GameManager : MonoBehaviour
 		Debug.Log("Boosted temperature!");
 	}
 
+	public async Task SpawnNewBear()
+	{
+		await ChangeBears(1, new Log
+		{
+			comment = $"Player {playerName} got new employee",
+			player_name = playerName,
+			resources_changed = new Dictionary<string, float> { { "player_bears_added", 1 } }
+		});
+		var newBear = Instantiate(bearsToSpawn[playerBears - 5]);
+		bears.Add(newBear);
+	}
+
 	public void KillAllBuildings()
 	{
 		foreach (var room in allRooms)
@@ -113,14 +126,13 @@ public class GameManager : MonoBehaviour
 		asteriumRoomView.Clear();
 	}
 
-	public void KillAllBears()
+	public void LoadAllBears()
 	{
-		foreach (var bear in bears)
+		for (int i = 0; i < playerBears - 4; i++)
 		{
-			Destroy(bear);
+			var newBear = Instantiate(bearsToSpawn[playerBears - 5]);
+			bears.Add(newBear);
 		}
-		bears.Clear();
-		bears = new List<GameObject>();
 	}
 
 	public void LoadBearFromModel(Bear model)
@@ -401,31 +413,31 @@ public class GameManager : MonoBehaviour
 
 			if (roomScript.asteriumCost > 0)
 			{
-				await ChangeAsteriy(-roomScript.asteriumCost,new Log
+				await ChangeAsteriy(-roomScript.asteriumCost, new Log
 				{
 					comment = $"Consumed {Mathf.Abs(roomScript.asteriumCost)} asterium from player {playerName} for building {roomScript.gameObject.name}",
 					player_name = playerName,
-					 
+
 					resources_changed = new Dictionary<string, float> { { "asterium", -roomScript.asteriumCost } }
 				});
 			}
 			if (roomScript.honeyCost > 0)
 			{
-				await ChangeHoney(-roomScript.honeyCost,new Log
+				await ChangeHoney(-roomScript.honeyCost, new Log
 				{
 					comment = $"Consumed {Mathf.Abs(roomScript.honeyCost)} honey from player {playerName} for building {roomScript.gameObject.name}",
 					player_name = playerName,
-					 
-					resources_changed = new Dictionary<string, float> { {"honey",-roomScript.honeyCost } }
+
+					resources_changed = new Dictionary<string, float> { { "honey", -roomScript.honeyCost } }
 				});
 			}
 			if (roomScript.astroluminiteCost > 0)
 			{
-				await ChangeAstroluminite(-roomScript.astroluminiteCost,new Log
+				await ChangeAstroluminite(-roomScript.astroluminiteCost, new Log
 				{
 					comment = $"Consumed {Mathf.Abs(roomScript.astroluminiteCost)} astroluminite from player {playerName} for building {roomScript.gameObject.name}",
 					player_name = playerName,
-					 
+
 					resources_changed = new Dictionary<string, float> { { "astroluminite", -roomScript.astroluminiteCost } }
 				});
 			}
@@ -463,7 +475,7 @@ public class GameManager : MonoBehaviour
 			{
 				comment = $"Consumed 10 asterium from player {playerName} for building an elevator",
 				player_name = playerName,
-				 
+
 				resources_changed = new Dictionary<string, float> { { "asterium", -10 } }
 			});
 		}
@@ -777,11 +789,23 @@ public class GameManager : MonoBehaviour
 		return HNY;
 	}
 
+	public async Task<int> GetBears()
+	{
+		if (isAPIActive)
+		{
+			var model = await RequestManager.GetPlayer(playerName);
+			playerModel = model;
+			playerBears = int.Parse(model.resources["bears"].Replace('.', ','));
+			return int.Parse(model.resources["bears"].Replace('.', ','));
+		}
+		return playerBears;
+	}
+
 	/// <summary>
 	/// Changes amount of honey by given number
 	/// </summary>
 	/// <param name="amount"></param>
-	public async Task ChangeHoney(float amount,Log log)
+	public async Task ChangeHoney(float amount, Log log)
 	{
 		if (isAPIActive && (honey + amount < Mathf.Floor(honey) || amount > 0))
 		{
@@ -801,7 +825,7 @@ public class GameManager : MonoBehaviour
 	/// Changes amount of asterium by given number
 	/// </summary>
 	/// <param name="amount"></param>
-	public async Task ChangeAsteriy(int amount,Log log)
+	public async Task ChangeAsteriy(int amount, Log log)
 	{
 		if (isAPIActive)
 		{
@@ -817,7 +841,7 @@ public class GameManager : MonoBehaviour
 		asteriy = Mathf.Clamp(asteriy, 0, 999);
 	}
 
-	public async Task ChangeAstroluminite(float amount,Log log)
+	public async Task ChangeAstroluminite(float amount, Log log)
 	{
 		if (isAPIActive)
 		{
@@ -833,7 +857,7 @@ public class GameManager : MonoBehaviour
 		astroluminite = Mathf.Clamp(astroluminite, 0, 999);
 	}
 
-	public async Task ChangeUrsowaks(float amount,Log log)
+	public async Task ChangeUrsowaks(float amount, Log log)
 	{
 		if (isAPIActive)
 		{
@@ -849,7 +873,7 @@ public class GameManager : MonoBehaviour
 		ursowaks = Mathf.Clamp(ursowaks, 0, 999);
 	}
 
-	public async Task ChangePrototype(float amount,Log log)
+	public async Task ChangePrototype(float amount, Log log)
 	{
 		if (isAPIActive)
 		{
@@ -865,7 +889,7 @@ public class GameManager : MonoBehaviour
 		prototype = Mathf.Clamp(prototype, 0, 999);
 	}
 
-	public async Task ChangeHNY(float amount,Log log)
+	public async Task ChangeHNY(float amount, Log log)
 	{
 		if (isAPIActive)
 		{
@@ -879,6 +903,22 @@ public class GameManager : MonoBehaviour
 		}
 		HNY += amount;
 		HNY = Mathf.Clamp(HNY, 0, 999);
+	}
+
+	public async Task ChangeBears(int amount, Log log)
+	{
+		if (isAPIActive)
+		{
+			int serverBears = await GetBears();
+			serverBears += amount;
+			serverBears = Mathf.Clamp(serverBears, -999, 999);
+			playerBears = serverBears;
+			await JsonManager.SavePlayerToJson(playerName);
+			await JsonManager.CreateLog(log);
+			return;
+		}
+		playerBears += amount;
+		playerBears = Mathf.Clamp(playerBears, 0, 8);
 	}
 
 	public bool FlyForRawAsterium() => rawAsterium < asteriumRooms.Where(x => x.GetComponent<RoomScript>().isEnpowered).ToList().Count;
@@ -1423,9 +1463,10 @@ public class GameManager : MonoBehaviour
 			//	ResourcesChanged = changedResources
 			//});
 		}
-		await ChangeHoney(-honeyToEat,new Log {
+		await ChangeHoney(-honeyToEat, new Log
+		{
 			comment = $"Deplicted honey for maintaining facility temperature of player {playerName}",
-			 resources_changed = new Dictionary<string, float> { { "player_honey", honeyToEat} },
+			resources_changed = new Dictionary<string, float> { { "player_honey", honeyToEat } },
 			player_name = playerName
 		});
 		//Debug.Log("Съели мёда: " + honeyToEat);
