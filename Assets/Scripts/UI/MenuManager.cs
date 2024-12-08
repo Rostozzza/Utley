@@ -271,14 +271,14 @@ public class MenuManager : MonoBehaviour
 			{
 				ShopManager.Instance.OpenShop();
 			}
-			if (Input.GetMouseButtonDown(0))
-			{
-				Cursor.SetCursor(cursorClick, Vector2.zero, CursorMode.Auto);
-			}
-			if (Input.GetMouseButtonUp(0))
-			{
-				Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
-			}
+		}
+		if (Input.GetMouseButtonDown(0))
+		{
+			Cursor.SetCursor(cursorClick, Vector2.zero, CursorMode.Auto);
+		}
+		if (Input.GetMouseButtonUp(0))
+		{
+			Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
 		}
 	}
 

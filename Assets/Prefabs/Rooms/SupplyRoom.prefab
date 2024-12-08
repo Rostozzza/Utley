@@ -13182,6 +13182,8 @@ MonoBehaviour:
   workSound: {fileID: 0}
   progressBar: {fileID: 346585425036155710}
   upgradeBar: {fileID: 5249598741145171567}
+  flyForType: 0
+  cosmodromeSelectScreen: {fileID: 0}
   isReadyForWork: 0
   graphs:
   - {fileID: 6446150030883060423}
@@ -18782,7 +18784,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1844415590319330177
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32133,6 +32135,14 @@ PrefabInstance:
       value: "\u200B"
       objectReference: {fileID: 0}
     - target: {fileID: 552184879011915972, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d2f3e21a7e05df241bcf2be5c47baaf7, type: 2}
+    - target: {fileID: 552184879011915972, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2156433623214286269, guid: d2f3e21a7e05df241bcf2be5c47baaf7, type: 2}
+    - target: {fileID: 552184879011915972, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_VerticalAlignment
       value: 1024
       objectReference: {fileID: 0}
@@ -32236,12 +32246,44 @@ PrefabInstance:
       propertyPath: 'connectedPoints.Array.data[2]'
       value: 
       objectReference: {fileID: 5720155628356962568}
+    - target: {fileID: 3868794253999423086, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3868794253999423086, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4292572577688978095, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6659140359634667441, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_Text
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6659140359634667441, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_ReadOnly
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6659140359634667441, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_CaretWidth
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6659140359634667441, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_GlobalFontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d2f3e21a7e05df241bcf2be5c47baaf7, type: 2}
+    - target: {fileID: 6659140359634667441, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_OnFocusSelectAll
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6659140359634667441, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_ResetOnDeActivation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6659140359634667441, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_RestoreOriginalTextOnEscape
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6813569672997682621, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
@@ -32261,9 +32303,17 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 9116436218247210671, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d2f3e21a7e05df241bcf2be5c47baaf7, type: 2}
+    - target: {fileID: 9116436218247210671, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_fontSizeMin
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 9116436218247210671, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2156433623214286269, guid: d2f3e21a7e05df241bcf2be5c47baaf7, type: 2}
     - target: {fileID: 9116436218247210671, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_enableAutoSizing
       value: 1
