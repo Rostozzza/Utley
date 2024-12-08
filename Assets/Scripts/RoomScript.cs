@@ -66,7 +66,7 @@ public class RoomScript : MonoBehaviour
 	protected float SpeedByBearLevelCoef = 1.05f;
 	protected float SpeedByRoomLevelCoef = 0.75f;
 	protected float StandartInteractionTime = 18f;
-	protected float SpeedByUsingSuitableBearCoef = 0.75f;
+	protected float SpeedByUsingSuitableBearCoef = 1f;
 
 	public virtual void Enpower()
 	{
