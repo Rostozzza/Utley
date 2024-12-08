@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class UnitScript : MonoBehaviour
 {
@@ -150,7 +149,7 @@ public class UnitScript : MonoBehaviour
 
 	public void LevelUpBear()
 	{
-		level = Mathf.Clamp(level+0.5f,1,5);
+		level = Mathf.Clamp(level + 1f/(int)(2 * Mathf.Pow(level, 1.2f)), 1, 5);
 		statusPanel.UpdateLevel(level);
 		expParticle.SetActive(false);
 		statusPanel.UpdateLoveWork(false);

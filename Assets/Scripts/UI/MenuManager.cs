@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class MenuManager : MonoBehaviour
 {
@@ -28,14 +29,14 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private GameObject loginScreen;
 	[SerializeField] private GameObject loadingScreen;
 	[SerializeField] private Slider loadingBar;
-	[SerializeField] private GameObject mainMenuScreen;
+	[SerializeField] public GameObject mainMenuScreen;
 	[SerializeField] private GameObject pauseScreen;
 	[SerializeField] private GameObject loseScreen;
 	[SerializeField] private GameObject winScreen;
 	[SerializeField] private List<GameObject> buttonsToHide;
 	[SerializeField] private List<GameObject> buttonsToShow;
 	[SerializeField] private List<TextMeshProUGUI> scores;
-	[SerializeField] private GameObject menuBG;
+	[SerializeField] public GameObject menuBG;
 	//[SerializeField] private List<TextMeshProUGUI> scores;
 	[Header("Inputs")]
 	[SerializeField] private TMP_InputField registrationUsernameField;
@@ -53,6 +54,13 @@ public class MenuManager : MonoBehaviour
 	[Header("Cursor")]
 	[SerializeField] private Texture2D cursorDefault;
 	[SerializeField] private Texture2D cursorClick;
+	[Header("Cutscenes")]
+	[SerializeField] VideoPlayer videoPlayer;
+	[SerializeField] VideoClip firstCutscene;
+	[SerializeField] VideoClip menuClip;
+	[SerializeField] VideoClip secondCutscene;
+	private bool canContinueAfter2Cutscene = false;
+	private Coroutine skipChecker;
 
 	public void SetMasterVolume()
 	{
@@ -124,9 +132,9 @@ public class MenuManager : MonoBehaviour
 		int scoreAsteriy = (int)(await game.GetAsteriy() * 10f);
 		int scoreHoney = (int)(await game.GetHoney() * 15f);
 		int scoreRooms = (int)((game.allRooms.Count - 7) * 500f);
-		int scoreHNY = (int)(await game.GetHNY() * 80f);
+		int scoreHNY = (int)(await game.GetHNY() * 550f);
 		int scoreScienceSample = (int)(await game.GetPrototype() * 480f);
-		int scoreAstroluminite = (int)(await game.GetAstroluminite() * 48f);
+		int scoreAstroluminite = (int)(await game.GetAstroluminite() * 96f);
 		int scoreUrsowax = (int)(await game.GetUrsowaks() * 400f);
 		int scoreTime = (int)(game.GetTimePast() * 10f);
 		int scoreDurabilitySum = (int)(game.allRooms.Where(x => !x.CompareTag("elevator")).ToList().ConvertAll(y => y.GetComponent<RoomScript>().durability).Sum() * 100f * 10f); // all rooms without elevators multiplyes by 100 to get % and by 10 to get score
@@ -176,12 +184,14 @@ public class MenuManager : MonoBehaviour
 
 	public void Start()
 	{
+        videoPlayer.loopPointReached += OnVideoEnd;
+        skipChecker = StartCoroutine(SkipChecker());
 		if (PlayerPrefs.GetString("currentPlayer") != "")
 		{
 			currentPLayerName = PlayerPrefs.GetString("currentPlayer");
 			currentPlayerField.text = currentPLayerName;
 			startingScreen.SetActive(false);
-			mainMenuScreen.SetActive(true);
+			mainMenuScreen.SetActive(false);
 		}
 	}
 
@@ -341,6 +351,7 @@ public class MenuManager : MonoBehaviour
 
 	private IEnumerator LoadingScreenCoroutine()
 	{
+		yield return Cutscene2();
 		var operation = SceneManager.LoadSceneAsync(1);
 		loadingScreen.SetActive(true);
 		while (!operation.isDone)
@@ -374,6 +385,53 @@ public class MenuManager : MonoBehaviour
 			loadingView.SetActive(false);
 		}
 	}
+
+	private IEnumerator Cutscene2()
+	{
+		videoPlayer.clip = secondCutscene;
+		skipChecker = StartCoroutine(SkipChecker());
+		while (!canContinueAfter2Cutscene)
+		{
+			yield return null;
+		}
+	}
+
+    private IEnumerator SkipChecker()
+    {
+        while (true)
+        {
+            if (Input.anyKeyDown)
+            {
+                yield return null;
+                float timer = 1f;
+                while (timer > 0)
+                {
+                    if (Input.anyKeyDown)
+                    {
+                        OnVideoEnd(videoPlayer);
+						skipChecker = null;
+                    }
+                    timer -= Time.deltaTime;
+                    yield return null;
+                }
+            }
+            yield return null;
+        }
+    }
+
+    private void OnVideoEnd(VideoPlayer vp)
+    {
+        if (videoPlayer.clip == firstCutscene)
+        {
+            videoPlayer.isLooping = true;
+            videoPlayer.clip = menuClip;
+            mainMenuScreen.SetActive(true);
+        }
+		else if (videoPlayer.clip == secondCutscene)
+		{
+            canContinueAfter2Cutscene = true;
+		}
+    }
 
 	private async Task ContinueGameAsync()
 	{

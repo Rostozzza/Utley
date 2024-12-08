@@ -17038,7 +17038,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1101681938
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18614,6 +18614,10 @@ MonoBehaviour:
   isAPIActive: 0
   cursorDefault: {fileID: 2800000, guid: 514353f884f6b2b418552b9b04b23243, type: 3}
   cursorClick: {fileID: 2800000, guid: d070a108765e72543a9f4d5ea71f6f3f, type: 3}
+  videoPlayer: {fileID: 1818146194}
+  firstCutscene: {fileID: 32900000, guid: dc8d78c92ddf6c14593c73e2a51adbe8, type: 3}
+  menuClip: {fileID: 32900000, guid: dbc0a71910f21824d8d5e5a015e0e4c3, type: 3}
+  secondCutscene: {fileID: 32900000, guid: 2268439d744eedd45871da3d9b4a3204, type: 3}
 --- !u!1 &1283204272
 GameObject:
   m_ObjectHideFlags: 0
@@ -26334,7 +26338,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818146190}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: dbc0a71910f21824d8d5e5a015e0e4c3, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: dc8d78c92ddf6c14593c73e2a51adbe8, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -26356,7 +26360,7 @@ VideoPlayer:
   m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
-  m_Looping: 1
+  m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
