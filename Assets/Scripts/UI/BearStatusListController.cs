@@ -14,4 +14,12 @@ public class BearStatusListController : MonoBehaviour
         instantiateBearPanel.GetComponent<BearStatusController>().Init(obj.gameObject, model.Name, obj.level, obj.job, obj.isBearBusy, obj.GetWorkStr(), obj.avatar);
         return instantiateBearPanel.GetComponent<BearStatusController>();
     }
+
+    public void ClearList()
+    {
+        foreach (BearStatusController panel in GetComponentsInChildren<BearStatusController>())
+        {
+            Destroy(panel.gameObject,1);
+        }
+    }
 }
