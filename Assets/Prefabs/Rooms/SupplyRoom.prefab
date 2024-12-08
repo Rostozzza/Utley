@@ -30510,11 +30510,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 552184879011915972, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_VerticalAlignment
-      value: 1024
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 552184879011915972, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_HorizontalAlignment
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1258528783287768250, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_Pivot.x
@@ -32143,12 +32143,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -2156433623214286269, guid: d2f3e21a7e05df241bcf2be5c47baaf7, type: 2}
     - target: {fileID: 552184879011915972, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 552184879011915972, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_VerticalAlignment
       value: 1024
       objectReference: {fileID: 0}
     - target: {fileID: 552184879011915972, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_HorizontalAlignment
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1258528783287768250, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_Pivot.x
@@ -32487,7 +32491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 552184879011915972, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_HorizontalAlignment
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1258528783287768250, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_Pivot.x
@@ -32630,6 +32634,14 @@ PrefabInstance:
     - target: {fileID: 9116436218247210671, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116436218247210671, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116436218247210671, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
