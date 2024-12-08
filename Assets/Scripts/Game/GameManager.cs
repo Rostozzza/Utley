@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private float timePast = 0f;
 	[SerializeField] private bool isGameRunning = true;
 	[Header("Building settings")]
+	[SerializeField] private GameObject buildingLoading;
 	public GameObject buildingScreen;
 	public GameObject elevatorBuildingScreen;
 	//[SerializeField] private GameObject floorPrefab;
@@ -335,9 +336,13 @@ public class GameManager : MonoBehaviour
 	/// Builds a room from variable "building" at position of "queuedBuildPosition"
 	/// </summary>
 	/// <param name="building"></param>
-	public async void SelectAndBuild(GameObject building)
+	public void SelectAndBuild(GameObject building)
 	{
-		await SelectAndBuildAsync(building);
+		if (isAPIActive)
+		{
+			buildingLoading.SetActive(true);
+		}
+		SelectAndBuildAsync(building);
 		Debug.Log("NoT DEAD");
 	}
 
@@ -447,7 +452,10 @@ public class GameManager : MonoBehaviour
 				resources_changed = new Dictionary<string, float> { { "asterium", -10 } }
 			});
 		}
-
+		if (isAPIActive)
+		{
+			buildingLoading.SetActive(false);
+		}
 		// goto room vvvvv
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
@@ -670,11 +678,6 @@ public class GameManager : MonoBehaviour
 		if (!instance.TryGetComponent<SupplyRoom>(out SupplyRoom s))
 		{
 			allRooms.Where(x => x.GetComponent<SupplyRoom>()).ToList().ForEach(y => y.GetComponent<SupplyRoom>().GetRoomsToEnpower());
-		}
-		if (isAPIActive)
-		{
-			//await JsonManager.SavePlayerToJson(playerName);
-			Debug.Log("NoT DEAD after saving");
 		}
 	}
 
@@ -1406,7 +1409,7 @@ public class GameManager : MonoBehaviour
 		}
 		await ChangeHoney(-honeyToEat,new Log {
 			comment = $"Deplicted honey for maintaining facility temperature of player {playerName}",
-			 
+			 resources_changed = new Dictionary<string, float> { { "player_honey", honeyToEat} },
 			player_name = playerName
 		});
 		//Debug.Log("Съели мёда: " + honeyToEat);

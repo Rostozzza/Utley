@@ -35,6 +35,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private List<GameObject> buttonsToHide;
 	[SerializeField] private List<GameObject> buttonsToShow;
 	[SerializeField] private List<TextMeshProUGUI> scores;
+	[SerializeField] private GameObject menuBG;
 	//[SerializeField] private List<TextMeshProUGUI> scores;
 	[Header("Inputs")]
 	[SerializeField] private TMP_InputField registrationUsernameField;
@@ -223,6 +224,7 @@ public class MenuManager : MonoBehaviour
 			loadingBar.value = (operation.progress / 0.9f);
 			yield return null;
 		}
+		menuBG.SetActive(true);
 		loadingBar.value = 0;
 		loadingScreen.SetActive(false);
 		mainMenuScreen.SetActive(true);

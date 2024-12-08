@@ -357,8 +357,16 @@ public class RequestManager
 		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/logs/";
 		using HttpClient client = new HttpClient();
 		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
-		request.Content = new StringContent(JsonConvert.SerializeObject(log), Encoding.UTF8, "application/json");
-		Debug.Log($"Log: {JsonConvert.SerializeObject(log)}");
+		if (log.shop_name == null)
+		{
+			request.Content = new StringContent(JsonConvert.SerializeObject(log).Replace("\"shop_name\":null,",""), Encoding.UTF8, "application/json");
+			Debug.Log($"Log: {JsonConvert.SerializeObject(log).Replace("\"shop_name\":null,", "")}");
+		}
+		else
+		{
+			request.Content = new StringContent(JsonConvert.SerializeObject(log), Encoding.UTF8, "application/json");
+			Debug.Log($"Log: {JsonConvert.SerializeObject(log)}");
+		}
 		try
 		{
 			var response = await client.SendAsync(request);
