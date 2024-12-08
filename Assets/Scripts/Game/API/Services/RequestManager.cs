@@ -39,7 +39,7 @@ public class RequestManager
 		jsonBody.Add("resources",resources);	
 		string resourcesToUpdateFormatted = JsonConvert.SerializeObject(jsonBody);
 		request.Content = new StringContent(resourcesToUpdateFormatted, Encoding.UTF8, "application/json");
-		Debug.Log(resourcesToUpdateFormatted);
+		//Debug.Log(resourcesToUpdateFormatted);
 		try
 		{
 			var response = await client.SendAsync(request);
@@ -50,7 +50,7 @@ public class RequestManager
 			}
 
 			var responseBody = await response.Content.ReadAsStringAsync();
-			Debug.Log($"Saved resources: {responseBody}");
+			//Debug.Log($"Saved resources: {responseBody}");
 			//var responseResources = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseBody);
 			return null;
 		}
@@ -66,7 +66,9 @@ public class RequestManager
 		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/shops/{shopName}/";
 		using HttpClient client = new HttpClient();
 		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, url);
-		request.Content = new StringContent(JsonConvert.SerializeObject(resources), Encoding.UTF8, "application/json");
+		Dictionary<string, Dictionary<string, int>> jsonBody = new Dictionary<string, Dictionary<string, int>>();
+		jsonBody.Add("resources", resources);
+		request.Content = new StringContent(JsonConvert.SerializeObject(jsonBody), Encoding.UTF8, "application/json");
 		try
 		{
 			var response = await client.SendAsync(request);
@@ -76,9 +78,9 @@ public class RequestManager
 				return null;
 			}
 
-			var responseBody = await response.Content.ReadAsStringAsync();
-			var responseResources = JsonConvert.DeserializeObject<Dictionary<string, int>>(responseBody);
-			return responseResources;
+			//var responseBody = await response.Content.ReadAsStringAsync();
+			//var responseResources = JsonConvert.DeserializeObject<Dictionary<string, int>>(responseBody);
+			return null;
 		}
 		catch (Exception e)
 		{
@@ -356,6 +358,7 @@ public class RequestManager
 		using HttpClient client = new HttpClient();
 		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
 		request.Content = new StringContent(JsonConvert.SerializeObject(log), Encoding.UTF8, "application/json");
+		Debug.Log($"Log: {JsonConvert.SerializeObject(log)}");
 		try
 		{
 			var response = await client.SendAsync(request);
@@ -400,7 +403,6 @@ public class RequestManager
 			Shop responceLog;
 			var responseBody = await response.Content.ReadAsStringAsync();
 			responceLog = JsonConvert.DeserializeObject<Shop>(responseBody);
-			Mathf.PerlinNoise1D(Time.time);
 			return responceLog;
 		}
 		catch (Exception e)
@@ -508,10 +510,10 @@ public class RequestManager
 				GameManager.Instance.playerModel = player;;
 				GameManager.Instance.asteriy = int.Parse(player.resources["asterium"]);
 				GameManager.Instance.honey = float.Parse(player.resources["honey"]);
-				GameManager.Instance.honey = float.Parse(player.resources["ursowaks"]);
-				GameManager.Instance.honey = float.Parse(player.resources["astroluminite"]);
-				GameManager.Instance.honey = float.Parse(player.resources["prototype"]);
-				GameManager.Instance.honey = float.Parse(player.resources["HNY"]);
+				GameManager.Instance.ursowaks = float.Parse(player.resources["ursowaks"]);
+				GameManager.Instance.astroluminite = float.Parse(player.resources["astroluminite"]);
+				GameManager.Instance.prototype = float.Parse(player.resources["prototype"]);
+				GameManager.Instance.HNY = float.Parse(player.resources["HNY"]);
 			}
 			yield return null;
 		}

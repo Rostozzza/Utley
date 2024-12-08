@@ -71,8 +71,6 @@ public class JsonManager
 		playerModel.resources.Add("HNY", "0");
 		playerModel.resources.Add("playerBears", "4");
 		playerModel.resources.Add("password", password);
-
-
 		string serializedPlayer = JsonConvert.SerializeObject(playerModel);
 		//File.WriteAllText(path, serializedPlayer);
 		var rerponce = await requestManager.CreatePlayer(playerModel);
@@ -93,9 +91,9 @@ public class JsonManager
 			resources = new Dictionary<string, int>()
 		};
 		shop.resources.Add("bears", 4);
-		shop.resources.Add("time", 60);
-		shop.resources.Add("honey",300);
-		shop.resources.Add("temperatureBoost",1);
+		shop.resources.Add("time", 1);
+		shop.resources.Add("honey", 300);
+		shop.resources.Add("temperatureBoost", 1);
 		if (isAPIActive)
 		{
 			await requestManager.CreateShop(player, shop);
@@ -117,9 +115,10 @@ public class JsonManager
 		shopModel.resources.Add("honey", shopHoney);
 		shopModel.resources.Add("bears", shopBears);
 		shopModel.resources.Add("time", shopTime);
-		shopModel.resources.Add("temperatureBoost",shopTemperatureBoost);
+		shopModel.resources.Add("temperatureBoost", shopTemperatureBoost);
 
 		string serializedShop = JsonConvert.SerializeObject(shopModel);
+		Debug.Log(serializedShop);
 		//File.WriteAllText(path,serializedPlayer);
 		//var allPlayers = await requestManager.GetAllPlayers();
 		//if (allPlayers.FirstOrDefault(x => x.name == playerName) != null)

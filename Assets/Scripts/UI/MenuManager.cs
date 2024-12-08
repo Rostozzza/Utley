@@ -251,6 +251,10 @@ public class MenuManager : MonoBehaviour
 			{
 				Pause();
 			}
+			if (Input.GetKeyDown(KeyCode.E))
+			{
+				ShopManager.Instance.OpenShop();
+			}
 		}
 	}
 
@@ -262,6 +266,7 @@ public class MenuManager : MonoBehaviour
 		{
 			Debug.Log("Initializing player creation..");
 			await JsonManager.CreateNewPlayer(registrationUsernameField.text, registrationPasswordField.text);
+			await JsonManager.InitializeShop(registrationUsernameField.text);
 		}
 		else
 		{
@@ -344,6 +349,7 @@ public class MenuManager : MonoBehaviour
 		else
 		{
 			yield return RequestManager.GetPlayerEnum(currentPLayerName);
+			ShopManager.Instance.isAPIActive = true;
 			//Debug.Log(GameManager.Instance.playerModel.resources["elevators"]);
 			GameManager.Instance.isAPIActive = isAPIActive;
 			GameManager.Instance.JsonManager = new JsonManager(isAPIActive);

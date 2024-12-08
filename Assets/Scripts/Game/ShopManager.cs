@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
@@ -15,21 +16,20 @@ public class ShopManager : MonoBehaviour
 	public int time;
 	public int temperatureBoost;
 	public bool isAPIActive;
+	public TextMeshProUGUI HNYField;
 	[SerializeField] private GameObject buyGrid;
 	[SerializeField] private Animator animator;
 	[SerializeField] private GameObject shopLoadingScreen;
 	[SerializeField] private List<ShopItem> shopItems = new List<ShopItem>();
+	[SerializeField] private List<ShopItem> shopItemsToSell = new List<ShopItem>();
 	JsonManager JsonManager;
-
-	//[SerializeField]private List<GameObject> buyItems;
-	//[SerializeField] private GameObject itemPrefab;
+	private bool isOpened = false;
 
 	public void Awake()
 	{
 		if (Instance == null)
 		{
 			Instance = this;
-			DontDestroyOnLoad(gameObject);
 		}
 		else
 		{
@@ -39,35 +39,84 @@ public class ShopManager : MonoBehaviour
 
 	public void OpenShop()
 	{
-		animator.SetTrigger("OpenShop");
-		isAPIActive = MenuManager.Instance.isAPIActive;
-		JsonManager = GameManager.Instance.JsonManager;
-		if (MenuManager.Instance.isAPIActive)
+		if (!isOpened)
 		{
-			shopLoadingScreen.SetActive(true);
-			StartCoroutine(LoadShop());
+			isOpened = true;
+			animator.SetTrigger("OpenShop");
+			isAPIActive = MenuManager.Instance.isAPIActive;
+			JsonManager = GameManager.Instance.JsonManager;
+			if (MenuManager.Instance.isAPIActive)
+			{
+				shopLoadingScreen.SetActive(true);
+				StartCoroutine(LoadShop());
+				return;
+			}
+			HNYField.text = GameManager.Instance.HNY.ToString();
 		}
-
+		else
+		{
+			isOpened = false;
+			animator.SetTrigger("CloseShop");
+			isAPIActive = MenuManager.Instance.isAPIActive;
+			return;
+		}
 	}
 
 	private IEnumerator LoadShop()
 	{
 		yield return GameManager.Instance.JsonManager.GetShopModel("HNYShop");
+		if (model == null)
+		{
+			yield break;
+		}
+		HNYField.text = GameManager.Instance.HNY.ToString();
 		shopName = model.name;
 		bears = model.resources["bears"];
 		honey = model.resources["honey"];
 		time = model.resources["time"];
 		temperatureBoost = model.resources["temperatureBoost"];
 		shopLoadingScreen.SetActive(false);
-		if (model == null)
-		{
-			yield break;
-		}
 		for (int i = 0; i < shopItems.Count; i++)
 		{
 			shopItems[i].quantity = model.resources[shopItems[i].name];
 			shopItems[i].UpdateFields();
 		}
+	}
+
+	public void BuyAll()
+	{
+		BuyAllAsync();
+	}
+
+	private async Task BuyAllAsync()
+	{
+		shopLoadingScreen.SetActive(true);
+		foreach (var item in shopItems)
+		{
+			if (item.requestedAmount.text.Length > 0)
+			{
+				await item.BuyItemAsync();
+			}
+		}
+		shopLoadingScreen.SetActive(false);
+	}
+
+	public void SellAll()
+	{
+		SellAllAsync();
+	}
+
+	private async Task SellAllAsync()
+	{
+		shopLoadingScreen.SetActive(true);
+		foreach (var item in shopItemsToSell)
+		{
+			if (item.requestedAmount.text.Length > 0)
+			{
+				await item.BuyItemAsync();
+			}
+		}
+		shopLoadingScreen.SetActive(false);
 	}
 
 	#region Get/Change
