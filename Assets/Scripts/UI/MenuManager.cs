@@ -264,7 +264,7 @@ public class MenuManager : MonoBehaviour
 	{
 		if (SceneManager.GetActiveScene().buildIndex == 1)
 		{
-			if (Input.GetKeyDown(KeyCode.Escape))
+			if (Input.GetKeyDown(KeyCode.Escape) && !ShopManager.Instance.GetIsOpen())
 			{
 				Pause();
 			}
