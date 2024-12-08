@@ -129,6 +129,7 @@ public class ShopItem : MonoBehaviour
 					break;
 				case "bears":
 					//add new bear
+					await GameManager.Instance.SpawnNewBear();
 
 					await ShopManager.Instance.ChangeShopBears(-int.Parse(requestedAmount.text), new Log
 					{

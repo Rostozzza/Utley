@@ -918,7 +918,8 @@ public class GameManager : MonoBehaviour
 			return;
 		}
 		playerBears += amount;
-		playerBears = Mathf.Clamp(playerBears, 0, 8);
+		playerBears = Mathf.Clamp(playerBears, 0, 6);
+		Debug.Log("Changed bears!");
 	}
 
 	public bool FlyForRawAsterium() => rawAsterium < asteriumRooms.Where(x => x.GetComponent<RoomScript>().isEnpowered).ToList().Count;
