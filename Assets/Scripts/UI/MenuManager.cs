@@ -17,6 +17,7 @@ public class MenuManager : MonoBehaviour
 	JsonManager JsonManager = new JsonManager(true);
 	RequestManager RequestManager = new RequestManager(true);
 	[SerializeField] private string currentPLayerName;
+	[SerializeField] private string currentPlayerPassword;
 	[SerializeField] private TextMeshProUGUI currentPlayerField;
 	[SerializeField] private GameObject loadingView;
 	[Header("Game message settings")]
@@ -43,6 +44,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private TMP_InputField registrationPasswordField;
 	[SerializeField] private TMP_InputField loginUsernameField;
 	[SerializeField] private TMP_InputField loginPasswordField;
+	[SerializeField] private GameObject continueGameButton;
 	[Header("Audio")]
 	[SerializeField] private AudioMixer mixer;
 	[SerializeField] private Slider masterSlider;
@@ -62,6 +64,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] VideoClip secondCutscene;
 	private bool canContinueAfter2Cutscene = false;
 	private Coroutine skipChecker;
+	public bool isPlayerLoadable = false;
 
 	public void SetMasterVolume()
 	{
@@ -94,7 +97,7 @@ public class MenuManager : MonoBehaviour
 		var group = loseScreen.GetComponent<CanvasGroup>();
 		while (true)
 		{
-			group.alpha += Time.deltaTime*2f;
+			group.alpha += Time.deltaTime * 2f;
 			if (group.alpha >= 1f)
 			{
 				break;
@@ -144,7 +147,7 @@ public class MenuManager : MonoBehaviour
 		int scoreTotal = scoreAsteriy + scoreHoney + scoreRooms + scoreHNY + scoreScienceSample + scoreAstroluminite + scoreUrsowax + scoreTime + scoreDurabilitySum + scoreBearsLevelsSum;
 
 		//\\//\\//\\//\\//\\//\\//\\//\\//\\
-		
+
 		//scores[0].text = Convert.ToString(scoreAsteriy);
 		//scores[1].text = Convert.ToString(scoreHoney);
 		//scores[2].text = Convert.ToString(scoreRooms);
@@ -155,19 +158,26 @@ public class MenuManager : MonoBehaviour
 		//scores[7].text = Convert.ToString(scoreTime);
 		//scores[8].text = Convert.ToString(scoreDurabilitySum);
 		//scores[9].text = Convert.ToString(scoreBearsLevelsSum);
-//
+		//
 		//scores[10].text = Convert.ToString(total);
 
-		scores.ForEach(x => x.text = $"Итого очков:\n\nОстаток астерия: {scoreAsteriy, 16}\nОстаток энергомеда: {scoreHoney, 13}\nПостройка комплексов: {scoreRooms, 11}\nОстаток М.Е.Д.: {scoreHNY, 17}\nОстаток образцов: {scoreScienceSample, 15}\nОстаток астролуминита: {scoreAstroluminite, 10}\nОстаток урсовокс: {scoreUrsowax, 15}\nДлина смены: {scoreTime, 20}\nОстаток прочности: {scoreDurabilitySum, 14}\nУровень команды: {scoreBearsLevelsSum, 16}\n\nИтого: {scoreTotal, 26}");
+		scores.ForEach(x => x.text = $"Итого очков:\n\nОстаток астерия: {scoreAsteriy,16}\nОстаток энергомеда: {scoreHoney,13}\nПостройка комплексов: {scoreRooms,11}\nОстаток М.Е.Д.: {scoreHNY,17}\nОстаток образцов: {scoreScienceSample,15}\nОстаток астролуминита: {scoreAstroluminite,10}\nОстаток урсовокс: {scoreUrsowax,15}\nДлина смены: {scoreTime,20}\nОстаток прочности: {scoreDurabilitySum,14}\nУровень команды: {scoreBearsLevelsSum,16}\n\nИтого: {scoreTotal,26}");
 	}
 
 	public void ActivateAPI()
 	{
 		isAPIActive = true;
+		JsonManager = new JsonManager(isAPIActive);
+		if (isPlayerLoadable)
+		{
+			continueGameButton.SetActive(true);
+		}
 	}
 	public void DeactivateAPI()
 	{
 		isAPIActive = false;
+		JsonManager = new JsonManager(isAPIActive);
+		continueGameButton.SetActive(false);
 	}
 
 	public void Awake()
@@ -185,8 +195,8 @@ public class MenuManager : MonoBehaviour
 
 	public void Start()
 	{
-        videoPlayer.loopPointReached += OnVideoEnd;
-        skipChecker = StartCoroutine(SkipChecker());
+		videoPlayer.loopPointReached += OnVideoEnd;
+		skipChecker = StartCoroutine(SkipChecker());
 		if (PlayerPrefs.GetString("currentPlayer") != "")
 		{
 			currentPLayerName = PlayerPrefs.GetString("currentPlayer");
@@ -310,6 +320,7 @@ public class MenuManager : MonoBehaviour
 			return;
 		}
 		currentPLayerName = registrationUsernameField.text;
+		currentPlayerPassword = registrationPasswordField.text;
 		PlayerPrefs.SetString("currentPlayer", currentPLayerName);
 		loadingView.SetActive(false);
 	}
@@ -327,6 +338,11 @@ public class MenuManager : MonoBehaviour
 		{
 			Debug.Log("Incorrect password!");
 			return;
+		}
+		if (JsonManager.IsPlayerLoadable(requestedPlayer))
+		{
+			continueGameButton.SetActive(true);
+			isPlayerLoadable = true;
 		}
 		currentPLayerName = loginUsernameField.text;
 		PlayerPrefs.SetString("currentPlayer", currentPLayerName);
@@ -359,12 +375,24 @@ public class MenuManager : MonoBehaviour
 		buttonsToShow.ForEach(x => x.SetActive(true));
 		loadingView.SetActive(true);
 		mainMenuScreen.SetActive(false);
-		StartCoroutine(LoadingScreenCoroutine());
+		StartCoroutine(LoadingScreenCoroutine(0));
 	}
 
-	private IEnumerator LoadingScreenCoroutine()
+	public void NewGame()
 	{
-		yield return Cutscene2();
+		buttonsToHide.ForEach(x => x.SetActive(false));
+		buttonsToShow.ForEach(x => x.SetActive(true));
+		loadingView.SetActive(true);
+		mainMenuScreen.SetActive(false);
+		StartCoroutine(LoadingScreenCoroutine(1));
+	}
+
+	private IEnumerator LoadingScreenCoroutine(int state)
+	{
+		if (state == 0)
+		{
+			yield return Cutscene2();
+		}
 		var operation = SceneManager.LoadSceneAsync(1);
 		loadingScreen.SetActive(true);
 		while (!operation.isDone)
@@ -386,6 +414,11 @@ public class MenuManager : MonoBehaviour
 		}
 		else
 		{
+			if (state == 1)
+			{
+				yield return JsonManager.RefillExistingShop(currentPLayerName);
+				yield return JsonManager.ResetExistingPlayer(currentPLayerName, currentPlayerPassword);
+			}
 			yield return RequestManager.GetPlayerEnum(currentPLayerName);
 			ShopManager.Instance.isAPIActive = true;
 			//Debug.Log(GameManager.Instance.playerModel.resources["elevators"]);
@@ -410,51 +443,51 @@ public class MenuManager : MonoBehaviour
 		}
 	}
 
-    private IEnumerator SkipChecker()
-    {
-        while (true)
-        {
-            if (Input.anyKeyDown)
-            {
-                yield return null;
-                float timer = 1f;
-                while (timer > 0)
-                {
-                    if (Input.anyKeyDown)
-                    {
-                        OnVideoEnd(videoPlayer);
+	private IEnumerator SkipChecker()
+	{
+		while (true)
+		{
+			if (Input.anyKeyDown)
+			{
+				yield return null;
+				float timer = 1f;
+				while (timer > 0)
+				{
+					if (Input.anyKeyDown)
+					{
+						OnVideoEnd(videoPlayer);
 						skipChecker = null;
-                    }
-                    timer -= Time.deltaTime;
-                    yield return null;
-                }
-            }
-            yield return null;
-        }
-    }
+					}
+					timer -= Time.deltaTime;
+					yield return null;
+				}
+			}
+			yield return null;
+		}
+	}
 
-    private void OnVideoEnd(VideoPlayer vp)
-    {
-        if (videoPlayer.clip == firstCutscene)
-        {
-            videoPlayer.isLooping = true;
-            videoPlayer.clip = menuClip;
-            mainMenuScreen.SetActive(true);
-        }
+	private void OnVideoEnd(VideoPlayer vp)
+	{
+		if (videoPlayer.clip == firstCutscene)
+		{
+			videoPlayer.isLooping = true;
+			videoPlayer.clip = menuClip;
+			mainMenuScreen.SetActive(true);
+		}
 		else if (videoPlayer.clip == secondCutscene)
 		{
-            canContinueAfter2Cutscene = true;
+			canContinueAfter2Cutscene = true;
 			videoPlayer.gameObject.SetActive(false);
 		}
-    }
+	}
 
-	private async Task ContinueGameAsync()
+	private async Task ContinueGameAsync(int state)
 	{
 		buttonsToHide.ForEach(x => x.SetActive(false));
 		buttonsToShow.ForEach(x => x.SetActive(true));
 		loadingView.SetActive(true);
 		mainMenuScreen.SetActive(false);
-		StartCoroutine(LoadingScreenCoroutine());
+		StartCoroutine(LoadingScreenCoroutine(state));
 		//SceneManager.LoadSceneAsync(1);
 	}
 }

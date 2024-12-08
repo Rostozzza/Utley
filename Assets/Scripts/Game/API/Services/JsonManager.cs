@@ -64,10 +64,10 @@ public class JsonManager
 		playerModel.resources.Add("rooms", "[{\"Type\":\"AsteriumRecycle\",\"Level\":1,\"Coordinates\":[-2.8,10.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":0},{\"Type\":\"BuildRoom\",\"Level\":1,\"Coordinates\":[-2.8,2.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":2},{\"Type\":\"EnergoHoneyRoom\",\"Level\":1,\"Coordinates\":[-10.8,10.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":3},{\"Type\":\"ResearchRoom\",\"Level\":1,\"Coordinates\":[-18.8,10.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":4},{\"Type\":\"SupplyRoom\",\"Level\":1,\"Coordinates\":[-2.8,6.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":5},{\"Type\":\"LivingRoom\",\"Level\":1,\"Coordinates\":[-10.8,6.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":6},{\"Type\":\"complex_cosmodrome (1)\",\"Level\":1,\"Coordinates\":[-5.8,14.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":7}]");
 		playerModel.resources.Add("elevators", "[{\"Coordinates\":[5.2,10.0,0.0],\"ConnectedElevators\":[1],\"ConnectedRooms\":[0,2,5,7],\"BlocksUp\":1,\"BlocksDown\":2,\"Index\":1}]");
 
-		playerModel.resources.Add("honey", "100");
-		playerModel.resources.Add("asterium", "100");
+		playerModel.resources.Add("honey", "40");
+		playerModel.resources.Add("asterium", "40");
 		playerModel.resources.Add("ursowaks", "0");
-		playerModel.resources.Add("astroluminite", "0");
+		playerModel.resources.Add("astroluminite", "6");
 		playerModel.resources.Add("prototype", "0");
 		playerModel.resources.Add("HNY", "0");
 		playerModel.resources.Add("bears", "4");
@@ -76,6 +76,80 @@ public class JsonManager
 		//File.WriteAllText(path, serializedPlayer);
 		var rerponce = await requestManager.CreatePlayer(playerModel);
 		return rerponce;
+	}
+
+	public async Task<Player> ResetExistingPlayer(string playerName, string password)
+	{
+		Player playerModel = new Player();
+		playerModel.name = playerName;
+		playerModel.resources = new Dictionary<string, string>();
+		//var bearsToSave = JsonConvert.SerializeObject(GameManager.Instance.bears.Select(x => x.GetComponent<UnitScript>().bearModel).ToList());
+		//playerModel.Resources.Add("bears", bearsToSave);
+		string path = $"{Application.persistentDataPath} + /{playerName}.json";
+
+		playerModel.resources.Add("rooms", "[{\"Type\":\"AsteriumRecycle\",\"Level\":1,\"Coordinates\":[-2.8,10.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":0},{\"Type\":\"BuildRoom\",\"Level\":1,\"Coordinates\":[-2.8,2.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":2},{\"Type\":\"EnergoHoneyRoom\",\"Level\":1,\"Coordinates\":[-10.8,10.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":3},{\"Type\":\"ResearchRoom\",\"Level\":1,\"Coordinates\":[-18.8,10.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":4},{\"Type\":\"SupplyRoom\",\"Level\":1,\"Coordinates\":[-2.8,6.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":5},{\"Type\":\"LivingRoom\",\"Level\":1,\"Coordinates\":[-10.8,6.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":6},{\"Type\":\"complex_cosmodrome (1)\",\"Level\":1,\"Coordinates\":[-5.8,14.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":7}]");
+		playerModel.resources.Add("elevators", "[{\"Coordinates\":[5.2,10.0,0.0],\"ConnectedElevators\":[1],\"ConnectedRooms\":[0,2,5,7],\"BlocksUp\":1,\"BlocksDown\":2,\"Index\":1}]");
+
+		playerModel.resources.Add("honey", "40");
+		playerModel.resources.Add("asterium", "40");
+		playerModel.resources.Add("ursowaks", "0");
+		playerModel.resources.Add("astroluminite", "6");
+		playerModel.resources.Add("prototype", "0");
+		playerModel.resources.Add("HNY", "0");
+		playerModel.resources.Add("bears", "4");
+		playerModel.resources.Add("password", password);
+
+		await requestManager.UpdatePlayerResources(playerName,playerModel.resources);
+		return playerModel;
+	}
+
+	public bool IsPlayerLoadable(Player player)
+	{
+		Player playerModel = new Player();
+		playerModel.name = player.name;
+		playerModel.resources = new Dictionary<string, string>();
+		//var bearsToSave = JsonConvert.SerializeObject(GameManager.Instance.bears.Select(x => x.GetComponent<UnitScript>().bearModel).ToList());
+		//playerModel.Resources.Add("bears", bearsToSave);
+
+		playerModel.resources.Add("rooms", "[{\"Type\":\"AsteriumRecycle\",\"Level\":1,\"Coordinates\":[-2.8,10.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":0},{\"Type\":\"BuildRoom\",\"Level\":1,\"Coordinates\":[-2.8,2.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":2},{\"Type\":\"EnergoHoneyRoom\",\"Level\":1,\"Coordinates\":[-10.8,10.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":3},{\"Type\":\"ResearchRoom\",\"Level\":1,\"Coordinates\":[-18.8,10.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":4},{\"Type\":\"SupplyRoom\",\"Level\":1,\"Coordinates\":[-2.8,6.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":5},{\"Type\":\"LivingRoom\",\"Level\":1,\"Coordinates\":[-10.8,6.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":6},{\"Type\":\"complex_cosmodrome (1)\",\"Level\":1,\"Coordinates\":[-5.8,14.0,0.0],\"ConnectedElevators\":[1],\"Durability\":1,\"Index\":7}]");
+		playerModel.resources.Add("elevators", "[{\"Coordinates\":[5.2,10.0,0.0],\"ConnectedElevators\":[1],\"ConnectedRooms\":[0,2,5,7],\"BlocksUp\":1,\"BlocksDown\":2,\"Index\":1}]");
+
+		playerModel.resources.Add("honey", "40");
+		playerModel.resources.Add("asterium", "40");
+		playerModel.resources.Add("ursowaks", "0");
+		playerModel.resources.Add("astroluminite", "6");
+		playerModel.resources.Add("prototype", "0");
+		playerModel.resources.Add("HNY", "0");
+		playerModel.resources.Add("bears", "4");
+
+		if (player.resources["rooms"].Length <= playerModel.resources["rooms"].Length)
+		{
+			return false;
+		}
+		else
+		{
+			Debug.Log("Not a new player!");
+			return true;
+		}
+	}
+
+	public async Task<Shop> RefillExistingShop(string player)
+	{
+		Shop shop = new Shop
+		{
+			name = "HNYShop",
+			resources = new Dictionary<string, int>()
+		};
+		shop.resources.Add("bears", 2);
+		shop.resources.Add("time", 1);
+		shop.resources.Add("honey", 300);
+		shop.resources.Add("temperatureBoost", 1);
+		shop.resources.Add("asterium", 500);
+		if (isAPIActive)
+		{
+			await requestManager.UpdateShopResources(player,shop.name, shop.resources);
+		}
+		return shop;
 	}
 
 	public async Task CreateLog(Log log)
