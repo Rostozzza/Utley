@@ -561,7 +561,14 @@ public class RoomScript : MonoBehaviour
 		if (durability <= 0)
 		{
 			status = Status.Destroyed;
-			statusPanel.UpdateStatus(status);
+			try
+			{
+				statusPanel.UpdateStatus(status);
+			}
+			catch
+			{
+				Debug.Log("No status panel present at this moment!");
+			}
 			SetLampsOn(false);
 			if (blinks != null)
 			{

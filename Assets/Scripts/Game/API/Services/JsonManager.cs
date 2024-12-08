@@ -94,6 +94,7 @@ public class JsonManager
 		shop.resources.Add("time", 1);
 		shop.resources.Add("honey", 300);
 		shop.resources.Add("temperatureBoost", 1);
+		shop.resources.Add("asterium",500);
 		if (isAPIActive)
 		{
 			await requestManager.CreateShop(player, shop);
@@ -111,11 +112,13 @@ public class JsonManager
 		var shopBears = shopController.bears;
 		var shopTime = shopController.time;
 		var shopTemperatureBoost = shopController.temperatureBoost;
+		var shopAsterium = shopController.asterium;
 
 		shopModel.resources.Add("honey", shopHoney);
 		shopModel.resources.Add("bears", shopBears);
 		shopModel.resources.Add("time", shopTime);
 		shopModel.resources.Add("temperatureBoost", shopTemperatureBoost);
+		shopModel.resources.Add("asterium", shopAsterium);
 
 		string serializedShop = JsonConvert.SerializeObject(shopModel);
 		Debug.Log(serializedShop);

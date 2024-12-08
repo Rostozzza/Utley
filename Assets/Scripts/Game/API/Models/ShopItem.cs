@@ -138,6 +138,22 @@ public class ShopItem : MonoBehaviour
 						player_name = GameManager.Instance.playerName,
 					});
 					break;
+				case "asterium":
+					await GameManager.Instance.ChangeAsteriy(int.Parse(requestedAmount.text), new Log
+					{
+						comment = $"Player {GameManager.Instance.playerName} bought {requestedAmount.text} of {name} from {shopName} for {price} HNY",
+						resources_changed = new Dictionary<string, float> { { "player_asterium_added", +float.Parse(requestedAmount.text) } },
+						player_name = GameManager.Instance.playerName
+					});
+
+					await ShopManager.Instance.ChangeShopAsterium(-int.Parse(requestedAmount.text), new Log
+					{
+						comment = $"Player {GameManager.Instance.playerName} bought {requestedAmount.text} of {name} from {shopName} for {price} HNY",
+						shop_name = shopName,
+						resources_changed = new Dictionary<string, float> { { "shop_asterium", -float.Parse(requestedAmount.text) } },
+						player_name = GameManager.Instance.playerName,
+					});
+					break;
 			}
 			await GameManager.Instance.ChangeHNY(price * int.Parse(requestedAmount.text), new Log
 			{

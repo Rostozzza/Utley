@@ -15,6 +15,7 @@ public class ShopManager : MonoBehaviour
 	public int honey;
 	public int time;
 	public int temperatureBoost;
+	public int asterium;
 	public bool isAPIActive;
 	public TextMeshProUGUI HNYField;
 	[SerializeField] private GameObject buyGrid;
@@ -49,6 +50,7 @@ public class ShopManager : MonoBehaviour
 			{
 				shopLoadingScreen.SetActive(true);
 				StartCoroutine(LoadShop());
+				GameManager.Instance.JsonManager.GetShopModel("HNYShop");
 				return;
 			}
 			HNYField.text = GameManager.Instance.HNY.ToString();
@@ -64,10 +66,9 @@ public class ShopManager : MonoBehaviour
 
 	private IEnumerator LoadShop()
 	{
-		yield return GameManager.Instance.JsonManager.GetShopModel("HNYShop");
-		if (model == null)
+		while (model == null)
 		{
-			yield break;
+			yield return null;
 		}
 		HNYField.text = GameManager.Instance.HNY.ToString();
 		shopName = model.name;
@@ -75,6 +76,7 @@ public class ShopManager : MonoBehaviour
 		honey = model.resources["honey"];
 		time = model.resources["time"];
 		temperatureBoost = model.resources["temperatureBoost"];
+		asterium = model.resources["asterium"];
 		shopLoadingScreen.SetActive(false);
 		for (int i = 0; i < shopItems.Count; i++)
 		{
@@ -132,6 +134,18 @@ public class ShopManager : MonoBehaviour
 		return honey;
 	}
 
+	public async Task<int> GetShopAsterium()
+	{
+		if (isAPIActive)
+		{
+			var model = await JsonManager.GetShopModel(shopName);
+			this.model = model;
+			asterium = model.resources["asterium"];
+			return model.resources["asterium"];
+		}
+		return asterium;
+	}
+
 	public async Task<int> GetShopBears()
 	{
 		if (isAPIActive)
@@ -185,11 +199,32 @@ public class ShopManager : MonoBehaviour
 		honey += amount;
 		honey = Mathf.Clamp(honey, 0, 999);
 	}
+
+	public async Task ChangeShopAsterium(int amount, Log log)
+	{
+		if (isAPIActive)
+		{
+			int serverAsterium = await GetShopAsterium();
+			serverAsterium += amount;
+			serverAsterium = Mathf.Clamp(serverAsterium, 0, 999);
+			asterium = serverAsterium;
+			await JsonManager.SaveShopToJson(shopName);
+			await JsonManager.CreateLog(log);
+			shopItems.First(x => x.name == "asterium").quantity = serverAsterium;
+			shopItems.First(x => x.name == "asterium").UpdateFields();
+			return;
+		}
+		shopItems.First(x => x.name == "asterium").quantity += amount;
+		shopItems.First(x => x.name == "asterium").UpdateFields();
+		asterium += amount;
+		asterium = Mathf.Clamp(honey, 0, 999);
+	}
+
 	public async Task ChangeShopBears(int amount, Log log)
 	{
 		if (isAPIActive)
 		{
-			int serverBears = await GetShopHoney();
+			int serverBears = await GetShopBears();
 			serverBears += amount;
 			serverBears = Mathf.Clamp(serverBears, 0, 999);
 			bears = serverBears;
@@ -208,7 +243,7 @@ public class ShopManager : MonoBehaviour
 	{
 		if (isAPIActive)
 		{
-			int serverTime = await GetShopHoney();
+			int serverTime = await GetShopTime();
 			serverTime += amount;
 			serverTime = Mathf.Clamp(serverTime, 0, 999);
 			time = serverTime;
@@ -227,7 +262,7 @@ public class ShopManager : MonoBehaviour
 	{
 		if (isAPIActive)
 		{
-			int serverTemperatureBoost = await GetShopHoney();
+			int serverTemperatureBoost = await GetShopTemperatureBoost();
 			serverTemperatureBoost += amount;
 			serverTemperatureBoost = Mathf.Clamp(serverTemperatureBoost, 0, 999);
 			temperatureBoost = serverTemperatureBoost;
