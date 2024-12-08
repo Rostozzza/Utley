@@ -99,9 +99,9 @@ public class GameManager : MonoBehaviour
 		Debug.Log("Boosted temperature!");
 	}
 
-	public async Task SpawnNewBear()
+	public async Task SpawnNewBear(int amount)
 	{
-		await ChangeBears(1, new Log
+		await ChangeBears(amount, new Log
 		{
 			comment = $"Player {playerName} got new employee",
 			player_name = playerName,
@@ -117,13 +117,13 @@ public class GameManager : MonoBehaviour
 		{
 			Destroy(room);
 		}
-		bearStatusListController.ClearList();
+		//bearStatusListController.ClearList();
+		roomStatusListController.ClearList();
 		maxBearsAmount = 0;
 		allRooms.Clear();
 		allRooms = new List<GameObject>();
 		asteriumRooms.Clear();
 		builderRooms.Clear();
-		asteriumRoomView.Clear();
 	}
 
 	public void LoadAllBears()
@@ -133,6 +133,7 @@ public class GameManager : MonoBehaviour
 			var newBear = Instantiate(bearsToSpawn[playerBears - 5]);
 			bears.Add(newBear);
 		}
+		bears.ForEach(x => x.GetComponent<UnitMovement>().UpdateCurrentElevator());
 	}
 
 	public void LoadBearFromModel(Bear model)
@@ -163,7 +164,7 @@ public class GameManager : MonoBehaviour
 			newRoom.GetComponent<RoomScript>().level = room.Level;
 			if (newRoom.GetComponent<RoomScript>().resource == RoomScript.Resources.Cosmodrome)
 			{
-				ui = newRoom.GetComponentsInChildren<Canvas>().First(x => x.CompareTag("cosmodromeCanvas")).gameObject;
+				ui = newRoom.GetComponentsInChildren<RectTransform>(true).First(x => x.CompareTag("cosmodromeCanvas")).gameObject;
 				asteriumViewGrid = ui.GetComponentInChildren<GridLayoutGroup>(true).transform;
 			}
 			if (newRoom.GetComponent<RoomScript>().resource == RoomScript.Resources.Asteriy)

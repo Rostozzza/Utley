@@ -1530,7 +1530,8 @@ MonoBehaviour:
   asteriumCost: 25
   honeyCost: 0
   astroluminiteCost: 1
-  connectedElevators: []
+  connectedElevators:
+  - {fileID: 0}
   connectedRooms: []
   rawWalkPoints:
   - {fileID: 1379056768680765885}
@@ -1610,7 +1611,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -7180,7 +7181,7 @@ GameObject:
   - component: {fileID: 6177540711765823202}
   m_Layer: 5
   m_Name: UrsowaksButton
-  m_TagString: Untagged
+  m_TagString: assignment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13790,7 +13791,7 @@ GameObject:
   - component: {fileID: 8343715658714316222}
   m_Layer: 5
   m_Name: Prototype
-  m_TagString: Untagged
+  m_TagString: assignment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14531,7 +14532,7 @@ Light:
   m_InnerSpotAngle: 88.91971
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -19978,7 +19979,7 @@ Light:
   m_InnerSpotAngle: 88.91971
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -31740,7 +31741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1410232366625048663
 RectTransform:
   m_ObjectHideFlags: 0

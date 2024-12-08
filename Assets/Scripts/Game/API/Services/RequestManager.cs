@@ -521,6 +521,7 @@ public class RequestManager
 				GameManager.Instance.ursowaks = float.Parse(player.resources["ursowaks"]);
 				GameManager.Instance.astroluminite = float.Parse(player.resources["astroluminite"]);
 				GameManager.Instance.prototype = float.Parse(player.resources["prototype"]);
+				GameManager.Instance.playerBears = int.Parse(player.resources["bears"]);
 				GameManager.Instance.HNY = float.Parse(player.resources["HNY"]);
 			}
 			yield return null;
