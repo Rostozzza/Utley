@@ -220,6 +220,7 @@ public class MenuManager : MonoBehaviour
 
 	public void ToMenu()
 	{
+		videoPlayer.clip = menuClip;
 		loseScreen.SetActive(false);
 		loseScreen.GetComponent<CanvasGroup>().alpha = 0f;
 		winScreen.SetActive(false);
@@ -430,6 +431,7 @@ public class MenuManager : MonoBehaviour
 		else if (videoPlayer.clip == secondCutscene)
 		{
             canContinueAfter2Cutscene = true;
+			videoPlayer.gameObject.SetActive(false);
 		}
     }
 
