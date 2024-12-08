@@ -157,11 +157,11 @@ public class RoomScript : MonoBehaviour
 
 	public void AssignWorkForSelectedBear()
 	{
-		try 
+		try
 		{
 			GameManager.Instance.selectedUnit.GetComponent<UnitMovement>().currentRoom.GetComponent<BuilderRoom>().SetWait(false);
 		}
-		catch {}
+		catch { }
 		GameManager.Instance.WalkAndWork(GameManager.Instance.selectedUnit, gameObject);
 		GameManager.Instance.HideAllAssignButtons();
 	}
@@ -213,7 +213,7 @@ public class RoomScript : MonoBehaviour
 			await GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)), new Log
 			{
 				comment = $"Consumed {(30 + 10 * (level - 1))} honey for upgrading {this.name} room",
-				 
+
 				player_name = GameManager.Instance.playerName,
 				resources_changed = new Dictionary<string, float> { { "honey", -(30 + 10 * (level - 1)) } }
 			});
@@ -444,11 +444,11 @@ public class RoomScript : MonoBehaviour
 				}
 				timeShow.text = "";
 				GameManager.Instance.WithdrawRawAsterium();
-				GameManager.Instance.ChangeAsteriy(20,new Log
+				GameManager.Instance.ChangeAsteriy(20, new Log
 				{
 					comment = $"Added 20 asterium to player {GameManager.Instance.playerName} for processing raw asterium from spaceship",
 					player_name = GameManager.Instance.playerName,
-					 
+
 					resources_changed = new Dictionary<string, float> { { "asterium", 20 } }
 				});
 				isReadyForWork = false;
@@ -462,13 +462,13 @@ public class RoomScript : MonoBehaviour
 				if (fixedBear.GetComponent<UnitScript>().job == Qualification.researcher)
 				{
 					//timer = 45f * (1 - 0.25f * (level - 1)) * (1 - 0.05f * fixedBear.GetComponent<UnitScript>().level);
-					timer = StandartInteractionTime * (1 - (SpeedByBearLevelCoef - 1) * fixedBear.GetComponent<UnitScript>().level) * SpeedByUsingSuitableBearCoef * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
+					timer = StandartInteractionTime * (1 - (SpeedByBearLevelCoef - 1) * fixedBear.GetComponent<UnitScript>().level) * SpeedByUsingSuitableBearCoef * (level > 1 ? (1 - (1 - SpeedByRoomLevelCoef) * level) : 1);
 					fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
 				}
 				else
 				{
 					//timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
-					timer = StandartInteractionTime * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
+					timer = StandartInteractionTime * (level > 1 ? (1 - (1 - SpeedByRoomLevelCoef) * level) : 1);
 				}
 				if (fixedBear.GetComponent<UnitScript>().isBoosted)
 				{
@@ -498,12 +498,12 @@ public class RoomScript : MonoBehaviour
 						GameManager.Instance.DeliverRawAsterium();
 						break;
 					case FlyForType.Astroluminite:
-						GameManager.Instance.ChangeAstroluminite(8,new Log
+						GameManager.Instance.ChangeAstroluminite(8, new Log
 						{
 							comment = $"Added 8 astroluminite to player {GameManager.Instance.playerName} from spaceship",
 							player_name = GameManager.Instance.playerName,
-							 
-							resources_changed = new Dictionary<string, float> { { "astroluminite",8 } }
+
+							resources_changed = new Dictionary<string, float> { { "astroluminite", 8 } }
 						});
 						break;
 				}
@@ -542,6 +542,10 @@ public class RoomScript : MonoBehaviour
 		if (other.CompareTag("unit"))
 		{
 			other.GetComponent<UnitMovement>().currentRoom = this;
+			if (other.GetComponent<UnitMovement>().currentElevator == null && connectedElevators != null)
+			{
+				other.GetComponent<UnitMovement>().currentElevator = connectedElevators[0];
+			}
 		}
 	}
 
@@ -725,12 +729,12 @@ public class RoomScript : MonoBehaviour
 
 		if (await GameManager.Instance.GetAsteriy() >= 10)
 		{
-			GameManager.Instance.ChangeAsteriy(-10,new Log
+			GameManager.Instance.ChangeAsteriy(-10, new Log
 			{
 				comment = $"Consumed 10 asterium from player {GameManager.Instance.playerName} to repair {gameObject.name} room",
 				player_name = GameManager.Instance.playerName,
-				 
-				resources_changed = new Dictionary<string, float> { { "asterium", -10} }
+
+				resources_changed = new Dictionary<string, float> { { "asterium", -10 } }
 			});
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
 			int timeToRepair = (int)((1 - durability) * 100 / 2);

@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private GameObject buildingParticle;
 	private bool isCold = false;
 	private bool isFreezing = false;
+	private int predictedAsteriumViews;
 
 	public void EnpowerAllRooms()
 	{
@@ -107,8 +108,18 @@ public class GameManager : MonoBehaviour
 			player_name = playerName,
 			resources_changed = new Dictionary<string, float> { { "player_bears_added", 1 } }
 		});
-		var newBear = Instantiate(bearsToSpawn[playerBears - 5]);
-		bears.Add(newBear);
+		if (amount > 1)
+		{
+			var newBear = Instantiate(bearsToSpawn[0]);
+			bears.Add(newBear);
+			var newBear2 = Instantiate(bearsToSpawn[1]);
+			bears.Add(newBear2);
+		}
+		else
+		{
+			var newBear = Instantiate(bearsToSpawn[playerBears - 5]);
+			bears.Add(newBear);
+		}
 	}
 
 	public void KillAllBuildings()
@@ -119,10 +130,14 @@ public class GameManager : MonoBehaviour
 		}
 		//bearStatusListController.ClearList();
 		roomStatusListController.ClearList();
+		workStations.Clear();
 		maxBearsAmount = 0;
 		allRooms.Clear();
 		allRooms = new List<GameObject>();
 		asteriumRooms.Clear();
+		//Destroy(asteriumRoomView[0].gameObject);
+		asteriumRoomView.Clear();
+		asteriumRoomView = new List<Image>();
 		builderRooms.Clear();
 	}
 
@@ -130,10 +145,15 @@ public class GameManager : MonoBehaviour
 	{
 		for (int i = 0; i < playerBears - 4; i++)
 		{
-			var newBear = Instantiate(bearsToSpawn[playerBears - 5]);
+			var newBear = Instantiate(bearsToSpawn[i]);
 			bears.Add(newBear);
 		}
-		bears.ForEach(x => x.GetComponent<UnitMovement>().UpdateCurrentElevator());
+		Debug.Log("Starting assignation of elevators..");
+		foreach (var bear in bears)
+		{
+			bear.GetComponent<UnitMovement>().currentElevator = allRooms.First(x => x.GetComponent<Elevator>()).GetComponent<Elevator>();
+			Debug.Log("Elevator assigned!(or maybe not..)");
+		}
 	}
 
 	public void LoadBearFromModel(Bear model)
@@ -170,8 +190,17 @@ public class GameManager : MonoBehaviour
 			if (newRoom.GetComponent<RoomScript>().resource == RoomScript.Resources.Asteriy)
 			{
 				asteriumRooms.Add(newRoom.GetComponent<RoomScript>());
-				var newAsteriumView = Instantiate(asteriumViewPrefab, asteriumViewGrid);
-				asteriumRoomView.Add(newAsteriumView.GetComponent<Image>());
+				if (allRooms.FirstOrDefault(x => x.GetComponent<RoomScript>().resource == RoomScript.Resources.Cosmodrome))
+				{
+					var newAsteriumView = Instantiate(asteriumViewPrefab, asteriumViewGrid);
+					asteriumRoomView.Add(newAsteriumView.GetComponentInChildren<Image>(true));
+					Debug.Log($"Addend new asterium! asteriumView amount: {asteriumRoomView.Count}");
+				}
+				else
+				{
+					predictedAsteriumViews++;
+					Debug.Log("Queueing 1 asterium view");
+				}
 			}
 			allRooms.Add(newRoom);
 			//if (newRoom.GetComponent<SupplyRoom>())
@@ -230,6 +259,11 @@ public class GameManager : MonoBehaviour
 			var elevatorScript = elevator.GetComponent<Elevator>();
 			elevatorScript.connectedElevators = elevatorScript.elevatorModel.ConnectedElevators.Select(x => allRooms[x].GetComponent<Elevator>()).ToList();
 			elevatorScript.connectedRooms = elevatorScript.elevatorModel.ConnectedRooms.Select(x => allRooms[x].GetComponent<RoomScript>()).ToList();
+		}
+		for (int i = 0; i < predictedAsteriumViews; i++)
+		{
+			var newAsteriumView = Instantiate(asteriumViewPrefab, asteriumViewGrid);
+			asteriumRoomView.Add(newAsteriumView.GetComponentInChildren<Image>(true));
 		}
 	}
 
