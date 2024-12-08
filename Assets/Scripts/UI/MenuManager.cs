@@ -272,7 +272,6 @@ public class MenuManager : MonoBehaviour
 			{
 				ShopManager.Instance.OpenShop();
 			}
-
 		}
 		if (Input.GetMouseButton(2))
 		{
