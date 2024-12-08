@@ -7,7 +7,7 @@ public class UnitMovement : MonoBehaviour
 {
 	[SerializeField] private float speed;
 	[SerializeField] private RoomScript target;
-	[SerializeField] private Elevator currentElevator;
+	[SerializeField] public Elevator currentElevator;
 	public RoomScript currentRoom;
 	[SerializeField] private float offsetX = 1.24f;
 	public Coroutine currentRoutine;

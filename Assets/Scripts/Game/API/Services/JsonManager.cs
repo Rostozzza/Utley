@@ -216,8 +216,8 @@ public class JsonManager
 			}
 		}
 		GameManager.Instance.AssembleBase();
-		GameManager.Instance.EnpowerAllRooms();
 		GameManager.Instance.LoadAllBears();
+		GameManager.Instance.EnpowerAllRooms();
 		//}
 		//catch (Exception e) { Debug.Log($"Exception dropped! {e.Message}"); }
 	}
