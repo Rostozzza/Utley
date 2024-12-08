@@ -271,14 +271,17 @@ public class UnitScript : MonoBehaviour
 	private IEnumerator BedroomWalkBehaviour(List<Vector3> walkPoints, GameObject obj)
 	{
 		Vector3 chosenPoint;
-		//State = States.Walk;
 		chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
+		GetComponentInChildren<Animator>().StopPlayback();
+		GetComponentInChildren<Animator>().speed = 1;
+		GetComponentInChildren<Animator>().SetBool("Walk", true);
+		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(chosenPoint.x - transform.position.x), 0);
 		while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
 		{
 			transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
 			yield return null;
 		}
-		// move hands "working"
+		GetComponentInChildren<Animator>().SetBool("Walk", false);
 	}
 
 	private IEnumerator EnergohoneyWalkBehaviour(List<Vector3> walkPoints, GameObject obj)

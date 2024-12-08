@@ -63,6 +63,11 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private GameObject cosmodromeSelectScreen;
 	public bool isReadyForWork = false;
 
+	protected float SpeedByBearLevelCoef = 1.05f;
+	protected float SpeedByRoomLevelCoef = 0.75f;
+	protected float StandartInteractionTime = 18f;
+	protected float SpeedByUsingSuitableBearCoef = 0.75f;
+
 	public virtual void Enpower()
 	{
 		isEnpowered = true;
@@ -426,7 +431,7 @@ public class RoomScript : MonoBehaviour
 		switch (resource)
 		{
 			case Resources.Asteriy:
-				timer = 45f;
+				timer = StandartInteractionTime;
 				while (timer > 0)
 				{
 					timeShow.text = SecondsToTimeToShow(timer);
@@ -448,16 +453,18 @@ public class RoomScript : MonoBehaviour
 			case Resources.Cosmodrome:
 				cosmodromeSelectScreen.SetActive(false);
 				fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
-				timer = 45f;
+				//timer = 45f;
 				//(1 - 0.05f * fixedBear.GetComponent<UnitScript>().level)
 				if (fixedBear.GetComponent<UnitScript>().job == Qualification.researcher)
 				{
-					timer = 45f * (1 - 0.25f * (level - 1)) * (1 - 0.05f * fixedBear.GetComponent<UnitScript>().level);
+					//timer = 45f * (1 - 0.25f * (level - 1)) * (1 - 0.05f * fixedBear.GetComponent<UnitScript>().level);
+					timer = StandartInteractionTime * (1 - (SpeedByBearLevelCoef - 1) * fixedBear.GetComponent<UnitScript>().level) * SpeedByUsingSuitableBearCoef * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
 					fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
 				}
 				else
 				{
-					timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
+					//timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
+					timer = StandartInteractionTime * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
 				}
 				if (fixedBear.GetComponent<UnitScript>().isBoosted)
 				{

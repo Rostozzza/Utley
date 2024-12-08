@@ -24,6 +24,9 @@ public class PointerHint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         Temperature,
         Asterium,
         Bear,
-        DontScroll
+        DontScroll,
+        Ursowaks,
+        Prototype,
+        Astroluminite
     } 
 }

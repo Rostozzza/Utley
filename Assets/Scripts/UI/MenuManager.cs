@@ -49,6 +49,9 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private AudioMixerGroup musicGroup;
 	[Header("API")]
 	public bool isAPIActive;
+	[Header("Cursor")]
+	[SerializeField] private Texture2D cursorDefault;
+	[SerializeField] private Texture2D cursorClick;
 
 	public void SetMasterVolume()
 	{
@@ -255,6 +258,14 @@ public class MenuManager : MonoBehaviour
 			{
 				ShopManager.Instance.OpenShop();
 			}
+			if (Input.GetMouseButtonDown(0))
+			{
+				Cursor.SetCursor(cursorClick, Vector2.zero, CursorMode.Auto);
+			}
+			if (Input.GetMouseButtonUp(0))
+			{
+				Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
+			}
 		}
 	}
 
@@ -341,9 +352,9 @@ public class MenuManager : MonoBehaviour
 			loadingScreen.SetActive(false);
 			Time.timeScale = 1f;
 			loadingView.SetActive(false);
-			GameManager.Instance.asteriy = 600;
-			GameManager.Instance.honey = 100;
-			GameManager.Instance.astroluminite = 20;
+			GameManager.Instance.asteriy = 40;
+			GameManager.Instance.honey = 40;
+			GameManager.Instance.astroluminite = 6;
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
 		}
 		else

@@ -479,6 +479,7 @@ public class GameManager : MonoBehaviour
 
 	private IEnumerator SelectAndBuildWaiter(GameObject building, GameObject room, Transform point)
 	{
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
 		{
 			yield return null;

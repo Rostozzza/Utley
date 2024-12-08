@@ -21,6 +21,9 @@ public class UIResourceShower : MonoBehaviour
     [SerializeField] private GameObject temperatureDynamic2;
     [SerializeField] private GameObject asteriumPanel;
     [SerializeField] private GameObject bearPanel;
+    [SerializeField] private GameObject protypePanel;
+    [SerializeField] private GameObject astroluminitePanel;
+    [SerializeField] private GameObject ursowaksPanel;
 
     [Header("Bars with info")]
     [SerializeField] private Image icon;
@@ -161,6 +164,15 @@ public class UIResourceShower : MonoBehaviour
             case PointerHint.HintType.Bear:
                 bearPanel.SetActive(true);
                 break;
+            case PointerHint.HintType.Ursowaks:
+                ursowaksPanel.SetActive(true);
+                break;
+            case PointerHint.HintType.Prototype:
+                protypePanel.SetActive(true);
+                break;
+            case PointerHint.HintType.Astroluminite:
+                astroluminitePanel.SetActive(true);
+                break;
         }
     }
 
@@ -179,6 +191,15 @@ public class UIResourceShower : MonoBehaviour
                 break;
             case PointerHint.HintType.Bear:
                 bearPanel.SetActive(false);
+                break;
+            case PointerHint.HintType.Ursowaks:
+                ursowaksPanel.SetActive(false);
+                break;
+            case PointerHint.HintType.Prototype:
+                protypePanel.SetActive(false);
+                break;
+            case PointerHint.HintType.Astroluminite:
+                astroluminitePanel.SetActive(false);
                 break;
         }
     }

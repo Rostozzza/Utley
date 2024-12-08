@@ -25,11 +25,11 @@ public class BedRoom : RoomScript
 			timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
 		}
 		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Bed, GetWalkPoints(), this.gameObject);
-		timer = 120f;
-		if (fixedBear.GetComponent<UnitScript>().isBoosted)
-		{
-			timer *= 0.9f;
-		}
+		timer = 150f;
+		//if (fixedBear.GetComponent<UnitScript>().isBoosted)
+		//{
+		//	timer *= 0.9f;
+		//}
 		while (timer > 0)
 		{
 			timeShow.text = SecondsToTimeToShow(timer);
