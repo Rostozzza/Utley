@@ -279,4 +279,9 @@ public class ShopManager : MonoBehaviour
 		temperatureBoost = Mathf.Clamp(temperatureBoost, 0, 999);
 	}
 	#endregion
+
+	public bool GetIsOpen()
+	{
+		return isOpened;
+	}
 }

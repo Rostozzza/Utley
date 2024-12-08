@@ -1637,6 +1637,11 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	public void CallShopFromGameManager()
+	{
+		ShopManager.Instance.OpenShop();
+	}
+
 	public void AddBearToMove(BearStatusController bear)
 	{
 		bearsToMoveOn.Add(bear);

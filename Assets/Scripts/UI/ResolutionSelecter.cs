@@ -15,7 +15,7 @@ public class ResolutionSelecter : MonoBehaviour
 	{
 		resolutions = Screen.resolutions.ToList();
 		resolutionDropdown.ClearOptions();
-		List<string> options = resolutions.Select(x => x.width + "x" + x.height).ToList();
+		List<string> options = resolutions.Select(x => x.width + "x" + x.height + " " + (int)x.refreshRateRatio.value + "Гц").ToList();
 		
 		resolutionDropdown.AddOptions(options);
 		if (!PlayerPrefs.HasKey("SavedResolution"))
