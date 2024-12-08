@@ -92,7 +92,6 @@ public class SupplyRoom : RoomScript
 	{
 		if (durability < hp)
 		{
-			Debug.Log("ОТПИТЫВАЕТ");
 			GetRoomsToUnpower();
 		}
 		base.ChangeDurability(hp);
@@ -100,7 +99,6 @@ public class SupplyRoom : RoomScript
 
 	public void InitializeGraph()
 	{
-		Debug.Log("ГРАФЫ СТРОИТ");
 		int randNum = Random.Range(0, graphs.Count);
 		graph = graphs[randNum];
 		currentAnswerField = graph.GetComponentsInChildren<TMP_InputField>().First(x => x.gameObject.tag == "answerField");

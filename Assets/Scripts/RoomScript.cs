@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System;
 
 using Random = UnityEngine.Random;
-using UnityEngine.Rendering.Universal;
 
 public class RoomScript : MonoBehaviour
 {
@@ -158,6 +157,11 @@ public class RoomScript : MonoBehaviour
 
 	public void AssignWorkForSelectedBear()
 	{
+		try 
+		{
+			GameManager.Instance.selectedUnit.GetComponent<UnitMovement>().currentRoom.GetComponent<BuilderRoom>().SetWait(false);
+		}
+		catch {}
 		GameManager.Instance.WalkAndWork(GameManager.Instance.selectedUnit, gameObject);
 		GameManager.Instance.HideAllAssignButtons();
 	}
