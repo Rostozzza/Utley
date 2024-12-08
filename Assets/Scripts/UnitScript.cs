@@ -223,8 +223,38 @@ public class UnitScript : MonoBehaviour
 				walkingCoroutine = null;
 				break;
 			case RoomScript.Resources.Research:
+				walkingCoroutine = StartCoroutine(ResearchBehaviour(walkPoints, obj));
+				while (obj.GetComponent<RoomScript>().status == RoomScript.Status.Busy)
+				{
+					yield return null;
+				}
+				StopCoroutine(walkingCoroutine);
+				walkingCoroutine = null;
 				break;
 		}
+	}
+
+	private IEnumerator ResearchBehaviour(List<Vector3> walkPoints, GameObject obj)
+	{
+		Vector3 chosenPoint;
+		chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
+		GetComponentInChildren<Animator>().StopPlayback();
+		GetComponentInChildren<Animator>().speed = 1;
+		GetComponentInChildren<Animator>().SetBool("Walk", true);
+		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(chosenPoint.x - transform.position.x), 0);
+		while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
+		{
+			transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
+			yield return null;
+		}
+		GetComponentInChildren<Animator>().SetBool("Walk", false);
+		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
+		GetComponentInChildren<Animator>().SetBool("Work", true);
+		while (obj.GetComponent<RoomScript>().status == RoomScript.Status.Busy)
+		{
+			yield return null;
+		}
+		GetComponentInChildren<Animator>().SetBool("Work", false);
 	}
 
 	private IEnumerator BuildBehaviour(GameObject obj)

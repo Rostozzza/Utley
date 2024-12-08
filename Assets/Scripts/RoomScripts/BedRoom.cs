@@ -9,8 +9,8 @@ public class BedRoom : RoomScript
 		float timer;
 		status = Status.Busy;
 		statusPanel.UpdateStatus(status);
-		fixedBear.GetComponent<UnitScript>().SetBusy(true);
-		fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
+		//fixedBear.GetComponent<UnitScript>().SetBusy(true);
+		//fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 		//fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(false);
 		animator.SetTrigger("StartWork");
 		//!borrowed part!//
@@ -42,8 +42,8 @@ public class BedRoom : RoomScript
 		}
 		timeShow.text = "";
 		GameManager.Instance.BoostThreeBears();
-		fixedBear.GetComponent<UnitScript>().SetBusy(false);
-		fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
+		//fixedBear.GetComponent<UnitScript>().SetBusy(false);
+		//fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 		//!borrowed part!//
 		if (fixedBear != null)
 		{
