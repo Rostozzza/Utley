@@ -9,6 +9,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using System;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -85,12 +86,26 @@ public class GameManager : MonoBehaviour
 		allRooms.Where(x => x.GetComponent<SupplyRoom>() && x.GetComponent<SupplyRoom>().durability > 0).ToList().ForEach(y => y.GetComponent<SupplyRoom>().GetRoomsToEnpower());
 	}
 
+	public void DecreaseTime()
+	{
+		timeLeft -= 30f;
+		Debug.Log("Decreased time!");
+	}
+
+	public void BoostTemperature()
+	{
+		temperature = 20;
+		Debug.Log("Boosted temperature!");
+	}
+
 	public void KillAllBuildings()
 	{
 		foreach (var room in allRooms)
 		{
 			Destroy(room);
 		}
+		bearStatusListController.ClearList();
+		maxBearsAmount = 0;
 		allRooms.Clear();
 		allRooms = new List<GameObject>();
 		asteriumRooms.Clear();

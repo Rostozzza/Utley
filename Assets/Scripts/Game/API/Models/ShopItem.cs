@@ -107,7 +107,7 @@ public class ShopItem : MonoBehaviour
 					break;
 				case "time":
 					//Decrease time
-
+					GameManager.Instance.DecreaseTime();
 					await ShopManager.Instance.ChangeShopTime(-int.Parse(requestedAmount.text), new Log
 					{
 						comment = $"Player {GameManager.Instance.playerName}'s work time decreased by {requestedAmount.text} from {shopName} for {price} HNY.",
@@ -118,7 +118,7 @@ public class ShopItem : MonoBehaviour
 					break;
 				case "temperatureBoost":
 					//increase temperature
-
+					GameManager.Instance.BoostTemperature();
 					await ShopManager.Instance.ChangeShopTemperatureBoost(-int.Parse(requestedAmount.text), new Log
 					{
 						comment = $"Player {GameManager.Instance.playerName}'s base temperature was urgently raised to maximum for {price} HNY",
