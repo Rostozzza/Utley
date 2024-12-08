@@ -273,24 +273,24 @@ public class MenuManager : MonoBehaviour
 				ShopManager.Instance.OpenShop();
 			}
 
-			if (Input.GetMouseButton(2))
+		}
+		if (Input.GetMouseButton(2))
+		{
+			Cursor.SetCursor(cursorDrag, Vector2.zero, CursorMode.Auto);
+		}
+		else
+		{
+			if (Input.GetMouseButton(0))
 			{
-				Cursor.SetCursor(cursorDrag, Vector2.zero, CursorMode.Auto);
+				Cursor.SetCursor(cursorClick, Vector2.zero, CursorMode.Auto);
 			}
 			else
 			{
-				if (Input.GetMouseButton(0))
-				{
-					Cursor.SetCursor(cursorClick, Vector2.zero, CursorMode.Auto);
-				}
-				else
-				{
-					Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
-				}
-				if (Input.GetMouseButton(1))
-				{
-					Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
-				}
+				Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
+			}
+			if (Input.GetMouseButton(1))
+			{
+				Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
 			}
 		}
 	}

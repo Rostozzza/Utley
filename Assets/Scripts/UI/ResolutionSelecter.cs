@@ -28,7 +28,6 @@ public class ResolutionSelecter : MonoBehaviour
 		}
 		resolutionDropdown.value = currentResolutionIndex;
 		resolutionDropdown.RefreshShownValue();
-		resolutionDropdown.Show();
 		resolutionDropdown.interactable = true;
 	}
 
