@@ -17,14 +17,14 @@ public class EnergohoneyRoom : RoomScript
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
 		{
 			//timer = 45f * (1 - 0.25f * (level - 1)) * (1 - 0.05f * fixedBear.GetComponent<UnitScript>().level);
-			timer = StandartInteractionTime * (1 - (SpeedByBearLevelCoef - 1) * fixedBear.GetComponent<UnitScript>().level) * SpeedByUsingSuitableBearCoef * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
+			timer = (StandartInteractionTime + 5) * (1 - (SpeedByBearLevelCoef - 1) * fixedBear.GetComponent<UnitScript>().level) * SpeedByUsingSuitableBearCoef * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
 			fixedBear.GetComponent<UnitScript>().expParticle.SetActive(true);
 			fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
 		}
 		else
 		{
 			//timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
-			timer = StandartInteractionTime * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
+			timer = (StandartInteractionTime + 5) * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
 		}
 		if (fixedBear.GetComponent<UnitScript>().isBoosted)
 		{

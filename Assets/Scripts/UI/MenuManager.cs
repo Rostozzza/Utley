@@ -54,6 +54,7 @@ public class MenuManager : MonoBehaviour
 	[Header("Cursor")]
 	[SerializeField] private Texture2D cursorDefault;
 	[SerializeField] private Texture2D cursorClick;
+	[SerializeField] private Texture2D cursorDrag;
 	[Header("Cutscenes")]
 	[SerializeField] VideoPlayer videoPlayer;
 	[SerializeField] VideoClip firstCutscene;
@@ -271,14 +272,26 @@ public class MenuManager : MonoBehaviour
 			{
 				ShopManager.Instance.OpenShop();
 			}
+
 		}
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButton(2))
 		{
-			Cursor.SetCursor(cursorClick, Vector2.zero, CursorMode.Auto);
+			Cursor.SetCursor(cursorDrag, Vector2.zero, CursorMode.Auto);
 		}
-		if (Input.GetMouseButtonUp(0))
+		else
 		{
-			Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
+			if (Input.GetMouseButton(0))
+			{
+				Cursor.SetCursor(cursorClick, Vector2.zero, CursorMode.Auto);
+			}
+			else
+			{
+				Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
+			}
+			if (Input.GetMouseButton(1))
+			{
+				Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
+			}
 		}
 	}
 
