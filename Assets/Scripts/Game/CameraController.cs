@@ -10,6 +10,7 @@ public class CameraController : MonoBehaviour
     private bool isScroll = true;
     Coroutine moving = null;
     Coroutine changingZoom = null;
+    public bool isCameraLocked = false;
 
     private void Start()
     {
@@ -25,6 +26,11 @@ public class CameraController : MonoBehaviour
     }
 
     void Update()
+    {
+        if (!isCameraLocked) CameraHolder();
+    }
+
+    private void CameraHolder()
     {
         needToMoveByMousePos = Input.mousePosition.x < (left + 5) || Input.mousePosition.x > (right - 5) || Input.mousePosition.y < (bottom + 5) || Input.mousePosition.y > (top - 5);
         if (needToMoveByMousePos || Input.GetMouseButton(2) || Input.touchCount > 1)
@@ -118,5 +124,10 @@ public class CameraController : MonoBehaviour
     public void SetScroll(bool set)
     {
         isScroll = set;
+    }
+
+    public void SetCameraLock(bool set)
+    {
+        isCameraLocked = set;
     }
 }

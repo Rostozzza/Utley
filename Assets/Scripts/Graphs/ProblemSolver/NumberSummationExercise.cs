@@ -59,12 +59,14 @@ public class NumberSummationExercise : MonoBehaviour
 	public IEnumerator AnswerWaiter()
 	{
 		rightAnswer = GenerateTask();
+		Camera.main.GetComponent<CameraController>().SetCameraLock(true);
 		while (!answerTrigger)
 		{
 			yield return null;
 		}
 		answerTrigger = false;
 		Time.timeScale = 1;
+		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 		if (answer == rightAnswer)
 		{
 			Debug.Log("ВЕРНЫЙ ОТВЕТ");
