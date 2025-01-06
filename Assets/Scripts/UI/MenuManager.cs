@@ -40,6 +40,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] public GameObject menuBG;
 	[SerializeField] public GameObject problemSolverScreen;
 	[SerializeField] public GameObject SetPipesScreen;
+	[SerializeField] private GameObject shopScreen;
 	//[SerializeField] private List<TextMeshProUGUI> scores;
 	[Header("Inputs")]
 	[SerializeField] private TMP_InputField registrationUsernameField;
@@ -64,13 +65,13 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] VideoClip firstCutscene;
 	[SerializeField] VideoClip menuClip;
 	[SerializeField] VideoClip secondCutscene;
+	[Header("Number Summation Problem")]
+	[SerializeField] private NumberSummationExercise numberSummation;
+	[SerializeField] private Animator tabletAnimator;
 	private bool canContinueAfter2Cutscene = false;
 	private Coroutine skipChecker;
 	public bool isPlayerLoadable = false;
-	[Header("Problem Solver")]
-	[SerializeField] public int answer;
-	[SerializeField] private int rightAnswer;
-	[SerializeField] public bool answerTrigger;
+	
 
 	public void SetMasterVolume()
 	{
@@ -202,6 +203,10 @@ public class MenuManager : MonoBehaviour
 	public void Start()
 	{
 		videoPlayer.loopPointReached += OnVideoEnd;
+		SceneManager.activeSceneChanged += (Scene oldScene, Scene newScene) =>
+		{
+			GetComponent<Canvas>().worldCamera = Camera.main;
+		};
 		skipChecker = StartCoroutine(SkipChecker());
 		if (PlayerPrefs.GetString("currentPlayer") != "")
 		{
@@ -210,6 +215,7 @@ public class MenuManager : MonoBehaviour
 			startingScreen.SetActive(false);
 			mainMenuScreen.SetActive(false);
 		}
+		tabletAnimator = ShopManager.Instance.animator;
 	}
 
 	public void Pause()
@@ -284,8 +290,9 @@ public class MenuManager : MonoBehaviour
 			{
 				Pause();
 			}
-			if (Input.GetKeyDown(KeyCode.E))
+			if (Input.GetKeyDown(KeyCode.E) && !problemSolverScreen.active)
 			{
+				shopScreen.SetActive(true);
 				ShopManager.Instance.OpenShop();
 			}
 		}
@@ -499,42 +506,27 @@ public class MenuManager : MonoBehaviour
 
 	public void CallProblemSolver(ProblemType type)
 	{
+		
 		problemSolverScreen.SetActive(true);
-		Time.timeScale = 0;
+		shopScreen.SetActive(false);
 		switch (type)
 		{
 			case ProblemType.SetPipes:
-				rightAnswer = 7;
 				SetPipesScreen.SetActive(true);
 				break;
 		}
-		StartCoroutine(AnswerWaiter());
+		tabletAnimator.SetTrigger("OpenShop");
+		StartCoroutine(WaitForNumberSummationEnd());
 	}
 
-	public IEnumerator AnswerWaiter()
+	private IEnumerator WaitForNumberSummationEnd()
 	{
-		while (!answerTrigger)
-		{
-			yield return null;
-		}
-		answerTrigger = false;
-		Time.timeScale = 1;
-		if (answer == rightAnswer)
-		{
-			Debug.Log("ВЕРНЫЙ ОТВЕТ");
-		}
-		else
-		{
-			Debug.Log("ОТВЕТ НЕВЕРНЫЙ");
-		}
+		yield return new WaitForSeconds(1.5f);
+		Time.timeScale = 0;
+		yield return numberSummation.AnswerWaiter();
 		SetPipesScreen.SetActive(false);
 		problemSolverScreen.SetActive(false);
-	}
-
-	public void GiveAnswer(GameObject answerHolder)
-	{
-		answer = Convert.ToInt32(answerHolder.GetComponent<TMP_InputField>().text);
-		answerTrigger = true;
+		tabletAnimator.SetTrigger("CloseShop");
 	}
 
 	public enum ProblemType

@@ -19,15 +19,18 @@ public class OgePointLogic : MonoBehaviour
 		ConnectPoints();
 	}
 
-	private void ConnectPoints()
+	public void ConnectPoints()
 	{
 		foreach (OgePointLogic point in connectedPoints)
 		{
-			var lineInstance = Instantiate(line,transform).GetComponent<LineRenderer>();
+			var lineInstance = Instantiate(line, transform).GetComponent<LineRenderer>();
 			lineInstance.useWorldSpace = true;
 			lineInstance.SetPosition(0, transform.position);
 			lineInstance.SetPosition(1, point.transform.position);
-			point.sourcePoints.Add(this);
+			if (!point.sourcePoints.Contains(this))
+			{
+				point.sourcePoints.Add(this);
+			}
 		}
 	}
 
@@ -39,5 +42,20 @@ public class OgePointLogic : MonoBehaviour
 	private void OnDestroy()
 	{
 		GameManager.Instance.SetIsGraphUsing(false);
+	}
+
+	public void SetColor(Color color)
+	{
+		transform.GetComponent<Image>().color = color;
+	}
+
+	public List<OgePointLogic> GetConnectedPoints()
+	{
+		return connectedPoints;
+	}
+
+	public List<OgePointLogic> GetSourcePoints()
+	{
+		return sourcePoints;
 	}
 }

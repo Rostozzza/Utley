@@ -20,7 +20,7 @@ public class ShopManager : MonoBehaviour
 	public bool isAPIActive;
 	public TextMeshProUGUI HNYField;
 	[SerializeField] private GameObject buyGrid;
-	[SerializeField] private Animator animator;
+	[SerializeField] public Animator animator;
 	[SerializeField] private GameObject shopLoadingScreen;
 	[SerializeField] private List<ShopItem> shopItems = new List<ShopItem>();
 	[SerializeField] private List<ShopItem> shopItemsToSell = new List<ShopItem>();
