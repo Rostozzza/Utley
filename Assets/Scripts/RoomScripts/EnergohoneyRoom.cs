@@ -3,7 +3,15 @@ using System.Collections;
 
 public class EnergohoneyRoom : RoomScript
 {
-	protected override IEnumerator WorkStatus()
+	[SerializeField] GameObject setPipesButtonScreen;
+
+    protected override void Start()
+    {
+        base.Start();
+		ShowSetPipesButtonScreen();
+    }
+
+    protected override IEnumerator WorkStatus()
 	{
 		float timer;
 		status = Status.Busy;
@@ -63,5 +71,21 @@ public class EnergohoneyRoom : RoomScript
 			resources_changed = new System.Collections.Generic.Dictionary<string, float> { {"honey",honeyToAdd } },
 			 
 		});
+	}
+
+	public void ShowSetPipesButtonScreen()
+	{
+		setPipesButtonScreen.SetActive(true);
+	}
+
+	public void HideSetPipesButtonScreen()
+	{
+		setPipesButtonScreen.SetActive(false);
+	}
+
+	public void SetPipes()
+	{
+		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetPipes);
+		HideSetPipesButtonScreen();
 	}
 }

@@ -1169,7 +1169,14 @@ public class GameManager : MonoBehaviour
 
 	public void HideAllAssignButtons()
 	{
-		allRooms.Where(x => x.GetComponent<RoomScript>()).ToList().ForEach(y => y.GetComponent<RoomScript>().HideButton());
+		allRooms.Where(x => x.GetComponent<RoomScript>()).ToList();//.ForEach(y => y.GetComponent<RoomScript>().HideButton());
+		foreach (var room in allRooms)
+		{
+			if (!room.CompareTag("dont_hide_button"))
+			{
+				room.GetComponent<RoomScript>().HideButton();
+			}
+		}
 	}
 
 	public void ShowAvailableAssignments()

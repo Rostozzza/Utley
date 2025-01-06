@@ -38,6 +38,8 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private List<GameObject> buttonsToShow;
 	[SerializeField] private List<TextMeshProUGUI> scores;
 	[SerializeField] public GameObject menuBG;
+	[SerializeField] public GameObject problemSolverScreen;
+	[SerializeField] public GameObject SetPipesScreen;
 	//[SerializeField] private List<TextMeshProUGUI> scores;
 	[Header("Inputs")]
 	[SerializeField] private TMP_InputField registrationUsernameField;
@@ -65,6 +67,10 @@ public class MenuManager : MonoBehaviour
 	private bool canContinueAfter2Cutscene = false;
 	private Coroutine skipChecker;
 	public bool isPlayerLoadable = false;
+	[Header("Problem Solver")]
+	[SerializeField] public int answer;
+	[SerializeField] private int rightAnswer;
+	[SerializeField] public bool answerTrigger;
 
 	public void SetMasterVolume()
 	{
@@ -489,5 +495,50 @@ public class MenuManager : MonoBehaviour
 		mainMenuScreen.SetActive(false);
 		StartCoroutine(LoadingScreenCoroutine(state));
 		//SceneManager.LoadSceneAsync(1);
+	}
+
+	public void CallProblemSolver(ProblemType type)
+	{
+		problemSolverScreen.SetActive(true);
+		Time.timeScale = 0;
+		switch (type)
+		{
+			case ProblemType.SetPipes:
+				rightAnswer = 7;
+				SetPipesScreen.SetActive(true);
+				break;
+		}
+		StartCoroutine(AnswerWaiter());
+	}
+
+	public IEnumerator AnswerWaiter()
+	{
+		while (!answerTrigger)
+		{
+			yield return null;
+		}
+		answerTrigger = false;
+		Time.timeScale = 1;
+		if (answer == rightAnswer)
+		{
+			Debug.Log("ВЕРНЫЙ ОТВЕТ");
+		}
+		else
+		{
+			Debug.Log("ОТВЕТ НЕВЕРНЫЙ");
+		}
+		SetPipesScreen.SetActive(false);
+		problemSolverScreen.SetActive(false);
+	}
+
+	public void GiveAnswer(GameObject answerHolder)
+	{
+		answer = Convert.ToInt32(answerHolder.GetComponent<TMP_InputField>().text);
+		answerTrigger = true;
+	}
+
+	public enum ProblemType
+	{
+		SetPipes
 	}
 }

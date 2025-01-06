@@ -35642,8 +35642,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status: 0
   resource: 2
-  leftDoor: {fileID: 0}
-  rightDoor: {fileID: 0}
+  leftDoor: {fileID: 2528073555486570653}
+  rightDoor: {fileID: 8571632363847494913}
   hasLeftDoor: 0
   hasRightDoor: 0
   roomStatsScreen: {fileID: 1172612712928513837}
@@ -35908,6 +35908,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6492818043054902958}
   m_SourcePrefab: {fileID: 100100000, guid: c7138f7c32cb1bf4db9812afcb38da8e, type: 3}
+--- !u!1 &2528073555486570653 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7953606483559150473, guid: c7138f7c32cb1bf4db9812afcb38da8e, type: 3}
+  m_PrefabInstance: {fileID: 5581481068879186708}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3230254348475118135 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7034987942772324643, guid: c7138f7c32cb1bf4db9812afcb38da8e, type: 3}
@@ -35943,5 +35948,10 @@ Animator:
 --- !u!4 &5404282206789168383 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c7138f7c32cb1bf4db9812afcb38da8e, type: 3}
+  m_PrefabInstance: {fileID: 5581481068879186708}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8571632363847494913 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4287964840364058133, guid: c7138f7c32cb1bf4db9812afcb38da8e, type: 3}
   m_PrefabInstance: {fileID: 5581481068879186708}
   m_PrefabAsset: {fileID: 0}
