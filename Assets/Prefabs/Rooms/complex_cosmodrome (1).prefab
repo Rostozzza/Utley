@@ -35470,6 +35470,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6166423827410720581}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9067638837696998263}
     - targetCorrespondingSourceObject: {fileID: -4619342603592232540, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4515329455453238029}
@@ -35642,10 +35645,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status: 0
   resource: 2
-  leftDoor: {fileID: 2528073555486570653}
-  rightDoor: {fileID: 8571632363847494913}
-  hasLeftDoor: 0
-  hasRightDoor: 0
   roomStatsScreen: {fileID: 1172612712928513837}
   roomBuildScreen: {fileID: 3488088751966703108}
   asteriumCost: 0
@@ -35717,6 +35716,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 12.039938, y: 0.26166153, z: 7.100091}
   m_Center: {x: 3.041257, y: 3.7795968, z: 0.95808315}
+--- !u!114 &9067638837696998263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4540715411704343108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a39c08fe792a012428fdba3abfabce5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomType: 0
+  leftDoor: {fileID: 2528073555486570653}
+  rightDoor: {fileID: 8571632363847494913}
+  topTrapDoor: {fileID: 0}
+  bottomTrapDoor: {fileID: 0}
+  hasLeftDoor: 0
+  hasRightDoor: 0
+  hasTopTrapDoor: 0
+  hasBottomTrapDoor: 0
 --- !u!1001 &5581481068879186708
 PrefabInstance:
   m_ObjectHideFlags: 0

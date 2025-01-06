@@ -342,6 +342,7 @@ GameObject:
   - component: {fileID: 5805622377619484630}
   - component: {fileID: 2937154685749528394}
   - component: {fileID: -5687924578187250022}
+  - component: {fileID: 481740862944697946}
   m_Layer: 0
   m_Name: EnergoHoneyRoom
   m_TagString: room
@@ -404,10 +405,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status: 0
   resource: 0
-  leftDoor: {fileID: 8254692536980482652}
-  rightDoor: {fileID: 4292728100649235702}
-  hasLeftDoor: 0
-  hasRightDoor: 0
   roomStatsScreen: {fileID: 8848311927583229045}
   roomBuildScreen: {fileID: 1987562685197329006}
   asteriumCost: 20
@@ -603,6 +600,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &481740862944697946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328577350032810797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a39c08fe792a012428fdba3abfabce5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomType: 0
+  leftDoor: {fileID: 8254692536980482652}
+  rightDoor: {fileID: 4292728100649235702}
+  topTrapDoor: {fileID: 0}
+  bottomTrapDoor: {fileID: 0}
+  hasLeftDoor: 0
+  hasRightDoor: 0
+  hasTopTrapDoor: 0
+  hasBottomTrapDoor: 0
 --- !u!1 &496913081211017644
 GameObject:
   m_ObjectHideFlags: 0

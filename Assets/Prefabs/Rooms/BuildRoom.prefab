@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 1550860505669509525}
   - component: {fileID: 1469887729993612399}
   - component: {fileID: 7339609668221275391}
+  - component: {fileID: -7644280943555505570}
   m_Layer: 0
   m_Name: BuildRoom
   m_TagString: room
@@ -284,10 +285,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status: 0
   resource: 4
-  leftDoor: {fileID: 1720180808355283602}
-  rightDoor: {fileID: 1678311434302064787}
-  hasLeftDoor: 0
-  hasRightDoor: 0
   roomStatsScreen: {fileID: 1979506383352209399}
   roomBuildScreen: {fileID: 9019441687023794043}
   asteriumCost: 35
@@ -417,6 +414,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-7644280943555505570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499206874984719121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a39c08fe792a012428fdba3abfabce5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomType: 0
+  leftDoor: {fileID: 1720180808355283602}
+  rightDoor: {fileID: 1678311434302064787}
+  topTrapDoor: {fileID: 0}
+  bottomTrapDoor: {fileID: 0}
+  hasLeftDoor: 0
+  hasRightDoor: 0
+  hasTopTrapDoor: 0
+  hasBottomTrapDoor: 0
 --- !u!1 &1063710117667887597
 GameObject:
   m_ObjectHideFlags: 0

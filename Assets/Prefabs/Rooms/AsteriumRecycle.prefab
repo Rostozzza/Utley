@@ -28541,6 +28541,7 @@ GameObject:
   - component: {fileID: 2212405224928843374}
   - component: {fileID: 6881682886034302060}
   - component: {fileID: 851107004578839833}
+  - component: {fileID: 4284348490504680543}
   m_Layer: 0
   m_Name: AsteriumRecycle
   m_TagString: room
@@ -28640,10 +28641,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status: 0
   resource: 1
-  leftDoor: {fileID: 7697326446249576725}
-  rightDoor: {fileID: 6222399685666512922}
-  hasLeftDoor: 0
-  hasRightDoor: 0
   roomStatsScreen: {fileID: 8922297901173540683}
   roomBuildScreen: {fileID: 1827167266271620046}
   asteriumCost: 30
@@ -28789,6 +28786,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4284348490504680543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7578359609187239277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a39c08fe792a012428fdba3abfabce5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomType: 0
+  leftDoor: {fileID: 7697326446249576725}
+  rightDoor: {fileID: 6222399685666512922}
+  topTrapDoor: {fileID: 0}
+  bottomTrapDoor: {fileID: 0}
+  hasLeftDoor: 0
+  hasRightDoor: 0
+  hasTopTrapDoor: 0
+  hasBottomTrapDoor: 0
 --- !u!1 &7620161143268910046
 GameObject:
   m_ObjectHideFlags: 0
