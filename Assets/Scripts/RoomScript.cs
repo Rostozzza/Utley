@@ -13,10 +13,6 @@ public class RoomScript : MonoBehaviour
 {
 	[SerializeField] public Status status;
 	[SerializeField] public Resources resource;
-	[SerializeField] public GameObject leftDoor;
-	[SerializeField] public GameObject rightDoor;
-	[SerializeField] public bool hasLeftDoor;
-	[SerializeField] public bool hasRightDoor;
 	[SerializeField] private GameObject roomStatsScreen;
 	[SerializeField] private GameObject roomBuildScreen;
 	public Room roomModel;
@@ -100,7 +96,6 @@ public class RoomScript : MonoBehaviour
 		defaultLampColor = lamps[0].GetComponent<Renderer>().material.color;
 		baseOfRoom = transform.Find("base").gameObject;
 		defaultBaseColor = baseOfRoom.GetComponent<Renderer>().material.color;
-		CheckAndHideDoors(true);
 		foreach (var button in GetComponentsInChildren<Button>())
 		{
 			button.gameObject.SetActive(GameManager.Instance.mode == GameManager.Mode.Build);
@@ -775,68 +770,6 @@ public class RoomScript : MonoBehaviour
 	{
 		this.status = status;
 		statusPanel.UpdateStatus(status);
-	}
-
-	public void CheckAndHideDoors(bool checkNeighbours)
-	{
-		NearRooms nearRooms = CheckNearRooms(checkNeighbours);
-		SetDoorsHide(nearRooms.leftRoom, nearRooms.rightRoom);
-		//Debug.Log(name + " ДВЕРИ: " + nearRooms.leftRoom + " " + nearRooms.rightRoom);
-	}
-
-	public class NearRooms
-	{
-		public  bool leftRoom { get; set; }
-		public  bool rightRoom { get; set; }
-		public  bool topRoom { get; set; }
-		public  bool bottomRoom { get; set; }
-		public NearRooms() { leftRoom = false; rightRoom = false; topRoom = false; bottomRoom = false; }
-		public NearRooms(bool leftRoom, bool rightRoom, bool topRoom, bool bottomRoom)
-		{
-			this.leftRoom = leftRoom;
-			this.rightRoom = rightRoom;
-			this.topRoom = topRoom;
-			this.bottomRoom = bottomRoom;
-		}
-		public NearRooms(bool leftRoom, bool rightRoom) { this.leftRoom = leftRoom; this.rightRoom = rightRoom; topRoom = false; bottomRoom = false; }
-	}
-
-	public NearRooms CheckNearRooms(bool checkNeighbours)
-	{
-		bool HasRoomAt(Vector3 dir)
-		{
-			List<Transform> hits;
-			hits = Physics.RaycastAll(transform.position, dir, 8f).ToList().ConvertAll(x => x.transform);
-			foreach (Transform probablyRoom in hits)
-			{
-				if (probablyRoom.TryGetComponent(out RoomScript roomScript))
-				{
-					if (checkNeighbours) roomScript.CheckAndHideDoors(false);
-					return false;
-				}
-				else if (probablyRoom.TryGetComponent(out BuildRoomScript elevatorScript))
-				{
-					return false;
-				}
-			}
-			return true;
-		}
-
-		NearRooms nearRooms = new
-			(
-			HasRoomAt(Vector3.left),
-			HasRoomAt(Vector3.right)
-			);
-
-		return nearRooms;
-	}
-
-	public void SetDoorsHide(bool LDoor, bool RDoor)
-	{
-		hasLeftDoor = LDoor;
-		hasRightDoor = RDoor;
-		leftDoor.SetActive(LDoor);
-		rightDoor.SetActive(RDoor);
 	}
 
 	public enum Resources
