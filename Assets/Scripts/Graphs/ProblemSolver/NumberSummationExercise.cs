@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class NumberSummationExercise : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class NumberSummationExercise : MonoBehaviour
 	[SerializeField] private int rightAnswer;
 	[SerializeField] public bool answerTrigger;
 	[SerializeField] private Transform pointsParent;
+	[HideInInspector] public bool isTaskActive = false;
 	[Header("Task Generator")]
 	[SerializeField] [Range(1, 50)] private int difficulty;
 	[SerializeField] private GameObject weightPrefab;
@@ -75,6 +77,15 @@ public class NumberSummationExercise : MonoBehaviour
 		{
 			Debug.Log("ОТВЕТ НЕВЕРНЫЙ");
 		}
+		ClearGraph();
+		isTaskActive = false;
+	}
+
+	public void ClearGraph()
+	{
+		pointsParent.GetComponentsInChildren<OgePointLogic>(true).ToList().ForEach(p => p.SetColor(Color.white));
+		pointsParent.GetComponentsInChildren<LineRenderer>(true).ToList().ForEach(line => Destroy(line.gameObject,1f));
+		pointsParent.GetComponentsInChildren<TextMeshProUGUI>(true).ToList().Where(text => !text.transform.parent.GetComponent<RectMask2D>()).ToList().ForEach(weight => Destroy(weight.gameObject, 1f));
 	}
 
 	public void GiveAnswer(GameObject answerHolder)

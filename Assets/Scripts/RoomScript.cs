@@ -45,7 +45,7 @@ public class RoomScript : MonoBehaviour
 	public bool isEnpowered = false;
 	protected RoomStatusController statusPanel;
 	public string workStr;
-	[SerializeField] private GameObject assignmentButton;
+	[SerializeField] protected GameObject assignmentButton;
 	Coroutine blinks = null;
 	[Header("Audio Settings")]
 	[SerializeField] protected AudioSource audioSource;
@@ -96,7 +96,7 @@ public class RoomScript : MonoBehaviour
 		defaultLampColor = lamps[0].GetComponent<Renderer>().material.color;
 		baseOfRoom = transform.Find("base").gameObject;
 		defaultBaseColor = baseOfRoom.GetComponent<Renderer>().material.color;
-		foreach (var button in GetComponentsInChildren<Button>())
+		foreach (var button in GetComponentsInChildren<Button>().Where(x => !x.CompareTag("dont_hide_button")))
 		{
 			button.gameObject.SetActive(GameManager.Instance.mode == GameManager.Mode.Build);
 		}
@@ -162,7 +162,7 @@ public class RoomScript : MonoBehaviour
 		GameManager.Instance.HideAllAssignButtons();
 	}
 
-	public void ShowButton()
+	public virtual void ShowButton()
 	{
 		if (isEnpowered && status == Status.Free && durability > 0 && resource != Resources.Asteriy)
 		{
@@ -170,7 +170,7 @@ public class RoomScript : MonoBehaviour
 		}
 	}
 
-	public void HideButton()
+	public virtual void HideButton()
 	{
 		if (resource != Resources.Asteriy)
 		{

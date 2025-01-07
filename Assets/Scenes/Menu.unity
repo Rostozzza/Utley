@@ -20416,6 +20416,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1818146191}
+  - {fileID: 165816597}
   - {fileID: 1101681938}
   - {fileID: 187023827}
   - {fileID: 825269404}
@@ -20426,7 +20427,6 @@ RectTransform:
   - {fileID: 744902781}
   - {fileID: 2083813794}
   - {fileID: 1186147400}
-  - {fileID: 165816597}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -27548,7 +27548,8 @@ MonoBehaviour:
   rightAnswer: 0
   answerTrigger: 0
   pointsParent: {fileID: 1986204602}
-  difficulty: 18
+  isTaskActive: 0
+  difficulty: 8
   weightPrefab: {fileID: 9143395552911299677, guid: 7b197dbbd8fb7ab41a7059c985ae0a24, type: 3}
   points: []
 --- !u!1 &1741563040

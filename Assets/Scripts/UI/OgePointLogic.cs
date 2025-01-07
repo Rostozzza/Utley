@@ -1,9 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using System.Collections;
-using System;
 
 public class OgePointLogic : MonoBehaviour
 {

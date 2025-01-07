@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Text;
 using UnityEngine;
-using System.Security.Cryptography;
-using System.Net;
 using System.Collections;
 using UnityEngine.Networking;
 

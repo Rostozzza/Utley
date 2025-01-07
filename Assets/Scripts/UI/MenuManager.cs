@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -71,7 +70,7 @@ public class MenuManager : MonoBehaviour
 	private bool canContinueAfter2Cutscene = false;
 	private Coroutine skipChecker;
 	public bool isPlayerLoadable = false;
-	
+
 
 	public void SetMasterVolume()
 	{
@@ -203,10 +202,7 @@ public class MenuManager : MonoBehaviour
 	public void Start()
 	{
 		videoPlayer.loopPointReached += OnVideoEnd;
-		SceneManager.activeSceneChanged += (Scene oldScene, Scene newScene) =>
-		{
-			GetComponent<Canvas>().worldCamera = Camera.main;
-		};
+
 		skipChecker = StartCoroutine(SkipChecker());
 		if (PlayerPrefs.GetString("currentPlayer") != "")
 		{
@@ -216,6 +212,17 @@ public class MenuManager : MonoBehaviour
 			mainMenuScreen.SetActive(false);
 		}
 		tabletAnimator = ShopManager.Instance.animator;
+		SceneManager.activeSceneChanged += (Scene oldScene, Scene newScene) =>
+		{
+			GetComponent<Canvas>().worldCamera = Camera.main;
+			if (numberSummation.isTaskActive)
+			{
+				Time.timeScale = 1f;
+				numberSummation.ClearGraph();
+				numberSummation.isTaskActive = false;
+				tabletAnimator.SetTrigger("CloseShop");
+			}
+		};
 	}
 
 	public void Pause()
@@ -226,6 +233,7 @@ public class MenuManager : MonoBehaviour
 		}
 
 		pauseScreen.SetActive(true);
+		SetPipesScreen.SetActive(!numberSummation.isTaskActive);
 		Time.timeScale = 0f;
 		mixer.SetFloat("Lowpass", 500f);
 	}
@@ -236,6 +244,7 @@ public class MenuManager : MonoBehaviour
 		{
 			return;
 		}
+		SetPipesScreen.SetActive(numberSummation.isTaskActive);
 		pauseScreen.SetActive(false);
 		Time.timeScale = 1f;
 		mixer.SetFloat("Lowpass", 22000f);
@@ -506,7 +515,7 @@ public class MenuManager : MonoBehaviour
 
 	public void CallProblemSolver(ProblemType type)
 	{
-		
+
 		problemSolverScreen.SetActive(true);
 		shopScreen.SetActive(false);
 		switch (type)
@@ -521,6 +530,7 @@ public class MenuManager : MonoBehaviour
 
 	private IEnumerator WaitForNumberSummationEnd()
 	{
+		numberSummation.isTaskActive = true;
 		yield return new WaitForSeconds(1.5f);
 		Time.timeScale = 0;
 		yield return numberSummation.AnswerWaiter();

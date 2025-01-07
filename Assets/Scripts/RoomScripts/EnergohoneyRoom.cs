@@ -11,7 +11,23 @@ public class EnergohoneyRoom : RoomScript
 		ShowSetPipesButtonScreen();
     }
 
-    protected override IEnumerator WorkStatus()
+	public override void ShowButton()
+	{
+		if (isEnpowered && status == Status.Free && durability > 0 && !setPipesButtonScreen.active)
+		{
+			assignmentButton.SetActive(true);
+		}
+	}
+
+	public override void HideButton()
+	{
+		if (resource != Resources.Asteriy )
+		{
+			assignmentButton.SetActive(false);
+		}
+	}
+
+	protected override IEnumerator WorkStatus()
 	{
 		float timer;
 		status = Status.Busy;

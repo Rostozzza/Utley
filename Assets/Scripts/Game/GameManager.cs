@@ -9,7 +9,6 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using System;
 using Random = UnityEngine.Random;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -317,7 +316,7 @@ public class GameManager : MonoBehaviour
 		selectedRoom = null;
 		foreach (GameObject room in allRooms)
 		{
-			foreach (var button in room.GetComponentsInChildren<Button>(true).Where(x => !x.CompareTag("assignment")).ToList())
+			foreach (var button in room.GetComponentsInChildren<Button>(true).Where(x => !x.CompareTag("assignment") && !x.CompareTag("dont_hide_button")).ToList())
 			{
 				button.gameObject.SetActive(mode == Mode.Build);
 			}
@@ -1169,8 +1168,8 @@ public class GameManager : MonoBehaviour
 
 	public void HideAllAssignButtons()
 	{
-		allRooms.Where(x => x.GetComponent<RoomScript>()).ToList();//.ForEach(y => y.GetComponent<RoomScript>().HideButton());
-		foreach (var room in allRooms)
+		//.ForEach(y => y.GetComponent<RoomScript>().HideButton());
+		foreach (var room in allRooms.Where(x => x.GetComponent<RoomScript>()).ToList())
 		{
 			if (!room.CompareTag("dont_hide_button"))
 			{
