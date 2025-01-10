@@ -25,11 +25,11 @@ public class ShopItem : MonoBehaviour
 		}
 		if (requestedAmount.text.Length > 0 && int.Parse(requestedAmount.text) <= maxQuantity)
 		{
-			quantityField.text = $"{quantity - int.Parse(requestedAmount.text)}/{maxQuantity}";
+			quantityField.text = $"{Mathf.Clamp(quantity - int.Parse(requestedAmount.text),0,99999999)}/{maxQuantity}";
 		}
 		else
 		{
-			quantityField.text = $"{quantity}/{maxQuantity}";
+			quantityField.text = $"{Mathf.Clamp(quantity, 0, 9999)}/{maxQuantity}";
 		}
 		if (quantity == 0 || (requestedAmount.text.Length > 0 && int.Parse(requestedAmount.text) >= quantity))
 		{

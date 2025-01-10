@@ -404,20 +404,18 @@ public class GameManager : MonoBehaviour
 			buildingLoading.SetActive(true);
 		}
 		SelectAndBuildAsync(building);
-		Debug.Log("NoT DEAD");
 	}
 
 	public async Task SelectAndBuildAsync(GameObject building)
 	{
 		var currentAsterium = await GetAsteriy();
-		Debug.Log("NoT DEAD");
 		queuedBuildPositon.GetComponent<Button>().interactable = false;
 		if (!building.CompareTag("elevator"))
 		{
 			RoomScript roomScript = building.GetComponent<RoomScript>();
 			var currentHoney = await GetHoney();
 			var currentAstroluminite = await GetAstroluminite();
-			if (currentAsterium < roomScript.asteriumCost && currentHoney < roomScript.honeyCost && currentAstroluminite < roomScript.astroluminiteCost)
+			if (currentAsterium < roomScript.asteriumCost || currentHoney < roomScript.honeyCost || currentAstroluminite < roomScript.astroluminiteCost)
 			{
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
