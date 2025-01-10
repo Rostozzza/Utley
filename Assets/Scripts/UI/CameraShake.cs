@@ -33,11 +33,11 @@ public class CameraShake : MonoBehaviour
 		while (timer > 0)
 		{
 			timer -= Time.deltaTime;
-			transform.position = transform.position + (Vector3)Random.insideUnitCircle * force;
-			//transform.position = startPos + Random.insideUnitSphere * force;
+			//transform.position = transform.position + (Vector3)Random.insideUnitCircle * force;
+			transform.position = startPos + Random.insideUnitSphere * force;
 			yield return null;
 		}
-		//transform.position = startPos;
+		transform.position = startPos;
 	}
 	private IEnumerator AbberationDrain()
 	{
