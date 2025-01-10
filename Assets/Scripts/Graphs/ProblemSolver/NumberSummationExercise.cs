@@ -77,6 +77,7 @@ public class NumberSummationExercise : MonoBehaviour
 		{
 			Debug.Log("ОТВЕТ НЕВЕРНЫЙ");
 		}
+		GameManager.Instance.SetIsGraphUsing(false);
 		ClearGraph();
 		isTaskActive = false;
 	}
