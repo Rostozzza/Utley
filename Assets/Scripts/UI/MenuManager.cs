@@ -39,7 +39,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] public GameObject menuBG;
 	[SerializeField] public GameObject problemSolverScreen;
 	[SerializeField] public GameObject SetPipesScreen;
-	[SerializeField] private GameObject shopScreen;
+	[SerializeField] public GameObject shopScreen;
 	//[SerializeField] private List<TextMeshProUGUI> scores;
 	[Header("Inputs")]
 	[SerializeField] private TMP_InputField registrationUsernameField;

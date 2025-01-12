@@ -1643,6 +1643,7 @@ public class GameManager : MonoBehaviour
 
 	public void CallShopFromGameManager()
 	{
+		MenuManager.Instance.shopScreen.SetActive(true);
 		ShopManager.Instance.OpenShop();
 	}
 
