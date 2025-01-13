@@ -531,9 +531,10 @@ public class MenuManager : MonoBehaviour
 	private IEnumerator WaitForNumberSummationEnd()
 	{
 		numberSummation.isTaskActive = true;
-		yield return new WaitForSeconds(1.5f);
-		Time.timeScale = 0;
 		yield return numberSummation.AnswerWaiter();
+		yield return new WaitForSeconds(1f);
+		Time.timeScale = 0;
+		
 		SetPipesScreen.SetActive(false);
 		problemSolverScreen.SetActive(false);
 		tabletAnimator.SetTrigger("CloseShop");
