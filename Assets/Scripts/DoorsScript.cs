@@ -13,6 +13,17 @@ public class DoorsScript : MonoBehaviour
 	[SerializeField] public bool hasRightDoor;
     [SerializeField] public bool hasTopTrapDoor;
     [SerializeField] public bool hasBottomTrapDoor;
+	
+	[SerializeField] public bool useCustomSettings;
+	[Header("Custom Settings")]
+	[SerializeField] private float CenterOffsetX;
+	[SerializeField] private float CenterOffsetY;
+	[SerializeField] private float HorizontalRange;
+	[SerializeField] private float VerticalRange;
+	[SerializeField] private ForcedSetting ForceLeftDoor;
+	[SerializeField] private ForcedSetting ForceRightDoor;
+	[SerializeField] private ForcedSetting ForceTopDoor;
+	[SerializeField] private ForcedSetting ForceBottomDoor;
 
     void Start()
     {
@@ -54,42 +65,56 @@ public class DoorsScript : MonoBehaviour
 
 	public NearRooms CheckNearRooms(bool checkNeighbours)
 	{
-		bool HasRoomAt(Vector3 dir)
+		bool HasRoomAt(Vector3 dir, float len)
 		{
 			List<Transform> hits;
-			hits = Physics.RaycastAll(transform.position, dir, (dir.y == 0) ? 8f : 4f).ToList().ConvertAll(x => x.transform);
+			hits = Physics.RaycastAll(useCustomSettings ? transform.position + new Vector3(CenterOffsetX, CenterOffsetY) : transform.position, dir, len).ToList().ConvertAll(x => x.transform);
 			foreach (Transform probablyRoom in hits)
 			{
-				if (probablyRoom.TryGetComponent(out DoorsScript doorsScript))
+				if (probablyRoom.TryGetComponent(out DoorsScript doorsScript) && probablyRoom != gameObject)
 				{
 					if (checkNeighbours) doorsScript.CheckAndHideDoors(false);
 					return false;
 				}
-				else if (probablyRoom.TryGetComponent(out BuildRoomScript elevatorScript))
-				{
-					return false;
-				}
+				//else if (probablyRoom.TryGetComponent(out BuildRoomScript elevatorScript))
+				//{
+				//	return false;
+				//}
 			}
 			return true;
 		}
 
-		NearRooms nearRooms = new
-        (
-			HasRoomAt(Vector3.left),
-			HasRoomAt(Vector3.right),
-            HasRoomAt(Vector3.up),
-            HasRoomAt(Vector3.down)
-        );
-
-		return nearRooms;
+		if (useCustomSettings)
+		{
+			NearRooms nearRooms = new
+        	(
+				HasRoomAt(Vector3.left, HorizontalRange / 2f),
+				HasRoomAt(Vector3.right, HorizontalRange / 2f),
+        	    HasRoomAt(Vector3.up, VerticalRange / 2f),
+        	    HasRoomAt(Vector3.down, VerticalRange / 2f)
+        	);
+			Debug.Log(nearRooms.leftRoom + " " + nearRooms.rightRoom);
+			return nearRooms;
+		}
+		else
+		{
+			NearRooms nearRooms = new
+        	(
+				HasRoomAt(Vector3.left, 8f),
+				HasRoomAt(Vector3.right, 8f),
+        	    HasRoomAt(Vector3.up, 4f),
+        	    HasRoomAt(Vector3.down, 4f)
+        	);
+			return nearRooms;
+		}
 	}
 
 	public void SetDoorsHide(bool LDoor, bool RDoor)
 	{
 		hasLeftDoor = LDoor;
 		hasRightDoor = RDoor;
-		leftDoor.SetActive(LDoor);
-		rightDoor.SetActive(RDoor);
+		leftDoor.SetActive(ForcedDoor(ForceLeftDoor, LDoor));
+		rightDoor.SetActive(ForcedDoor(ForceRightDoor, RDoor));
 	}
 
     public void SetDoorsHide(NearRooms nearRooms)
@@ -98,15 +123,37 @@ public class DoorsScript : MonoBehaviour
 		hasRightDoor = nearRooms.rightRoom;
 		hasTopTrapDoor = nearRooms.topRoom;
 		hasBottomTrapDoor = nearRooms.bottomRoom;
-		leftDoor.SetActive(nearRooms.leftRoom);
-		rightDoor.SetActive(nearRooms.rightRoom);
-        topTrapDoor.SetActive(nearRooms.topRoom);
-        bottomTrapDoor.SetActive(nearRooms.bottomRoom);
+		leftDoor.SetActive(ForcedDoor(ForceLeftDoor, nearRooms.leftRoom));
+		rightDoor.SetActive(ForcedDoor(ForceRightDoor, nearRooms.rightRoom));
+        topTrapDoor.SetActive(ForcedDoor(ForceTopDoor, nearRooms.topRoom));
+        bottomTrapDoor.SetActive(ForcedDoor(ForceBottomDoor, nearRooms.bottomRoom));
     }
+
+	private bool ForcedDoor(ForcedSetting forcedSetting, bool origin)
+	{
+		switch (forcedSetting)
+		{
+			case ForcedSetting.None:
+				return origin;
+			case ForcedSetting.Open:
+				return false;
+			case ForcedSetting.Close:
+				return true;
+			default:
+				return origin;
+		}
+	}
 
     public enum RoomType
     {
         Room,
         Elevator
     }
+
+	public enum ForcedSetting
+	{
+		None,
+		Open,
+		Close
+	}
 }
