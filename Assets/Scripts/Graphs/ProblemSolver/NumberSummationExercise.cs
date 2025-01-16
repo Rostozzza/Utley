@@ -20,6 +20,7 @@ public class NumberSummationExercise : MonoBehaviour
 	[SerializeField] [Range(1, 50)] private int difficulty;
 	[SerializeField] private GameObject weightPrefab;
 	[SerializeField] private List<OgePointLogic> points;
+	public LineRenderer lineRenderer;
 
 	private int GenerateTask(int steps = 3)
 	{

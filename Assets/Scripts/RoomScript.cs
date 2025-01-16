@@ -733,7 +733,7 @@ public class RoomScript : MonoBehaviour
 				resources_changed = new Dictionary<string, float> { { "asterium", -10 } }
 			});
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
-			int timeToRepair = (int)((1 - durability) * 100 / 2);
+			int timeToRepair = (int)((1 - durability) * 100 / 3);
 			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
 			StartCoroutine(Repair(timeToRepair, fixedBuilderRoom));
 		}

@@ -532,7 +532,7 @@ public class MenuManager : MonoBehaviour
 	{
 		numberSummation.isTaskActive = true;
 		yield return numberSummation.AnswerWaiter();
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(1.5f);
 		Time.timeScale = 0;
 		
 		SetPipesScreen.SetActive(false);

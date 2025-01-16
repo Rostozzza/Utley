@@ -1451,6 +1451,7 @@ public class GameManager : MonoBehaviour
 			shuffleRooms.ForEach(delegate (GameObject room)
 			{
 				room.GetComponent<RoomScript>().ChangeDurability(-0.01f);
+				Debug.Log(room.name);
 			});
 		}
 	}
@@ -1583,7 +1584,7 @@ public class GameManager : MonoBehaviour
 			}
 			shuffleRooms.ForEach(delegate (GameObject room)
 			{
-				float damage = (0.35f / 5f + 0.04f * cycleNumber - 0.02f * room.GetComponent<RoomScript>().depthLevel) * room.GetComponent<RoomScript>().durability;
+				float damage = (0.35f / 5f + 0.02f * cycleNumber - 0.02f * room.GetComponent<RoomScript>().depthLevel);
 				Debug.Log(room.name + " задамажен фазой на " + damage);
 				room.GetComponent<RoomScript>().ChangeDurability(-damage);
 			});
