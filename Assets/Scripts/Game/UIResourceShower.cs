@@ -24,13 +24,20 @@ public class UIResourceShower : MonoBehaviour
     [SerializeField] private GameObject protypePanel;
     [SerializeField] private GameObject astroluminitePanel;
     [SerializeField] private GameObject ursowaksPanel;
+    [SerializeField] private GameObject seasonPanel;
+    [SerializeField] private TextMeshProUGUI seasonPanelText;
+    [SerializeField] private GameObject seasonDebuffPanel;
+    [SerializeField] private TextMeshProUGUI seasonDebuffPanelText;
+    [SerializeField] private GameObject timeLeftPanel;
 
     [Header("Bars with info")]
     [SerializeField] private Image icon;
+    [SerializeField] private Image iconDebuff;
     [SerializeField] private TextMeshProUGUI seasonHeader;
     [SerializeField] private TextMeshProUGUI seasonTimeLeft;
     [SerializeField] private TextMeshProUGUI seasonDiscription;
     [SerializeField] private List<Sprite> icons;
+    [SerializeField] private List<Sprite> iconsDebuff;
     [SerializeField] private TextMeshProUGUI timeLeft;
 
     private void Start()
@@ -62,7 +69,8 @@ public class UIResourceShower : MonoBehaviour
         icon.sprite = icons[(int)GameManager.Instance.season];
         seasonHeader.text = SeasonToHeaderText(GameManager.Instance.season);
         //seasonTimeLeft.text = "Ещё " + Convert.ToString((int)GameManager.Instance.GetSeasonTimeLeft()) + " с.";
-        seasonDiscription.text = SeasonToDiscriptionText(GameManager.Instance.season);
+        //seasonDiscription.text = SeasonToDiscriptionText(GameManager.Instance.season);
+        iconDebuff.sprite = iconsDebuff[(int)GameManager.Instance.season];
     }
 
     private IEnumerator TemperatureChanger()
@@ -99,7 +107,8 @@ public class UIResourceShower : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             seasonTimeLeft.text = "Ещё " + Convert.ToString((int)GameManager.Instance.GetSeasonTimeLeft()) + " с.";
-            timeLeft.text = "Время до конца\nсмены: " + Convert.ToString((int)GameManager.Instance.GetTimeLeft()) + " с.";
+            //timeLeft.text = "Время до конца\nсмены: " + Convert.ToString((int)GameManager.Instance.GetTimeLeft()) + " с.";
+            timeLeft.text = Convert.ToString((int)GameManager.Instance.GetTimeLeft()) + " с.";
             yield return null;
         }
     }
@@ -113,7 +122,7 @@ public class UIResourceShower : MonoBehaviour
             case GameManager.Season.Storm:
                 return $"Снижение выработки энергомеда на {15 + 3 * GameManager.Instance.cycleNumber}%";
             case GameManager.Season.Freeze:
-                return $"Увеличение потребления энергомеда на {10 + 5 * GameManager.Instance.cycleNumber}%\nУвеличение скорости падения температуры на 25%";
+                return $"Увеличение потребления энергомеда\nна {10 + 5 * GameManager.Instance.cycleNumber}%\nУвеличение скорости падения температуры\nна 25%";
             case GameManager.Season.Tide:
                 return "Невозможность отправить космический корабль\nБыстрая потеря прочности у комплексов";
             default:
@@ -151,7 +160,7 @@ public class UIResourceShower : MonoBehaviour
                     honeyToEat *= 1f + 0.1f + 0.05f * GameManager.Instance.cycleNumber;
                 }
                 honeyReducePanel.SetActive(true);
-                honeyReduceDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)honeyToEat) + "  в минуту";
+                honeyReduceDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)honeyToEat) + " в минуту";
                 break;
 
             case PointerHint.HintType.Temperature:
@@ -172,6 +181,17 @@ public class UIResourceShower : MonoBehaviour
                 break;
             case PointerHint.HintType.Astroluminite:
                 astroluminitePanel.SetActive(true);
+                break;
+            case PointerHint.HintType.Season:
+                seasonPanelText.text = SeasonToText(GameManager.Instance.season);
+                seasonPanel.SetActive(true);
+                break;
+            case PointerHint.HintType.SeasonDebuff:
+                seasonDebuffPanelText.text = SeasonToDiscriptionText(GameManager.Instance.season);
+                seasonDebuffPanel.SetActive(true);
+                break;
+            case PointerHint.HintType.TimeLeft:
+                timeLeftPanel.SetActive(true);
                 break;
         }
     }
@@ -201,6 +221,32 @@ public class UIResourceShower : MonoBehaviour
             case PointerHint.HintType.Astroluminite:
                 astroluminitePanel.SetActive(false);
                 break;
+            case PointerHint.HintType.Season:
+                seasonPanel.SetActive(false);
+                break;
+            case PointerHint.HintType.SeasonDebuff:
+                seasonDebuffPanel.SetActive(false);
+                break;
+            case PointerHint.HintType.TimeLeft:
+                timeLeftPanel.SetActive(false);
+                break;
+        }
+    }
+
+    private string SeasonToText(GameManager.Season season)
+    {
+        switch (season)
+        {
+            case GameManager.Season.Calm:
+                return "Спокойная фаза";
+            case GameManager.Season.Storm:
+                return "Буревая фаза";
+            case GameManager.Season.Freeze:
+                return "Морозная фаза";
+            case GameManager.Season.Tide:
+                return "Приливная фаза";
+            default:
+                return "Неизвестная фаза";
         }
     }
 }
