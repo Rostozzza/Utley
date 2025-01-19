@@ -101,14 +101,14 @@ public class RoomScript : MonoBehaviour
 	{
 		isEnpowered = true;
 		ChangeDurability(0);
-		Debug.Log($"Empowered roon {gameObject.name}");
+		//Debug.Log($"Empowered roon {gameObject.name}");
 	}
 
 	public virtual void Unpower()
 	{
 		isEnpowered = false;
 		ChangeDurability(0);
-		Debug.Log($"Empowered roon {gameObject.name}");
+		//Debug.Log($"Empowered roon {gameObject.name}");
 	}
 
 	protected virtual void Start()
@@ -607,7 +607,7 @@ public class RoomScript : MonoBehaviour
 			}
 			catch
 			{
-				Debug.Log("No status panel present at this moment!");
+				//Debug.Log("No status panel present at this moment!");
 			}
 			SetLampsOn(false);
 			if (blinks != null)
@@ -626,7 +626,7 @@ public class RoomScript : MonoBehaviour
 		}
 		catch (Exception e)
 		{
-			Debug.Log("No statusPanel present at this moment!");
+			//Debug.Log("No statusPanel present at this moment!");
 		}
 		if (!isEnpowered)
 		{

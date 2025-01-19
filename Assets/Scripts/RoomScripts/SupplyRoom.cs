@@ -40,7 +40,6 @@ public class SupplyRoom : RoomScript
 			{
 				continue;
 			}
-			Debug.Log(room.name);
 		}
 		foreach (var room in poweredRooms.Distinct().ToList())
 		{
@@ -48,7 +47,7 @@ public class SupplyRoom : RoomScript
 			{
 				continue;
 			}
-			Debug.Log($"Trying to empower {room.name}");
+			//Debug.Log($"Trying to empower {room.name}");
 			room.GetComponent<RoomScript>().Enpower();
 		}
 		try
