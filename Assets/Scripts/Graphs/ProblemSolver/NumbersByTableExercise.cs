@@ -66,8 +66,8 @@ public class NumbersByTableExercise : MonoBehaviour
 		gridLayout = new string[gridRange+1, gridRange+1];
 		for (int i = 0; i <= gridRange; i++)
 		{
-			gridLayout[0, i] = $"П{i + 1}";
-			gridLayout[i, 0] = $"П{i + 1}";
+			gridLayout[0, i] = $"пїЅ{i + 1}";
+			gridLayout[i, 0] = $"пїЅ{i + 1}";
 		}
 		for (int i = 1; i <= gridRange; i++)
 		{
@@ -82,13 +82,14 @@ public class NumbersByTableExercise : MonoBehaviour
 		{
 			if (rightAnswers[i] != int.Parse(allInputFields[i].text))
 			{
-				Debug.Log("Неверно");
+				Debug.Log("РќР•Р’Р•Р РќРћ");
 				rightAnswers = null;
 				allInputFields = null;
 				task.SetActive(false);
 				Destroy(task,0.1f);
 				tasksPresets.Remove(tasksPresets.First(x => x.task == task));
 				task = null;
+				MenuManager.Instance.connectFurnacesScreen.SetActive(false);
 				MenuManager.Instance.problemSolverScreen.SetActive(false);
 				MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
 				targetedRoom.SetWorkEfficiency(0.2f);
@@ -103,11 +104,12 @@ public class NumbersByTableExercise : MonoBehaviour
 		tasksPresets.Remove(tasksPresets.First(x => x.task == task));
 		task = null;
 		gridRange++;
+		MenuManager.Instance.connectFurnacesScreen.SetActive(false);
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
 		MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
 		targetedRoom.SetWorkEfficiency(1f);
 		GameManager.Instance.TryProcessingRawAsterium();
-		Debug.Log("Верно");
+		Debug.Log("Р’Р•Р РќРћ");
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 	}
 }
