@@ -41,22 +41,22 @@ public class RoomWorkUI : MonoBehaviour
 	{
 		animator.SetTrigger("Show");
 		correspondingUI = ui;
-		grid.cellSize.Set(grid.cellSize.x, ((0.7538002f - (0.7538002f / amountOfUnits)) / amountOfUnits) - (0.7538002f / amountOfUnits));
+		//grid.cellSize.Set(grid.cellSize.x, 0.7538002f - (0.7538002f / amountOfUnits));
 		float timeInterval = time / amountOfUnits;
 		int workResults = 0;
 		for (int i = 0; i < amountOfUnits; i++)
 		{
 			yield return new WaitForSeconds(timeInterval);
-			Instantiate(workUnitPrefab,grid.transform).GetComponent<Image>().sprite = workUnitSprite;
+			Instantiate(workUnitPrefab, grid.transform).GetComponent<Image>().sprite = workUnitSprite;
 			workResults++;
 			resultText.text = $"+{workResults}";
 		}
-		timeInterval = 3f/amountOfUnits;
+		timeInterval = 1f / amountOfUnits;
 		for (int i = 0; i < amountOfUnits; i++)
 		{
 			yield return new WaitForSeconds(timeInterval);
 			Destroy(grid.transform.GetChild(0).gameObject);
-			var resultInstance = Instantiate(workResultToScreenPrefab,GameManager.Instance.GetComponentInChildren<Canvas>().transform);
+			var resultInstance = Instantiate(workResultToScreenPrefab, GameManager.Instance.GetComponentInChildren<Canvas>().transform);
 
 			Vector2 ancoredPos;
 			RectTransformUtility.ScreenPointToLocalPointInRectangle(GameManager.Instance.GetComponentInChildren<Canvas>().GetComponent<RectTransform>(), (Vector2)Camera.main.WorldToScreenPoint(resultImage.transform.position), Camera.main, out ancoredPos);
