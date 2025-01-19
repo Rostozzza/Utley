@@ -66,7 +66,9 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] VideoClip secondCutscene;
 	[Header("Number Summation Problem")]
 	[SerializeField] private NumberSummationExercise numberSummation;
-	[SerializeField] private Animator tabletAnimator;
+	[Header("Number By Table Exercise")]
+	[SerializeField] private NumbersByTableExercise numbersByTable;
+	[SerializeField] public Animator tabletAnimator;
 	private bool canContinueAfter2Cutscene = false;
 	private Coroutine skipChecker;
 	public bool isPlayerLoadable = false;
@@ -513,27 +515,39 @@ public class MenuManager : MonoBehaviour
 		//SceneManager.LoadSceneAsync(1);
 	}
 
-	public void CallProblemSolver(ProblemType type)
+	public void CallProblemSolver(ProblemType type, RoomScript room)
 	{
 
-		problemSolverScreen.SetActive(true);
 		shopScreen.SetActive(false);
 		switch (type)
 		{
 			case ProblemType.SetPipes:
 				SetPipesScreen.SetActive(true);
+				StartCoroutine(WaitForNumberSummationEnd(room));
+				break;
+			case ProblemType.SetFurnaces:
+				numbersByTable.gameObject.SetActive(true);
+				StartCoroutine(WaitForFurnacesEnd(room));
 				break;
 		}
 		tabletAnimator.SetTrigger("OpenShop");
-		StartCoroutine(WaitForNumberSummationEnd());
+		
 	}
 
-	private IEnumerator WaitForNumberSummationEnd()
+	private IEnumerator WaitForFurnacesEnd(RoomScript room)
+	{
+		problemSolverScreen.SetActive(true);
+		numbersByTable.GenerateTask(room);
+		yield return new WaitForSeconds(1.5f);
+	}
+
+	private IEnumerator WaitForNumberSummationEnd(RoomScript room)
 	{
 		numberSummation.isTaskActive = true;
-		yield return numberSummation.AnswerWaiter();
+		problemSolverScreen.SetActive(true);
 		yield return new WaitForSeconds(1.5f);
-		Time.timeScale = 0;
+		yield return numberSummation.AnswerWaiter(room);
+		
 		
 		SetPipesScreen.SetActive(false);
 		problemSolverScreen.SetActive(false);
@@ -542,6 +556,7 @@ public class MenuManager : MonoBehaviour
 
 	public enum ProblemType
 	{
-		SetPipes
+		SetPipes,
+		SetFurnaces
 	}
 }

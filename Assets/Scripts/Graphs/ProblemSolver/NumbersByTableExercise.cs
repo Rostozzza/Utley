@@ -3,13 +3,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using Random = UnityEngine.Random;
 
 public class NumbersByTableExercise : MonoBehaviour
 {
 	[Header("Grid Settings")]
 	[SerializeField] private GridLayoutGroup grid;
 	[SerializeField] private GameObject gridCellPrefab;
-	[SerializeField][Range(3, 8)] private int gridRange;
+	[SerializeField][Range(0, 6)] private int gridRange;
 	[SerializeField][Range(10, 100)] private float gridScale;
 	[Header("Input Settings")]
 	[SerializeField] private GameObject inputPrefab;
@@ -20,7 +22,9 @@ public class NumbersByTableExercise : MonoBehaviour
 	[SerializeField] private string[,] gridLayout;
 	[SerializeField] private List<int> rightAnswers;
 	[SerializeField] private List<TaskPreset> tasksPresets;
+	private RoomScript targetedRoom;
 
+	[Serializable]
 	public struct TaskPreset
 	{
 		public List<int> answers;
@@ -28,14 +32,15 @@ public class NumbersByTableExercise : MonoBehaviour
 		public GameObject task;
 	}
 
-	public void GenerateTask()
+	public void GenerateTask(RoomScript room)
 	{
+		targetedRoom = room;
 		GenerateFromPreset();
 	}
 
 	public void GenerateFromPreset()
 	{
-		var preset = tasksPresets[Random.Range(0, tasksPresets.Count)];
+		var preset = tasksPresets[Random.Range(gridRange, Mathf.Clamp(gridRange+2,0,tasksPresets.Count))];
 		task = preset.task;
 		rightAnswers = preset.answers;
 		allInputFields = preset.fields;
@@ -65,23 +70,29 @@ public class NumbersByTableExercise : MonoBehaviour
 			if (rightAnswers[i] != int.Parse(allInputFields[i].text))
 			{
 				Debug.Log("Неверно");
-				task = null;
 				rightAnswers = null;
 				allInputFields = null;
 				task.SetActive(false);
 				Destroy(task,0.1f);
 				tasksPresets.Remove(tasksPresets.First(x => x.task == task));
 				task = null;
+				MenuManager.Instance.problemSolverScreen.SetActive(false);
+				MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
+				targetedRoom.SetWorkEfficiency(0.2f);
 				return;
 			}
 		}
-		task = null;
 		rightAnswers = null;
 		allInputFields = null;
 		task.SetActive(false);
 		Destroy(task, 0.1f);
 		tasksPresets.Remove(tasksPresets.First(x => x.task == task));
 		task = null;
+		gridRange++;
+		MenuManager.Instance.problemSolverScreen.SetActive(false);
+		MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
+		targetedRoom.SetWorkEfficiency(1f);
+		GameManager.Instance.TryProcessingRawAsterium();
 		Debug.Log("Верно");
 	}
 }

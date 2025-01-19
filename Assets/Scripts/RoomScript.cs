@@ -57,12 +57,46 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private FlyForType flyForType;
 	[SerializeField] private GameObject cosmodromeSelectScreen;
 	public bool isReadyForWork = false;
-
+	[SerializeField] private GameObject coneierScreen;
+	[Header("Work Settings")]
 	protected float SpeedByBearLevelCoef = 1.05f;
 	protected float SpeedByRoomLevelCoef = 0.75f;
 	protected float StandartInteractionTime = 18f;
 	protected float SpeedByUsingSuitableBearCoef = 1f;
+	protected float efficientyCoeficent = 1f;
+	[SerializeField] protected RoomWorkUI workUI;
+	[SerializeField] private GameObject efficiencyDownPanel;
+	[SerializeField] private TextMeshProUGUI efficiencyDownPercentageText;
+	public void SetWorkEfficiency(float newCoef)
+	{
+		var efficiencyAnim = efficiencyDownPanel.GetComponent<Animator>();
+		efficiencyDownPercentageText.text = $"-{(1 - newCoef) * 100}%";
+		if (efficientyCoeficent <= 1f && newCoef >= 1f)
+		{
+			efficiencyAnim.SetTrigger("HideCompletely");
+		}
+		if (efficientyCoeficent >= 1f && newCoef <= 1f)
+		{
+			efficiencyAnim.SetTrigger("ShowPanel");
+			StartCoroutine(WaitForWorkEfficiencyRetry(60));
+		}
+		efficientyCoeficent = newCoef;
+	}
 
+	private IEnumerator WaitForWorkEfficiencyRetry(int time)
+	{
+		float timeSpent = 0f;
+		coneierScreen.GetComponent<Button>().interactable = false;
+		while (timeSpent <= time)
+		{
+			timeSpent += Time.deltaTime;
+			coneierScreen.GetComponent<Button>().image.color = new Color(1, time / timeSpent, 0);
+			yield return null;
+		}
+		efficiencyDownPanel.GetComponent<Animator>().SetTrigger("HidePanel");
+		coneierScreen.GetComponent<Button>().interactable = true;
+		ShowSetPipesButtonScreen();
+	}
 	public virtual void Enpower()
 	{
 		isEnpowered = true;
@@ -79,6 +113,7 @@ public class RoomScript : MonoBehaviour
 
 	protected virtual void Start()
 	{
+		workUI = GetComponentInChildren<RoomWorkUI>(true);
 		audioSource = GetComponent<AudioSource>();
 		statusPanel = GameManager.Instance.roomStatusListController.CreateRoomStatus(this);
 		animator = GetComponentInChildren<Animator>();
@@ -432,6 +467,7 @@ public class RoomScript : MonoBehaviour
 		{
 			case Resources.Asteriy:
 				timer = StandartInteractionTime;
+				workUI.StartWork(timer, 20, GameManager.Instance.uiResourceShower.asteriyAmountText.transform);
 				while (timer > 0)
 				{
 					timeShow.text = SecondsToTimeToShow(timer);
@@ -770,6 +806,27 @@ public class RoomScript : MonoBehaviour
 	{
 		this.status = status;
 		statusPanel.UpdateStatus(status);
+	}
+
+	public virtual void ShowSetPipesButtonScreen()
+	{
+		coneierScreen.GetComponent<Button>().interactable = true;
+	}
+
+	public bool CheckIfSolved()
+	{
+		return !coneierScreen.GetComponent<Button>().interactable;
+	}
+
+	public virtual void HideSetPipesButtonScreen()
+	{
+		coneierScreen.GetComponent<Button>().interactable = false;
+	}
+
+	public virtual void SetPipes()
+	{
+		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetFurnaces,this);
+		HideSetPipesButtonScreen();
 	}
 
 	public enum Resources

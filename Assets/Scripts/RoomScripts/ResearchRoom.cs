@@ -7,6 +7,8 @@ public class ResearchRoom : RoomScript
 {
 	[SerializeField] private GameObject researchSelectScreen;
 	[SerializeField] private Type waitOption = Type.None;
+	[SerializeField] private Sprite ursowaksSprite;
+	[SerializeField] private Sprite prototypeSprite;
 	private float haveAstroluminte;
 	private int haveAsteriy;
 
@@ -126,6 +128,21 @@ public class ResearchRoom : RoomScript
 		if (fixedBear.GetComponent<UnitScript>().isBoosted)
 		{
 			timer *= 0.9f;
+		}
+		switch (waitOption)
+		{
+			case Type.Ursowaks:
+				workUI.SetResultImage(ursowaksSprite);
+				workUI.SetWorkUnitSprite(ursowaksSprite);
+				workUI.StartWork(timer,1,GameManager.Instance.uiResourceShower.ursowaksAmountText.transform);
+				break;
+			case Type.Prototype:
+				workUI.SetResultImage(prototypeSprite);
+				workUI.SetWorkUnitSprite(prototypeSprite);
+				workUI.StartWork(timer, 1, GameManager.Instance.uiResourceShower.prototypeAmountText.transform);
+				break;
+			default:
+				break;
 		}
 		while (timer > 0)
 		{

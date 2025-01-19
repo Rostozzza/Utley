@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class EnergohoneyRoom : RoomScript
 {
@@ -13,7 +14,7 @@ public class EnergohoneyRoom : RoomScript
 
 	public override void ShowButton()
 	{
-		if (isEnpowered && status == Status.Free && durability > 0 && !setPipesButtonScreen.active)
+		if (isEnpowered && status == Status.Free && durability > 0 && CheckIfSolved())
 		{
 			assignmentButton.SetActive(true);
 		}
@@ -54,6 +55,8 @@ public class EnergohoneyRoom : RoomScript
 		{
 			timer *= 0.9f;
 		}
+		int honeyToAdd = (GameManager.Instance.season != GameManager.Season.Storm) ? 10 : (int)(10 * (1 - 0.15f + 0.03f * GameManager.Instance.cycleNumber));
+		workUI.StartWork(timer,honeyToAdd,GameManager.Instance.uiResourceShower.energoHoneyAmountText.transform);
 		while (timer > 0)
 		{
 			timeShow.text = SecondsToTimeToShow(timer);
@@ -61,8 +64,7 @@ public class EnergohoneyRoom : RoomScript
 			yield return null;
 		}
 		timeShow.text = "";
-
-		int honeyToAdd = (GameManager.Instance.season != GameManager.Season.Storm) ? 10 : (int)(10 * (1 - 0.15f + 0.03f * GameManager.Instance.cycleNumber));
+		
 		GameManager.Instance.uiResourceShower.UpdateIndicators();
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
 		{
@@ -89,19 +91,9 @@ public class EnergohoneyRoom : RoomScript
 		});
 	}
 
-	public void ShowSetPipesButtonScreen()
+	public override void SetPipes()
 	{
-		setPipesButtonScreen.SetActive(true);
-	}
-
-	public void HideSetPipesButtonScreen()
-	{
-		setPipesButtonScreen.SetActive(false);
-	}
-
-	public void SetPipes()
-	{
-		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetPipes);
+		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetPipes,this);
 		HideSetPipesButtonScreen();
 	}
 }
