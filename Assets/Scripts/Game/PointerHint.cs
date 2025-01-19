@@ -24,9 +24,12 @@ public class PointerHint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         Temperature,
         Asterium,
         Bear,
-        DontScroll,
+        DontScroll, // xD it's not hint, it's says that if mouse point on it, then mouse scroll shouldn't work
         Ursowaks,
         Prototype,
-        Astroluminite
+        Astroluminite,
+        Season,
+        SeasonDebuff,
+        TimeLeft
     } 
 }
