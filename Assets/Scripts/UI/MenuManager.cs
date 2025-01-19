@@ -39,6 +39,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] public GameObject menuBG;
 	[SerializeField] public GameObject problemSolverScreen;
 	[SerializeField] public GameObject SetPipesScreen;
+	[SerializeField] public GameObject connectFurnacesScreen;
 	[SerializeField] public GameObject shopScreen;
 	//[SerializeField] private List<TextMeshProUGUI> scores;
 	[Header("Inputs")]
@@ -517,7 +518,6 @@ public class MenuManager : MonoBehaviour
 
 	public void CallProblemSolver(ProblemType type, RoomScript room)
 	{
-
 		shopScreen.SetActive(false);
 		switch (type)
 		{
@@ -530,6 +530,7 @@ public class MenuManager : MonoBehaviour
 				StartCoroutine(WaitForFurnacesEnd(room));
 				break;
 		}
+		GameManager.Instance.SetIsGraphUsing(true);
 		tabletAnimator.SetTrigger("OpenShop");
 		
 	}

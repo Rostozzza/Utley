@@ -1016,11 +1016,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -51.805
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 7.330002
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1899,11 +1899,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 40.195
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 99.33
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3005,11 +3005,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -97.805
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 53.33
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3888,15 +3888,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u0413\u043E\u0442\u043E\u0432\u043E!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 17e6a45a562aaaf46af6a98e4e580485, type: 2}
+  m_sharedMaterial: {fileID: 235508042702513954, guid: 17e6a45a562aaaf46af6a98e4e580485, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5965,8 +5965,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 150.7, y: 41}
-  m_SizeDelta: {x: 1.7663, y: 0.6708}
+  m_AnchoredPosition: {x: 108.9, y: 65.3}
+  m_SizeDelta: {x: 1.25, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &233754970
 MonoBehaviour:
@@ -6035,9 +6035,6 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelect:
     m_PersistentCalls:
-      m_Calls: []
-  m_OnDeselect:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1445191781}
         m_TargetAssemblyTypeName: OgePointLogic, Assembly-CSharp
@@ -6049,8 +6046,11 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
+  m_OnDeselect:
+    m_PersistentCalls:
+      m_Calls: []
   m_OnTextSelection:
     m_PersistentCalls:
       m_Calls: []
@@ -6276,8 +6276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
-  connectedPoints:
-  - {fileID: 1274759437}
+  connectedPoints: []
   sourcePoints: []
   line: {fileID: 6313832427241624432, guid: ebce59cc910259942a119e7065b1088b, type: 3}
 --- !u!114 &254813321
@@ -8385,11 +8384,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5.8050003
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 99.33
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8885,8 +8884,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 244, y: -170}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 249.76, y: -155.44}
+  m_SizeDelta: {x: 148.48, y: 59.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &320806835
 MonoBehaviour:
@@ -8944,6 +8943,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1445191781}
+        m_TargetAssemblyTypeName: OgePointLogic, Assembly-CSharp
+        m_MethodName: SetIsUsing
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &320806836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8964,8 +8975,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 42649406fb7bcf849b45cde68fc35e70, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11268,8 +11279,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 144.1, y: -33.7}
-  m_SizeDelta: {x: 1.7663, y: 0.6708}
+  m_AnchoredPosition: {x: 167.7, y: -19.9}
+  m_SizeDelta: {x: 1.25, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &397305807
 MonoBehaviour:
@@ -11338,9 +11349,6 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelect:
     m_PersistentCalls:
-      m_Calls: []
-  m_OnDeselect:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1445191781}
         m_TargetAssemblyTypeName: OgePointLogic, Assembly-CSharp
@@ -11352,8 +11360,11 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
+  m_OnDeselect:
+    m_PersistentCalls:
+      m_Calls: []
   m_OnTextSelection:
     m_PersistentCalls:
       m_Calls: []
@@ -12757,11 +12768,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -97.805
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -38.67
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14403,11 +14414,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -97.805
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -84.67
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15688,11 +15699,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5.8050003
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 7.330002
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17373,11 +17384,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -51.805
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -38.67
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -20954,11 +20965,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5.8050003
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -84.67
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -22620,7 +22631,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5214798819160550248, guid: 03b0ce98cc32ed14f9a5d43a36dd9062, type: 3}
       propertyPath: m_fontSize
-      value: 26
+      value: 15.1
       objectReference: {fileID: 0}
     - target: {fileID: 5903267634746529196, guid: 03b0ce98cc32ed14f9a5d43a36dd9062, type: 3}
       propertyPath: m_Pivot.x
@@ -22761,11 +22772,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 86.195
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -38.67
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -24016,11 +24027,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 86.195
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 99.33
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -25441,11 +25452,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 86.195
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 53.33
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -26040,8 +26051,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 132.3, y: -32.4}
-  m_SizeDelta: {x: 1.7663, y: 0.6708}
+  m_AnchoredPosition: {x: 148.8, y: -23.4}
+  m_SizeDelta: {x: 1.25, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1119059633
 MonoBehaviour:
@@ -26110,9 +26121,6 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelect:
     m_PersistentCalls:
-      m_Calls: []
-  m_OnDeselect:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1445191781}
         m_TargetAssemblyTypeName: OgePointLogic, Assembly-CSharp
@@ -26124,8 +26132,11 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
+  m_OnDeselect:
+    m_PersistentCalls:
+      m_Calls: []
   m_OnTextSelection:
     m_PersistentCalls:
       m_Calls: []
@@ -26428,11 +26439,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -97.805
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 99.33
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -27110,11 +27121,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5.8050003
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 53.33
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -27579,8 +27590,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 144.1, y: -33.7}
-  m_SizeDelta: {x: 1.7663, y: 0.6708}
+  m_AnchoredPosition: {x: 167.7, y: -19.9}
+  m_SizeDelta: {x: 1.25, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1195631475
 MonoBehaviour:
@@ -27649,9 +27660,6 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelect:
     m_PersistentCalls:
-      m_Calls: []
-  m_OnDeselect:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1445191781}
         m_TargetAssemblyTypeName: OgePointLogic, Assembly-CSharp
@@ -27663,8 +27671,11 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
+  m_OnDeselect:
+    m_PersistentCalls:
+      m_Calls: []
   m_OnTextSelection:
     m_PersistentCalls:
       m_Calls: []
@@ -28112,11 +28123,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 40.195
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -84.67
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -28589,6 +28600,7 @@ MonoBehaviour:
   menuBG: {fileID: 1818146190}
   problemSolverScreen: {fileID: 612615044}
   SetPipesScreen: {fileID: 1740750703}
+  connectFurnacesScreen: {fileID: 1633784291}
   shopScreen: {fileID: 1666799427}
   registrationUsernameField: {fileID: 1006359521}
   registrationPasswordField: {fileID: 1574533325}
@@ -28905,11 +28917,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 40.195
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 53.33
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30257,11 +30269,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 40.195
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -38.67
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -32668,11 +32680,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -51.805
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 99.33
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -32954,8 +32966,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 150.7, y: 41}
-  m_SizeDelta: {x: 1.7663, y: 0.6708}
+  m_AnchoredPosition: {x: 108.9, y: 65.3}
+  m_SizeDelta: {x: 1.25, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1494726618
 MonoBehaviour:
@@ -33024,9 +33036,6 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelect:
     m_PersistentCalls:
-      m_Calls: []
-  m_OnDeselect:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1445191781}
         m_TargetAssemblyTypeName: OgePointLogic, Assembly-CSharp
@@ -33038,8 +33047,11 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
+  m_OnDeselect:
+    m_PersistentCalls:
+      m_Calls: []
   m_OnTextSelection:
     m_PersistentCalls:
       m_Calls: []
@@ -33713,8 +33725,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 125.8, y: 42.2}
-  m_SizeDelta: {x: 1.7663, y: 0.6708}
+  m_AnchoredPosition: {x: 128.2, y: 60.1}
+  m_SizeDelta: {x: 1.25, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1523916116
 MonoBehaviour:
@@ -33783,9 +33795,6 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelect:
     m_PersistentCalls:
-      m_Calls: []
-  m_OnDeselect:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1445191781}
         m_TargetAssemblyTypeName: OgePointLogic, Assembly-CSharp
@@ -33797,8 +33806,11 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
+  m_OnDeselect:
+    m_PersistentCalls:
+      m_Calls: []
   m_OnTextSelection:
     m_PersistentCalls:
       m_Calls: []
@@ -34924,11 +34936,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -51.805
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -84.67
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -35218,11 +35230,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5.8050003
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -38.67
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -37430,11 +37442,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 86.195
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -84.67
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -37536,11 +37548,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -97.805
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 7.330002
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -37642,11 +37654,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 86.195
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 7.330002
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -39490,8 +39502,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 123, y: -124.4}
-  m_SizeDelta: {x: 1.7663, y: 0.6708}
+  m_AnchoredPosition: {x: 112.4, y: -100}
+  m_SizeDelta: {x: 1.25, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1753496523
 MonoBehaviour:
@@ -39560,9 +39572,6 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelect:
     m_PersistentCalls:
-      m_Calls: []
-  m_OnDeselect:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1445191781}
         m_TargetAssemblyTypeName: OgePointLogic, Assembly-CSharp
@@ -39574,8 +39583,11 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
+  m_OnDeselect:
+    m_PersistentCalls:
+      m_Calls: []
   m_OnTextSelection:
     m_PersistentCalls:
       m_Calls: []
@@ -41032,7 +41044,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &1802560828
 Canvas:
   m_ObjectHideFlags: 0
@@ -42505,8 +42517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
-  connectedPoints:
-  - {fileID: 1274759437}
+  connectedPoints: []
   sourcePoints: []
   line: {fileID: 6313832427241624432, guid: ebce59cc910259942a119e7065b1088b, type: 3}
 --- !u!114 &1882620633
@@ -43398,8 +43409,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 39.9, y: -58.5}
-  m_SizeDelta: {x: 1.7663, y: 0.6708}
+  m_AnchoredPosition: {x: -9.9, y: -54.4}
+  m_SizeDelta: {x: 1.25, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1956656785
 MonoBehaviour:
@@ -43468,9 +43479,6 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelect:
     m_PersistentCalls:
-      m_Calls: []
-  m_OnDeselect:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1445191781}
         m_TargetAssemblyTypeName: OgePointLogic, Assembly-CSharp
@@ -43482,8 +43490,11 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
+  m_OnDeselect:
+    m_PersistentCalls:
+      m_Calls: []
   m_OnTextSelection:
     m_PersistentCalls:
       m_Calls: []
@@ -45364,11 +45375,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 40.195
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 7.330002
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -46054,11 +46065,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -51.805
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 53.33
       objectReference: {fileID: 0}
     - target: {fileID: 8497287183785213667, guid: 3ace9544514a9ab41947a6416f4f7eb6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -47631,8 +47642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
-  connectedPoints:
-  - {fileID: 1274759437}
+  connectedPoints: []
   sourcePoints: []
   line: {fileID: 6313832427241624432, guid: ebce59cc910259942a119e7065b1088b, type: 3}
 --- !u!1001 &2595748345877076897
