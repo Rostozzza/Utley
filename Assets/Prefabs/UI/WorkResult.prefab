@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4548329537755341380}
   - component: {fileID: 5640568389937806125}
   - component: {fileID: 2485932266352872896}
+  - component: {fileID: 6904599152148991178}
   m_Layer: 5
   m_Name: WorkResult
   m_TagString: Untagged
@@ -89,7 +90,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6dc13d436ce5440aa12acffd54d22e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 300
+  speed: 600
+  acceleration: 600
 --- !u!96 &2485932266352872896
 TrailRenderer:
   serializedVersion: 3
@@ -197,3 +199,25 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!95 &6904599152148991178
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112130046343831669}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 19cc62d97235d9e41b6ccd0b1a1afc48, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
