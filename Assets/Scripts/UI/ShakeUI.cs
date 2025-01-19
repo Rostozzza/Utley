@@ -9,33 +9,41 @@ public class ShakeUI : MonoBehaviour
 	[SerializeField] private float yPos;
 	private float startPosition;
 	private Coroutine shakeCoroutine;
+	private int queue = 0;
 
 	private void Start()
 	{
-		startPosition = toShake.position.y;
+		startPosition = toShake.localPosition.y;
 	}
 
 	public void Shake()
 	{
 		if (shakeCoroutine != null)
 		{
-			shakeCoroutine = null;
+			queue++;
+			return;
 		}
+		queue++;
 		shakeCoroutine = StartCoroutine(ShakeCoroutine());
 	}
 
 	private IEnumerator ShakeCoroutine()
 	{
-		while (toShake.position.y < yPos)
+		while (toShake.localPosition.y < yPos)
 		{
-			toShake.Translate(Vector3.up * strength * Time.deltaTime);
+			toShake.Translate(Vector3.up * 1 * Time.deltaTime, Space.Self);
 			yield return null;
 		}
-		while (toShake.position.y > startPosition)
+		while (toShake.localPosition.y > startPosition)
 		{
-			toShake.Translate(Vector3.down * strength * Time.deltaTime);
+			toShake.Translate(Vector3.down * 1 * Time.deltaTime,Space.Self);
 			yield return null;
 		}
-		toShake.position = new Vector3(toShake.position.x,startPosition,toShake.position.z);
+		toShake.localPosition = new Vector3(toShake.position.x,startPosition,toShake.position.z);
+		if (queue > 0)
+		{
+			queue--;
+			shakeCoroutine = StartCoroutine(ShakeCoroutine());
+		}
 	}
 }
