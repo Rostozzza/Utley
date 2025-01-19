@@ -959,15 +959,36 @@ public class GameManager : MonoBehaviour
 	public void DeliverRawAsterium()
 	{
 		rawAsterium++;
-		asteriumRooms[rawAsterium - 1].isReadyForWork = true;
-		asteriumRooms[rawAsterium - 1].StartWork(gameObject);
-		asteriumRoomView[rawAsterium - 1].color = (Color.red + Color.yellow) / 2f;
+		TryProcessingRawAsterium();
+	}
+
+	public void TryProcessingRawAsterium()
+	{
+		var targetedRoom = asteriumRooms.FirstOrDefault(x => !x.isReadyForWork && x.CheckIfSolved() && x.isEnpowered);
+		if (targetedRoom == null || rawAsterium <= 0)
+		{
+			return;
+		}
+		targetedRoom.isReadyForWork = true;
+		targetedRoom.StartWork(gameObject);
+		rawAsterium--;
+		var targetedView = asteriumRoomView.FirstOrDefault(x => x.color != (Color.red + Color.yellow) / 2f);
+		if (targetedView == null)
+		{
+			return;
+		}
+		targetedView.color = (Color.red + Color.yellow) / 2f;
 	}
 
 	public void WithdrawRawAsterium()
 	{
-		rawAsterium--;
-		asteriumRoomView[rawAsterium].color = Color.grey;
+		var targetedView = asteriumRoomView.FirstOrDefault(x => x.color == (Color.red + Color.yellow) / 2f);
+		if (targetedView == null)
+		{
+			return;
+		}
+		targetedView.color = Color.grey; 
+		
 	}
 
 	private void Update()

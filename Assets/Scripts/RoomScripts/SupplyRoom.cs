@@ -10,7 +10,6 @@ public class SupplyRoom : RoomScript
 	[SerializeField] List<GameObject> graphs;
 	private TMP_InputField currentAnswerField;
 	public bool isSoft = false;
-
 	GameObject graph;
 	[SerializeField] private List<GameObject> poweredRooms;
 

@@ -7,12 +7,12 @@ using UnityEngine.UI;
 
 public class UIResourceShower : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI energoHoneyAmountText;
-    [SerializeField] private TextMeshProUGUI asteriyAmountText;
-    [SerializeField] private TextMeshProUGUI bearsAmountText;
-    [SerializeField] private TextMeshProUGUI astroluminiteAmountText;
-    [SerializeField] private TextMeshProUGUI ursowaksAmountText;
-    [SerializeField] private TextMeshProUGUI prototypeAmountText;
+    [SerializeField] public TextMeshProUGUI energoHoneyAmountText;
+    [SerializeField] public TextMeshProUGUI asteriyAmountText;
+    [SerializeField] public TextMeshProUGUI bearsAmountText;
+    [SerializeField] public TextMeshProUGUI astroluminiteAmountText;
+    [SerializeField] public TextMeshProUGUI ursowaksAmountText;
+    [SerializeField] public TextMeshProUGUI prototypeAmountText;
     [SerializeField] private Slider temperatureSlider;
     [SerializeField] private GameObject honeyReducePanel;
     [SerializeField] private GameObject temperaturePanel;
@@ -40,29 +40,29 @@ public class UIResourceShower : MonoBehaviour
     [SerializeField] private List<Sprite> iconsDebuff;
     [SerializeField] private TextMeshProUGUI timeLeft;
 
-    private void Start()
-    {
-        UpdateIndicators();
-        honeyReducePanel.SetActive(false);
-        temperaturePanel.SetActive(false);
-        asteriumPanel.SetActive(false);
-        bearPanel.SetActive(false);
-        StartCoroutine(TimeChanger());
-        StartCoroutine(TemperatureChanger());
-    }
+	private void Start()
+	{
+		UpdateIndicators();
+		honeyReducePanel.SetActive(false);
+		temperaturePanel.SetActive(false);
+		asteriumPanel.SetActive(false);
+		bearPanel.SetActive(false);
+		StartCoroutine(TimeChanger());
+		StartCoroutine(TemperatureChanger());
+	}
 
-    /// <summary>
-    /// Updates UI indicators (honey, asteriy, etc.)
-    /// </summary>
-    public void UpdateIndicators()
-    {
-        energoHoneyAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.honey));
-        asteriyAmountText.text = Convert.ToString(GameManager.Instance.asteriy);
-        astroluminiteAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.astroluminite));
-        ursowaksAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.ursowaks));
-        prototypeAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.prototype));
-        bearsAmountText.text = Convert.ToString(GameManager.Instance.bears.Count) + "/" + Convert.ToString(GameManager.Instance.maxBearsAmount);
-    }
+	/// <summary>
+	/// Updates UI indicators (honey, asteriy, etc.)
+	/// </summary>
+	public void UpdateIndicators()
+	{
+		energoHoneyAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.honey));
+		asteriyAmountText.text = Convert.ToString(GameManager.Instance.asteriy);
+		astroluminiteAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.astroluminite));
+		ursowaksAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.ursowaks));
+		prototypeAmountText.text = Convert.ToString(Mathf.CeilToInt(GameManager.Instance.prototype));
+		bearsAmountText.text = Convert.ToString(GameManager.Instance.bears.Count) + "/" + Convert.ToString(GameManager.Instance.maxBearsAmount);
+	}
 
     public void UpdateBarsStatuses()
     {
@@ -73,33 +73,33 @@ public class UIResourceShower : MonoBehaviour
         iconDebuff.sprite = iconsDebuff[(int)GameManager.Instance.season];
     }
 
-    private IEnumerator TemperatureChanger()
-    {
-        while (true)
-        {
-            temperatureSlider.value = (GameManager.Instance.GetTemperature() + 25f) / 45f;
-            temperatureDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)GameManager.Instance.GetTemperature()) + " °C";
-            temperatureDynamic2.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)GameManager.Instance.GetTemperature()) + " °C";
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
+	private IEnumerator TemperatureChanger()
+	{
+		while (true)
+		{
+			temperatureSlider.value = (GameManager.Instance.GetTemperature() + 25f) / 45f;
+			temperatureDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)GameManager.Instance.GetTemperature()) + " °C";
+			temperatureDynamic2.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)GameManager.Instance.GetTemperature()) + " °C";
+			yield return new WaitForSeconds(0.1f);
+		}
+	}
 
-    private string SeasonToHeaderText(GameManager.Season season)
-    {
-        switch (season)
-        {
-            case GameManager.Season.Calm:
-                return "Спокойная фаза";
-            case GameManager.Season.Storm:
-                return "Буревая фаза";
-            case GameManager.Season.Freeze:
-                return "Морозная фаза";
-            case GameManager.Season.Tide:
-                return "Приливная фаза";
-            default:
-                return "Неизвестная фаза";
-        }
-    }
+	private string SeasonToHeaderText(GameManager.Season season)
+	{
+		switch (season)
+		{
+			case GameManager.Season.Calm:
+				return "Спокойная фаза";
+			case GameManager.Season.Storm:
+				return "Буревая фаза";
+			case GameManager.Season.Freeze:
+				return "Морозная фаза";
+			case GameManager.Season.Tide:
+				return "Приливная фаза";
+			default:
+				return "Неизвестная фаза";
+		}
+	}
 
     private IEnumerator TimeChanger()
     {

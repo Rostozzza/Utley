@@ -17,7 +17,7 @@ public class NumberSummationExercise : MonoBehaviour
 	[SerializeField] private Transform pointsParent;
 	[HideInInspector] public bool isTaskActive = false;
 	[Header("Task Generator")]
-	[SerializeField] [Range(1, 50)] private int difficulty;
+	[SerializeField][Range(1, 50)] private int difficulty;
 	[SerializeField] private GameObject weightPrefab;
 	[SerializeField] private List<OgePointLogic> points;
 	public LineRenderer lineRenderer;
@@ -59,7 +59,7 @@ public class NumberSummationExercise : MonoBehaviour
 		return correctAnswer;
 	}
 
-	public IEnumerator AnswerWaiter()
+	public IEnumerator AnswerWaiter(RoomScript roomToTarget)
 	{
 		rightAnswer = GenerateTask();
 		Camera.main.GetComponent<CameraController>().SetCameraLock(true);
@@ -73,10 +73,12 @@ public class NumberSummationExercise : MonoBehaviour
 		if (answer == rightAnswer)
 		{
 			Debug.Log("ВЕРНЫЙ ОТВЕТ");
+			roomToTarget.SetWorkEfficiency(1);
 		}
 		else
 		{
 			Debug.Log("ОТВЕТ НЕВЕРНЫЙ");
+			roomToTarget.SetWorkEfficiency(0.8f);
 		}
 		GameManager.Instance.SetIsGraphUsing(false);
 		ClearGraph();
