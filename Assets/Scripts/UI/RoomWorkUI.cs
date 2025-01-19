@@ -57,10 +57,11 @@ public class RoomWorkUI : MonoBehaviour
 			yield return new WaitForSeconds(timeInterval);
 			Destroy(grid.transform.GetChild(0).gameObject);
 			var resultInstance = Instantiate(workResultToScreenPrefab,GameManager.Instance.GetComponentInChildren<Canvas>().transform);
-			resultInstance.transform.position = Camera.main.WorldToScreenPoint((Vector2)resultImage.transform.position);
-			resultInstance.transform.position.Set(resultInstance.transform.position.x, resultInstance.transform.position.y, GameManager.Instance.GetComponentInChildren<Canvas>().transform.position.z);
 
-
+			Vector2 ancoredPos;
+			RectTransformUtility.ScreenPointToLocalPointInRectangle(GameManager.Instance.GetComponentInChildren<Canvas>().GetComponent<RectTransform>(), (Vector2)Camera.main.WorldToScreenPoint(resultImage.transform.position), Camera.main, out ancoredPos);
+			Debug.Log(ancoredPos);
+			resultInstance.GetComponent<RectTransform>().anchoredPosition = ancoredPos;
 			resultInstance.GetComponent<Image>().sprite = resultImage.GetComponent<Image>().sprite;
 			resultInstance.GetComponent<WorkResultIntoUI>().FlyTorwardsUI(correspondingUI);
 			workResults--;

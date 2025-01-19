@@ -55,7 +55,7 @@ public class EnergohoneyRoom : RoomScript
 		{
 			timer *= 0.9f;
 		}
-		int honeyToAdd = (GameManager.Instance.season != GameManager.Season.Storm) ? 10 : (int)(10 * (1 - 0.15f + 0.03f * GameManager.Instance.cycleNumber));
+		int honeyToAdd = (GameManager.Instance.season != GameManager.Season.Storm) ? 5 : (int)(5 * (1 - 0.15f + 0.03f * GameManager.Instance.cycleNumber));
 		workUI.StartWork(timer,honeyToAdd,GameManager.Instance.uiResourceShower.energoHoneyAmountText.transform);
 		while (timer > 0)
 		{

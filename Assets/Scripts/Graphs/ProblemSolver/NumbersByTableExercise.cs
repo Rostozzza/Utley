@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Random = UnityEngine.Random;
+using System.Collections;
 
 public class NumbersByTableExercise : MonoBehaviour
 {
@@ -40,11 +41,23 @@ public class NumbersByTableExercise : MonoBehaviour
 
 	public void GenerateFromPreset()
 	{
+		Camera.main.GetComponent<CameraController>().SetCameraLock(true);
 		var preset = tasksPresets[Random.Range(gridRange, Mathf.Clamp(gridRange+2,0,tasksPresets.Count))];
 		task = preset.task;
 		rightAnswers = preset.answers;
 		allInputFields = preset.fields;
+		StartCoroutine(ConnectAllPoints());
 		task.SetActive(true);
+	}
+
+	private IEnumerator ConnectAllPoints()
+	{
+		yield return new WaitForSeconds(1.5f);
+		foreach (var point in task.GetComponentsInChildren<OgePointLogic>(true))
+		{
+			point.ConnectPoints();
+		}
+		yield return task;
 	}
 
 	private void GenerateGirdLayout()
@@ -79,6 +92,7 @@ public class NumbersByTableExercise : MonoBehaviour
 				MenuManager.Instance.problemSolverScreen.SetActive(false);
 				MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
 				targetedRoom.SetWorkEfficiency(0.2f);
+				Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 				return;
 			}
 		}
@@ -94,5 +108,6 @@ public class NumbersByTableExercise : MonoBehaviour
 		targetedRoom.SetWorkEfficiency(1f);
 		GameManager.Instance.TryProcessingRawAsterium();
 		Debug.Log("Верно");
+		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 	}
 }

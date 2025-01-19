@@ -12,9 +12,13 @@ public class WorkResultIntoUI : MonoBehaviour
 
 	private IEnumerator Fly(Transform element)
 	{
-		while (Vector2.Distance(transform.position, element.position) > 0.1f)
+		var anchoredPos = GetComponent<RectTransform>();
+		Vector2 targetedPos;
+		targetedPos = element.transform.position;
+		Debug.Log(targetedPos);
+		while (Vector2.Distance(anchoredPos.anchoredPosition, targetedPos) > 0.1f)
 		{
-			transform.position = Vector2.Lerp(transform.position,element.position,Time.deltaTime * speed);
+			anchoredPos.anchoredPosition = Vector2.Lerp(anchoredPos.anchoredPosition, targetedPos, Time.deltaTime * speed);
 			yield return null;
 		}
 		Destroy(gameObject);
