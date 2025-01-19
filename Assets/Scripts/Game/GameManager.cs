@@ -1472,7 +1472,6 @@ public class GameManager : MonoBehaviour
 			shuffleRooms.ForEach(delegate (GameObject room)
 			{
 				room.GetComponent<RoomScript>().ChangeDurability(-0.01f);
-				Debug.Log(room.name);
 			});
 		}
 	}

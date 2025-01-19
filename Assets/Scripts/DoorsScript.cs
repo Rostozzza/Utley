@@ -93,7 +93,6 @@ public class DoorsScript : MonoBehaviour
         	    HasRoomAt(Vector3.up, VerticalRange / 2f),
         	    HasRoomAt(Vector3.down, VerticalRange / 2f)
         	);
-			Debug.Log(nearRooms.leftRoom + " " + nearRooms.rightRoom);
 			return nearRooms;
 		}
 		else
