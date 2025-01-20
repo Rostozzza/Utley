@@ -7,43 +7,41 @@ public class ShakeUI : MonoBehaviour
 	[SerializeField] private float strength;
 	[SerializeField] private Transform toShake;
 	[SerializeField] private float yPos;
-	private float startPosition;
+	private Vector3 startPosition;
 	private Coroutine shakeCoroutine;
 	private int queue = 0;
+	private Animator animator;
 
 	private void Start()
 	{
-		startPosition = toShake.localPosition.y;
+		startPosition = toShake.localPosition;
+		animator = toShake.GetComponent<Animator>();
 	}
 
 	public void Shake()
 	{
-		if (shakeCoroutine != null)
-		{
-			queue++;
-			return;
-		}
-		queue++;
-		shakeCoroutine = StartCoroutine(ShakeCoroutine());
+		animator.SetTrigger("Shake");
 	}
 
-	private IEnumerator ShakeCoroutine()
-	{
-		while (toShake.localPosition.y < yPos)
-		{
-			toShake.Translate(Vector3.up * 1 * Time.deltaTime, Space.Self);
-			yield return null;
-		}
-		while (toShake.localPosition.y > startPosition)
-		{
-			toShake.Translate(Vector3.down * 1 * Time.deltaTime,Space.Self);
-			yield return null;
-		}
-		toShake.localPosition = new Vector3(toShake.position.x,startPosition,toShake.position.z);
-		if (queue > 0)
-		{
-			queue--;
-			shakeCoroutine = StartCoroutine(ShakeCoroutine());
-		}
-	}
+	//private IEnumerator ShakeCoroutine()
+	//{
+	//	while (toShake.localPosition.y < yPos)
+	//	{
+	//		toShake.Translate(Vector3.up * 1 * Time.deltaTime, Space.Self);
+	//		yield return null;
+	//	}
+	//	while (toShake.localPosition.y > startPosition.y)
+	//	{
+	//		toShake.Translate(Vector3.down * 1 * Time.deltaTime,Space.Self);
+	//		yield return null;
+	//	}
+	//	toShake.localPosition = startPosition;
+
+	//	if (queue > 1)
+	//	{
+	//		queue--;
+	//		shakeCoroutine = StartCoroutine(ShakeCoroutine());
+	//	}
+	//	shakeCoroutine = null;
+	//}
 }

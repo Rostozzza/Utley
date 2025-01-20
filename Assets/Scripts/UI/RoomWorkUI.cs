@@ -62,7 +62,7 @@ public class RoomWorkUI : MonoBehaviour
 			RectTransformUtility.ScreenPointToLocalPointInRectangle(GameManager.Instance.GetComponentInChildren<Canvas>().GetComponent<RectTransform>(), (Vector2)Camera.main.WorldToScreenPoint(resultImage.transform.position), Camera.main, out ancoredPos);
 			Debug.Log(ancoredPos);
 			resultInstance.GetComponent<RectTransform>().anchoredPosition = ancoredPos + Random.insideUnitCircle*15f;
-			resultInstance.GetComponent<Image>().sprite = resultImage.GetComponent<Image>().sprite;
+			//resultInstance.GetComponent<Image>().sprite = resultImage.GetComponent<Image>().sprite;
 			resultInstance.GetComponent<WorkResultIntoUI>().FlyTorwardsUI(correspondingUI);
 			workResults--;
 			resultText.text = $"+{workResults}";

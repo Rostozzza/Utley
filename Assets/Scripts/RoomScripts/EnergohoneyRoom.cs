@@ -59,7 +59,7 @@ public class EnergohoneyRoom : RoomScript
 		workUI.StartWork(timer,honeyToAdd,GameManager.Instance.uiResourceShower.energoHoneyAmountText.transform);
 		while (timer > 0)
 		{
-			timeShow.text = SecondsToTimeToShow(timer);
+			//timeShow.text = SecondsToTimeToShow(timer);
 			timer -= Time.deltaTime;
 			yield return null;
 		}
