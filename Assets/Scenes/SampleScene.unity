@@ -23548,6 +23548,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 76.87078
       objectReference: {fileID: 0}
+    - target: {fileID: 4507467789773361948, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5660998347327301849, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -23600,6 +23604,14 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7752754145954463192, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7752754145954463192, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b246c4190f4e46ec9352fe15a7b09ce0, type: 2}
     - target: {fileID: 7823825785235443348, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 41.014473
@@ -32699,6 +32711,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: complex_cosmodrome (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5026688865674754522, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5026688865674754522, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 05354ee87cccf6344b719a48fa745255, type: 2}
     - target: {fileID: 5094921183457901796, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 2.9429998
