@@ -18,6 +18,9 @@ public class ShakeUI : MonoBehaviour
 		animator = toShake.GetComponent<Animator>();
 	}
 
+	/// <summary>
+	/// Makes UI shake.
+	/// </summary>
 	public void Shake()
 	{
 		animator.SetTrigger("Shake");

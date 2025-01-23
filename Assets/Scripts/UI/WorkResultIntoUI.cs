@@ -6,6 +6,11 @@ public class WorkResultIntoUI : MonoBehaviour
 {
 	[SerializeField] private float speed;
 	[SerializeField] private float acceleration = 100;
+
+	/// <summary>
+	/// Makes UI component fly torwards another UI component on the same canvas.
+	/// </summary>
+	/// <param name="element"></param>
 	public void FlyTorwardsUI(Transform element)
 	{
 		StartCoroutine(Fly(element));

@@ -22,6 +22,11 @@ public class NumberSummationExercise : MonoBehaviour
 	[SerializeField] private List<OgePointLogic> points;
 	public LineRenderer lineRenderer;
 
+	/// <summary>
+	/// Generates task, answer and connects all OgePointLogics.
+	/// </summary>
+	/// <param name="steps"></param>
+	/// <returns></returns>
 	private int GenerateTask(int steps = 3)
 	{
 		points = pointsParent.GetComponentsInChildren<OgePointLogic>().ToList();
@@ -59,6 +64,11 @@ public class NumberSummationExercise : MonoBehaviour
 		return correctAnswer;
 	}
 
+	/// <summary>
+	/// Waits for player's answer.
+	/// </summary>
+	/// <param name="roomToTarget"></param>
+	/// <returns></returns>
 	public IEnumerator AnswerWaiter(RoomScript roomToTarget)
 	{
 		rightAnswer = GenerateTask();
@@ -85,6 +95,9 @@ public class NumberSummationExercise : MonoBehaviour
 		isTaskActive = false;
 	}
 
+	/// <summary>
+	/// Clean up task after completion.
+	/// </summary>
 	public void ClearGraph()
 	{
 		pointsParent.GetComponentsInChildren<OgePointLogic>(true).ToList().ForEach(p => p.SetColor(Color.white));
@@ -92,6 +105,10 @@ public class NumberSummationExercise : MonoBehaviour
 		pointsParent.GetComponentsInChildren<TextMeshProUGUI>(true).ToList().Where(text => !text.transform.parent.GetComponent<RectMask2D>()).ToList().ForEach(weight => Destroy(weight.gameObject, 1f));
 	}
 
+	/// <summary>
+	/// Triggers answerWaiter.
+	/// </summary>
+	/// <param name="answerHolder"></param>
 	public void GiveAnswer(GameObject answerHolder)
 	{
 		answer = Convert.ToInt32(answerHolder.GetComponent<TMP_InputField>().text);

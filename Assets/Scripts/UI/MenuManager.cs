@@ -491,6 +491,25 @@ public class MenuManager : MonoBehaviour
 		}
 	}
 
+	public void OpenTutorial()
+	{
+		buttonsToHide.ForEach(x => x.SetActive(false));
+		buttonsToShow.ForEach(x => x.SetActive(true));
+		loadingView.SetActive(true);
+		mainMenuScreen.SetActive(false);
+		SceneManager.LoadSceneAsync(2);
+		videoPlayer.gameObject.SetActive(false);
+		loadingBar.value = 0;
+		loadingScreen.SetActive(false);
+		Time.timeScale = 1f;
+		loadingView.SetActive(false);
+		GameManager.Instance.asteriy = 40;
+		GameManager.Instance.honey = 40;
+		GameManager.Instance.astroluminite = 6;
+		GameManager.Instance.playerBears = 4;
+		GameManager.Instance.uiResourceShower.UpdateIndicators();
+	}
+
 	private void OnVideoEnd(VideoPlayer vp)
 	{
 		if (videoPlayer.clip == firstCutscene)

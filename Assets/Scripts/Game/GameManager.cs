@@ -1662,6 +1662,11 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	public void ActivateTutorialMode()
+	{
+
+	}
+
 	public void CallShopFromGameManager()
 	{
 		MenuManager.Instance.shopScreen.SetActive(true);
