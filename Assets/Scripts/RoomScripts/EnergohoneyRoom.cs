@@ -9,7 +9,6 @@ public class EnergohoneyRoom : RoomScript
     protected override void Start()
     {
         base.Start();
-		ShowSetPipesButtonScreen();
     }
 
 	public override void ShowButton()
