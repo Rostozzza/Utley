@@ -1087,7 +1087,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 63.49, y: 73.54}
+  m_AnchoredPosition: {x: -88.6, y: 82.1}
   m_SizeDelta: {x: 600, y: 315}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &94874732
@@ -10838,6 +10838,11 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 2606328058312651893, guid: f1a5d73b02f50b34e947a54f2c99eeb3, type: 3}
   m_PrefabInstance: {fileID: 283731908}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &681016907 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1458037989015496847, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+  m_PrefabInstance: {fileID: 1398197918}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &685611102
 GameObject:
   m_ObjectHideFlags: 0
@@ -11116,6 +11121,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704929179}
   m_CullTransparentMesh: 1
+--- !u!224 &707844076 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5938093899936473437, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+  m_PrefabInstance: {fileID: 3562911849079285420}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &708579817
 GameObject:
   m_ObjectHideFlags: 0
@@ -14550,6 +14560,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926917803}
   m_CullTransparentMesh: 1
+--- !u!1 &929357051
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 929357052}
+  m_Layer: 5
+  m_Name: ToPointSlide7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &929357052
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929357051}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1741973713}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -328.7, y: 117.4}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &937293395
 GameObject:
   m_ObjectHideFlags: 0
@@ -21552,9 +21597,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2329037035901884118, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2711997747166926409, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
       propertyPath: m_Shadows.m_Type
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877812017268990984, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026933532760048727, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6197293802033969619, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
       propertyPath: m_Shadows.m_Type
@@ -22500,7 +22557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1496771814}
   m_Layer: 5
-  m_Name: ToPointSlide5
+  m_Name: ToPointSlide 5 and 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24037,6 +24094,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4507467789773361948, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
       propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4702188321461192103, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108185118676973433, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5660998347327301849, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
@@ -26019,6 +26084,7 @@ RectTransform:
   - {fileID: 511216556}
   - {fileID: 584009458}
   - {fileID: 1496771814}
+  - {fileID: 929357052}
   m_Father: {fileID: 2101982847}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -31470,6 +31536,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 801.4, y: 177.52}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1999178390 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -8060346355397523301, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+  m_PrefabInstance: {fileID: 1398197918}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730795413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25fe2f83da5136e40b0b3cb670ce1bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2010418153 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5253349184228087923, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
@@ -31859,32 +31936,12 @@ MonoBehaviour:
       \u041F\u043E\u0441\u043B\u0435 \u0432\u044B\u0431\u043E\u0440\u0430 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
       \u0444\u043E\u043A\u0443\u0441 \u043A\u0430\u043C\u0435\u0440\u044B \u043F\u0435\u0440\u0435\u043D\u0435\u0441\u0435\u0442\u0441\u044F
       \u043D\u0430 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0433\u043E \u043C\u0435\u0434\u0432\u0435\u0434\u044F. "
-    position: {x: 0, y: 0, z: 0}
+    position: {x: 63.49, y: 73.54, z: 0}
     pointer:
       target: {fileID: 1496771814}
       angleZ: 0
       offset: 0
     conditionsSequence: 03000000
-    buttonToCheck: {fileID: 0}
-    keyToCheck: 0
-    tagToCheck: 
-    roomToCheck: {fileID: 0}
-    roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
-  - text: "\u041F\u043E\u0437\u043D\u0430\u043A\u043E\u043C\u044C\u0441\u044F \u0441
-      \u0438\u043D\u0434\u0438\u043A\u0430\u0442\u043E\u0440\u0430\u043C\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043E\u0432
-      \u0432 \u0441\u043F\u0438\u0441\u043A\u0435 \u0441\u043B\u0435\u0432\u0430.
-      \u041F\u043E \u043A\u043B\u0438\u043A\u0443 (<color=\"yellow\">\u041B\u041A\u041C</color>)
-      \u043D\u0430 \u0438\u043D\u0434\u0438\u043A\u0430\u0442\u043E\u0440 \u0444\u043E\u043A\u0443\u0441
-      \u043A\u0430\u043C\u0435\u0440\u044B \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u0438\u0442\u0441\u044F
-      \u043D\u0430 \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441."
-    position: {x: 0, y: 0, z: 0}
-    pointer:
-      target: {fileID: 0}
-      angleZ: 0
-      offset: 0
-    conditionsSequence: 07000000
     buttonToCheck: {fileID: 0}
     keyToCheck: 0
     tagToCheck: 
@@ -31902,7 +31959,7 @@ MonoBehaviour:
       \u0442\u0443\u0434\u0430. \u041E\u0442\u043F\u0440\u0430\u0432\u044C \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0433\u043E
       \u043C\u0435\u0434\u0432\u0435\u0434\u044F \u043D\u0430 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
       \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430."
-    position: {x: 0, y: 0, z: 0}
+    position: {x: -88.6, y: 82.1, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31912,6 +31969,26 @@ MonoBehaviour:
     keyToCheck: 0
     tagToCheck: 
     roomToCheck: {fileID: 1398197919}
+    roomHighlight: {fileID: 1999178390}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041F\u043E\u0437\u043D\u0430\u043A\u043E\u043C\u044C\u0441\u044F \u0441
+      \u0438\u043D\u0434\u0438\u043A\u0430\u0442\u043E\u0440\u0430\u043C\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043E\u0432
+      \u0432 \u0441\u043F\u0438\u0441\u043A\u0435 \u0441\u043B\u0435\u0432\u0430.
+      \u041F\u043E \u043A\u043B\u0438\u043A\u0443 (<color=\"yellow\">\u041B\u041A\u041C</color>)
+      \u043D\u0430 \u0438\u043D\u0434\u0438\u043A\u0430\u0442\u043E\u0440 \u0444\u043E\u043A\u0443\u0441
+      \u043A\u0430\u043C\u0435\u0440\u044B \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u0438\u0442\u0441\u044F
+      \u043D\u0430 \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441."
+    position: {x: -150.57, y: 73.54, z: 0}
+    pointer:
+      target: {fileID: 929357052}
+      angleZ: 180
+      offset: 0
+    conditionsSequence: 07000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
     krugPos: {x: 0, y: 0, z: 0}
     krugScale: 0
@@ -31932,10 +32009,10 @@ MonoBehaviour:
       \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434. \u041E\u0431 \u044D\u0442\u043E\u043C
       \u0442\u0435\u0431\u0435 \u0441\u043E\u043E\u0431\u0449\u0438\u0442 \u043F\u0440\u043E\u0433\u0440\u0435\u0441\u0441\u0431\u0430\u0440
       \u0432 \u043B\u0435\u0432\u043E\u0439 \u0447\u0430\u0441\u0442\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0430"
-    position: {x: 0, y: 0, z: 0}
+    position: {x: 264.73, y: -116.5, z: 0}
     pointer:
-      target: {fileID: 0}
-      angleZ: 0
+      target: {fileID: 681016907}
+      angleZ: 90
       offset: 0
     conditionsSequence: 08000000
     buttonToCheck: {fileID: 708579819}
@@ -31960,10 +32037,10 @@ MonoBehaviour:
       \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043A\u043E\u0441\u043C\u0438\u0447\u0435\u0441\u043A\u0438\u0439
       \u0447\u0435\u043B\u043D\u043E\u043A \u043D\u0430 \u0434\u043E\u0431\u044B\u0447\u0443
       \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432."
-    position: {x: 0, y: 0, z: 0}
+    position: {x: 264.73, y: -116.5, z: 0}
     pointer:
-      target: {fileID: 0}
-      angleZ: 0
+      target: {fileID: 707844076}
+      angleZ: 90
       offset: 0
     conditionsSequence: 08000000
     buttonToCheck: {fileID: 708579819}
@@ -31981,7 +32058,7 @@ MonoBehaviour:
       \u0435\u0433\u043E \u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0443 \u0432
       \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430
       (\u0432 \u0441\u0430\u043C\u043E\u043C \u043D\u0438\u0437\u0443)."
-    position: {x: 0, y: 0, z: 0}
+    position: {x: 264.73, y: -116.5, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
