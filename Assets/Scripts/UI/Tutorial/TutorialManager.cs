@@ -222,12 +222,12 @@ public class TutorialManager : MonoBehaviour
 	private void SpawnPointer(Pointer data)
 	{
 		var pointer = Instantiate(pointerPrefab, tutorialCanvas).transform;
-		if (!GameManager.Instance.GetComponent<Canvas>().transform.Find(data.target.name))
+		if (!GameManager.Instance.GetComponentInChildren<Canvas>().transform.Find(data.target.name))
 		{
 			Vector2 newPos;
 			
 			RectTransformUtility.ScreenPointToLocalPointInRectangle(tutorialCanvas.GetComponent<RectTransform>(), (Vector2)Camera.main.WorldToScreenPoint(data.target.position), Camera.main, out newPos);
-			pointer.position = newPos;
+			pointer.localPosition = newPos;
 			Debug.Log($"POINTER AT {newPos}");
 		}
 		else
