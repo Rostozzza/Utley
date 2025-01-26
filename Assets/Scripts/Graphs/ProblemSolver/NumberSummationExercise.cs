@@ -91,6 +91,7 @@ public class NumberSummationExercise : MonoBehaviour
 			Debug.Log("ОТВЕТ НЕВЕРНЫЙ");
 			roomToTarget.SetWorkEfficiency(0.8f);
 		}
+		EventManager.onEnergohoneySettingsSolved.Invoke();
 		GameManager.Instance.SetIsGraphUsing(false);
 		ClearGraph();
 		isTaskActive = false;
