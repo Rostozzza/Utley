@@ -1079,17 +1079,16 @@ RectTransform:
   m_GameObject: {fileID: 94874730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 1951086584}
   - {fileID: 432270028}
   m_Father: {fileID: 1732883441}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 278.90002, y: -156.88}
-  m_SizeDelta: {x: -557.8, y: -313.76}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 600, y: 315}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &94874732
 MonoBehaviour:
@@ -1104,16 +1103,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.07058824, g: 0.03529412, b: 0.21960786, a: 0.9098039}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
+  m_Sprite: {fileID: 21300000, guid: be03721653a6acd4bafe8a3bab7feee8, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -3095,6 +3094,107 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
+--- !u!1001 &230562154
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1633323105}
+    m_Modifications:
+    - target: {fileID: 1914244455409487036, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_Name
+      value: Pointer
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914244455409487036, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.3306792
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.9437432
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -309.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 141.38
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c280cc053adab3b409c8628063711174, type: 3}
 --- !u!1 &235787596
 GameObject:
   m_ObjectHideFlags: 0
@@ -5350,6 +5450,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380802361}
   m_CullTransparentMesh: 1
+--- !u!1 &382548864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 382548865}
+  - component: {fileID: 382548867}
+  - component: {fileID: 382548866}
+  m_Layer: 5
+  m_Name: Krug
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &382548865
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382548864}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1633323105}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &382548866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382548864}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.8039216, b: 0.08627451, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 6024c030ee45aff44b9907f715e97cd7, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &382548867
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382548864}
+  m_CullTransparentMesh: 1
 --- !u!1 &384040543
 GameObject:
   m_ObjectHideFlags: 0
@@ -6074,8 +6249,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -39.04, y: -2.09}
-  m_SizeDelta: {x: 149.1, y: 117.62}
+  m_AnchoredPosition: {x: -16.16, y: -75.18}
+  m_SizeDelta: {x: 270.92, y: 121.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &432270029
 MonoBehaviour:
@@ -6124,7 +6299,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 16.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11991,6 +12166,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969583d3d86f39a4bb3111c3c6cb3616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &742442235 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+  m_PrefabInstance: {fileID: 230562154}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &744157938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24272,6 +24452,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1732883441}
+  - {fileID: 382548865}
+  - {fileID: 742442235}
   m_Father: {fileID: 2101982847}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -30471,81 +30653,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1947409469}
   m_CullTransparentMesh: 1
---- !u!1 &1951086583
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1951086584}
-  - component: {fileID: 1951086586}
-  - component: {fileID: 1951086585}
-  m_Layer: 5
-  m_Name: Bear
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1951086584
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1951086583}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 94874731}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 76.4, y: 2.7}
-  m_SizeDelta: {x: 74.79, y: 98.8}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1951086585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1951086583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9dfce0c4c5ad157499e68c7a7b4c1756, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1951086586
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1951086583}
-  m_CullTransparentMesh: 1
 --- !u!1 &1955703260
 GameObject:
   m_ObjectHideFlags: 0
@@ -31601,7 +31708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821027e06d226b14ca21ce933184709b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kruzhochek: {fileID: 0}
+  kruzhochek: {fileID: 382548864}
   tutorialCanvas: {fileID: 1741973713}
   sequence:
   - text: "\u041F\u0440\u0438\u0432\u0435\u0442, \u0438\u0433\u0440\u043E\u043A!
@@ -31611,7 +31718,7 @@ MonoBehaviour:
       \u0431\u0430\u0437\u043E\u0439. \u0414\u043B\u044F \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0435\u043D\u0438\u0435
       \u043D\u0430\u0436\u043C\u0438 <color=\"yellow\">\u041B\u041A\u041C (\u043B\u0435\u0432\u0443\u044E
       \u043A\u043D\u043E\u043F\u043A\u0443 \u043C\u044B\u0448\u0438)</color>"
-    position: {x: 0, y: 0}
+    position: {x: 299.01, y: -149.79, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31622,6 +31729,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u041A\u0430\u0436\u0434\u0430\u044F \u0431\u0430\u0437\u0430 \u0441\u043E\u0441\u0442\u043E\u0438\u0442
       \u0438\u0437 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043E\u0432.
       \u0427\u0442\u043E\u0431\u044B \u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C
@@ -31631,7 +31740,7 @@ MonoBehaviour:
       \u0438 \u043F\u0440\u043E\u0432\u0435\u0434\u0438 \u043C\u044B\u0448\u044C\u044E
       \u0438\u043B\u0438 \u043F\u043E\u0434\u043D\u0435\u0441\u0438 <color=\"yellow\">\u043A\u0443\u0440\u0441\u043E\u0440</color>
       \u043A \u043B\u044E\u0431\u043E\u043C\u0443 \u043A\u0440\u0430\u044E \u044D\u043A\u0440\u0430\u043D\u0430."
-    position: {x: 0, y: 0}
+    position: {x: 299.01, y: -149.79, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31642,6 +31751,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0422\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u0443\u0437\u043D\u0430\u0442\u044C
       \u0431\u043E\u043B\u0435\u0435 \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u0443\u044E
       \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E \u043E \u043A\u0430\u0436\u0434\u043E\u043C
@@ -31653,17 +31764,19 @@ MonoBehaviour:
       \u0438\u043B\u0438 \u043D\u0430\u0436\u0430\u0442\u0438\u0435\u043C \u043A\u043D\u043E\u043F\u043A\u0438
       \u0441 \u0431\u0443\u043A\u0432\u043E\u0439 <color=\"yellow\">i</color> \u0432
       \u0432\u0435\u0440\u0445\u043D\u0435\u043C \u043B\u0435\u0432\u043E\u043C \u0443\u0433\u043B\u0443."
-    position: {x: 0, y: 0}
+    position: {x: -181.73, y: 100.4, z: 0}
     pointer:
-      target: {fileID: 0}
-      angleZ: 0
-      length: 0
+      target: {fileID: 708579818}
+      angleZ: 141.38
+      length: 1
     conditionsSequence: 01000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 105
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: -352.5, y: 206.58998, z: 0}
+    krugScale: 0.5
   - text: "<color=\"yellow\">\u041A\u043B\u0438\u043A\u043E\u043C \u043C\u044B\u0448\u0438
       (\u041B\u041A\u041C - \u043B\u0435\u0432\u0430\u044F \u043A\u043D\u043E\u043F\u043A\u0430
       \u043C\u044B\u0448\u0438)</color> \u043F\u043E \u043A\u043E\u0441\u043C\u043E\u0434\u0440\u043E\u043C\u0443
@@ -31678,17 +31791,19 @@ MonoBehaviour:
       \u0438\u043B\u0438 \u043D\u0430\u0436\u0430\u0432 \u043A\u043D\u043E\u043F\u043A\u0443
       \u0441 \u0431\u0443\u043A\u0432\u043E\u0439 <color=\"yellow\">i</color> \u0441\u043B\u0435\u0432\u0430
       \u0441\u0432\u0435\u0440\u0445\u0443"
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
       length: 0
-    conditionsSequence: 06000000
+    conditionsSequence: 0600000001000000
     buttonToCheck: {fileID: 708579819}
-    keyToCheck: 0
+    keyToCheck: 105
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u041F\u043E\u0437\u043D\u0430\u043A\u043E\u043C\u044C\u0441\u044F \u0441\u043E
       \u0432\u0441\u0435\u043C\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F\u043C\u0438
       \u043A\u043B\u0438\u043A\u043D\u0443\u0432 \u043C\u044B\u0448\u044C\u044E(<color=\"yellow\">\u041B\u041A\u041C</color>)
@@ -31708,7 +31823,7 @@ MonoBehaviour:
       \u041F\u043E\u0441\u043B\u0435 \u0432\u044B\u0431\u043E\u0440\u0430 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
       \u0444\u043E\u043A\u0443\u0441 \u043A\u0430\u043C\u0435\u0440\u044B \u043F\u0435\u0440\u0435\u043D\u0435\u0441\u0435\u0442\u0441\u044F
       \u043D\u0430 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0433\u043E \u043C\u0435\u0434\u0432\u0435\u0434\u044F. "
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31719,6 +31834,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u041F\u043E\u0437\u043D\u0430\u043A\u043E\u043C\u044C\u0441\u044F \u0441
       \u0438\u043D\u0434\u0438\u043A\u0430\u0442\u043E\u0440\u0430\u043C\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043E\u0432
       \u0432 \u0441\u043F\u0438\u0441\u043A\u0435 \u0441\u043B\u0435\u0432\u0430.
@@ -31726,7 +31843,7 @@ MonoBehaviour:
       \u043D\u0430 \u0438\u043D\u0434\u0438\u043A\u0430\u0442\u043E\u0440 \u0444\u043E\u043A\u0443\u0441
       \u043A\u0430\u043C\u0435\u0440\u044B \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u0438\u0442\u0441\u044F
       \u043D\u0430 \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441."
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31737,6 +31854,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0427\u0442\u043E\u0431\u044B \u043F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C
       \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0433\u043E \u043C\u0435\u0434\u0432\u0435\u0434\u044F
       \u043A\u043B\u0438\u043A\u043D\u0438 \u041F\u041A\u041C(\u043F\u0440\u0430\u0432\u043E\u0439
@@ -31747,7 +31866,7 @@ MonoBehaviour:
       \u0442\u0443\u0434\u0430. \u041E\u0442\u043F\u0440\u0430\u0432\u044C \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0433\u043E
       \u043C\u0435\u0434\u0432\u0435\u0434\u044F \u043D\u0430 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
       \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430."
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31758,6 +31877,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 1398197919}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0422\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u043D\u0430\u0437\u043D\u0430\u0447\u0430\u0442\u044C
       \u043C\u0435\u0434\u0432\u0435\u0434\u0435\u0439 \u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0443.
       \u0412\u044B\u0431\u0435\u0440\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
@@ -31775,7 +31896,7 @@ MonoBehaviour:
       \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434. \u041E\u0431 \u044D\u0442\u043E\u043C
       \u0442\u0435\u0431\u0435 \u0441\u043E\u043E\u0431\u0449\u0438\u0442 \u043F\u0440\u043E\u0433\u0440\u0435\u0441\u0441\u0431\u0430\u0440
       \u0432 \u043B\u0435\u0432\u043E\u0439 \u0447\u0430\u0441\u0442\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0430"
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31786,6 +31907,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 1398197919}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0412\u044B\u0431\u0435\u0440\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
       \u043F\u0435\u0440\u0432\u043E\u043F\u0440\u043E\u0445\u043E\u0434\u0446\u0430
       \u0414\u0430\u0448\u0443(\u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E
@@ -31801,7 +31924,7 @@ MonoBehaviour:
       \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043A\u043E\u0441\u043C\u0438\u0447\u0435\u0441\u043A\u0438\u0439
       \u0447\u0435\u043B\u043D\u043E\u043A \u043D\u0430 \u0434\u043E\u0431\u044B\u0447\u0443
       \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432."
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31812,6 +31935,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 3562911849079285424}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0412\u044B\u0431\u0435\u0440\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
       \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 \u0423\u0442\u043B\u0435\u044F(\u0441
       \u043F\u043E\u043C\u043E\u0449\u044C\u044E \u0441\u043F\u0438\u0441\u043A\u0430
@@ -31820,7 +31945,7 @@ MonoBehaviour:
       \u0435\u0433\u043E \u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0443 \u0432
       \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430
       (\u0432 \u0441\u0430\u043C\u043E\u043C \u043D\u0438\u0437\u0443)."
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31831,6 +31956,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 1196657644}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0422\u0435\u043F\u0435\u0440\u044C \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C
       \u0441\u0442\u0440\u043E\u0438\u0442\u044C! \u0427\u0442\u043E\u0431\u044B
       \u0432\u043E\u0439\u0442\u0438 \u0432 \u0440\u0435\u0436\u0438\u043C \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430
@@ -31839,7 +31966,7 @@ MonoBehaviour:
       \u043D\u0430\u0436\u0430\u0432 \u043A\u043D\u043E\u043F\u043A\u0443 \u0441
       \u043C\u043E\u043B\u043E\u0442\u043A\u043E\u043C \u0432 \u043B\u0435\u0432\u043E\u043C
       \u0432\u0435\u0440\u0445\u043D\u0435\u043C \u0443\u0433\u043B\u0443 \u044D\u043A\u0440\u0430\u043D\u0430."
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31850,10 +31977,12 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u041D\u0430\u0436\u043C\u0438 \u043D\u0430 \u043F\u043B\u044E\u0441\u0438\u043A
       \u0440\u044F\u0434\u043E\u043C \u0441 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043E\u043C
       \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430."
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31864,13 +31993,15 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0412\u044B\u0431\u0435\u0440\u0438 \u0432 \u043F\u043E\u044F\u0432\u0438\u0432\u0448\u0435\u043C\u0441\u044F
       \u0441\u043F\u0438\u0441\u043A\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
       \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430.
       \u041E\u0431\u0440\u0430\u0442\u0438 \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u0435,
       \u0447\u0442\u043E \u043F\u043E\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u0442\u0440\u0430\u0442\u0438\u0442
       \u0440\u0435\u0441\u0443\u0440\u0441\u044B!"
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31881,6 +32012,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0412\u044B\u0439\u0434\u0438 \u0438\u0437 \u0440\u0435\u0436\u0438\u043C\u0430
       \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430
       \u043D\u0430\u0436\u0430\u0442\u0438\u0435\u043C [b] \u043D\u0430 \u043A\u043B\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0435,
@@ -31888,7 +32021,7 @@ MonoBehaviour:
       \u0441 \u043C\u043E\u043B\u043E\u0442\u043E\u0447\u043A\u043E\u043C \u0432
       \u043F\u0440\u0430\u0432\u043E\u043C \u0432\u0435\u0440\u0445\u043D\u0435\u043C
       \u0443\u0433\u043B\u0443."
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31899,6 +32032,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u041D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u043D\u043E\u0432\u044C
       \u043F\u043E\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u044B
       \u0442\u0440\u0435\u0431\u0443\u044E\u0442 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438.
@@ -31913,7 +32048,7 @@ MonoBehaviour:
       \u0441\u043D\u0438\u0436\u0435\u043D\u0430; \u043F\u043E\u0432\u0442\u043E\u0440\u043D\u0430\u044F
       \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u0430
       \u043B\u0438\u0448\u044C \u0441\u043F\u0443\u0441\u0442\u044F \u0432\u0440\u0435\u043C\u044F."
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31924,6 +32059,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u041A\u0430\u0436\u0434\u044B\u0439 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
       \u043D\u0430\u0441\u0442\u0440\u0430\u0438\u0432\u0430\u0435\u0442\u0441\u044F
       \u043F\u043E \u0441\u0432\u043E\u0435\u043C\u0443. \u041F\u043E\u043D\u044F\u0442\u044C,
@@ -31933,7 +32070,7 @@ MonoBehaviour:
       \u043B\u0435\u0432\u043E\u043C \u0432\u0435\u0440\u0445\u043D\u0435\u043C \u0443\u0433\u043B\u0443.
       \u041D\u0430\u0436\u043C\u0438 \u041B\u041A\u041C, \u0447\u0442\u043E\u0431\u044B
       \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C."
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31944,6 +32081,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0427\u0442\u043E\u0431\u044B \u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C
       \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430
       \u0442\u0435\u0431\u0435 \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E
@@ -31957,7 +32096,7 @@ MonoBehaviour:
       \u0438 \u0432\u0432\u0435\u0434\u0438 \u043F\u043E\u043B\u0443\u0447\u0438\u0432\u0448\u0435\u0435\u0441\u044F
       \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435 \u0432 \u043F\u043E\u043B\u0435
       \u0432\u0432\u043E\u0434\u0430 \u043F\u043E\u0434 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u0433\u0435\u043D\u0435\u0440\u0430\u0442\u043E\u0440\u043E\u043C."
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31968,6 +32107,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u041E\u0431\u0440\u0430\u0442\u0438 \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u0435
       \u043D\u0430 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u044F.
       \u041E\u043D \u043D\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442,
@@ -31976,7 +32117,7 @@ MonoBehaviour:
       \u0427\u0442\u043E\u0431\u044B \u043F\u043E\u0434\u0430\u0442\u044C \u043F\u0438\u0442\u0430\u043D\u0438\u0435,
       \u043F\u043E\u0441\u0442\u0440\u043E\u0439 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
       \u0441\u043D\u0430\u0431\u0436\u0435\u043D\u0438\u044F \u0440\u044F\u0434\u043E\u043C."
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -31987,6 +32128,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u041E\u0442\u043F\u0440\u0430\u0432\u044C \u043E\u0441\u0432\u043E\u0431\u043E\u0434\u0438\u0432\u0448\u0435\u0433\u043E\u0441\u044F
       \u043C\u0435\u0434\u0432\u0435\u0434\u044F \u043D\u0430 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
       \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u0439 \u0438
@@ -31997,7 +32140,7 @@ MonoBehaviour:
       \u0431\u044B\u0442\u044C \u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D
       \u0442\u043E\u043B\u044C\u043A\u043E \u043D\u0430 \u044D\u0442\u043E\u0439
       \u043F\u043B\u0430\u043D\u0435\u0442\u0435."
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -32008,6 +32151,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0422\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u0443\u043B\u0443\u0447\u0448\u0430\u0442\u044C
       \u043D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u044B,
       \u0447\u0442\u043E\u0431\u044B \u0443\u0432\u0435\u043B\u0438\u0447\u0438\u0442\u044C
@@ -32020,7 +32165,7 @@ MonoBehaviour:
       \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u0435, \u0447\u0442\u043E \u0443
       \u0442\u0435\u0431\u044F \u0434\u043E\u043B\u0436\u043D\u043E \u0431\u044B\u0442\u044C
       \u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430."
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -32031,6 +32176,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0421\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0435\u043C \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u044B
       \u0442\u0435\u0440\u044F\u044E\u0442 \u0441\u0432\u043E\u044E \u043F\u0440\u043E\u0447\u043D\u043E\u0441\u0442\u044C.
       \u0427\u0442\u043E\u0431\u044B \u043F\u043E\u0447\u0438\u043D\u0438\u0442\u044C
@@ -32040,7 +32187,7 @@ MonoBehaviour:
       \u0432 \u0440\u0435\u0436\u0438\u043C\u0435 \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430.
       \u041F\u043E\u0447\u0438\u043D\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
       \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430"
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -32051,6 +32198,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0422\u0432\u043E\u0439 \u043C\u0435\u0434\u0432\u0435\u0434\u044C, \u043D\u0430\u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044B\u0439
       \u0432 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u0439
       \u0437\u0430\u0432\u0435\u0440\u0448\u0438\u043B \u0441\u0432\u043E\u044E \u0440\u0430\u0431\u043E\u0442\u0443!
@@ -32066,7 +32215,7 @@ MonoBehaviour:
       \u0438\u043B\u0438 \u043D\u0430\u0436\u0430\u0432 \u043D\u0430 \u0438\u043A\u043E\u043D\u043A\u0443
       \u043F\u043B\u0430\u043D\u0448\u0435\u0442 \u0432 \u043F\u0440\u0430\u0432\u043E\u043C
       \u0432\u0435\u0440\u0445\u043D\u0435\u043C \u0443\u0433\u043B\u0443."
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -32077,6 +32226,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u041C.\u0415.\u0414. - \u044D\u0442\u043E \u043F\u043E\u043A\u0430\u0437\u0430\u0442\u0435\u043B\u044C
       \u043B\u043E\u044F\u043B\u044C\u043D\u043E\u0441\u0442\u0438 \u043C\u0438\u0440\u0430
       \u0411\u0435\u0440\u043B\u043E\u0433\u0438 \u043A \u0442\u0435\u0431\u0435,
@@ -32092,7 +32243,7 @@ MonoBehaviour:
       \u0443\u0440\u0441\u043E\u0432\u0430\u043A\u0441\u0430. \u0427\u0435\u043C
       \u0431\u043E\u043B\u044C\u0448\u0435 \u041C.\u0415.\u0414\u0430 \u0442\u0435\u043C
       \u043B\u0443\u0447\u0448\u0435!!"
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -32103,6 +32254,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0422\u044B \u0433\u043E\u0442\u043E\u0432, \u0447\u0442\u043E\u0431\u044B
       \u0441\u0442\u0430\u0442\u044C \u043D\u0430\u0441\u0442\u043E\u044F\u0449\u0438\u043C
       \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0446\u0435\u043C! \u0418\u043C\u0435\u043D\u0435\u043C
@@ -32112,7 +32265,7 @@ MonoBehaviour:
       \u0423\u041F\u0420\u0410\u0412\u041B\u0415\u041D\u0426\u042B. \u0421\u0442\u0430\u043D\u044C
       \u043C\u0435\u0434\u0432\u0435\u0434\u0435\u043C, \u043A\u043E\u0442\u043E\u0440\u044B\u0439
       \u0441\u043C\u043E\u0433!"
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -32123,8 +32276,10 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0421\u043E\u0441\u0430\u043B?"
-    position: {x: 0, y: 0}
+    position: {x: 0, y: 0, z: 0}
     pointer:
       target: {fileID: 0}
       angleZ: 0
@@ -32135,9 +32290,11 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   textOutput: {fileID: 432270029}
   tutorialView: {fileID: 94874731}
-  pointerPrefab: {fileID: 0}
+  pointerPrefab: {fileID: 1914244455409487036, guid: c280cc053adab3b409c8628063711174, type: 3}
 --- !u!1 &2038204623
 GameObject:
   m_ObjectHideFlags: 0
