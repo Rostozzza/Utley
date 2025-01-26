@@ -222,7 +222,16 @@ public class TutorialManager : MonoBehaviour
 	private void SpawnPointer(Pointer data)
 	{
 		var pointer = Instantiate(pointerPrefab, tutorialCanvas).transform;
-		pointer.position = data.target.position;
+		if (data.target.GetComponentInParent<Canvas>() != tutorialCanvas)
+		{
+			Vector2 newPos;
+			RectTransformUtility.ScreenPointToLocalPointInRectangle(tutorialCanvas.GetComponent<RectTransform>(), (Vector2)Camera.main.WorldToScreenPoint(data.target.position), Camera.main, out newPos);
+			pointer.position = newPos;
+		}
+		else
+		{
+			pointer.position = data.target.position;
+		}
 		pointer.eulerAngles = new Vector3(0, 0, data.angleZ);
 		pointer.localScale = new Vector3(data.length, data.length, data.length);
 		TryClearPointer();
