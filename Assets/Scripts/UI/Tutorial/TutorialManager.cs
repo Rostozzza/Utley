@@ -5,6 +5,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 using System.Diagnostics.CodeAnalysis;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -59,7 +60,8 @@ public class TutorialManager : MonoBehaviour
 		OnMenuShown,
 		OnBearSelect,
 		OnBearMove,
-		OnClickLMB
+		OnClickLMB,
+		OnRoomInfoCheck
 	}
 
 	private void Start()
@@ -127,6 +129,17 @@ public class TutorialManager : MonoBehaviour
 					break;
 				case Condition.OnClickLMB:
 					while (!Input.GetMouseButtonDown(0)) yield return null;
+					break;
+				case Condition.OnRoomInfoCheck:
+					while (!GameManager.Instance.allRooms.Where(x => x.GetComponent<RoomScript>()).Any(x => 
+						{
+							if (x.transform.Find("RoomInfo").gameObject.activeInHierarchy)
+							{
+								Debug.Log(x.transform);
+								return true;
+							}
+							return false;
+						})) yield return null;
 					break;
 			}
 		}
