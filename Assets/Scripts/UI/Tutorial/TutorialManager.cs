@@ -127,6 +127,7 @@ public class TutorialManager : MonoBehaviour
 				case Condition.OnButtonPress:
 					button.onClick.AddListener(StopWaiting);
 					yield return WaitForEvent();
+					button.onClick.RemoveListener(StopWaiting);
 					Debug.Log("Sosal?");
 					isButtonPressed = false;
 					break;
@@ -145,8 +146,14 @@ public class TutorialManager : MonoBehaviour
 						})) yield return null;
 					break;
 				case Condition.OnBearSelect:
-					EventManager.bearSelected.AddListener(StopWaiting);
+					EventManager.onBearSelected.AddListener(StopWaiting);
 					yield return WaitForEvent();
+					EventManager.onBearSelected.RemoveListener(StopWaiting);
+					break;
+				case Condition.OnBearMove:
+					EventManager.onBearReachedDestination.AddListener(StopWaitingForEnergohoneyReached);
+					yield return WaitForEvent();
+					EventManager.onBearReachedDestination.RemoveListener(StopWaitingForEnergohoneyReached);
 					break;
 			}
 		}
@@ -166,6 +173,9 @@ public class TutorialManager : MonoBehaviour
 		pointerSlot = pointer.gameObject;
 	}
 
+	/// <summary>
+	/// Removes pointer from scene;
+	/// </summary>
 	private void TryClearPointer()
 	{
 		if (pointerSlot == null)
@@ -174,6 +184,20 @@ public class TutorialManager : MonoBehaviour
 		}
 		Destroy(pointerSlot);
 		pointerSlot = null;
+	}
+
+	/// <summary>
+	/// Checks if bear that had triggered the event reached energohoney room and stops waiting;
+	/// </summary>
+	/// <param name="room"></param>
+	private void StopWaitingForEnergohoneyReached(RoomScript room)
+	{
+		if (room.GetType() == typeof(EnergohoneyRoom))
+		{
+			Debug.Log("reached energohoney!");
+			isButtonPressed = true;
+			StopCoroutine(WaitForEvent());
+		}
 	}
 
 	/// <summary>
@@ -191,7 +215,7 @@ public class TutorialManager : MonoBehaviour
 	/// </summary>
 	private IEnumerator WaitForEvent()
 	{
-		while (!Input.GetMouseButtonDown(1) && !isButtonPressed)
+		while (!isButtonPressed)
 		{
 			yield return null;
 		}

@@ -191,6 +191,7 @@ public class UnitMovement : MonoBehaviour
 				yield return null;
 			}
 		}
+		EventManager.onBearReachedDestination.Invoke(target);
 		currentRoutine = null;
 		GetComponentInChildren<Animator>().SetBool("Walk", false);
 	}
