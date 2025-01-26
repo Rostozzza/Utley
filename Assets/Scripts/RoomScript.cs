@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;
 
 public class RoomScript : MonoBehaviour
 {
+	[SerializeField] private bool outlineTemp;
 	[SerializeField] public Status status;
 	[SerializeField] public Resources resource;
 	[SerializeField] private GameObject roomStatsScreen;
@@ -131,6 +132,7 @@ public class RoomScript : MonoBehaviour
 		defaultLampColor = lamps[0].GetComponent<Renderer>().material.color;
 		baseOfRoom = transform.Find("base").gameObject;
 		defaultBaseColor = baseOfRoom.GetComponent<Renderer>().material.color;
+		if (outlineTemp) transform.GetComponent<RoomOutliner>().SetOutline(true);
 		foreach (var button in GetComponentsInChildren<Button>().Where(x => !x.CompareTag("dont_hide_button")))
 		{
 			button.gameObject.SetActive(GameManager.Instance.mode == GameManager.Mode.Build);

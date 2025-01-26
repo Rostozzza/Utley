@@ -4,7 +4,7 @@ using UnityEngine;
 public class RoomOutliner : MonoBehaviour
 {
     [SerializeField] private List<SpriteRenderer> outlineFrameParts;
-    private Color color = Color.blue;
+    private Color color = Color.yellow;
     void Start()
     {
         if (outlineFrameParts.Count == 0)

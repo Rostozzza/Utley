@@ -59,6 +59,7 @@ public class TutorialManager : MonoBehaviour
 		OnMenuShown,
 		OnBearSelect,
 		OnBearMove,
+		OnClickLMB
 	}
 
 	private void Start()
@@ -111,11 +112,11 @@ public class TutorialManager : MonoBehaviour
 			{
 				case Condition.OnCameraMove:
 					var cameraTransform = Camera.main.transform;
-					var deltaCameraMovement = 0f;
+					var pathCameraMovement = 0f;
 					Vector2 previousPos = cameraTransform.position;
-					while (deltaCameraMovement <= 50f)
+					while (pathCameraMovement <= 50f)
 					{
-						deltaCameraMovement += MathF.Abs(((Vector2)cameraTransform.position - previousPos).magnitude);
+						pathCameraMovement += MathF.Abs(((Vector2)cameraTransform.position - previousPos).magnitude);
 						previousPos = cameraTransform.position;
 						yield return null;
 					}
@@ -123,6 +124,9 @@ public class TutorialManager : MonoBehaviour
 				case Condition.OnButtonPress:
 					button.onClick.AddListener(OnButtonClick);
 					yield return WaitForButtonClick();
+					break;
+				case Condition.OnClickLMB:
+					while (!Input.GetMouseButtonDown(0)) yield return null;
 					break;
 			}
 		}
