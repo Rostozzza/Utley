@@ -7632,6 +7632,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
+--- !u!114 &496612051 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1234976984716336758, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
+  m_PrefabInstance: {fileID: 496612050}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50985220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1841e854cbd66154ea77d9a6556d4004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &503725508
 GameObject:
   m_ObjectHideFlags: 0
@@ -32047,6 +32058,27 @@ MonoBehaviour:
     keyToCheck: 0
     tagToCheck: 
     roomToCheck: {fileID: 3562911849079285424}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0412\u044B\u0431\u0435\u0440\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
+      \u0442\u0432\u043E\u0440\u0446\u0430 \u041D\u0438\u043A\u0438\u0442\u0443 (\u0441
+      \u043F\u043E\u043C\u043E\u0449\u044C\u044E \u0441\u043F\u0438\u0441\u043A\u0430
+      \u043C\u043E\u043D\u0438\u0442\u043E\u0440\u043E\u0432 \u0441\u043F\u0440\u0430\u0432\u0430
+      \u0438\u043B\u0438 \u043A\u043B\u0430\u0432\u0438\u0448\u0438 4) \u0438 \u043E\u0442\u043F\u0440\u0430\u0432\u044C
+      \u0435\u0433\u043E \u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0443 \u0432
+      \u0436\u0438\u043B\u043E\u0439 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441(\u0442\u0430\u043C,
+      \u0433\u0434\u0435 \u043A\u0440\u043E\u0432\u0430\u0442\u0438)."
+    position: {x: 0, y: 0, z: 0}
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    conditionsSequence: 08000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 496612051}
     roomHighlight: {fileID: 0}
     krugPos: {x: 0, y: 0, z: 0}
     krugScale: 0
