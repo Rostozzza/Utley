@@ -114,7 +114,7 @@ public class TutorialManager : MonoBehaviour
 					var cameraTransform = Camera.main.transform;
 					var pathCameraMovement = 0f;
 					Vector2 previousPos = cameraTransform.position;
-					while (pathCameraMovement <= 50f)
+					while (pathCameraMovement <= 0f) // Earlier was 50f, but Egor said that player should just move camera, not overcome the distance. :D
 					{
 						pathCameraMovement += MathF.Abs(((Vector2)cameraTransform.position - previousPos).magnitude);
 						previousPos = cameraTransform.position;
