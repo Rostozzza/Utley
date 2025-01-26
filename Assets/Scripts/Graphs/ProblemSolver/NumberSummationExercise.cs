@@ -29,6 +29,7 @@ public class NumberSummationExercise : MonoBehaviour
 	/// <returns></returns>
 	private int GenerateTask(int steps = 3)
 	{
+		EventManager.onEnergohoneySettingsOpened.Invoke();
 		points = pointsParent.GetComponentsInChildren<OgePointLogic>().ToList();
 		int randomPointIndex = Random.Range(0, Mathf.Clamp(steps, 0, points.Count));
 		foreach (var point in points)

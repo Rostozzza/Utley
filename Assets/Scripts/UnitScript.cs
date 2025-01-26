@@ -261,6 +261,7 @@ public class UnitScript : MonoBehaviour
 
 	private IEnumerator BuildBehaviour(GameObject obj)
 	{
+		EventManager.onBearWorkStarted.Invoke(GetComponent<UnitMovement>().currentRoom);
 		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
 		GetComponentInChildren<Animator>().SetBool("Work", true);
 		while (obj.GetComponent<BuilderRoom>().GetWait())
@@ -330,6 +331,10 @@ public class UnitScript : MonoBehaviour
 		statusPanel.UpdateState(isBusy);
 		GetComponentInChildren<Animator>().SetBool("Work", false);
 		GetComponentInChildren<Animator>().SetBool("Walk", false);
+		if (isBearBusy)
+		{
+			EventManager.onBearWorkStarted.Invoke(GetComponent<UnitMovement>().currentRoom);
+		}
 	}
 
 	public void Boost()
