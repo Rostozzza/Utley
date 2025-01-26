@@ -54,7 +54,7 @@ public class TutorialManager : MonoBehaviour
 	{
 		public Transform target;
 		public float angleZ;
-		public float length;
+		public float offset;
 	}
 
 	/// <summary>
@@ -231,24 +231,24 @@ public class TutorialManager : MonoBehaviour
 			Debug.Log($"POINTER AT {newPos}");
 			TryClearPointer();
 			pointer.eulerAngles = new Vector3(0, 0, data.angleZ);
-			pointer.localScale = new Vector3(data.length, data.length, data.length);
+			pointer.GetComponent<RectTransform>().pivot += new Vector2(data.offset, 0);
 			pointerSlot = pointer.gameObject;
 			while (pointer != null)
 			{
 				RectTransformUtility.ScreenPointToLocalPointInRectangle(tutorialCanvas.GetComponent<RectTransform>(), (Vector2)Camera.main.WorldToScreenPoint(data.target.position), Camera.main, out newPos);
-				pointer.position = newPos;
+				pointer.localPosition = newPos;
 				yield return null;
 			}
 		}
 		else
 		{
 			pointer.position = data.target.position;
+			pointer.GetComponent<RectTransform>().pivot += new Vector2(data.offset, 0);
+			pointer.eulerAngles = new Vector3(0, 0, data.angleZ);
+			TryClearPointer();
+			pointerSlot = pointer.gameObject;
+			yield return null;
 		}
-		pointer.eulerAngles = new Vector3(0, 0, data.angleZ);
-		pointer.localScale = new Vector3(data.length, data.length, data.length);
-		TryClearPointer();
-		pointerSlot = pointer.gameObject;
-		yield return null;
 	}
 
 	/// <summary>
