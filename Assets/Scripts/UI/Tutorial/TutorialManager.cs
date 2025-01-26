@@ -63,7 +63,8 @@ public class TutorialManager : MonoBehaviour
 		OnBearSelect,
 		OnBearMove,
 		OnClickLMB,
-		OnRoomInfoCheck
+		OnRoomInfoCheck,
+		OnRoomSelect
 	}
 
 	private void Start()
@@ -147,6 +148,11 @@ public class TutorialManager : MonoBehaviour
 				case Condition.OnBearSelect:
 					EventManager.bearSelected.AddListener(StopWaiting);
 					yield return WaitForEvent();
+					break;
+				case Condition.OnRoomSelect:
+					EventManager.onRoomSelected.AddListener(StopWaiting);
+					yield return WaitForEvent();
+					EventManager.onRoomSelected.RemoveListener(StopWaiting);
 					break;
 			}
 		}
