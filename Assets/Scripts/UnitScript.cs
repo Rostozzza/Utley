@@ -207,6 +207,7 @@ public class UnitScript : MonoBehaviour
 				break;
 			case RoomScript.Resources.Bed:
 				walkingCoroutine = StartCoroutine(BedroomWalkBehaviour(walkPoints, obj));
+				EventManager.onBearWorkStarted.Invoke(GetComponent<UnitMovement>().currentRoom);
 				while (obj.GetComponent<RoomScript>().status == RoomScript.Status.Busy)
 				{
 					yield return null;
