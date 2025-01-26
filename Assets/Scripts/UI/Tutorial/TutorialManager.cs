@@ -16,6 +16,8 @@ public class TutorialManager : MonoBehaviour
 	[SerializeField] private GameObject kruzhochek;
 	[SerializeField] private Transform tutorialCanvas;
 	[SerializeField] private List<TutorialPart> sequence;
+	private KeyCode keyCodeToCheck = KeyCode.None;
+	private RoomScript roomToCheck = null;
 	[Header("View Settings")]
 	[SerializeField] private TextMeshProUGUI textOutput;
 	[SerializeField] private Transform tutorialView;
@@ -36,6 +38,7 @@ public class TutorialManager : MonoBehaviour
 		public Pointer pointer;
 		public List<Condition> conditionsSequence;
 		public Button buttonToCheck;
+		public KeyCode keyToCheck;
 		public string tagToCheck;
 		public RoomScript roomToCheck;
 		public RoomOutliner roomHighlight;
@@ -67,7 +70,9 @@ public class TutorialManager : MonoBehaviour
 		OnBearMove,
 		OnClickLMB,
 		OnRoomInfoCheck,
-		OnRoomSelect
+		OnRoomSelect,
+		OnBearWorkStarted,
+		OnEnergohoneySettingsOpened
 	}
 
 	private void Start()
@@ -92,6 +97,14 @@ public class TutorialManager : MonoBehaviour
 			{
 				part.roomHighlight.SetOutline(true);
 			}
+			if (part.roomToCheck != null)
+			{
+				roomToCheck = part.roomToCheck;
+			}
+			if (part.keyToCheck != KeyCode.None)
+			{
+				keyCodeToCheck = part.keyToCheck;
+			}
 			if (part.krugScale != 0)
 			{
 				kruzhochek.GetComponent<Image>().enabled = true;
@@ -109,6 +122,8 @@ public class TutorialManager : MonoBehaviour
 			{
 				part.roomHighlight.SetOutline(false);
 			}
+			roomToCheck = null;
+			keyCodeToCheck = KeyCode.None;
 			TryClearPointer();
 		}
 	}
@@ -165,14 +180,24 @@ public class TutorialManager : MonoBehaviour
 					EventManager.onBearSelected.RemoveListener(StopWaiting);
 					break;
 				case Condition.OnBearMove:
-					EventManager.onBearReachedDestination.AddListener(StopWaitingForEnergohoneyReached);
+					EventManager.onBearReachedDestination.AddListener(StopWaitingForRoomCheck);
 					yield return WaitForEvent();
-					EventManager.onBearReachedDestination.RemoveListener(StopWaitingForEnergohoneyReached);
+					EventManager.onBearReachedDestination.RemoveListener(StopWaitingForRoomCheck);
 					break;
 				case Condition.OnRoomSelect:
 					EventManager.onRoomSelected.AddListener(StopWaiting);
 					yield return WaitForEvent();
 					EventManager.onRoomSelected.RemoveListener(StopWaiting);
+					break;
+				case Condition.OnBearWorkStarted:
+					EventManager.onBearWorkStarted.AddListener(StopWaitingForRoomCheck);
+					yield return WaitForEvent();
+					EventManager.onBearWorkStarted.RemoveListener(StopWaitingForRoomCheck);
+					break;
+				case Condition.OnEnergohoneySettingsOpened:
+					EventManager.onEnergohoneySettingsOpened.AddListener(StopWaiting);
+					yield return WaitForEvent();
+					EventManager.onEnergohoneySettingsOpened.RemoveListener(StopWaiting);
 					break;
 			}
 		}
@@ -209,11 +234,11 @@ public class TutorialManager : MonoBehaviour
 	/// Checks if bear that had triggered the event reached energohoney room and stops waiting;
 	/// </summary>
 	/// <param name="room"></param>
-	private void StopWaitingForEnergohoneyReached(RoomScript room)
+	private void StopWaitingForRoomCheck(RoomScript room)
 	{
-		if (room.GetType() == typeof(EnergohoneyRoom))
+		if (room.GetType() == roomToCheck.GetType())
 		{
-			Debug.Log("reached energohoney!");
+			Debug.Log("reached room!");
 			isButtonPressed = true;
 			StopCoroutine(WaitForEvent());
 		}
@@ -234,7 +259,7 @@ public class TutorialManager : MonoBehaviour
 	/// </summary>
 	private IEnumerator WaitForEvent()
 	{
-		while (!isButtonPressed)
+		while (!isButtonPressed && (keyCodeToCheck != KeyCode.None ? !Input.GetKeyDown(keyCodeToCheck) : true))
 		{
 			yield return null;
 		}
