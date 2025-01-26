@@ -244,6 +244,7 @@ public class ShopItem : MonoBehaviour
 						resources_changed = new Dictionary<string, float> { { "player_ursowaks", -float.Parse(requestedAmount.text) } },
 						player_name = GameManager.Instance.playerName
 					});
+					EventManager.onUrsovaxSent.Invoke();
 					break;
 			}
 			await GameManager.Instance.ChangeHNY(price * int.Parse(requestedAmount.text), new Log

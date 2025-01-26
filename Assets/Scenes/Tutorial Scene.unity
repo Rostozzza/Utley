@@ -1052,6 +1052,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82129569}
   m_CullTransparentMesh: 1
+--- !u!1 &94874730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 94874731}
+  - component: {fileID: 94874733}
+  - component: {fileID: 94874732}
+  m_Layer: 5
+  m_Name: TutorialView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &94874731
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94874730}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1951086584}
+  - {fileID: 432270028}
+  m_Father: {fileID: 1732883441}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 278.90002, y: -156.88}
+  m_SizeDelta: {x: -557.8, y: -313.76}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &94874732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94874730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.07058824, g: 0.03529412, b: 0.21960786, a: 0.9098039}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &94874733
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94874730}
+  m_CullTransparentMesh: 1
 --- !u!1 &106961786
 GameObject:
   m_ObjectHideFlags: 0
@@ -3560,42 +3637,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257705691}
   m_CullTransparentMesh: 1
---- !u!1 &259065453
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 259065454}
-  m_Layer: 5
-  m_Name: Tutorial
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &259065454
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259065453}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1761565746}
-  m_Father: {fileID: 1741973713}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &262029570
 GameObject:
   m_ObjectHideFlags: 0
@@ -5998,6 +6039,142 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416009648}
+  m_CullTransparentMesh: 1
+--- !u!1 &432270027
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 432270028}
+  - component: {fileID: 432270030}
+  - component: {fileID: 432270029}
+  m_Layer: 5
+  m_Name: TutorialText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &432270028
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432270027}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 94874731}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -39.04, y: -2.09}
+  m_SizeDelta: {x: 149.1, y: 117.62}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &432270029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432270027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: d2f3e21a7e05df241bcf2be5c47baaf7, type: 2}
+  m_sharedMaterial: {fileID: -2156433623214286269, guid: d2f3e21a7e05df241bcf2be5c47baaf7, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 1.24
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &432270030
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432270027}
   m_CullTransparentMesh: 1
 --- !u!1 &438377825
 GameObject:
@@ -9483,156 +9660,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 604504539}
-  m_CullTransparentMesh: 1
---- !u!1 &607129691
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 607129692}
-  - component: {fileID: 607129694}
-  - component: {fileID: 607129693}
-  m_Layer: 5
-  m_Name: Krug
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &607129692
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 607129691}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1741973713}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &607129693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 607129691}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.8039216, b: 0.08627451, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6024c030ee45aff44b9907f715e97cd7, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &607129694
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 607129691}
-  m_CullTransparentMesh: 1
---- !u!1 &613624832
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 613624833}
-  - component: {fileID: 613624835}
-  - component: {fileID: 613624834}
-  m_Layer: 5
-  m_Name: Bear
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &613624833
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613624832}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1761565746}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 76.4, y: 2.7}
-  m_SizeDelta: {x: 74.79, y: 98.8}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &613624834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613624832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9dfce0c4c5ad157499e68c7a7b4c1756, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &613624835
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613624832}
   m_CullTransparentMesh: 1
 --- !u!1 &613803461
 GameObject:
@@ -15893,6 +15920,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
+--- !u!114 &1006031557 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6177540711765823202, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
+  m_PrefabInstance: {fileID: 1006031556}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1032845230
 GameObject:
   m_ObjectHideFlags: 0
@@ -21374,6 +21412,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6a70607a7eb97498073c99d199ea9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1398197920 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4529240506288044491, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+  m_PrefabInstance: {fileID: 1398197918}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1398197921 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9202728377364343100, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+  m_PrefabInstance: {fileID: 1398197918}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1403493862
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24180,6 +24240,108 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1627039768}
   m_CullTransparentMesh: 1
+--- !u!1 &1633323104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1633323105}
+  - component: {fileID: 1633323108}
+  - component: {fileID: 1633323107}
+  - component: {fileID: 1633323106}
+  m_Layer: 5
+  m_Name: TutorialCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1633323105
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633323104}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1732883441}
+  m_Father: {fileID: 2101982847}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &1633323106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633323104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1633323107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633323104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &1633323108
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633323104}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 1
+  m_Camera: {fileID: 330585545}
+  m_PlaneDistance: 2
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 32767
+  m_TargetDisplay: 0
 --- !u!1 &1642775197
 GameObject:
   m_ObjectHideFlags: 0
@@ -24378,142 +24540,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 801.4, y: 177.52}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1662712074
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1662712075}
-  - component: {fileID: 1662712077}
-  - component: {fileID: 1662712076}
-  m_Layer: 5
-  m_Name: TutorialText
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1662712075
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1662712074}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1761565746}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -39.04, y: -2.09}
-  m_SizeDelta: {x: 149.1, y: 117.62}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1662712076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1662712074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: 
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d2f3e21a7e05df241bcf2be5c47baaf7, type: 2}
-  m_sharedMaterial: {fileID: -2156433623214286269, guid: d2f3e21a7e05df241bcf2be5c47baaf7, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 1
-  m_fontSizeMin: 1.24
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1662712077
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1662712074}
-  m_CullTransparentMesh: 1
 --- !u!1 &1676835880
 GameObject:
   m_ObjectHideFlags: 0
@@ -25611,6 +25637,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1724428823}
   m_CullTransparentMesh: 1
+--- !u!1 &1732883440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1732883441}
+  m_Layer: 5
+  m_Name: Tutorial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1732883441
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732883440}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 94874731}
+  m_Father: {fileID: 1633323105}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1737250276
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25739,8 +25801,6 @@ RectTransform:
   - {fileID: 1790237335}
   - {fileID: 511216556}
   - {fileID: 584009458}
-  - {fileID: 259065454}
-  - {fileID: 607129692}
   m_Father: {fileID: 2101982847}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -25961,83 +26021,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760149263}
-  m_CullTransparentMesh: 1
---- !u!1 &1761565745
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1761565746}
-  - component: {fileID: 1761565748}
-  - component: {fileID: 1761565747}
-  m_Layer: 5
-  m_Name: TutorialView
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1761565746
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1761565745}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 613624833}
-  - {fileID: 1662712075}
-  m_Father: {fileID: 259065454}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 278.90002, y: -156.88}
-  m_SizeDelta: {x: -557.8, y: -313.76}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1761565747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1761565745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.07058824, g: 0.03529412, b: 0.21960786, a: 0.9098039}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1761565748
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1761565745}
   m_CullTransparentMesh: 1
 --- !u!1001 &1771013346
 PrefabInstance:
@@ -30488,6 +30471,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1947409469}
   m_CullTransparentMesh: 1
+--- !u!1 &1951086583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1951086584}
+  - component: {fileID: 1951086586}
+  - component: {fileID: 1951086585}
+  m_Layer: 5
+  m_Name: Bear
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1951086584
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951086583}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 94874731}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 76.4, y: 2.7}
+  m_SizeDelta: {x: 74.79, y: 98.8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1951086585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951086583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 9dfce0c4c5ad157499e68c7a7b4c1756, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1951086586
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951086583}
+  m_CullTransparentMesh: 1
 --- !u!1 &1955703260
 GameObject:
   m_ObjectHideFlags: 0
@@ -31564,8 +31622,6 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
   - text: "\u041A\u0430\u0436\u0434\u0430\u044F \u0431\u0430\u0437\u0430 \u0441\u043E\u0441\u0442\u043E\u0438\u0442
       \u0438\u0437 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043E\u0432.
       \u0427\u0442\u043E\u0431\u044B \u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C
@@ -31586,8 +31642,6 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
   - text: "\u0422\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u0443\u0437\u043D\u0430\u0442\u044C
       \u0431\u043E\u043B\u0435\u0435 \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u0443\u044E
       \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E \u043E \u043A\u0430\u0436\u0434\u043E\u043C
@@ -31610,8 +31664,6 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
   - text: "<color=\"yellow\">\u041A\u043B\u0438\u043A\u043E\u043C \u043C\u044B\u0448\u0438
       (\u041B\u041A\u041C - \u043B\u0435\u0432\u0430\u044F \u043A\u043D\u043E\u043F\u043A\u0430
       \u043C\u044B\u0448\u0438)</color> \u043F\u043E \u043A\u043E\u0441\u043C\u043E\u0434\u0440\u043E\u043C\u0443
@@ -31637,8 +31689,6 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
   - text: "\u041F\u043E\u0437\u043D\u0430\u043A\u043E\u043C\u044C\u0441\u044F \u0441\u043E
       \u0432\u0441\u0435\u043C\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F\u043C\u0438
       \u043A\u043B\u0438\u043A\u043D\u0443\u0432 \u043C\u044B\u0448\u044C\u044E(<color=\"yellow\">\u041B\u041A\u041C</color>)
@@ -31669,8 +31719,6 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
   - text: "\u041F\u043E\u0437\u043D\u0430\u043A\u043E\u043C\u044C\u0441\u044F \u0441
       \u0438\u043D\u0434\u0438\u043A\u0430\u0442\u043E\u0440\u0430\u043C\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043E\u0432
       \u0432 \u0441\u043F\u0438\u0441\u043A\u0435 \u0441\u043B\u0435\u0432\u0430.
@@ -31689,8 +31737,6 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
   - text: "\u0427\u0442\u043E\u0431\u044B \u043F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C
       \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0433\u043E \u043C\u0435\u0434\u0432\u0435\u0434\u044F
       \u043A\u043B\u0438\u043A\u043D\u0438 \u041F\u041A\u041C(\u043F\u0440\u0430\u0432\u043E\u0439
@@ -31712,8 +31758,6 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 1398197919}
     roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
   - text: "\u0422\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u043D\u0430\u0437\u043D\u0430\u0447\u0430\u0442\u044C
       \u043C\u0435\u0434\u0432\u0435\u0434\u0435\u0439 \u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0443.
       \u0412\u044B\u0431\u0435\u0440\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
@@ -31742,8 +31786,6 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 1398197919}
     roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
   - text: "\u0412\u044B\u0431\u0435\u0440\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
       \u043F\u0435\u0440\u0432\u043E\u043F\u0440\u043E\u0445\u043E\u0434\u0446\u0430
       \u0414\u0430\u0448\u0443(\u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E
@@ -31770,8 +31812,6 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 3562911849079285424}
     roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
   - text: "\u0412\u044B\u0431\u0435\u0440\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
       \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 \u0423\u0442\u043B\u0435\u044F(\u0441
       \u043F\u043E\u043C\u043E\u0449\u044C\u044E \u0441\u043F\u0438\u0441\u043A\u0430
@@ -31791,8 +31831,6 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 1196657644}
     roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
   - text: "\u0422\u0435\u043F\u0435\u0440\u044C \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C
       \u0441\u0442\u0440\u043E\u0438\u0442\u044C! \u0427\u0442\u043E\u0431\u044B
       \u0432\u043E\u0439\u0442\u0438 \u0432 \u0440\u0435\u0436\u0438\u043C \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430
@@ -31812,8 +31850,6 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
   - text: "\u041D\u0430\u0436\u043C\u0438 \u043D\u0430 \u043F\u043B\u044E\u0441\u0438\u043A
       \u0440\u044F\u0434\u043E\u043C \u0441 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043E\u043C
       \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430."
@@ -31828,8 +31864,6 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
   - text: "\u0412\u044B\u0431\u0435\u0440\u0438 \u0432 \u043F\u043E\u044F\u0432\u0438\u0432\u0448\u0435\u043C\u0441\u044F
       \u0441\u043F\u0438\u0441\u043A\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
       \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430.
@@ -31847,8 +31881,6 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
   - text: "\u0412\u044B\u0439\u0434\u0438 \u0438\u0437 \u0440\u0435\u0436\u0438\u043C\u0430
       \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430
       \u043D\u0430\u0436\u0430\u0442\u0438\u0435\u043C [b] \u043D\u0430 \u043A\u043B\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0435,
@@ -31867,8 +31899,6 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
   - text: "\u041D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u043D\u043E\u0432\u044C
       \u043F\u043E\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u044B
       \u0442\u0440\u0435\u0431\u0443\u044E\u0442 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438.
@@ -31894,8 +31924,205 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
+  - text: "\u041A\u0430\u0436\u0434\u044B\u0439 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u043D\u0430\u0441\u0442\u0440\u0430\u0438\u0432\u0430\u0435\u0442\u0441\u044F
+      \u043F\u043E \u0441\u0432\u043E\u0435\u043C\u0443. \u041F\u043E\u043D\u044F\u0442\u044C,
+      \u043A\u0430\u043A \u043D\u0443\u0436\u043D\u043E \u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C
+      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u043C\u043E\u0436\u043D\u043E
+      \u043F\u043E \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0435 \u0432
+      \u043B\u0435\u0432\u043E\u043C \u0432\u0435\u0440\u0445\u043D\u0435\u043C \u0443\u0433\u043B\u0443.
+      \u041D\u0430\u0436\u043C\u0438 \u041B\u041A\u041C, \u0447\u0442\u043E\u0431\u044B
+      \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C."
+    position: {x: 0, y: 0}
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      length: 0
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+  - text: "\u0427\u0442\u043E\u0431\u044B \u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C
+      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430
+      \u0442\u0435\u0431\u0435 \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E
+      \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E \u043F\u043E\u0434\u0430\u0442\u044C
+      \u043F\u0438\u0442\u0430\u043D\u0438\u0435 \u043D\u0430 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u0433\u0435\u043D\u0435\u0440\u0430\u0442\u043E\u0440.
+      \u0414\u043B\u044F \u044D\u0442\u043E\u0433\u043E \u043F\u043E\u0441\u0447\u0438\u0442\u0430\u0439
+      \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C
+      \u0432\u044B\u0434\u0435\u043B\u0435\u043D\u043D\u044B\u0445 \u043A\u0440\u0430\u0441\u043D\u044B\u043C
+      \u0443\u043B\u044C\u0435\u0432 (\u043F\u0440\u043E\u0441\u0443\u043C\u043C\u0438\u0440\u0443\u0439
+      \u0447\u0438\u0441\u043B\u0430 \u043C\u0435\u0436\u0434\u0443 \u043D\u0438\u043C\u0438)
+      \u0438 \u0432\u0432\u0435\u0434\u0438 \u043F\u043E\u043B\u0443\u0447\u0438\u0432\u0448\u0435\u0435\u0441\u044F
+      \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435 \u0432 \u043F\u043E\u043B\u0435
+      \u0432\u0432\u043E\u0434\u0430 \u043F\u043E\u0434 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u0433\u0435\u043D\u0435\u0440\u0430\u0442\u043E\u0440\u043E\u043C."
+    position: {x: 0, y: 0}
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      length: 0
+    conditionsSequence: 0a000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+  - text: "\u041E\u0431\u0440\u0430\u0442\u0438 \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u0435
+      \u043D\u0430 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u044F.
+      \u041E\u043D \u043D\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442,
+      \u0442\u0430\u043A \u043A\u0430\u043A \u043D\u0430 \u043D\u0435\u0433\u043E
+      \u043D\u0435 \u043F\u043E\u0434\u0430\u043D\u043E \u043F\u0438\u0442\u0430\u043D\u0438\u0435.
+      \u0427\u0442\u043E\u0431\u044B \u043F\u043E\u0434\u0430\u0442\u044C \u043F\u0438\u0442\u0430\u043D\u0438\u0435,
+      \u043F\u043E\u0441\u0442\u0440\u043E\u0439 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u0441\u043D\u0430\u0431\u0436\u0435\u043D\u0438\u044F \u0440\u044F\u0434\u043E\u043C."
+    position: {x: 0, y: 0}
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      length: 0
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 73273328}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+  - text: "\u041E\u0442\u043F\u0440\u0430\u0432\u044C \u043E\u0441\u0432\u043E\u0431\u043E\u0434\u0438\u0432\u0448\u0435\u0433\u043E\u0441\u044F
+      \u043C\u0435\u0434\u0432\u0435\u0434\u044F \u043D\u0430 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u0439 \u0438
+      \u0441\u043E\u0437\u0434\u0430\u0439 \u0443\u0440\u0441\u043E\u0432\u0430\u043A\u0441.
+      \u0423\u0440\u0441\u043E\u0432\u0430\u043A\u0441 \u043A\u0440\u0430\u0439\u043D\u0435
+      \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C \u043C\u0438\u0440\u0443
+      \u043C\u0435\u0434\u0432\u0435\u0434\u0435\u0439 \u0438 \u043C\u043E\u0436\u0435\u0442
+      \u0431\u044B\u0442\u044C \u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D
+      \u0442\u043E\u043B\u044C\u043A\u043E \u043D\u0430 \u044D\u0442\u043E\u0439
+      \u043F\u043B\u0430\u043D\u0435\u0442\u0435."
+    position: {x: 0, y: 0}
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      length: 0
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 1006031557}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+  - text: "\u0422\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u0443\u043B\u0443\u0447\u0448\u0430\u0442\u044C
+      \u043D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u044B,
+      \u0447\u0442\u043E\u0431\u044B \u0443\u0432\u0435\u043B\u0438\u0447\u0438\u0442\u044C
+      \u0438\u0445 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C.
+      \u0412\u043E\u0439\u0434\u0438 \u0432 \u0440\u0435\u0436\u0438\u043C \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u043E,
+      \u043D\u0430\u0436\u043C\u0438 \u041B\u041A\u041C \u043D\u0430 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430
+      \u0438 \u0432\u044B\u0431\u0435\u0440\u0438 \u043F\u0443\u043D\u043A\u0442
+      \"\u0423\u043B\u0443\u0447\u0448\u0438\u0442\u044C\". \u041E\u0431\u0440\u0430\u0442\u0438
+      \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u0435, \u0447\u0442\u043E \u0443
+      \u0442\u0435\u0431\u044F \u0434\u043E\u043B\u0436\u043D\u043E \u0431\u044B\u0442\u044C
+      \u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430."
+    position: {x: 0, y: 0}
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      length: 0
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 1398197920}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+  - text: "\u0421\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0435\u043C \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u044B
+      \u0442\u0435\u0440\u044F\u044E\u0442 \u0441\u0432\u043E\u044E \u043F\u0440\u043E\u0447\u043D\u043E\u0441\u0442\u044C.
+      \u0427\u0442\u043E\u0431\u044B \u043F\u043E\u0447\u0438\u043D\u0438\u0442\u044C
+      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u043D\u0430\u0436\u043C\u0438
+      \u043A\u043D\u043E\u043F\u043A\u0443 \"\u0427\u0438\u043D\u0438\u0442\u044C\"
+      \u043D\u0430 \u043D\u0443\u0436\u043D\u043E\u043C \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0435
+      \u0432 \u0440\u0435\u0436\u0438\u043C\u0435 \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430.
+      \u041F\u043E\u0447\u0438\u043D\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430"
+    position: {x: 0, y: 0}
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      length: 0
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 1398197921}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+  - text: "\u0422\u0432\u043E\u0439 \u043C\u0435\u0434\u0432\u0435\u0434\u044C, \u043D\u0430\u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044B\u0439
+      \u0432 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u0439
+      \u0437\u0430\u0432\u0435\u0440\u0448\u0438\u043B \u0441\u0432\u043E\u044E \u0440\u0430\u0431\u043E\u0442\u0443!
+      \u0422\u0435\u043F\u0435\u0440\u044C \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C
+      \u043F\u043E\u0434\u0430\u0440\u0438\u0442\u044C \u0432\u0430\u043A\u0446\u0438\u043D\u0443
+      \u043C\u0438\u0440\u0443 \u0411\u0435\u0440\u043B\u043E\u0433\u0438, \u0447\u0442\u043E\u0431\u044B
+      \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u041C.\u0415.\u0414.\u044B
+      (\u043C\u0435\u0434\u0432\u0435\u0436\u044C\u0438 \u0435\u0434\u0438\u043D\u0438\u0446\u044B
+      \u0434\u0430\u0440\u0430). \u041E\u0442\u043A\u0440\u043E\u0439 \u0443\u043D\u0438\u043A\u0430\u043B\u044C\u043D\u044B\u0439
+      \u043F\u043B\u0430\u043D\u0448\u0435\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0446\u0430
+      \u0423\u0442\u043B\u0435\u044F \u043D\u0430\u0436\u0430\u0442\u0438\u0435\u043C
+      \u043A\u043B\u0430\u0432\u0438\u0448\u0438 [e] \u043D\u0430 \u043A\u043B\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0435
+      \u0438\u043B\u0438 \u043D\u0430\u0436\u0430\u0432 \u043D\u0430 \u0438\u043A\u043E\u043D\u043A\u0443
+      \u043F\u043B\u0430\u043D\u0448\u0435\u0442 \u0432 \u043F\u0440\u0430\u0432\u043E\u043C
+      \u0432\u0435\u0440\u0445\u043D\u0435\u043C \u0443\u0433\u043B\u0443."
+    position: {x: 0, y: 0}
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      length: 0
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 511216557}
+    keyToCheck: 101
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+  - text: "\u041C.\u0415.\u0414. - \u044D\u0442\u043E \u043F\u043E\u043A\u0430\u0437\u0430\u0442\u0435\u043B\u044C
+      \u043B\u043E\u044F\u043B\u044C\u043D\u043E\u0441\u0442\u0438 \u043C\u0438\u0440\u0430
+      \u0411\u0435\u0440\u043B\u043E\u0433\u0438 \u043A \u0442\u0435\u0431\u0435,
+      \u043F\u043E\u0432\u044B\u0448\u0430\u0439 \u0435\u0433\u043E, \u043E\u0442\u0434\u0430\u0432\u0430\u044F
+      \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u044B\u0435 \u043C\u0438\u0440\u0443
+      \u0411\u0435\u0440\u043B\u043E\u0433\u0438 \u0440\u0435\u0441\u0443\u0440\u0441\u044B.
+      \u0421\u0435\u0439\u0447\u0430\u0441 \u043E\u0442\u0434\u0430\u0439 \u0442\u043E\u043B\u044C\u043A\u043E
+      \u0447\u0442\u043E \u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u043D\u044B\u0439
+      \u0443\u0440\u0441\u043E\u0432\u0430\u043A\u0441, \u0432\u0432\u0435\u0434\u044F
+      \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0443\u0440\u0441\u043E\u0432\u0430\u043A\u0441\u0430,
+      \u043A\u043E\u0442\u043E\u0440\u043E\u0435 \u0442\u044B \u0445\u043E\u0447\u0435\u0448\u044C
+      \u043E\u0442\u0434\u0430\u0442\u044C, \u043F\u043E\u0434 \u0438\u043A\u043E\u043D\u043A\u043E\u0439
+      \u0443\u0440\u0441\u043E\u0432\u0430\u043A\u0441\u0430. \u0427\u0435\u043C
+      \u0431\u043E\u043B\u044C\u0448\u0435 \u041C.\u0415.\u0414\u0430 \u0442\u0435\u043C
+      \u043B\u0443\u0447\u0448\u0435!!"
+    position: {x: 0, y: 0}
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      length: 0
+    conditionsSequence: 0b000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+  - text: "\u0422\u044B \u0433\u043E\u0442\u043E\u0432, \u0447\u0442\u043E\u0431\u044B
+      \u0441\u0442\u0430\u0442\u044C \u043D\u0430\u0441\u0442\u043E\u044F\u0449\u0438\u043C
+      \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0446\u0435\u043C! \u0418\u043C\u0435\u043D\u0435\u043C
+      \u0441\u0432\u044F\u0442\u043E\u0439 \u043F\u0447\u0435\u043B\u044B \u0438
+      \u0445\u0440\u0430\u0431\u0440\u043E\u0433\u043E \u043C\u0435\u0434\u0432\u0435\u0434\u044F
+      \u043F\u043E\u0441\u0432\u044F\u0449\u0430\u044E \u0442\u0435\u0431\u044F \u0432
+      \u0423\u041F\u0420\u0410\u0412\u041B\u0415\u041D\u0426\u042B. \u0421\u0442\u0430\u043D\u044C
+      \u043C\u0435\u0434\u0432\u0435\u0434\u0435\u043C, \u043A\u043E\u0442\u043E\u0440\u044B\u0439
+      \u0441\u043C\u043E\u0433!"
+    position: {x: 0, y: 0}
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      length: 0
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
   - text: "\u0421\u043E\u0441\u0430\u043B?"
     position: {x: 0, y: 0}
     pointer:
@@ -31908,10 +32135,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
-  textOutput: {fileID: 1662712076}
-  tutorialView: {fileID: 1761565746}
+  textOutput: {fileID: 432270029}
+  tutorialView: {fileID: 94874731}
   pointerPrefab: {fileID: 0}
 --- !u!1 &2038204623
 GameObject:
@@ -32814,6 +33039,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1741973713}
+  - {fileID: 1633323105}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2101982848

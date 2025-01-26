@@ -72,7 +72,9 @@ public class TutorialManager : MonoBehaviour
 		OnRoomInfoCheck,
 		OnRoomSelect,
 		OnBearWorkStarted,
-		OnEnergohoneySettingsOpened
+		OnEnergohoneySettingsOpened,
+		OnEnergohoneySerringsSolved,
+		OnUrsovaksSold
 	}
 
 	private void Start()
@@ -198,6 +200,16 @@ public class TutorialManager : MonoBehaviour
 					EventManager.onEnergohoneySettingsOpened.AddListener(StopWaiting);
 					yield return WaitForEvent();
 					EventManager.onEnergohoneySettingsOpened.RemoveListener(StopWaiting);
+					break;
+				case Condition.OnEnergohoneySerringsSolved:
+					EventManager.onEnergohoneySettingsSolved.AddListener(StopWaiting);
+					yield return WaitForEvent();
+					EventManager.onEnergohoneySettingsSolved.RemoveListener(StopWaiting);
+					break;
+				case Condition.OnUrsovaksSold:
+					EventManager.onUrsovaxSent.AddListener(StopWaiting);
+					yield return WaitForEvent();
+					EventManager.onUrsovaxSent.RemoveListener(StopWaiting);
 					break;
 			}
 		}

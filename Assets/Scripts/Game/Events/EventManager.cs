@@ -24,7 +24,14 @@ public static class EventManager
 	public static UnityEvent<RoomScript> onBearWorkStarted = new UnityEvent<RoomScript>();
 
 	/// <summary>
-	/// Triggered when energohoney room settings is opened
+	/// Triggered when energohoney room settings is opened;
 	/// </summary>
 	public static UnityEvent onEnergohoneySettingsOpened = new UnityEvent();
+
+	/// <summary>
+	/// Triggered when energohoney room settings were solved;
+	/// </summary>
+	public static UnityEvent onEnergohoneySettingsSolved = new UnityEvent();
+
+	public static UnityEvent onUrsovaxSent = new UnityEvent();
 }
