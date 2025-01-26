@@ -42,6 +42,8 @@ public class TutorialManager : MonoBehaviour
 		public string tagToCheck;
 		public RoomScript roomToCheck;
 		public RoomOutliner roomHighlight;
+		public Vector3 krugPos;
+		public float krugScale;
 	}
 
 	/// <summary>
@@ -104,6 +106,16 @@ public class TutorialManager : MonoBehaviour
 			if (part.keyToCheck != KeyCode.None)
 			{
 				keyCodeToCheck = part.keyToCheck;
+			}
+			if (part.krugScale != 0)
+			{
+				kruzhochek.GetComponent<Image>().enabled = true;
+				kruzhochek.transform.localPosition = part.krugPos;
+				kruzhochek.transform.localScale *= part.krugScale;
+			}
+			else
+			{
+				kruzhochek.GetComponent<Image>().enabled = false;
 			}
 			tutorialView.localPosition = part.position;
 			textOutput.text = part.text;
