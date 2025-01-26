@@ -236,7 +236,7 @@ public class TutorialManager : MonoBehaviour
 			while (pointer != null)
 			{
 				RectTransformUtility.ScreenPointToLocalPointInRectangle(tutorialCanvas.GetComponent<RectTransform>(), (Vector2)Camera.main.WorldToScreenPoint(data.target.position), Camera.main, out newPos);
-				pointer.localPosition = newPos;
+				pointer.localPosition = Vector2.Lerp(pointer.localPosition,newPos,Time.deltaTime*20f);
 				yield return null;
 			}
 		}
