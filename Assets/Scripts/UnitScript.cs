@@ -181,7 +181,7 @@ public class UnitScript : MonoBehaviour
 	public void SelectUnit()
 	{
 		GameManager.Instance.selectedUnit = gameObject;
-		EventManager.bearSelected.Invoke();
+		EventManager.onBearSelected.Invoke();
 		GameManager.Instance.ShowAvailableAssignments();
 		SetMarker(true);
 	}
