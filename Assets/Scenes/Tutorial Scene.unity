@@ -292,7 +292,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 522920300}
   m_HandleRect: {fileID: 522920299}
   m_Direction: 2
-  m_Value: 0.12799987
+  m_Value: 1
   m_Size: 0.21674684
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7867,8 +7867,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1719970425}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.1002563}
-  m_AnchorMax: {x: 1, y: 0.31700313}
+  m_AnchorMin: {x: 0, y: 0.10025641}
+  m_AnchorMax: {x: 1, y: 0.31700325}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9483,6 +9483,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 604504539}
+  m_CullTransparentMesh: 1
+--- !u!1 &607129691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 607129692}
+  - component: {fileID: 607129694}
+  - component: {fileID: 607129693}
+  m_Layer: 5
+  m_Name: Krug
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &607129692
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607129691}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1741973713}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &607129693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607129691}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.8039216, b: 0.08627451, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 6024c030ee45aff44b9907f715e97cd7, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &607129694
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607129691}
   m_CullTransparentMesh: 1
 --- !u!1 &613624832
 GameObject:
@@ -12911,81 +12986,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &833087625
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 833087626}
-  - component: {fileID: 833087628}
-  - component: {fileID: 833087627}
-  m_Layer: 5
-  m_Name: Krug
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &833087626
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 833087625}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1741973713}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 117.8, y: 206.59}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &833087627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 833087625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.8039216, b: 0.08627451, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6024c030ee45aff44b9907f715e97cd7, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &833087628
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 833087625}
-  m_CullTransparentMesh: 1
 --- !u!1 &834892853
 GameObject:
   m_ObjectHideFlags: 0
@@ -18413,7 +18413,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.00017359934, y: 0.0001373291}
+  m_AnchoredPosition: {x: -0.00017359934, y: 0.00018310547}
   m_SizeDelta: {x: 91.1674, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1198330829
@@ -25740,7 +25740,7 @@ RectTransform:
   - {fileID: 511216556}
   - {fileID: 584009458}
   - {fileID: 259065454}
-  - {fileID: 833087626}
+  - {fileID: 607129692}
   m_Father: {fileID: 2101982847}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -25998,7 +25998,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 278.90002, y: -156.88002}
+  m_AnchoredPosition: {x: 278.90002, y: -156.88}
   m_SizeDelta: {x: -557.8, y: -313.76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1761565747
@@ -31543,7 +31543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821027e06d226b14ca21ce933184709b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kruzhochek: {fileID: 833087625}
+  kruzhochek: {fileID: 0}
   tutorialCanvas: {fileID: 1741973713}
   sequence:
   - text: "\u041F\u0440\u0438\u0432\u0435\u0442, \u0438\u0433\u0440\u043E\u043A!
@@ -31712,6 +31712,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 1398197919}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0422\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u043D\u0430\u0437\u043D\u0430\u0447\u0430\u0442\u044C
       \u043C\u0435\u0434\u0432\u0435\u0434\u0435\u0439 \u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0443.
       \u0412\u044B\u0431\u0435\u0440\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
@@ -31740,6 +31742,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 1398197919}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0412\u044B\u0431\u0435\u0440\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
       \u043F\u0435\u0440\u0432\u043E\u043F\u0440\u043E\u0445\u043E\u0434\u0446\u0430
       \u0414\u0430\u0448\u0443(\u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E
@@ -31766,6 +31770,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 3562911849079285424}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0412\u044B\u0431\u0435\u0440\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
       \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 \u0423\u0442\u043B\u0435\u044F(\u0441
       \u043F\u043E\u043C\u043E\u0449\u044C\u044E \u0441\u043F\u0438\u0441\u043A\u0430
@@ -31785,6 +31791,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 1196657644}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0422\u0435\u043F\u0435\u0440\u044C \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C
       \u0441\u0442\u0440\u043E\u0438\u0442\u044C! \u0427\u0442\u043E\u0431\u044B
       \u0432\u043E\u0439\u0442\u0438 \u0432 \u0440\u0435\u0436\u0438\u043C \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430
@@ -31804,6 +31812,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u041D\u0430\u0436\u043C\u0438 \u043D\u0430 \u043F\u043B\u044E\u0441\u0438\u043A
       \u0440\u044F\u0434\u043E\u043C \u0441 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043E\u043C
       \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430."
@@ -31818,6 +31828,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0412\u044B\u0431\u0435\u0440\u0438 \u0432 \u043F\u043E\u044F\u0432\u0438\u0432\u0448\u0435\u043C\u0441\u044F
       \u0441\u043F\u0438\u0441\u043A\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
       \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430.
@@ -31835,6 +31847,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u0412\u044B\u0439\u0434\u0438 \u0438\u0437 \u0440\u0435\u0436\u0438\u043C\u0430
       \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430
       \u043D\u0430\u0436\u0430\u0442\u0438\u0435\u043C [b] \u043D\u0430 \u043A\u043B\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0435,
@@ -31853,6 +31867,8 @@ MonoBehaviour:
     tagToCheck: 
     roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u041D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u043D\u043E\u0432\u044C
       \u043F\u043E\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u044B
       \u0442\u0440\u0435\u0431\u0443\u044E\u0442 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438.
