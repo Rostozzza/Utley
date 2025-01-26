@@ -21,6 +21,8 @@ public class TutorialManager : MonoBehaviour
 	[Header("Pointer Settings")]
 	private GameObject pointerSlot;
 	[SerializeField] private GameObject pointerPrefab;
+	[Header("Hidden settings")]
+	private bool isButtonPressed = false;
 
 	/// <summary>
 	/// Tutorial part, used in tutorial sequence. When some settings are unneeded, set them to Null.
@@ -97,7 +99,6 @@ public class TutorialManager : MonoBehaviour
 		}
 	}
 
-
 	/// <summary>
 	/// Waits for specific conditions.
 	/// </summary>
@@ -106,7 +107,7 @@ public class TutorialManager : MonoBehaviour
 	/// <param name="tag"></param>
 	/// <param name="roomToWork"></param>
 	/// <returns></returns>
-	private IEnumerator ConditionWaiter(List<Condition> conditions,Button button = null, string tag = null, RoomScript roomToWork = null)
+	private IEnumerator ConditionWaiter(List<Condition> conditions, Button button = null, string tag = null, RoomScript roomToWork = null)
 	{
 		foreach (var condition in conditions)
 		{
@@ -116,7 +117,7 @@ public class TutorialManager : MonoBehaviour
 					var cameraTransform = Camera.main.transform;
 					var pathCameraMovement = 0f;
 					Vector2 previousPos = cameraTransform.position;
-					while (pathCameraMovement <= 0f) // Earlier was 50f, but Egor said that player should just move camera, not overcome the distance. :D
+					while (pathCameraMovement <= 0f) // Earlier was 50f, but Egor said that player should just move camera, not overcome the distance(🤡).
 					{
 						pathCameraMovement += MathF.Abs(((Vector2)cameraTransform.position - previousPos).magnitude);
 						previousPos = cameraTransform.position;
@@ -126,6 +127,8 @@ public class TutorialManager : MonoBehaviour
 				case Condition.OnButtonPress:
 					button.onClick.AddListener(OnButtonClick);
 					yield return WaitForButtonClick();
+					Debug.Log("Sosal?");
+					isButtonPressed = false;
 					break;
 				case Condition.OnClickLMB:
 					while (!Input.GetMouseButtonDown(0)) yield return null;
@@ -149,11 +152,11 @@ public class TutorialManager : MonoBehaviour
 	/// Spawns an arrow on tutorial canvas accordiong to data provided in Pointer class.
 	/// </summary>
 	/// <param name="data"></param>
-	private void SpawnPointer(Pointer data) 
+	private void SpawnPointer(Pointer data)
 	{
-		var pointer = Instantiate(pointerPrefab,tutorialCanvas).transform;
+		var pointer = Instantiate(pointerPrefab, tutorialCanvas).transform;
 		pointer.position = data.target.position;
-		pointer.eulerAngles = new Vector3(0,0,data.angleZ);
+		pointer.eulerAngles = new Vector3(0, 0, data.angleZ);
 		pointer.localScale = new Vector3(data.length, data.length, data.length);
 		TryClearPointer();
 		pointerSlot = pointer.gameObject;
@@ -174,12 +177,14 @@ public class TutorialManager : MonoBehaviour
 	/// </summary>
 	private void OnButtonClick()
 	{
+		Debug.Log("clicked!");
+		isButtonPressed = true;
 		StopCoroutine(WaitForButtonClick());
 	}
 
 	private IEnumerator WaitForButtonClick()
 	{
-		while (Input.GetMouseButtonDown(1))
+		while (!Input.GetMouseButtonDown(1) && !isButtonPressed)
 		{
 			yield return null;
 		}
