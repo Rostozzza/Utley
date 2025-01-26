@@ -93,7 +93,7 @@ public class TutorialManager : MonoBehaviour
 		{
 			if (part.pointer.target != null)
 			{
-				SpawnPointer(part.pointer);
+				StartCoroutine(SpawnPointer(part.pointer));
 			}
 			if (part.roomHighlight != null)
 			{
@@ -219,7 +219,7 @@ public class TutorialManager : MonoBehaviour
 	/// Spawns an arrow on tutorial canvas accordiong to data provided in Pointer class.
 	/// </summary>
 	/// <param name="data"></param>
-	private void SpawnPointer(Pointer data)
+	private IEnumerator SpawnPointer(Pointer data)
 	{
 		var pointer = Instantiate(pointerPrefab, tutorialCanvas).transform;
 		if (!GameManager.Instance.GetComponentInChildren<Canvas>().transform.Find(data.target.name))
@@ -237,6 +237,7 @@ public class TutorialManager : MonoBehaviour
 			{
 				RectTransformUtility.ScreenPointToLocalPointInRectangle(tutorialCanvas.GetComponent<RectTransform>(), (Vector2)Camera.main.WorldToScreenPoint(data.target.position), Camera.main, out newPos);
 				pointer.position = newPos;
+				yield return null;
 			}
 		}
 		else
@@ -247,6 +248,7 @@ public class TutorialManager : MonoBehaviour
 		pointer.localScale = new Vector3(data.length, data.length, data.length);
 		TryClearPointer();
 		pointerSlot = pointer.gameObject;
+		yield return null;
 	}
 
 	/// <summary>
