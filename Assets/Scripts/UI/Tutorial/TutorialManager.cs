@@ -13,6 +13,7 @@ using System.Runtime.CompilerServices;
 public class TutorialManager : MonoBehaviour
 {
 	[Header("Tutorial Settings")]
+	[SerializeField] private GameObject kruzhochek;
 	[SerializeField] private Transform tutorialCanvas;
 	[SerializeField] private List<TutorialPart> sequence;
 	private KeyCode keyCodeToCheck = KeyCode.None;
