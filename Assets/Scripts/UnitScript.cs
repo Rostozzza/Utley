@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Analytics;
+using UnityEngine.Events;
 
 public class UnitScript : MonoBehaviour
 {
@@ -179,6 +181,7 @@ public class UnitScript : MonoBehaviour
 	public void SelectUnit()
 	{
 		GameManager.Instance.selectedUnit = gameObject;
+		EventManager.bearSelected.Invoke();
 		GameManager.Instance.ShowAvailableAssignments();
 		SetMarker(true);
 	}

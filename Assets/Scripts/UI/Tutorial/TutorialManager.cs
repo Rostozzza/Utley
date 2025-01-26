@@ -125,8 +125,8 @@ public class TutorialManager : MonoBehaviour
 					}
 					break;
 				case Condition.OnButtonPress:
-					button.onClick.AddListener(OnButtonClick);
-					yield return WaitForButtonClick();
+					button.onClick.AddListener(StopWaiting);
+					yield return WaitForEvent();
 					Debug.Log("Sosal?");
 					isButtonPressed = false;
 					break;
@@ -143,6 +143,10 @@ public class TutorialManager : MonoBehaviour
 							}
 							return false;
 						})) yield return null;
+					break;
+				case Condition.OnBearSelect:
+					EventManager.bearSelected.AddListener(StopWaiting);
+					yield return WaitForEvent();
 					break;
 			}
 		}
@@ -173,20 +177,24 @@ public class TutorialManager : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Start waiting untill coroutine is disabled.
+	/// Stop event-waiting coroutine
 	/// </summary>
-	private void OnButtonClick()
+	private void StopWaiting()
 	{
 		Debug.Log("clicked!");
 		isButtonPressed = true;
-		StopCoroutine(WaitForButtonClick());
+		StopCoroutine(WaitForEvent());
 	}
 
-	private IEnumerator WaitForButtonClick()
+	/// <summary>
+	/// Start waiting untill coroutine is disabled.
+	/// </summary>
+	private IEnumerator WaitForEvent()
 	{
 		while (!Input.GetMouseButtonDown(1) && !isButtonPressed)
 		{
 			yield return null;
 		}
+		isButtonPressed = false;
 	}
 }
