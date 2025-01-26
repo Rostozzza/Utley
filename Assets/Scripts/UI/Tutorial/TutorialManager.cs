@@ -229,6 +229,15 @@ public class TutorialManager : MonoBehaviour
 			RectTransformUtility.ScreenPointToLocalPointInRectangle(tutorialCanvas.GetComponent<RectTransform>(), (Vector2)Camera.main.WorldToScreenPoint(data.target.position), Camera.main, out newPos);
 			pointer.position = newPos;
 			Debug.Log($"POINTER AT {newPos}");
+			TryClearPointer();
+			pointer.eulerAngles = new Vector3(0, 0, data.angleZ);
+			pointer.localScale = new Vector3(data.length, data.length, data.length);
+			pointerSlot = pointer.gameObject;
+			while (pointer != null)
+			{
+				RectTransformUtility.ScreenPointToLocalPointInRectangle(tutorialCanvas.GetComponent<RectTransform>(), (Vector2)Camera.main.WorldToScreenPoint(data.target.position), Camera.main, out newPos);
+				pointer.position = newPos;
+			}
 		}
 		else
 		{
