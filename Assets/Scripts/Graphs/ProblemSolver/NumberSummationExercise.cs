@@ -95,6 +95,7 @@ public class NumberSummationExercise : MonoBehaviour
 		GameManager.Instance.SetIsGraphUsing(false);
 		ClearGraph();
 		isTaskActive = false;
+		MenuManager.Instance.problemSolverScreen.SetActive(false);
 	}
 
 	/// <summary>

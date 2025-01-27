@@ -111,7 +111,7 @@ public class TutorialManager : MonoBehaviour
 			{
 				kruzhochek.GetComponent<Image>().enabled = true;
 				kruzhochek.transform.localPosition = part.krugPos;
-				kruzhochek.transform.localScale *= part.krugScale;
+				kruzhochek.transform.localScale = new Vector3(part.krugScale, part.krugScale, part.krugScale);
 			}
 			else
 			{
@@ -163,10 +163,10 @@ public class TutorialManager : MonoBehaviour
 					isButtonPressed = false;
 					break;
 				case Condition.OnClickLMB:
-					while (!Input.GetMouseButtonDown(0)) yield return null;
+					while (!Input.GetMouseButtonUp(0)) yield return null;
 					break;
 				case Condition.OnRoomInfoCheck:
-					while (!GameManager.Instance.allRooms.Where(x => x.GetComponent<RoomScript>()).Any(x => 
+					while (!GameManager.Instance.allRooms.Where(x => x.GetComponent<RoomScript>()).Any(x =>
 						{
 							if (x.transform.Find("RoomInfo").gameObject.activeInHierarchy)
 							{
@@ -211,7 +211,9 @@ public class TutorialManager : MonoBehaviour
 					yield return WaitForEvent();
 					EventManager.onUrsovaxSent.RemoveListener(StopWaiting);
 					break;
+
 			}
+			yield return null;
 		}
 	}
 
@@ -225,7 +227,7 @@ public class TutorialManager : MonoBehaviour
 		if (!GameManager.Instance.GetComponentInChildren<Canvas>().transform.Find(data.target.name))
 		{
 			Vector2 newPos;
-			
+
 			RectTransformUtility.ScreenPointToLocalPointInRectangle(tutorialCanvas.GetComponent<RectTransform>(), (Vector2)Camera.main.WorldToScreenPoint(data.target.position), Camera.main, out newPos);
 			pointer.localPosition = newPos;
 			Debug.Log($"POINTER AT {newPos}");
@@ -236,7 +238,7 @@ public class TutorialManager : MonoBehaviour
 			while (pointer != null)
 			{
 				RectTransformUtility.ScreenPointToLocalPointInRectangle(tutorialCanvas.GetComponent<RectTransform>(), (Vector2)Camera.main.WorldToScreenPoint(data.target.position), Camera.main, out newPos);
-				pointer.localPosition = Vector2.Lerp(pointer.localPosition,newPos,Time.deltaTime*20f);
+				pointer.localPosition = Vector2.Lerp(pointer.localPosition, newPos, Time.deltaTime * 20f);
 				yield return null;
 			}
 		}

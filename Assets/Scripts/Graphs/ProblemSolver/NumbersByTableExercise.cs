@@ -35,6 +35,7 @@ public class NumbersByTableExercise : MonoBehaviour
 
 	public void GenerateTask(RoomScript room)
 	{
+		MenuManager.Instance.problemSolverScreen.SetActive(true);
 		targetedRoom = room;
 		GenerateFromPreset();
 	}
@@ -94,6 +95,7 @@ public class NumbersByTableExercise : MonoBehaviour
 				MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
 				targetedRoom.SetWorkEfficiency(0.2f);
 				Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+				MenuManager.Instance.problemSolverScreen.SetActive(false);
 				return;
 			}
 		}
@@ -111,5 +113,6 @@ public class NumbersByTableExercise : MonoBehaviour
 		GameManager.Instance.TryProcessingRawAsterium();
 		Debug.Log("ВЕРНО");
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+		MenuManager.Instance.problemSolverScreen.SetActive(false);
 	}
 }

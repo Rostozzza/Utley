@@ -296,15 +296,16 @@ public class MenuManager : MonoBehaviour
 
 	public void Update()
 	{
-		if (SceneManager.GetActiveScene().buildIndex == 1)
+		if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 2)
 		{
 			if (Input.GetKeyDown(KeyCode.Escape) && !ShopManager.Instance.GetIsOpen())
 			{
 				Pause();
 			}
-			if (Input.GetKeyDown(KeyCode.E) && !problemSolverScreen.active)
+			if (Input.GetKeyDown(KeyCode.E) && !problemSolverScreen.activeInHierarchy)
 			{
 				shopScreen.SetActive(true);
+				Debug.Log("OPEN SHOP");
 				ShopManager.Instance.OpenShop();
 			}
 		}
@@ -431,11 +432,18 @@ public class MenuManager : MonoBehaviour
 			loadingScreen.SetActive(false);
 			Time.timeScale = 1f;
 			loadingView.SetActive(false);
-			GameManager.Instance.asteriy = 40;
-			GameManager.Instance.honey = 40;
-			GameManager.Instance.astroluminite = 6;
-			GameManager.Instance.playerBears = 4;
-			GameManager.Instance.uiResourceShower.UpdateIndicators();
+			try
+			{
+				GameManager.Instance.asteriy = 40;
+				GameManager.Instance.honey = 40;
+				GameManager.Instance.astroluminite = 6;
+				GameManager.Instance.playerBears = 4;
+				GameManager.Instance.uiResourceShower.UpdateIndicators();
+			}
+			catch
+			{
+				Debug.Log("L");
+			}
 		}
 		else
 		{
@@ -503,11 +511,18 @@ public class MenuManager : MonoBehaviour
 		loadingScreen.SetActive(false);
 		Time.timeScale = 1f;
 		loadingView.SetActive(false);
-		GameManager.Instance.asteriy = 40;
-		GameManager.Instance.honey = 40;
-		GameManager.Instance.astroluminite = 6;
-		GameManager.Instance.playerBears = 4;
-		GameManager.Instance.uiResourceShower.UpdateIndicators();
+		try
+		{
+			GameManager.Instance.asteriy = 40;
+			GameManager.Instance.honey = 40;
+			GameManager.Instance.astroluminite = 6;
+			GameManager.Instance.playerBears = 4;
+			GameManager.Instance.uiResourceShower.UpdateIndicators();
+		}
+		catch
+		{
+			Debug.Log("LL");
+		}
 	}
 
 	private void OnVideoEnd(VideoPlayer vp)
