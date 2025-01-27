@@ -35,6 +35,7 @@ public class TutorialManager : MonoBehaviour
 	{
 		public string text;
 		public Vector3 position;
+		public float scale;
 		public Pointer pointer;
 		public List<Condition> conditionsSequence;
 		public Button buttonToCheck;
@@ -117,6 +118,10 @@ public class TutorialManager : MonoBehaviour
 			{
 				kruzhochek.GetComponent<Image>().enabled = false;
 			}
+			if (part.scale != 0)
+			{
+				tutorialView.localScale = new Vector3(part.scale, part.scale, part.scale);
+			}
 			tutorialView.localPosition = part.position;
 			textOutput.text = part.text;
 			yield return ConditionWaiter(part.conditionsSequence, part.buttonToCheck, part.tagToCheck, part.roomToCheck);
@@ -124,6 +129,7 @@ public class TutorialManager : MonoBehaviour
 			{
 				part.roomHighlight.SetOutline(false);
 			}
+			tutorialView.localScale = new Vector3(0.7f, 0.7f, 0.7f);
 			roomToCheck = null;
 			keyCodeToCheck = KeyCode.None;
 			TryClearPointer();
