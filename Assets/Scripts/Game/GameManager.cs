@@ -1447,7 +1447,7 @@ public class GameManager : MonoBehaviour
 
 	private IEnumerator ConstantDurabilityDamager(int n)
 	{
-		while (true)
+		while (true && isTimeGo)
 		{
 			yield return new WaitForSeconds(10);
 			List<GameObject> interestRooms = new List<GameObject>();
