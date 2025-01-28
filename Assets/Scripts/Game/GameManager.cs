@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private float temperature = 20f;
 	[SerializeField] private float timePast = 0f;
 	[SerializeField] private bool isGameRunning = true;
+	[SerializeField] private bool isTimeGo = true;
+	[SerializeField] private bool isEnergohoneyConsuming = true;
 	[Header("Building settings")]
 	[SerializeField] private GameObject buildingLoading;
 	public GameObject buildingScreen;
@@ -994,12 +996,29 @@ public class GameManager : MonoBehaviour
 	private void Update()
 	{
 		InputHandler();
-		if (timeLeft <= 0 && isGameRunning)
+		TimeGoHandler();
+	}
+
+	private void TimeGoHandler()
+	{
+		if (isTimeGo)
 		{
-			MenuManager.Instance.ShowWinScreen();
+			if (timeLeft <= 0 && isGameRunning)
+			{
+				MenuManager.Instance.ShowWinScreen();
+			}
+			timeLeft -= Time.deltaTime;
+			timePast += Time.deltaTime;
 		}
-		timeLeft -= Time.deltaTime;
-		timePast += Time.deltaTime;
+	}
+
+/// <summary>
+/// true - time goes, false - time stops. Time like "resource" at top bar.
+/// </summary>
+/// <param name="set"></param>
+	public void SetTimeGo(bool set)
+	{
+		isTimeGo = set;
 	}
 
 	private void InputHandler()
@@ -1478,11 +1497,16 @@ public class GameManager : MonoBehaviour
 
 	private IEnumerator ConstantEnergohoneyConsumer()
 	{
-		while (true)
+		while (isEnergohoneyConsuming)
 		{
 			yield return new WaitForSeconds(1);
 			ConsumeEnergohoney();
 		}
+	}
+
+	public void SetEnergohoneyConsume(bool set)
+	{
+		isEnergohoneyConsuming = set;
 	}
 
 	private async Task ConsumeEnergohoney()
