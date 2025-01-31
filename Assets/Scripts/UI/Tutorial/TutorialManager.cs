@@ -65,7 +65,6 @@ public class TutorialManager : MonoBehaviour
 	[Serializable]
 	public enum Condition
 	{
-		None,
 		OnCameraMove,
 		OnButtonPress,
 		OnMenuShown,
@@ -77,7 +76,8 @@ public class TutorialManager : MonoBehaviour
 		OnBearWorkStarted,
 		OnEnergohoneySettingsOpened,
 		OnEnergohoneySerringsSolved,
-		OnUrsovaksSold
+		OnUrsovaksSold,
+		None
 	}
 
 	private void Start()
