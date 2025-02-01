@@ -70,6 +70,8 @@ public class MenuManager : MonoBehaviour
 	[Header("Number By Table Exercise")]
 	[SerializeField] private NumbersByTableExercise numbersByTable;
 	[SerializeField] public Animator tabletAnimator;
+	[Header("Supply Room Graph Exercise")]
+	[SerializeField] public SupplyRoomGraphExercise graphExercise;
 	private bool canContinueAfter2Cutscene = false;
 	private Coroutine skipChecker;
 	public bool isPlayerLoadable = false;
@@ -563,6 +565,11 @@ public class MenuManager : MonoBehaviour
 				numbersByTable.gameObject.SetActive(true);
 				StartCoroutine(WaitForFurnacesEnd(room));
 				break;
+			case ProblemType.SetSupply:
+				problemSolverScreen.SetActive(true);
+				graphExercise.gameObject.SetActive(true);
+				graphExercise.InitializeTask(room);
+				break;
 		}
 		GameManager.Instance.SetIsGraphUsing(true);
 		tabletAnimator.SetTrigger("OpenShop");
@@ -592,6 +599,7 @@ public class MenuManager : MonoBehaviour
 	public enum ProblemType
 	{
 		SetPipes,
-		SetFurnaces
+		SetFurnaces,
+		SetSupply
 	}
 }

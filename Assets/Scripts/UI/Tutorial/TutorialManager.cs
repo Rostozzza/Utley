@@ -21,6 +21,7 @@ public class TutorialManager : MonoBehaviour
 	[Header("View Settings")]
 	[SerializeField] private TextMeshProUGUI textOutput;
 	[SerializeField] private Transform tutorialView;
+	[SerializeField] private GameObject startGameButton;
 	[Header("Pointer Settings")]
 	private GameObject pointerSlot;
 	[SerializeField] private GameObject pointerPrefab;
@@ -75,7 +76,8 @@ public class TutorialManager : MonoBehaviour
 		OnBearWorkStarted,
 		OnEnergohoneySettingsOpened,
 		OnEnergohoneySerringsSolved,
-		OnUrsovaksSold
+		OnUrsovaksSold,
+		None
 	}
 
 	private void Start()
@@ -136,6 +138,7 @@ public class TutorialManager : MonoBehaviour
 			keyCodeToCheck = KeyCode.None;
 			TryClearPointer();
 		}
+		startGameButton.SetActive(true);
 	}
 
 	/// <summary>

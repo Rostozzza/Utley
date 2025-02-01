@@ -22,6 +22,11 @@ public class SupplyRoom : RoomScript
 			GetRoomsToEnpower();
 		}
 	}
+	public override void SetPipes()
+	{
+		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetSupply, this);
+		HideSetPipesButtonScreen();
+	}
 
 	public void GetRoomsToEnpower()
 	{
