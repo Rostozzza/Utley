@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System;
 
 using Random = UnityEngine.Random;
+using UnityEditor;
 
 public class RoomScript : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class RoomScript : MonoBehaviour
 	public bool isEnpowered = false;
 	protected RoomStatusController statusPanel;
 	public string workStr;
+	[SerializeField] private bool waitForPermissionToContinue;
 	[SerializeField] protected GameObject assignmentButton;
 	Coroutine blinks = null;
 	[Header("Audio Settings")]
@@ -150,6 +152,7 @@ public class RoomScript : MonoBehaviour
 			case Resources.Cosmodrome:
 				workStr = "Добыча астерия";
 				workSound = SoundManager.Instance.cosmodromeWorkSound;
+				StartCoroutine(ConstantResistorSetCaller(10));
 				break;
 			case Resources.Supply:
 				workStr = "Монтаж сетей";
@@ -825,8 +828,40 @@ public class RoomScript : MonoBehaviour
 
 	public virtual void SetPipes()
 	{
-		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetFurnaces,this);
+		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetFurnaces, this);
 		HideSetPipesButtonScreen();
+	}
+
+	private IEnumerator ConstantResistorSetCaller(float cooldownTime)
+	{
+		while (true)
+		{
+			yield return new WaitForSeconds(cooldownTime);
+			efficiencyDownPanel.SetActive(true);
+			SetWorkEfficiency(1 - 0.3f);
+			waitForPermissionToContinue = true;
+			yield return PermissionToContinueWaiter();
+			efficiencyDownPanel.SetActive(false);
+		}
+	}
+
+	private IEnumerator PermissionToContinueWaiter()
+	{
+		while (waitForPermissionToContinue)
+		{
+			yield return null;
+		}
+	}
+
+	public void GivePermissionToContinue()
+	{
+		waitForPermissionToContinue = false;
+	}
+
+	public void SetResistors() // God is displeased;
+	{
+		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetResistors, this);
+		//HideSetPipesButtonScreen();
 	}
 
 	public enum Resources

@@ -41,6 +41,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] public GameObject SetPipesScreen;
 	[SerializeField] public GameObject connectFurnacesScreen;
 	[SerializeField] public GameObject shopScreen;
+	[SerializeField] public GameObject setResistorsScreen;
 	//[SerializeField] private List<TextMeshProUGUI> scores;
 	[Header("Inputs")]
 	[SerializeField] private TMP_InputField registrationUsernameField;
@@ -65,6 +66,8 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] VideoClip firstCutscene;
 	[SerializeField] VideoClip menuClip;
 	[SerializeField] VideoClip secondCutscene;
+	[Header("Cosmodrome Resistors Problem")]
+	[SerializeField] private CosmodromeResistorsExercise cosmodromeResistors;
 	[Header("Number Summation Problem")]
 	[SerializeField] private NumberSummationExercise numberSummation;
 	[Header("Number By Table Exercise")]
@@ -570,6 +573,10 @@ public class MenuManager : MonoBehaviour
 				graphExercise.gameObject.SetActive(true);
 				graphExercise.InitializeTask(room);
 				break;
+			case ProblemType.SetResistors:
+				setResistorsScreen.SetActive(true);
+				StartCoroutine(WaitForResistorsCountEnd(room));
+				break;
 		}
 		GameManager.Instance.SetIsGraphUsing(true);
 		tabletAnimator.SetTrigger("OpenShop");
@@ -596,10 +603,23 @@ public class MenuManager : MonoBehaviour
 		tabletAnimator.SetTrigger("CloseShop");
 	}
 
+	private IEnumerator WaitForResistorsCountEnd(RoomScript room)
+	{
+		problemSolverScreen.SetActive(true);
+		yield return new WaitForSeconds(1.5f);
+		yield return cosmodromeResistors.AnswerWaiter(room);
+		
+		cosmodromeResistors.HideSample();
+		setResistorsScreen.SetActive(false);
+		problemSolverScreen.SetActive(false);
+		tabletAnimator.SetTrigger("CloseShop");
+	}
+
 	public enum ProblemType
 	{
 		SetPipes,
 		SetFurnaces,
-		SetSupply
+		SetSupply,
+		SetResistors
 	}
 }
