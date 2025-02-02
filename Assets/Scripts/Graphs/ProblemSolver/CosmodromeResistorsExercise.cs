@@ -57,7 +57,7 @@ public class CosmodromeResistorsExercise : MonoBehaviour
 		else
 		{
 			Debug.Log("ОТВЕТ НЕВЕРНЫЙ");
-			roomToTarget.SetWorkEfficiency(0.3f);
+			roomToTarget.SetWorkEfficiency(1 - 0.3f, false);
 		}
         roomToTarget.GivePermissionToContinue();
 		EventManager.onEnergohoneySettingsSolved.Invoke();

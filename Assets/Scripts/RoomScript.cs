@@ -69,36 +69,94 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] protected RoomWorkUI workUI;
 	[SerializeField] private GameObject efficiencyDownPanel;
 	[SerializeField] private TextMeshProUGUI efficiencyDownPercentageText;
-	public void SetWorkEfficiency(float newCoef)
+	[SerializeField] private Slider progressbar;
+	[Header("Cosmodrome Only")]
+	[SerializeField] private Image buttonBGImg;
+	[SerializeField] private Image circleTimer;
+	[SerializeField] private Image gearImg;
+	public void SetWorkEfficiency(float newCoef, bool isCosmodromeWait = true)
 	{
 		var efficiencyAnim = efficiencyDownPanel.GetComponent<Animator>();
-		efficiencyDownPercentageText.text = $"-{(1 - newCoef) * 100}%";
-		if (efficientyCoeficent <= 1f && newCoef >= 1f)
+		switch (resource)
 		{
-			efficiencyAnim.SetTrigger("HideCompletely");
+			case Resources.Cosmodrome:
+				efficiencyDownPercentageText.text = $"-{(1 - newCoef) * 100}%";
+				if (efficientyCoeficent <= 1f && newCoef >= 1f)
+				{
+					efficiencyAnim.SetTrigger("HidePanel");
+					circleTimer.fillAmount = 1;
+					StartCoroutine(CosmodromeCircleTimer(60));
+				}
+				else if (newCoef < 1f)
+				{
+					if (isCosmodromeWait)
+					{
+						SetConeierScreen(true);
+						efficiencyAnim.SetTrigger("ShowPanel");
+					}
+					else
+					{
+						SetConeierScreen(false);
+						efficiencyAnim.SetTrigger("MakeGearRed");
+						StartCoroutine(WaitForWorkEfficiencyRetry(30));
+					}
+				}
+				efficientyCoeficent = newCoef;
+				break;
+			default:
+				efficiencyDownPercentageText.text = $"-{(1 - newCoef) * 100}%";
+				if (efficientyCoeficent <= 1f && newCoef >= 1f)
+				{
+					efficiencyAnim.SetTrigger("HideCompletely");
+				}
+				if (newCoef < 1f)
+				{
+					efficiencyAnim.SetTrigger("ShowPanel");
+					StartCoroutine(WaitForWorkEfficiencyRetry(60));
+				}
+				efficientyCoeficent = newCoef;
+				break;
 		}
-		if (efficientyCoeficent >= 1f && newCoef <= 1f)
-		{
-			efficiencyAnim.SetTrigger("ShowPanel");
-			StartCoroutine(WaitForWorkEfficiencyRetry(60));
-		}
-		efficientyCoeficent = newCoef;
 	}
 
 	private IEnumerator WaitForWorkEfficiencyRetry(int time)
 	{
+		if (progressbar) progressbar.gameObject.SetActive(true);
 		float timeSpent = 0f;
-		coneierScreen.GetComponent<Button>().interactable = false;
+		SetConeierScreen(false);
 		while (timeSpent <= time)
 		{
 			timeSpent += Time.deltaTime;
-			coneierScreen.GetComponent<Button>().image.color = new Color(1, time / timeSpent, 0);
+			if (progressbar) progressbar.value = 1 - timeSpent / time;
 			yield return null;
 		}
-		efficiencyDownPanel.GetComponent<Animator>().SetTrigger("HidePanel");
-		coneierScreen.GetComponent<Button>().interactable = true;
+		if (resource == Resources.Cosmodrome) efficiencyDownPanel.GetComponent<Animator>().SetTrigger("UnmakeGearRed");
+		if (progressbar) progressbar.gameObject.SetActive(false);
+		if (resource != Resources.Cosmodrome) efficiencyDownPanel.GetComponent<Animator>().SetTrigger("HidePanel");
+		SetConeierScreen(true);
 		ShowSetPipesButtonScreen();
 	}
+
+	private IEnumerator IncorrectAnswer(float timeToWait)
+	{
+		efficiencyDownPanel.GetComponent<Animator>().SetTrigger("UnmakeGearRed");
+		yield return new WaitForSeconds(timeToWait);
+		efficiencyDownPanel.GetComponent<Animator>().SetTrigger("HidePanel");
+	}
+
+	private IEnumerator CosmodromeCircleTimer(float time)
+	{
+		SetConeierScreen(false);
+		float timeSpent = 0f;
+		while (timeSpent <= time)
+		{
+			timeSpent += Time.deltaTime;
+			circleTimer.fillAmount = 1 - timeSpent / time;
+			yield return null;
+		}
+		SetWorkEfficiency(1 - 0.3f, true);
+	}
+
 	public virtual void Enpower()
 	{
 		isEnpowered = true;
@@ -115,6 +173,7 @@ public class RoomScript : MonoBehaviour
 
 	protected virtual void Start()
 	{
+		if (progressbar) progressbar.gameObject.SetActive(false);
 		workUI = GetComponentInChildren<RoomWorkUI>(true);
 		audioSource = GetComponent<AudioSource>();
 		statusPanel = GameManager.Instance.roomStatusListController.CreateRoomStatus(this);
@@ -152,7 +211,8 @@ public class RoomScript : MonoBehaviour
 			case Resources.Cosmodrome:
 				workStr = "Добыча астерия";
 				workSound = SoundManager.Instance.cosmodromeWorkSound;
-				StartCoroutine(ConstantResistorSetCaller(10));
+				SetWorkEfficiency(1);
+				//StartCoroutine(ConstantResistorSetCaller(10));
 				break;
 			case Resources.Supply:
 				workStr = "Монтаж сетей";
@@ -509,6 +569,7 @@ public class RoomScript : MonoBehaviour
 				{
 					timer *= 0.9f;
 				}
+				timer *= 1 + (1 - efficientyCoeficent); // for RESISTORS exercise;
 				while (timer > 0)
 				{
 					timeShow.text = SecondsToTimeToShow(timer);
@@ -813,7 +874,7 @@ public class RoomScript : MonoBehaviour
 
 	public virtual void ShowSetPipesButtonScreen()
 	{
-		coneierScreen.GetComponent<Button>().interactable = true;
+		SetConeierScreen(true);
 	}
 
 	public bool CheckIfSolved()
@@ -823,7 +884,7 @@ public class RoomScript : MonoBehaviour
 
 	public virtual void HideSetPipesButtonScreen()
 	{
-		coneierScreen.GetComponent<Button>().interactable = false;
+		SetConeierScreen(false);
 	}
 
 	public virtual void SetPipes()
@@ -832,17 +893,17 @@ public class RoomScript : MonoBehaviour
 		HideSetPipesButtonScreen();
 	}
 
-	private IEnumerator ConstantResistorSetCaller(float cooldownTime)
+	private IEnumerator ConstantResistorSetCaller(float cooldownTime) // No more constant. Just calls chain with infinity loop.
 	{
-		while (true)
-		{
-			yield return new WaitForSeconds(cooldownTime);
-			efficiencyDownPanel.SetActive(true);
-			SetWorkEfficiency(1 - 0.3f);
-			waitForPermissionToContinue = true;
-			yield return PermissionToContinueWaiter();
-			efficiencyDownPanel.SetActive(false);
-		}
+		//while (true)
+		//{
+		//	yield return new WaitForSeconds(cooldownTime);
+		//	SetWorkEfficiency(1 - 0.3f);
+		//	//SetResistors();
+		//	waitForPermissionToContinue = true;
+		//	yield return PermissionToContinueWaiter();
+		//}
+		yield return null;
 	}
 
 	private IEnumerator PermissionToContinueWaiter()
@@ -861,8 +922,39 @@ public class RoomScript : MonoBehaviour
 	public void SetResistors() // God is displeased;
 	{
 		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetResistors, this);
-		//HideSetPipesButtonScreen();
 	}
+
+	private void SetConeierScreen(bool set)
+	{
+		coneierScreen.GetComponentInChildren<Button>().interactable = set;
+	}
+
+	//private IEnumerator MakeGearRed(float time)
+	//{
+	//	Debug.Log("краснеет");
+	//	float timePast = 0;
+	//	while (timePast <= time)
+	//	{
+	//		Debug.Log("КРАСНЕЕТ " + (timePast / time));
+	//		timePast += Time.deltaTime;
+	//		gearImg.color = new Color(timePast / time, gearImg.color.g, gearImg.color.b);
+	//		buttonBGImg.color = new Color(timePast / time, buttonBGImg.color.g, buttonBGImg.color.b);
+	//		yield return null;
+	//	}
+	//}
+//
+	//private IEnumerator UnmakeGearRed(float time)
+	//{
+	//	Debug.Log("краснеет наоборот");
+	//	float timePast = 0;
+	//	while (timePast <= time)
+	//	{
+	//		timePast += Time.deltaTime;
+	//		gearImg.color = new Color(1 - timePast / time, gearImg.color.g, gearImg.color.b);
+	//		buttonBGImg.color = new Color(1 - timePast / time, buttonBGImg.color.g, buttonBGImg.color.b);
+	//		yield return null;
+	//	}
+	//}
 
 	public enum Resources
 	{

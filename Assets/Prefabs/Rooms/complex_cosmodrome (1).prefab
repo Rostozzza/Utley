@@ -6420,7 +6420,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5635223393516490189
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21705,7 +21705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7829699356224473334
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36000,6 +36000,7 @@ MonoBehaviour:
   baseOfRoom: {fileID: 0}
   isEnpowered: 1
   workStr: 
+  waitForPermissionToContinue: 0
   assignmentButton: {fileID: 201630722402361656}
   audioSource: {fileID: 109606226753101674}
   workSound: {fileID: 0}
@@ -36012,6 +36013,8 @@ MonoBehaviour:
   workUI: {fileID: 0}
   efficiencyDownPanel: {fileID: 0}
   efficiencyDownPercentageText: {fileID: 0}
+  progressbar: {fileID: 0}
+  circleTimer: {fileID: 0}
 --- !u!65 &490867867813273337
 BoxCollider:
   m_ObjectHideFlags: 0

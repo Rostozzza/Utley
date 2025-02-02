@@ -29025,7 +29025,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0ae0aa73ba0244590a29c933b0fe3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineTemp: 0
   status: 0
   resource: 1
   roomStatsScreen: {fileID: 8922297901173540683}
@@ -29047,6 +29046,7 @@ MonoBehaviour:
   baseOfRoom: {fileID: 0}
   isEnpowered: 0
   workStr: 
+  waitForPermissionToContinue: 0
   assignmentButton: {fileID: 0}
   audioSource: {fileID: 0}
   workSound: {fileID: 0}
@@ -29059,6 +29059,7 @@ MonoBehaviour:
   workUI: {fileID: 0}
   efficiencyDownPanel: {fileID: 1534143107002053798}
   efficiencyDownPercentageText: {fileID: 2586423233395382240}
+  progressbar: {fileID: 3153413135437055467}
 --- !u!65 &6881682886034302060
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30505,6 +30506,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7708759291376220874, guid: 13efc6169c077664a8a659ffa0fd1e20, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30534,6 +30539,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3153413135437055467 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9202420993904782397, guid: 13efc6169c077664a8a659ffa0fd1e20, type: 3}
+  m_PrefabInstance: {fileID: 6086260480665217494}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &6498967427414337533

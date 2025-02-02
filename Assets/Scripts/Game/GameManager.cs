@@ -1223,7 +1223,7 @@ public class GameManager : MonoBehaviour
 
 	public void ClickedGameObject(GameObject gameObject)
 	{
-		Debug.Log("кликнули по " + gameObject.tag);
+		Debug.Log("кликнули по <color=\"yellow\">" + gameObject.tag + "</color>");
 		bears.ForEach(x => x.GetComponent<UnitScript>().SetMarker(false));
 		if (gameObject.CompareTag("unit"))
 		{
