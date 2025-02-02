@@ -929,33 +929,6 @@ public class RoomScript : MonoBehaviour
 		coneierScreen.GetComponentInChildren<Button>().interactable = set;
 	}
 
-	//private IEnumerator MakeGearRed(float time)
-	//{
-	//	Debug.Log("краснеет");
-	//	float timePast = 0;
-	//	while (timePast <= time)
-	//	{
-	//		Debug.Log("КРАСНЕЕТ " + (timePast / time));
-	//		timePast += Time.deltaTime;
-	//		gearImg.color = new Color(timePast / time, gearImg.color.g, gearImg.color.b);
-	//		buttonBGImg.color = new Color(timePast / time, buttonBGImg.color.g, buttonBGImg.color.b);
-	//		yield return null;
-	//	}
-	//}
-//
-	//private IEnumerator UnmakeGearRed(float time)
-	//{
-	//	Debug.Log("краснеет наоборот");
-	//	float timePast = 0;
-	//	while (timePast <= time)
-	//	{
-	//		timePast += Time.deltaTime;
-	//		gearImg.color = new Color(1 - timePast / time, gearImg.color.g, gearImg.color.b);
-	//		buttonBGImg.color = new Color(1 - timePast / time, buttonBGImg.color.g, buttonBGImg.color.b);
-	//		yield return null;
-	//	}
-	//}
-
 	public enum Resources
 	{
 		Energohoney,
