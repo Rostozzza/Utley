@@ -27671,20 +27671,20 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 0
-  m_Color: {r: 1, g: 0.9372627, b: 0.8066038, a: 1}
-  m_Intensity: 8
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 4.5
   m_Range: 10
   m_SpotAngle: 145.4852
-  m_InnerSpotAngle: 88.91971
+  m_InnerSpotAngle: 145.4852
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -34680,20 +34680,20 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 0
-  m_Color: {r: 1, g: 0.9372627, b: 0.8066038, a: 1}
-  m_Intensity: 8
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 4.5
   m_Range: 10
   m_SpotAngle: 145.4852
-  m_InnerSpotAngle: 88.91971
+  m_InnerSpotAngle: 145.4852
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -34720,7 +34720,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -36014,7 +36014,9 @@ MonoBehaviour:
   efficiencyDownPanel: {fileID: 0}
   efficiencyDownPercentageText: {fileID: 0}
   progressbar: {fileID: 0}
+  buttonBGImg: {fileID: 0}
   circleTimer: {fileID: 0}
+  gearImg: {fileID: 0}
 --- !u!65 &490867867813273337
 BoxCollider:
   m_ObjectHideFlags: 0
