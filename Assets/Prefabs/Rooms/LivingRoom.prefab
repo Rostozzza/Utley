@@ -323,14 +323,14 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 0
-  m_Color: {r: 1, g: 0.9372627, b: 0.8066038, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 8
   m_Range: 10
   m_SpotAngle: 145.4852
-  m_InnerSpotAngle: 88.91971
+  m_InnerSpotAngle: 145.4852
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1496,14 +1496,14 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 0
-  m_Color: {r: 1, g: 0.9372627, b: 0.8066038, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 8
   m_Range: 10
   m_SpotAngle: 145.4852
-  m_InnerSpotAngle: 88.91971
+  m_InnerSpotAngle: 145.4852
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -2061,7 +2061,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1841e854cbd66154ea77d9a6556d4004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineTemp: 0
   status: 0
   resource: 3
   roomStatsScreen: {fileID: 9158423160723202447}
@@ -2089,6 +2088,7 @@ MonoBehaviour:
   baseOfRoom: {fileID: 0}
   isEnpowered: 0
   workStr: 
+  waitForPermissionToContinue: 0
   assignmentButton: {fileID: 7971945987948002016}
   audioSource: {fileID: 0}
   workSound: {fileID: 0}
@@ -2101,6 +2101,10 @@ MonoBehaviour:
   workUI: {fileID: 0}
   efficiencyDownPanel: {fileID: 0}
   efficiencyDownPercentageText: {fileID: 0}
+  progressbar: {fileID: 0}
+  buttonBGImg: {fileID: 0}
+  circleTimer: {fileID: 0}
+  gearImg: {fileID: 0}
 --- !u!65 &1921077031688786394
 BoxCollider:
   m_ObjectHideFlags: 0

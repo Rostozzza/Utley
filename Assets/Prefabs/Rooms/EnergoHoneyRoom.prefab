@@ -548,6 +548,9 @@ MonoBehaviour:
   efficiencyDownPanel: {fileID: 8383941648249186263}
   efficiencyDownPercentageText: {fileID: 4825382423051043985}
   progressbar: {fileID: 5391034219776480922}
+  buttonBGImg: {fileID: 0}
+  circleTimer: {fileID: 0}
+  gearImg: {fileID: 0}
   setPipesButtonScreen: {fileID: 8074306765584709538}
 --- !u!65 &2898520250293289566
 BoxCollider:
@@ -13372,14 +13375,14 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 0
-  m_Color: {r: 1, g: 0.9372627, b: 0.8066038, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 8
   m_Range: 10
   m_SpotAngle: 145.4852
-  m_InnerSpotAngle: 88.91971
+  m_InnerSpotAngle: 145.4852
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -14531,14 +14534,14 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 0
-  m_Color: {r: 1, g: 0.9372627, b: 0.8066038, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 8
   m_Range: 10
   m_SpotAngle: 145.4852
-  m_InnerSpotAngle: 88.91971
+  m_InnerSpotAngle: 145.4852
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
