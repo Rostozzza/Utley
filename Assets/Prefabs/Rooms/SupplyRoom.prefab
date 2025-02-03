@@ -12300,14 +12300,14 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 0
-  m_Color: {r: 1, g: 0.9372627, b: 0.8066038, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 8
   m_Range: 10
   m_SpotAngle: 145.4852
-  m_InnerSpotAngle: 88.91971
+  m_InnerSpotAngle: 145.4852
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -13410,6 +13410,9 @@ MonoBehaviour:
   efficiencyDownPanel: {fileID: 2905534161718834677}
   efficiencyDownPercentageText: {fileID: 2232671404646635187}
   progressbar: {fileID: 1647178781900473528}
+  buttonBGImg: {fileID: 0}
+  circleTimer: {fileID: 0}
+  gearImg: {fileID: 0}
   graphs:
   - {fileID: 0}
   - {fileID: 0}
@@ -29646,14 +29649,14 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 0
-  m_Color: {r: 1, g: 0.9372627, b: 0.8066038, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 8
   m_Range: 10
   m_SpotAngle: 145.4852
-  m_InnerSpotAngle: 88.91971
+  m_InnerSpotAngle: 145.4852
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
