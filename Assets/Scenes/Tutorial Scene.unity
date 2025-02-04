@@ -19327,6 +19327,37 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3218449152405066042, guid: 6f3da82e8d0b5ac4ead551a327cc9c2e, type: 3}
   m_PrefabInstance: {fileID: 1006031556}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1019425847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1019425848}
+  m_Layer: 0
+  m_Name: ToPointSlide 19
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1019425848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019425847}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.411, y: 8.528, z: -2.522}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1032845230
 GameObject:
   m_ObjectHideFlags: 0
@@ -25437,6 +25468,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1398197922 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2965427100370571902, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+  m_PrefabInstance: {fileID: 1398197918}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1406830757
 GameObject:
   m_ObjectHideFlags: 0
@@ -38000,8 +38036,8 @@ MonoBehaviour:
     position: {x: 171, y: -118, z: 0}
     scale: 0
     pointer:
-      target: {fileID: 0}
-      angleZ: 0
+      target: {fileID: 1019425848}
+      angleZ: 141
       offset: 0
     pointers: []
     conditionsSequence: 01000000
@@ -38052,9 +38088,9 @@ MonoBehaviour:
     position: {x: 0, y: -120, z: 0}
     scale: 0.9
     pointer:
-      target: {fileID: 0}
-      angleZ: 0
-      offset: 0
+      target: {fileID: 1398197922}
+      angleZ: 180
+      offset: 0.5
     pointers: []
     conditionsSequence: 01000000
     buttonToCheck: {fileID: 1398197920}
@@ -38076,9 +38112,9 @@ MonoBehaviour:
     position: {x: 0, y: -120, z: 0}
     scale: 0.9
     pointer:
-      target: {fileID: 0}
-      angleZ: 0
-      offset: 0
+      target: {fileID: 1398197922}
+      angleZ: 180
+      offset: 0.5
     pointers: []
     conditionsSequence: 01000000
     buttonToCheck: {fileID: 1398197921}
@@ -40583,3 +40619,4 @@ SceneRoots:
   - {fileID: 133090083}
   - {fileID: 1412540208}
   - {fileID: 1698103656}
+  - {fileID: 1019425848}
