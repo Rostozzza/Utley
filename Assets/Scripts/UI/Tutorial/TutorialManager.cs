@@ -37,7 +37,7 @@ public class TutorialManager : MonoBehaviour
 		public string text;
 		public Vector3 position;
 		public float scale;
-		public List<Pointer> pointers;
+		public Pointer pointer;
 		public List<Condition> conditionsSequence;
 		public Button buttonToCheck;
 		public KeyCode keyToCheck;
@@ -97,12 +97,9 @@ public class TutorialManager : MonoBehaviour
 	{
 		foreach (var part in sequence)
 		{
-			if (part.pointers.Count > 0)
+			if (part.pointer.target != null)
 			{
-				foreach (var point in part.pointers)
-				{
-					StartCoroutine(SpawnPointer(point));
-				}
+				StartCoroutine(SpawnPointer(part.pointer));
 			}
 			if (part.roomHighlight != null)
 			{
