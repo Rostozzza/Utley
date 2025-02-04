@@ -119,6 +119,7 @@ public class RoomScript : MonoBehaviour
 		}
 	}
 
+
 	private IEnumerator WaitForWorkEfficiencyRetry(int time)
 	{
 		if (progressbar) progressbar.gameObject.SetActive(true);
