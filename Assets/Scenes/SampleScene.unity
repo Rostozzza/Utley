@@ -4881,6 +4881,7 @@ GameObject:
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
   - component: {fileID: 330585549}
+  - component: {fileID: 330585550}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4931,7 +4932,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 1.48
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5041,6 +5042,18 @@ MonoBehaviour:
   volume: {fileID: 832575518}
   abberationLength: 3.5
   abberationIntensity: 1
+--- !u!114 &330585550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c24daa9f02db94799e09c46d6fe4ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &337378648
 GameObject:
   m_ObjectHideFlags: 0
@@ -22360,12 +22373,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7403409793845794150, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: cameraPoint
+      value: 
+      objectReference: {fileID: 1541059256}
+    - target: {fileID: 7403409793845794150, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
       propertyPath: isEnpowered
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7403409793845794150, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
       propertyPath: outlineTemp
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7403409793845794150, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: cameraAngle.x
+      value: 10.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 7403409793845794150, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: cameraAngle.y
+      value: -36.95
       objectReference: {fileID: 0}
     - target: {fileID: 7403409793845794150, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
       propertyPath: connectedElevators.Array.size
@@ -22417,9 +22442,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2097626594887498254, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1541059256}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+--- !u!4 &1398197919 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2097626594887498254, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+  m_PrefabInstance: {fileID: 1398197918}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1403493862
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24153,6 +24186,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540655634}
   m_CullTransparentMesh: 1
+--- !u!1 &1541059255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1541059256}
+  m_Layer: 0
+  m_Name: CameraPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1541059256
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541059255}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.08571427, y: -0.3155942, z: 0.028638013, w: 0.94458103}
+  m_LocalPosition: {x: 2.9500003, y: 0.10999966, z: -2.077}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1398197919}
+  m_LocalEulerAnglesHint: {x: 10.37, y: -36.95, z: 0}
 --- !u!1 &1555714163
 GameObject:
   m_ObjectHideFlags: 0

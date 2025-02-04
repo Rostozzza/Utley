@@ -5,6 +5,9 @@ using UnityEngine.UI;
 public class EnergohoneyRoom : RoomScript
 {
 	[SerializeField] GameObject setPipesButtonScreen;
+	[Header("Camera task settings")]
+	[SerializeField] private Transform cameraPoint;
+	[SerializeField] private Vector3 cameraAngle;
 
     protected override void Start()
     {
@@ -92,6 +95,7 @@ public class EnergohoneyRoom : RoomScript
 
 	public override void SetPipes()
 	{
+		Camera.main.GetComponent<CameraController>().GoToTaskPoint(cameraPoint.position,cameraAngle,true);
 		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetPipes,this);
 		HideSetPipesButtonScreen();
 	}
