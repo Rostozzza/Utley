@@ -6,9 +6,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
-using System.Diagnostics.CodeAnalysis;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -23,7 +20,7 @@ public class TutorialManager : MonoBehaviour
 	[SerializeField] private Transform tutorialView;
 	[SerializeField] private GameObject startGameButton;
 	[Header("Pointer Settings")]
-	private GameObject pointerSlot;
+	public List<GameObject> pointerSlots;
 	[SerializeField] private GameObject pointerPrefab;
 	[Header("Hidden settings")]
 	private bool isButtonPressed = false;
@@ -38,6 +35,7 @@ public class TutorialManager : MonoBehaviour
 		public Vector3 position;
 		public float scale;
 		public Pointer pointer;
+		public List<Pointer> pointers;
 		public List<Condition> conditionsSequence;
 		public Button buttonToCheck;
 		public KeyCode keyToCheck;
@@ -97,9 +95,14 @@ public class TutorialManager : MonoBehaviour
 	{
 		foreach (var part in sequence)
 		{
-			if (part.pointer.target != null)
+			TryClearPointer();
+			if (part.pointer.target != null) part.pointers.Add(part.pointer); // KOSTYL' adds single pointer to list of pointers
+			if (part.pointers.Count > 0)
 			{
-				StartCoroutine(SpawnPointer(part.pointer));
+				foreach (var point in part.pointers)
+				{
+					StartCoroutine(SpawnPointer(point));
+				}
 			}
 			if (part.roomHighlight != null)
 			{
@@ -243,10 +246,9 @@ public class TutorialManager : MonoBehaviour
 			RectTransformUtility.ScreenPointToLocalPointInRectangle(tutorialCanvas.GetComponent<RectTransform>(), (Vector2)Camera.main.WorldToScreenPoint(data.target.position), Camera.main, out newPos);
 			pointer.localPosition = newPos;
 			Debug.Log($"POINTER AT {newPos}");
-			TryClearPointer();
 			pointer.eulerAngles = new Vector3(0, 0, data.angleZ);
 			pointer.GetComponent<RectTransform>().pivot += new Vector2(data.offset, 0);
-			pointerSlot = pointer.gameObject;
+			pointerSlots.Add(pointer.gameObject);
 			while (pointer != null)
 			{
 				RectTransformUtility.ScreenPointToLocalPointInRectangle(tutorialCanvas.GetComponent<RectTransform>(), (Vector2)Camera.main.WorldToScreenPoint(data.target.position), Camera.main, out newPos);
@@ -259,8 +261,7 @@ public class TutorialManager : MonoBehaviour
 			pointer.position = data.target.position;
 			pointer.GetComponent<RectTransform>().pivot += new Vector2(data.offset, 0);
 			pointer.eulerAngles = new Vector3(0, 0, data.angleZ);
-			TryClearPointer();
-			pointerSlot = pointer.gameObject;
+			pointerSlots.Add(pointer.gameObject);
 			yield return null;
 		}
 	}
@@ -270,12 +271,12 @@ public class TutorialManager : MonoBehaviour
 	/// </summary>
 	private void TryClearPointer()
 	{
-		if (pointerSlot == null)
+		if (!(pointerSlots.Count > 0)) return;
+		foreach (var pointerSlot in pointerSlots)
 		{
-			return;
+			Destroy(pointerSlot);
 		}
-		Destroy(pointerSlot);
-		pointerSlot = null;
+		pointerSlots.Clear();
 	}
 
 	/// <summary>

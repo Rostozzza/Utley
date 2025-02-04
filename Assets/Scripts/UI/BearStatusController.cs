@@ -17,8 +17,9 @@ public class BearStatusController : MonoBehaviour
     [SerializeField] private Slider LvlSlider;
     [SerializeField] private Image loveWorkImage;
     [SerializeField] private Sprite[] UpArrow;
+    [SerializeField] private int priority;
 
-    public void Init(GameObject obj, string name, float level, Qualification job, bool isBearBusy, string workText, Sprite avatar)
+    public void Init(GameObject obj, string name, float level, Qualification job, bool isBearBusy, string workText, Sprite avatar, int priority)
     {
         this.obj = obj;
         bearName.text = name;
@@ -30,6 +31,7 @@ public class BearStatusController : MonoBehaviour
         LvlSlider.value = level % 1;
         loveWorkImage.sprite = UpArrow[0];
         GameManager.Instance.AddBearToMove(this);
+        this.priority = priority;
     }
 
     private string QualificationToText(Qualification job)
@@ -120,5 +122,10 @@ public class BearStatusController : MonoBehaviour
     public void UpdateLoveWork(bool update)
     {
         loveWorkImage.sprite = UpArrow[update ? 1 : 0];
+    }
+
+    public int GetPriority()
+    {
+        return priority;
     }
 }

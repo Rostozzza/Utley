@@ -32,6 +32,7 @@ public class UnitScript : MonoBehaviour
 	public Bear bearModel;
 	public bool isBearBusy = false;
 	private BearStatusController statusPanel;
+	[SerializeField] private int priorityInStatusPanel;
 	[Header("Bear UI")]
 	[SerializeField] private GameObject statsScreen;
 	[SerializeField] private TextMeshProUGUI nameField;
@@ -56,7 +57,7 @@ public class UnitScript : MonoBehaviour
 
 	private void Start()
 	{
-		statusPanel = GameManager.Instance.bearStatusListController.CreateBearStatus(this);
+		statusPanel = GameManager.Instance.bearStatusListController.CreateBearStatus(this, priorityInStatusPanel);
 		marker = transform.Find("Marker").GetComponent<SpriteRenderer>();
 		SetMarker(false);
 		//UpdateStatsScreen();
