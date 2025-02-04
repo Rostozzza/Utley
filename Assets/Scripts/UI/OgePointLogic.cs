@@ -13,7 +13,10 @@ public class OgePointLogic : MonoBehaviour
 
 	public void Start()
 	{
-		ConnectPoints();
+		if (!isActive)
+		{
+			ConnectPoints();
+		}
 	}
 
 	public void ConnectPoints()
