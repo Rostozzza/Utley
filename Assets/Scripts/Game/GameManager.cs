@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private Sprite selectedBuildButton;
 	[SerializeField] private Sprite defaultInfoButton;
 	[SerializeField] private Sprite selectedInfoButton;
-	[SerializeField] private List<BearStatusController> bearsToMoveOn;
+	[SerializeField] public List<BearStatusController> bearsToMoveOn;
 	[SerializeField] private bool isGraphUsing = false;
 	[SerializeField] private float timeLeft = 480f;
 	[SerializeField] private float seasonTimeLeft;

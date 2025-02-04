@@ -31,9 +31,12 @@ public class BearStatusListController : MonoBehaviour
 
     public void SortByPriority()
     {
+        var sortedBears = bears.OrderBy(b => b.GetComponent<BearStatusController>().GetPriority()).ToList();
         foreach (var bear in bears)
         {
             bear.transform.SetSiblingIndex(bear.GetComponent<BearStatusController>().GetPriority() - 1);
         }
+        bears = sortedBears;
+        GameManager.Instance.bearsToMoveOn = sortedBears.Select(x => x.GetComponent<BearStatusController>()).ToList();
     }
 }
