@@ -581,8 +581,6 @@ public class MenuManager : MonoBehaviour
 				break;
 		}
 		GameManager.Instance.SetIsGraphUsing(true);
-		
-		
 	}
 
 	private IEnumerator WaitForFurnacesEnd(RoomScript room)

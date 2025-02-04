@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour
 			lastPoint = transform.position;
 		}
 		moving = StartCoroutine(FloatTorwards(orthoOn ? lastPoint : position, orthoOn ? Vector3.zero : rotation));
-		matrixBlender.BlendToMatrix(!orthoOn ? ortho : perspective, 3f, 8, !orthoOn);
+		matrixBlender.BlendToMatrix(!orthoOn ? ortho : perspective, !orthoOn ? 3f : 0, 8, !orthoOn);
 		orthoOn = !orthoOn;
 	}
 
