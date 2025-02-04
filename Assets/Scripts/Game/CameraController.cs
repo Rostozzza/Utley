@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour
 	{
 		SetCameraLock(true);
 		moving = StartCoroutine(FloatTorwards(position, rotation));
-		matrixBlender.BlendToMatrix(isOrtho ? ortho : perspective, 0.5f, 8, isOrtho);
+		matrixBlender.BlendToMatrix(isOrtho ? ortho : perspective, 3f, 8, isOrtho);
 		isOrtho = !isOrtho;
 	}
 
@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour
 	{
 		while (Vector3.Distance(transform.position, position) > 0.1f && rotation !=  transform.eulerAngles)
 		{
-			transform.position = Vector3.Lerp(transform.position, position, Time.deltaTime * 10f);
+			transform.position = Vector3.Lerp(transform.position, position, Time.deltaTime * 5f);
 			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(rotation), Time.deltaTime * 5f);
 			yield return null;
 		}
