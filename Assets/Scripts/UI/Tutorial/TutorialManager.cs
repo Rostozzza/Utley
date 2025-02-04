@@ -84,6 +84,7 @@ public class TutorialManager : MonoBehaviour
 	{
 		GameManager.Instance.SetTimeGo(false);
 		GameManager.Instance.SetEnergohoneyConsume(false);
+		GameManager.Instance.SetSeasonChange(false);
 		tutorialView.gameObject.SetActive(true);
 		StartCoroutine(TutorialSequence());
 	}

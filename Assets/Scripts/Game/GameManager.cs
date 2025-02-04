@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private bool isGameRunning = true;
 	[SerializeField] private bool isTimeGo = true;
 	[SerializeField] private bool isEnergohoneyConsuming = true;
+	[SerializeField] private bool isSeasonChanging = true;
 	[Header("Building settings")]
 	[SerializeField] private GameObject buildingLoading;
 	public GameObject buildingScreen;
@@ -1561,7 +1562,7 @@ public class GameManager : MonoBehaviour
 
 	private IEnumerator ConstantSeasonChanger()
 	{
-		while (true)
+		while (isSeasonChanging)
 		{
 			uiResourceShower.UpdateBarsStatuses();
 			seasonTimeLeft = 30f;
@@ -1570,6 +1571,7 @@ public class GameManager : MonoBehaviour
 				seasonTimeLeft -= Time.deltaTime;
 				yield return null;
 			}
+			if (!isSeasonChanging) break;
 			Debug.Log("Season Changed");
 			switch (season)
 			{
@@ -1589,6 +1591,11 @@ public class GameManager : MonoBehaviour
 					break;
 			}
 		}
+	}
+
+	public void SetSeasonChange(bool set)
+	{
+		isSeasonChanging = set;
 	}
 
 	public IEnumerator DamageRoomsBySeason()
