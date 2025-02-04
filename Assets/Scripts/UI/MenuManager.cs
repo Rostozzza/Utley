@@ -561,8 +561,8 @@ public class MenuManager : MonoBehaviour
 		switch (type)
 		{
 			case ProblemType.SetPipes:
-				SetPipesScreen.SetActive(true);
-				StartCoroutine(WaitForNumberSummationEnd(room));
+				//SetPipesScreen.SetActive(true);
+				//StartCoroutine(WaitForNumberSummationEnd(room));
 				break;
 			case ProblemType.SetFurnaces:
 				numbersByTable.gameObject.SetActive(true);
@@ -579,7 +579,7 @@ public class MenuManager : MonoBehaviour
 				break;
 		}
 		GameManager.Instance.SetIsGraphUsing(true);
-		tabletAnimator.SetTrigger("OpenShop");
+		//tabletAnimator.SetTrigger("OpenShop");
 		
 	}
 
