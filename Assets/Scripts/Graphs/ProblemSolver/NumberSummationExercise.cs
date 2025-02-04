@@ -31,6 +31,7 @@ public class NumberSummationExercise : MonoBehaviour
 	{
 		EventManager.onEnergohoneySettingsOpened.Invoke();
 		points = pointsParent.GetComponentsInChildren<OgePointLogic>().ToList();
+		pointsParent = points[0].transform.parent;
 		int randomPointIndex = Random.Range(0, Mathf.Clamp(steps, 0, points.Count));
 		foreach (var point in points)
 		{
@@ -72,6 +73,7 @@ public class NumberSummationExercise : MonoBehaviour
 	/// <returns></returns>
 	public IEnumerator AnswerWaiter(RoomScript roomToTarget)
 	{
+		pointsParent = roomToTarget.transform;
 		rightAnswer = GenerateTask();
 		Camera.main.GetComponent<CameraController>().SetCameraLock(true);
 		while (!answerTrigger)

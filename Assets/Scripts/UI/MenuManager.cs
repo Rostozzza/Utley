@@ -562,7 +562,7 @@ public class MenuManager : MonoBehaviour
 		{
 			case ProblemType.SetPipes:
 				//SetPipesScreen.SetActive(true);
-				//StartCoroutine(WaitForNumberSummationEnd(room));
+				StartCoroutine(WaitForNumberSummationEnd(room));
 				break;
 			case ProblemType.SetFurnaces:
 				numbersByTable.gameObject.SetActive(true);
