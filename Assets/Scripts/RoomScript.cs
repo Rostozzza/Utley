@@ -76,7 +76,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private Image gearImg;
 	public void SetWorkEfficiency(float newCoef, bool isCosmodromeWait = true)
 	{
-		var efficiencyAnim = efficiencyDownPanel.GetComponent<Animator>();
+		Animator efficiencyAnim = efficiencyDownPanel.GetComponent<Animator>();
 		switch (resource)
 		{
 			case Resources.Cosmodrome:
@@ -211,7 +211,7 @@ public class RoomScript : MonoBehaviour
 			case Resources.Cosmodrome:
 				workStr = "Добыча астерия";
 				workSound = SoundManager.Instance.cosmodromeWorkSound;
-				SetWorkEfficiency(1);
+				if (efficiencyDownPanel != null) SetWorkEfficiency(1);
 				//StartCoroutine(ConstantResistorSetCaller(10));
 				break;
 			case Resources.Supply:
