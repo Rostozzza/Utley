@@ -49,10 +49,12 @@ public class NumberSummationExercise : MonoBehaviour
 			if (steps - i == 1)
 			{
 				currentPoint.SetColor(Color.red);
+				previousPoint.GetComponentsInChildren<LineRenderer>()[randomPointIndex].SetColors(new Color(1,0,0,0.5f), new Color(1, 0, 0, 0.5f));
 			}
 			else
 			{
 				currentPoint.SetColor(Color.red);
+				previousPoint.GetComponentsInChildren<LineRenderer>()[randomPointIndex].SetColors(new Color(1, 0, 0, 0.5f), new Color(1, 0, 0, 0.5f));
 			}
 			Vector3 averagePosition = previousPoint.transform.position + (currentPoint.transform.position - previousPoint.transform.position)/2;
 			var weight = Instantiate(weightPrefab,pointsParent);
