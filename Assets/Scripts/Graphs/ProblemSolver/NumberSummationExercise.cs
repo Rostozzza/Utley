@@ -58,7 +58,7 @@ public class NumberSummationExercise : MonoBehaviour
 			var weight = Instantiate(weightPrefab,pointsParent);
 			weight.transform.position = averagePosition;
 			int weightValue = Random.Range(1,difficulty);
-			weight.GetComponent<TextMeshProUGUI>().text = weightValue.ToString();
+			weight.GetComponentInChildren<TextMeshProUGUI>(true).text = weightValue.ToString();
 			correctAnswer += weightValue;
 		}
 		
@@ -95,6 +95,7 @@ public class NumberSummationExercise : MonoBehaviour
 		}
 		EventManager.onEnergohoneySettingsSolved.Invoke();
 		GameManager.Instance.SetIsGraphUsing(false);
+		Camera.main.GetComponent<CameraController>().GoToTaskPoint(Vector3.zero,Vector3.zero);
 		ClearGraph();
 		isTaskActive = false;
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
@@ -114,9 +115,9 @@ public class NumberSummationExercise : MonoBehaviour
 	/// Triggers answerWaiter.
 	/// </summary>
 	/// <param name="answerHolder"></param>
-	public void GiveAnswer(GameObject answerHolder)
+	public void GiveAnswer(int answer)
 	{
-		answer = Convert.ToInt32(answerHolder.GetComponent<TMP_InputField>().text);
+		this.answer = answer;
 		answerTrigger = true;
 	}
 }

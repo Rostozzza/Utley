@@ -30,6 +30,12 @@ public class EnergohoneyRoom : RoomScript
 		}
 	}
 
+
+	public void GiveAnswerToExercise(string answer)
+	{
+		MenuManager.Instance.numberSummation.GiveAnswer(int.Parse(answer));
+	}
+
 	protected override IEnumerator WorkStatus()
 	{
 		float timer;

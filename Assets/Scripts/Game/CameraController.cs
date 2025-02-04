@@ -12,6 +12,8 @@ public class CameraController : MonoBehaviour
 	Coroutine changingZoom = null;
 	public bool isCameraLocked = false;
 
+	private Vector3 lastPoint;
+
 	private Matrix4x4 ortho, perspective;
 	private float aspect;
 	private bool orthoOn = false;
@@ -27,10 +29,16 @@ public class CameraController : MonoBehaviour
 
 	public void GoToTaskPoint(Vector3 position, Vector3 rotation, bool isOrtho = false)
 	{
-		SetCameraLock(true);
-		moving = StartCoroutine(FloatTorwards(position, rotation));
-		matrixBlender.BlendToMatrix(isOrtho ? ortho : perspective, 3f, 8, isOrtho);
-		isOrtho = !isOrtho;
+		
+		Debug.Log($"Ortho on? {orthoOn}");
+		if (!orthoOn)
+		{
+			SetCameraLock(true);
+			lastPoint = transform.position;
+		}
+		moving = StartCoroutine(FloatTorwards(orthoOn ? lastPoint : position, orthoOn ? Vector3.zero : rotation));
+		matrixBlender.BlendToMatrix(!orthoOn ? ortho : perspective, 3f, 8, !orthoOn);
+		orthoOn = !orthoOn;
 	}
 
 	private IEnumerator FloatTorwards(Vector3 position, Vector3 rotation)

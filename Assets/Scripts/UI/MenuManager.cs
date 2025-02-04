@@ -69,7 +69,7 @@ public class MenuManager : MonoBehaviour
 	[Header("Cosmodrome Resistors Problem")]
 	[SerializeField] private CosmodromeResistorsExercise cosmodromeResistors;
 	[Header("Number Summation Problem")]
-	[SerializeField] private NumberSummationExercise numberSummation;
+	[SerializeField] public NumberSummationExercise numberSummation;
 	[Header("Number By Table Exercise")]
 	[SerializeField] private NumbersByTableExercise numbersByTable;
 	[SerializeField] public Animator tabletAnimator;
@@ -78,7 +78,6 @@ public class MenuManager : MonoBehaviour
 	private bool canContinueAfter2Cutscene = false;
 	private Coroutine skipChecker;
 	public bool isPlayerLoadable = false;
-
 
 	public void SetMasterVolume()
 	{
@@ -567,19 +566,22 @@ public class MenuManager : MonoBehaviour
 			case ProblemType.SetFurnaces:
 				numbersByTable.gameObject.SetActive(true);
 				StartCoroutine(WaitForFurnacesEnd(room));
+				tabletAnimator.SetTrigger("OpenShop");
 				break;
 			case ProblemType.SetSupply:
 				problemSolverScreen.SetActive(true);
 				graphExercise.gameObject.SetActive(true);
 				graphExercise.InitializeTask(room);
+				tabletAnimator.SetTrigger("OpenShop");
 				break;
 			case ProblemType.SetResistors:
 				setResistorsScreen.SetActive(true);
 				StartCoroutine(WaitForResistorsCountEnd(room));
+				tabletAnimator.SetTrigger("OpenShop");
 				break;
 		}
 		GameManager.Instance.SetIsGraphUsing(true);
-		//tabletAnimator.SetTrigger("OpenShop");
+		
 		
 	}
 
@@ -593,14 +595,14 @@ public class MenuManager : MonoBehaviour
 	private IEnumerator WaitForNumberSummationEnd(RoomScript room)
 	{
 		numberSummation.isTaskActive = true;
-		problemSolverScreen.SetActive(true);
-		yield return new WaitForSeconds(1.5f);
+		//problemSolverScreen.SetActive(true);
+		//yield return new WaitForSeconds(1.5f);
 		yield return numberSummation.AnswerWaiter(room);
 		
 		
 		SetPipesScreen.SetActive(false);
-		problemSolverScreen.SetActive(false);
-		tabletAnimator.SetTrigger("CloseShop");
+		//problemSolverScreen.SetActive(false);
+		//tabletAnimator.SetTrigger("CloseShop");
 	}
 
 	private IEnumerator WaitForResistorsCountEnd(RoomScript room)
