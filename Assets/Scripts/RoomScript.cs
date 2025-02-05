@@ -20,6 +20,9 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] public int asteriumCost;
 	[SerializeField] public int honeyCost;
 	[SerializeField] public int astroluminiteCost;
+	[Header("Camera task settings")]
+	[SerializeField] protected Transform cameraPoint;
+	[SerializeField] protected Vector3 cameraAngle;
 
 	public List<Elevator> connectedElevators;
 	public List<RoomScript> connectedRooms;
@@ -890,6 +893,7 @@ public class RoomScript : MonoBehaviour
 
 	public virtual void SetPipes()
 	{
+		Camera.main.GetComponent<CameraController>().GoToTaskPoint(cameraPoint.position, cameraAngle, true);
 		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetFurnaces, this);
 		HideSetPipesButtonScreen();
 	}

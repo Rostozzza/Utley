@@ -566,7 +566,7 @@ public class MenuManager : MonoBehaviour
 			case ProblemType.SetFurnaces:
 				numbersByTable.gameObject.SetActive(true);
 				StartCoroutine(WaitForFurnacesEnd(room));
-				tabletAnimator.SetTrigger("OpenShop");
+				//tabletAnimator.SetTrigger("OpenShop");
 				break;
 			case ProblemType.SetSupply:
 				problemSolverScreen.SetActive(true);
@@ -585,8 +585,8 @@ public class MenuManager : MonoBehaviour
 
 	private IEnumerator WaitForFurnacesEnd(RoomScript room)
 	{
-		problemSolverScreen.SetActive(true);
-		numbersByTable.GenerateTask(room);
+		//problemSolverScreen.SetActive(true);
+		room.GetComponentInChildren<NumbersByTableExercise>(true).GenerateTask(room);
 		yield return new WaitForSeconds(1.5f);
 	}
 
