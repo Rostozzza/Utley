@@ -25473,6 +25473,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2965427100370571902, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
   m_PrefabInstance: {fileID: 1398197918}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &1398197923 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5112523715058167277, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+  m_PrefabInstance: {fileID: 1398197918}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1406830757
 GameObject:
   m_ObjectHideFlags: 0
@@ -38088,7 +38093,7 @@ MonoBehaviour:
     position: {x: 0, y: -120, z: 0}
     scale: 0.9
     pointer:
-      target: {fileID: 1398197922}
+      target: {fileID: 1398197923}
       angleZ: 180
       offset: 0.5
     pointers: []
@@ -38227,22 +38232,6 @@ MonoBehaviour:
       offset: 0
     pointers: []
     conditionsSequence: 05000000
-    buttonToCheck: {fileID: 708579819}
-    keyToCheck: 0
-    tagToCheck: 
-    roomToCheck: {fileID: 0}
-    roomHighlight: {fileID: 0}
-    krugPos: {x: 0, y: 0, z: 0}
-    krugScale: 0
-  - text: "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0439 \u0441\u043B\u0430\u0439\u0434"
-    position: {x: 0, y: 0, z: 0}
-    scale: 0
-    pointer:
-      target: {fileID: 0}
-      angleZ: 0
-      offset: 0
-    pointers: []
-    conditionsSequence: 01000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 0
     tagToCheck: 

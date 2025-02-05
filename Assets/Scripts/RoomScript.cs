@@ -818,10 +818,10 @@ public class RoomScript : MonoBehaviour
 			Debug.Log("Нет свободных строительных комплексов!");
 			return;
 		}
+
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
-
 
 		if (await GameManager.Instance.GetAsteriy() >= 10)
 		{

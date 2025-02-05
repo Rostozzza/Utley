@@ -657,7 +657,7 @@ public class GameManager : MonoBehaviour
 			}
 			if (instance.TryGetComponent(out SupplyRoom supply))
 			{
-				supply.InitializeGraph();
+				//supply.InitializeGraph(); // outdated, should be commented if we using exercise in tablet 🤬;
 			}
 			RaycastHit hit;
 			Ray rayLeft = new Ray(instance.transform.position, Vector3.left * 6f);

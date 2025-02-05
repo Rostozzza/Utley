@@ -53,6 +53,7 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 			Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 			MenuManager.Instance.problemSolverScreen.SetActive(false);
 			MenuManager.Instance.graphExercise.gameObject.SetActive(false);
+			GameManager.Instance.SetIsGraphUsing(false);
 			return;
 		}
 		MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
@@ -60,6 +61,7 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
 		MenuManager.Instance.graphExercise.gameObject.SetActive(false);
+		GameManager.Instance.SetIsGraphUsing(false);
 		return;
 	}
 }
