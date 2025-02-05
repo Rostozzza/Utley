@@ -5,9 +5,7 @@ using UnityEngine.UI;
 public class EnergohoneyRoom : RoomScript
 {
 	[SerializeField] GameObject setPipesButtonScreen;
-	[Header("Camera task settings")]
-	[SerializeField] private Transform cameraPoint;
-	[SerializeField] private Vector3 cameraAngle;
+	
 
     protected override void Start()
     {

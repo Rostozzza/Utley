@@ -92,10 +92,11 @@ public class NumbersByTableExercise : MonoBehaviour
 				task = null;
 				MenuManager.Instance.connectFurnacesScreen.SetActive(false);
 				MenuManager.Instance.problemSolverScreen.SetActive(false);
-				MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
+				//MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
 				targetedRoom.SetWorkEfficiency(0.2f);
+				Camera.main.GetComponent<CameraController>().GoToTaskPoint(Vector3.zero, Vector3.zero);
 				Camera.main.GetComponent<CameraController>().SetCameraLock(false);
-				MenuManager.Instance.problemSolverScreen.SetActive(false);
+				//MenuManager.Instance.problemSolverScreen.SetActive(false);
 				return;
 			}
 		}
@@ -106,13 +107,14 @@ public class NumbersByTableExercise : MonoBehaviour
 		tasksPresets.Remove(tasksPresets.First(x => x.task == task));
 		task = null;
 		gridRange++;
-		MenuManager.Instance.connectFurnacesScreen.SetActive(false);
+		//MenuManager.Instance.connectFurnacesScreen.SetActive(false);
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
-		MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
+		//MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
 		targetedRoom.SetWorkEfficiency(1f);
 		GameManager.Instance.TryProcessingRawAsterium();
 		Debug.Log("ВЕРНО");
+		Camera.main.GetComponent<CameraController>().GoToTaskPoint(Vector3.zero, Vector3.zero);
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
-		MenuManager.Instance.problemSolverScreen.SetActive(false);
+		//MenuManager.Instance.problemSolverScreen.SetActive(false);
 	}
 }
