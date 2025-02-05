@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private bool isTimeGo = true;
 	[SerializeField] private bool isEnergohoneyConsuming = true;
 	[SerializeField] private bool isSeasonChanging = true;
+	[SerializeField] private bool isCursorAtUIDontScroll;
 	[Header("Building settings")]
 	[SerializeField] private GameObject buildingLoading;
 	public GameObject buildingScreen;
@@ -437,7 +438,7 @@ public class GameManager : MonoBehaviour
 					break;
 				}
 			}
-			if (fixedBuilderRoom == null)
+			if (fixedBuilderRoom == null || !fixedBuilderRoom.GetComponent<BuilderRoom>().GetWait())
 			{
 				Debug.Log("Нет свободных строительных комплексов!");
 				queuedBuildPositon = null;
@@ -1043,14 +1044,14 @@ public class GameManager : MonoBehaviour
 			else
 			{
 				//OutlineWorkStations(false);
-				selectedUnit = null;
+				if (!isCursorAtUIDontScroll) selectedUnit = null;
 				if (selectedRoom != null)
 				{
 					selectedRoom.ToggleRoomStats(false);
 					selectedRoom.ToggleBuildStats(false);
 				}
 				selectedRoom = null;
-				selectedUnit = null;
+				if (!isCursorAtUIDontScroll) selectedUnit = null;
 			}
 		}
 		else if (Input.GetMouseButtonDown(1)) //off
@@ -1741,6 +1742,16 @@ public class GameManager : MonoBehaviour
 	public void SetIsGameRunning(bool set)
 	{
 		isGameRunning = set;
+	}
+
+	public void SetIsCursorAtUIDontScroll(bool set)
+	{
+		isCursorAtUIDontScroll = set;
+	}
+
+	public bool GetIsCursorAtUIDontScroll()
+	{
+		return isCursorAtUIDontScroll;
 	}
 
 	public enum Season

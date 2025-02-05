@@ -80,11 +80,16 @@ public class TutorialManager : MonoBehaviour
 
 	private void Start()
 	{
-		GameManager.Instance.SetTimeGo(false);
-		GameManager.Instance.SetEnergohoneyConsume(false);
-		GameManager.Instance.SetSeasonChange(false);
+		SetGameManagerSettings(false);
 		tutorialView.gameObject.SetActive(true);
 		StartCoroutine(TutorialSequence());
+	}
+
+	private void SetGameManagerSettings(bool set)
+	{
+		GameManager.Instance.SetTimeGo(set);
+		GameManager.Instance.SetEnergohoneyConsume(set);
+		GameManager.Instance.SetSeasonChange(set);
 	}
 
 	/// <summary>
@@ -143,6 +148,7 @@ public class TutorialManager : MonoBehaviour
 			TryClearPointer();
 		}
 		startGameButton.SetActive(true);
+		SetGameManagerSettings(true);
 	}
 
 	/// <summary>

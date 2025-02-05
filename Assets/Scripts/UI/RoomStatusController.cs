@@ -94,7 +94,7 @@ public class RoomStatusController : MonoBehaviour
 
     public void MoveToObject()
     {
-        Camera.main.GetComponent<CameraController>().MoveToPoint(obj.transform.position);
+        Camera.main.GetComponent<CameraController>().MoveToPoint(obj.transform.position + new Vector3(2f, 0f));
         EventManager.onRoomSelected.Invoke();
     }
 }

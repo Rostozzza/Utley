@@ -9,13 +9,21 @@ public class PointerHint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (hintType != HintType.DontScroll) GameManager.Instance.uiResourceShower.ShowHint(hintType);
-        else Camera.main.GetComponent<CameraController>().SetScroll(false);
+        else 
+        {
+            Camera.main.GetComponent<CameraController>().SetScroll(false);
+            GameManager.Instance.SetIsCursorAtUIDontScroll(true);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         if (hintType != HintType.DontScroll) GameManager.Instance.uiResourceShower.HideHint(hintType);
-        else Camera.main.GetComponent<CameraController>().SetScroll(true);
+        else 
+        {
+            Camera.main.GetComponent<CameraController>().SetScroll(true);
+            GameManager.Instance.SetIsCursorAtUIDontScroll(false);
+        }
     }
 
     public enum HintType
