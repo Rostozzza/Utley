@@ -1500,10 +1500,14 @@ public class GameManager : MonoBehaviour
 
 	private IEnumerator ConstantEnergohoneyConsumer()
 	{
-		while (isEnergohoneyConsuming)
+		while (true)
 		{
-			yield return new WaitForSeconds(1);
-			ConsumeEnergohoney();
+			while (isEnergohoneyConsuming)
+			{
+				yield return new WaitForSeconds(1);
+				ConsumeEnergohoney();
+			}
+			yield return null;
 		}
 	}
 
@@ -1563,34 +1567,38 @@ public class GameManager : MonoBehaviour
 
 	private IEnumerator ConstantSeasonChanger()
 	{
-		while (isSeasonChanging)
+		while (true)
 		{
-			uiResourceShower.UpdateBarsStatuses();
-			seasonTimeLeft = 30f;
-			while (seasonTimeLeft > 0)
+			while (isSeasonChanging)
 			{
-				seasonTimeLeft -= Time.deltaTime;
-				yield return null;
+				uiResourceShower.UpdateBarsStatuses();
+				seasonTimeLeft = 30f;
+				while (seasonTimeLeft > 0)
+				{
+					seasonTimeLeft -= Time.deltaTime;
+					yield return null;
+				}
+				if (!isSeasonChanging) break;
+				Debug.Log("Season Changed");
+				switch (season)
+				{
+					case Season.Tide:
+						ChangeSeason(Season.Calm);
+						cycleNumber++;
+						break;
+					case Season.Calm:
+						ChangeSeason(Season.Storm);
+						break;
+					case Season.Storm:
+						ChangeSeason(Season.Freeze);
+						break;
+					case Season.Freeze:
+						ChangeSeason(Season.Tide);
+						StartCoroutine(DamageRoomsBySeason());
+						break;
+				}
 			}
-			if (!isSeasonChanging) break;
-			Debug.Log("Season Changed");
-			switch (season)
-			{
-				case Season.Tide:
-					ChangeSeason(Season.Calm);
-					cycleNumber++;
-					break;
-				case Season.Calm:
-					ChangeSeason(Season.Storm);
-					break;
-				case Season.Storm:
-					ChangeSeason(Season.Freeze);
-					break;
-				case Season.Freeze:
-					ChangeSeason(Season.Tide);
-					StartCoroutine(DamageRoomsBySeason());
-					break;
-			}
+			yield return null;
 		}
 	}
 
