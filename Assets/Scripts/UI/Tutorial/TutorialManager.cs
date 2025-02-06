@@ -75,7 +75,8 @@ public class TutorialManager : MonoBehaviour
 		OnEnergohoneySettingsOpened,
 		OnEnergohoneySerringsSolved,
 		OnUrsovaksSold,
-		None
+		None,
+		OnSupplyRoomSolved
 	}
 
 	private void Start()
@@ -231,6 +232,11 @@ public class TutorialManager : MonoBehaviour
 					EventManager.onUrsovaxSent.AddListener(StopWaiting);
 					yield return WaitForEvent();
 					EventManager.onUrsovaxSent.RemoveListener(StopWaiting);
+					break;
+				case Condition.OnSupplyRoomSolved:
+					EventManager.onSupplyRoomSettingsSolved.AddListener(StopWaiting);
+					yield return WaitForEvent();
+					EventManager.onSupplyRoomSettingsSolved.RemoveListener(StopWaiting);
 					break;
 
 			}

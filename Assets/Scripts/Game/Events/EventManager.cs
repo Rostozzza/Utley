@@ -33,5 +33,13 @@ public static class EventManager
 	/// </summary>
 	public static UnityEvent onEnergohoneySettingsSolved = new UnityEvent();
 
+	/// <summary>
+	/// Triggered when player send off ursowaks
+	/// </summary>
 	public static UnityEvent onUrsovaxSent = new UnityEvent();
+
+	/// <summary>
+	/// Triggered when player solves supply room settings;
+	/// </summary>
+	public static UnityEvent onSupplyRoomSettingsSolved = new UnityEvent();
 }
