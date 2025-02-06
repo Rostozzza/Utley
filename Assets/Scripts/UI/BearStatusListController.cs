@@ -18,7 +18,7 @@ public class BearStatusListController : MonoBehaviour
 
     private void Start()
     {
-        Invoke("SortByPriority", 0.01f);
+        Invoke(nameof(SortByPriority), 0.01f);
     }
 
     public void ClearList()
