@@ -5838,6 +5838,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
+--- !u!114 &404622466 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7368051777665493213, guid: de4055a33b75bc445bb185de3188154d, type: 3}
+  m_PrefabInstance: {fileID: 1664707344}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -37124,6 +37135,10 @@ PrefabInstance:
       propertyPath: buttonBGImg
       value: 
       objectReference: {fileID: 11710220}
+    - target: {fileID: 1264120715950172156, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: circleFrame
+      value: 
+      objectReference: {fileID: 404622466}
     - target: {fileID: 1264120715950172156, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: circleTimer
       value: 

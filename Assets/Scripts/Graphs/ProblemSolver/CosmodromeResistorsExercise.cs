@@ -20,6 +20,7 @@ public class CosmodromeResistorsExercise : MonoBehaviour
     [SerializeField] private GameObject sample;
 	[SerializeField] private List<OgePointLogic> points;
 	public LineRenderer lineRenderer;
+	private int sequenceIndex = 0;
 
 	/// <summary>
 	/// Generates task, answer and connects all OgePointLogics.
@@ -28,9 +29,30 @@ public class CosmodromeResistorsExercise : MonoBehaviour
 	private int GenerateTask()
 	{
         Debug.Log(samples.Count);
-		sample = samples[Random.Range(1, samples.Count + 1) - 1];
+		sample = samples[sequenceIndex]; //samples[Random.Range(1, samples.Count + 1) - 1];
+		SequenceIndexChange(true);
         sample.SetActive(true);
         return sample.GetComponent<SampleStorage>().GetRightAnswer();
+	}
+
+	private void SequenceIndexChange(bool isPositive)
+	{
+		if (isPositive)
+		{
+			sequenceIndex++;
+			if (sequenceIndex > samples.Count - 1)
+			{
+				sequenceIndex = 0;
+			}
+		}
+		else
+		{
+			sequenceIndex--;
+			if (sequenceIndex < 0)
+			{
+				sequenceIndex = samples.Count - 1;
+			}
+		}
 	}
 
 	/// <summary>
@@ -58,6 +80,7 @@ public class CosmodromeResistorsExercise : MonoBehaviour
 		{
 			Debug.Log("ОТВЕТ НЕВЕРНЫЙ");
 			roomToTarget.SetWorkEfficiency(1 - 0.3f, false);
+			SequenceIndexChange(false); // I'M VERY SORRRRRRRRRY but it's should work :D ;
 		}
         roomToTarget.GivePermissionToContinue();
 		EventManager.onEnergohoneySettingsSolved.Invoke();

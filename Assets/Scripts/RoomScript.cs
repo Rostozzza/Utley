@@ -74,6 +74,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private Image buttonBGImg;
 	[SerializeField] private Image circleTimer;
 	[SerializeField] private Image gearImg;
+	[SerializeField] private Image circleFrame;
 	public void SetWorkEfficiency(float newCoef, bool isCosmodromeWait = true, bool isThisFirstCall = false) // Last parameter is KOSTYL'
 	{
 		Animator efficiencyAnim = efficiencyDownPanel.GetComponent<Animator>();
@@ -85,7 +86,7 @@ public class RoomScript : MonoBehaviour
 				{
 					if (!isThisFirstCall) efficiencyAnim.SetTrigger("HidePanel");
 					circleTimer.fillAmount = 1;
-					StartCoroutine(CosmodromeCircleTimer(60));
+					StartCoroutine(CosmodromeCircleTimer(150));
 				}
 				else if (newCoef < 1f)
 				{
@@ -121,6 +122,7 @@ public class RoomScript : MonoBehaviour
 
 	private IEnumerator WaitForWorkEfficiencyRetry(int time)
 	{
+		if (circleFrame) circleFrame.enabled = false;
 		if (progressbar) progressbar.gameObject.SetActive(true);
 		float timeSpent = 0f;
 		SetConeierScreen(false);
@@ -146,6 +148,7 @@ public class RoomScript : MonoBehaviour
 
 	private IEnumerator CosmodromeCircleTimer(float time)
 	{
+		if (circleFrame) circleFrame.enabled = true;
 		SetConeierScreen(false);
 		float timeSpent = 0f;
 		while (timeSpent <= time)
