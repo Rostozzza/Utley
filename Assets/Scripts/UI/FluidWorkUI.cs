@@ -18,17 +18,19 @@ public class FluidWorkUI : RoomWorkUI
 		{
 			timer += Time.deltaTime;
 			fluidImage.fillAmount = timer / time;
+			resultImage.GetComponent<Image>().fillAmount = (timer / time);
 			resultText.text = $"{(int)((timer / time)*100f)}%";
 			yield return null;
 		}
 		while (timer / time > 0f)
 		{
 			timer -= Time.deltaTime*10f;
-			resultImage.GetComponent<Image>().fillAmount = 1f - (timer / time);
 			resultText.text = $"{(int)((timer / time) * 100f)}%";
 			fluidImage.fillAmount = timer / time;
 			yield return null;
 		}
+
+		resultImage.GetComponent<Image>().fillAmount = 0;
 		try
 		{
 			var resultInstance = Instantiate(workResultToScreenPrefab, GameManager.Instance.GetComponentInChildren<Canvas>().transform);

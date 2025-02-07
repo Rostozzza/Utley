@@ -46,6 +46,8 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 	{
 		var answerField = currentTask.graphView.GetComponentsInChildren<TMP_InputField>().First(x => x.gameObject.tag == "answerField");
 		EventManager.onSupplyRoomSettingsSolved.Invoke();
+		Destroy(currentTask.graphView);
+		tasks.Remove(currentTask);
 		if (int.Parse(answerField.text) == currentTask.answer)
 		{
 			(targetedRoom as SupplyRoom).GetRoomsToEnpower();
