@@ -871,6 +871,7 @@ public class RoomScript : MonoBehaviour
 		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		status = Status.Free;
+		statusPanel.UpdateStatus(status);
 	}
 
 	public void SetStatus(Status status)
