@@ -45,6 +45,7 @@ public class ShopManager : MonoBehaviour
 		{
 			isOpened = true;
 			animator.SetTrigger("OpenShop");
+			GameManager.Instance.SetIsGraphUsing(true);
 			isAPIActive = MenuManager.Instance.isAPIActive;
 			JsonManager = GameManager.Instance.JsonManager;
 			if (MenuManager.Instance.isAPIActive)
@@ -60,6 +61,7 @@ public class ShopManager : MonoBehaviour
 		{
 			isOpened = false;
 			animator.SetTrigger("CloseShop");
+			GameManager.Instance.SetIsGraphUsing(false);
 			isAPIActive = MenuManager.Instance.isAPIActive;
 			return;
 		}

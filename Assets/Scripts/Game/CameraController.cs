@@ -17,6 +17,11 @@ public class CameraController : MonoBehaviour
         InitPixels();
     }
 
+    public void InitPixelsDelayed()
+    {
+        Invoke(nameof(InitPixels), 1f);
+    }
+
     public void InitPixels()
     {
         left = 0;

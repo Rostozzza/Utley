@@ -54,7 +54,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private Slider masterSlider;
 	[SerializeField] private Slider SFXSlider;
 	[SerializeField] private Slider musicSlider;
-	[SerializeField] private AudioMixerGroup musicGroup;
+	[SerializeField] private AudioSource BGMusicSource;
 	[Header("API")]
 	public bool isAPIActive;
 	[Header("Cursor")]
@@ -231,6 +231,10 @@ public class MenuManager : MonoBehaviour
 				numberSummation.isTaskActive = false;
 				tabletAnimator.SetTrigger("CloseShop");
 			}
+			if (SceneManager.GetActiveScene().buildIndex != 0)
+			{
+				BGMusicSource = GameObject.FindGameObjectWithTag("BG_music").GetComponent<AudioSource>();
+			}
 		};
 	}
 
@@ -245,6 +249,10 @@ public class MenuManager : MonoBehaviour
 		SetPipesScreen.SetActive(!numberSummation.isTaskActive);
 		Time.timeScale = 0f;
 		mixer.SetFloat("Lowpass", 500f);
+		if (SceneManager.GetActiveScene().buildIndex != 0)
+		{
+			BGMusicSource.Pause();
+		}
 	}
 
 	public void Resume()
@@ -257,6 +265,10 @@ public class MenuManager : MonoBehaviour
 		pauseScreen.SetActive(false);
 		Time.timeScale = 1f;
 		mixer.SetFloat("Lowpass", 22000f);
+		if (SceneManager.GetActiveScene().buildIndex != 0)
+		{
+			BGMusicSource.UnPause();
+		}
 	}
 
 	public void ToMenu()
