@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class RoomWorkUI : MonoBehaviour
 {
-	private Animator animator;
-	private TextMeshProUGUI resultText;
-	[SerializeField] private Transform resultImage;
-	[SerializeField] private Sprite workUnitSprite;
-	[SerializeField] private GameObject workUnitPrefab;
-	[SerializeField] private GameObject workResultToScreenPrefab;
-	[SerializeField] private Transform correspondingUI;
-	[SerializeField] private Sprite workResultSprite;
-	private GridLayoutGroup grid;
+	protected Animator animator;
+	protected TextMeshProUGUI resultText;
+	[SerializeField] protected Transform resultImage;
+	[SerializeField] protected Sprite workUnitSprite;
+	[SerializeField] protected GameObject workUnitPrefab;
+	[SerializeField] protected GameObject workResultToScreenPrefab;
+	[SerializeField] protected Transform correspondingUI;
+	[SerializeField] protected Sprite workResultSprite;
+	protected GridLayoutGroup grid;
 
 	public void Start()
 	{
@@ -35,9 +35,10 @@ public class RoomWorkUI : MonoBehaviour
 	public void SetResultImage(Sprite image)
 	{
 		resultImage.GetComponent<Image>().sprite = image;
+		workResultSprite = image;
 	}
 
-	private IEnumerator WorkProcess(float time, float amountOfUnits, Transform ui)
+	protected virtual IEnumerator WorkProcess(float time, float amountOfUnits, Transform ui)
 	{
 		animator.SetTrigger("Show");
 		correspondingUI = ui;

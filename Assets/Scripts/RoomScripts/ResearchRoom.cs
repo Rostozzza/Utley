@@ -77,6 +77,7 @@ public class ResearchRoom : RoomScript
 
 	protected override IEnumerator WorkStatus()
 	{
+		workUI = workUI as FluidWorkUI;
 		yield return SelectOption();
 
 		yield return GetHaveResources();
@@ -129,24 +130,24 @@ public class ResearchRoom : RoomScript
 		{
 			timer *= 0.9f;
 		}
-		//switch (waitOption)
-		//{
-		//	case Type.Ursowaks:
-		//		workUI.SetResultImage(ursowaksSprite);
-		//		workUI.SetWorkUnitSprite(ursowaksSprite);
-		//		workUI.StartWork(timer,1,GameManager.Instance.uiResourceShower.ursowaksAmountText.transform);
-		//		break;
-		//	case Type.Prototype:
-		//		workUI.SetResultImage(prototypeSprite);
-		//		workUI.SetWorkUnitSprite(prototypeSprite);
-		//		workUI.StartWork(timer, 1, GameManager.Instance.uiResourceShower.prototypeAmountText.transform);
-		//		break;
-		//	default:
-		//		break;
-		//}
+		switch (waitOption)
+		{
+			case Type.Ursowaks:
+				workUI.SetResultImage(ursowaksSprite);
+				workUI.SetWorkUnitSprite(ursowaksSprite);
+				workUI.StartWork(timer, 1, GameManager.Instance.uiResourceShower.ursowaksAmountText.transform);
+				break;
+			case Type.Prototype:
+				workUI.SetResultImage(prototypeSprite);
+				workUI.SetWorkUnitSprite(prototypeSprite);
+				workUI.StartWork(timer, 1, GameManager.Instance.uiResourceShower.prototypeAmountText.transform);
+				break;
+			default:
+				break;
+		}
 		while (timer > 0)
 		{
-			timeShow.text = SecondsToTimeToShow(timer);
+			//timeShow.text = SecondsToTimeToShow(timer);
 			timer -= Time.deltaTime;
 			yield return null;
 		}
