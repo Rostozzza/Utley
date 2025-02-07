@@ -25,6 +25,7 @@ public class FluidWorkUI : RoomWorkUI
 		{
 			timer -= Time.deltaTime*10f;
 			resultImage.GetComponent<Image>().fillAmount = 1f - (timer / time);
+			resultText.text = $"{(int)((timer / time) * 100f)}%";
 			fluidImage.fillAmount = timer / time;
 			yield return null;
 		}
