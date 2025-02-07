@@ -235,7 +235,7 @@ public class MenuManager : MonoBehaviour
 
 	public void Pause()
 	{
-		if (SceneManager.GetActiveScene().buildIndex != 1)
+		if (SceneManager.GetActiveScene().buildIndex == 0)
 		{
 			return;
 		}
@@ -248,7 +248,7 @@ public class MenuManager : MonoBehaviour
 
 	public void Resume()
 	{
-		if (SceneManager.GetActiveScene().buildIndex != 1)
+		if (SceneManager.GetActiveScene().buildIndex == 0)
 		{
 			return;
 		}
