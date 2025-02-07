@@ -1,5 +1,4 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +12,7 @@ public class RoomWorkUI : MonoBehaviour
 	[SerializeField] private GameObject workUnitPrefab;
 	[SerializeField] private GameObject workResultToScreenPrefab;
 	[SerializeField] private Transform correspondingUI;
+	[SerializeField] private Sprite workResultSprite;
 	private GridLayoutGroup grid;
 
 	public void Start()
@@ -63,7 +63,7 @@ public class RoomWorkUI : MonoBehaviour
 			Debug.Log(ancoredPos);
 			resultInstance.GetComponent<RectTransform>().anchoredPosition = ancoredPos + Random.insideUnitCircle*15f;
 			//resultInstance.GetComponent<Image>().sprite = resultImage.GetComponent<Image>().sprite;
-			resultInstance.GetComponent<WorkResultIntoUI>().FlyTorwardsUI(correspondingUI);
+			resultInstance.GetComponent<WorkResultIntoUI>().FlyTorwardsUI(correspondingUI,workResultSprite);
 			workResults--;
 			resultText.text = $"+{workResults}";
 		}

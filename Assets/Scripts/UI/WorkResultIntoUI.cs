@@ -1,6 +1,6 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WorkResultIntoUI : MonoBehaviour
 {
@@ -11,8 +11,9 @@ public class WorkResultIntoUI : MonoBehaviour
 	/// Makes UI component fly torwards another UI component on the same canvas.
 	/// </summary>
 	/// <param name="element"></param>
-	public void FlyTorwardsUI(Transform element)
+	public void FlyTorwardsUI(Transform element, Sprite img)
 	{
+		GetComponentInChildren<Image>().sprite = img;
 		StartCoroutine(Fly(element));
 	}
 

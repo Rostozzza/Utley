@@ -530,14 +530,14 @@ public class RoomScript : MonoBehaviour
 		{
 			case Resources.Asteriy:
 				timer = StandartInteractionTime;
-				//workUI.StartWork(timer, 20, GameManager.Instance.uiResourceShower.asteriyAmountText.transform);
+				workUI.StartWork(timer, 20, GameManager.Instance.uiResourceShower.asteriyAmountText.transform);
 				while (timer > 0)
 				{
-					timeShow.text = SecondsToTimeToShow(timer);
+					//timeShow.text = SecondsToTimeToShow(timer);
 					timer -= Time.deltaTime;
 					yield return null;
 				}
-				timeShow.text = "";
+				//timeShow.text = "";
 				GameManager.Instance.WithdrawRawAsterium();
 				GameManager.Instance.ChangeAsteriy(20, new Log
 				{
