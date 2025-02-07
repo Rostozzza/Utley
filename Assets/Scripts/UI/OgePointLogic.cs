@@ -33,12 +33,12 @@ public class OgePointLogic : MonoBehaviour
 
 	public void SetIsUsing(bool set)
 	{
-		GameManager.Instance.SetIsGraphUsing(set);
+		//GameManager.Instance.SetIsGraphUsing(set);
 	}
 
 	private void OnDestroy()
 	{
-		GameManager.Instance.SetIsGraphUsing(false);
+		//GameManager.Instance.SetIsGraphUsing(false);
 	}
 
 	public void SetColor(Color color)
