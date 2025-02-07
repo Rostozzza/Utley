@@ -461,6 +461,7 @@ public class RoomScript : MonoBehaviour
 				if (GameManager.Instance.FlyForRawAsterium() && GameManager.Instance.season != GameManager.Season.Tide)
 				{
 					//timeShow.gameObject.SetActive(true);
+					workUI.SetResultImage(GameManager.Instance.uiResourceShower.asteriyAmountText.transform.parent.parent.GetComponentsInChildren<Image>()[1].sprite);
 					flyForType = FlyForType.Asterium;
 					StartCoroutine(WorkStatus());
 				}
@@ -469,6 +470,7 @@ public class RoomScript : MonoBehaviour
 				if (GameManager.Instance.season != GameManager.Season.Tide)
 				{
 					//timeShow.gameObject.SetActive(true);
+					workUI.SetResultImage(GameManager.Instance.uiResourceShower.astroluminiteAmountText.transform.parent.parent.GetComponentsInChildren<Image>()[1].sprite); //im sorry 🤡
 					flyForType = FlyForType.Astroluminite;
 					StartCoroutine(WorkStatus());
 				}
@@ -570,7 +572,7 @@ public class RoomScript : MonoBehaviour
 					timer *= 0.9f;
 				}
 				timer *= 1 + (1 - efficientyCoeficent); // for RESISTORS exercise;
-				(workUI as FluidWorkUI).StartWork(timer, 20, GameManager.Instance.uiResourceShower.asteriyAmountText.transform);
+				(workUI as FluidWorkUI).StartWork(timer, 20, GameManager.Instance.uiResourceShower.astroluminiteAmountText.transform);
 				while (timer > 0)
 				{
 					//timeShow.text = SecondsToTimeToShow(timer);
