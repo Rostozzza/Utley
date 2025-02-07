@@ -29151,6 +29151,7 @@ MonoBehaviour:
   buttonBGImg: {fileID: 0}
   circleTimer: {fileID: 0}
   gearImg: {fileID: 0}
+  circleFrame: {fileID: 0}
 --- !u!65 &6881682886034302060
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30776,6 +30777,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1380038667678185219}
     m_Modifications:
+    - target: {fileID: 291140714292674898, guid: c8a4f3e9f2fc6b64a933f0b27d2df153, type: 3}
+      propertyPath: m_Range
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 291140714292674898, guid: c8a4f3e9f2fc6b64a933f0b27d2df153, type: 3}
+      propertyPath: m_Intensity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5404322104249755494, guid: c8a4f3e9f2fc6b64a933f0b27d2df153, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.977

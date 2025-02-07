@@ -35,6 +35,7 @@ public class NumbersByTableExercise : MonoBehaviour
 
 	public void GenerateTask(RoomScript room)
 	{
+		GameManager.Instance.SetIsGraphUsing(true);
 		MenuManager.Instance.problemSolverScreen.SetActive(true);
 		targetedRoom = room;
 		GenerateFromPreset();
@@ -79,6 +80,7 @@ public class NumbersByTableExercise : MonoBehaviour
 
 	public void SubmitAnswer()
 	{
+		GameManager.Instance.SetIsGraphUsing(true);
 		for (int i = 0; i < rightAnswers.Count; i++)
 		{
 			if (rightAnswers[i] != int.Parse(allInputFields[i].text))
