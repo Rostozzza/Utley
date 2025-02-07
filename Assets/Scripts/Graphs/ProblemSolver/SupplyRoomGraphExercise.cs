@@ -45,6 +45,10 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 	public void SubmitAnswer()
 	{
 		var answerField = currentTask.graphView.GetComponentsInChildren<TMP_InputField>().First(x => x.gameObject.tag == "answerField");
+		if (answerField.text == "")
+		{
+			return;
+		}
 		EventManager.onSupplyRoomSettingsSolved.Invoke();
 		Destroy(currentTask.graphView);
 		tasks.Remove(currentTask);
