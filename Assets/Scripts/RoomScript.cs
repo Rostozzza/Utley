@@ -74,16 +74,16 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private Image buttonBGImg;
 	[SerializeField] private Image circleTimer;
 	[SerializeField] private Image gearImg;
-	public void SetWorkEfficiency(float newCoef, bool isCosmodromeWait = true)
+	public void SetWorkEfficiency(float newCoef, bool isCosmodromeWait = true, bool isThisFirstCall = false) // Last parameter is KOSTYL'
 	{
 		Animator efficiencyAnim = efficiencyDownPanel.GetComponent<Animator>();
 		switch (resource)
 		{
 			case Resources.Cosmodrome:
-				efficiencyDownPercentageText.text = $"-{(1 - newCoef) * 100}%";
+				efficiencyDownPercentageText.text = isThisFirstCall ? "" : $"-{(1 - newCoef) * 100}%";
 				if (efficientyCoeficent <= 1f && newCoef >= 1f)
 				{
-					efficiencyAnim.SetTrigger("HidePanel");
+					if (!isThisFirstCall) efficiencyAnim.SetTrigger("HidePanel");
 					circleTimer.fillAmount = 1;
 					StartCoroutine(CosmodromeCircleTimer(60));
 				}
@@ -211,7 +211,7 @@ public class RoomScript : MonoBehaviour
 			case Resources.Cosmodrome:
 				workStr = "Добыча астерия";
 				workSound = SoundManager.Instance.cosmodromeWorkSound;
-				if (efficiencyDownPanel != null) SetWorkEfficiency(1);
+				if (efficiencyDownPanel != null) SetWorkEfficiency(1, true, true);
 				//StartCoroutine(ConstantResistorSetCaller(10));
 				break;
 			case Resources.Supply:
