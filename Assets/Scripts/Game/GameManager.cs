@@ -421,10 +421,11 @@ public class GameManager : MonoBehaviour
 			var currentAstroluminite = await GetAstroluminite();
 			if (currentAsterium < roomScript.asteriumCost || currentHoney < roomScript.honeyCost || currentAstroluminite < roomScript.astroluminiteCost)
 			{
+				queuedBuildPositon.GetComponentInChildren<Button>(true).interactable = true;
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
 				elevatorBuildingScreen.SetActive(false);
-				queuedBuildPositon.GetComponent<Button>().interactable = true;
+				
 				return;
 			}
 
@@ -441,6 +442,8 @@ public class GameManager : MonoBehaviour
 			if (fixedBuilderRoom == null || !fixedBuilderRoom.GetComponent<BuilderRoom>().GetWait())
 			{
 				Debug.Log("Нет свободных строительных комплексов!");
+
+				queuedBuildPositon.GetComponentInChildren<Button>(true).interactable = true;
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
 				elevatorBuildingScreen.SetActive(false);
@@ -486,7 +489,7 @@ public class GameManager : MonoBehaviour
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
 				elevatorBuildingScreen.SetActive(false);
-				queuedBuildPositon.GetComponent<Button>().interactable = true;
+				queuedBuildPositon.GetComponentInChildren<Button>(true).interactable = true;
 				return;
 			}
 			fixedBuilderRoom = null;
