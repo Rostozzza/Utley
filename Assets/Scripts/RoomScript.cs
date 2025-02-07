@@ -576,6 +576,7 @@ public class RoomScript : MonoBehaviour
 				}
 				timer *= 1 + (1 - efficientyCoeficent); // for RESISTORS exercise;
 				(workUI as FluidWorkUI).StartWork(timer, 20, GameManager.Instance.uiResourceShower.astroluminiteAmountText.transform);
+				fixedBear.SetActive(false);
 				while (timer > 0)
 				{
 					//timeShow.text = SecondsToTimeToShow(timer);
@@ -593,7 +594,7 @@ public class RoomScript : MonoBehaviour
 					timer -= Time.deltaTime;
 					yield return null;
 				}
-
+				fixedBear.SetActive(true);
 				switch (flyForType)
 				{
 					case FlyForType.Asterium:
