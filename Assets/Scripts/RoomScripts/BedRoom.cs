@@ -29,9 +29,10 @@ public class BedRoom : RoomScript
 		//{
 		//	timer *= 0.9f;
 		//}
+		(workUI as FluidWorkUI).StartWork(timer, 20, GameManager.Instance.uiResourceShower.bearsAmountText.transform);
 		while (timer > 0)
 		{
-			timeShow.text = SecondsToTimeToShow(timer);
+			//timeShow.text = SecondsToTimeToShow(timer);
 			timer -= Time.deltaTime;
 			yield return null;
 		}
