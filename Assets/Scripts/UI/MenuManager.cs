@@ -216,6 +216,7 @@ public class MenuManager : MonoBehaviour
 		{
 			currentPLayerName = PlayerPrefs.GetString("currentPlayer");
 			currentPlayerField.text = currentPLayerName;
+
 			startingScreen.SetActive(false);
 			mainMenuScreen.SetActive(false);
 		}
@@ -235,7 +236,7 @@ public class MenuManager : MonoBehaviour
 
 	public void Pause()
 	{
-		if (SceneManager.GetActiveScene().buildIndex == 0)
+		if (SceneManager.GetActiveScene().buildIndex == 0 || problemSolverScreen.active)
 		{
 			return;
 		}
