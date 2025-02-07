@@ -9537,6 +9537,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1841e854cbd66154ea77d9a6556d4004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &496612052 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 893052443696060211, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
+  m_PrefabInstance: {fileID: 496612050}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &503725508
 GameObject:
   m_ObjectHideFlags: 0
@@ -37806,7 +37811,10 @@ MonoBehaviour:
       target: {fileID: 758049014}
       angleZ: 0
       offset: 0
-    pointers: []
+    pointers:
+    - target: {fileID: 496612052}
+      angleZ: 90
+      offset: 0
     conditionsSequence: 08000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 0
@@ -40199,7 +40207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1172612712928513837, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1182159484782535745, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_SizeDelta.x
@@ -40303,7 +40311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3488088751966703108, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3767274520511459582, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_LocalPosition.x
@@ -40431,7 +40439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7368429296526382887, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.787
+      value: 1.74
       objectReference: {fileID: 0}
     - target: {fileID: 7368429296526382887, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_AnchoredPosition.y
