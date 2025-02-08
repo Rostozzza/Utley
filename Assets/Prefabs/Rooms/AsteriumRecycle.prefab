@@ -30502,6 +30502,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 468568795882877523}
     m_Modifications:
+    - target: {fileID: 1689270219756304882, guid: aa39a190e5ee6374a8aa2302982a9edb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2563046078280960427, guid: aa39a190e5ee6374a8aa2302982a9edb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -30627,9 +30631,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 468568795882877523}
     m_Modifications:
+    - target: {fileID: 382613631715039373, guid: 13efc6169c077664a8a659ffa0fd1e20, type: 3}
+      propertyPath: m_Maskable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 382613631715039373, guid: 13efc6169c077664a8a659ffa0fd1e20, type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 382613631715039373, guid: 13efc6169c077664a8a659ffa0fd1e20, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1339072002490703535, guid: 13efc6169c077664a8a659ffa0fd1e20, type: 3}
       propertyPath: m_Name
       value: EfficiencyCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518366666445829961, guid: 13efc6169c077664a8a659ffa0fd1e20, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.00000011920929
       objectReference: {fileID: 0}
     - target: {fileID: 1528755419758144625, guid: 13efc6169c077664a8a659ffa0fd1e20, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
