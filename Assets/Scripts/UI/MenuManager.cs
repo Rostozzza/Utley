@@ -19,6 +19,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private string currentPlayerPassword;
 	[SerializeField] private TextMeshProUGUI currentPlayerField;
 	[SerializeField] private GameObject loadingView;
+	[SerializeField] private List<GameObject> tutor;
 	[Header("Game message settings")]
 	[SerializeField] private CanvasGroup messageView;
 	[SerializeField] private TextMeshProUGUI messageField;
@@ -253,6 +254,10 @@ public class MenuManager : MonoBehaviour
 		{
 			BGMusicSource.Pause();
 		}
+		try
+		{
+			GameObject.FindGameObjectWithTag("tutorial").GetComponent<Canvas>().sortingOrder = 9999; // God left us;
+		} catch {}
 	}
 
 	public void Resume()
@@ -269,6 +274,10 @@ public class MenuManager : MonoBehaviour
 		{
 			BGMusicSource.UnPause();
 		}
+		try
+		{
+			GameObject.FindGameObjectWithTag("tutorial").GetComponent<Canvas>().sortingOrder = 32767; // 😭;
+		} catch {}
 	}
 
 	public void ToMenu()
