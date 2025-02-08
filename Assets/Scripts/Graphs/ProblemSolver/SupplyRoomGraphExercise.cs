@@ -25,6 +25,7 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 	public void InitializeTask(RoomScript room)
 	{
 		GameManager.Instance.SetIsGraphUsing(true);
+		EventManager.onSupplySettingsOpened.Invoke();
 		Camera.main.GetComponent<CameraController>().SetCameraLock(true);
 		targetedRoom = room;
 		currentTask = tasks[Random.Range(0, tasks.Count)];

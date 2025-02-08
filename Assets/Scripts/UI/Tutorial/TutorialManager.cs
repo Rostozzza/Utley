@@ -76,7 +76,8 @@ public class TutorialManager : MonoBehaviour
 		OnEnergohoneySerringsSolved,
 		OnUrsovaksSold,
 		None,
-		OnSupplyRoomSolved
+		OnSupplyRoomSolved,
+		OnSupplyRoomSettingsOpened
 	}
 
 	private void Start()
@@ -241,9 +242,14 @@ public class TutorialManager : MonoBehaviour
 					EventManager.onUrsovaxSent.RemoveListener(StopWaiting);
 					break;
 				case Condition.OnSupplyRoomSolved:
+					EventManager.onSupplySettingsOpened.AddListener(StopWaiting);
+					yield return WaitForEvent();
+					GameManager.Instance.GetComponentsInChildren<Canvas>()[1].sortingOrder = 9999; // God left us;
+					EventManager.onSupplySettingsOpened.RemoveListener(StopWaiting);
 					EventManager.onSupplyRoomSettingsSolved.AddListener(StopWaiting);
 					yield return WaitForEvent();
 					EventManager.onSupplyRoomSettingsSolved.RemoveListener(StopWaiting);
+					GameManager.Instance.GetComponentsInChildren<Canvas>()[1].sortingOrder = 32767; // 😭;
 					break;
 
 			}

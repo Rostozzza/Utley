@@ -39,7 +39,12 @@ public static class EventManager
 	public static UnityEvent onUrsovaxSent = new UnityEvent();
 
 	/// <summary>
+	/// Triggered when Supply room settings is opened;
+	/// </summary>
+	public static UnityEvent onSupplySettingsOpened = new UnityEvent();
+	/// <summary>
 	/// Triggered when player solves supply room settings;
 	/// </summary>
 	public static UnityEvent onSupplyRoomSettingsSolved = new UnityEvent();
+
 }
