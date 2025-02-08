@@ -47,4 +47,8 @@ public static class EventManager
 	/// </summary>
 	public static UnityEvent onSupplyRoomSettingsSolved = new UnityEvent();
 
+	/// <summary>
+	/// Triggered when any room got upgraded;
+	/// </summary>
+	public static UnityEvent onRoomUpgraded = new UnityEvent();
 }

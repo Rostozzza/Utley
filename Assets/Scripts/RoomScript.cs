@@ -353,6 +353,7 @@ public class RoomScript : MonoBehaviour
 			button.GetComponentInChildren<TextMeshProUGUI>().text = "Максимальный уровень!";
 		}
 		UpdateRoomHullView();
+		EventManager.onRoomUpgraded.Invoke();
 		yield return null;
 	}
 

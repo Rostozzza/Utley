@@ -77,7 +77,8 @@ public class TutorialManager : MonoBehaviour
 		OnUrsovaksSold,
 		None,
 		OnSupplyRoomSolved,
-		OnSupplyRoomSettingsOpened
+		OnSupplyRoomSettingsOpened,
+		OnRoomUpgraded
 	}
 
 	private void Start()
@@ -250,6 +251,11 @@ public class TutorialManager : MonoBehaviour
 					yield return WaitForEvent();
 					EventManager.onSupplyRoomSettingsSolved.RemoveListener(StopWaiting);
 					GameManager.Instance.GetComponentsInChildren<Canvas>()[1].sortingOrder = 32767; // 😭;
+					break;
+				case Condition.OnRoomUpgraded:
+					EventManager.onRoomUpgraded.AddListener(StopWaiting);
+					yield return WaitForEvent();
+					EventManager.onRoomUpgraded.RemoveListener(StopWaiting);
 					break;
 
 			}
