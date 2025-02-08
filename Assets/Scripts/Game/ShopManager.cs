@@ -24,6 +24,7 @@ public class ShopManager : MonoBehaviour
 	[SerializeField] private GameObject shopLoadingScreen;
 	[SerializeField] private List<ShopItem> shopItems = new List<ShopItem>();
 	[SerializeField] private List<ShopItem> shopItemsToSell = new List<ShopItem>();
+	[SerializeField] private GameObject shopInterface;
 	JsonManager JsonManager;
 	private bool isOpened = false;
 
@@ -104,6 +105,7 @@ public class ShopManager : MonoBehaviour
 			}
 		}
 		shopLoadingScreen.SetActive(false);
+		shopInterface.GetComponentsInChildren<TMP_InputField>().ToList().ForEach(x => x.text = "");
 	}
 
 	public void SellAll()
@@ -122,6 +124,7 @@ public class ShopManager : MonoBehaviour
 			}
 		}
 		shopLoadingScreen.SetActive(false);
+		shopInterface.GetComponentsInChildren<TMP_InputField>().ToList().ForEach(x => x.text = "");
 	}
 
 	#region Get/Change
