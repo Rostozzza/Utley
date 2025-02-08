@@ -210,7 +210,9 @@ public class TutorialManager : MonoBehaviour
 					break;
 				case Condition.OnBearMove:
 					EventManager.onBearReachedDestination.AddListener(StopWaitingForRoomCheck);
+					button.interactable = false;
 					yield return WaitForEvent();
+					button.interactable = true;
 					EventManager.onBearReachedDestination.RemoveListener(StopWaitingForRoomCheck);
 					break;
 				case Condition.OnRoomSelect:

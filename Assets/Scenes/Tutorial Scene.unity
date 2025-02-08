@@ -21240,6 +21240,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097299119}
   m_CullTransparentMesh: 1
+--- !u!114 &1100987584 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7150890815794446519, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+  m_PrefabInstance: {fileID: 1398197918}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1103498418
 GameObject:
   m_ObjectHideFlags: 0
@@ -37963,7 +37974,7 @@ MonoBehaviour:
       offset: 0
     pointers: []
     conditionsSequence: 04000000
-    buttonToCheck: {fileID: 708579819}
+    buttonToCheck: {fileID: 1100987584}
     keyToCheck: 0
     tagToCheck: 
     roomToCheck: {fileID: 1398197919}
