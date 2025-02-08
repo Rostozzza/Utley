@@ -28,6 +28,10 @@ public class DoorsScript : MonoBehaviour
     void Start()
     {
 		CheckAndHideDoors(true);
+		foreach (var room in GameManager.Instance.allRooms.Where(x => x.GetComponent<RoomScript>() && x!= gameObject))
+		{
+			room.GetComponent<DoorsScript>().CheckAndHideDoors(true);
+		}
     }
 
 	public void CheckAndHideDoors(bool checkNeighbours)
@@ -43,7 +47,7 @@ public class DoorsScript : MonoBehaviour
                 break;
         }
 		
-		//Debug.Log(name + " ДВЕРИ: " + nearRooms.leftRoom + " " + nearRooms.rightRoom);
+		Debug.Log(name + " ДВЕРИ: " + nearRooms.leftRoom + " " + nearRooms.rightRoom);
 	}
 
 	public class NearRooms
@@ -73,7 +77,7 @@ public class DoorsScript : MonoBehaviour
 			{
 				if (probablyRoom.TryGetComponent(out DoorsScript doorsScript) && probablyRoom != gameObject)
 				{
-					if (checkNeighbours) doorsScript.CheckAndHideDoors(false);
+					if (checkNeighbours) doorsScript.Invoke("CheckAndHideDoors",0.2f);
 					return false;
 				}
 				//else if (probablyRoom.TryGetComponent(out BuildRoomScript elevatorScript))
