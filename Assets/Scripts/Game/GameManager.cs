@@ -413,7 +413,7 @@ public class GameManager : MonoBehaviour
 	public async Task SelectAndBuildAsync(GameObject building)
 	{
 		var currentAsterium = await GetAsteriy();
-		queuedBuildPositon.GetComponent<Button>().interactable = false;
+		if (queuedBuildPositon.GetComponentInParent<Elevator>() == null) queuedBuildPositon.GetComponent<Button>().interactable = false;
 		if (!building.CompareTag("elevator"))
 		{
 			RoomScript roomScript = building.GetComponent<RoomScript>();
@@ -559,16 +559,16 @@ public class GameManager : MonoBehaviour
 			yield return null;
 		}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", true);
-		Instantiate(buildingParticle, queuedBuildPositon.transform.position, Quaternion.identity);
+		Instantiate(buildingParticle, point.position, Quaternion.identity);
 		if (!building.CompareTag("elevator"))
 		{
-			if (queuedBuildPositon.transform.position.x < queuedBuildPositon.transform.parent.parent.position.x)
+			if (point.position.x < point.parent.parent.position.x)
 			{
-				Instantiate(buildingParticle, queuedBuildPositon.transform.position + Vector3.left * 4f, Quaternion.identity);
+				Instantiate(buildingParticle, point.position + Vector3.left * 4f, Quaternion.identity);
 			}
 			else
 			{
-				Instantiate(buildingParticle, queuedBuildPositon.transform.position + Vector3.right * 4f, Quaternion.identity);
+				Instantiate(buildingParticle, point.position + Vector3.right * 4f, Quaternion.identity);
 			}
 		}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
@@ -735,7 +735,7 @@ public class GameManager : MonoBehaviour
 				asteriumRoomView.Add(newAsteriumView.GetComponent<Image>());
 			}
 		}
-		if (queuedBuildPositon.transform.parent.parent.tag == "elevator" && queuedBuildPositon.transform.parent.parent.position.y != instance.transform.position.y && instance.tag == "elevator")
+		if (point.parent.parent.tag == "elevator" && point.parent.parent.position.y != instance.transform.position.y && instance.tag == "elevator")
 		{
 			queuedBuildPositon = null;
 			return;
@@ -1234,7 +1234,21 @@ public class GameManager : MonoBehaviour
 
 	public void ShowAvailableAssignments()
 	{
-		allRooms.Where(x => x.GetComponent<RoomScript>()).ToList().ForEach(y => y.GetComponent<RoomScript>().ShowButton());
+		var interestingRooms = allRooms.Where(x => x.GetComponent<RoomScript>()).ToList();
+		foreach (var room in interestingRooms)
+		{
+			if (room.TryGetComponent<BuilderRoom>(out BuilderRoom builder))
+			{
+				if (builder.fixedBear == null) // Shows assign button only if it's hasn't fixedBear
+				{
+					room.GetComponent<RoomScript>().ShowButton();
+				}
+			}
+			else
+			{
+				room.GetComponent<RoomScript>().ShowButton();
+			}
+		}
 	}
 
 	public void ClickedGameObject(GameObject gameObject)
@@ -1665,7 +1679,7 @@ public class GameManager : MonoBehaviour
 					Debug.Log(room.name + " задамажен фазой на " + damage);
 					room.GetComponent<RoomScript>().ChangeDurability(-damage);
 				});
-				Camera.main.GetComponent<CameraShake>().MeteorImpact();
+				if (ShopManager.Instance.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("TabletHide")) Camera.main.GetComponent<CameraShake>().MeteorImpact();
 				yield return new WaitForSeconds(6f);
 			}
 		}
