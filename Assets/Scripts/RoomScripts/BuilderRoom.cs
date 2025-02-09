@@ -10,6 +10,7 @@ public class BuilderRoom : RoomScript
     {
         base.Start();
         GameManager.Instance.builderRooms.Add(this.gameObject);
+        fixedBear = null;
     }
 
     protected override IEnumerator WorkStatus()
