@@ -425,7 +425,7 @@ public class GameManager : MonoBehaviour
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
 				elevatorBuildingScreen.SetActive(false);
-				
+
 				return;
 			}
 
@@ -994,8 +994,8 @@ public class GameManager : MonoBehaviour
 		{
 			return;
 		}
-		targetedView.color = Color.grey; 
-		
+		targetedView.color = Color.grey;
+
 	}
 
 	private void Update()
@@ -1017,10 +1017,10 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-/// <summary>
-/// true - time goes, false - time stops. Time like "resource" at top bar.
-/// </summary>
-/// <param name="set"></param>
+	/// <summary>
+	/// true - time goes, false - time stops. Time like "resource" at top bar.
+	/// </summary>
+	/// <param name="set"></param>
 	public void SetTimeGo(bool set)
 	{
 		isTimeGo = set;
@@ -1170,7 +1170,7 @@ public class GameManager : MonoBehaviour
 		//	selectedUnit = null;
 		//	return;
 		//}
-		if (gameObject.CompareTag("room"))
+		if (gameObject.CompareTag("room") && !selectedUnit.GetComponent<UnitMovement>().IsWalkingToWork())
 		{
 			selectedUnit.GetComponent<UnitMovement>().StopAllCoroutines();
 			selectedUnit.GetComponent<UnitMovement>().MoveToRoom(gameObject.GetComponent<RoomScript>());
@@ -1193,30 +1193,35 @@ public class GameManager : MonoBehaviour
 	private IEnumerator WalkAndStartWork(GameObject unit, GameObject obj) // needs to wait for walk and after we starting work
 	{
 		//Debug.Log(unit + "|" + obj);
-		unit.GetComponent<UnitMovement>().StopAllCoroutines();
-		unit.GetComponent<UnitMovement>().MoveToRoom(obj.GetComponentInParent<RoomScript>());
-		if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
-		var enRouteButton = obj.GetComponentsInChildren<ButtonEnRoute>(true)[0];
-		enRouteButton.SetButtonState(false);
-		selectedUnit = null;
-		Debug.Log($"BTN PRSD: {enRouteButton.IsButtonPressed()}");
-		while (unit.GetComponent<UnitMovement>().currentRoutine != null)
+		if (!unit.GetComponent<UnitMovement>().IsWalkingToWork())
 		{
-			if (enRouteButton.IsButtonPressed())
+			unit.GetComponent<UnitMovement>().StopAllCoroutines();
+			unit.GetComponent<UnitMovement>().MoveToRoom(obj.GetComponentInParent<RoomScript>());
+			unit.GetComponent<UnitMovement>().SetIsWalkingToWork(true);
+			if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+			var enRouteButton = obj.GetComponentsInChildren<ButtonEnRoute>(true)[0];
+			enRouteButton.SetButtonState(false);
+			selectedUnit = null;
+			while (unit.GetComponent<UnitMovement>().currentRoutine != null)
 			{
-				unit.GetComponent<UnitMovement>().StopAllCoroutines();
-				unit.GetComponent<UnitMovement>().MoveToRoom(unit.GetComponent<UnitMovement>().currentRoom);
-				break;
+				if (enRouteButton.IsButtonPressed())
+				{
+					unit.GetComponent<UnitMovement>().StopAllCoroutines();
+					unit.GetComponent<UnitMovement>().SetIsWalkingToWork(false);
+					unit.GetComponent<UnitMovement>().MoveToRoom(unit.GetComponent<UnitMovement>().currentRoom);
+					break;
+				}
+				yield return null;
 			}
-			yield return null;
-		}
-		if (!enRouteButton.IsButtonPressed())
-		{
-			if (obj.GetComponentInParent<RoomScript>().resource == RoomScript.Resources.Build) obj.GetComponentInParent<BuilderRoom>().SetWait(true);
-			obj.GetComponentInParent<RoomScript>().StartWork(unit);
-			enRouteButton.SetButtonState(true);
-			unit.GetComponent<UnitScript>().SetMarker(false);
-			OutlineWorkStations(false);
+			if (!enRouteButton.IsButtonPressed() && unit.GetComponent<UnitMovement>().IsWalkingToWork())
+			{
+				if (obj.GetComponentInParent<RoomScript>().resource == RoomScript.Resources.Build) obj.GetComponentInParent<BuilderRoom>().SetWait(true);
+				obj.GetComponentInParent<RoomScript>().StartWork(unit);
+				enRouteButton.SetButtonState(true);
+				unit.GetComponent<UnitScript>().SetMarker(false);
+				OutlineWorkStations(false);
+				unit.GetComponent<UnitMovement>().SetIsWalkingToWork(false);
+			}
 		}
 	}
 
@@ -1234,7 +1239,7 @@ public class GameManager : MonoBehaviour
 
 	public void ShowAvailableAssignments()
 	{
-		var interestingRooms = allRooms.Where(x => x.GetComponent<RoomScript>()).ToList();
+		var interestingRooms = allRooms.Where(x => x.GetComponent<RoomScript>() && (x.GetComponentInChildren<ButtonEnRoute>(true) && !x.GetComponentInChildren<ButtonEnRoute>(true).GetComponent<Button>().interactable)).ToList();
 		foreach (var room in interestingRooms)
 		{
 			if (room.TryGetComponent<BuilderRoom>(out BuilderRoom builder))

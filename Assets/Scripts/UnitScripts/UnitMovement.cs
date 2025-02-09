@@ -11,9 +11,24 @@ public class UnitMovement : MonoBehaviour
 	public RoomScript currentRoom;
 	[SerializeField] private float offsetX = 1.24f;
 	public Coroutine currentRoutine;
+	[SerializeField] private bool isWalkingToWork = false;
+
+	public bool IsWalkingToWork()
+	{
+		return isWalkingToWork;
+	}
+
+	public void SetIsWalkingToWork(bool isWalkingToWork)
+	{
+		this.isWalkingToWork = isWalkingToWork;
+	}
 
 	public void MoveToRoom(RoomScript target)
 	{
+		if (isWalkingToWork)
+		{
+			return;
+		}
 		List<Elevator> branch = new List<Elevator>();
 		this.target = target;
 		if (currentRoutine != null)
