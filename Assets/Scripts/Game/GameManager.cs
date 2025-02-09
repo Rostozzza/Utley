@@ -1131,7 +1131,6 @@ public class GameManager : MonoBehaviour
 				selectedUnit = null;
 			}
 		}
-
 		if (Input.GetKeyDown(KeyCode.B)) SetModeByButton((int)Mode.Build);
 		else if (Input.GetKeyDown(KeyCode.I)) SetModeByButton((int)Mode.Info);
 	}
@@ -1193,20 +1192,32 @@ public class GameManager : MonoBehaviour
 
 	private IEnumerator WalkAndStartWork(GameObject unit, GameObject obj) // needs to wait for walk and after we starting work
 	{
-		Debug.Log(unit + "|" + obj);
+		//Debug.Log(unit + "|" + obj);
 		unit.GetComponent<UnitMovement>().StopAllCoroutines();
 		unit.GetComponent<UnitMovement>().MoveToRoom(obj.GetComponentInParent<RoomScript>());
 		if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
-
+		var enRouteButton = obj.GetComponentsInChildren<ButtonEnRoute>(true)[0];
+		enRouteButton.SetButtonState(false);
 		selectedUnit = null;
+		Debug.Log($"BTN PRSD: {enRouteButton.IsButtonPressed()}");
 		while (unit.GetComponent<UnitMovement>().currentRoutine != null)
 		{
+			if (enRouteButton.IsButtonPressed())
+			{
+				unit.GetComponent<UnitMovement>().StopAllCoroutines();
+				unit.GetComponent<UnitMovement>().MoveToRoom(unit.GetComponent<UnitMovement>().currentRoom);
+				break;
+			}
 			yield return null;
 		}
-		if (obj.GetComponentInParent<RoomScript>().resource == RoomScript.Resources.Build) obj.GetComponentInParent<BuilderRoom>().SetWait(true);
-		obj.GetComponentInParent<RoomScript>().StartWork(unit);
-		unit.GetComponent<UnitScript>().SetMarker(false);
-		OutlineWorkStations(false);
+		if (!enRouteButton.IsButtonPressed())
+		{
+			if (obj.GetComponentInParent<RoomScript>().resource == RoomScript.Resources.Build) obj.GetComponentInParent<BuilderRoom>().SetWait(true);
+			obj.GetComponentInParent<RoomScript>().StartWork(unit);
+			enRouteButton.SetButtonState(true);
+			unit.GetComponent<UnitScript>().SetMarker(false);
+			OutlineWorkStations(false);
+		}
 	}
 
 	public void HideAllAssignButtons()

@@ -47,7 +47,7 @@ public class DoorsScript : MonoBehaviour
                 break;
         }
 		
-		Debug.Log(name + " ДВЕРИ: " + nearRooms.leftRoom + " " + nearRooms.rightRoom);
+		//Debug.Log(name + " ДВЕРИ: " + nearRooms.leftRoom + " " + nearRooms.rightRoom);
 	}
 
 	public class NearRooms
