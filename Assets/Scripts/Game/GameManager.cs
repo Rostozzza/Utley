@@ -1654,7 +1654,7 @@ public class GameManager : MonoBehaviour
 					Debug.Log(room.name + " задамажен фазой на " + damage);
 					room.GetComponent<RoomScript>().ChangeDurability(-damage);
 				});
-				Camera.main.GetComponent<CameraShake>().MeteorImpact();
+				if (ShopManager.Instance.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("TabletHide")) Camera.main.GetComponent<CameraShake>().MeteorImpact();
 				yield return new WaitForSeconds(6f);
 			}
 		}

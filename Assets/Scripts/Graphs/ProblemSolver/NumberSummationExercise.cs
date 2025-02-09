@@ -92,10 +92,12 @@ public class NumberSummationExercise : MonoBehaviour
 			roomToTarget.SetWorkEfficiency(0.8f);
 		}
 		EventManager.onEnergohoneySettingsSolved.Invoke();
-		GameManager.Instance.SetIsGraphUsing(false);
 		ClearGraph();
 		isTaskActive = false;
+		MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
+		MenuManager.Instance.graphExercise.gameObject.SetActive(false);
+		GameManager.Instance.SetIsGraphUsing(false);
 	}
 
 	/// <summary>

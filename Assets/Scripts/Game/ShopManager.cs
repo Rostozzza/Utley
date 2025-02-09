@@ -49,6 +49,7 @@ public class ShopManager : MonoBehaviour
 			GameManager.Instance.SetIsGraphUsing(true);
 			isAPIActive = MenuManager.Instance.isAPIActive;
 			JsonManager = GameManager.Instance.JsonManager;
+			shopInterface.GetComponentsInChildren<TMP_InputField>().ToList().ForEach(x => x.text = "");
 			if (MenuManager.Instance.isAPIActive)
 			{
 				shopLoadingScreen.SetActive(true);

@@ -101,6 +101,7 @@ public class MenuManager : MonoBehaviour
 
 	public void ShowLoseScreen()
 	{
+		if (ShopManager.Instance.GetIsOpen()) ShopManager.Instance.OpenShop();
 		GameManager.Instance.SetIsGameRunning(false);
 		CountScoreAndUpdate();
 		loseScreen.SetActive(true);
@@ -123,6 +124,7 @@ public class MenuManager : MonoBehaviour
 
 	public void ShowWinScreen()
 	{
+		if (ShopManager.Instance.GetIsOpen()) ShopManager.Instance.OpenShop();
 		GameManager.Instance.SetIsGameRunning(false);
 		CountScoreAndUpdate();
 		winScreen.SetActive(true);
@@ -247,7 +249,7 @@ public class MenuManager : MonoBehaviour
 		}
 
 		pauseScreen.SetActive(true);
-		SetPipesScreen.SetActive(!numberSummation.isTaskActive);
+		//SetPipesScreen.SetActive(!numberSummation.isTaskActive);
 		Time.timeScale = 0f;
 		mixer.SetFloat("Lowpass", 500f);
 		if (SceneManager.GetActiveScene().buildIndex != 0)
@@ -266,7 +268,7 @@ public class MenuManager : MonoBehaviour
 		{
 			return;
 		}
-		SetPipesScreen.SetActive(numberSummation.isTaskActive);
+		//SetPipesScreen.SetActive(numberSummation.isTaskActive);
 		pauseScreen.SetActive(false);
 		Time.timeScale = 1f;
 		mixer.SetFloat("Lowpass", 22000f);
@@ -461,10 +463,10 @@ public class MenuManager : MonoBehaviour
 			loadingView.SetActive(false);
 			try
 			{
-				GameManager.Instance.asteriy = 40;
-				GameManager.Instance.honey = 40;
-				GameManager.Instance.astroluminite = 6;
-				GameManager.Instance.playerBears = 4;
+				GameManager.Instance.asteriy = 999; // 40
+				GameManager.Instance.honey = 999; // 40
+				GameManager.Instance.astroluminite = 999; // 6
+				GameManager.Instance.playerBears = 4; // 4
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
 			}
 			catch
