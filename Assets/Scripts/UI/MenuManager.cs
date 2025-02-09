@@ -463,9 +463,9 @@ public class MenuManager : MonoBehaviour
 			loadingView.SetActive(false);
 			try
 			{
-				GameManager.Instance.asteriy = 999; // 40
-				GameManager.Instance.honey = 999; // 40
-				GameManager.Instance.astroluminite = 999; // 6
+				GameManager.Instance.asteriy = 40; // 40
+				GameManager.Instance.honey = 40; // 40
+				GameManager.Instance.astroluminite = 6; // 6
 				GameManager.Instance.playerBears = 4; // 4
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
 			}
