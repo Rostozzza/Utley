@@ -247,7 +247,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.6417, y: 1.7095}
-  m_SizeDelta: {x: 0.0845, y: 0.5211}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!222 &3209820736975572720
 CanvasRenderer:
@@ -690,7 +690,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -1.212, y: 0.037}
+  m_AnchoredPosition: {x: -1.2119751, y: 0.036987305}
   m_SizeDelta: {x: 1.1033, y: 3.6073}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6176455073111805621
@@ -738,7 +738,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &4245332549921976718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -795,6 +795,7 @@ MonoBehaviour:
   workUnitPrefab: {fileID: 5039237716565645085, guid: 7e515d5fd9d087d429787e5be2b91fd0, type: 3}
   workResultToScreenPrefab: {fileID: 112130046343831669, guid: 9a744e83a3602e047a59db988ffdf205, type: 3}
   correspondingUI: {fileID: 0}
+  workResultSprite: {fileID: 0}
 --- !u!1 &8648120107259403607
 GameObject:
   m_ObjectHideFlags: 0
