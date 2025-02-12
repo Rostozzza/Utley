@@ -13,7 +13,9 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 	[Header("Task Generation")]
 	[SerializeField] private SupplyTaskPreset currentTask;
 	[SerializeField] private List<SupplyTaskPreset> tasks;
+	[SerializeField] private List<GameObject> taskPrefabs;
 	private RoomScript targetedRoom;
+	private List<GameObject> taskPrefs;
 
 	[Serializable]
 	private struct SupplyTaskPreset
@@ -71,5 +73,52 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 		MenuManager.Instance.graphExercise.gameObject.SetActive(false);
 		GameManager.Instance.SetIsGraphUsing(false);
 		return;
+	}
+
+    void Start()
+    {
+        taskPrefs = new List<GameObject>(taskPrefabs);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
+		{
+			Time.timeScale = 1;
+			MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
+			Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+			GameManager.Instance.SetIsGraphUsing(false);
+			MenuManager.Instance.problemSolverScreen.SetActive(false);
+			Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+			MenuManager.Instance.problemSolverScreen.SetActive(false);
+			MenuManager.Instance.graphExercise.gameObject.SetActive(false);
+			GameManager.Instance.SetIsGraphUsing(false);
+			Destroy(currentTask.graphView);
+			tasks.Remove(currentTask);
+			//var prefab = taskPrefs[Random.Range(0, taskPrefabs.Count)];
+			//var newTask = Instantiate(prefab, this.gameObject.transform);
+			//tasks.Add(TaskPrefabToPreset(newTask));
+			//tasks.Find(currentTask);
+		}
+    }
+
+	private SupplyTaskPreset TaskPrefabToPreset(GameObject pref)
+	{
+		SupplyTaskPreset toReturn = new SupplyTaskPreset();
+		if (pref.name == taskPrefs[0].name)
+		{
+			toReturn.answer = 3;
+			toReturn.graphView = pref;
+		}
+		else if (pref.name == taskPrefabs[1].name)
+		{
+			toReturn.answer = 10;
+			toReturn.graphView = pref;
+		}
+		else
+		{
+			Debug.Log("Что-то не так");
+		}
+		return toReturn;
 	}
 }
