@@ -22,7 +22,7 @@ public class SkillIssueManager : MonoBehaviour
 	/// </summary>
 	private void HandleGoida()
 	{
-		if (!Input.GetKeyDown(KeyCode.Z) || copeRoutine != null)
+		if (!Input.GetKeyDown(KeyCode.Keypad2) || copeRoutine != null)
 		{
 			return;
 		}
@@ -30,7 +30,7 @@ public class SkillIssueManager : MonoBehaviour
 		{
 			StopCoroutine(copeRoutine);
 		}
-		copeRoutine = StartCoroutine(Goida(0.5f, 0, new List<KeyCode> { KeyCode.Z, KeyCode.O, KeyCode.V }));
+		copeRoutine = StartCoroutine(Goida(0.5f, 0, new List<KeyCode> { KeyCode.Keypad2, KeyCode.Keypad2, KeyCode.Keypad8 }));
 	}
 
 	/// <summary>
@@ -38,7 +38,7 @@ public class SkillIssueManager : MonoBehaviour
 	/// </summary>
 	private void HandleSosi()
 	{
-		if (!Input.GetKeyDown(KeyCode.S) || copeRoutine != null)
+		if (!Input.GetKeyDown(KeyCode.Keypad1) || copeRoutine != null)
 		{
 			return;
 		}
@@ -46,7 +46,7 @@ public class SkillIssueManager : MonoBehaviour
 		{
 			StopCoroutine(copeRoutine);
 		}
-		copeRoutine = StartCoroutine(Sosi(0.5f, 0, new List<KeyCode> { KeyCode.S, KeyCode.O, KeyCode.S, KeyCode.I }));
+		copeRoutine = StartCoroutine(Sosi(0.5f, 0, new List<KeyCode> { KeyCode.Keypad1, KeyCode.Keypad4, KeyCode.Keypad8, KeyCode.Keypad8 }));
 	}
 
 	/// <summary>
@@ -54,7 +54,7 @@ public class SkillIssueManager : MonoBehaviour
 	/// </summary>
 	private void HandleHui()
 	{
-		if (!Input.GetKeyDown(KeyCode.H) || copeRoutine != null)
+		if (!Input.GetKeyDown(KeyCode.Keypad1) || copeRoutine != null)
 		{
 			return;
 		}
@@ -62,7 +62,7 @@ public class SkillIssueManager : MonoBehaviour
 		{
 			StopCoroutine(copeRoutine);
 		}
-		copeRoutine = StartCoroutine(Hui(0.5f, 0, new List<KeyCode> { KeyCode.H, KeyCode.U, KeyCode.I }));
+		copeRoutine = StartCoroutine(Hui(0.5f, 0, new List<KeyCode> { KeyCode.Keypad1, KeyCode.Keypad3, KeyCode.Keypad4 }));
 	}
 
 	private IEnumerator Hui(float timeLeft, int now, List<KeyCode> killYourself)
