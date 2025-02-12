@@ -117,4 +117,23 @@ public class NumbersByTableExercise : MonoBehaviour
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
 	}
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
+		{
+			Time.timeScale = 1;
+			GameManager.Instance.SetIsGraphUsing(false);
+			rightAnswers = null;
+			allInputFields = null;
+			task.SetActive(false);
+			Destroy(task, 0.1f);
+			tasksPresets.Remove(tasksPresets.First(x => x.task == task));
+			task = null;
+			MenuManager.Instance.connectFurnacesScreen.SetActive(false);
+			MenuManager.Instance.problemSolverScreen.SetActive(false);
+			MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
+			Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+		}
+    }
 }

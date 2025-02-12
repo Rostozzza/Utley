@@ -894,6 +894,13 @@ public class RoomScript : MonoBehaviour
 	public virtual void HideSetPipesButtonScreen()
 	{
 		SetConeierScreen(false);
+		StartCoroutine(DelayedSetConeierScreen(true, 0.5f));
+	}
+
+	private IEnumerator DelayedSetConeierScreen(bool set, float delayTime)
+	{
+		yield return new WaitForSeconds(delayTime);
+		SetConeierScreen(set);
 	}
 
 	public virtual void SetPipes()

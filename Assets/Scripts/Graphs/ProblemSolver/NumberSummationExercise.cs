@@ -76,6 +76,18 @@ public class NumberSummationExercise : MonoBehaviour
 		Camera.main.GetComponent<CameraController>().SetCameraLock(true);
 		while (!answerTrigger)
 		{
+			if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
+			{
+				Time.timeScale = 1;
+				Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+				roomToTarget.GivePermissionToContinue();
+				GameManager.Instance.SetIsGraphUsing(false);
+				ClearGraph();
+				isTaskActive = false;
+				MenuManager.Instance.problemSolverScreen.SetActive(false);
+				MenuManager.Instance.graphExercise.gameObject.SetActive(false);
+				yield break;
+			}
 			yield return null;
 		}
 		answerTrigger = false;
