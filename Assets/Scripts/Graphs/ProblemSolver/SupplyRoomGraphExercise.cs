@@ -15,7 +15,6 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 	[SerializeField] private List<SupplyTaskPreset> tasks;
 	[SerializeField] private List<GameObject> taskPrefabs;
 	private RoomScript targetedRoom;
-	private List<GameObject> taskPrefs;
 
 	[Serializable]
 	private struct SupplyTaskPreset
@@ -47,6 +46,7 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 
 	public void SubmitAnswer()
 	{
+		Debug.Log("Отправили ответ");
 		var answerField = currentTask.graphView.GetComponentsInChildren<TMP_InputField>().First(x => x.gameObject.tag == "answerField");
 		if (answerField.text == "")
 		{
@@ -55,6 +55,11 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 		EventManager.onSupplyRoomSettingsSolved.Invoke();
 		Destroy(currentTask.graphView);
 		tasks.Remove(currentTask);
+		var prefab = taskPrefabs[Random.Range(0, taskPrefabs.Count)];
+		var newTask = Instantiate(prefab, this.gameObject.transform);
+		newTask.name = newTask.name[..^7];
+		tasks.Add(TaskPrefabToPreset(newTask));
+		newTask.SetActive(false);
 		if (int.Parse(answerField.text) == currentTask.answer)
 		{
 			(targetedRoom as SupplyRoom).GetRoomsToEnpower();
@@ -75,11 +80,6 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 		return;
 	}
 
-    void Start()
-    {
-        taskPrefs = new List<GameObject>(taskPrefabs);
-    }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
@@ -95,17 +95,22 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 			GameManager.Instance.SetIsGraphUsing(false);
 			Destroy(currentTask.graphView);
 			tasks.Remove(currentTask);
-			//var prefab = taskPrefs[Random.Range(0, taskPrefabs.Count)];
-			//var newTask = Instantiate(prefab, this.gameObject.transform);
-			//tasks.Add(TaskPrefabToPreset(newTask));
-			//tasks.Find(currentTask);
+			var prefab = taskPrefabs[Random.Range(0, taskPrefabs.Count)];
+			var newTask = Instantiate(prefab, this.gameObject.transform);
+			newTask.name = newTask.name[..^7];
+			tasks.Add(TaskPrefabToPreset(newTask));
+			newTask.SetActive(false);
+		}
+		if (Input.GetKeyDown(KeyCode.Return))
+		{
+			SubmitAnswer();
 		}
     }
 
 	private SupplyTaskPreset TaskPrefabToPreset(GameObject pref)
 	{
 		SupplyTaskPreset toReturn = new SupplyTaskPreset();
-		if (pref.name == taskPrefs[0].name)
+		if (pref.name == taskPrefabs[0].name)
 		{
 			toReturn.answer = 3;
 			toReturn.graphView = pref;
