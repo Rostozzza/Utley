@@ -21,8 +21,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private GameObject loadingView;
 	[SerializeField] private List<GameObject> tutor;
 	[Header("Game message settings")]
-	[SerializeField] private CanvasGroup messageView;
-	[SerializeField] private TextMeshProUGUI messageField;
+	[SerializeField] private NotificationsManager notificationsManager;
 	private Coroutine messageViewRoutine;
 	[Header("Screens")]
 	[SerializeField] private GameObject startingScreen;
@@ -79,7 +78,6 @@ public class MenuManager : MonoBehaviour
 	private bool canContinueAfter2Cutscene = false;
 	private Coroutine skipChecker;
 	public bool isPlayerLoadable = false;
-
 
 	public void SetMasterVolume()
 	{

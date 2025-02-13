@@ -1,5 +1,6 @@
 ﻿
 using UnityEngine.Events;
+using static NotificationTypes;
 
 public static class EventManager
 {
@@ -51,4 +52,21 @@ public static class EventManager
 	/// Triggered when any room got upgraded;
 	/// </summary>
 	public static UnityEvent onRoomUpgraded = new UnityEvent();
+
+	#region Notification system
+	/// <summary>
+	/// Invoke error through this event. Pass error message into Invoke()
+	/// </summary>
+	public static UnityEvent<string> callError = new UnityEvent<string>();
+
+	/// <summary>
+	/// Invoke warning through this event. Pass warning message into Invoke()
+	/// </summary>
+	public static UnityEvent<string> callWarning = new UnityEvent<string>();
+
+	/// <summary>
+	/// Invoke standart notification through this event. Pass message into Invoke()
+	/// </summary>
+	public static UnityEvent<string> callMessage = new UnityEvent<string>();
+	#endregion
 }

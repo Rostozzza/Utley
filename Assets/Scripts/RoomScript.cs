@@ -294,11 +294,13 @@ public class RoomScript : MonoBehaviour
 		if (fixedBuilderRoom == null)
 		{
 			Debug.Log("Нет свободных строительных комплексов!");
+			EventManager.callWarning.Invoke($"Нет свободного <color=yellow>конструктора</color> в комплексе строительства!");
 			return;
 		}
 		else if (!fixedBuilderRoom.GetComponent<BuilderRoom>().GetWait())
 		{
 			Debug.Log("Нет свободных строительных комплексов!");
+			EventManager.callWarning.Invoke($"Нет свободного <color=yellow>конструктора</color> в комплексе строительства!");
 			return;
 		}
 
@@ -819,11 +821,13 @@ public class RoomScript : MonoBehaviour
 		if (fixedBuilderRoom == null)
 		{
 			Debug.Log("Медведь занят!");
+			EventManager.callWarning.Invoke($"Нет свободного <color=yellow>конструктора</color> в комплексе строительства!");
 			return;
 		}
 		else if (!fixedBuilderRoom.GetComponent<BuilderRoom>().GetWait())
 		{
 			Debug.Log("Нет свободных строительных комплексов!");
+			EventManager.callWarning.Invoke($"Нет свободного <color=yellow>конструктора</color> в комплексе строительства!");
 			return;
 		}
 
