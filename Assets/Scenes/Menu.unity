@@ -1966,7 +1966,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.32250002, y: 0.073333345}
   m_AnchorMax: {x: 0.68, y: 0.32444444}
-  m_AnchoredPosition: {x: -1, y: -0.33999634}
+  m_AnchoredPosition: {x: -1, y: -0.33996582}
   m_SizeDelta: {x: 0, y: 0.6800003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &68369760
@@ -21242,7 +21242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6659140359634667441, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6659140359634667441, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -21364,7 +21364,9 @@ MonoBehaviour:
     answer: 3
   - graphView: {fileID: 1409972905}
     answer: 10
-  taskPrefabs: []
+  taskPrefabs:
+  - {fileID: 4899694540894591096, guid: 89f7f79a7fa75ef479a5c731159648f0, type: 3}
+  - {fileID: 8997576154960461383, guid: a61b1e3a8023cf343a26499e1d3a67d9, type: 3}
 --- !u!1 &716980603
 GameObject:
   m_ObjectHideFlags: 0
@@ -51996,7 +51998,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6659140359634667441, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6659140359634667441, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
