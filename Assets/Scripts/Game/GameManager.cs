@@ -425,7 +425,9 @@ public class GameManager : MonoBehaviour
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
 				elevatorBuildingScreen.SetActive(false);
-
+				EventManager.callError.Invoke($"Недостаточно ресурсов! Не хватает: {(currentAsterium < roomScript.asteriumCost ? "<color=black>"+(currentAsterium- roomScript.asteriumCost)+"</color>" + "астериума;" : "")}" +
+					$"{(currentHoney < roomScript.honeyCost ? "<color=yellow>" + (currentHoney - roomScript.honeyCost) + "</color>" + "энергомёда;" : "")}" +
+					$"{(currentAstroluminite < roomScript.astroluminiteCost ? "<color=purple>" + (currentAstroluminite - roomScript.astroluminiteCost) + "</color>" + "астролюминита;" : "")}");
 				return;
 			}
 
@@ -442,7 +444,7 @@ public class GameManager : MonoBehaviour
 			if (fixedBuilderRoom == null || !fixedBuilderRoom.GetComponent<BuilderRoom>().GetWait())
 			{
 				Debug.Log("Нет свободных строительных комплексов!");
-
+				EventManager.callWarning.Invoke($"Нет свободного <color=yellow>конструктора</color> в комплексе строительства!");
 				queuedBuildPositon.GetComponentInChildren<Button>(true).interactable = true;
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
@@ -505,6 +507,7 @@ public class GameManager : MonoBehaviour
 			if (fixedBuilderRoom == null)
 			{
 				Debug.Log("Нет свободных строительных комплексов!");
+				EventManager.callWarning.Invoke($"Нет свободного <color=yellow>конструктора</color> в комплексе строительства!");
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
 				elevatorBuildingScreen.SetActive(false);
