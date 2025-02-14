@@ -124,8 +124,12 @@ public class CosmodromeResistorsExercise : MonoBehaviour
 	/// <param name="answerHolder"></param>
 	public void GiveAnswer(GameObject answerHolder)
 	{
-		answer = Convert.ToInt32(answerHolder.GetComponent<TMP_InputField>().text);
-		answerTrigger = true;
-        answerHolder.GetComponent<TMP_InputField>().text = "";
+		try
+		{
+			answer = Convert.ToInt32(answerHolder.GetComponent<TMP_InputField>().text);
+			answerTrigger = true;
+			answerHolder.GetComponent<TMP_InputField>().text = "";
+		}
+		catch { EventManager.callWarning.Invoke("Поле ответа пустое!"); }
 	}
 }

@@ -83,23 +83,27 @@ public class NumbersByTableExercise : MonoBehaviour
 		GameManager.Instance.SetIsGraphUsing(true);
 		for (int i = 0; i < rightAnswers.Count; i++)
 		{
-			if (rightAnswers[i] != int.Parse(allInputFields[i].text))
+			try
 			{
-				Debug.Log("НЕВЕРНО");
-				rightAnswers = null;
-				allInputFields = null;
-				task.SetActive(false);
-				Destroy(task,0.1f);
-				tasksPresets.Remove(tasksPresets.First(x => x.task == task));
-				task = null;
-				MenuManager.Instance.connectFurnacesScreen.SetActive(false);
-				MenuManager.Instance.problemSolverScreen.SetActive(false);
-				MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
-				targetedRoom.SetWorkEfficiency(0.2f);
-				Camera.main.GetComponent<CameraController>().SetCameraLock(false);
-				MenuManager.Instance.problemSolverScreen.SetActive(false);
-				return;
+				if (rightAnswers[i] != int.Parse(allInputFields[i].text))
+				{
+					Debug.Log("НЕВЕРНО");
+					rightAnswers = null;
+					allInputFields = null;
+					task.SetActive(false);
+					Destroy(task, 0.1f);
+					tasksPresets.Remove(tasksPresets.First(x => x.task == task));
+					task = null;
+					MenuManager.Instance.connectFurnacesScreen.SetActive(false);
+					MenuManager.Instance.problemSolverScreen.SetActive(false);
+					MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
+					targetedRoom.SetWorkEfficiency(0.2f);
+					Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+					MenuManager.Instance.problemSolverScreen.SetActive(false);
+					return;
+				}
 			}
+			catch { EventManager.callWarning.Invoke("Не все поля ответов заполнены!"); }
 		}
 		rightAnswers = null;
 		allInputFields = null;

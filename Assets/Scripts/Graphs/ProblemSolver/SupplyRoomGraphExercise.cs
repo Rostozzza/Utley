@@ -50,6 +50,7 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 		var answerField = currentTask.graphView.GetComponentsInChildren<TMP_InputField>().First(x => x.gameObject.tag == "answerField");
 		if (answerField.text == "")
 		{
+			EventManager.callWarning.Invoke("Поле ответа пустое!");
 			return;
 		}
 		EventManager.onSupplyRoomSettingsSolved.Invoke();
