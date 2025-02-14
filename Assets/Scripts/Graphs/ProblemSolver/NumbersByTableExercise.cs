@@ -44,7 +44,7 @@ public class NumbersByTableExercise : MonoBehaviour
 	public void GenerateFromPreset()
 	{
 		Camera.main.GetComponent<CameraController>().SetCameraLock(true);
-		var preset = tasksPresets[Random.Range(gridRange, Mathf.Clamp(gridRange+2,0,tasksPresets.Count))];
+		var preset = tasksPresets[Random.Range(gridRange, Mathf.Clamp(gridRange + 2, 0, tasksPresets.Count))];
 		task = preset.task;
 		rightAnswers = preset.answers;
 		allInputFields = preset.fields;
@@ -65,7 +65,7 @@ public class NumbersByTableExercise : MonoBehaviour
 	private void GenerateGirdLayout()
 	{
 		rightAnswers = new List<int>();
-		gridLayout = new string[gridRange+1, gridRange+1];
+		gridLayout = new string[gridRange + 1, gridRange + 1];
 		for (int i = 0; i <= gridRange; i++)
 		{
 			gridLayout[0, i] = $"�{i + 1}";
@@ -103,7 +103,11 @@ public class NumbersByTableExercise : MonoBehaviour
 					return;
 				}
 			}
-			catch { EventManager.callWarning.Invoke("Не все поля ответов заполнены!"); }
+			catch
+			{
+				EventManager.callWarning.Invoke("Не все поля ответов заполнены!");
+				return;
+			}
 		}
 		rightAnswers = null;
 		allInputFields = null;
@@ -122,9 +126,9 @@ public class NumbersByTableExercise : MonoBehaviour
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
 	}
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
 		{
 			Time.timeScale = 1;
 			GameManager.Instance.SetIsGraphUsing(false);
@@ -139,5 +143,5 @@ public class NumbersByTableExercise : MonoBehaviour
 			MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
 			Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 		}
-    }
+	}
 }
