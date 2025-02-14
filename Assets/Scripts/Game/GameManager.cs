@@ -1195,6 +1195,7 @@ public class GameManager : MonoBehaviour
 
 	private IEnumerator WalkAndStartWork(GameObject unit, GameObject obj) // needs to wait for walk and after we starting work
 	{
+		bool builderGoesBack = false;
 		//Debug.Log(unit + "|" + obj);
 		if (!unit.GetComponent<UnitMovement>().IsWalkingToWork())
 		{
@@ -1203,12 +1204,28 @@ public class GameManager : MonoBehaviour
 			unit.GetComponent<UnitMovement>().SetIsWalkingToWork(true);
 			if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
 			var enRouteButton = obj.GetComponentsInChildren<ButtonEnRoute>(true)[0];
-			enRouteButton.SetButtonState(false);
+			if (obj.GetComponentInParent<RoomScript>().resource == RoomScript.Resources.Build)
+			{
+				if (obj.GetComponentInParent<BuilderRoom>().fixedBear != null)
+				{
+					enRouteButton.SetButtonState(true);
+					builderGoesBack = true;
+				}
+				else
+				{
+					enRouteButton.SetButtonState(false);
+				}
+			}
+			else
+			{
+				enRouteButton.SetButtonState(false);
+			}
 			selectedUnit = null;
 			while (unit.GetComponent<UnitMovement>().currentRoutine != null)
 			{
-				if (enRouteButton.IsButtonPressed())
+				if ((builderGoesBack) ? !enRouteButton.IsButtonPressed() : enRouteButton.IsButtonPressed())//(obj.GetComponentInParent<RoomScript>().resource == RoomScript.Resources.Build) ? obj.GetComponentInParent<BuilderRoom>().fixedBear != null && !enRouteButton.IsButtonPressed() : enRouteButton.IsButtonPressed())
 				{
+					Debug.Log("Отменили");
 					unit.GetComponent<UnitMovement>().StopAllCoroutines();
 					unit.GetComponent<UnitMovement>().SetIsWalkingToWork(false);
 					unit.GetComponent<UnitMovement>().MoveToRoom(unit.GetComponent<UnitMovement>().currentRoom);
@@ -1216,7 +1233,8 @@ public class GameManager : MonoBehaviour
 				}
 				yield return null;
 			}
-			if (!enRouteButton.IsButtonPressed() && unit.GetComponent<UnitMovement>().IsWalkingToWork())
+			//bool builderRoomCondition = (obj.GetComponentInParent<RoomScript>().resource == RoomScript.Resources.Build) && (obj.GetComponentInParent<BuilderRoom>().fixedBear != null) && unit.GetComponent<UnitMovement>().IsWalkingToWork();
+			if ((!enRouteButton.IsButtonPressed() && unit.GetComponent<UnitMovement>().IsWalkingToWork()) || builderGoesBack)//(builderGoesBack) ? unit.GetComponent<UnitMovement>().IsWalkingToWork() : !enRouteButton.IsButtonPressed() && unit.GetComponent<UnitMovement>().IsWalkingToWork())// || builderRoomCondition)
 			{
 				if (obj.GetComponentInParent<RoomScript>().resource == RoomScript.Resources.Build) obj.GetComponentInParent<BuilderRoom>().SetWait(true);
 				obj.GetComponentInParent<RoomScript>().StartWork(unit);
