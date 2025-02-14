@@ -425,9 +425,9 @@ public class GameManager : MonoBehaviour
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
 				elevatorBuildingScreen.SetActive(false);
-				EventManager.callError.Invoke($"Недостаточно ресурсов! Не хватает: {(currentAsterium < roomScript.asteriumCost ? "<color=black>"+(currentAsterium- roomScript.asteriumCost)+"</color>" + "астериума;" : "")}" +
-					$"{(currentHoney < roomScript.honeyCost ? "<color=yellow>" + (currentHoney - roomScript.honeyCost) + "</color>" + "энергомёда;" : "")}" +
-					$"{(currentAstroluminite < roomScript.astroluminiteCost ? "<color=purple>" + (currentAstroluminite - roomScript.astroluminiteCost) + "</color>" + "астролюминита;" : "")}");
+				EventManager.callError.Invoke($"Недостаточно ресурсов! Не хватает: {(currentAsterium < roomScript.asteriumCost ? "<color=black>"+(Mathf.Abs(currentAsterium- roomScript.asteriumCost))+"</color>" + "астериума;" : "")}" +
+					$"{(currentHoney < roomScript.honeyCost ? "<color=yellow>" + ((int)Mathf.Abs(currentHoney - roomScript.honeyCost)) + "</color>" + "энергомёда;" : "")}" +
+					$"{(currentAstroluminite < roomScript.astroluminiteCost ? "<color=purple>" + (Mathf.Abs(currentAstroluminite - roomScript.astroluminiteCost)) + "</color>" + "астролюминита;" : "")}");
 				return;
 			}
 
