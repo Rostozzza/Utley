@@ -619,7 +619,7 @@ public class MenuManager : MonoBehaviour
 		yield return new WaitForSeconds(1.5f);
 		yield return numberSummation.AnswerWaiter(room);
 		
-		
+		room.SetConeierScreen(false);
 		SetPipesScreen.SetActive(false);
 		problemSolverScreen.SetActive(false);
 		tabletAnimator.SetTrigger("CloseShop");

@@ -1261,6 +1261,7 @@ public class GameManager : MonoBehaviour
 	public void ShowAvailableAssignments()
 	{
 		var interestingRooms = allRooms.Where(x => x.GetComponent<RoomScript>() && (x.GetComponentInChildren<ButtonEnRoute>(true) && !x.GetComponentInChildren<ButtonEnRoute>(true).GetComponent<Button>().interactable)).ToList();
+		//interestingRooms.ForEach(x => Debug.Log("<color=\"green\">" + x + "</color>"));
 		foreach (var room in interestingRooms)
 		{
 			if (room.TryGetComponent<BuilderRoom>(out BuilderRoom builder))

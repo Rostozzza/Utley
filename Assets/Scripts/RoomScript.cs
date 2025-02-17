@@ -267,7 +267,12 @@ public class RoomScript : MonoBehaviour
 	{
 		if (isEnpowered && status == Status.Free && durability > 0 && resource != Resources.Asteriy)
 		{
+			//Debug.Log("<color=\"green\">" + gameObject.name + "</color>");
 			assignmentButton.SetActive(true);
+		}
+		else
+		{
+			//Debug.Log("<color=\"orange\">" + gameObject.name + "</color>" + "<color=\"red\">" + " isEnpowered=" + (isEnpowered) + " status=" + (status == Status.Free) + " durability=" + (durability > 0) + "</color>");
 		}
 	}
 
@@ -944,7 +949,7 @@ public class RoomScript : MonoBehaviour
 		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetResistors, this);
 	}
 
-	private void SetConeierScreen(bool set)
+	public void SetConeierScreen(bool set)
 	{
 		coneierScreen.GetComponentInChildren<Button>().interactable = set;
 	}
