@@ -34,6 +34,11 @@ public class DoorsScript : MonoBehaviour
 		}
     }
 
+	public void CheckAndHideDoors()
+	{
+		CheckAndHideDoors(false);
+	}
+
 	public void CheckAndHideDoors(bool checkNeighbours)
 	{
 		NearRooms nearRooms = CheckNearRooms(checkNeighbours);
@@ -77,7 +82,7 @@ public class DoorsScript : MonoBehaviour
 			{
 				if (probablyRoom.TryGetComponent(out DoorsScript doorsScript) && probablyRoom != gameObject)
 				{
-					if (checkNeighbours) doorsScript.Invoke("CheckAndHideDoors",0.2f);
+					if (checkNeighbours) doorsScript.Invoke(nameof(CheckAndHideDoors), 0.2f);
 					return false;
 				}
 				//else if (probablyRoom.TryGetComponent(out BuildRoomScript elevatorScript))

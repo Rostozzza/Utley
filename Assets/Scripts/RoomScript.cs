@@ -135,6 +135,7 @@ public class RoomScript : MonoBehaviour
 		if (resource == Resources.Cosmodrome) efficiencyDownPanel.GetComponent<Animator>().SetTrigger("UnmakeGearRed");
 		if (progressbar) progressbar.gameObject.SetActive(false);
 		if (resource != Resources.Cosmodrome) efficiencyDownPanel.GetComponent<Animator>().SetTrigger("HidePanel");
+		efficiencyDownPercentageText.text = "";
 		SetConeierScreen(true);
 		ShowSetPipesButtonScreen();
 	}
@@ -164,6 +165,7 @@ public class RoomScript : MonoBehaviour
 	{
 		isEnpowered = true;
 		ChangeDurability(0);
+		SetConeierScreenShow(true);
 		//Debug.Log($"Empowered roon {gameObject.name}");
 	}
 
@@ -171,6 +173,7 @@ public class RoomScript : MonoBehaviour
 	{
 		isEnpowered = false;
 		ChangeDurability(0);
+		SetConeierScreenShow(false);
 		//Debug.Log($"Empowered roon {gameObject.name}");
 	}
 
@@ -249,6 +252,7 @@ public class RoomScript : MonoBehaviour
 			baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
 			UpdateRoomHullView();
 		}
+		SetConeierScreenShow(isEnpowered);
 		sparks.ForEach(y => y.Stop());
 	}
 
@@ -951,7 +955,36 @@ public class RoomScript : MonoBehaviour
 
 	public void SetConeierScreen(bool set)
 	{
-		coneierScreen.GetComponentInChildren<Button>().interactable = set;
+		if (coneierScreen != null)
+		{
+			coneierScreen.GetComponentInChildren<Button>().interactable = set;
+		}
+		else
+		{
+			Debug.Log("Не назначен coneierScreen в комплексе: <color=\"orange\">" + gameObject.name + "</color>");
+		}
+	}
+
+	public void SetConeierScreenShow(bool set)
+	{
+		if (coneierScreen != null)
+		{
+			Animator efficiencyAnim = efficiencyDownPanel.GetComponent<Animator>();
+			if (set)
+			{
+				if (efficiencyAnim.GetCurrentAnimatorStateInfo(0).IsName("HideCompletely"))
+				efficiencyAnim.SetTrigger("UnHideCompletely");
+			}
+			else
+			{
+				if (!efficiencyAnim.GetCurrentAnimatorStateInfo(0).IsName("HideCompletely"))
+				efficiencyAnim.SetTrigger("HideCompletely");
+			}
+		}
+		else
+		{
+			Debug.Log("Не назначен coneierScreen в комплексе: <color=\"orange\">" + gameObject.name + "</color>");
+		}
 	}
 
 	public enum Resources

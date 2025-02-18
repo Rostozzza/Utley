@@ -1065,7 +1065,7 @@ public class GameManager : MonoBehaviour
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out raycastHit, 100f) && !buildingScreen.activeSelf)
 			{
-				if (raycastHit.transform != null)
+				if (raycastHit.transform.gameObject != null)
 				{
 					RightClick(raycastHit.transform.gameObject);
 					//OutlineWorkStations(false);
@@ -1173,6 +1173,11 @@ public class GameManager : MonoBehaviour
 		//	selectedUnit = null;
 		//	return;
 		//}
+		if (selectedUnit == null)
+		{
+			Debug.Log("Не выбран юнит");
+			return;
+		}
 		if (gameObject.CompareTag("room") && !selectedUnit.GetComponent<UnitMovement>().IsWalkingToWork())
 		{
 			selectedUnit.GetComponent<UnitMovement>().StopAllCoroutines();
