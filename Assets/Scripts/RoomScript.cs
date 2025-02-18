@@ -840,10 +840,6 @@ public class RoomScript : MonoBehaviour
 			return;
 		}
 
-		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
-		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
-		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
-
 		if (await GameManager.Instance.GetAsteriy() >= 10)
 		{
 			GameManager.Instance.ChangeAsteriy(-10, new Log
@@ -858,6 +854,16 @@ public class RoomScript : MonoBehaviour
 			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
 			StartCoroutine(Repair(timeToRepair, fixedBuilderRoom));
 		}
+		else
+		{
+			Debug.Log("Не хватает ресов для починки!");
+			EventManager.callWarning.Invoke($"Не хватает <color=yellow>ресурсов</color> для починки!");
+			return;
+		}
+
+		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
+		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
+		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
 	}
 
 	private IEnumerator Repair(int time, GameObject room)
