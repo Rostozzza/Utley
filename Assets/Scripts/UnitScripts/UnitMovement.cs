@@ -238,4 +238,9 @@ public class UnitMovement : MonoBehaviour
 		}
 		return null;
 	}
+
+	public RoomScript GetTarget()
+	{
+		return target;
+	}
 }

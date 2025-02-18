@@ -183,7 +183,21 @@ public class UnitScript : MonoBehaviour
 	{
 		GameManager.Instance.selectedUnit = gameObject;
 		EventManager.onBearSelected.Invoke();
-		GameManager.Instance.ShowAvailableAssignments();
+
+		bool shouldWeShowAvailableAssignments = true; // in case if our bear is builder we shouldn't show, because click on assign button makes bug
+		foreach (var buildRoom in GameManager.Instance.builderRooms)
+		{
+			if (buildRoom.GetComponent<BuilderRoom>().fixedBear == gameObject)
+			{
+				shouldWeShowAvailableAssignments = false;
+				break;
+			}
+		}
+		try { if (GetComponent<UnitMovement>().GetTarget().resource == RoomScript.Resources.Build) shouldWeShowAvailableAssignments = false; }
+		catch {}
+		if (shouldWeShowAvailableAssignments) GameManager.Instance.ShowAvailableAssignments();
+		else GameManager.Instance.HideAllAssignButtons();
+
 		SetMarker(true);
 	}
 
