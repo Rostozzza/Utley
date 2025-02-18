@@ -70,6 +70,8 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 			MenuManager.Instance.problemSolverScreen.SetActive(false);
 			MenuManager.Instance.graphExercise.gameObject.SetActive(false);
 			GameManager.Instance.SetIsGraphUsing(false);
+			targetedRoom.SetConeierScreen(false);
+			answerField.text = "";
 			return;
 		}
 		MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
@@ -78,6 +80,8 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
 		MenuManager.Instance.graphExercise.gameObject.SetActive(false);
 		GameManager.Instance.SetIsGraphUsing(false);
+		targetedRoom.SetConeierScreen(false);
+		answerField.text = "";
 		return;
 	}
 

@@ -89,6 +89,7 @@ public class NumbersByTableExercise : MonoBehaviour
 				{
 					Debug.Log("НЕВЕРНО");
 					rightAnswers = null;
+					allInputFields.ForEach(x => x.text = "");
 					allInputFields = null;
 					task.SetActive(false);
 					Destroy(task, 0.1f);
@@ -100,6 +101,7 @@ public class NumbersByTableExercise : MonoBehaviour
 					targetedRoom.SetWorkEfficiency(0.2f);
 					Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 					MenuManager.Instance.problemSolverScreen.SetActive(false);
+					targetedRoom.SetConeierScreen(false);
 					return;
 				}
 			}
@@ -122,6 +124,7 @@ public class NumbersByTableExercise : MonoBehaviour
 		targetedRoom.SetWorkEfficiency(1f);
 		GameManager.Instance.TryProcessingRawAsterium();
 		Debug.Log("ВЕРНО");
+		targetedRoom.SetConeierScreen(false);
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
 	}

@@ -978,7 +978,7 @@ public class RoomScript : MonoBehaviour
 			Animator efficiencyAnim = efficiencyDownPanel.GetComponent<Animator>();
 			if (set)
 			{
-				if (efficiencyAnim.GetCurrentAnimatorStateInfo(0).IsName("HideCompletely"))
+				if (efficiencyAnim.GetCurrentAnimatorStateInfo(0).IsName("HideCompletely") && !CheckIfSolved())
 				efficiencyAnim.SetTrigger("UnHideCompletely");
 			}
 			else
