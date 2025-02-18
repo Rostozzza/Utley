@@ -250,6 +250,7 @@ public class UnitScript : MonoBehaviour
 				walkingCoroutine = null;
 				break;
 		}
+		GetComponentInChildren<Animator>().speed = 1f;
 	}
 
 	private IEnumerator ResearchBehaviour(List<Vector3> walkPoints, GameObject obj)
@@ -257,7 +258,7 @@ public class UnitScript : MonoBehaviour
 		Vector3 chosenPoint;
 		chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
 		GetComponentInChildren<Animator>().StopPlayback();
-		GetComponentInChildren<Animator>().speed = 1;
+		GetComponentInChildren<Animator>().speed = 0.5f;
 		GetComponentInChildren<Animator>().SetBool("Walk", true);
 		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(chosenPoint.x - transform.position.x), 0);
 		while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
@@ -267,6 +268,7 @@ public class UnitScript : MonoBehaviour
 		}
 		GetComponentInChildren<Animator>().SetBool("Walk", false);
 		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
+		GetComponentInChildren<Animator>().speed = 1f;
 		GetComponentInChildren<Animator>().SetBool("Work", true);
 		while (obj.GetComponent<RoomScript>().status == RoomScript.Status.Busy)
 		{
@@ -292,7 +294,7 @@ public class UnitScript : MonoBehaviour
 		Vector3 chosenPoint;
 		chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
 		GetComponentInChildren<Animator>().StopPlayback();
-		GetComponentInChildren<Animator>().speed = 1;
+		GetComponentInChildren<Animator>().speed = 0.5f;
 		GetComponentInChildren<Animator>().SetBool("Walk", true);
 		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(chosenPoint.x - transform.position.x), 0);
 		while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
@@ -301,6 +303,7 @@ public class UnitScript : MonoBehaviour
 			yield return null;
 		}
 		GetComponentInChildren<Animator>().SetBool("Walk", false);
+		GetComponentInChildren<Animator>().speed = 1f;
 	}
 
 	private IEnumerator EnergohoneyWalkBehaviour(List<Vector3> walkPoints, GameObject obj)
@@ -310,7 +313,7 @@ public class UnitScript : MonoBehaviour
 		GetComponentInChildren<Animator>().speed = 1f;
 		while (obj.GetComponent<RoomScript>().status == RoomScript.Status.Busy)
 		{
-			GetComponentInChildren<Animator>().speed = 1;
+			GetComponentInChildren<Animator>().speed = 0.5f;
 			GetComponentInChildren<Animator>().SetBool("Walk", true);
 			chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(chosenPoint.x - transform.position.x), 0);
@@ -321,9 +324,11 @@ public class UnitScript : MonoBehaviour
 			}
 			GetComponentInChildren<Animator>().SetBool("Walk", false);
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
+			GetComponentInChildren<Animator>().speed = 1f;
 			GetComponentInChildren<Animator>().SetBool("Work", true);
 			yield return new WaitForSeconds(5f);
 			GetComponentInChildren<Animator>().SetBool("Work", false);
+			GetComponentInChildren<Animator>().speed = 0.5f;
 			GetComponentInChildren<Animator>().SetBool("Walk", true);
 			chosenPoint = walkPoints[3];
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(chosenPoint.x - transform.position.x), 0);
@@ -334,6 +339,7 @@ public class UnitScript : MonoBehaviour
 			}
 			GetComponentInChildren<Animator>().SetBool("Walk", false);
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
+			GetComponentInChildren<Animator>().speed = 1f;
 			GetComponentInChildren<Animator>().SetBool("Work", true);
 			yield return new WaitForSeconds(3f);
 			GetComponentInChildren<Animator>().SetBool("Work", false);
