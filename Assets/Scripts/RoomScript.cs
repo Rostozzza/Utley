@@ -528,6 +528,7 @@ public class RoomScript : MonoBehaviour
 			status = Status.Free;
 			statusPanel.UpdateStatus(status);
 		}
+		fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 		fixedBear = null;
 	}
 

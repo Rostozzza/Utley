@@ -47,6 +47,7 @@ public class BedRoom : RoomScript
 		//!borrowed part!//
 		if (fixedBear != null)
 		{
+			fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 			fixedBear.GetComponent<UnitScript>().CanBeSelected();
 			fixedBear = null;
 		}
