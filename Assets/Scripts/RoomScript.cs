@@ -480,6 +480,17 @@ public class RoomScript : MonoBehaviour
 					flyForType = FlyForType.Asterium;
 					StartCoroutine(WorkStatus());
 				}
+				else
+				{
+					if (GameManager.Instance.season == GameManager.Season.Tide)
+					{
+						EventManager.callWarning.Invoke("Невозможно отправить! Сейчас фаза <color=yellow>прилива</color>.");
+					}
+					if (!GameManager.Instance.FlyForRawAsterium())
+					{
+						EventManager.callWarning.Invoke("Невозможно отправить! Все комплексы переработки астерия <color=yellow>заняты</color>.");
+					}
+				}
 				break;
 			case 1: // Astroluminite
 				if (GameManager.Instance.season != GameManager.Season.Tide)

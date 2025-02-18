@@ -964,7 +964,7 @@ public class GameManager : MonoBehaviour
 		Debug.Log("Changed bears!");
 	}
 
-	public bool FlyForRawAsterium() => rawAsterium < asteriumRooms.Where(x => x.GetComponent<RoomScript>().isEnpowered).ToList().Count;
+	public bool FlyForRawAsterium() => rawAsterium < asteriumRooms.Where(x => x.GetComponent<RoomScript>().isEnpowered && !x.GetComponent<RoomScript>().isReadyForWork).ToList().Count;
 
 	public void DeliverRawAsterium()
 	{
