@@ -6,6 +6,7 @@ using System.Linq;
 using System;
 using Random = UnityEngine.Random;
 using System.Collections;
+using Unity.Mathematics;
 
 public class NumbersByTableExercise : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class NumbersByTableExercise : MonoBehaviour
 	[SerializeField] private string[,] gridLayout;
 	[SerializeField] private List<int> rightAnswers;
 	[SerializeField] private List<TaskPreset> tasksPresets;
+	[SerializeField] private List<GameObject> taskPrefabs;
+	[SerializeField] private int playerDifficulty = 1; // sorry for using this instead of (difficulty). Idk how your var is working
 	private RoomScript targetedRoom;
 
 	[Serializable]
@@ -31,6 +34,7 @@ public class NumbersByTableExercise : MonoBehaviour
 		public List<int> answers;
 		public List<TMP_InputField> fields;
 		public GameObject task;
+		public int difficultLevel; // from 1 to ...3?
 	}
 
 	public void GenerateTask(RoomScript room)
@@ -44,12 +48,37 @@ public class NumbersByTableExercise : MonoBehaviour
 	public void GenerateFromPreset()
 	{
 		Camera.main.GetComponent<CameraController>().SetCameraLock(true);
-		var preset = tasksPresets[Random.Range(gridRange, Mathf.Clamp(gridRange + 2, 0, tasksPresets.Count))];
+		var preset = tasksPresets[tasksPresets.FindIndex(x => x.difficultLevel == TaskDifficultByPlayerDifficult(playerDifficulty))]; //[Random.Range(gridRange, Mathf.Clamp(gridRange + 2, 0, tasksPresets.Count))]; // also now task finds by player difficuty. I think it's makes more sense if we using "templates"
 		task = preset.task;
 		rightAnswers = preset.answers;
 		allInputFields = preset.fields;
 		StartCoroutine(ConnectAllPoints());
 		task.SetActive(true);
+	}
+
+/// <summary>
+/// Sometimes player difficulty may be higher than most difficult our task, so this method solving this problem. P.S. This approach assumes that tasks are arranged in increasing complexity without gaps.
+/// </summary>
+/// <param name="playerDifficulty"></param>
+/// <returns></returns>
+	private int TaskDifficultByPlayerDifficult(int playerDifficulty)
+	{
+		int highestDifficult = 0;
+		tasksPresets.ForEach(x => highestDifficult = math.max(highestDifficult, x.difficultLevel));
+		return (highestDifficult < playerDifficulty) ? highestDifficult : playerDifficulty;
+	}
+
+	private void ChangePlayerDifficulty(bool isPositive)
+	{
+		if (isPositive)
+		{
+			playerDifficulty++;
+		}
+		else
+		{
+			playerDifficulty--;
+		}
+		playerDifficulty = Math.Clamp(playerDifficulty, 1, 999);
 	}
 
 	private IEnumerator ConnectAllPoints()
@@ -92,6 +121,7 @@ public class NumbersByTableExercise : MonoBehaviour
 					allInputFields.ForEach(x => x.text = "");
 					allInputFields = null;
 					task.SetActive(false);
+					CreateNewExercise(task);
 					Destroy(task, 0.1f);
 					tasksPresets.Remove(tasksPresets.First(x => x.task == task));
 					task = null;
@@ -114,6 +144,7 @@ public class NumbersByTableExercise : MonoBehaviour
 		rightAnswers = null;
 		allInputFields = null;
 		task.SetActive(false);
+		CreateNewExercise(task);
 		Destroy(task, 0.1f);
 		tasksPresets.Remove(tasksPresets.First(x => x.task == task));
 		task = null;
@@ -124,6 +155,7 @@ public class NumbersByTableExercise : MonoBehaviour
 		targetedRoom.SetWorkEfficiency(1f);
 		GameManager.Instance.TryProcessingRawAsterium();
 		Debug.Log("ВЕРНО");
+		ChangePlayerDifficulty(true);
 		targetedRoom.SetConeierScreen(false);
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
@@ -138,6 +170,7 @@ public class NumbersByTableExercise : MonoBehaviour
 			rightAnswers = null;
 			allInputFields = null;
 			task.SetActive(false);
+			CreateNewExercise(task);
 			Destroy(task, 0.1f);
 			tasksPresets.Remove(tasksPresets.First(x => x.task == task));
 			task = null;
@@ -146,5 +179,42 @@ public class NumbersByTableExercise : MonoBehaviour
 			MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
 			Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 		}
+	}
+
+	private void CreateNewExercise(GameObject deletedTask) // asking for deleted task because we looking for same task from prefab
+	{
+		//var prefab = taskPrefabs[Random.Range(0, taskPrefabs.Count)];
+		var prefab = taskPrefabs[taskPrefabs.FindIndex(x => x.name == deletedTask.name)];
+		var newTask = Instantiate(prefab, this.gameObject.transform);
+		newTask.name = newTask.name[..^7];
+		tasksPresets.Add(TaskPrefabToPreset(newTask));
+		newTask.SetActive(false);
+	}
+
+	private TaskPreset TaskPrefabToPreset(GameObject pref)
+	{
+		TaskPreset toReturn = new TaskPreset();
+		if (pref.name == taskPrefabs[0].name)
+		{
+			toReturn.answers = new List<int> { 5, 1 };
+			toReturn.difficultLevel = 1;
+		}
+		else if (pref.name == taskPrefabs[1].name)
+		{
+			toReturn.answers = new List<int> { 10, 7 };
+			toReturn.difficultLevel = 2;
+		}
+		else if (pref.name == taskPrefabs[2].name)
+		{
+			toReturn.answers = new List<int> { 2, 5, 6, 8 };
+			toReturn.difficultLevel = 3;
+		}
+		else
+		{
+			Debug.Log("<color=red>Что-то не так</color>");
+		}
+		toReturn.task = pref;
+		toReturn.fields = pref.transform.Find("Inputs").GetComponentsInChildren<TMP_InputField>().ToList();
+		return toReturn;
 	}
 }
