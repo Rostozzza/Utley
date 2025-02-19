@@ -944,7 +944,7 @@ public class GameManager : MonoBehaviour
 			return;
 		}
 		HNY += amount;
-		HNY = Mathf.Clamp(HNY, 0, 999);
+		HNY = Mathf.Clamp(HNY, -999, 999);
 	}
 
 	public async Task ChangeBears(int amount, Log log)
@@ -1078,62 +1078,94 @@ public class GameManager : MonoBehaviour
 			elevatorBuildingScreen.SetActive(false);
 		}
 
-		if (Input.GetKeyDown(KeyCode.Alpha1) && !isGraphUsing)
+		if (!isGraphUsing)
 		{
-			if (selectedUnit != bearsToMoveOn[0].GetBearObj())
+			if (Input.GetKeyDown(KeyCode.Alpha1) && bearsToMoveOn.Count > 0)
 			{
-				bearsToMoveOn[0].MoveToObject();
+				if (selectedUnit != bearsToMoveOn[0].GetBearObj())
+				{
+					bearsToMoveOn[0].MoveToObject();
+				}
+				else
+				{
+					selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+					selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+					HideAllAssignButtons();
+					selectedUnit = null;
+				}
 			}
-			else
+			else if (Input.GetKeyDown(KeyCode.Alpha2) && bearsToMoveOn.Count > 1)
 			{
-				selectedUnit.GetComponent<UnitScript>().SetMarker(false);
-				selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
-				HideAllAssignButtons();
-				selectedUnit = null;
+				if (selectedUnit != bearsToMoveOn[1].GetBearObj())
+				{
+					bearsToMoveOn[1].MoveToObject();
+				}
+				else
+				{
+					selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+					selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+					HideAllAssignButtons();
+					selectedUnit = null;
+				}
+			}
+			else if (Input.GetKeyDown(KeyCode.Alpha3) && bearsToMoveOn.Count > 2)
+			{
+				if (selectedUnit != bearsToMoveOn[2].GetBearObj())
+				{
+					bearsToMoveOn[2].MoveToObject();
+				}
+				else
+				{
+					selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+					selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+					HideAllAssignButtons();
+					selectedUnit = null;
+				}
+			}
+			else if (Input.GetKeyDown(KeyCode.Alpha4) && bearsToMoveOn.Count > 3)
+			{
+				if (selectedUnit != bearsToMoveOn[3].GetBearObj())
+				{
+					bearsToMoveOn[3].MoveToObject();
+				}
+				else
+				{
+					selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+					selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+					HideAllAssignButtons();
+					selectedUnit = null;
+				}
+			}
+			else if (Input.GetKeyDown(KeyCode.Alpha5) && bearsToMoveOn.Count > 4)
+			{
+				if (selectedUnit != bearsToMoveOn[4].GetBearObj())
+				{
+					bearsToMoveOn[4].MoveToObject();
+				}
+				else
+				{
+					selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+					selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+					HideAllAssignButtons();
+					selectedUnit = null;
+				}
+			}
+			else if (Input.GetKeyDown(KeyCode.Alpha6) && bearsToMoveOn.Count > 5)
+			{
+				if (selectedUnit != bearsToMoveOn[5].GetBearObj())
+				{
+					bearsToMoveOn[5].MoveToObject();
+				}
+				else
+				{
+					selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+					selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+					HideAllAssignButtons();
+					selectedUnit = null;
+				}
 			}
 		}
-		else if (Input.GetKeyDown(KeyCode.Alpha2) && !isGraphUsing)
-		{
-			if (selectedUnit != bearsToMoveOn[1].GetBearObj())
-			{
-				bearsToMoveOn[1].MoveToObject();
-			}
-			else
-			{
-				selectedUnit.GetComponent<UnitScript>().SetMarker(false);
-				selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
-				HideAllAssignButtons();
-				selectedUnit = null;
-			}
-		}
-		else if (Input.GetKeyDown(KeyCode.Alpha3) && !isGraphUsing)
-		{
-			if (selectedUnit != bearsToMoveOn[2].GetBearObj())
-			{
-				bearsToMoveOn[2].MoveToObject();
-			}
-			else
-			{
-				selectedUnit.GetComponent<UnitScript>().SetMarker(false);
-				selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
-				HideAllAssignButtons();
-				selectedUnit = null;
-			}
-		}
-		else if (Input.GetKeyDown(KeyCode.Alpha4) && !isGraphUsing)
-		{
-			if (selectedUnit != bearsToMoveOn[3].GetBearObj())
-			{
-				bearsToMoveOn[3].MoveToObject();
-			}
-			else
-			{
-				selectedUnit.GetComponent<UnitScript>().SetMarker(false);
-				selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
-				HideAllAssignButtons();
-				selectedUnit = null;
-			}
-		}
+
 		if (Input.GetKeyDown(KeyCode.B)) SetModeByButton((int)Mode.Build);
 		else if (Input.GetKeyDown(KeyCode.I)) SetModeByButton((int)Mode.Info);
 	}
@@ -1310,6 +1342,10 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
+			selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+			selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+			HideAllAssignButtons();
+			selectedUnit = null;
 			if (gameObject.CompareTag("room"))
 			{
 				switch (mode)
