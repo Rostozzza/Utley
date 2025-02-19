@@ -18713,7 +18713,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 175.59985, y: -169.53722}
+  m_AnchoredPosition: {x: 175.59985, y: -169.53723}
   m_SizeDelta: {x: -376.1759, y: -416.4062}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &816625983
@@ -28005,6 +28005,7 @@ MonoBehaviour:
   currentPlayerField: {fileID: 802049374}
   loadingView: {fileID: 612661211}
   tutor: []
+  isPauseMenuActive: 0
   notificationsManager: {fileID: 0}
   startingScreen: {fileID: 187023826}
   registrationScreen: {fileID: 825269403}
@@ -35325,11 +35326,13 @@ MonoBehaviour:
     - {fileID: 233754970}
     - {fileID: 1195631475}
     task: {fileID: 1600569507}
+    difficultLevel: 1
   - answers: 0a00000007000000
     fields:
     - {fileID: 1494726618}
     - {fileID: 397305807}
     task: {fileID: 1366680802}
+    difficultLevel: 2
   - answers: 02000000050000000600000008000000
     fields:
     - {fileID: 1523916116}
@@ -35337,10 +35340,12 @@ MonoBehaviour:
     - {fileID: 1753496523}
     - {fileID: 1956656785}
     task: {fileID: 609561812}
+    difficultLevel: 3
   taskPrefabs:
   - {fileID: 7658260401842713423, guid: 95b597291a21e7a4faa01db9a3ed351a, type: 3}
   - {fileID: 7905165558460577005, guid: a43f27565623b56429d2c3a3cd1e4409, type: 3}
   - {fileID: 8632959687854181910, guid: 5f488ffb9b42aac49adfb8b4a1223eb1, type: 3}
+  playerDifficulty: 1
 --- !u!1 &1636202203
 GameObject:
   m_ObjectHideFlags: 0
