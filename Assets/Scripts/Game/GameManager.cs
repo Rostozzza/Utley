@@ -1342,6 +1342,10 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
+			selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+			selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+			HideAllAssignButtons();
+			selectedUnit = null;
 			if (gameObject.CompareTag("room"))
 			{
 				switch (mode)
