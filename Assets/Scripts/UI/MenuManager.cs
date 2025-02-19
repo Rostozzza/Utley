@@ -102,6 +102,7 @@ public class MenuManager : MonoBehaviour
 	public void ShowLoseScreen()
 	{
 		if (ShopManager.Instance.GetIsOpen()) ShopManager.Instance.OpenShop();
+		EventManager.onGameEnd.Invoke(false);
 		GameManager.Instance.SetIsGameRunning(false);
 		CountScoreAndUpdate();
 		loseScreen.SetActive(true);
@@ -125,6 +126,7 @@ public class MenuManager : MonoBehaviour
 	public void ShowWinScreen()
 	{
 		if (ShopManager.Instance.GetIsOpen()) ShopManager.Instance.OpenShop();
+		EventManager.onGameEnd.Invoke(true);
 		GameManager.Instance.SetIsGameRunning(false);
 		CountScoreAndUpdate();
 		winScreen.SetActive(true);
@@ -309,13 +311,28 @@ public class MenuManager : MonoBehaviour
 
 	public void ToMenu()
 	{
+		if (ShopManager.Instance.GetIsOpen()) 
+		{
+			ShopManager.Instance.transform.SetSiblingIndex(0);
+			ShopManager.Instance.animator.speed = 10000;
+			ShopManager.Instance.OpenShop();
+			Invoke(nameof(SetNormalTabletAnimatorState), 0.1f);
+		}
 		videoPlayer.clip = menuClip;
 		loseScreen.SetActive(false);
 		loseScreen.GetComponent<CanvasGroup>().alpha = 0f;
 		winScreen.SetActive(false);
 		winScreen.GetComponent<CanvasGroup>().alpha = 0f;
 		pauseScreen.SetActive(false);
+		isPauseMenuActive = false;
+		EventManager.onGameEnd.Invoke(false);
 		StartCoroutine(ToMenuCoroutine());
+	}
+
+	private void SetNormalTabletAnimatorState() // I sorry for that;
+	{
+		ShopManager.Instance.transform.SetSiblingIndex(1);
+		ShopManager.Instance.animator.speed = 1;
 	}
 
 	private IEnumerator ToMenuCoroutine()
@@ -340,6 +357,7 @@ public class MenuManager : MonoBehaviour
 		winScreen.SetActive(false);
 		winScreen.GetComponent<CanvasGroup>().alpha = 0f;
 		pauseScreen.SetActive(false);
+		isPauseMenuActive = false;
 		loadingView.SetActive(false);
 	}
 

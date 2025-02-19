@@ -53,6 +53,11 @@ public static class EventManager
 	/// </summary>
 	public static UnityEvent onRoomUpgraded = new UnityEvent();
 
+	/// <summary>
+	/// Triggered when game ends, true - win, false = lose;
+	/// </summary>
+	public static UnityEvent<bool> onGameEnd = new UnityEvent<bool>();
+
 	#region Notification system
 	/// <summary>
 	/// Invoke error through this event. Pass error message into Invoke()

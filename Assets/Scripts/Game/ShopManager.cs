@@ -32,12 +32,21 @@ public class ShopManager : MonoBehaviour
 	{
 		if (Instance == null)
 		{
+			EventManager.onGameEnd.AddListener(EraseAllFields);
 			Instance = this;
 		}
 		else
 		{
 			Destroy(gameObject);
 		}
+	}
+	
+	private void EraseAllFields(bool arg) => EraseAllFields();
+
+	private void EraseAllFields()
+	{
+		shopItems.ForEach(x => x.EraseAllFields());
+		shopItemsToSell.ForEach(x => x.EraseAllFields());
 	}
 
 	public void OpenShop()

@@ -16,7 +16,7 @@ public class ShopItem : MonoBehaviour
 	public TMP_InputField requestedAmount;
 	public TextMeshProUGUI costOutput;
 
-	public void UpdateFields()
+    public void UpdateFields()
 	{
 		CheckInputField(requestedAmount, costOutput);
 
@@ -58,6 +58,15 @@ public class ShopItem : MonoBehaviour
 	private void CheckInputField(TMP_InputField field, TextMeshProUGUI output)
 	{
 		field.text = field.text.Replace("-", "");
+	}
+
+	public void EraseAllFields()
+	{
+		try {quantityField.text = "";} catch {}
+		try {priceField.text = "";} catch {}
+		try {requestedAmount.text = "";} catch {}
+		try {costOutput.text = "";} catch {}
+		//😁;
 	}
 
 	public async Task BuyItemAsync()
