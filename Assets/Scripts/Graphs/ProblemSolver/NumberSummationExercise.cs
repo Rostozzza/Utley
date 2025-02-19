@@ -76,7 +76,7 @@ public class NumberSummationExercise : MonoBehaviour
 		Camera.main.GetComponent<CameraController>().SetCameraLock(true);
 		while (!answerTrigger)
 		{
-			if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
+			if (Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
 			{
 				Time.timeScale = 1;
 				Camera.main.GetComponent<CameraController>().SetCameraLock(false);

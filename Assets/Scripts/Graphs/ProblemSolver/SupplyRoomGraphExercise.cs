@@ -87,7 +87,7 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
+        if (Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
 		{
 			Time.timeScale = 1;
 			MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");

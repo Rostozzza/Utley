@@ -20,6 +20,8 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI currentPlayerField;
 	[SerializeField] private GameObject loadingView;
 	[SerializeField] private List<GameObject> tutor;
+	[SerializeField] private bool isPauseMenuActive = false;
+	private Dictionary<LineRenderer, bool> linesStates = new();
 	[Header("Game message settings")]
 	[SerializeField] private NotificationsManager notificationsManager;
 	private Coroutine messageViewRoutine;
@@ -239,14 +241,36 @@ public class MenuManager : MonoBehaviour
 		};
 	}
 
+	private void SwitchHideLinesVFX() // switch because it's assumes that it will be only changing.
+	{
+		if (isPauseMenuActive) // from menu to game
+		{
+			foreach (LineRenderer line in linesStates.Keys)
+			{
+				line.enabled = linesStates[line];
+			}
+		}
+		else // from game to menu
+		{
+			List<LineRenderer> lines = FindObjectsByType<LineRenderer>(FindObjectsSortMode.None).ToList();
+			Dictionary<LineRenderer, bool> newLinesStates = new();
+			foreach (var line in lines) newLinesStates.Add(line, line.enabled);
+			linesStates = newLinesStates;
+
+			lines.ForEach(x => x.enabled = false);
+		}
+	}
+
 	public void Pause()
 	{
-		if (SceneManager.GetActiveScene().buildIndex == 0 || problemSolverScreen.active)
+		if (SceneManager.GetActiveScene().buildIndex == 0)
 		{
 			return;
 		}
 
+		SwitchHideLinesVFX();
 		pauseScreen.SetActive(true);
+		isPauseMenuActive = true;
 		//SetPipesScreen.SetActive(!numberSummation.isTaskActive);
 		Time.timeScale = 0f;
 		mixer.SetFloat("Lowpass", 500f);
@@ -266,8 +290,11 @@ public class MenuManager : MonoBehaviour
 		{
 			return;
 		}
+
+		SwitchHideLinesVFX();
 		//SetPipesScreen.SetActive(numberSummation.isTaskActive);
 		pauseScreen.SetActive(false);
+		isPauseMenuActive = false;
 		Time.timeScale = 1f;
 		mixer.SetFloat("Lowpass", 22000f);
 		if (SceneManager.GetActiveScene().buildIndex != 0)
@@ -325,11 +352,11 @@ public class MenuManager : MonoBehaviour
 	{
 		if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 2)
 		{
-			if (Input.GetKeyDown(KeyCode.Escape) && !ShopManager.Instance.GetIsOpen())
+			if (Input.GetKeyDown(KeyCode.Escape))
 			{
 				Pause();
 			}
-			if (Input.GetKeyDown(KeyCode.E) && !problemSolverScreen.activeInHierarchy)
+			if (Input.GetKeyDown(KeyCode.E) && !problemSolverScreen.activeInHierarchy && !isPauseMenuActive)
 			{
 				shopScreen.SetActive(true);
 				Debug.Log("OPEN SHOP");
