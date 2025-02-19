@@ -18,11 +18,24 @@ public class ShopItem : MonoBehaviour
 
 	public void UpdateFields()
 	{
+		CheckInputField(requestedAmount, costOutput);
+
 		if (price > 0)
 		{
 			costOutput.text = "+ " + (price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
+
+			if (requestedAmount.text != "")
+			{
+				costOutput.text = (price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
+			}
+			else
+			{
+				costOutput.text = "";
+			}
+
 			return;
 		}
+
 		if (requestedAmount.text.Length > 0 && int.Parse(requestedAmount.text) <= maxQuantity)
 		{
 			quantityField.text = $"{Mathf.Clamp(quantity - int.Parse(requestedAmount.text),0,99999999)}/{maxQuantity}";
@@ -31,6 +44,7 @@ public class ShopItem : MonoBehaviour
 		{
 			quantityField.text = $"{Mathf.Clamp(quantity, 0, 9999)}/{maxQuantity}";
 		}
+
 		if (quantity == 0 || (requestedAmount.text.Length > 0 && int.Parse(requestedAmount.text) >= quantity))
 		{
 			quantityField.color = Color.red;
@@ -39,7 +53,11 @@ public class ShopItem : MonoBehaviour
 		{
 			quantityField.color = Color.black;
 		}
-		costOutput.text = (price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
+	}
+
+	private void CheckInputField(TMP_InputField field, TextMeshProUGUI output)
+	{
+		field.text = field.text.Replace("-", "");
 	}
 
 	public async Task BuyItemAsync()
