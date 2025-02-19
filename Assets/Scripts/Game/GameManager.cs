@@ -944,7 +944,7 @@ public class GameManager : MonoBehaviour
 			return;
 		}
 		HNY += amount;
-		HNY = Mathf.Clamp(HNY, 0, 999);
+		HNY = Mathf.Clamp(HNY, -999, 999);
 	}
 
 	public async Task ChangeBears(int amount, Log log)
