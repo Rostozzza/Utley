@@ -1212,7 +1212,7 @@ public class GameManager : MonoBehaviour
 		}
 		if (gameObject.CompareTag("room") && !selectedUnit.GetComponent<UnitMovement>().IsWalkingToWork())
 		{
-			selectedUnit.GetComponent<UnitMovement>().StopAllCoroutines();
+			//selectedUnit.GetComponent<UnitMovement>().StopAllCoroutines();
 			selectedUnit.GetComponent<UnitMovement>().MoveToRoom(gameObject.GetComponent<RoomScript>());
 			if (builderRooms.Any(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit) && builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit).ToList()[0].GetComponent<BuilderRoom>().GetWait())
 			{
@@ -1222,6 +1222,10 @@ public class GameManager : MonoBehaviour
 					//builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == unit).ToList()[0].GetComponent<BuilderRoom>().InterruptWork();
 				}
 			}
+			selectedUnit.GetComponent<UnitScript>().SetMarker(false);
+			selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+			HideAllAssignButtons();
+			selectedUnit = null;
 		}
 	}
 

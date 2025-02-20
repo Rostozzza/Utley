@@ -12,6 +12,7 @@ public class UnitMovement : MonoBehaviour
 	[SerializeField] private float offsetX = 1.24f;
 	public Coroutine currentRoutine;
 	[SerializeField] private bool isWalkingToWork = false;
+	private bool isTransitioning = false;
 
 	public bool IsWalkingToWork()
 	{
@@ -26,6 +27,10 @@ public class UnitMovement : MonoBehaviour
 	public void MoveToRoom(RoomScript target)
 	{
 		if (isWalkingToWork)
+		{
+			return;
+		}
+		if (isTransitioning)
 		{
 			return;
 		}
@@ -131,7 +136,9 @@ public class UnitMovement : MonoBehaviour
 								GetComponentInChildren<Animator>().SetBool("ClimbDown", true);
 							}
 							GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
+							isTransitioning = true;
 							yield return new WaitForSeconds(1.15f);
+							isTransitioning = false;
 						}
 						GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
 						while (Mathf.Abs(transform.position.y-room.transform.position.y) > 0.1f)
@@ -142,7 +149,9 @@ public class UnitMovement : MonoBehaviour
 						transform.position = new Vector3(transform.position.x, room.transform.position.y, transform.position.z);
 						GetComponentInChildren<Animator>().SetBool("ClimbDown", false);
 						GetComponentInChildren<Animator>().SetBool("ClimbUp", false);
+						isTransitioning = true;
 						yield return new WaitForSeconds(1.28f);
+						isTransitioning = false;
 						Debug.Log("Breakage!");
 						break;
 					}
@@ -168,11 +177,13 @@ public class UnitMovement : MonoBehaviour
 					yield return null;
 				}
 			}
+			isTransitioning = true;
 			while (0.698f > transform.position.z)
 			{
 				transform.Translate(new Vector3(0, 0, 1) * speed * Time.deltaTime);
 				yield return null;
 			}
+			isTransitioning = false;
 			currentElevator = e;
 		}
 
@@ -189,7 +200,9 @@ public class UnitMovement : MonoBehaviour
 				GetComponentInChildren<Animator>().SetBool("ClimbDown", true);
 			}
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
+			isTransitioning = true;
 			yield return new WaitForSeconds(1.15f);
+			isTransitioning = false;
 		}
 		while (Mathf.Abs(transform.position.y - target.transform.position.y) > 0.1f)
 		{
@@ -199,13 +212,17 @@ public class UnitMovement : MonoBehaviour
 		transform.position = new Vector3(transform.position.x, target.transform.position.y, transform.position.z);
 		GetComponentInChildren<Animator>().SetBool("ClimbDown", false);
 		GetComponentInChildren<Animator>().SetBool("ClimbUp", false);
+		isTransitioning = true;
 		yield return new WaitForSeconds(1.28f);
+		isTransitioning = false;
 		GetComponentInChildren<Animator>().SetBool("Walk", true);
+		isTransitioning = true;
 		while (-1 < transform.position.z)
 		{
 			transform.Translate(new Vector3(0, 0, -1) * speed * Time.deltaTime);
 			yield return null;
 		}
+		isTransitioning = false;
 		//gameObject.GetComponent<UnitScript>().State = UnitScript.States.Walk;
 		if (target.transform.position.x + 1.24f < transform.position.x)
 		{
