@@ -407,16 +407,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7469436537539252333, guid: 13efc6169c077664a8a659ffa0fd1e20, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 3.24
+      objectReference: {fileID: 0}
     - target: {fileID: 7708759291376220874, guid: 13efc6169c077664a8a659ffa0fd1e20, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8616071714697461302, guid: 13efc6169c077664a8a659ffa0fd1e20, type: 3}
       propertyPath: m_text
-      value: 
+      value: -30%
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4858679066463939272, guid: 13efc6169c077664a8a659ffa0fd1e20, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1518366666445829961, guid: 13efc6169c077664a8a659ffa0fd1e20, type: 3}
       insertIndex: -1

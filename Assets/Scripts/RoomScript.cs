@@ -135,7 +135,7 @@ public class RoomScript : MonoBehaviour
 		if (resource == Resources.Cosmodrome) efficiencyDownPanel.GetComponent<Animator>().SetTrigger("UnmakeGearRed");
 		if (progressbar) progressbar.gameObject.SetActive(false);
 		if (resource != Resources.Cosmodrome) efficiencyDownPanel.GetComponent<Animator>().SetTrigger("HidePanel");
-		efficiencyDownPercentageText.text = "";
+		if (resource != Resources.Cosmodrome) efficiencyDownPercentageText.text = "";
 		SetConeierScreen(true);
 		ShowSetPipesButtonScreen();
 	}
@@ -150,6 +150,7 @@ public class RoomScript : MonoBehaviour
 	private IEnumerator CosmodromeCircleTimer(float time)
 	{
 		if (circleFrame) circleFrame.enabled = true;
+		efficiencyDownPercentageText.text = "";
 		SetConeierScreen(false);
 		float timeSpent = 0f;
 		while (timeSpent <= time)
