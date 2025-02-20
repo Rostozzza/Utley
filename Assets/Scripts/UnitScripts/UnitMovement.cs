@@ -119,16 +119,21 @@ public class UnitMovement : MonoBehaviour
 					{
 						var directionElevator = room.transform.position.y;
 						GetComponentInChildren<Animator>().SetBool("Walk", false);
-						if (transform.position.y - target.transform.position.y > 0)
+						GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
+						if (!GetComponentInChildren<Animator>().GetBool("ClimbUp") && !GetComponentInChildren<Animator>().GetBool("ClimbDown"))
 						{
-							GetComponentInChildren<Animator>().SetBool("ClimbUp", true);
-						}
-						else
-						{
-							GetComponentInChildren<Animator>().SetBool("ClimbDown", true);
+							if (transform.position.y - target.transform.position.y > 0)
+							{
+								GetComponentInChildren<Animator>().SetBool("ClimbUp", true);
+							}
+							else
+							{
+								GetComponentInChildren<Animator>().SetBool("ClimbDown", true);
+							}
+							GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
+							yield return new WaitForSeconds(1.15f);
 						}
 						GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
-						yield return new WaitForSeconds(1.15f);
 						while (Mathf.Abs(transform.position.y-room.transform.position.y) > 0.1f)
 						{
 							transform.Translate(new Vector3(0, (room.transform.position.y - transform.position.y) * 100, 0).normalized * Time.deltaTime * speed / 2f);
@@ -163,20 +168,29 @@ public class UnitMovement : MonoBehaviour
 					yield return null;
 				}
 			}
+			while (0.698f > transform.position.z)
+			{
+				transform.Translate(new Vector3(0, 0, 1) * speed * Time.deltaTime);
+				yield return null;
+			}
 			currentElevator = e;
 		}
 
-		GetComponentInChildren<Animator>().SetBool("Walk", false);
-		if (transform.position.y - target.transform.position.y > 0)
-		{
-			GetComponentInChildren<Animator>().SetBool("ClimbUp", true);
-		}
-		else
-		{
-			GetComponentInChildren<Animator>().SetBool("ClimbDown", true);
-		}
 		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
-		yield return new WaitForSeconds(1.15f);
+		if (!GetComponentInChildren<Animator>().GetBool("ClimbUp") && !GetComponentInChildren<Animator>().GetBool("ClimbDown"))
+		{
+			GetComponentInChildren<Animator>().SetBool("Walk", false);
+			if (transform.position.y - target.transform.position.y > 0)
+			{
+				GetComponentInChildren<Animator>().SetBool("ClimbUp", true);
+			}
+			else
+			{
+				GetComponentInChildren<Animator>().SetBool("ClimbDown", true);
+			}
+			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
+			yield return new WaitForSeconds(1.15f);
+		}
 		while (Mathf.Abs(transform.position.y - target.transform.position.y) > 0.1f)
 		{
 			transform.Translate(new Vector3(0, (target.transform.position.y - transform.position.y) * 100, 0).normalized * Time.deltaTime * speed / 2f);
@@ -187,6 +201,11 @@ public class UnitMovement : MonoBehaviour
 		GetComponentInChildren<Animator>().SetBool("ClimbUp", false);
 		yield return new WaitForSeconds(1.28f);
 		GetComponentInChildren<Animator>().SetBool("Walk", true);
+		while (-1 < transform.position.z)
+		{
+			transform.Translate(new Vector3(0, 0, -1) * speed * Time.deltaTime);
+			yield return null;
+		}
 		//gameObject.GetComponent<UnitScript>().State = UnitScript.States.Walk;
 		if (target.transform.position.x + 1.24f < transform.position.x)
 		{
@@ -206,6 +225,7 @@ public class UnitMovement : MonoBehaviour
 				yield return null;
 			}
 		}
+		
 		EventManager.onBearReachedDestination.Invoke(target);
 		currentRoutine = null;
 		GetComponentInChildren<Animator>().SetBool("Walk", false);
