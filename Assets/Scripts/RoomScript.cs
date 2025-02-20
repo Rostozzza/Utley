@@ -398,7 +398,7 @@ public class RoomScript : MonoBehaviour
 		{
 			UpdateUpgradeView();
 		}
-		if (!progressBar.transform.parent.gameObject.active && !upgradeBar.transform.parent.gameObject.active)
+		if (!progressBar.transform.parent.gameObject.activeSelf && !upgradeBar.transform.parent.gameObject.activeSelf)
 		{
 			roomBuildScreen.SetActive(toggle);
 		}
@@ -424,6 +424,22 @@ public class RoomScript : MonoBehaviour
 
 	public virtual void BuildRoom(GameObject button)
 	{
+		GameObject fixedBuilderRoom = null;
+		foreach (GameObject room in GameManager.Instance.builderRooms)
+		{
+			if (room.GetComponent<BuilderRoom>().GetWait() && room.GetComponent<BuilderRoom>().fixedBear)
+			{
+				room.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Busy);
+				fixedBuilderRoom = room;
+				break;
+			}
+		}
+		if (fixedBuilderRoom == null)
+		{
+			Debug.Log("Нет свободных строительных комплексов!");
+			EventManager.callWarning.Invoke($"Назначьте персонажа на комплекс строительства.");
+			return;
+		}
 		GameManager.Instance.QueueBuildPos(button);
 		GameManager.Instance.buildingScreen.SetActive(true);
 	}
@@ -499,6 +515,13 @@ public class RoomScript : MonoBehaviour
 					workUI.SetResultImage(GameManager.Instance.uiResourceShower.astroluminiteAmountText.transform.parent.parent.GetComponentsInChildren<Image>()[1].sprite); //im sorry 🤡
 					flyForType = FlyForType.Astroluminite;
 					StartCoroutine(WorkStatus());
+				}
+				else
+				{
+					if (GameManager.Instance.season == GameManager.Season.Tide)
+					{
+						EventManager.callWarning.Invoke("Невозможно отправить! Сейчас фаза <color=yellow>прилива</color>.");
+					}
 				}
 				break;
 		}

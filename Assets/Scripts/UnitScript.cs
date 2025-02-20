@@ -31,7 +31,7 @@ public class UnitScript : MonoBehaviour
 	private Coroutine boostHolder = null;
 	public Bear bearModel;
 	public bool isBearBusy = false;
-	private BearStatusController statusPanel;
+	[SerializeField] private BearStatusController statusPanel;
 	[SerializeField] private int priorityInStatusPanel;
 	[Header("Bear UI")]
 	[SerializeField] private GameObject statsScreen;
