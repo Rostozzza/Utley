@@ -3297,6 +3297,7 @@ MonoBehaviour:
   bearModel:
     Level: 0
   isBearBusy: 0
+  statusPanel: {fileID: 0}
   priorityInStatusPanel: 1
   statsScreen: {fileID: 0}
   nameField: {fileID: 0}
@@ -12337,6 +12338,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 895371806372438072, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+      propertyPath: roomType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2743876564508728058, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: connectedRooms.Array.size
       value: 4
@@ -12446,6 +12451,10 @@ PrefabInstance:
     - target: {fileID: 173426271292609831, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 895371806372438072, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+      propertyPath: roomType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2743876564508728058, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: connectedRooms.Array.size
@@ -20235,6 +20244,7 @@ MonoBehaviour:
   bearModel:
     Level: 0
   isBearBusy: 0
+  statusPanel: {fileID: 0}
   priorityInStatusPanel: 2
   statsScreen: {fileID: 0}
   nameField: {fileID: 0}
@@ -22940,6 +22950,7 @@ MonoBehaviour:
   bearModel:
     Level: 0
   isBearBusy: 0
+  statusPanel: {fileID: 0}
   priorityInStatusPanel: 3
   statsScreen: {fileID: 0}
   nameField: {fileID: 0}
@@ -24051,6 +24062,10 @@ PrefabInstance:
     - target: {fileID: 173426271292609831, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 895371806372438072, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+      propertyPath: roomType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2743876564508728058, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: connectedRooms.Array.size
@@ -27275,6 +27290,7 @@ MonoBehaviour:
   bearModel:
     Level: 0
   isBearBusy: 0
+  statusPanel: {fileID: 0}
   priorityInStatusPanel: 4
   statsScreen: {fileID: 0}
   nameField: {fileID: 0}
@@ -29842,6 +29858,10 @@ PrefabInstance:
     - target: {fileID: 173426271292609831, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 895371806372438072, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+      propertyPath: roomType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1834032288102885784, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

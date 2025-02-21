@@ -5,6 +5,7 @@ using System.Linq;
 public class DoorsScript : MonoBehaviour
 {
     [SerializeField] public RoomType roomType;
+	[SerializeField] private int index;
 	[SerializeField] public GameObject leftDoor;
 	[SerializeField] public GameObject rightDoor;
     [SerializeField] public GameObject topTrapDoor;
@@ -41,13 +42,41 @@ public class DoorsScript : MonoBehaviour
 
 	public void CheckAndHideDoors(bool checkNeighbours)
 	{
-		NearRooms nearRooms = CheckNearRooms(checkNeighbours);
+		NearRooms nearRooms = new NearRooms();
         switch (roomType)
         {
             case RoomType.Room:
+				nearRooms = CheckNearRooms(checkNeighbours);
                 SetDoorsHide(nearRooms.leftRoom, nearRooms.rightRoom);
                 break;
             case RoomType.Elevator:
+				List<DoorsScript> group = new();
+				if (TryGetComponent<Elevator>(out Elevator elevator))
+				{
+					//group.Add(this);
+					group.AddRange(GetComponentsInChildren<DoorsScript>());
+				}
+				else
+				{
+					//group.Add(transform.parent.GetComponent<DoorsScript>());
+					group.AddRange(transform.parent.GetComponentsInChildren<DoorsScript>());
+				}
+				group = group.OrderBy(x => x.transform.position.y).ToList();
+				index = group.IndexOf(this);
+
+				nearRooms = CheckNearRooms(checkNeighbours);
+				nearRooms.topRoom = false;
+				nearRooms.bottomRoom = false;
+				if (group.IndexOf(this) == 0)
+				{
+					nearRooms.bottomRoom = true;
+				}
+				else if (group.IndexOf(this) == group.Count - 1)
+				{
+					nearRooms.topRoom = true;
+				}
+				Debug.Log($"Имя: {gameObject.name}, Индекс: {group.IndexOf(this)}, Верх: {nearRooms.topRoom}, Низ: {nearRooms.bottomRoom}");
+				//Debug.Log($"<color=red>{group[3].name}</color>");
                 SetDoorsHide(nearRooms);
                 break;
         }
