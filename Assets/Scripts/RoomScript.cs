@@ -887,7 +887,9 @@ public class RoomScript : MonoBehaviour
 			});
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
 			int timeToRepair = (int)((1 - durability) * 100 / 3);
-			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
+			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
+			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
+			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
 			StartCoroutine(Repair(timeToRepair, fixedBuilderRoom));
 		}
 		else
@@ -897,9 +899,7 @@ public class RoomScript : MonoBehaviour
 			return;
 		}
 
-		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
-		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
-		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
+		
 	}
 
 	private IEnumerator Repair(int time, GameObject room)

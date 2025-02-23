@@ -75,8 +75,6 @@ public class DoorsScript : MonoBehaviour
 				{
 					nearRooms.topRoom = true;
 				}
-				Debug.Log($"Имя: {gameObject.name}, Индекс: {group.IndexOf(this)}, Верх: {nearRooms.topRoom}, Низ: {nearRooms.bottomRoom}");
-				//Debug.Log($"<color=red>{group[3].name}</color>");
                 SetDoorsHide(nearRooms);
                 break;
         }

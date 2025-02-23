@@ -116,6 +116,7 @@ public class ShopManager : MonoBehaviour
 		}
 		shopLoadingScreen.SetActive(false);
 		shopInterface.GetComponentsInChildren<TMP_InputField>().ToList().ForEach(x => x.text = "");
+		GameManager.Instance.uiResourceShower.UpdateIndicators();
 	}
 
 	public void SellAll()
@@ -135,6 +136,7 @@ public class ShopManager : MonoBehaviour
 		}
 		shopLoadingScreen.SetActive(false);
 		shopInterface.GetComponentsInChildren<TMP_InputField>().ToList().ForEach(x => x.text = "");
+		GameManager.Instance.uiResourceShower.UpdateIndicators();
 	}
 
 	#region Get/Change
