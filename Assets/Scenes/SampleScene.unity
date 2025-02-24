@@ -26863,7 +26863,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5018831342732565845, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.99
+      value: -1.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 5018831342732565845, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5018831342732565845, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5018831342732565845, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5018831342732565845, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5018831342732565845, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -26871,7 +26887,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5018831342732565845, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -3.73
+      value: -2.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5018831342732565845, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 6007400145238893244, guid: 8166a09b53c9a814ab6af8849bd8fb32, type: 3}
       propertyPath: m_Layer
@@ -33422,11 +33442,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7403409793845794150, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
       propertyPath: cameraAngle.x
-      value: 10.37
+      value: 28.962
       objectReference: {fileID: 0}
     - target: {fileID: 7403409793845794150, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
       propertyPath: cameraAngle.y
-      value: -36.95
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7403409793845794150, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
       propertyPath: connectedElevators.Array.size
@@ -37134,13 +37154,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541059255}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.08571427, y: -0.3155942, z: 0.028638013, w: 0.94458103}
-  m_LocalPosition: {x: 2.9500003, y: 0.10999966, z: -2.077}
+  m_LocalRotation: {x: 0.25005895, y: 0, z: 0, w: 0.96823066}
+  m_LocalPosition: {x: 2.352, y: 1.03, z: -2.077}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1398197919}
-  m_LocalEulerAnglesHint: {x: 10.37, y: -36.95, z: 0}
+  m_LocalEulerAnglesHint: {x: 28.962, y: 0, z: 0}
 --- !u!1001 &1543165159
 PrefabInstance:
   m_ObjectHideFlags: 0
