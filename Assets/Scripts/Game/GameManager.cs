@@ -1169,7 +1169,7 @@ public class GameManager : MonoBehaviour
 		}
 
 		if (Input.GetKeyDown(KeyCode.B)) SetModeByButton((int)Mode.Build);
-		else if (Input.GetKeyDown(KeyCode.I)) SetModeByButton((int)Mode.Info);
+		//else if (Input.GetKeyDown(KeyCode.I)) SetModeByButton((int)Mode.Info);
 	}
 
 	private bool MouseOnTarget(GameObject target, bool isTutorial)
