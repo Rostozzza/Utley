@@ -88,6 +88,7 @@ public class EnergohoneyRoom : RoomScript
 			resources_changed = new System.Collections.Generic.Dictionary<string, float> { {"honey",honeyToAdd } },
 			 
 		});
+		roomStatsController.RefreshDescription();
 	}
 
 	public override void SetPipes()
