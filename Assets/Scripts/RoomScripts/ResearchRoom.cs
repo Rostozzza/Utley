@@ -30,7 +30,6 @@ public class ResearchRoom : RoomScript
 			{
 				StartCoroutine(WorkStatus());
 				audioSource.Play();
-				roomStatsController.RefreshDescription();
 			}
 		}
 	}
@@ -176,7 +175,6 @@ public class ResearchRoom : RoomScript
 				break;
 			default:
 				break;
-		roomStatsController.RefreshDescription();
 		}
 
 		GameManager.Instance.uiResourceShower.UpdateIndicators();

@@ -55,6 +55,5 @@ public class BedRoom : RoomScript
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("EndWork");
 		audioSource.Stop();
-		roomStatsController.RefreshDescription();
 	}
 }

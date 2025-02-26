@@ -13679,7 +13679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &708579818
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25674,6 +25674,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6a70607a7eb97498073c99d199ea9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1398197920 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4529240506288044491, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+  m_PrefabInstance: {fileID: 1398197918}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1398197921 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9202728377364343100, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+  m_PrefabInstance: {fileID: 1398197918}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &1398197922 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2965427100370571902, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+  m_PrefabInstance: {fileID: 1398197918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1398197923 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5112523715058167277, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+  m_PrefabInstance: {fileID: 1398197918}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1406830757
 GameObject:
   m_ObjectHideFlags: 0
@@ -38355,12 +38387,12 @@ MonoBehaviour:
     position: {x: 0, y: -120, z: 0}
     scale: 0.9
     pointer:
-      target: {fileID: 0}
+      target: {fileID: 1398197923}
       angleZ: 180
       offset: 0.5
     pointers: []
     conditionsSequence: 0f000000
-    buttonToCheck: {fileID: 0}
+    buttonToCheck: {fileID: 1398197920}
     keyToCheck: 0
     tagToCheck: 
     roomToCheck: {fileID: 0}
@@ -38379,12 +38411,12 @@ MonoBehaviour:
     position: {x: 0, y: -120, z: 0}
     scale: 0.9
     pointer:
-      target: {fileID: 0}
+      target: {fileID: 1398197922}
       angleZ: 180
       offset: 0.5
     pointers: []
     conditionsSequence: 01000000
-    buttonToCheck: {fileID: 0}
+    buttonToCheck: {fileID: 1398197921}
     keyToCheck: 0
     tagToCheck: 
     roomToCheck: {fileID: 0}

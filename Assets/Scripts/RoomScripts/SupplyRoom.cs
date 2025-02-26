@@ -199,6 +199,5 @@ public class SupplyRoom : RoomScript
 		animator.SetTrigger("EndWork");
 		fixedBear.GetComponent<UnitScript>().SetBusy(false);
 		audioSource.Stop();
-		roomStatsController.RefreshDescription();
 	}
 }

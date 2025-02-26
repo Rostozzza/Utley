@@ -37,7 +37,6 @@ public class BuilderRoom : RoomScript
 		animator.SetTrigger("EndWork");
 		audioSource.Stop();
         fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
-		roomStatsController.RefreshDescription();
         //ShowButton();
     }
     

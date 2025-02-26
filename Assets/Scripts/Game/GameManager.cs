@@ -314,9 +314,8 @@ public class GameManager : MonoBehaviour
 		HideAllAssignButtons();
 		if (selectedRoom)
 		{
-			//selectedRoom.ToggleRoomStats(false);
-			//selectedRoom.ToggleBuildStats(false);
-			selectedRoom.GetRoomStatsController().SetStatsScreenShow(false);
+			selectedRoom.ToggleRoomStats(false);
+			selectedRoom.ToggleBuildStats(false);
 		}
 		selectedRoom = null;
 		foreach (GameObject room in allRooms)
@@ -360,7 +359,7 @@ public class GameManager : MonoBehaviour
 	public void SetModeByButton(int mode)
 	{
 		Image buildButton = GameObject.FindGameObjectWithTag("build_button").GetComponent<Image>();
-		//Image infoButton = GameObject.FindGameObjectWithTag("info_button").GetComponent<Image>(); //disabled
+		Image infoButton = GameObject.FindGameObjectWithTag("info_button").GetComponent<Image>();
 		if (this.mode == (Mode)mode)
 		{
 			switch (this.mode)
@@ -369,7 +368,7 @@ public class GameManager : MonoBehaviour
 					buildButton.sprite = defaultBuildButton;
 					break;
 				case Mode.Info:
-					//infoButton.sprite = defaultInfoButton;
+					infoButton.sprite = defaultInfoButton;
 					break;
 			}
 			SetMode(Mode.None);
@@ -382,7 +381,7 @@ public class GameManager : MonoBehaviour
 					buildButton.sprite = defaultBuildButton;
 					break;
 				case Mode.Info:
-					//infoButton.sprite = defaultInfoButton;
+					infoButton.sprite = defaultInfoButton;
 					break;
 			}
 			switch ((Mode)mode)
@@ -391,7 +390,7 @@ public class GameManager : MonoBehaviour
 					buildButton.sprite = selectedBuildButton;
 					break;
 				case Mode.Info:
-					//infoButton.sprite = selectedInfoButton;
+					infoButton.sprite = selectedInfoButton;
 					break;
 			}
 			SetMode((Mode)mode);
@@ -1169,7 +1168,7 @@ public class GameManager : MonoBehaviour
 		}
 
 		if (Input.GetKeyDown(KeyCode.B)) SetModeByButton((int)Mode.Build);
-		//else if (Input.GetKeyDown(KeyCode.I)) SetModeByButton((int)Mode.Info);
+		else if (Input.GetKeyDown(KeyCode.I)) SetModeByButton((int)Mode.Info);
 	}
 
 	private bool MouseOnTarget(GameObject target, bool isTutorial)
@@ -1207,46 +1206,28 @@ public class GameManager : MonoBehaviour
 		//	selectedUnit = null;
 		//	return;
 		//}
-		//if (selectedUnit == null)
-		//{
-		//	Debug.Log("Не выбран юнит");
-		//	return;
-		//}
-		//if (gameObject.CompareTag("room") && !selectedUnit.GetComponent<UnitMovement>().IsWalkingToWork())
-		//{
-		//	//selectedUnit.GetComponent<UnitMovement>().StopAllCoroutines();
-		//	//selectedUnit.GetComponent<UnitMovement>().MoveToRoom(gameObject.GetComponent<RoomScript>());
-		//	//if (builderRooms.Any(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit) && builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit).ToList()[0].GetComponent<BuilderRoom>().GetWait())
-		//	//{
-		//	//	if (builderRooms.Any(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit))
-		//	//	{
-		//	//		builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit).ToList()[0].GetComponent<BuilderRoom>().SetWait(false, true);
-		//	//		//builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == unit).ToList()[0].GetComponent<BuilderRoom>().InterruptWork();
-		//	//	}
-		//	//}
-		//}
-		if (gameObject.TryGetComponent(out RoomScript roomScript))
+		if (selectedUnit == null)
 		{
-			bool shouldWeShowStats = !roomScript.GetRoomStatsController().GetIsStatsActive();
-			if (shouldWeShowStats)
+			Debug.Log("Не выбран юнит");
+			return;
+		}
+		if (gameObject.CompareTag("room") && !selectedUnit.GetComponent<UnitMovement>().IsWalkingToWork())
+		{
+			//selectedUnit.GetComponent<UnitMovement>().StopAllCoroutines();
+			selectedUnit.GetComponent<UnitMovement>().MoveToRoom(gameObject.GetComponent<RoomScript>());
+			if (builderRooms.Any(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit) && builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit).ToList()[0].GetComponent<BuilderRoom>().GetWait())
 			{
-				foreach (var room in allRooms.ConvertAll(r => r.GetComponent<RoomScript>()))
+				if (builderRooms.Any(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit))
 				{
-					try 
-					{
-						room.GetRoomStatsController().SetStatsScreenShow(false);
-					} catch {}
+					builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit).ToList()[0].GetComponent<BuilderRoom>().SetWait(false, true);
+					//builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == unit).ToList()[0].GetComponent<BuilderRoom>().InterruptWork();
 				}
 			}
-			roomScript.GetRoomStatsController().SetStatsScreenShow(shouldWeShowStats);
-		}
-		if (selectedUnit)
-		{
 			selectedUnit.GetComponent<UnitScript>().SetMarker(false);
 			selectedUnit.GetComponent<UnitScript>().GetStatusPanel().SetSelect(false);
+			HideAllAssignButtons();
 			selectedUnit = null;
 		}
-		HideAllAssignButtons();
 	}
 
 	public void WalkAndWork(GameObject unit, GameObject obj)

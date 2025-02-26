@@ -15,8 +15,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] public Status status;
 	[SerializeField] public Resources resource;
 	[SerializeField] private GameObject roomStatsScreen;
-	[SerializeField] protected RoomStatsController roomStatsController;
-	//[SerializeField] private GameObject roomBuildScreen;
+	[SerializeField] private GameObject roomBuildScreen;
 	public Room roomModel;
 	[SerializeField] public int asteriumCost;
 	[SerializeField] public int honeyCost;
@@ -179,12 +178,6 @@ public class RoomScript : MonoBehaviour
 		//Debug.Log($"Empowered roon {gameObject.name}");
 	}
 
-	private void Awake()
-	{
-		roomStatsController = GetComponentInChildren<RoomStatsController>(true);
-		roomStatsController.SetRoomScript(this);
-	}
-
 	protected virtual void Start()
 	{
 		if (progressbar) progressbar.gameObject.SetActive(false);
@@ -195,9 +188,10 @@ public class RoomScript : MonoBehaviour
 		walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
 		roomStatsScreen = transform.Find("RoomInfo").gameObject;
 		roomStatsScreen.SetActive(false);
-		//roomBuildScreen = transform.Find("RoomBuildMode").gameObject;
-		//roomBuildScreen.SetActive(false);
+		roomBuildScreen = transform.Find("RoomBuildMode").gameObject;
+		roomBuildScreen.SetActive(false);
 		hullPercentage = roomStatsScreen.transform.Find("hull%").GetComponent<TextMeshProUGUI>();
+		levelText = roomStatsScreen.transform.Find("Level (1)").GetComponent<TextMeshProUGUI>();
 		hullBar = roomStatsScreen.transform.Find("Hull").transform;
 		lamps = GameObject.FindGameObjectsWithTag("room_lamp").ToList().FindAll(g => g.transform.parent.IsChildOf(transform));
 		lamps.ForEach(x => x.GetComponent<Renderer>().material.EnableKeyword("_EMISSION"));
@@ -341,7 +335,7 @@ public class RoomScript : MonoBehaviour
 	private IEnumerator Upgrade(GameObject button, GameObject room)
 	{
 		upgradeBar.transform.parent.gameObject.SetActive(true);
-		roomStatsController.SetStatsScreenShow(false);
+		roomBuildScreen.SetActive(false);
 		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
 		{
 			yield return null;
@@ -386,7 +380,7 @@ public class RoomScript : MonoBehaviour
 		if (level < 3)
 		{
 			var currentHoney = await GameManager.Instance.GetHoney();
-			var desiredButton = roomStatsScreen.GetComponentsInChildren<TextMeshProUGUI>(true).First(x => x.transform.parent.name.Contains("Improve"));
+			var desiredButton = roomBuildScreen.GetComponentsInChildren<TextMeshProUGUI>(true).First(x => x.transform.parent.name.Contains("Improve"));
 			if (currentHoney < (30 + 10 * (level - 1)))
 			{
 				//desiredButton.GetComponent<Button>() = false;
@@ -407,15 +401,19 @@ public class RoomScript : MonoBehaviour
 		}
 		if (!progressBar.transform.parent.gameObject.activeSelf && !upgradeBar.transform.parent.gameObject.activeSelf)
 		{
-			//roomBuildScreen.SetActive(toggle);
+			roomBuildScreen.SetActive(toggle);
 		}
 	}
 
 	public void UpdateRoomHullView()
 	{
-		roomStatsController.GetLevelText().text = $"Уровень: <color=yellow>{level}</color>";
 		try
 		{
+			levelText.text = "";
+			for (int i = 0; i < level; i++)
+			{
+				levelText.text += "I";
+			}
 			roomStatsScreen.transform.Find("hull%").GetComponent<TextMeshProUGUI>().text = $"{Mathf.RoundToInt((durability / 1f) * 100f)}%";
 			roomStatsScreen.transform.Find("Hull").localScale = new Vector3(durability / 1f, 1, 1);
 		}
@@ -461,7 +459,6 @@ public class RoomScript : MonoBehaviour
 					break;
 				case Resources.Asteriy:
 					work = StartCoroutine(WorkStatus());
-					roomStatsController.RefreshDescription();
 					audioSource.Play();
 					return;
 				case Resources.Bed:
@@ -484,7 +481,6 @@ public class RoomScript : MonoBehaviour
 			{
 				work = StartCoroutine(WorkStatus());
 				audioSource.Play();
-				roomStatsController.RefreshDescription();
 			}
 		}
 	}
@@ -500,7 +496,6 @@ public class RoomScript : MonoBehaviour
 					workUI.SetResultImage(GameManager.Instance.uiResourceShower.asteriyAmountText.transform.parent.parent.GetComponentsInChildren<Image>()[1].sprite);
 					flyForType = FlyForType.Asterium;
 					StartCoroutine(WorkStatus());
-					roomStatsController.RefreshDescription();
 				}
 				else
 				{
@@ -521,7 +516,6 @@ public class RoomScript : MonoBehaviour
 					workUI.SetResultImage(GameManager.Instance.uiResourceShower.astroluminiteAmountText.transform.parent.parent.GetComponentsInChildren<Image>()[1].sprite); //im sorry 🤡
 					flyForType = FlyForType.Astroluminite;
 					StartCoroutine(WorkStatus());
-					roomStatsController.RefreshDescription();
 				}
 				else
 				{
@@ -547,7 +541,6 @@ public class RoomScript : MonoBehaviour
 		{
 			timeShow.gameObject.SetActive(true);
 			StartCoroutine(WorkStatus());
-			roomStatsController.RefreshDescription();
 		}
 	}
 
@@ -572,7 +565,6 @@ public class RoomScript : MonoBehaviour
 		}
 		fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 		fixedBear = null;
-		roomStatsController.RefreshDescription();
 	}
 
 	protected virtual IEnumerator WorkStatus()
@@ -694,7 +686,6 @@ public class RoomScript : MonoBehaviour
 			animator.SetTrigger("EndWork");
 		}
 		audioSource.Stop();
-		roomStatsController.RefreshDescription();
 	}
 
 	protected void OnTriggerEnter(Collider other)
@@ -896,8 +887,7 @@ public class RoomScript : MonoBehaviour
 			});
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
 			int timeToRepair = (int)((1 - durability) * 100 / 3);
-			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
-			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
+			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
 			StartCoroutine(Repair(timeToRepair, fixedBuilderRoom));
@@ -914,7 +904,7 @@ public class RoomScript : MonoBehaviour
 
 	private IEnumerator Repair(int time, GameObject room)
 	{
-		roomStatsController.SetStatsScreenShow(false);
+		roomBuildScreen.SetActive(false);
 		progressBar.transform.parent.gameObject.SetActive(true);
 		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
 		{
@@ -1037,47 +1027,6 @@ public class RoomScript : MonoBehaviour
 		{
 			Debug.Log("Не назначен coneierScreen в комплексе: <color=\"orange\">" + gameObject.name + "</color>");
 		}
-	}
-
-	public RoomStatsController GetRoomStatsController()
-	{
-		return roomStatsController;
-	}
-
-	public GameObject GetRoomStatsScreen()
-	{
-		return roomStatsScreen;
-	}
-
-	public float GetInteractionTime()
-	{
-		return StandartInteractionTime;
-	}
-
-	public bool GetIsEfficBearWorking()
-	{
-		if (fixedBear == null) return false;
-		Qualification job = fixedBear.GetComponent<UnitScript>().job;
-        switch (resource)
-        {
-            case Resources.Energohoney:
-                return job == Qualification.beekeeper;
-            case Resources.Supply:
-                return job == Qualification.coder;
-            case Resources.Cosmodrome:
-                return job == Qualification.researcher;
-            case Resources.Research:
-                return job == Qualification.bioengineer;
-            case Resources.Bed:
-                return job == Qualification.creator;
-            case Resources.Asteriy:
-                return false;
-            case Resources.Build:
-                return job == Qualification.builder;
-            default:
-				Debug.Log("<color=red>ЧТО-ТО НЕ ТАК</color>");
-                return false;
-        }
 	}
 
 	public enum Resources
