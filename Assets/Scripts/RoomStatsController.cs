@@ -63,7 +63,7 @@ public class RoomStatsController : MonoBehaviour
             $"Время работы {roomScript.GetInteractionTime()} с.\n" +
             $"\n" +
             $"Эффективный специалист:\n" +
-            $"\t<color=yellow>{ResourceToEfficBearText(roomScript.resource)}.</color>\n";
+            $"<color=yellow>{ResourceToEfficBearText(roomScript.resource)}.</color>\n";
         return toReturn;
     }
 
