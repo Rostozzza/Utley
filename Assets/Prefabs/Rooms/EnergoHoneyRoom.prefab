@@ -226,11 +226,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7966809716212158921}
   - {fileID: 4609255205091364894}
   - {fileID: 883551042247940071}
   - {fileID: 8521966293815425372}
   - {fileID: 4133137863030464669}
-  - {fileID: 7966809716212158921}
   - {fileID: 6651803084454196342}
   - {fileID: 736289640384885238}
   - {fileID: 5775553621253987691}
@@ -29199,6 +29199,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2097626594887498254}
     m_Modifications:
+    - target: {fileID: 2582057879659348275, guid: 2aea8a598011cd84b8f781e052363b12, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3436492723984360663, guid: 2aea8a598011cd84b8f781e052363b12, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -29241,7 +29245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3436492723984360663, guid: 2aea8a598011cd84b8f781e052363b12, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.1117313
+      value: -2.426
       objectReference: {fileID: 0}
     - target: {fileID: 3436492723984360663, guid: 2aea8a598011cd84b8f781e052363b12, type: 3}
       propertyPath: m_LocalRotation.w
