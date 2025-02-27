@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using TMPro;
 using UnityEngine;
+using System.Collections;
 
 public class RoomStatsController : MonoBehaviour
 {
@@ -15,9 +16,13 @@ public class RoomStatsController : MonoBehaviour
     [SerializeField] private GameObject resourceEmoji;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private bool isStatsActive = false;
+    [SerializeField] private float offsetZ;
 
     private void Start()
     {
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        transform.position = transform.position + new Vector3(0, 0, offsetZ);
+        if (GetComponentInParent<RoomScript>().resource != RoomScript.Resources.Cosmodrome) rectTransform.localPosition = new Vector3(2, 0, rectTransform.localPosition.z);
         InitStatsScreen();
     }
 
@@ -59,9 +64,7 @@ public class RoomStatsController : MonoBehaviour
     {
         string toReturn =
             $"{ResourceToText(roomScript.resource)}.\n" +
-            $"\n" +
             $"Время работы {roomScript.GetInteractionTime()} с.\n" +
-            $"\n" +
             $"Эффективный специалист:\n" +
             $"<color=yellow>{ResourceToEfficBearText(roomScript.resource)}.</color>\n";
         return toReturn;
