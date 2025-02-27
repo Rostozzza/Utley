@@ -569,10 +569,10 @@ public class MenuManager : MonoBehaviour
 				//tabletAnimator.SetTrigger("OpenShop");
 				break;
 			case ProblemType.SetSupply:
-				problemSolverScreen.SetActive(true);
+				//problemSolverScreen.SetActive(true);
 				graphExercise.gameObject.SetActive(true);
 				graphExercise.InitializeTask(room);
-				tabletAnimator.SetTrigger("OpenShop");
+				//tabletAnimator.SetTrigger("OpenShop");
 				break;
 			case ProblemType.SetResistors:
 				setResistorsScreen.SetActive(true);
