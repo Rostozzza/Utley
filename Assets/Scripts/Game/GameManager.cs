@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private bool isEnergohoneyConsuming = true;
 	[SerializeField] private bool isSeasonChanging = true;
 	[SerializeField] private bool isCursorAtUIDontScroll;
+	private bool wasSelectedThisFrame = false;
 	[Header("Building settings")]
 	[SerializeField] private GameObject buildingLoading;
 	public GameObject buildingScreen;
@@ -85,6 +86,11 @@ public class GameManager : MonoBehaviour
 	private bool isCold = false;
 	private bool isFreezing = false;
 	private int predictedAsteriumViews;
+
+	public void SetThisFrameSelected(bool value)
+	{
+		wasSelectedThisFrame = value;
+	}
 
 	public void EnpowerAllRooms()
 	{
@@ -425,7 +431,7 @@ public class GameManager : MonoBehaviour
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
 				elevatorBuildingScreen.SetActive(false);
-				EventManager.callError.Invoke($"Недостаточно {(currentAsterium < roomScript.asteriumCost ? "<color=yellow>"+(Mathf.Abs(currentAsterium- roomScript.asteriumCost))+"</color>" + " астериума;" : "")}" +
+				EventManager.callError.Invoke($"Недостаточно {(currentAsterium < roomScript.asteriumCost ? "<color=yellow>" + (Mathf.Abs(currentAsterium - roomScript.asteriumCost)) + "</color>" + " астериума;" : "")}" +
 					$"{(currentHoney < roomScript.honeyCost ? "<color=yellow>" + ((int)Mathf.Abs(currentHoney - roomScript.honeyCost)) + "</color>" + " энергомёда;" : "")}" +
 					$"{(currentAstroluminite < roomScript.astroluminiteCost ? "<color=yellow>" + (Mathf.Abs(currentAstroluminite - roomScript.astroluminiteCost)) + "</color>" + " астролюминита;" : "")}");
 				return;
@@ -1213,14 +1219,12 @@ public class GameManager : MonoBehaviour
 		}
 		if (gameObject.CompareTag("room") && !selectedUnit.GetComponent<UnitMovement>().IsWalkingToWork())
 		{
-			//selectedUnit.GetComponent<UnitMovement>().StopAllCoroutines();
 			selectedUnit.GetComponent<UnitMovement>().MoveToRoom(gameObject.GetComponent<RoomScript>());
 			if (builderRooms.Any(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit) && builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit).ToList()[0].GetComponent<BuilderRoom>().GetWait())
 			{
 				if (builderRooms.Any(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit))
 				{
 					builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == selectedUnit).ToList()[0].GetComponent<BuilderRoom>().SetWait(false, true);
-					//builderRooms.Where(x => x.GetComponent<BuilderRoom>().fixedBear == unit).ToList()[0].GetComponent<BuilderRoom>().InterruptWork();
 				}
 			}
 			selectedUnit.GetComponent<UnitScript>().SetMarker(false);
@@ -1323,30 +1327,37 @@ public class GameManager : MonoBehaviour
 	public void ClickedGameObject(GameObject gameObject)
 	{
 		Debug.Log("кликнули по <color=\"yellow\">" + gameObject.tag + "</color>");
-		bears.ForEach(x => x.GetComponent<UnitScript>().SetMarker(false));
 		if (gameObject.CompareTag("unit"))
 		{
 			if (gameObject.GetComponent<UnitScript>().selectable)
 			{
+				bears.ForEach(x => x.GetComponent<UnitScript>().SetMarker(false));
 				switch (mode)
 				{
 					case Mode.None:
+						Debug.Log("Select");
 						gameObject.GetComponent<UnitScript>().SelectUnit();
 						break;
 					case Mode.Info:
-						SetModeByButton((int)Mode.None);
-						gameObject.GetComponent<UnitScript>().SelectUnit();
+						//SetModeByButton((int)Mode.None);
+						//gameObject.GetComponent<UnitScript>().SelectUnit();
 						//gameObject.GetComponent<UnitScript>().SetStatsScreen();
 						break;
 					case Mode.Build:
 						SetModeByButton((int)Mode.None);
-						gameObject.GetComponent<UnitScript>().SelectUnit();
+						GetComponent<UnitScript>().SelectUnit();
 						break;
 				}
 			}
 		}
 		else
 		{
+			if (wasSelectedThisFrame)
+			{
+				Debug.Log("bonk");
+				return;
+			}
+			bears.ForEach(x => x.GetComponent<UnitScript>().SetMarker(false));
 			if (selectedUnit != null)
 			{
 				selectedUnit.GetComponent<UnitScript>().SetMarker(false);
@@ -1596,7 +1607,6 @@ public class GameManager : MonoBehaviour
 			// analogue
 			shuffleRooms.ForEach(delegate (GameObject room)
 			{
-				Debug.Log("Chopped!");
 				room.GetComponent<RoomScript>().ChangeDurability(-0.01f);
 			});
 		}

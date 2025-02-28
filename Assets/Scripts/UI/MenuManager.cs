@@ -374,7 +374,7 @@ public class MenuManager : MonoBehaviour
 			{
 				Pause();
 			}
-			if (Input.GetKeyDown(KeyCode.E) && !problemSolverScreen.activeInHierarchy && !isPauseMenuActive)
+			if (Input.GetKeyDown(KeyCode.E) && !isPauseMenuActive)
 			{
 				shopScreen.SetActive(true);
 				Debug.Log("OPEN SHOP");
