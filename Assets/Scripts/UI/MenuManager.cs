@@ -594,6 +594,8 @@ public class MenuManager : MonoBehaviour
 
 	private IEnumerator WaitForNumberSummationEnd(RoomScript room)
 	{
+		numberSummation = room.GetComponentInChildren<NumberSummationExercise>(true);
+		numberSummation.gameObject.SetActive(true);
 		numberSummation.isTaskActive = true;
 		//problemSolverScreen.SetActive(true);
 		//yield return new WaitForSeconds(1.5f);

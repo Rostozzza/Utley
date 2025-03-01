@@ -36,26 +36,26 @@ public class CameraController : MonoBehaviour
 			lastPoint = transform.position;
 		}
 		GameManager.Instance.transform.GetChild(0).gameObject.SetActive(orthoOn);
-		moving = StartCoroutine(FloatTorwards(orthoOn ? lastPoint : position, orthoOn ? Vector3.zero : rotation, orthoOn ? 60f : 90f,orthoOn));
+		moving = StartCoroutine(FloatTorwards(orthoOn ? lastPoint : position, orthoOn ? Vector3.zero : rotation, orthoOn ? 60f : 90f, orthoOn));
 		//matrixBlender.BlendToMatrix(!orthoOn ? ortho : perspective, !orthoOn ? 3f : 0, 8, !orthoOn);
 		orthoOn = !orthoOn;
 	}
 
 	private IEnumerator FloatTorwards(Vector3 position, Vector3 rotation, float fov, bool ortho)
 	{
-		while (Vector3.Distance(transform.position, position) > 0.1f && rotation !=  transform.eulerAngles)
+		while (Vector3.Distance(transform.position, position) > 0.5f || rotation != transform.eulerAngles)
 		{
 			transform.position = Vector3.Lerp(transform.position, position, Time.deltaTime * 5f);
 			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(rotation), Time.deltaTime * 5f);
 			yield return null;
 		}
-		var cameraComponent = GetComponent<Camera>();
-		var lerpCoef = 10 * (orthoOn ? -1 : 1);
-		while (cameraComponent.fieldOfView != fov)
-		{
-			cameraComponent.fieldOfView = Mathf.Lerp(cameraComponent.fieldOfView,fov,Time.deltaTime * 10f);
-			yield return null;
-		}
+		//var cameraComponent = GetComponent<Camera>();
+		//var lerpCoef = 10 * (orthoOn ? -1 : 1);
+		//while (cameraComponent.fieldOfView != fov)
+		//{
+		//	cameraComponent.fieldOfView = Mathf.Lerp(cameraComponent.fieldOfView,fov,Time.deltaTime * 10f);
+		//	yield return null;
+		//}
 		transform.position = position;
 		transform.eulerAngles = rotation;
 	}
