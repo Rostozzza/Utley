@@ -30,6 +30,6 @@ public class Notification : MonoBehaviour
 	{
 		yield return new WaitForSeconds(lifespan);
 		animator.SetTrigger("Fade");
-		Destroy(gameObject, 1f);
+		Destroy(gameObject);
 	}
 }
