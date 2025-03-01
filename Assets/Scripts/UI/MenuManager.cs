@@ -570,6 +570,8 @@ public class MenuManager : MonoBehaviour
 				break;
 			case ProblemType.SetSupply:
 				//problemSolverScreen.SetActive(true);
+				//graphExercise.gameObject.SetActive(true);
+				graphExercise = room.GetComponentInChildren<SupplyRoomGraphExercise>(true);
 				graphExercise.gameObject.SetActive(true);
 				graphExercise.InitializeTask(room);
 				//tabletAnimator.SetTrigger("OpenShop");

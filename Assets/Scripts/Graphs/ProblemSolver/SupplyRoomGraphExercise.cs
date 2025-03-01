@@ -24,7 +24,6 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 
 	public void InitializeTask(RoomScript room)
 	{
-
 		Camera.main.GetComponent<CameraController>().SetCameraLock(true);
 		targetedRoom = room;
 		currentTask = tasks[Random.Range(0, tasks.Count)];
@@ -38,13 +37,13 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 		{
 			point.ConnectPoints();
 		}
-
 		currentTask.graphView.SetActive(true);
 	}
 
 	public void SubmitAnswer()
 	{
 		var answerField = currentTask.graphView.GetComponentsInChildren<TMP_InputField>().First(x => x.gameObject.tag == "answerField");
+		Camera.main.GetComponent<CameraController>().GoToTaskPoint(Vector3.zero,Vector3.zero);
 		if (int.Parse(answerField.text) == currentTask.answer)
 		{
 			(targetedRoom as SupplyRoom).GetRoomsToEnpower();
