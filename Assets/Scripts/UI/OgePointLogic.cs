@@ -10,6 +10,7 @@ public class OgePointLogic : MonoBehaviour
 
 	//[SerializeField] private Sprite exploredSprite;
 	[SerializeField] private GameObject line;
+	[SerializeField] private Sprite filledCircle;
 
 	public void Start()
 	{
@@ -46,6 +47,7 @@ public class OgePointLogic : MonoBehaviour
 
 	public void SetColor(Color color)
 	{
+		transform.GetComponent<Image>().sprite = filledCircle;
 		transform.GetComponent<Image>().color = color;
 	}
 

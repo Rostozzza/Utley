@@ -29,6 +29,7 @@ public class NumberSummationExercise : MonoBehaviour
 	/// <returns></returns>
 	private int GenerateTask(int steps = 3)
 	{
+		
 		EventManager.onEnergohoneySettingsOpened.Invoke();
 		points = pointsParent.GetComponentsInChildren<OgePointLogic>().ToList();
 		pointsParent = points[0].transform.parent;
@@ -38,7 +39,8 @@ public class NumberSummationExercise : MonoBehaviour
 			point.ConnectPoints();
 		}
 		var currentPoint = points[randomPointIndex];
-		currentPoint.SetColor(Color.red);
+		Color red = new Color(1,0,0,0.5f);
+		currentPoint.SetColor(red);
 		int correctAnswer = 0;
 		for (int i = 0; i < steps; i++)
 		{
@@ -48,13 +50,14 @@ public class NumberSummationExercise : MonoBehaviour
 			currentPoint = connectedPoints[randomPointIndex];
 			if (steps - i == 1)
 			{
-				currentPoint.SetColor(Color.red);
-				previousPoint.GetComponentsInChildren<LineRenderer>()[randomPointIndex].SetColors(new Color(1,0,0,0.5f), new Color(1, 0, 0, 0.5f));
+				currentPoint.SetColor(red);
+
+				previousPoint.GetComponentsInChildren<LineRenderer>()[randomPointIndex].SetColors(red,red);
 			}
 			else
 			{
-				currentPoint.SetColor(Color.red);
-				previousPoint.GetComponentsInChildren<LineRenderer>()[randomPointIndex].SetColors(new Color(1, 0, 0, 0.5f), new Color(1, 0, 0, 0.5f));
+				currentPoint.SetColor(red);
+				previousPoint.GetComponentsInChildren<LineRenderer>()[randomPointIndex].SetColors(red,red);
 			}
 			Vector3 averagePosition = previousPoint.transform.position + (currentPoint.transform.position - previousPoint.transform.position)/2;
 			var weight = Instantiate(weightPrefab,pointsParent);
@@ -101,6 +104,7 @@ public class NumberSummationExercise : MonoBehaviour
 		ClearGraph();
 		isTaskActive = false;
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
+		gameObject.SetActive(false);
 	}
 
 	/// <summary>
