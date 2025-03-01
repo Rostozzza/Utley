@@ -21,6 +21,16 @@ public class CosmodromeResistorsExercise : MonoBehaviour
 	[SerializeField] private List<OgePointLogic> points;
 	public LineRenderer lineRenderer;
 	private int sequenceIndex = 0;
+	private bool isListenerAdded = false;
+
+		private void Start()
+	{
+		if (!isListenerAdded)
+		{
+			EventManager.onToMenuButton.AddListener(CloseExercise);
+			isListenerAdded = true;
+		}
+	}
 
 	/// <summary>
 	/// Generates task, answer and connects all OgePointLogics.
@@ -66,17 +76,9 @@ public class CosmodromeResistorsExercise : MonoBehaviour
 		Camera.main.GetComponent<CameraController>().SetCameraLock(true);
 		while (!answerTrigger)
 		{
-			if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
+			if (Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
 			{
-				answerTrigger = false;
-				Time.timeScale = 1;
-				Camera.main.GetComponent<CameraController>().SetCameraLock(false);
-				SequenceIndexChange(false);
-				roomToTarget.GivePermissionToContinue();
-				GameManager.Instance.SetIsGraphUsing(false);
-				ClearGraph();
-				isTaskActive = false;
-				MenuManager.Instance.problemSolverScreen.SetActive(false);
+				CloseExercise();
 				yield break;
 			}
 			yield return null;
@@ -101,6 +103,20 @@ public class CosmodromeResistorsExercise : MonoBehaviour
 		ClearGraph();
 		isTaskActive = false;
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
+	}
+
+	public void CloseExercise()
+	{
+		answerTrigger = false;
+		Time.timeScale = 1;
+		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+		SequenceIndexChange(false);
+		//roomToTarget.GivePermissionToContinue();
+		GameManager.Instance.SetIsGraphUsing(false);
+		ClearGraph();
+		isTaskActive = false;
+		MenuManager.Instance.problemSolverScreen.SetActive(false);
+		gameObject.SetActive(false);
 	}
 
 	/// <summary>

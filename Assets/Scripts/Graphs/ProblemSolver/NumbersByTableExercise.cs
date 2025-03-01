@@ -27,6 +27,7 @@ public class NumbersByTableExercise : MonoBehaviour
 	[SerializeField] private List<GameObject> taskPrefabs;
 	[SerializeField] private int playerDifficulty = 1; // sorry for using this instead of (difficulty). Idk how your var is working
 	private RoomScript targetedRoom;
+	private bool isListenerAdded = false;
 
 	[Serializable]
 	public struct TaskPreset
@@ -35,6 +36,15 @@ public class NumbersByTableExercise : MonoBehaviour
 		public List<TMP_InputField> fields;
 		public GameObject task;
 		public int difficultLevel; // from 1 to ...3?
+	}
+
+	private void Start()
+	{
+		if (!isListenerAdded)
+		{
+			EventManager.onToMenuButton.AddListener(CloseExercise);
+			isListenerAdded = true;
+		}
 	}
 
 	public void GenerateTask(RoomScript room)
@@ -165,20 +175,26 @@ public class NumbersByTableExercise : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
 		{
-			Time.timeScale = 1;
-			GameManager.Instance.SetIsGraphUsing(false);
-			rightAnswers = null;
-			allInputFields = null;
-			task.SetActive(false);
-			CreateNewExercise(task);
-			Destroy(task, 0.1f);
-			tasksPresets.Remove(tasksPresets.First(x => x.task == task));
-			task = null;
-			MenuManager.Instance.connectFurnacesScreen.SetActive(false);
-			MenuManager.Instance.problemSolverScreen.SetActive(false);
-			MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
-			Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+			CloseExercise();
 		}
+	}
+
+	public void CloseExercise()
+	{
+		Time.timeScale = 1;
+		GameManager.Instance.SetIsGraphUsing(false);
+		rightAnswers = null;
+		allInputFields = null;
+		task.SetActive(false);
+		CreateNewExercise(task);
+		Destroy(task, 0.1f);
+		tasksPresets.Remove(tasksPresets.First(x => x.task == task));
+		task = null;
+		MenuManager.Instance.connectFurnacesScreen.SetActive(false);
+		MenuManager.Instance.problemSolverScreen.SetActive(false);
+		MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
+		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+		gameObject.SetActive(false);
 	}
 
 	private void CreateNewExercise(GameObject deletedTask) // asking for deleted task because we looking for same task from prefab

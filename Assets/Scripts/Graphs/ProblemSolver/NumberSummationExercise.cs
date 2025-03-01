@@ -21,6 +21,16 @@ public class NumberSummationExercise : MonoBehaviour
 	[SerializeField] private GameObject weightPrefab;
 	[SerializeField] private List<OgePointLogic> points;
 	public LineRenderer lineRenderer;
+	private bool isListenerAdded = false;
+
+	private void Start()
+	{
+		if (!isListenerAdded)
+		{
+			EventManager.onToMenuButton.AddListener(CloseExercise);
+			isListenerAdded = true;
+		}
+	}
 
 	/// <summary>
 	/// Generates task, answer and connects all OgePointLogics.
@@ -78,18 +88,12 @@ public class NumberSummationExercise : MonoBehaviour
 		{
 			if (Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
 			{
-				Time.timeScale = 1;
-				Camera.main.GetComponent<CameraController>().SetCameraLock(false);
-				roomToTarget.GivePermissionToContinue();
-				GameManager.Instance.SetIsGraphUsing(false);
-				ClearGraph();
-				isTaskActive = false;
-				MenuManager.Instance.problemSolverScreen.SetActive(false);
-				MenuManager.Instance.graphExercise.gameObject.SetActive(false);
+				CloseExercise();
 				yield break;
 			}
 			yield return null;
 		}
+		roomToTarget.SetConeierScreen(false);
 		answerTrigger = false;
 		Time.timeScale = 1;
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
@@ -110,6 +114,19 @@ public class NumberSummationExercise : MonoBehaviour
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
 		MenuManager.Instance.graphExercise.gameObject.SetActive(false);
 		GameManager.Instance.SetIsGraphUsing(false);
+	}
+
+	private void CloseExercise()
+	{
+		Time.timeScale = 1;
+		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+		//roomToTarget.GivePermissionToContinue();
+		GameManager.Instance.SetIsGraphUsing(false);
+		ClearGraph();
+		isTaskActive = false;
+		MenuManager.Instance.problemSolverScreen.SetActive(false);
+		MenuManager.Instance.graphExercise.gameObject.SetActive(false);
+		gameObject.SetActive(false);
 	}
 
 	/// <summary>

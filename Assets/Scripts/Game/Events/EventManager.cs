@@ -58,6 +58,11 @@ public static class EventManager
 	/// </summary>
 	public static UnityEvent<bool> onGameEnd = new UnityEvent<bool>();
 
+	/// <summary>
+	/// Triggered when method "ToMenu" calls in MenuManager
+	/// </summary>
+	public static UnityEvent onToMenuButton = new UnityEvent();
+
 	#region Notification system
 	/// <summary>
 	/// Invoke error through this event. Pass error message into Invoke()
