@@ -212,6 +212,7 @@ public class MenuManager : MonoBehaviour
 		if (Instance == null)
 		{
 			Instance = this;
+			problemSolverScreen.SetActive(false);
 			DontDestroyOnLoad(gameObject);
 		}
 		else
@@ -384,7 +385,7 @@ public class MenuManager : MonoBehaviour
 			{
 				Pause();
 			}
-			if (Input.GetKeyDown(KeyCode.E) && !isPauseMenuActive)
+			if (Input.GetKeyDown(KeyCode.E) && !problemSolverScreen.activeSelf && !isPauseMenuActive)
 			{
 				shopScreen.SetActive(true);
 				Debug.Log("OPEN SHOP");
