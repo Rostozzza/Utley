@@ -7,6 +7,7 @@ public class BearStatusListController : MonoBehaviour
     public List<GameObject> bears;
     [SerializeField] private GameObject panelPrefab;
     [SerializeField] private Transform content;
+
     public BearStatusController CreateBearStatus(UnitScript obj, int priority)
     {
         Bear model = obj.bearModel;
