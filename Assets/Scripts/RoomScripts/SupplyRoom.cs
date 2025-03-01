@@ -25,6 +25,7 @@ public class SupplyRoom : RoomScript
 	public override void SetPipes()
 	{
 		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetSupply, this);
+		Camera.main.GetComponent<CameraController>().GoToTaskPoint(cameraPoint.position, cameraAngle, true);
 		HideSetPipesButtonScreen();
 	}
 
