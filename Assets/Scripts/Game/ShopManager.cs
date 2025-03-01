@@ -26,7 +26,7 @@ public class ShopManager : MonoBehaviour
 	[SerializeField] private List<ShopItem> shopItemsToSell = new List<ShopItem>();
 	[SerializeField] private GameObject shopInterface;
 	JsonManager JsonManager;
-	private bool isOpened = false;
+	[SerializeField] private bool isOpened = false;
 
 	public void Awake()
 	{

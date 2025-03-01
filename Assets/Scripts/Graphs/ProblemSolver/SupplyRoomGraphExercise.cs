@@ -15,12 +15,22 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 	[SerializeField] private List<SupplyTaskPreset> tasks;
 	[SerializeField] private List<GameObject> taskPrefabs;
 	private RoomScript targetedRoom;
+	private bool isListenerAdded = false;
 
 	[Serializable]
 	private struct SupplyTaskPreset
 	{
 		[SerializeField] public GameObject graphView;
 		[SerializeField] public float answer;
+	}
+
+	private void Start()
+	{
+		if (!isListenerAdded)
+		{
+			EventManager.onToMenuButton.AddListener(CloseExercise);
+			isListenerAdded = true;
+		}
 	}
 
 	public void InitializeTask(RoomScript room)
@@ -89,28 +99,34 @@ public class SupplyRoomGraphExercise : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
 		{
-			Time.timeScale = 1;
-			MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
-			Camera.main.GetComponent<CameraController>().SetCameraLock(false);
-			GameManager.Instance.SetIsGraphUsing(false);
-			MenuManager.Instance.problemSolverScreen.SetActive(false);
-			Camera.main.GetComponent<CameraController>().SetCameraLock(false);
-			MenuManager.Instance.problemSolverScreen.SetActive(false);
-			MenuManager.Instance.graphExercise.gameObject.SetActive(false);
-			GameManager.Instance.SetIsGraphUsing(false);
-			Destroy(currentTask.graphView);
-			tasks.Remove(currentTask);
-			var prefab = taskPrefabs[Random.Range(0, taskPrefabs.Count)];
-			var newTask = Instantiate(prefab, this.gameObject.transform);
-			newTask.name = newTask.name[..^7];
-			tasks.Add(TaskPrefabToPreset(newTask));
-			newTask.SetActive(false);
+			CloseExercise();
 		}
 		if (Input.GetKeyDown(KeyCode.Return))
 		{
 			SubmitAnswer();
 		}
     }
+
+	public void CloseExercise()
+	{
+		Time.timeScale = 1;
+		MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
+		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+		GameManager.Instance.SetIsGraphUsing(false);
+		MenuManager.Instance.problemSolverScreen.SetActive(false);
+		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+		MenuManager.Instance.problemSolverScreen.SetActive(false);
+		MenuManager.Instance.graphExercise.gameObject.SetActive(false);
+		GameManager.Instance.SetIsGraphUsing(false);
+		Destroy(currentTask.graphView);
+		tasks.Remove(currentTask);
+		var prefab = taskPrefabs[Random.Range(0, taskPrefabs.Count)];
+		var newTask = Instantiate(prefab, this.gameObject.transform);
+		newTask.name = newTask.name[..^7];
+		tasks.Add(TaskPrefabToPreset(newTask));
+		newTask.SetActive(false);
+		gameObject.SetActive(false);
+	}
 
 	private SupplyTaskPreset TaskPrefabToPreset(GameObject pref)
 	{

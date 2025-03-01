@@ -101,6 +101,10 @@ public class MenuManager : MonoBehaviour
 
 	public void ShowLoseScreen()
 	{
+		List<LineRenderer> lines = FindObjectsByType<LineRenderer>(FindObjectsSortMode.None).ToList(); // hides graph lines
+		lines.ForEach(x => x.enabled = false);
+		//SwitchHideLinesVFX(true);
+
 		if (ShopManager.Instance.GetIsOpen()) ShopManager.Instance.OpenShop();
 		EventManager.onGameEnd.Invoke(false);
 		GameManager.Instance.SetIsGameRunning(false);
@@ -125,6 +129,10 @@ public class MenuManager : MonoBehaviour
 
 	public void ShowWinScreen()
 	{
+		List<LineRenderer> lines = FindObjectsByType<LineRenderer>(FindObjectsSortMode.None).ToList(); // hides graph lines
+		lines.ForEach(x => x.enabled = false);
+		//SwitchHideLinesVFX(true);
+
 		if (ShopManager.Instance.GetIsOpen()) ShopManager.Instance.OpenShop();
 		EventManager.onGameEnd.Invoke(true);
 		GameManager.Instance.SetIsGameRunning(false);
@@ -204,6 +212,7 @@ public class MenuManager : MonoBehaviour
 		if (Instance == null)
 		{
 			Instance = this;
+			problemSolverScreen.SetActive(false);
 			DontDestroyOnLoad(gameObject);
 		}
 		else
@@ -228,7 +237,7 @@ public class MenuManager : MonoBehaviour
 		tabletAnimator = ShopManager.Instance.animator;
 		SceneManager.activeSceneChanged += (Scene oldScene, Scene newScene) =>
 		{
-			GetComponent<Canvas>().worldCamera = Camera.main.GetComponentsInChildren<Camera>()[1];
+			try { GetComponent<Canvas>().worldCamera = Camera.main.GetComponentsInChildren<Camera>()[1]; } catch {}
 			if (numberSummation.isTaskActive)
 			{
 				Time.timeScale = 1f;
@@ -243,7 +252,7 @@ public class MenuManager : MonoBehaviour
 		};
 	}
 
-	private void SwitchHideLinesVFX() // switch because it's assumes that it will be only changing.
+	private void SwitchHideLinesVFX(bool setPauseMenuAfter) // switch because it's assumes that it will be only changing.
 	{
 		if (isPauseMenuActive) // from menu to game
 		{
@@ -261,6 +270,7 @@ public class MenuManager : MonoBehaviour
 
 			lines.ForEach(x => x.enabled = false);
 		}
+		isPauseMenuActive = setPauseMenuAfter;
 	}
 
 	public void Pause()
@@ -270,9 +280,8 @@ public class MenuManager : MonoBehaviour
 			return;
 		}
 
-		SwitchHideLinesVFX();
+		SwitchHideLinesVFX(true);
 		pauseScreen.SetActive(true);
-		isPauseMenuActive = true;
 		//SetPipesScreen.SetActive(!numberSummation.isTaskActive);
 		Time.timeScale = 0f;
 		mixer.SetFloat("Lowpass", 500f);
@@ -293,10 +302,9 @@ public class MenuManager : MonoBehaviour
 			return;
 		}
 
-		SwitchHideLinesVFX();
+		SwitchHideLinesVFX(false);
 		//SetPipesScreen.SetActive(numberSummation.isTaskActive);
 		pauseScreen.SetActive(false);
-		isPauseMenuActive = false;
 		Time.timeScale = 1f;
 		mixer.SetFloat("Lowpass", 22000f);
 		if (SceneManager.GetActiveScene().buildIndex != 0)
@@ -311,11 +319,14 @@ public class MenuManager : MonoBehaviour
 
 	public void ToMenu()
 	{
-		if (ShopManager.Instance.GetIsOpen()) 
+		EventManager.onToMenuButton.Invoke();
+
+		if (ShopManager.Instance.animator.GetCurrentAnimatorStateInfo(0).IsName("TabletShow"))
 		{
+			Debug.Log("<color=red>ЗАКРЫЛИ</color>");
 			ShopManager.Instance.transform.SetSiblingIndex(0);
-			ShopManager.Instance.animator.speed = 10000;
-			ShopManager.Instance.OpenShop();
+			tabletAnimator.speed = 10000;
+			tabletAnimator.SetTrigger("CloseShop");
 			Invoke(nameof(SetNormalTabletAnimatorState), 0.1f);
 		}
 		videoPlayer.clip = menuClip;
@@ -332,7 +343,7 @@ public class MenuManager : MonoBehaviour
 	private void SetNormalTabletAnimatorState() // I sorry for that;
 	{
 		ShopManager.Instance.transform.SetSiblingIndex(1);
-		ShopManager.Instance.animator.speed = 1;
+		tabletAnimator.speed = 1;
 	}
 
 	private IEnumerator ToMenuCoroutine()
@@ -374,7 +385,7 @@ public class MenuManager : MonoBehaviour
 			{
 				Pause();
 			}
-			if (Input.GetKeyDown(KeyCode.E) && !isPauseMenuActive)
+			if (Input.GetKeyDown(KeyCode.E) && !problemSolverScreen.activeSelf && !isPauseMenuActive)
 			{
 				shopScreen.SetActive(true);
 				Debug.Log("OPEN SHOP");
@@ -664,7 +675,6 @@ public class MenuManager : MonoBehaviour
 		yield return new WaitForSeconds(1.5f);
 		yield return numberSummation.AnswerWaiter(room);
 		
-		room.SetConeierScreen(false);
 		SetPipesScreen.SetActive(false);
 		problemSolverScreen.SetActive(false);
 		tabletAnimator.SetTrigger("CloseShop");

@@ -1841,6 +1841,11 @@ public class GameManager : MonoBehaviour
 		isGraphUsing = set;
 	}
 
+	public bool GetIsGraphUsing()
+	{
+		return isGraphUsing;
+	}
+
 	public float GetSeasonTimeLeft()
 	{
 		return seasonTimeLeft;
