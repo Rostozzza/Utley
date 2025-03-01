@@ -571,8 +571,8 @@ public class MenuManager : MonoBehaviour
 			case ProblemType.SetSupply:
 				//problemSolverScreen.SetActive(true);
 				//graphExercise.gameObject.SetActive(true);
-				graphExercise = room.GetComponentInChildren<SupplyRoomGraphExercise>(true);
-				graphExercise.gameObject.SetActive(true);
+				graphExercise = room.GetComponentInChildren<SupplyRoomGraphExercise>(true);//Vector3(-3.0999999,5.69999981,0.5)
+				graphExercise.gameObject.SetActive(true);                                   //Vector3(31.2199955,343.100006,0)
 				graphExercise.InitializeTask(room);
 				//tabletAnimator.SetTrigger("OpenShop");
 				break;
