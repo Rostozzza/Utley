@@ -25,10 +25,11 @@ public class WorkResultIntoUI : MonoBehaviour
 		targetedPos = Camera.main.WorldToScreenPoint(element.position);
 		RectTransformUtility.ScreenPointToLocalPointInRectangle(GameManager.Instance.GetComponentInChildren<Canvas>().GetComponent<RectTransform>(), (Vector2)targetedPos, Camera.main, out targetedPos);
 		Debug.Log(targetedPos);
-		float currentSpeed = 1;
+		float currentSpeed = 5;
 		while (Vector2.Distance(anchoredPos.anchoredPosition, targetedPos) > 5f)
 		{
-			anchoredPos.anchoredPosition += ((targetedPos - anchoredPos.anchoredPosition).normalized*Time.deltaTime * currentSpeed);
+			//anchoredPos.anchoredPosition += ((targetedPos - anchoredPos.anchoredPosition).normalized*Time.deltaTime * currentSpeed);
+			anchoredPos.anchoredPosition = Vector3.MoveTowards(anchoredPos.anchoredPosition,targetedPos,Time.deltaTime * currentSpeed);
 			currentSpeed += currentSpeed >= speed ? 0 : Time.deltaTime*acceleration;
 			yield return null;
 		}
