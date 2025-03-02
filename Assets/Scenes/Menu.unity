@@ -28147,6 +28147,7 @@ GameObject:
   - component: {fileID: 1243164889}
   - component: {fileID: 1243164888}
   - component: {fileID: 1243164892}
+  - component: {fileID: 1243164893}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -28315,6 +28316,18 @@ MonoBehaviour:
   tabletAnimator: {fileID: 165816599}
   graphExercise: {fileID: 712686967}
   isPlayerLoadable: 0
+--- !u!114 &1243164893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243164887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3002fbb31e3aef043a1c3e01733106f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1248317026
 GameObject:
   m_ObjectHideFlags: 0
