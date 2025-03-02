@@ -56,6 +56,11 @@ public class OgePointLogic : MonoBehaviour
 		return connectedPoints;
 	}
 
+	public void AddPointToConnected(OgePointLogic point)
+	{
+		connectedPoints.Add(point);
+	}
+
 	public List<OgePointLogic> GetSourcePoints()
 	{
 		return sourcePoints;
