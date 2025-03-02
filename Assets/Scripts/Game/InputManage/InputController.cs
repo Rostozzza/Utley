@@ -7,7 +7,18 @@ public enum ActionKeys
 {
     None,
     Pause,
-    Quit
+    Quit,
+    Bear1,
+    Bear2,
+    Bear3,
+    Bear4,
+    Bear5,
+    Bear6,
+    OpenShop,
+    //SelectUnitByPointer,
+    MoveBearToRoom,
+    BuildMode,
+    InfoMode,
 }
 
 public class InputController : MonoBehaviour
@@ -17,8 +28,21 @@ public class InputController : MonoBehaviour
     {
         { ActionKeys.None, KeyCode.None},
         { ActionKeys.Pause, KeyCode.Escape},
-        { ActionKeys.Quit, KeyCode.Escape}
+        { ActionKeys.Quit, KeyCode.Escape},
+        { ActionKeys.Bear1, KeyCode.Alpha1},
+        { ActionKeys.Bear2, KeyCode.Alpha2},
+        { ActionKeys.Bear3, KeyCode.Alpha3},
+        { ActionKeys.Bear4, KeyCode.Alpha4},
+        { ActionKeys.Bear5, KeyCode.Alpha5},
+        { ActionKeys.Bear6, KeyCode.Alpha6},
+        { ActionKeys.OpenShop, KeyCode.E},
+        //{ ActionKeys.SelectUnitByPointer, KeyCode.Mouse0},
+        { ActionKeys.MoveBearToRoom, KeyCode.Mouse1},
+        { ActionKeys.BuildMode, KeyCode.B},
+        { ActionKeys.InfoMode, KeyCode.I}
     };
+
+    static private List<BindSelector> binds = new();
 
     static public Dictionary<ActionKeys, KeyCode> keyDict = defaultKeyDict;
 
@@ -41,7 +65,14 @@ public class InputController : MonoBehaviour
 
     static public void LoadKeyDict()
     {
-        keyDict = PlayerPrefs.HasKey("key_dict") ? StringToKeyDict(PlayerPrefs.GetString("key_dict")) : defaultKeyDict;
+        keyDict = PlayerPrefs.HasKey("key_dict") ? StringToKeyDict(PlayerPrefs.GetString("key_dict")) : defaultKeyDict; // just trying to load;
+        foreach (var key in defaultKeyDict.Keys) // if hasn't some actions, then add them from default;
+        {
+            if (!keyDict.ContainsKey(key))
+            {
+                keyDict.Add(key, defaultKeyDict[key]);
+            }
+        }
     }
 
     static private string KeyDictToSting(Dictionary<ActionKeys, KeyCode> keyDict)
@@ -62,8 +93,8 @@ public class InputController : MonoBehaviour
         foreach (var keyAndValue in keysAndValues)
         {
             List<string> keyAndValuePair = keyAndValue.Split(new char[] { '@' }).ToList();
-            Enum.TryParse(keyAndValuePair[0], out ActionKeys key);
-            Enum.TryParse(keyAndValuePair[1], out KeyCode value);
+            if (!Enum.TryParse(keyAndValuePair[0], out ActionKeys key)) continue;
+            if (!Enum.TryParse(keyAndValuePair[1], out KeyCode value)) continue;
 
             toReturn.Add(key, value);
         }
@@ -88,5 +119,20 @@ public class InputController : MonoBehaviour
     {
         LoadKeyDict();
         CreateBindPrefs();
+    }
+
+    static public void AddBind(BindSelector bind)
+    {
+        binds.Add(bind);
+    }
+
+    static public void SolveBindConflicts()
+    {
+        binds.ForEach(bind => bind.SolveConflict());
+    }
+
+    static public void EraseAllBinds()
+    {
+        binds.ForEach(bind => bind.EraseBind());
     }
 }

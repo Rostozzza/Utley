@@ -12877,6 +12877,7 @@ GameObject:
   - component: {fileID: 4966867351028900263}
   - component: {fileID: 8621399627006151657}
   - component: {fileID: 8140461540977156101}
+  - component: {fileID: 966654989773752338}
   m_Layer: 0
   m_Name: AssignUnit
   m_TagString: assignment
@@ -12997,6 +12998,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &966654989773752338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4024887107719531427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d4ccddb902d8374c918c47fc9be807b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hintType: 11
 --- !u!1 &4106997033794261130
 GameObject:
   m_ObjectHideFlags: 0

@@ -381,11 +381,11 @@ public class MenuManager : MonoBehaviour
 	{
 		if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 2)
 		{
-			if (Input.GetKeyDown(KeyCode.Escape))
+			if (InputController.GetKeyDown(ActionKeys.Pause))
 			{
 				Pause();
 			}
-			if (Input.GetKeyDown(KeyCode.E) && !problemSolverScreen.activeSelf && !isPauseMenuActive)
+			if (InputController.GetKeyDown(ActionKeys.OpenShop) && !problemSolverScreen.activeSelf && !isPauseMenuActive)
 			{
 				shopScreen.SetActive(true);
 				Debug.Log("OPEN SHOP");

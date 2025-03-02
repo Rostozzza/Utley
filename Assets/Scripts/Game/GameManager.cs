@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private bool isEnergohoneyConsuming = true;
 	[SerializeField] private bool isSeasonChanging = true;
 	[SerializeField] private bool isCursorAtUIDontScroll;
+    [SerializeField] private int amountIsCursorAtUI;
 	private bool wasSelectedThisFrame = false;
 	[Header("Building settings")]
 	[SerializeField] private GameObject buildingLoading;
@@ -87,7 +88,7 @@ public class GameManager : MonoBehaviour
 	private bool isFreezing = false;
 	private int predictedAsteriumViews;
 
-	public void SetThisFrameSelected(bool value)
+    public void SetThisFrameSelected(bool value)
 	{
 		wasSelectedThisFrame = value;
 	}
@@ -1038,7 +1039,7 @@ public class GameManager : MonoBehaviour
 
 	private void InputHandler()
 	{
-		if (Input.GetMouseButtonUp(0)) //off
+		if (Input.GetMouseButtonUp(0)) //by some reason InputController bugs here;
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out raycastHit, 100f) && !buildingScreen.activeSelf)
@@ -1049,6 +1050,7 @@ public class GameManager : MonoBehaviour
 				}
 				else
 				{
+					//if (amountIsCursorAtUI > 0) return;
 					//OutlineWorkStations(false);
 					bears.ForEach(x => x.GetComponent<UnitScript>().SetMarker(false));
 					HideAllAssignButtons();
@@ -1067,7 +1069,7 @@ public class GameManager : MonoBehaviour
 				if (!isCursorAtUIDontScroll) selectedUnit = null;
 			}
 		}
-		else if (Input.GetMouseButtonDown(1)) //off
+		else if (InputController.GetKeyDown(ActionKeys.MoveBearToRoom)) //off
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out raycastHit, 100f) && !buildingScreen.activeSelf)
@@ -1079,7 +1081,7 @@ public class GameManager : MonoBehaviour
 				}
 			}
 		}
-		else if (Input.GetKeyDown(KeyCode.Escape) && (buildingScreen.activeSelf || elevatorBuildingScreen.activeSelf))
+		else if (InputController.GetKeyDown(ActionKeys.Quit) && (buildingScreen.activeSelf || elevatorBuildingScreen.activeSelf))
 		{
 			buildingScreen.SetActive(false);
 			elevatorBuildingScreen.SetActive(false);
@@ -1087,7 +1089,7 @@ public class GameManager : MonoBehaviour
 
 		if (!isGraphUsing)
 		{
-			if (Input.GetKeyDown(KeyCode.Alpha1) && bearsToMoveOn.Count > 0)
+			if (InputController.GetKeyDown(ActionKeys.Bear1) && bearsToMoveOn.Count > 0)
 			{
 				if (selectedUnit != bearsToMoveOn[0].GetBearObj())
 				{
@@ -1101,7 +1103,7 @@ public class GameManager : MonoBehaviour
 					selectedUnit = null;
 				}
 			}
-			else if (Input.GetKeyDown(KeyCode.Alpha2) && bearsToMoveOn.Count > 1)
+			else if (InputController.GetKeyDown(ActionKeys.Bear2) && bearsToMoveOn.Count > 1)
 			{
 				if (selectedUnit != bearsToMoveOn[1].GetBearObj())
 				{
@@ -1115,7 +1117,7 @@ public class GameManager : MonoBehaviour
 					selectedUnit = null;
 				}
 			}
-			else if (Input.GetKeyDown(KeyCode.Alpha3) && bearsToMoveOn.Count > 2)
+			else if (InputController.GetKeyDown(ActionKeys.Bear3) && bearsToMoveOn.Count > 2)
 			{
 				if (selectedUnit != bearsToMoveOn[2].GetBearObj())
 				{
@@ -1129,7 +1131,7 @@ public class GameManager : MonoBehaviour
 					selectedUnit = null;
 				}
 			}
-			else if (Input.GetKeyDown(KeyCode.Alpha4) && bearsToMoveOn.Count > 3)
+			else if (InputController.GetKeyDown(ActionKeys.Bear4) && bearsToMoveOn.Count > 3)
 			{
 				if (selectedUnit != bearsToMoveOn[3].GetBearObj())
 				{
@@ -1143,7 +1145,7 @@ public class GameManager : MonoBehaviour
 					selectedUnit = null;
 				}
 			}
-			else if (Input.GetKeyDown(KeyCode.Alpha5) && bearsToMoveOn.Count > 4)
+			else if (InputController.GetKeyDown(ActionKeys.Bear5) && bearsToMoveOn.Count > 4)
 			{
 				if (selectedUnit != bearsToMoveOn[4].GetBearObj())
 				{
@@ -1157,7 +1159,7 @@ public class GameManager : MonoBehaviour
 					selectedUnit = null;
 				}
 			}
-			else if (Input.GetKeyDown(KeyCode.Alpha6) && bearsToMoveOn.Count > 5)
+			else if (InputController.GetKeyDown(ActionKeys.Bear6) && bearsToMoveOn.Count > 5)
 			{
 				if (selectedUnit != bearsToMoveOn[5].GetBearObj())
 				{
@@ -1173,8 +1175,8 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-		if (Input.GetKeyDown(KeyCode.B)) SetModeByButton((int)Mode.Build);
-		else if (Input.GetKeyDown(KeyCode.I)) SetModeByButton((int)Mode.Info);
+		if (InputController.GetKeyDown(ActionKeys.BuildMode)) SetModeByButton((int)Mode.Build);
+		else if (InputController.GetKeyDown(ActionKeys.InfoMode)) SetModeByButton((int)Mode.Info);
 	}
 
 	private bool MouseOnTarget(GameObject target, bool isTutorial)
@@ -1880,6 +1882,13 @@ public class GameManager : MonoBehaviour
 	{
 		return isCursorAtUIDontScroll;
 	}
+
+	public void SetIsCursorAtUI(bool set)
+	{
+		amountIsCursorAtUI += set ? 1 : -1;
+	}
+
+	public int GetIsCursorAtUI() => amountIsCursorAtUI;
 
 	public enum Season
 	{
