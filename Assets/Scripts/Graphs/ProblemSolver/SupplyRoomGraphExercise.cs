@@ -40,25 +40,22 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 		currentTask.graphView.SetActive(true);
 	}
 
-	public void SubmitAnswer()
+	public void SubmitAnswer(TMP_InputField field)
 	{
-		var answerField = currentTask.graphView.GetComponentsInChildren<TMP_InputField>().First(x => x.gameObject.tag == "answerField");
+		var answerField = field;
+		
 		Camera.main.GetComponent<CameraController>().GoToTaskPoint(Vector3.zero,Vector3.zero);
 		if (int.Parse(answerField.text) == currentTask.answer)
 		{
 			(targetedRoom as SupplyRoom).GetRoomsToEnpower();
-			MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
+			Debug.Log("CORRECT");
 			targetedRoom.SetWorkEfficiency(1f);
 			Camera.main.GetComponent<CameraController>().SetCameraLock(false);
-			MenuManager.Instance.problemSolverScreen.SetActive(false);
-			MenuManager.Instance.graphExercise.gameObject.SetActive(false);
 			return;
 		}
-		MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
+		Debug.Log("INCORRECT");
 		targetedRoom.SetWorkEfficiency(0f);
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
-		MenuManager.Instance.problemSolverScreen.SetActive(false);
-		MenuManager.Instance.graphExercise.gameObject.SetActive(false);
 		return;
 	}
 }
