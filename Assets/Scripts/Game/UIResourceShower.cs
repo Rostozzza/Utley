@@ -77,7 +77,7 @@ public class UIResourceShower : MonoBehaviour
 	{
 		while (true)
 		{
-			temperatureSlider.value = (GameManager.Instance.GetTemperature() + 25f) / 45f;
+			temperatureSlider.value = (GameManager.Instance.GetTemperature() + ValuesHolder.MinTemperature) / (ValuesHolder.MaxTemperature + ValuesHolder.MinTemperature);
 			temperatureDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)GameManager.Instance.GetTemperature()) + " °C";
 			temperatureDynamic2.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)GameManager.Instance.GetTemperature()) + " °C";
 			yield return new WaitForSeconds(0.1f);

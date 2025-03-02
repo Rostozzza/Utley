@@ -11,9 +11,9 @@ public class ValueManager : MonoBehaviour
     private void Awake()
     {
         TryGetBalance();
-        Debug.Log(model.CycleDuration);
 
         SetValuesHolder();
+        Debug.Log(ValuesHolder.GameDuration);
     }
 
     private void SetValuesHolder()

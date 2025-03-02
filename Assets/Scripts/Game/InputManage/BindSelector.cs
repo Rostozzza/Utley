@@ -62,7 +62,7 @@ public class BindSelector : MonoBehaviour
         string toReturn = action switch
         {
             ActionKeys.None => "Ничего",
-            ActionKeys.Pause => "Паузы",
+            ActionKeys.Pause => "Пауза",
             ActionKeys.Quit => "Назад",
             ActionKeys.Bear1 => "Медведь 1",
             ActionKeys.Bear2 => "Медведь 2",

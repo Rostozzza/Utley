@@ -517,9 +517,9 @@ public class MenuManager : MonoBehaviour
 			loadingView.SetActive(false);
 			try
 			{
-				GameManager.Instance.asteriy = 40; // 40
-				GameManager.Instance.honey = 40; // 40
-				GameManager.Instance.astroluminite = 6; // 6
+				GameManager.Instance.asteriy = ValuesHolder.StartAsterium; // 40
+				GameManager.Instance.honey = ValuesHolder.StartEnergohoney; // 40
+				GameManager.Instance.astroluminite = ValuesHolder.StartAstroluminite; // 6
 				GameManager.Instance.playerBears = 4; // 4
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
 			}
@@ -596,9 +596,9 @@ public class MenuManager : MonoBehaviour
 		loadingView.SetActive(false);
 		try
 		{
-			GameManager.Instance.asteriy = 40;
-			GameManager.Instance.honey = 40;
-			GameManager.Instance.astroluminite = 6;
+			GameManager.Instance.asteriy = ValuesHolder.StartAsterium;
+			GameManager.Instance.honey = ValuesHolder.StartEnergohoney;
+			GameManager.Instance.astroluminite = ValuesHolder.StartAstroluminite;
 			GameManager.Instance.playerBears = 4;
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
 		}

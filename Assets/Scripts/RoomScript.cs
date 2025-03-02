@@ -61,10 +61,10 @@ public class RoomScript : MonoBehaviour
 	public bool isReadyForWork = false;
 	[SerializeField] private GameObject coneierScreen;
 	[Header("Work Settings")]
-	protected float SpeedByBearLevelCoef = 1.05f;
-	protected float SpeedByRoomLevelCoef = 0.75f;
-	protected float StandartInteractionTime = 18f;
-	protected float SpeedByUsingSuitableBearCoef = 1f;
+	protected float SpeedByBearLevelCoef = ValuesHolder.InteractionSpeedMultiplyerByLevel;
+	protected float SpeedByRoomLevelCoef = ValuesHolder.InteractionSpeedMultiplyerByGrade;
+	protected float StandartInteractionTime = ValuesHolder.StandartInteractionTime;
+	protected float SpeedByUsingSuitableBearCoef = ValuesHolder.InteracionTimeMultiplyerByCorrectJob;
 	protected float efficientyCoeficent = 1f;
 	[SerializeField] protected RoomWorkUI workUI;
 	[SerializeField] private GameObject efficiencyDownPanel;
@@ -353,7 +353,7 @@ public class RoomScript : MonoBehaviour
 		upgradeBar.fillAmount = 0;
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
 		room.GetComponent<RoomScript>().SetStatus(Status.Free);
-		durability = 1f;
+		//durability = 1f;
 		ChangeDurability(0);
 		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
@@ -583,7 +583,7 @@ public class RoomScript : MonoBehaviour
 		{
 			case Resources.Asteriy:
 				timer = StandartInteractionTime;
-				workUI.StartWork(timer, 20, GameManager.Instance.uiResourceShower.asteriyAmountText.transform);
+				workUI.StartWork(timer, ValuesHolder.AsteriumAmountByOneInteraction, GameManager.Instance.uiResourceShower.asteriyAmountText.transform);
 				while (timer > 0)
 				{
 					//timeShow.text = SecondsToTimeToShow(timer);
@@ -592,12 +592,12 @@ public class RoomScript : MonoBehaviour
 				}
 				//timeShow.text = "";
 				GameManager.Instance.WithdrawRawAsterium();
-				GameManager.Instance.ChangeAsteriy(20, new Log
+				GameManager.Instance.ChangeAsteriy(ValuesHolder.AsteriumAmountByOneInteraction, new Log
 				{
-					comment = $"Added 20 asterium to player {GameManager.Instance.playerName} for processing raw asterium from spaceship",
+					comment = $"Added {ValuesHolder.AsteriumAmountByOneInteraction} asterium to player {GameManager.Instance.playerName} for processing raw asterium from spaceship",
 					player_name = GameManager.Instance.playerName,
 
-					resources_changed = new Dictionary<string, float> { { "asterium", 20 } }
+					resources_changed = new Dictionary<string, float> { { "asterium", ValuesHolder.AsteriumAmountByOneInteraction } }
 				});
 				isReadyForWork = false;
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
@@ -623,7 +623,7 @@ public class RoomScript : MonoBehaviour
 					timer *= 0.9f;
 				}
 				timer *= 1 + (1 - efficientyCoeficent); // for RESISTORS exercise;
-				(workUI as FluidWorkUI).StartWork(timer, 20, GameManager.Instance.uiResourceShower.astroluminiteAmountText.transform);
+				(workUI as FluidWorkUI).StartWork(timer, 20, GameManager.Instance.uiResourceShower.astroluminiteAmountText.transform); // I wanted to placer ValuesHolder var where "20", but there is 20 for astroluminite??? idk, better to leave unchanged
 				fixedBear.SetActive(false);
 				while (timer > 0)
 				{
@@ -649,12 +649,12 @@ public class RoomScript : MonoBehaviour
 						GameManager.Instance.DeliverRawAsterium();
 						break;
 					case FlyForType.Astroluminite:
-						GameManager.Instance.ChangeAstroluminite(8, new Log
+						GameManager.Instance.ChangeAstroluminite(ValuesHolder.AstroluminiteAmountByOneInteraction, new Log
 						{
-							comment = $"Added 8 astroluminite to player {GameManager.Instance.playerName} from spaceship",
+							comment = $"Added {ValuesHolder.AstroluminiteAmountByOneInteraction} astroluminite to player {GameManager.Instance.playerName} from spaceship",
 							player_name = GameManager.Instance.playerName,
 
-							resources_changed = new Dictionary<string, float> { { "astroluminite", 8 } }
+							resources_changed = new Dictionary<string, float> { { "astroluminite", ValuesHolder.AstroluminiteAmountByOneInteraction } }
 						});
 						break;
 				}
@@ -886,7 +886,7 @@ public class RoomScript : MonoBehaviour
 				resources_changed = new Dictionary<string, float> { { "asterium", -10 } }
 			});
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
-			int timeToRepair = (int)((1 - durability) * 100 / 3);
+			int timeToRepair = (int) ValuesHolder.RepairSpeed; //((1 - durability) * 100 / 3);
 			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);

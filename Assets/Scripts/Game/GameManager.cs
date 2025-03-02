@@ -42,9 +42,9 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private Sprite selectedInfoButton;
 	[SerializeField] public List<BearStatusController> bearsToMoveOn;
 	[SerializeField] private bool isGraphUsing = false;
-	[SerializeField] private float timeLeft = 480f;
+	[SerializeField] private float timeLeft = ValuesHolder.GameDuration; // doesn't work, go to Awake and change;
 	[SerializeField] private float seasonTimeLeft;
-	[SerializeField] private float temperature = 20f;
+	[SerializeField] private float temperature = ValuesHolder.MaxTemperature;
 	[SerializeField] private float timePast = 0f;
 	[SerializeField] private bool isGameRunning = true;
 	[SerializeField] private bool isTimeGo = true;
@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
 
 	public void BoostTemperature()
 	{
-		temperature = 20;
+		temperature = ValuesHolder.MaxTemperature;
 		Debug.Log("Boosted temperature!");
 	}
 
@@ -285,8 +285,9 @@ public class GameManager : MonoBehaviour
 			Instance = this;
 			//DontDestroyOnLoad(gameObject);
 		}
+		timeLeft = ValuesHolder.GameDuration;
 		skyBG = GameObject.FindGameObjectWithTag("skyBG");
-		StartCoroutine(ConstantDurabilityDamager(4));
+		StartCoroutine(ConstantDurabilityDamager((int)ValuesHolder.DurationLoss));
 		StartCoroutine(ConstantEnergohoneyConsumer());
 		StartCoroutine(ConstantSeasonChanger());
 		StartCoroutine(ConstantTemperatureController());
@@ -1812,12 +1813,12 @@ public class GameManager : MonoBehaviour
 					bears.ForEach(x => x.GetComponent<UnitScript>().StopFreezing());
 				}
 			}
-			if (temperature <= -25f && isGameRunning)
+			if (temperature <= -ValuesHolder.MinTemperature && isGameRunning)
 			{
 				Debug.Log("ПОРАЖЕНИЕ");
 				MenuManager.Instance.ShowLoseScreen();
 			}
-			temperature = Mathf.Clamp(temperature, -25, 20);
+			temperature = Mathf.Clamp(temperature, -ValuesHolder.MinTemperature, ValuesHolder.MaxTemperature);
 			yield return null;
 		}
 	}
