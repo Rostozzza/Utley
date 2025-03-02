@@ -78,6 +78,8 @@ public class MenuManager : MonoBehaviour
 	private bool canContinueAfter2Cutscene = false;
 	private Coroutine skipChecker;
 	public bool isPlayerLoadable = false;
+	[Header("Cosmodrome Exercise (fuck resistors!)")]
+	[SerializeField] private CosmodromeExercise cosmodromeExercise;
 
 	public void SetMasterVolume()
 	{
@@ -577,13 +579,15 @@ public class MenuManager : MonoBehaviour
 				//tabletAnimator.SetTrigger("OpenShop");
 				break;
 			case ProblemType.SetResistors:
-				setResistorsScreen.SetActive(true);
+				cosmodromeExercise.gameObject.SetActive(true);
 				StartCoroutine(WaitForResistorsCountEnd(room));
 				tabletAnimator.SetTrigger("OpenShop");
 				break;
 			case ProblemType.SetBreakingBad:
 				room.GetComponentInChildren<ResearchRoomExercise>(true).gameObject.SetActive(true);
 				room.GetComponentInChildren<ResearchRoomExercise>(true).StartExercise(room);
+				break;
+			case ProblemType.SetCosmodrome:
 				break;
 		}
 		GameManager.Instance.SetIsGraphUsing(true);
@@ -615,10 +619,10 @@ public class MenuManager : MonoBehaviour
 	{
 		problemSolverScreen.SetActive(true);
 		yield return new WaitForSeconds(1.5f);
-		yield return cosmodromeResistors.AnswerWaiter(room);
-		
-		cosmodromeResistors.HideSample();
-		setResistorsScreen.SetActive(false);
+		//yield return cosmodromeResistors.AnswerWaiter(room);
+		yield return cosmodromeExercise.AnswerWaiter(room);
+		//cosmodromeResistors.HideSample();
+		cosmodromeExercise.gameObject.SetActive(false);
 		problemSolverScreen.SetActive(false);
 		tabletAnimator.SetTrigger("CloseShop");
 	}
@@ -629,6 +633,7 @@ public class MenuManager : MonoBehaviour
 		SetFurnaces,
 		SetSupply,
 		SetResistors,
-		SetBreakingBad
+		SetBreakingBad,
+		SetCosmodrome
 	}
 }
