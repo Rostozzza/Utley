@@ -47,7 +47,7 @@ public class OgePointLogic : MonoBehaviour
 
 	public void SetColor(Color color)
 	{
-		transform.GetComponent<Image>().sprite = filledCircle;
+		transform.GetComponentInChildren<Image>().sprite = filledCircle;
 		transform.GetComponent<Image>().color = color;
 	}
 

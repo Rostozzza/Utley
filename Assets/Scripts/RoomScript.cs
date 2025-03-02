@@ -79,7 +79,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private Image gearImg;
 	public void SetWorkEfficiency(float newCoef, bool isCosmodromeWait = true)
 	{
-		var efficiencyAnim = efficiencyDownPanel.GetComponent<Animator>();
+		var efficiencyAnim = efficiencyDownPanel.GetComponentInChildren<Animator>(true);
 		switch (resource)
 		{
 			case Resources.Cosmodrome:
