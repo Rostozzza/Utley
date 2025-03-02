@@ -581,6 +581,10 @@ public class MenuManager : MonoBehaviour
 				StartCoroutine(WaitForResistorsCountEnd(room));
 				tabletAnimator.SetTrigger("OpenShop");
 				break;
+			case ProblemType.SetBreakingBad:
+				room.GetComponentInChildren<ResearchRoomExercise>(true).gameObject.SetActive(true);
+				room.GetComponentInChildren<ResearchRoomExercise>(true).StartExercise(room);
+				break;
 		}
 		GameManager.Instance.SetIsGraphUsing(true);
 	}
@@ -624,6 +628,7 @@ public class MenuManager : MonoBehaviour
 		SetPipes,
 		SetFurnaces,
 		SetSupply,
-		SetResistors
+		SetResistors,
+		SetBreakingBad
 	}
 }
