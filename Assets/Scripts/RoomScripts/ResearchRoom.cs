@@ -12,13 +12,6 @@ public class ResearchRoom : RoomScript
 	private float haveAstroluminte;
 	private int haveAsteriy;
 
-	public override void SetPipes()
-	{
-		Camera.main.GetComponent<CameraController>().GoToTaskPoint(cameraPoint.position, cameraAngle, true);
-		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetBreakingBad, this);
-		HideSetPipesButtonScreen();
-	}
-
 	public override async void StartWork(GameObject bear)
 	{
 		if (status != Status.Destroyed && isEnpowered)

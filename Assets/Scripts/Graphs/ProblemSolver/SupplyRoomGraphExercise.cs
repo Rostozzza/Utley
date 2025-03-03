@@ -26,6 +26,17 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 
 	private void Start()
 	{
+		if (!isListenerAdded)
+		{
+			EventManager.onToMenuButton.AddListener(CloseExercise);
+			isListenerAdded = true;
+		}
+	}
+
+	public void InitializeTask(RoomScript room)
+	{
+		GameManager.Instance.SetIsGraphUsing(true);
+		EventManager.onSupplySettingsOpened.Invoke();
 		Camera.main.GetComponent<CameraController>().SetCameraLock(true);
 		targetedRoom = room;
 		currentTask = tasks[Random.Range(0, tasks.Count)];
@@ -39,25 +50,101 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 		{
 			point.ConnectPoints();
 		}
+
 		currentTask.graphView.SetActive(true);
 	}
 
-	public void SubmitAnswer(TMP_InputField field)
+	public void SubmitAnswer()
 	{
-		var answerField = field;
-		
-		Camera.main.GetComponent<CameraController>().GoToTaskPoint(Vector3.zero,Vector3.zero);
+		Debug.Log("Отправили ответ");
+		var answerField = currentTask.graphView.GetComponentsInChildren<TMP_InputField>().First(x => x.gameObject.tag == "answerField");
+		if (answerField.text == "")
+		{
+			EventManager.callWarning.Invoke("Поле ответа пустое!");
+			return;
+		}
+		EventManager.onSupplyRoomSettingsSolved.Invoke();
+		Destroy(currentTask.graphView);
+		tasks.Remove(currentTask);
+		var prefab = taskPrefabs[Random.Range(0, taskPrefabs.Count)];
+		var newTask = Instantiate(prefab, this.gameObject.transform);
+		newTask.name = newTask.name[..^7];
+		tasks.Add(TaskPrefabToPreset(newTask));
+		newTask.SetActive(false);
 		if (int.Parse(answerField.text) == currentTask.answer)
 		{
 			(targetedRoom as SupplyRoom).GetRoomsToEnpower();
-			Debug.Log("CORRECT");
+			MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
 			targetedRoom.SetWorkEfficiency(1f);
 			Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+			MenuManager.Instance.problemSolverScreen.SetActive(false);
+			MenuManager.Instance.graphExercise.gameObject.SetActive(false);
+			GameManager.Instance.SetIsGraphUsing(false);
+			targetedRoom.SetConeierScreen(false);
+			answerField.text = "";
 			return;
 		}
-		Debug.Log("INCORRECT");
+		MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
 		targetedRoom.SetWorkEfficiency(0f);
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+		MenuManager.Instance.problemSolverScreen.SetActive(false);
+		MenuManager.Instance.graphExercise.gameObject.SetActive(false);
+		GameManager.Instance.SetIsGraphUsing(false);
+		targetedRoom.SetConeierScreen(false);
+		answerField.text = "";
 		return;
+	}
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
+		{
+			CloseExercise();
+		}
+		if (Input.GetKeyDown(KeyCode.Return))
+		{
+			SubmitAnswer();
+		}
+    }
+
+	public void CloseExercise()
+	{
+		Time.timeScale = 1;
+		MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
+		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+		GameManager.Instance.SetIsGraphUsing(false);
+		MenuManager.Instance.problemSolverScreen.SetActive(false);
+		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+		MenuManager.Instance.problemSolverScreen.SetActive(false);
+		MenuManager.Instance.graphExercise.gameObject.SetActive(false);
+		GameManager.Instance.SetIsGraphUsing(false);
+		Destroy(currentTask.graphView);
+		tasks.Remove(currentTask);
+		var prefab = taskPrefabs[Random.Range(0, taskPrefabs.Count)];
+		var newTask = Instantiate(prefab, this.gameObject.transform);
+		newTask.name = newTask.name[..^7];
+		tasks.Add(TaskPrefabToPreset(newTask));
+		newTask.SetActive(false);
+		gameObject.SetActive(false);
+	}
+
+	private SupplyTaskPreset TaskPrefabToPreset(GameObject pref)
+	{
+		SupplyTaskPreset toReturn = new SupplyTaskPreset();
+		if (pref.name == taskPrefabs[0].name)
+		{
+			toReturn.answer = 3;
+			toReturn.graphView = pref;
+		}
+		else if (pref.name == taskPrefabs[1].name)
+		{
+			toReturn.answer = 10;
+			toReturn.graphView = pref;
+		}
+		else
+		{
+			Debug.Log("Что-то не так");
+		}
+		return toReturn;
 	}
 }

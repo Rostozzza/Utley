@@ -10,14 +10,10 @@ public class OgePointLogic : MonoBehaviour
 
 	//[SerializeField] private Sprite exploredSprite;
 	[SerializeField] private GameObject line;
-	[SerializeField] private Sprite filledCircle;
 
 	public void Start()
 	{
-		if (!isActive)
-		{
-			ConnectPoints();
-		}
+		ConnectPoints();
 	}
 
 	public void ConnectPoints()
@@ -47,18 +43,12 @@ public class OgePointLogic : MonoBehaviour
 
 	public void SetColor(Color color)
 	{
-		transform.GetComponentInChildren<Image>().sprite = filledCircle;
 		transform.GetComponent<Image>().color = color;
 	}
 
 	public List<OgePointLogic> GetConnectedPoints()
 	{
 		return connectedPoints;
-	}
-
-	public void AddPointToConnected(OgePointLogic point)
-	{
-		connectedPoints.Add(point);
 	}
 
 	public List<OgePointLogic> GetSourcePoints()

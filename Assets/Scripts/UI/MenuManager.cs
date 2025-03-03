@@ -71,7 +71,7 @@ public class MenuManager : MonoBehaviour
 	[Header("Cosmodrome Resistors Problem")]
 	[SerializeField] private CosmodromeResistorsExercise cosmodromeResistors;
 	[Header("Number Summation Problem")]
-	[SerializeField] public NumberSummationExercise numberSummation;
+	[SerializeField] private NumberSummationExercise numberSummation;
 	[Header("Number By Table Exercise")]
 	[SerializeField] private NumbersByTableExercise numbersByTable;
 	[SerializeField] public Animator tabletAnimator;
@@ -80,8 +80,6 @@ public class MenuManager : MonoBehaviour
 	private bool canContinueAfter2Cutscene = false;
 	private Coroutine skipChecker;
 	public bool isPlayerLoadable = false;
-	[Header("Cosmodrome Exercise (fuck resistors!)")]
-	[SerializeField] private CosmodromeExercise cosmodromeExercise;
 
 	public void SetMasterVolume()
 	{
@@ -641,66 +639,55 @@ public class MenuManager : MonoBehaviour
 		switch (type)
 		{
 			case ProblemType.SetPipes:
-				//SetPipesScreen.SetActive(true);
+				SetPipesScreen.SetActive(true);
 				StartCoroutine(WaitForNumberSummationEnd(room));
 				break;
 			case ProblemType.SetFurnaces:
 				numbersByTable.gameObject.SetActive(true);
 				StartCoroutine(WaitForFurnacesEnd(room));
-				//tabletAnimator.SetTrigger("OpenShop");
 				break;
 			case ProblemType.SetSupply:
-				//problemSolverScreen.SetActive(true);
-				//graphExercise.gameObject.SetActive(true);
-				graphExercise = room.GetComponentInChildren<SupplyRoomGraphExercise>(true);//Vector3(-3.0999999,5.69999981,0.5)
-				graphExercise.gameObject.SetActive(true);                                   //Vector3(31.2199955,343.100006,0)
+				problemSolverScreen.SetActive(true);
+				graphExercise.gameObject.SetActive(true);
 				graphExercise.InitializeTask(room);
-				//tabletAnimator.SetTrigger("OpenShop");
 				break;
 			case ProblemType.SetResistors:
-				cosmodromeExercise.gameObject.SetActive(true);
+				setResistorsScreen.SetActive(true);
 				StartCoroutine(WaitForResistorsCountEnd(room));
-				tabletAnimator.SetTrigger("OpenShop");
-				break;
-			case ProblemType.SetBreakingBad:
-				room.GetComponentInChildren<ResearchRoomExercise>(true).gameObject.SetActive(true);
-				room.GetComponentInChildren<ResearchRoomExercise>(true).StartExercise(room);
-				break;
-			case ProblemType.SetCosmodrome:
 				break;
 		}
 		GameManager.Instance.SetIsGraphUsing(true);
+		tabletAnimator.SetTrigger("OpenShop");
+		
 	}
 
 	private IEnumerator WaitForFurnacesEnd(RoomScript room)
 	{
-		//problemSolverScreen.SetActive(true);
-		room.GetComponentInChildren<NumbersByTableExercise>(true).GenerateTask(room);
+		problemSolverScreen.SetActive(true);
+		numbersByTable.GenerateTask(room);
 		yield return new WaitForSeconds(1.5f);
 	}
 
 	private IEnumerator WaitForNumberSummationEnd(RoomScript room)
 	{
-		numberSummation = room.GetComponentInChildren<NumberSummationExercise>(true);
-		numberSummation.gameObject.SetActive(true);
 		numberSummation.isTaskActive = true;
-		//problemSolverScreen.SetActive(true);
-		//yield return new WaitForSeconds(1.5f);
+		problemSolverScreen.SetActive(true);
+		yield return new WaitForSeconds(1.5f);
 		yield return numberSummation.AnswerWaiter(room);
 		
 		SetPipesScreen.SetActive(false);
-		//problemSolverScreen.SetActive(false);
-		//tabletAnimator.SetTrigger("CloseShop");
+		problemSolverScreen.SetActive(false);
+		tabletAnimator.SetTrigger("CloseShop");
 	}
 
 	private IEnumerator WaitForResistorsCountEnd(RoomScript room)
 	{
 		problemSolverScreen.SetActive(true);
 		yield return new WaitForSeconds(1.5f);
-		//yield return cosmodromeResistors.AnswerWaiter(room);
-		yield return cosmodromeExercise.AnswerWaiter(room);
-		//cosmodromeResistors.HideSample();
-		cosmodromeExercise.gameObject.SetActive(false);
+		yield return cosmodromeResistors.AnswerWaiter(room);
+		
+		cosmodromeResistors.HideSample();
+		setResistorsScreen.SetActive(false);
 		problemSolverScreen.SetActive(false);
 		tabletAnimator.SetTrigger("CloseShop");
 	}
@@ -710,8 +697,6 @@ public class MenuManager : MonoBehaviour
 		SetPipes,
 		SetFurnaces,
 		SetSupply,
-		SetResistors,
-		SetBreakingBad,
-		SetCosmodrome
+		SetResistors
 	}
 }

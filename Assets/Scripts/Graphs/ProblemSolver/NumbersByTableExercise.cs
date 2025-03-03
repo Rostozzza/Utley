@@ -122,22 +122,32 @@ public class NumbersByTableExercise : MonoBehaviour
 		GameManager.Instance.SetIsGraphUsing(true);
 		for (int i = 0; i < rightAnswers.Count; i++)
 		{
-			if (rightAnswers[i] != int.Parse(allInputFields[i].text))
+			try
 			{
-				Debug.Log("НЕВЕРНО");
-				rightAnswers = null;
-				allInputFields = null;
-				task.SetActive(false);
-				Destroy(task,0.1f);
-				tasksPresets.Remove(tasksPresets.First(x => x.task == task));
-				task = null;
-				MenuManager.Instance.connectFurnacesScreen.SetActive(false);
-				MenuManager.Instance.problemSolverScreen.SetActive(false);
-				//MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
-				targetedRoom.SetWorkEfficiency(0.2f);
-				Camera.main.GetComponent<CameraController>().GoToTaskPoint(Vector3.zero, Vector3.zero);
-				Camera.main.GetComponent<CameraController>().SetCameraLock(false);
-				//MenuManager.Instance.problemSolverScreen.SetActive(false);
+				if (rightAnswers[i] != int.Parse(allInputFields[i].text))
+				{
+					Debug.Log("НЕВЕРНО");
+					rightAnswers = null;
+					allInputFields.ForEach(x => x.text = "");
+					allInputFields = null;
+					task.SetActive(false);
+					CreateNewExercise(task);
+					Destroy(task, 0.1f);
+					tasksPresets.Remove(tasksPresets.First(x => x.task == task));
+					task = null;
+					MenuManager.Instance.connectFurnacesScreen.SetActive(false);
+					MenuManager.Instance.problemSolverScreen.SetActive(false);
+					MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
+					targetedRoom.SetWorkEfficiency(0.2f);
+					Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+					MenuManager.Instance.problemSolverScreen.SetActive(false);
+					targetedRoom.SetConeierScreen(false);
+					return;
+				}
+			}
+			catch
+			{
+				EventManager.callWarning.Invoke("Не все поля ответов заполнены!");
 				return;
 			}
 		}
@@ -149,14 +159,78 @@ public class NumbersByTableExercise : MonoBehaviour
 		tasksPresets.Remove(tasksPresets.First(x => x.task == task));
 		task = null;
 		gridRange++;
-		//MenuManager.Instance.connectFurnacesScreen.SetActive(false);
+		MenuManager.Instance.connectFurnacesScreen.SetActive(false);
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
-		//MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
+		MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
 		targetedRoom.SetWorkEfficiency(1f);
 		GameManager.Instance.TryProcessingRawAsterium();
 		Debug.Log("ВЕРНО");
-		Camera.main.GetComponent<CameraController>().GoToTaskPoint(Vector3.zero, Vector3.zero);
+		ChangePlayerDifficulty(true);
+		targetedRoom.SetConeierScreen(false);
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
-		//MenuManager.Instance.problemSolverScreen.SetActive(false);
+		MenuManager.Instance.problemSolverScreen.SetActive(false);
+	}
+
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
+		{
+			CloseExercise();
+		}
+	}
+
+	public void CloseExercise()
+	{
+		Time.timeScale = 1;
+		GameManager.Instance.SetIsGraphUsing(false);
+		rightAnswers = null;
+		allInputFields = null;
+		task.SetActive(false);
+		CreateNewExercise(task);
+		Destroy(task, 0.1f);
+		tasksPresets.Remove(tasksPresets.First(x => x.task == task));
+		task = null;
+		MenuManager.Instance.connectFurnacesScreen.SetActive(false);
+		MenuManager.Instance.problemSolverScreen.SetActive(false);
+		MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
+		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+		gameObject.SetActive(false);
+	}
+
+	private void CreateNewExercise(GameObject deletedTask) // asking for deleted task because we looking for same task from prefab
+	{
+		//var prefab = taskPrefabs[Random.Range(0, taskPrefabs.Count)];
+		var prefab = taskPrefabs[taskPrefabs.FindIndex(x => x.name == deletedTask.name)];
+		var newTask = Instantiate(prefab, this.gameObject.transform);
+		newTask.name = newTask.name[..^7];
+		tasksPresets.Add(TaskPrefabToPreset(newTask));
+		newTask.SetActive(false);
+	}
+
+	private TaskPreset TaskPrefabToPreset(GameObject pref)
+	{
+		TaskPreset toReturn = new TaskPreset();
+		if (pref.name == taskPrefabs[0].name)
+		{
+			toReturn.answers = new List<int> { 5, 1 };
+			toReturn.difficultLevel = 1;
+		}
+		else if (pref.name == taskPrefabs[1].name)
+		{
+			toReturn.answers = new List<int> { 10, 7 };
+			toReturn.difficultLevel = 2;
+		}
+		else if (pref.name == taskPrefabs[2].name)
+		{
+			toReturn.answers = new List<int> { 2, 5, 6, 8 };
+			toReturn.difficultLevel = 3;
+		}
+		else
+		{
+			Debug.Log("<color=red>Что-то не так</color>");
+		}
+		toReturn.task = pref;
+		toReturn.fields = pref.transform.Find("Inputs").GetComponentsInChildren<TMP_InputField>().ToList();
+		return toReturn;
 	}
 }
