@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class EnergohoneyRoom : RoomScript
 {
 	[SerializeField] GameObject setPipesButtonScreen;
+	
 
     protected override void Start()
     {
@@ -25,6 +26,12 @@ public class EnergohoneyRoom : RoomScript
 		{
 			assignmentButton.SetActive(false);
 		}
+	}
+
+
+	public void GiveAnswerToExercise(string answer)
+	{
+		MenuManager.Instance.numberSummation.GiveAnswer(int.Parse(answer));
 	}
 
 	protected override IEnumerator WorkStatus()
@@ -93,6 +100,7 @@ public class EnergohoneyRoom : RoomScript
 
 	public override void SetPipes()
 	{
+		Camera.main.GetComponent<CameraController>().GoToTaskPoint(cameraPoint.position,cameraAngle,true);
 		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetPipes,this);
 		HideSetPipesButtonScreen();
 	}
