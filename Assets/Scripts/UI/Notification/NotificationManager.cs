@@ -29,7 +29,7 @@ public class NotificationsManager : MonoBehaviour
     /// <param name="type"></param>
     public UnityAction CreateNotification(string message, NotificationType type)
 	{
-		if (activeNotificationTexts.ConvertAll(x => x.GetMainText()).Contains(message)) return null;
+		if (activeNotificationTexts.Count > 0) return null;
 
 		var notification = Instantiate(prefab, notificationGrid);
 		notification.GetComponent<Notification>().InitializeNotification(type, message);
