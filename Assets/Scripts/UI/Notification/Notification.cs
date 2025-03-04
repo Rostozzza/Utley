@@ -19,6 +19,7 @@ public class Notification : MonoBehaviour
 	/// <param name="text"></param>
 	public void InitializeNotification(NotificationType notification, string text)
 	{
+		NotificationsManager.Instance.AddActiveNotificationText(this);
 		animator = GetComponent<Animator>();
 		titleText.text = notification.titleText;
 		mainText.text = text;
@@ -30,6 +31,10 @@ public class Notification : MonoBehaviour
 	{
 		yield return new WaitForSeconds(lifespan);
 		animator.SetTrigger("Fade");
-		Destroy(gameObject);
+		Destroy(gameObject, 1f);
 	}
+
+    void OnDestroy() => NotificationsManager.Instance.RemoveActiveNotificationText(this);
+
+	public string GetMainText() => mainText.text;
 }

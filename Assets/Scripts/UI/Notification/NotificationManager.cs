@@ -4,19 +4,33 @@ using UnityEngine.UI;
 using System;
 using static NotificationTypes;
 using UnityEngine.Events;
+using System.Linq;
 
 public class NotificationsManager : MonoBehaviour
 {
 	[Header("Notification draw settings")]
 	[SerializeField] private GameObject prefab;
 	[SerializeField] private Transform notificationGrid;
+	[Space]
+	static public NotificationsManager Instance;
+	[SerializeField] private List<Notification> activeNotificationTexts;
 
-	/// <summary>
-	/// Use this to set up new notification. Pass presets presented in "NotificationTypes" class into "type" field.
-	/// </summary>
-	/// <param name="type"></param>
-	public UnityAction CreateNotification(string message, NotificationType type)
+    void Awake()
+    {
+        if (Instance == null)
+		{
+			Instance = this;
+		}
+    }
+
+    /// <summary>
+    /// Use this to set up new notification. Pass presets presented in "NotificationTypes" class into "type" field.
+    /// </summary>
+    /// <param name="type"></param>
+    public UnityAction CreateNotification(string message, NotificationType type)
 	{
+		if (activeNotificationTexts.ConvertAll(x => x.GetMainText()).Contains(message)) return null;
+
 		var notification = Instantiate(prefab, notificationGrid);
 		notification.GetComponent<Notification>().InitializeNotification(type, message);
 		return null;
@@ -28,4 +42,7 @@ public class NotificationsManager : MonoBehaviour
 		EventManager.callWarning.AddListener(warning => { CreateNotification(warning, NotificationTypes.warning); });
 		EventManager.callMessage.AddListener(message => { CreateNotification(message, NotificationTypes.message); });
 	}
+
+	public void AddActiveNotificationText(Notification notification) => activeNotificationTexts.Add(notification);
+	public void RemoveActiveNotificationText(Notification notification) => activeNotificationTexts.Remove(notification);
 }
