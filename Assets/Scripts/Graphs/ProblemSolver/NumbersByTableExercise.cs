@@ -42,7 +42,7 @@ public class NumbersByTableExercise : MonoBehaviour
 	{
 		if (!isListenerAdded)
 		{
-			EventManager.onToMenuButton.AddListener(CloseExercise);
+			//EventManager.onToMenuButton.AddListener(CloseExercise);
 			isListenerAdded = true;
 		}
 	}
@@ -144,7 +144,7 @@ public class NumbersByTableExercise : MonoBehaviour
 		rightAnswers = null;
 		allInputFields = null;
 		task.SetActive(false);
-		CreateNewExercise(task);
+		//CreateNewExercise(task);
 		Destroy(task, 0.1f);
 		tasksPresets.Remove(tasksPresets.First(x => x.task == task));
 		task = null;

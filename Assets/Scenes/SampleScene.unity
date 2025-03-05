@@ -3081,6 +3081,7 @@ MonoBehaviour:
   currentElevator: {fileID: 737861180}
   currentRoom: {fileID: 0}
   offsetX: 1.225
+  isWalkingToWork: 0
 --- !u!114 &228737126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3110,6 +3111,8 @@ MonoBehaviour:
   bearModel:
     Level: 0
   isBearBusy: 0
+  statusPanel: {fileID: 0}
+  priorityInStatusPanel: 0
   statsScreen: {fileID: 0}
   nameField: {fileID: 0}
   qualificationField: {fileID: 0}
@@ -7393,7 +7396,7 @@ GameObject:
   - component: {fileID: 493423724}
   m_Layer: 0
   m_Name: OST
-  m_TagString: Untagged
+  m_TagString: BG_music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19059,6 +19062,8 @@ MonoBehaviour:
   bearModel:
     Level: 0
   isBearBusy: 0
+  statusPanel: {fileID: 0}
+  priorityInStatusPanel: 0
   statsScreen: {fileID: 0}
   nameField: {fileID: 0}
   qualificationField: {fileID: 0}
@@ -19090,6 +19095,7 @@ MonoBehaviour:
   currentElevator: {fileID: 737861180}
   currentRoom: {fileID: 0}
   offsetX: 1.225
+  isWalkingToWork: 0
 --- !u!136 &1202761588
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -21637,6 +21643,8 @@ MonoBehaviour:
   bearModel:
     Level: 0
   isBearBusy: 0
+  statusPanel: {fileID: 0}
+  priorityInStatusPanel: 0
   statsScreen: {fileID: 0}
   nameField: {fileID: 0}
   qualificationField: {fileID: 0}
@@ -21668,6 +21676,7 @@ MonoBehaviour:
   currentElevator: {fileID: 737861180}
   currentRoom: {fileID: 0}
   offsetX: 1.225
+  isWalkingToWork: 0
 --- !u!136 &1389703187
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -25509,6 +25518,8 @@ MonoBehaviour:
   bearModel:
     Level: 0
   isBearBusy: 0
+  statusPanel: {fileID: 0}
+  priorityInStatusPanel: 0
   statsScreen: {fileID: 0}
   nameField: {fileID: 0}
   qualificationField: {fileID: 0}
@@ -25540,6 +25551,7 @@ MonoBehaviour:
   currentElevator: {fileID: 737861180}
   currentRoom: {fileID: 0}
   offsetX: 1.225
+  isWalkingToWork: 0
 --- !u!136 &1703134540
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -33162,6 +33174,9 @@ MonoBehaviour:
   isGameRunning: 1
   isTimeGo: 1
   isEnergohoneyConsuming: 1
+  isSeasonChanging: 1
+  isCursorAtUIDontScroll: 0
+  amountIsCursorAtUI: 0
   buildingLoading: {fileID: 580756757}
   buildingScreen: {fileID: 1428568829}
   elevatorBuildingScreen: {fileID: 1642775197}

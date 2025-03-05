@@ -16581,9 +16581,6 @@ MonoBehaviour:
     answer: 3
   - graphView: {fileID: 1409972905}
     answer: 10
-  taskPrefabs:
-  - {fileID: 4899694540894591096, guid: 89f7f79a7fa75ef479a5c731159648f0, type: 3}
-  - {fileID: 8997576154960461383, guid: a61b1e3a8023cf343a26499e1d3a67d9, type: 3}
 --- !u!1 &716980603
 GameObject:
   m_ObjectHideFlags: 0
@@ -28316,6 +28313,7 @@ MonoBehaviour:
   tabletAnimator: {fileID: 165816599}
   graphExercise: {fileID: 712686967}
   isPlayerLoadable: 0
+  cosmodromeExercise: {fileID: 0}
 --- !u!114 &1243164893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32970,6 +32968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1721825445242151637, guid: 6be49914a2bbf384985361b899368483, type: 3}
   notificationGrid: {fileID: 68369759}
+  activeNotificationTexts: []
 --- !u!1 &1507611284
 GameObject:
   m_ObjectHideFlags: 0
@@ -35947,7 +35946,7 @@ GameObject:
   - component: {fileID: 1659263989}
   m_Layer: 0
   m_Name: BGMusic
-  m_TagString: Untagged
+  m_TagString: BG_music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
