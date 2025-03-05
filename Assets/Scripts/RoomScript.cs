@@ -905,7 +905,7 @@ public class RoomScript : MonoBehaviour
 				resources_changed = new Dictionary<string, float> { { "asterium", -10 } }
 			});
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
-			int timeToRepair = (int)ValuesHolder.RepairSpeed; //((1 - durability) * 100 / 3);
+			int timeToRepair = (int)((1 - durability) * 100 / ValuesHolder.RepairSpeed); //((1 - durability) * 100 / 3);
 			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
