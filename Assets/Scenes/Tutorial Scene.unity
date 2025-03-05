@@ -1329,7 +1329,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 6b8b7e0ad753af643935d00c42680def, type: 3}
-  m_Color: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
+  m_Color: {r: 0.49411765, g: 0.49411765, b: 0.49411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1492,7 +1492,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 8386739fb5f1d0247a53ce8f17ebd522, type: 3}
-  m_Color: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
+  m_Color: {r: 0.49411765, g: 0.49411765, b: 0.49411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3461,6 +3461,7 @@ MonoBehaviour:
   currentElevator: {fileID: 737861180}
   currentRoom: {fileID: 0}
   offsetX: 1.225
+  isWalkingToWork: 0
 --- !u!114 &228737126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3490,6 +3491,8 @@ MonoBehaviour:
   bearModel:
     Level: 0
   isBearBusy: 0
+  statusPanel: {fileID: 0}
+  priorityInStatusPanel: 0
   statsScreen: {fileID: 0}
   nameField: {fileID: 0}
   qualificationField: {fileID: 0}
@@ -7772,7 +7775,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 8386739fb5f1d0247a53ce8f17ebd522, type: 3}
-  m_Color: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
+  m_Color: {r: 0.49411765, g: 0.49411765, b: 0.49411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7859,7 +7862,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 8386739fb5f1d0247a53ce8f17ebd522, type: 3}
-  m_Color: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
+  m_Color: {r: 0.49411765, g: 0.49411765, b: 0.49411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -10020,7 +10023,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 8386739fb5f1d0247a53ce8f17ebd522, type: 3}
-  m_Color: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
+  m_Color: {r: 0.49411765, g: 0.49411765, b: 0.49411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -11658,7 +11661,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 0885b79b0cca7d64d8b71e7ddc9552b8, type: 3}
-  m_Color: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
+  m_Color: {r: 0.49411765, g: 0.49411765, b: 0.49411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -18184,7 +18187,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 8386739fb5f1d0247a53ce8f17ebd522, type: 3}
-  m_Color: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
+  m_Color: {r: 0.49411765, g: 0.49411765, b: 0.49411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -18682,7 +18685,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 8386739fb5f1d0247a53ce8f17ebd522, type: 3}
-  m_Color: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
+  m_Color: {r: 0.49411765, g: 0.49411765, b: 0.49411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -20452,6 +20455,8 @@ MonoBehaviour:
   bearModel:
     Level: 0
   isBearBusy: 0
+  statusPanel: {fileID: 0}
+  priorityInStatusPanel: 0
   statsScreen: {fileID: 0}
   nameField: {fileID: 0}
   qualificationField: {fileID: 0}
@@ -20483,6 +20488,7 @@ MonoBehaviour:
   currentElevator: {fileID: 737861180}
   currentRoom: {fileID: 0}
   offsetX: 1.225
+  isWalkingToWork: 0
 --- !u!136 &1202761588
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -23069,6 +23075,8 @@ MonoBehaviour:
   bearModel:
     Level: 0
   isBearBusy: 0
+  statusPanel: {fileID: 0}
+  priorityInStatusPanel: 0
   statsScreen: {fileID: 0}
   nameField: {fileID: 0}
   qualificationField: {fileID: 0}
@@ -23100,6 +23108,7 @@ MonoBehaviour:
   currentElevator: {fileID: 737861180}
   currentRoom: {fileID: 0}
   offsetX: 1.225
+  isWalkingToWork: 0
 --- !u!136 &1389703187
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -23461,28 +23470,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e6a70607a7eb97498073c99d199ea9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1398197920 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4529240506288044491, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
-  m_PrefabInstance: {fileID: 1398197918}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1398197921 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9202728377364343100, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
-  m_PrefabInstance: {fileID: 1398197918}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1398197922 stripped
@@ -25774,7 +25761,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 8b3fc1ffe865072449c0d2e42110f650, type: 3}
-  m_Color: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
+  m_Color: {r: 0.49411765, g: 0.49411765, b: 0.49411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -26634,7 +26621,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 8386739fb5f1d0247a53ce8f17ebd522, type: 3}
-  m_Color: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
+  m_Color: {r: 0.49411765, g: 0.49411765, b: 0.49411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -27546,6 +27533,8 @@ MonoBehaviour:
   bearModel:
     Level: 0
   isBearBusy: 0
+  statusPanel: {fileID: 0}
+  priorityInStatusPanel: 0
   statsScreen: {fileID: 0}
   nameField: {fileID: 0}
   qualificationField: {fileID: 0}
@@ -27577,6 +27566,7 @@ MonoBehaviour:
   currentElevator: {fileID: 737861180}
   currentRoom: {fileID: 0}
   offsetX: 1.225
+  isWalkingToWork: 0
 --- !u!136 &1703134540
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -28502,7 +28492,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 8386739fb5f1d0247a53ce8f17ebd522, type: 3}
-  m_Color: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
+  m_Color: {r: 0.49411765, g: 0.49411765, b: 0.49411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -32537,7 +32527,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 8386739fb5f1d0247a53ce8f17ebd522, type: 3}
-  m_Color: {r: 0.2981131, g: 0.2981131, b: 0.2981131, a: 1}
+  m_Color: {r: 0.49411765, g: 0.49411765, b: 0.49411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -34277,6 +34267,7 @@ MonoBehaviour:
       target: {fileID: 0}
       angleZ: 0
       offset: 0
+    pointers: []
     conditionsSequence: 05000000
     buttonToCheck: {fileID: 0}
     keyToCheck: 0
@@ -34300,6 +34291,7 @@ MonoBehaviour:
       target: {fileID: 0}
       angleZ: 0
       offset: 0
+    pointers: []
     conditionsSequence: 00000000
     buttonToCheck: {fileID: 0}
     keyToCheck: 0
@@ -34325,6 +34317,7 @@ MonoBehaviour:
       target: {fileID: 708579818}
       angleZ: 141.38
       offset: 0
+    pointers: []
     conditionsSequence: 01000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 105
@@ -34353,6 +34346,7 @@ MonoBehaviour:
       target: {fileID: 0}
       angleZ: 0
       offset: 0
+    pointers: []
     conditionsSequence: 0600000001000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 105
@@ -34386,6 +34380,7 @@ MonoBehaviour:
       target: {fileID: 1496771814}
       angleZ: 0
       offset: 0
+    pointers: []
     conditionsSequence: 03000000
     buttonToCheck: {fileID: 0}
     keyToCheck: 0
@@ -34410,6 +34405,7 @@ MonoBehaviour:
       target: {fileID: 0}
       angleZ: 0
       offset: 0
+    pointers: []
     conditionsSequence: 04000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 0
@@ -34431,6 +34427,7 @@ MonoBehaviour:
       target: {fileID: 929357052}
       angleZ: 180
       offset: 0
+    pointers: []
     conditionsSequence: 07000000
     buttonToCheck: {fileID: 0}
     keyToCheck: 0
@@ -34462,6 +34459,7 @@ MonoBehaviour:
       target: {fileID: 681016907}
       angleZ: 90
       offset: 0
+    pointers: []
     conditionsSequence: 08000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 0
@@ -34491,6 +34489,7 @@ MonoBehaviour:
       target: {fileID: 707844076}
       angleZ: 90
       offset: 0
+    pointers: []
     conditionsSequence: 08000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 0
@@ -34513,6 +34512,7 @@ MonoBehaviour:
       target: {fileID: 0}
       angleZ: 0
       offset: 0
+    pointers: []
     conditionsSequence: 08000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 0
@@ -34535,6 +34535,7 @@ MonoBehaviour:
       target: {fileID: 1340397990}
       angleZ: 90
       offset: 0
+    pointers: []
     conditionsSequence: 08000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 0
@@ -34557,6 +34558,7 @@ MonoBehaviour:
       target: {fileID: 535176800}
       angleZ: 141.38
       offset: 0
+    pointers: []
     conditionsSequence: 01000000
     buttonToCheck: {fileID: 535176801}
     keyToCheck: 98
@@ -34574,6 +34576,7 @@ MonoBehaviour:
       target: {fileID: 1912480332}
       angleZ: 90
       offset: 0
+    pointers: []
     conditionsSequence: 01000000
     buttonToCheck: {fileID: 195394983}
     keyToCheck: 0
@@ -34594,6 +34597,7 @@ MonoBehaviour:
       target: {fileID: 641803799}
       angleZ: 270
       offset: 1
+    pointers: []
     conditionsSequence: 01000000
     buttonToCheck: {fileID: 1716720647}
     keyToCheck: 0
@@ -34615,6 +34619,7 @@ MonoBehaviour:
       target: {fileID: 535176800}
       angleZ: 141.38
       offset: 0
+    pointers: []
     conditionsSequence: 01000000
     buttonToCheck: {fileID: 535176801}
     keyToCheck: 98
@@ -34643,6 +34648,7 @@ MonoBehaviour:
       target: {fileID: 2008664475}
       angleZ: 90
       offset: 0
+    pointers: []
     conditionsSequence: 09000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 0
@@ -34666,6 +34672,7 @@ MonoBehaviour:
       target: {fileID: 1801057807}
       angleZ: 180
       offset: 0
+    pointers: []
     conditionsSequence: 05000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 0
@@ -34693,6 +34700,7 @@ MonoBehaviour:
       target: {fileID: 0}
       angleZ: 0
       offset: 0
+    pointers: []
     conditionsSequence: 0a000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 0
@@ -34715,6 +34723,7 @@ MonoBehaviour:
       target: {fileID: 0}
       angleZ: 0
       offset: 0
+    pointers: []
     conditionsSequence: 01000000
     buttonToCheck: {fileID: 73273328}
     keyToCheck: 0
@@ -34739,6 +34748,7 @@ MonoBehaviour:
       target: {fileID: 1006031559}
       angleZ: 141
       offset: 0
+    pointers: []
     conditionsSequence: 01000000
     buttonToCheck: {fileID: 1006031557}
     keyToCheck: 0
@@ -34765,8 +34775,9 @@ MonoBehaviour:
       target: {fileID: 0}
       angleZ: 0
       offset: 0
+    pointers: []
     conditionsSequence: 01000000
-    buttonToCheck: {fileID: 1398197920}
+    buttonToCheck: {fileID: 0}
     keyToCheck: 0
     tagToCheck: 
     roomToCheck: {fileID: 0}
@@ -34788,8 +34799,9 @@ MonoBehaviour:
       target: {fileID: 0}
       angleZ: 0
       offset: 0
+    pointers: []
     conditionsSequence: 01000000
-    buttonToCheck: {fileID: 1398197921}
+    buttonToCheck: {fileID: 0}
     keyToCheck: 0
     tagToCheck: 
     roomToCheck: {fileID: 0}
@@ -34817,6 +34829,7 @@ MonoBehaviour:
       target: {fileID: 511216556}
       angleZ: 45
       offset: 0
+    pointers: []
     conditionsSequence: 01000000
     buttonToCheck: {fileID: 511216557}
     keyToCheck: 101
@@ -34846,6 +34859,7 @@ MonoBehaviour:
       target: {fileID: 906660349}
       angleZ: -45
       offset: 0
+    pointers: []
     conditionsSequence: 0b000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 0
@@ -34871,6 +34885,7 @@ MonoBehaviour:
       target: {fileID: 0}
       angleZ: 0
       offset: 0
+    pointers: []
     conditionsSequence: 05000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 0
@@ -34894,6 +34909,7 @@ MonoBehaviour:
       target: {fileID: 0}
       angleZ: 0
       offset: 0
+    pointers: []
     conditionsSequence: 05000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 0
@@ -34909,6 +34925,7 @@ MonoBehaviour:
       target: {fileID: 0}
       angleZ: 0
       offset: 0
+    pointers: []
     conditionsSequence: 01000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 0
@@ -34920,6 +34937,7 @@ MonoBehaviour:
   textOutput: {fileID: 432270029}
   tutorialView: {fileID: 94874731}
   startGameButton: {fileID: 760564991}
+  pointerSlots: []
   pointerPrefab: {fileID: 1914244455409487036, guid: c280cc053adab3b409c8628063711174, type: 3}
 --- !u!1 &2038204623
 GameObject:
@@ -35883,6 +35901,9 @@ MonoBehaviour:
   isGameRunning: 1
   isTimeGo: 1
   isEnergohoneyConsuming: 1
+  isSeasonChanging: 1
+  isCursorAtUIDontScroll: 0
+  amountIsCursorAtUI: 0
   buildingLoading: {fileID: 580756757}
   buildingScreen: {fileID: 1428568829}
   elevatorBuildingScreen: {fileID: 1642775197}
