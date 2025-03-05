@@ -21,6 +21,9 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] public int asteriumCost;
 	[SerializeField] public int honeyCost;
 	[SerializeField] public int astroluminiteCost;
+	[Header("Camera task settings")]
+	[SerializeField] protected Transform cameraPoint;
+	[SerializeField] protected Vector3 cameraAngle;
 
 	public List<Elevator> connectedElevators;
 	public List<RoomScript> connectedRooms;
@@ -78,7 +81,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private Image circleFrame;
 	public void SetWorkEfficiency(float newCoef, bool isCosmodromeWait = true, bool isThisFirstCall = false) // Last parameter is KOSTYL'
 	{
-		Animator efficiencyAnim = efficiencyDownPanel.GetComponent<Animator>();
+		var efficiencyAnim = efficiencyDownPanel.GetComponentInChildren<Animator>(true);
 		switch (resource)
 		{
 			case Resources.Cosmodrome:
@@ -87,7 +90,7 @@ public class RoomScript : MonoBehaviour
 				{
 					if (!isThisFirstCall) efficiencyAnim.SetTrigger("HidePanel");
 					circleTimer.fillAmount = 1;
-					StartCoroutine(CosmodromeCircleTimer(150));
+					StartCoroutine(CosmodromeCircleTimer(6));
 				}
 				else if (newCoef < 1f)
 				{
@@ -120,6 +123,7 @@ public class RoomScript : MonoBehaviour
 				break;
 		}
 	}
+
 
 	private IEnumerator WaitForWorkEfficiencyRetry(int time)
 	{
@@ -970,6 +974,7 @@ public class RoomScript : MonoBehaviour
 
 	public virtual void SetPipes()
 	{
+		Camera.main.GetComponent<CameraController>().GoToTaskPoint(cameraPoint.position, cameraAngle, true);
 		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetFurnaces, this);
 		HideSetPipesButtonScreen();
 	}

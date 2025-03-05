@@ -21,16 +21,6 @@ public class NumberSummationExercise : MonoBehaviour
 	[SerializeField] private GameObject weightPrefab;
 	[SerializeField] private List<OgePointLogic> points;
 	public LineRenderer lineRenderer;
-	private bool isListenerAdded = false;
-
-	private void Start()
-	{
-		if (!isListenerAdded)
-		{
-			EventManager.onToMenuButton.AddListener(CloseExercise);
-			isListenerAdded = true;
-		}
-	}
 
 	/// <summary>
 	/// Generates task, answer and connects all OgePointLogics.
@@ -39,15 +29,18 @@ public class NumberSummationExercise : MonoBehaviour
 	/// <returns></returns>
 	private int GenerateTask(int steps = 3)
 	{
+		
 		EventManager.onEnergohoneySettingsOpened.Invoke();
 		points = pointsParent.GetComponentsInChildren<OgePointLogic>().ToList();
+		pointsParent = points[0].transform.parent;
 		int randomPointIndex = Random.Range(0, Mathf.Clamp(steps, 0, points.Count));
 		foreach (var point in points)
 		{
 			point.ConnectPoints();
 		}
 		var currentPoint = points[randomPointIndex];
-		currentPoint.SetColor(Color.red);
+		Color red = new Color(1,0,0,0.5f);
+		currentPoint.SetColor(red);
 		int correctAnswer = 0;
 		for (int i = 0; i < steps; i++)
 		{
@@ -57,17 +50,20 @@ public class NumberSummationExercise : MonoBehaviour
 			currentPoint = connectedPoints[randomPointIndex];
 			if (steps - i == 1)
 			{
-				currentPoint.SetColor(Color.red);
+				currentPoint.SetColor(red);
+
+				previousPoint.GetComponentsInChildren<LineRenderer>()[randomPointIndex].SetColors(red,red);
 			}
 			else
 			{
-				currentPoint.SetColor(Color.red);
+				currentPoint.SetColor(red);
+				previousPoint.GetComponentsInChildren<LineRenderer>()[randomPointIndex].SetColors(red,red);
 			}
 			Vector3 averagePosition = previousPoint.transform.position + (currentPoint.transform.position - previousPoint.transform.position)/2;
 			var weight = Instantiate(weightPrefab,pointsParent);
 			weight.transform.position = averagePosition;
 			int weightValue = Random.Range(1,difficulty);
-			weight.GetComponent<TextMeshProUGUI>().text = weightValue.ToString();
+			weight.GetComponentInChildren<TextMeshProUGUI>(true).text = weightValue.ToString();
 			correctAnswer += weightValue;
 		}
 		
@@ -82,18 +78,13 @@ public class NumberSummationExercise : MonoBehaviour
 	/// <returns></returns>
 	public IEnumerator AnswerWaiter(RoomScript roomToTarget)
 	{
+		pointsParent = roomToTarget.transform;
 		rightAnswer = GenerateTask();
 		Camera.main.GetComponent<CameraController>().SetCameraLock(true);
 		while (!answerTrigger)
 		{
-			if (Input.GetKeyDown(KeyCode.E)) // Interrupts problem solving without giving answer (problem stays unsolved)
-			{
-				CloseExercise();
-				yield break;
-			}
 			yield return null;
 		}
-		roomToTarget.SetConeierScreen(false);
 		answerTrigger = false;
 		Time.timeScale = 1;
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
@@ -108,24 +99,11 @@ public class NumberSummationExercise : MonoBehaviour
 			roomToTarget.SetWorkEfficiency(0.8f);
 		}
 		EventManager.onEnergohoneySettingsSolved.Invoke();
-		ClearGraph();
-		isTaskActive = false;
-		MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
-		MenuManager.Instance.problemSolverScreen.SetActive(false);
-		MenuManager.Instance.graphExercise.gameObject.SetActive(false);
 		GameManager.Instance.SetIsGraphUsing(false);
-	}
-
-	private void CloseExercise()
-	{
-		Time.timeScale = 1;
-		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
-		//roomToTarget.GivePermissionToContinue();
-		GameManager.Instance.SetIsGraphUsing(false);
+		Camera.main.GetComponent<CameraController>().GoToTaskPoint(Vector3.zero,Vector3.zero);
 		ClearGraph();
 		isTaskActive = false;
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
-		MenuManager.Instance.graphExercise.gameObject.SetActive(false);
 		gameObject.SetActive(false);
 	}
 
@@ -143,14 +121,9 @@ public class NumberSummationExercise : MonoBehaviour
 	/// Triggers answerWaiter.
 	/// </summary>
 	/// <param name="answerHolder"></param>
-	public void GiveAnswer(GameObject answerHolder)
+	public void GiveAnswer(int answer)
 	{
-		try
-		{
-			answer = Convert.ToInt32(answerHolder.GetComponent<TMP_InputField>().text);
-			answerTrigger = true;
-			answerHolder.GetComponent<TMP_InputField>().text = "";
-		}
-		catch { EventManager.callWarning.Invoke("Поле ответа пустое!"); };
+		this.answer = answer;
+		answerTrigger = true;
 	}
 }
