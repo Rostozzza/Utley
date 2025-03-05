@@ -87,7 +87,8 @@ public class BindSelector : MonoBehaviour
 
     public void EraseBind()
     {
-        BindChoose(InputController.GetDefaultKeyDict()[action], true);
+        BindChoose(InputController.GetDefaultKeyDict()[action]);
+        ApplyBind(true);
     }
 
     private IEnumerator BindChooser()
@@ -98,33 +99,31 @@ public class BindSelector : MonoBehaviour
         InitText(action, keyCode);
     }
 
-    private void BindChoose(KeyCode keyCode, bool force)
+    private void BindChoose(KeyCode keyCode)
     {
         this.keyCode = keyCode;
         ColorBind();
-        if (force || !HasConflict(keyCode)) SendBindToController(action, keyCode);
+        //if (force || !HasConflict(keyCode)) SendBindToController(action, keyCode);
         InitText(action, keyCode);
     }
 
     private void ColorBind()
     {
-        buttonImage.color = InputController.GetDefaultKeyDict()[action] == keyCode ? buttonImage.color = baseColor : HasConflict(keyCode) ? buttonImage.color = conflictColor : buttonImage.color = changedColor; // this spaghetti is analogue to lower commented code;
-        
-        //if (InputController.GetDefaultKeyDict()[action] == keyCode) 
-        //{
-        //    buttonImage.color = baseColor;
-        //}
-        //else
-        //{
-        //    if (HasConflict(keyCode))
-        //    {
-        //        buttonImage.color = conflictColor;
-        //    }
-        //    else
-        //    {
-        //        buttonImage.color = changedColor;
-        //    }
-        //}
+        if (InputController.GetKeyDict()[action] == keyCode) 
+        {
+            buttonImage.color = baseColor;
+        }
+        else
+        {
+            if (HasConflict(keyCode))
+            {
+                buttonImage.color = conflictColor;
+            }
+            else
+            {
+                buttonImage.color = changedColor;
+            }
+        }
     }
 
     private bool HasConflict(KeyCode keyCode)
@@ -168,6 +167,13 @@ public class BindSelector : MonoBehaviour
         keyCode = InputController.keyDict[action];
         InitText();
         ColorBind();
+    }
+
+    public void ApplyBind(bool force = false)
+    {
+        if (force || !HasConflict(keyCode)) SendBindToController(action, keyCode);
+        ColorBind();
+        InitText();
     }
 
     public void SetAction(ActionKeys action) => this.action = action;

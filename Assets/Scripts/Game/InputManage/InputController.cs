@@ -121,6 +121,11 @@ public class InputController : MonoBehaviour
         CreateBindPrefs();
     }
 
+    static public void ApplyAllBinds() // If no conflicts;
+    {
+        binds.ForEach(bind => bind.ApplyBind());
+    }
+
     static public void AddBind(BindSelector bind)
     {
         binds.Add(bind);
