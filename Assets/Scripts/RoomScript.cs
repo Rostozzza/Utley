@@ -340,6 +340,12 @@ public class RoomScript : MonoBehaviour
 			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
 			StartCoroutine(Upgrade(button, fixedBuilderRoom));
 		}
+		else
+		{
+			Debug.Log("Не хватает ресов для починки!");
+			EventManager.callWarning.Invoke($"Не хватает <color=yellow>{Mathf.CeilToInt((30 + 10 * (level - 1)) - await GameManager.Instance.GetHoney())}</color> энергомеда для починки!");
+			return;
+		}
 	}
 
 	private IEnumerator Upgrade(GameObject button, GameObject room)
@@ -909,7 +915,7 @@ public class RoomScript : MonoBehaviour
 		else
 		{
 			Debug.Log("Не хватает ресов для починки!");
-			EventManager.callWarning.Invoke($"Не хватает <color=yellow>ресурсов</color> для починки!");
+			EventManager.callWarning.Invoke($"Не хватает <color=yellow>{10 - await GameManager.Instance.GetAsteriy()}</color> астерия для починки!");
 			return;
 		}
 
