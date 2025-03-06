@@ -689,6 +689,7 @@ public class MenuManager : MonoBehaviour
 		yield return numberSummation.AnswerWaiter(room);
 		
 		SetPipesScreen.SetActive(false);
+		(room as EnergohoneyRoom).SetIsSolved(true);
 		//problemSolverScreen.SetActive(false);
 		//tabletAnimator.SetTrigger("CloseShop");
 	}
