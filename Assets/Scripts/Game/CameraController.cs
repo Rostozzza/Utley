@@ -48,8 +48,10 @@ public class CameraController : MonoBehaviour
 
 	private IEnumerator FloatTorwards(Vector3 position, Vector3 rotation, float fov, bool ortho)
 	{
-		while (Vector3.Distance(transform.position, position) > 0.5f || rotation != transform.eulerAngles)
+		float timer = 2f;
+		while ((Vector3.Distance(transform.position, position) > 0.5f || rotation != transform.eulerAngles) && timer > 0)
 		{
+			timer -= Time.deltaTime;
 			transform.position = Vector3.Lerp(transform.position, position, Time.deltaTime * 5f);
 			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(rotation), Time.deltaTime * 5f);
 			yield return null;

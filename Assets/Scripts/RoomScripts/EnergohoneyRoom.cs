@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class EnergohoneyRoom : RoomScript
 {
 	[SerializeField] GameObject setPipesButtonScreen;
-	[SerializeField] private bool isSolved = false;
 	
 
     protected override void Start()

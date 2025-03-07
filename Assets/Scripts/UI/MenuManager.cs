@@ -658,9 +658,11 @@ public class MenuManager : MonoBehaviour
 				//tabletAnimator.SetTrigger("OpenShop");
 				break;
 			case ProblemType.SetResistors:
-				cosmodromeExercise.gameObject.SetActive(true);
-				StartCoroutine(WaitForResistorsCountEnd(room));
-				tabletAnimator.SetTrigger("OpenShop");
+				//cosmodromeExercise.gameObject.SetActive(true);
+				//StartCoroutine(WaitForResistorsCountEnd(room));
+				//tabletAnimator.SetTrigger("OpenShop");
+				
+				room.SetWorkEfficiency(1); // temp solution;
 				break;
 			case ProblemType.SetBreakingBad:
 				room.GetComponentInChildren<ResearchRoomExercise>(true).gameObject.SetActive(true);

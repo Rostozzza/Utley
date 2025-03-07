@@ -50,11 +50,12 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 			(targetedRoom as SupplyRoom).GetRoomsToEnpower();
 			Debug.Log("CORRECT");
 			targetedRoom.SetWorkEfficiency(1f);
-			Camera.main.GetComponent<CameraController>().SetCameraLock(false);
-			return;
 		}
-		Debug.Log("INCORRECT");
-		targetedRoom.SetWorkEfficiency(0f);
+		else
+		{
+			Debug.Log("INCORRECT");
+			targetedRoom.SetWorkEfficiency(0f);
+		}
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 		return;
 	}

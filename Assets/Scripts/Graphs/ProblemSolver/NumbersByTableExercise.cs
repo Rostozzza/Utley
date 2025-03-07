@@ -138,6 +138,8 @@ public class NumbersByTableExercise : MonoBehaviour
 				Camera.main.GetComponent<CameraController>().GoToTaskPoint(Vector3.zero, Vector3.zero);
 				Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 				//MenuManager.Instance.problemSolverScreen.SetActive(false);
+				GameManager.Instance.SetIsGraphUsing(false);
+				targetedRoom.SetIsSolved(true); // idk, maybe false
 				return;
 			}
 		}
@@ -157,6 +159,8 @@ public class NumbersByTableExercise : MonoBehaviour
 		Debug.Log("ВЕРНО");
 		Camera.main.GetComponent<CameraController>().GoToTaskPoint(Vector3.zero, Vector3.zero);
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+		GameManager.Instance.SetIsGraphUsing(false);
+		targetedRoom.SetIsSolved(true);
 		//MenuManager.Instance.problemSolverScreen.SetActive(false);
 	}
 }

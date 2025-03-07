@@ -985,8 +985,10 @@ public class GameManager : MonoBehaviour
 	public void TryProcessingRawAsterium()
 	{
 		var targetedRoom = asteriumRooms.FirstOrDefault(x => !x.isReadyForWork && x.CheckIfSolved() && x.isEnpowered);
+		asteriumRooms.ForEach(x => Debug.Log($"{!x.isReadyForWork} && {x.CheckIfSolved()} && {x.isEnpowered} = {!x.isReadyForWork && x.CheckIfSolved() && x.isEnpowered}"));
 		if (targetedRoom == null || rawAsterium <= 0)
 		{
+			Debug.Log("<color=red>НЕТ ПЕРЕРАБОТЧИКА</color>");
 			return;
 		}
 		targetedRoom.isReadyForWork = true;

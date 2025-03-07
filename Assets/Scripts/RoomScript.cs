@@ -52,6 +52,7 @@ public class RoomScript : MonoBehaviour
 	public string workStr;
 	[SerializeField] private bool waitForPermissionToContinue;
 	[SerializeField] protected GameObject assignmentButton;
+	[SerializeField] protected bool isSolved = false;
 	Coroutine blinks = null;
 	[Header("Audio Settings")]
 	[SerializeField] protected AudioSource audioSource;
@@ -90,7 +91,7 @@ public class RoomScript : MonoBehaviour
 				{
 					if (!isThisFirstCall) efficiencyAnim.SetTrigger("HidePanel");
 					circleTimer.fillAmount = 1;
-					StartCoroutine(CosmodromeCircleTimer(6));
+					StartCoroutine(CosmodromeCircleTimer(150));
 				}
 				else if (newCoef < 1f)
 				{
@@ -963,8 +964,10 @@ public class RoomScript : MonoBehaviour
 
 	public virtual bool CheckIfSolved()
 	{
-		return !coneierScreen.GetComponent<Button>().interactable;
+		return isSolved || !coneierScreen.GetComponent<Button>().interactable;
 	}
+
+	public virtual void SetIsSolved(bool set) => isSolved = set;
 
 	public virtual void HideSetPipesButtonScreen()
 	{
