@@ -964,7 +964,23 @@ public class RoomScript : MonoBehaviour
 
 	public virtual bool CheckIfSolved()
 	{
-		return isSolved || !coneierScreen.GetComponent<Button>().interactable;
+		if (isSolved) return true;
+		if (coneierScreen != null)
+		{
+			try
+			{
+				return !coneierScreen.GetComponent<Button>().interactable;
+			}
+			catch (Exception ex)
+			{
+				Debug.Log("Error when check is solved! Returning false. Description: " + ex.Message);
+				return false;
+			}
+		}
+		else
+		{
+			return isSolved;
+		}
 	}
 
 	public virtual void SetIsSolved(bool set) => isSolved = set;
