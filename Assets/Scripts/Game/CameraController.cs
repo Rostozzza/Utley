@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
 			SetCameraLock(true);
 			lastPoint = transform.position;
 		}
-		GameManager.Instance.transform.GetChild(0).gameObject.SetActive(orthoOn);
+		GameManager.Instance.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = orthoOn ? 1 : 0;//.gameObject.SetActive(orthoOn);
 		moving = StartCoroutine(FloatTorwards(orthoOn ? lastPoint : position, orthoOn ? Vector3.zero : rotation, orthoOn ? 60f : 90f, orthoOn));
 		//matrixBlender.BlendToMatrix(!orthoOn ? ortho : perspective, !orthoOn ? 3f : 0, 8, !orthoOn);
 		orthoOn = !orthoOn;
