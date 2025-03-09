@@ -80,7 +80,7 @@ public class MenuManager : MonoBehaviour
 	private bool canContinueAfter2Cutscene = false;
 	private Coroutine skipChecker;
 	public bool isPlayerLoadable = false;
-	[Header("Cosmodrome Exercise (fuck resistors!)")]
+	[Header("Cosmodrome Exercise")]
 	[SerializeField] private CosmodromeExercise cosmodromeExercise;
 
 	public void SetMasterVolume()
@@ -658,11 +658,11 @@ public class MenuManager : MonoBehaviour
 				//tabletAnimator.SetTrigger("OpenShop");
 				break;
 			case ProblemType.SetResistors:
-				//cosmodromeExercise.gameObject.SetActive(true);
-				//StartCoroutine(WaitForResistorsCountEnd(room));
-				//tabletAnimator.SetTrigger("OpenShop");
+				cosmodromeExercise.gameObject.SetActive(true);
+				StartCoroutine(WaitForResistorsCountEnd(room));
+				tabletAnimator.SetTrigger("OpenShop");
 				
-				room.SetWorkEfficiency(1); // temp solution;
+				//room.SetWorkEfficiency(1); // temp solution;
 				break;
 			case ProblemType.SetBreakingBad:
 				room.GetComponentInChildren<ResearchRoomExercise>(true).gameObject.SetActive(true);
