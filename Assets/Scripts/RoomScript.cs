@@ -91,7 +91,7 @@ public class RoomScript : MonoBehaviour
 				{
 					if (!isThisFirstCall) efficiencyAnim.SetTrigger("HidePanel");
 					circleTimer.fillAmount = 1;
-					StartCoroutine(CosmodromeCircleTimer(6));
+					StartCoroutine(CosmodromeCircleTimer(150));
 				}
 				else if (newCoef < 1f)
 				{
