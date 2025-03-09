@@ -522,6 +522,8 @@ public class MenuManager : MonoBehaviour
 				GameManager.Instance.asteriy = ValuesHolder.StartAsterium; // 40
 				GameManager.Instance.honey = ValuesHolder.StartEnergohoney; // 40
 				GameManager.Instance.astroluminite = ValuesHolder.StartAstroluminite; // 6
+				GameManager.Instance.prototype = ValuesHolder.StartPrototype;
+				GameManager.Instance.ursowaks = ValuesHolder.StartUrsowaks;
 				GameManager.Instance.playerBears = 4; // 4
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
 			}

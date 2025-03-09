@@ -13,15 +13,17 @@ public class BedRoom : RoomScript
 		//fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(false);
 		animator.SetTrigger("StartWork");
 		//!borrowed part!//
-		if (fixedBear.GetComponent<UnitScript>().job == Qualification.creator)
+		if (fixedBear.GetComponent<UnitScript>().job == Qualification.creator && (level != 1 && fixedBear.GetComponent<UnitScript>().level != 1))
 		{
-			timer = 45f * (1 - 0.25f * (level - 1)) * (1 - 0.05f * fixedBear.GetComponent<UnitScript>().level);
+			//timer = 45f * (1 - 0.25f * (level - 1)) * (1 - 0.05f * fixedBear.GetComponent<UnitScript>().level);
+			timer = GetModifiedInteractionTime(fixedBear.GetComponent<UnitScript>().level);
 			fixedBear.GetComponent<UnitScript>().expParticle.SetActive(true);
 			fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
 		}
 		else
 		{
-			timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
+			//timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
+			timer = ValuesHolder.StandartInteractionTime;
 		}
 		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Bed, GetWalkPoints(), this.gameObject);
 		timer = 150f;

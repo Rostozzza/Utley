@@ -11,10 +11,62 @@ public class ShopItem : MonoBehaviour
 	public int quantity;
 	public string name;
 	public string comment;
+	public Type type;
 	public TextMeshProUGUI quantityField;
 	public TextMeshProUGUI priceField;
 	public TMP_InputField requestedAmount;
 	public TextMeshProUGUI costOutput;
+
+    void Awake()
+    {
+        GetPrice();
+    }
+
+	private void GetPrice()
+	{
+		if (type == Type.buy)
+		{
+			switch (name)
+			{
+				case "bears":
+					price = ValuesHolder.BuyBears;
+					break;
+				case "honey":
+					price = ValuesHolder.BuyHoney;
+					break;
+				case "time":
+					price = ValuesHolder.BuyTime;
+					break;
+				case "temperatureBoost":
+					price = ValuesHolder.BuyTemperatureBoost;
+					break;
+				case "asterium":
+					price = ValuesHolder.BuyAsterium;
+					break;
+			}
+		}
+		else
+		{
+			switch (name)
+			{
+				case "honey":
+				    price = ValuesHolder.SellHoney;
+					break;
+				case "asterium":
+				    price = ValuesHolder.SellAsterium;
+					break;
+				case "astroluminite":
+				    price = ValuesHolder.SellAstroluminite;
+					break;
+				case "prototype":
+				    price = ValuesHolder.SellPrototype;
+					break;
+				case "ursowaks":
+				    price = ValuesHolder.SellUrsowaks;
+					break;
+			}
+		}
+	}
 
     public void UpdateFields()
 	{
@@ -34,6 +86,19 @@ public class ShopItem : MonoBehaviour
 			}
 
 			return;
+		}
+		else
+		{
+			costOutput.text = "- " + (price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
+
+			if (requestedAmount.text != "")
+			{
+				costOutput.text = (price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
+			}
+			else
+			{
+				costOutput.text = "";
+			}
 		}
 
 		if (requestedAmount.text.Length > 0 && int.Parse(requestedAmount.text) <= maxQuantity)
@@ -290,5 +355,11 @@ public class ShopItem : MonoBehaviour
 			UpdateFields();
 		}
 		ShopManager.Instance.HNYField.text = Math.Round((await GameManager.Instance.GetHNY()), 2).ToString();
+	}
+
+	public enum Type
+	{
+		sell, // top sting;
+		buy // bottom string;
 	}
 }

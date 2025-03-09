@@ -122,16 +122,18 @@ public class ResearchRoom : RoomScript
 		//!borrowed part!//
 		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Research, GetWalkPoints(), this.gameObject);
 
-		if (fixedBear.GetComponent<UnitScript>().job == Qualification.bioengineer)
+		if (fixedBear.GetComponent<UnitScript>().job == Qualification.bioengineer && (level != 1 && fixedBear.GetComponent<UnitScript>().level != 1))
 		{
 			//timer = 18f * (1 - 0.25f * (level - 1)) * (1 - 0.05f * fixedBear.GetComponent<UnitScript>().level);
-			timer = StandartInteractionTime * (1 - (SpeedByBearLevelCoef - 1) * fixedBear.GetComponent<UnitScript>().level) * SpeedByUsingSuitableBearCoef * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
+			//timer = StandartInteractionTime * (1 - (SpeedByBearLevelCoef - 1) * fixedBear.GetComponent<UnitScript>().level) * SpeedByUsingSuitableBearCoef * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
+			timer = GetModifiedInteractionTime(fixedBear.GetComponent<UnitScript>().level);
 			fixedBear.GetComponent<UnitScript>().expParticle.SetActive(true);
 			fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
 		}
 		else
 		{
-			timer = StandartInteractionTime * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
+			//timer = StandartInteractionTime * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
+			timer = ValuesHolder.StandartInteractionTime;
 			//timer = 18f * 1.25f * (1 - 0.25f * (level - 1));
 		}
 		if (fixedBear.GetComponent<UnitScript>().isBoosted)
@@ -164,21 +166,21 @@ public class ResearchRoom : RoomScript
 		switch (waitOption)
 		{
 			case Type.Ursowaks:
-				GameManager.Instance.ChangeUrsowaks(1,new Log
+				GameManager.Instance.ChangeUrsowaks(ValuesHolder.UrsowaksAmountByOneInteraction, new Log
 				{
-					comment = $"Player {GameManager.Instance.playerName} manufactured 1 ursowaks",
+					comment = $"Player {GameManager.Instance.playerName} manufactured {ValuesHolder.UrsowaksAmountByOneInteraction} ursowaks",
 					 
 					player_name = GameManager.Instance.playerName,
-					resources_changed = new Dictionary<string, float> { { "ursowaks", 1 } }
+					resources_changed = new Dictionary<string, float> { { "ursowaks", ValuesHolder.UrsowaksAmountByOneInteraction } }
 				});
 				break;
 			case Type.Prototype:
-				GameManager.Instance.ChangePrototype(1,new Log
+				GameManager.Instance.ChangePrototype(ValuesHolder.PrototypeAmountByOneInteraction, new Log
 				{
-					comment = $"Player {GameManager.Instance.playerName} manufactured 1 prototype",
+					comment = $"Player {GameManager.Instance.playerName} manufactured {ValuesHolder.PrototypeAmountByOneInteraction} prototype",
 					 
 					player_name = GameManager.Instance.playerName,
-					resources_changed = new Dictionary<string, float> { { "prototype", 1 } }
+					resources_changed = new Dictionary<string, float> { { "prototype", ValuesHolder.PrototypeAmountByOneInteraction } }
 				});
 				break;
 			default:

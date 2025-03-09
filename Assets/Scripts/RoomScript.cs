@@ -601,7 +601,7 @@ public class RoomScript : MonoBehaviour
 		switch (resource)
 		{
 			case Resources.Asteriy:
-				timer = StandartInteractionTime;
+				timer = ValuesHolder.StandartInteractionTimeAsteriumComplex;
 				workUI.StartWork(timer, ValuesHolder.AsteriumAmountByOneInteraction, GameManager.Instance.uiResourceShower.asteriyAmountText.transform);
 				while (timer > 0)
 				{
@@ -626,16 +626,18 @@ public class RoomScript : MonoBehaviour
 				fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 				//timer = 45f;
 				//(1 - 0.05f * fixedBear.GetComponent<UnitScript>().level)
-				if (fixedBear.GetComponent<UnitScript>().job == Qualification.researcher)
+				if ((fixedBear.GetComponent<UnitScript>().job == Qualification.researcher) && (level != 1 && fixedBear.GetComponent<UnitScript>().level != 1))
 				{
 					//timer = 45f * (1 - 0.25f * (level - 1)) * (1 - 0.05f * fixedBear.GetComponent<UnitScript>().level);
-					timer = StandartInteractionTime * (1 - (SpeedByBearLevelCoef - 1) * fixedBear.GetComponent<UnitScript>().level) * SpeedByUsingSuitableBearCoef * (level > 1 ? (1 - (1 - SpeedByRoomLevelCoef) * level) : 1);
+					//timer = StandartInteractionTime * (1 - (SpeedByBearLevelCoef - 1) * fixedBear.GetComponent<UnitScript>().level) * SpeedByUsingSuitableBearCoef * (level > 1 ? (1 - (1 - SpeedByRoomLevelCoef) * level) : 1);
+					timer = GetModifiedInteractionTime(fixedBear.GetComponent<UnitScript>().level);
 					fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
 				}
 				else
 				{
 					//timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
-					timer = StandartInteractionTime * (level > 1 ? (1 - (1 - SpeedByRoomLevelCoef) * level) : 1);
+					//timer = StandartInteractionTime * (level > 1 ? (1 - (1 - SpeedByRoomLevelCoef) * level) : 1);
+					timer = ValuesHolder.StandartInteractionTime;
 				}
 				if (fixedBear.GetComponent<UnitScript>().isBoosted)
 				{
@@ -1127,4 +1129,6 @@ public class RoomScript : MonoBehaviour
 		Busy,
 		Destroyed
 	}
+
+	protected float GetModifiedInteractionTime(float bearLevel) => ValuesHolder.StandartInteractionTime * Mathf.Pow(ValuesHolder.InteractionSpeedMultiplyerByLevel, bearLevel) * Mathf.Pow(ValuesHolder.InteractionSpeedMultiplyerByGrade, level);
 }

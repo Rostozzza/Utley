@@ -57,4 +57,19 @@ public class Constants
     public int AsteriumAmountByOneInteraction { get; set; }
     public float GameDuration { get; set; }
     public float CycleDuration { get; set; }
+    public int StartPrototype { get; set; }
+    public int StartUrsowaks { get; set; }
+    public int PrototypeAmountByOneInteraction { get; set; }
+    public int UrsowaksAmountByOneInteraction { get; set; }
+    public float StandartInteractionTimeAsteriumComplex { get; set; }
+    public float BuyBears { get; set; }
+    public float BuyHoney { get; set; }
+    public float BuyTime { get; set; }
+    public float BuyTemperatureBoost { get; set; }
+    public float BuyAsterium { get; set; }
+    public float SellHoney { get; set; }
+    public float SellAsterium { get; set; }
+    public float SellAstroluminite { get; set; }
+    public float SellPrototype { get; set; }
+    public float SellUrsowaks { get; set; }
 }

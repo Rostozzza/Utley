@@ -44,17 +44,19 @@ public class EnergohoneyRoom : RoomScript
 		fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		//!borrowed part!//
 		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Energohoney, GetWalkPoints(), this.gameObject);
-		if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
+		if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper && (level != 1 && fixedBear.GetComponent<UnitScript>().level != 1))
 		{
 			//timer = 45f * (1 - 0.25f * (level - 1)) * (1 - 0.05f * fixedBear.GetComponent<UnitScript>().level);
-			timer = (StandartInteractionTime + 5) * (1 - (SpeedByBearLevelCoef - 1) * fixedBear.GetComponent<UnitScript>().level) * SpeedByUsingSuitableBearCoef * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
+			//timer = (StandartInteractionTime + 5) * (1 - (SpeedByBearLevelCoef - 1) * fixedBear.GetComponent<UnitScript>().level) * SpeedByUsingSuitableBearCoef * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
+			timer = GetModifiedInteractionTime(fixedBear.GetComponent<UnitScript>().level);
 			fixedBear.GetComponent<UnitScript>().expParticle.SetActive(true);
 			fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
 		}
 		else
 		{
 			//timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
-			timer = (StandartInteractionTime + 5) * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
+			//timer = (StandartInteractionTime + 5) * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
+			timer = ValuesHolder.StandartInteractionTime;
 		}
 		if (fixedBear.GetComponent<UnitScript>().isBoosted)
 		{

@@ -18,4 +18,19 @@ static public class ValuesHolder
     static public int AsteriumAmountByOneInteraction { get; set; }
     static public float GameDuration { get; set; }
     static public float CycleDuration { get; set; }
+    static public int StartPrototype { get; set; }
+    static public int StartUrsowaks { get; set; }
+    static public int PrototypeAmountByOneInteraction { get; set; }
+    static public int UrsowaksAmountByOneInteraction { get; set; }
+    static public float StandartInteractionTimeAsteriumComplex { get; set; }
+    static public float BuyBears { get; set; }
+    static public float BuyHoney { get; set; }
+    static public float BuyTime { get; set; }
+    static public float BuyTemperatureBoost { get; set; }
+    static public float BuyAsterium { get; set; }
+    static public float SellHoney { get; set; }
+    static public float SellAsterium { get; set; }
+    static public float SellAstroluminite { get; set; }
+    static public float SellPrototype { get; set; }
+    static public float SellUrsowaks { get; set; }
 }
