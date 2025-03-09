@@ -39,6 +39,7 @@ public class ValueManager : MonoBehaviour
         ValuesHolder.PrototypeAmountByOneInteraction        = model.PrototypeAmountByOneInteraction;
         ValuesHolder.UrsowaksAmountByOneInteraction         = model.UrsowaksAmountByOneInteraction;
         ValuesHolder.StandartInteractionTimeAsteriumComplex = model.StandartInteractionTimeAsteriumComplex;
+        ValuesHolder.CycleModifier                          = model.CycleModifier;
         ValuesHolder.BuyBears                               = model.BuyBears;
         ValuesHolder.BuyHoney                               = model.BuyHoney;
         ValuesHolder.BuyTime                                = model.BuyTime;
@@ -83,6 +84,7 @@ public class ValueManager : MonoBehaviour
             PrototypeAmountByOneInteraction = 0,
             UrsowaksAmountByOneInteraction = 0,
             StandartInteractionTimeAsteriumComplex = 0,
+            CycleModifier = 1,
             BuyBears = -7,
             BuyHoney = -0.25f,
             BuyTime = -3,

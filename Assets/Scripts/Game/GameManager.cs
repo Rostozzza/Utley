@@ -1680,7 +1680,7 @@ public class GameManager : MonoBehaviour
 		float honeyToEat = (float)(5 + n1 + 1.05 * n2 + 1.1 * n3) / 60f;
 		if (season == Season.Freeze)
 		{
-			honeyToEat *= 1f + 0.1f + 0.05f * cycleNumber;
+			honeyToEat *= 1f + 0.1f + 0.05f * cycleNumber * ValuesHolder.CycleModifier;
 		}
 		if (isAPIActive)
 		{
@@ -1787,7 +1787,7 @@ public class GameManager : MonoBehaviour
 				}
 				shuffleRooms.ForEach(delegate (GameObject room)
 				{
-					float damage = (0.35f / 5f + 0.02f * cycleNumber - 0.02f * room.GetComponent<RoomScript>().depthLevel) / 2;
+					float damage = (0.35f / 5f + 0.02f * (cycleNumber * ValuesHolder.CycleModifier) - 0.02f * room.GetComponent<RoomScript>().depthLevel) / 2;
 					Debug.Log(room.name + " задамажен фазой на " + damage);
 					room.GetComponent<RoomScript>().ChangeDurability(-damage);
 				});

@@ -120,9 +120,9 @@ public class UIResourceShower : MonoBehaviour
             case GameManager.Season.Calm:
                 return "Эффектов нет";
             case GameManager.Season.Storm:
-                return $"Снижение выработки энергомеда на {15 + 3 * GameManager.Instance.cycleNumber}%";
+                return $"Снижение выработки энергомеда на {15 + 3 * (GameManager.Instance.cycleNumber * ValuesHolder.CycleModifier)}%";
             case GameManager.Season.Freeze:
-                return $"Увеличение потребления энергомеда\nна {10 + 5 * GameManager.Instance.cycleNumber}%\nУвеличение скорости падения температуры\nна 25%";
+                return $"Увеличение потребления энергомеда\nна {10 + 5 * (GameManager.Instance.cycleNumber * ValuesHolder.CycleModifier)}%\nУвеличение скорости падения температуры\nна 25%";
             case GameManager.Season.Tide:
                 return "Невозможность отправить космический корабль\nБыстрая потеря прочности у комплексов";
             default:
@@ -157,7 +157,7 @@ public class UIResourceShower : MonoBehaviour
                 float honeyToEat = (float)(5 + n1 + 1.05 * n2 + 1.1 * n3);
                 if (GameManager.Instance.season == GameManager.Season.Freeze)
                 {
-                    honeyToEat *= 1f + 0.1f + 0.05f * GameManager.Instance.cycleNumber;
+                    honeyToEat *= 1f + 0.1f + 0.05f * (GameManager.Instance.cycleNumber  * ValuesHolder.CycleModifier);
                 }
                 honeyReducePanel.SetActive(true);
                 honeyReduceDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)honeyToEat) + " в минуту";

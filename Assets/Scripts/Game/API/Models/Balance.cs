@@ -62,6 +62,7 @@ public class Constants
     public int PrototypeAmountByOneInteraction { get; set; }
     public int UrsowaksAmountByOneInteraction { get; set; }
     public float StandartInteractionTimeAsteriumComplex { get; set; }
+    public float CycleModifier { get; set; }
     public float BuyBears { get; set; }
     public float BuyHoney { get; set; }
     public float BuyTime { get; set; }

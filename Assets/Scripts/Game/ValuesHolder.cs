@@ -23,6 +23,7 @@ static public class ValuesHolder
     static public int PrototypeAmountByOneInteraction { get; set; }
     static public int UrsowaksAmountByOneInteraction { get; set; }
     static public float StandartInteractionTimeAsteriumComplex { get; set; }
+    static public float CycleModifier { get; set; }
     static public float BuyBears { get; set; }
     static public float BuyHoney { get; set; }
     static public float BuyTime { get; set; }
