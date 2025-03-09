@@ -72,6 +72,12 @@ public class ShopItem : MonoBehaviour
 	public async Task BuyItemAsync()
 	{
 		var shopName = ShopManager.Instance.shopName;
+		if (await GameManager.Instance.GetHNY() < -price * int.Parse(requestedAmount.text))
+		{
+			Debug.Log("Can't buy! Not enough HNY");
+			requestedAmount.text = "";
+			return;
+		}
 		if (price < 0)
 		{
 			switch (name)

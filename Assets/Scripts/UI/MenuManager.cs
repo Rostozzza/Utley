@@ -239,7 +239,7 @@ public class MenuManager : MonoBehaviour
 		tabletAnimator = ShopManager.Instance.animator;
 		SceneManager.activeSceneChanged += (Scene oldScene, Scene newScene) =>
 		{
-			try { GetComponent<Canvas>().worldCamera = Camera.main.GetComponentsInChildren<Camera>()[1]; } catch {}
+			GetComponent<Canvas>().worldCamera = Camera.main;//.GetComponentsInChildren<Camera>()[1];
 			if (numberSummation.isTaskActive)
 			{
 				Time.timeScale = 1f;
