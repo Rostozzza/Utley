@@ -56,6 +56,7 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 			Debug.Log("INCORRECT");
 			targetedRoom.SetWorkEfficiency(0f);
 		}
+		GameManager.Instance.SetIsGraphUsing(false);
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 		return;
 	}
