@@ -27,6 +27,9 @@ public class UIResourceShower : MonoBehaviour
     [SerializeField] private GameObject seasonPanel;
     [SerializeField] private TextMeshProUGUI seasonPanelText;
     [SerializeField] private GameObject seasonDebuffPanel;
+    [SerializeField] private GameObject seasonDebuffPanel1;
+    [SerializeField] private GameObject seasonDebuffPanel2;
+    [SerializeField] private GameObject seasonDebuffPanel3;
     [SerializeField] private TextMeshProUGUI seasonDebuffPanelText;
     [SerializeField] private GameObject timeLeftPanel;
 
@@ -187,8 +190,27 @@ public class UIResourceShower : MonoBehaviour
                 seasonPanel.SetActive(true);
                 break;
             case PointerHint.HintType.SeasonDebuff:
-                seasonDebuffPanelText.text = SeasonToDiscriptionText(GameManager.Instance.season);
-                seasonDebuffPanel.SetActive(true);
+                switch (GameManager.Instance.season)
+                {
+                    case GameManager.Season.Calm:
+                        seasonDebuffPanel.GetComponentInChildren<TextMeshProUGUI>().text = SeasonToDiscriptionText(GameManager.Instance.season);
+                        seasonDebuffPanel.SetActive(true);
+                        break;
+                    case GameManager.Season.Storm:
+                        seasonDebuffPanel1.GetComponentInChildren<TextMeshProUGUI>().text = SeasonToDiscriptionText(GameManager.Instance.season);
+                        seasonDebuffPanel1.SetActive(true);
+                        break;
+                    case GameManager.Season.Freeze:
+                        seasonDebuffPanel2.GetComponentInChildren<TextMeshProUGUI>().text = SeasonToDiscriptionText(GameManager.Instance.season);
+                        seasonDebuffPanel2.SetActive(true);
+                        break;
+                    case GameManager.Season.Tide:
+                        seasonDebuffPanel3.GetComponentInChildren<TextMeshProUGUI>().text = SeasonToDiscriptionText(GameManager.Instance.season);
+                        seasonDebuffPanel3.SetActive(true);
+                        break;
+                }
+                //seasonDebuffPanelText.text = SeasonToDiscriptionText(GameManager.Instance.season);
+                //seasonDebuffPanel.SetActive(true);
                 break;
             case PointerHint.HintType.TimeLeft:
                 timeLeftPanel.SetActive(true);
@@ -226,6 +248,9 @@ public class UIResourceShower : MonoBehaviour
                 break;
             case PointerHint.HintType.SeasonDebuff:
                 seasonDebuffPanel.SetActive(false);
+                seasonDebuffPanel1.SetActive(false);
+                seasonDebuffPanel2.SetActive(false);
+                seasonDebuffPanel3.SetActive(false);
                 break;
             case PointerHint.HintType.TimeLeft:
                 timeLeftPanel.SetActive(false);
