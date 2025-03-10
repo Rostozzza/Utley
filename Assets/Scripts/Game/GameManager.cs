@@ -1590,6 +1590,7 @@ public class GameManager : MonoBehaviour
 
 	private IEnumerator ConstantDurabilityDamager(int n)
 	{
+		n /= 4;
 		while (true && isTimeGo)
 		{
 			yield return new WaitForSeconds(10);
@@ -1658,29 +1659,30 @@ public class GameManager : MonoBehaviour
 
 	private async Task ConsumeEnergohoney()
 	{
-		int n1 = 0, n2 = 0, n3 = 0;
-		foreach (GameObject room in allRooms.Where(x => x.TryGetComponent(out RoomScript roomSctipt) && roomSctipt.isEnpowered))
-		{
-			if (room.TryGetComponent<RoomScript>(out RoomScript roomScript))
-			{
-				switch (roomScript.level)
-				{
-					case 1:
-						n1++;
-						break;
-					case 2:
-						n2++;
-						break;
-					case 3:
-						n3++;
-						break;
-				}
-			}
-		}
-		float honeyToEat = (float)(5 + n1 + 1.05 * n2 + 1.1 * n3) / 60f;
+		//int n1 = 0, n2 = 0, n3 = 0;
+		//foreach (GameObject room in allRooms.Where(x => x.TryGetComponent(out RoomScript roomScript) && roomScript.isEnpowered))
+		//{
+		//	if (room.TryGetComponent<RoomScript>(out RoomScript roomScript))
+		//	{
+		//		switch (roomScript.level)
+		//		{
+		//			case 1:
+		//				n1++;
+		//				break;
+		//			case 2:
+		//				n2++;
+		//				break;
+		//			case 3:
+		//				n3++;
+		//				break;
+		//		}
+		//	}
+		//}
+		int roomsAmount = allRooms.Where(x => x.TryGetComponent(out RoomScript roomScript) && roomScript.isEnpowered).Count();
+		float honeyToEat = (roomsAmount * 2 + 16 * cycleNumber) / 60f;
 		if (season == Season.Freeze)
 		{
-			honeyToEat *= 1f + 0.1f + 0.05f * cycleNumber * ValuesHolder.CycleModifier;
+			honeyToEat *= 1.05f + 0.1f * cycleNumber * ValuesHolder.CycleModifier;
 		}
 		if (isAPIActive)
 		{
@@ -1811,6 +1813,7 @@ public class GameManager : MonoBehaviour
 				{
 					temperature -= 0.5f * Time.deltaTime;
 				}
+				Debug.Log("Сносим температуру: " + temperature);
 				if (!isCold && temperature <= 0f)
 				{
 					isCold = true;
