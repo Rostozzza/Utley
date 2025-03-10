@@ -428,7 +428,8 @@ public class GameManager : MonoBehaviour
 			RoomScript roomScript = building.GetComponent<RoomScript>();
 			var currentHoney = await GetHoney();
 			var currentAstroluminite = await GetAstroluminite();
-			if (currentAsterium < roomScript.asteriumCost || currentHoney < roomScript.honeyCost || currentAstroluminite < roomScript.astroluminiteCost)
+			roomScript.GetPrices(out int asteriumCost, out int honeyCost, out int astroluminiteCost);
+			if (currentAsterium < asteriumCost || currentHoney < honeyCost || currentAstroluminite < astroluminiteCost)
 			{
 				queuedBuildPositon.GetComponentInChildren<Button>(true).interactable = true;
 				queuedBuildPositon = null;
@@ -495,7 +496,7 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
-			if (currentAsterium < 10)
+			if (currentAsterium < ValuesHolder.ElevatorAsteriumPrice) //😭;
 			{
 				EventManager.callWarning.Invoke($"Не хватает {10 - currentAsterium} астерия.");
 				queuedBuildPositon = null;
@@ -1678,12 +1679,7 @@ public class GameManager : MonoBehaviour
 		//		}
 		//	}
 		//}
-		int roomsAmount = allRooms.Where(x => x.TryGetComponent(out RoomScript roomScript) && roomScript.isEnpowered).Count();
-		float honeyToEat = (roomsAmount * 2 + 16 * cycleNumber) / 60f;
-		if (season == Season.Freeze)
-		{
-			honeyToEat *= 1.05f + 0.1f * cycleNumber * ValuesHolder.CycleModifier;
-		}
+		float honeyToEat = CalculateHoneyToEat();
 		if (isAPIActive)
 		{
 			//var model = await JsonManager.SavePlayerToJson(playerName);
@@ -1705,6 +1701,17 @@ public class GameManager : MonoBehaviour
 		});
 		//Debug.Log("Съели мёда: " + honeyToEat);
 		uiResourceShower.UpdateIndicators();
+	}
+
+	public float CalculateHoneyToEat(bool isForSecond = true)
+	{
+		int roomsAmount = allRooms.Where(x => x.TryGetComponent(out RoomScript roomScript) && roomScript.isEnpowered).Count();
+		float honeyToEat = ValuesHolder.EnergohoneyConsumeMultiplier * (roomsAmount * ValuesHolder.EnergohoneyConsumeMultiplierByRoom + 16 * cycleNumber) / (isForSecond ? 60f : 1f);
+		if (season == Season.Freeze)
+		{
+			honeyToEat *= 1.05f + 0.1f * cycleNumber * ValuesHolder.CycleModifier;
+		}
+		return honeyToEat;
 	}
 
 	private IEnumerator ConstantSeasonChanger()
@@ -1789,7 +1796,7 @@ public class GameManager : MonoBehaviour
 				}
 				shuffleRooms.ForEach(delegate (GameObject room)
 				{
-					float damage = (0.35f / 5f + 0.02f * (cycleNumber * ValuesHolder.CycleModifier) - 0.02f * room.GetComponent<RoomScript>().depthLevel) / 2;
+					float damage = ValuesHolder.DamageByTide * ValuesHolder.DamageByTideMultiplier;//(0.35f / 5f + 0.02f * (cycleNumber * ValuesHolder.CycleModifier) - 0.02f * room.GetComponent<RoomScript>().depthLevel) / 2;
 					Debug.Log(room.name + " задамажен фазой на " + damage);
 					room.GetComponent<RoomScript>().ChangeDurability(-damage);
 				});

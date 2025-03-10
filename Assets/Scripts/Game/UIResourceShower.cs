@@ -138,34 +138,10 @@ public class UIResourceShower : MonoBehaviour
         switch (hintType)
         {
             case PointerHint.HintType.Energohoney:
-                int n1 = 0, n2 = 0, n3 = 0;
-                foreach (GameObject room in GameManager.Instance.allRooms)
-                {
-                    if (room.TryGetComponent<RoomScript>(out RoomScript roomScript))
-                    {
-                        switch (roomScript.level)
-                        {
-                            case 1:
-                                n1++;
-                                break;
-                            case 2:
-                                n2++;
-                                break;
-                            case 3:
-                                n3++;
-                                break;
-                        }
-                    }
-                }
-                float honeyToEat = (float)(5 + n1 + 1.05 * n2 + 1.1 * n3);
-                if (GameManager.Instance.season == GameManager.Season.Freeze)
-                {
-                    honeyToEat *= 1f + 0.1f + 0.05f * (GameManager.Instance.cycleNumber  * ValuesHolder.CycleModifier);
-                }
+                float honeyToEat = GameManager.Instance.CalculateHoneyToEat(false);
                 honeyReducePanel.SetActive(true);
                 honeyReduceDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)honeyToEat) + " в минуту";
                 break;
-
             case PointerHint.HintType.Temperature:
                 temperaturePanel.SetActive(true);
                 temperatureDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)GameManager.Instance.GetTemperature()) + " °C";

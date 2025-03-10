@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class CosmodromeExercise : MonoBehaviour
 {
@@ -17,12 +19,15 @@ public class CosmodromeExercise : MonoBehaviour
 	private int verticies;
 	[Header("Task Generator")]
 	[SerializeField][Range(3, 50)] private int difficulty;
+	[SerializeField][Range(0f, 1f)] private float radiusRandomOffset;
 	[SerializeField] private GameObject weightPrefab;
 	[SerializeField] private List<OgePointLogic> shufflePoints;
 	[SerializeField] private OgePointLogic startPoint;
 	[SerializeField] private OgePointLogic endPoint;
 	[SerializeField] private Transform generationCenterPoint;
 	[SerializeField] private float generationRadius;
+	[SerializeField] private Transform startAxisTransform;
+	[SerializeField] private Transform endAxisTransform;
 
 
 
@@ -40,17 +45,31 @@ public class CosmodromeExercise : MonoBehaviour
 	/// <returns></returns>
 	private int GenerateTask()
 	{
+		Vector2 startAxis, endAxis, dir;
+
+		//float radAngStart = startAxisTransform.rotation.z * Mathf.Deg2Rad;
+		//startAxis = new Vector2(Mathf.Cos(radAngStart), Mathf.Sin(radAngStart));
+
+		//float radAngEnd = endAxisTransform.rotation.z * Mathf.Deg2Rad;
+		//endAxis = new Vector2(Mathf.Cos(radAngEnd), Mathf.Sin(radAngEnd));
+
+		startAxis = startAxisTransform.rotation * Vector2.right;
+		endAxis = endAxisTransform.rotation * Vector2.right;
+
 		correctAnswer = 0;
 
 		ResetShuffledPoints();
 
 		var previousPoint = startPoint;
 		int cycles = shufflePoints.Count;
+		float radiansAngle = Mathf.Atan2(startAxis.y, startAxis.x);
+		dir = new Vector2(Mathf.Cos(radiansAngle), Mathf.Sin(radiansAngle));
+
 		for (int i = 0; i < cycles; i++)
 		{
 			int randNum = Random.Range(0, shufflePoints.Count);
 			var currentPoint = shufflePoints[randNum];
-			currentPoint.transform.position = generationCenterPoint.position + (Vector3)(Random.insideUnitCircle * generationRadius);
+			currentPoint.transform.position = generationCenterPoint.position + (Vector3)(dir * (generationRadius + Random.Range(-radiusRandomOffset, radiusRandomOffset)));
 			shufflePoints.Remove(currentPoint);
 			currentPoint.AddPointToConnected(previousPoint);
 			Debug.Log("ShuffledPoint");
@@ -62,6 +81,11 @@ public class CosmodromeExercise : MonoBehaviour
 			correctAnswer += weightValue;
 
 			previousPoint = currentPoint;
+
+			// Rotation calc;
+			float angleIncrement = (Mathf.Atan2(startAxis.y, startAxis.x) - Mathf.Atan2(endAxis.y, endAxis.x)) / (cycles - 1);
+			radiansAngle += angleIncrement;
+			dir = new Vector2(Mathf.Cos(radiansAngle), Mathf.Sin(radiansAngle));
 		}
 		previousPoint.AddPointToConnected(endPoint);
 		shufflePoints.Remove(previousPoint);
@@ -95,12 +119,12 @@ public class CosmodromeExercise : MonoBehaviour
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 		if (int.Parse(answerField.text) == correctAnswer)
 		{
-			Debug.Log("бепмши нрбер");
+			Debug.Log("О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫");
 			roomToTarget.SetWorkEfficiency(1);
 		}
 		else
 		{
-			Debug.Log("нрбер мебепмши");
+			Debug.Log("О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫");
 			roomToTarget.SetWorkEfficiency(0.8f);
 		}
 		GameManager.Instance.SetIsGraphUsing(false);

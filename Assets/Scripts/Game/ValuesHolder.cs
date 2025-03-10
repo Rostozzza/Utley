@@ -34,4 +34,42 @@ static public class ValuesHolder
     static public float SellAstroluminite { get; set; }
     static public float SellPrototype { get; set; }
     static public float SellUrsowaks { get; set; }
+
+    static public int ElevatorAsteriumPrice { get; set; }
+    static public int ElevatorEnergohoneyPrice { get; set; }
+    static public int ElevatorAstroluminitePrice { get; set; }
+
+    static public int EnergohoneyAsteriumPrice { get; set; }
+    static public int EnergohoneyEnergohoneyPrice { get; set; }
+    static public int EnergohoneyAstroluminitePrice { get; set; }
+
+    static public int AsteriyAsteriumPrice { get; set; }
+    static public int AsteriyEnergohoneyPrice { get; set; }
+    static public int AsteriyAstroluminitePrice { get; set; }
+    
+    static public int CosmodromeAsteriumPrice { get; set; }
+    static public int CosmodromeEnergohoneyPrice { get; set; }
+    static public int CosmodromeAstroluminitePrice { get; set; }
+    
+    static public int BedAsteriumPrice { get; set; }
+    static public int BedEnergohoneyPrice { get; set; }
+    static public int BedAstroluminitePrice { get; set; }
+    
+    static public int BuildAsteriumPrice { get; set; }
+    static public int BuildEnergohoneyPrice { get; set; }
+    static public int BuildAstroluminitePrice { get; set; }
+    
+    static public int SupplyAsteriumPrice { get; set; }
+    static public int SupplyEnergohoneyPrice { get; set; }
+    static public int SupplyAstroluminitePrice { get; set; }
+    
+    static public int ResearchAsteriumPrice { get; set; }
+    static public int ResearchEnergohoneyPrice { get; set; }
+    static public int ResearchAstroluminitePrice { get; set; }
+    
+    static public int RepairCost { get; set; }
+    static public float DamageByTide { get; set; }
+    static public float DamageByTideMultiplier { get; set; }
+    static public float EnergohoneyConsumeMultiplier { get; set; }
+    static public float EnergohoneyConsumeMultiplierByRoom { get; set; }
 }

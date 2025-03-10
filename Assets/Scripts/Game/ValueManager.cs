@@ -50,6 +50,44 @@ public class ValueManager : MonoBehaviour
         ValuesHolder.SellAstroluminite                      = model.SellAstroluminite;
         ValuesHolder.SellPrototype                          = model.SellPrototype;
         ValuesHolder.SellUrsowaks                           = model.SellUrsowaks;
+
+        ValuesHolder.ElevatorAsteriumPrice                  = model.ElevatorAsteriumPrice;
+        ValuesHolder.ElevatorEnergohoneyPrice               = model.ElevatorEnergohoneyPrice;
+        ValuesHolder.ElevatorAstroluminitePrice             = model.ElevatorAstroluminitePrice;
+         
+        ValuesHolder.EnergohoneyAsteriumPrice               = model.EnergohoneyAsteriumPrice;
+        ValuesHolder.EnergohoneyEnergohoneyPrice            = model.EnergohoneyEnergohoneyPrice;
+        ValuesHolder.EnergohoneyAstroluminitePrice          = model.EnergohoneyAstroluminitePrice;
+         
+        ValuesHolder.AsteriyAsteriumPrice                   = model.AsteriyAsteriumPrice;
+        ValuesHolder.AsteriyEnergohoneyPrice                = model.AsteriyEnergohoneyPrice;
+        ValuesHolder.AsteriyAstroluminitePrice              = model.AsteriyAstroluminitePrice;
+          
+        ValuesHolder.CosmodromeAsteriumPrice                = model.CosmodromeAsteriumPrice;
+        ValuesHolder.CosmodromeEnergohoneyPrice             = model.CosmodromeEnergohoneyPrice;
+        ValuesHolder.CosmodromeAstroluminitePrice           = model.CosmodromeAstroluminitePrice;
+          
+        ValuesHolder.BedAsteriumPrice                       = model.BedAsteriumPrice;
+        ValuesHolder.BedEnergohoneyPrice                    = model.BedEnergohoneyPrice;
+        ValuesHolder.BedAstroluminitePrice                  = model.BedAstroluminitePrice;
+          
+        ValuesHolder.BuildAsteriumPrice                     = model.BuildAsteriumPrice;
+        ValuesHolder.BuildEnergohoneyPrice                  = model.BuildEnergohoneyPrice;
+        ValuesHolder.BuildAstroluminitePrice                = model.BuildAstroluminitePrice;
+          
+        ValuesHolder.SupplyAsteriumPrice                    = model.SupplyAsteriumPrice;
+        ValuesHolder.SupplyEnergohoneyPrice                 = model.SupplyEnergohoneyPrice;
+        ValuesHolder.SupplyAstroluminitePrice               = model.SupplyAstroluminitePrice;
+          
+        ValuesHolder.ResearchAsteriumPrice                  = model.ResearchAsteriumPrice;
+        ValuesHolder.ResearchEnergohoneyPrice               = model.ResearchEnergohoneyPrice;
+        ValuesHolder.ResearchAstroluminitePrice             = model.ResearchAstroluminitePrice;
+      
+        ValuesHolder.RepairCost                             = model.RepairCost;
+        ValuesHolder.DamageByTide                           = model.DamageByTide;
+        ValuesHolder.DamageByTideMultiplier                 = model.DamageByTideMultiplier;
+        ValuesHolder.EnergohoneyConsumeMultiplier           = model.EnergohoneyConsumeMultiplier;
+        ValuesHolder.EnergohoneyConsumeMultiplierByRoom     = model.EnergohoneyConsumeMultiplierByRoom;
     }
 
     public void TryGetBalance()
@@ -94,7 +132,45 @@ public class ValueManager : MonoBehaviour
             SellAsterium = 0.1f,
             SellAstroluminite = 0.6f,
             SellPrototype = 3,
-            SellUrsowaks = 5
+            SellUrsowaks = 5,
+
+            ElevatorAsteriumPrice = 10,
+            ElevatorEnergohoneyPrice = 0,
+            ElevatorAstroluminitePrice = 0,
+
+            EnergohoneyAsteriumPrice = 20,
+            EnergohoneyEnergohoneyPrice = 25,
+            EnergohoneyAstroluminitePrice = 1,
+
+            AsteriyAsteriumPrice = 30,
+            AsteriyEnergohoneyPrice = 0,
+            AsteriyAstroluminitePrice = 3,
+
+            CosmodromeAsteriumPrice = 0,
+            CosmodromeEnergohoneyPrice = 0,
+            CosmodromeAstroluminitePrice = 0,
+
+            BedAsteriumPrice = 25,
+            BedEnergohoneyPrice = 10,
+            BedAstroluminitePrice = 0,
+
+            BuildAsteriumPrice = 35,
+            BuildEnergohoneyPrice = 0,
+            BuildAstroluminitePrice = 3,
+
+            SupplyAsteriumPrice = 30,
+            SupplyEnergohoneyPrice = 5,
+            SupplyAstroluminitePrice = 2,
+
+            ResearchAsteriumPrice = 25,
+            ResearchEnergohoneyPrice = 0,
+            ResearchAstroluminitePrice = 1,
+
+            RepairCost = 10,
+            DamageByTide = 7,
+            DamageByTideMultiplier = 1,
+            EnergohoneyConsumeMultiplier = 1,
+            EnergohoneyConsumeMultiplierByRoom = 1,
         }; // tm = templateModel
         //Debug.Log(JsonConvert.SerializeObject(tm, Formatting.Indented));
         File.WriteAllText(path + "/Balance.json", JsonConvert.SerializeObject(tm, Formatting.Indented));

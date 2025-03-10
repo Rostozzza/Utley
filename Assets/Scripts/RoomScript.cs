@@ -900,14 +900,14 @@ public class RoomScript : MonoBehaviour
 			return;
 		}
 
-		if (await GameManager.Instance.GetAsteriy() >= 10)
+		if (await GameManager.Instance.GetAsteriy() >= ValuesHolder.RepairCost)
 		{
-			GameManager.Instance.ChangeAsteriy(-10, new Log
+			GameManager.Instance.ChangeAsteriy(-ValuesHolder.RepairCost, new Log
 			{
-				comment = $"Consumed 10 asterium from player {GameManager.Instance.playerName} to repair {gameObject.name} room",
+				comment = $"Consumed {ValuesHolder.RepairCost} asterium from player {GameManager.Instance.playerName} to repair {gameObject.name} room",
 				player_name = GameManager.Instance.playerName,
 
-				resources_changed = new Dictionary<string, float> { { "asterium", -10 } }
+				resources_changed = new Dictionary<string, float> { { "asterium", -ValuesHolder.RepairCost } }
 			});
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
 			int timeToRepair = (int)((1 - durability) * 100 / ValuesHolder.RepairSpeed); //((1 - durability) * 100 / 3);
@@ -1133,4 +1133,59 @@ public class RoomScript : MonoBehaviour
 	}
 
 	protected float GetModifiedInteractionTime(float bearLevel) => ValuesHolder.StandartInteractionTime * Mathf.Pow(ValuesHolder.InteractionSpeedMultiplyerByLevel, bearLevel) * Mathf.Pow(ValuesHolder.InteractionSpeedMultiplyerByGrade, level);
+	
+	public void GetPrices(out int asteriumCost, out int honeyCost, out int astroluminiteCost)
+	{
+		switch (resource)
+		{
+			case Resources.Energohoney:
+				asteriumCost = ValuesHolder.EnergohoneyAsteriumPrice;
+				honeyCost = ValuesHolder.EnergohoneyEnergohoneyPrice;
+				astroluminiteCost = ValuesHolder.EnergohoneyAstroluminitePrice;
+				break;
+
+			case Resources.Asteriy:
+				asteriumCost = ValuesHolder.AsteriyAsteriumPrice;
+				honeyCost = ValuesHolder.AsteriyEnergohoneyPrice;
+				astroluminiteCost = ValuesHolder.AsteriyAstroluminitePrice;
+				break;
+
+			case Resources.Cosmodrome:
+				asteriumCost = ValuesHolder.CosmodromeAsteriumPrice;
+				honeyCost = ValuesHolder.CosmodromeEnergohoneyPrice;
+				astroluminiteCost = ValuesHolder.CosmodromeAstroluminitePrice;
+				break;
+
+			case Resources.Bed:
+				asteriumCost = ValuesHolder.BedAsteriumPrice;
+				honeyCost = ValuesHolder.BedEnergohoneyPrice;
+				astroluminiteCost = ValuesHolder.BedAstroluminitePrice;
+				break;
+
+			case Resources.Build:
+				asteriumCost = ValuesHolder.BuildAsteriumPrice;
+				honeyCost = ValuesHolder.BuildEnergohoneyPrice;
+				astroluminiteCost = ValuesHolder.BuildAstroluminitePrice;
+				break;
+
+			case Resources.Supply:
+				asteriumCost = ValuesHolder.SupplyAsteriumPrice;
+				honeyCost = ValuesHolder.SupplyEnergohoneyPrice;
+				astroluminiteCost = ValuesHolder.SupplyAstroluminitePrice;
+				break;
+
+			case Resources.Research:
+				asteriumCost = ValuesHolder.ResearchAsteriumPrice;
+				honeyCost = ValuesHolder.ResearchEnergohoneyPrice;
+				astroluminiteCost = ValuesHolder.ResearchAstroluminitePrice;
+				break;
+
+			default:
+				Debug.Log("<color=red>ЧТО-ТО НЕ ТАК</color>");
+				asteriumCost = 0;
+				honeyCost = 0;
+				astroluminiteCost = 0;
+				break;
+		}
+	}
 }
