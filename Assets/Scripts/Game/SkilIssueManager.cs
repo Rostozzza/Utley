@@ -20,9 +20,9 @@ public class SkillIssueManager : MonoBehaviour
 	/// <summary>
 	/// L + Ratio
 	/// </summary>
-	private void HandleGoida()
+	private void HandleGoida() // time boost;
 	{
-		if (!Input.GetKeyDown(KeyCode.Keypad2) || copeRoutine != null)
+		if (!Input.GetKeyDown(KeyCode.Keypad3) || copeRoutine != null)
 		{
 			return;
 		}
@@ -30,13 +30,13 @@ public class SkillIssueManager : MonoBehaviour
 		{
 			StopCoroutine(copeRoutine);
 		}
-		copeRoutine = StartCoroutine(Goida(0.5f, 0, new List<KeyCode> { KeyCode.Keypad2, KeyCode.Keypad2, KeyCode.Keypad8 }));
+		copeRoutine = StartCoroutine(Goida(0.5f, 0, new List<KeyCode> { KeyCode.Keypad3, KeyCode.Keypad2, KeyCode.Keypad1 }));
 	}
 
 	/// <summary>
 	/// Cope.
 	/// </summary>
-	private void HandleSosi()
+	private void HandleSosi() // mnogo resursov;
 	{
 		if (!Input.GetKeyDown(KeyCode.Keypad1) || copeRoutine != null)
 		{
@@ -46,15 +46,15 @@ public class SkillIssueManager : MonoBehaviour
 		{
 			StopCoroutine(copeRoutine);
 		}
-		copeRoutine = StartCoroutine(Sosi(0.5f, 0, new List<KeyCode> { KeyCode.Keypad1, KeyCode.Keypad4, KeyCode.Keypad8, KeyCode.Keypad8 }));
+		copeRoutine = StartCoroutine(Sosi(0.5f, 0, new List<KeyCode> { KeyCode.Keypad1, KeyCode.Keypad2, KeyCode.Keypad1 }));
 	}
 
 	/// <summary>
 	/// ur mom
 	/// </summary>
-	private void HandleHui()
+	private void HandleHui() // unbreakable rooms;
 	{
-		if (!Input.GetKeyDown(KeyCode.Keypad1) || copeRoutine != null)
+		if (!Input.GetKeyDown(KeyCode.Keypad7) || copeRoutine != null)
 		{
 			return;
 		}
@@ -62,7 +62,7 @@ public class SkillIssueManager : MonoBehaviour
 		{
 			StopCoroutine(copeRoutine);
 		}
-		copeRoutine = StartCoroutine(Hui(0.5f, 0, new List<KeyCode> { KeyCode.Keypad1, KeyCode.Keypad3, KeyCode.Keypad4 }));
+		copeRoutine = StartCoroutine(Hui(0.5f, 0, new List<KeyCode> { KeyCode.Keypad7, KeyCode.Keypad8, KeyCode.Keypad9 }));
 	}
 
 	private IEnumerator Hui(float timeLeft, int now, List<KeyCode> killYourself)
@@ -74,12 +74,12 @@ public class SkillIssueManager : MonoBehaviour
 			{
 				if (now == killYourself.Count - 1)
 				{
-					GameManager.Instance.allRooms.Where(x => x.GetComponent<RoomScript>()).ToList().ForEach(x => x.GetComponent<RoomScript>().ChangeDurability(1) );
+					GameManager.Instance.allRooms.Where(x => x.GetComponent<RoomScript>()).ToList().ForEach(x => x.GetComponent<RoomScript>().SetDurability(1) );
 					Debug.Log("HUI");
 					Debug.Log($"Breakage!: {now}");
 					break;
 				}
-				yield return Sosi(timeLeft, now + 1, killYourself);
+				yield return Hui(timeLeft, now + 1, killYourself);
 				Debug.Log($"Breakage!: {now}");
 				break;
 			}

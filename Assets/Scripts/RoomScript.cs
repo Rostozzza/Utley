@@ -732,6 +732,8 @@ public class RoomScript : MonoBehaviour
 		return walkPoints;
 	}
 
+	public virtual void SetDurability(float hp) => ChangeDurability(hp - durability);
+
 	/// <summary>
 	/// Changes durability (wow) "-" to damage, "+" to heal
 	/// </summary>

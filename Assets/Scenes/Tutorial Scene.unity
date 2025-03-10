@@ -22137,7 +22137,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.00017359934, y: 0.00018310547}
+  m_AnchoredPosition: {x: -0.00017359934, y: -0.00076293945}
   m_SizeDelta: {x: 91.1674, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1198330829
@@ -29586,8 +29586,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 859392645}
   m_HandleRect: {fileID: 859392644}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.9999946
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -31248,7 +31248,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 220941122}
   m_PlaneDistance: 2
   m_PixelPerfect: 0
   m_ReceivesEvents: 1

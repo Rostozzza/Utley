@@ -1813,7 +1813,6 @@ public class GameManager : MonoBehaviour
 				{
 					temperature -= 0.5f * Time.deltaTime;
 				}
-				Debug.Log("Сносим температуру: " + temperature);
 				if (!isCold && temperature <= 0f)
 				{
 					isCold = true;
