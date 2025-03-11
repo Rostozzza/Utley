@@ -39,7 +39,7 @@ public class InputController : MonoBehaviour
         //{ ActionKeys.SelectUnitByPointer, KeyCode.Mouse0},
         { ActionKeys.MoveBearToRoom, KeyCode.Mouse1},
         { ActionKeys.BuildMode, KeyCode.B},
-        { ActionKeys.InfoMode, KeyCode.I}
+        //{ ActionKeys.InfoMode, KeyCode.I}
     };
 
     static private List<BindSelector> binds = new();

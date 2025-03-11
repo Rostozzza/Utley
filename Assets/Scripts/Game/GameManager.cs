@@ -986,7 +986,7 @@ public class GameManager : MonoBehaviour
 	public void TryProcessingRawAsterium()
 	{
 		var targetedRoom = asteriumRooms.FirstOrDefault(x => !x.isReadyForWork && x.CheckIfSolved() && x.isEnpowered);
-		asteriumRooms.ForEach(x => Debug.Log($"{!x.isReadyForWork} && {x.CheckIfSolved()} && {x.isEnpowered} = {!x.isReadyForWork && x.CheckIfSolved() && x.isEnpowered}"));
+		//asteriumRooms.ForEach(x => Debug.Log($"{!x.isReadyForWork} && {x.CheckIfSolved()} && {x.isEnpowered} = {!x.isReadyForWork && x.CheckIfSolved() && x.isEnpowered}"));
 		if (targetedRoom == null || rawAsterium <= 0)
 		{
 			Debug.Log("<color=red>НЕТ ПЕРЕРАБОТЧИКА</color>");
@@ -1796,11 +1796,12 @@ public class GameManager : MonoBehaviour
 				}
 				shuffleRooms.ForEach(delegate (GameObject room)
 				{
-					float damage = ValuesHolder.DamageByTide * ValuesHolder.DamageByTideMultiplier;//(0.35f / 5f + 0.02f * (cycleNumber * ValuesHolder.CycleModifier) - 0.02f * room.GetComponent<RoomScript>().depthLevel) / 2;
+					float damage = ValuesHolder.DamageByTide * ValuesHolder.DamageByTideMultiplier / 100f;//(0.35f / 5f + 0.02f * (cycleNumber * ValuesHolder.CycleModifier) - 0.02f * room.GetComponent<RoomScript>().depthLevel) / 2;
 					Debug.Log(room.name + " задамажен фазой на " + damage);
 					room.GetComponent<RoomScript>().ChangeDurability(-damage);
 				});
-				if (ShopManager.Instance.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("TabletHide")) Camera.main.GetComponent<CameraShake>().MeteorImpact();
+				if (!ShopManager.Instance.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("TabletHide")) Camera.main.GetComponent<CameraShake>().MeteorImpact();
+				Debug.Log($"<color=purple>Эффект: {!ShopManager.Instance.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("TabletHide")}</color>");
 				yield return new WaitForSeconds(6f);
 			}
 		}

@@ -72,7 +72,7 @@ public class BindSelector : MonoBehaviour
             ActionKeys.Bear6 => "Медведь 6",
             ActionKeys.OpenShop => "Открыть магазин",
             //ActionKeys.SelectUnitByPointer => "Выбрать медведя",
-            ActionKeys.MoveBearToRoom => "Переместить медведя",
+            ActionKeys.MoveBearToRoom => "Меню комплекса",
             ActionKeys.BuildMode => "Режим строительства",
             ActionKeys.InfoMode => "Режим информации",
             _ => "Имя не найдено",
