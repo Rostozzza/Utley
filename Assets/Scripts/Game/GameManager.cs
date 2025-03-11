@@ -1801,7 +1801,6 @@ public class GameManager : MonoBehaviour
 					room.GetComponent<RoomScript>().ChangeDurability(-damage);
 				});
 				if (!ShopManager.Instance.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("TabletHide")) Camera.main.GetComponent<CameraShake>().MeteorImpact();
-				Debug.Log($"<color=purple>Эффект: {!ShopManager.Instance.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("TabletHide")}</color>");
 				yield return new WaitForSeconds(6f);
 			}
 		}

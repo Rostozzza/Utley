@@ -31,9 +31,9 @@ public class SupplyRoom : RoomScript
 
 	public void GetRoomsToEnpower()
 	{
-		var horizontalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 17f
+		var horizontalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 9f //17f earlier range was longer;
 																	&& x.transform.position.y == transform.position.y && x.GetComponent<RoomScript>()).ToList();
-		var verticalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.y - transform.position.y) <= 9f
+		var verticalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.y - transform.position.y) <= 5f //9f
 																	&& x.transform.position.x == transform.position.x && x.GetComponent<RoomScript>()).ToList();
 		var diagonalRooms = GameManager.Instance.allRooms.Where(x =>Mathf.Abs(x.transform.position.x - transform.position.x) <= 9f
 																	&& Mathf.Abs(x.transform.position.y - transform.position.y) <= 5f && x.GetComponent<RoomScript>()).ToList();
