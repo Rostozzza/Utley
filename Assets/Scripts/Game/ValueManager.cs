@@ -10,7 +10,7 @@ public class ValueManager : MonoBehaviour
 
     private void Awake()
     {
-        TryGetBalance();
+        TryGetConfig();
 
         SetValuesHolder();
         Debug.Log(ValuesHolder.GameDuration);
@@ -51,38 +51,40 @@ public class ValueManager : MonoBehaviour
         ValuesHolder.SellPrototype                          = model.SellPrototype;
         ValuesHolder.SellUrsowaks                           = model.SellUrsowaks;
 
-        ValuesHolder.ElevatorAsteriumPrice                  = model.ElevatorAsteriumPrice;
-        ValuesHolder.ElevatorEnergohoneyPrice               = model.ElevatorEnergohoneyPrice;
-        ValuesHolder.ElevatorAstroluminitePrice             = model.ElevatorAstroluminitePrice;
-         
-        ValuesHolder.EnergohoneyAsteriumPrice               = model.EnergohoneyAsteriumPrice;
-        ValuesHolder.EnergohoneyEnergohoneyPrice            = model.EnergohoneyEnergohoneyPrice;
-        ValuesHolder.EnergohoneyAstroluminitePrice          = model.EnergohoneyAstroluminitePrice;
-         
-        ValuesHolder.AsteriyAsteriumPrice                   = model.AsteriyAsteriumPrice;
-        ValuesHolder.AsteriyEnergohoneyPrice                = model.AsteriyEnergohoneyPrice;
-        ValuesHolder.AsteriyAstroluminitePrice              = model.AsteriyAstroluminitePrice;
-          
-        ValuesHolder.CosmodromeAsteriumPrice                = model.CosmodromeAsteriumPrice;
-        ValuesHolder.CosmodromeEnergohoneyPrice             = model.CosmodromeEnergohoneyPrice;
-        ValuesHolder.CosmodromeAstroluminitePrice           = model.CosmodromeAstroluminitePrice;
-          
-        ValuesHolder.BedAsteriumPrice                       = model.BedAsteriumPrice;
-        ValuesHolder.BedEnergohoneyPrice                    = model.BedEnergohoneyPrice;
-        ValuesHolder.BedAstroluminitePrice                  = model.BedAstroluminitePrice;
-          
-        ValuesHolder.BuildAsteriumPrice                     = model.BuildAsteriumPrice;
-        ValuesHolder.BuildEnergohoneyPrice                  = model.BuildEnergohoneyPrice;
-        ValuesHolder.BuildAstroluminitePrice                = model.BuildAstroluminitePrice;
-          
-        ValuesHolder.SupplyAsteriumPrice                    = model.SupplyAsteriumPrice;
-        ValuesHolder.SupplyEnergohoneyPrice                 = model.SupplyEnergohoneyPrice;
-        ValuesHolder.SupplyAstroluminitePrice               = model.SupplyAstroluminitePrice;
-          
-        ValuesHolder.ResearchAsteriumPrice                  = model.ResearchAsteriumPrice;
-        ValuesHolder.ResearchEnergohoneyPrice               = model.ResearchEnergohoneyPrice;
-        ValuesHolder.ResearchAstroluminitePrice             = model.ResearchAstroluminitePrice;
-      
+        ValuesHolder.RoomsBuildPrice                        = model.RoomsBuildPrice;
+
+        //ValuesHolder.ElevatorAsteriumPrice                  = model.ElevatorAsteriumPrice;
+        //ValuesHolder.ElevatorEnergohoneyPrice               = model.ElevatorEnergohoneyPrice;
+        //ValuesHolder.ElevatorAstroluminitePrice             = model.ElevatorAstroluminitePrice;
+        // 
+        //ValuesHolder.EnergohoneyAsteriumPrice               = model.EnergohoneyAsteriumPrice;
+        //ValuesHolder.EnergohoneyEnergohoneyPrice            = model.EnergohoneyEnergohoneyPrice;
+        //ValuesHolder.EnergohoneyAstroluminitePrice          = model.EnergohoneyAstroluminitePrice;
+        // 
+        //ValuesHolder.AsteriyAsteriumPrice                   = model.AsteriyAsteriumPrice;
+        //ValuesHolder.AsteriyEnergohoneyPrice                = model.AsteriyEnergohoneyPrice;
+        //ValuesHolder.AsteriyAstroluminitePrice              = model.AsteriyAstroluminitePrice;
+        //  
+        //ValuesHolder.CosmodromeAsteriumPrice                = model.CosmodromeAsteriumPrice;
+        //ValuesHolder.CosmodromeEnergohoneyPrice             = model.CosmodromeEnergohoneyPrice;
+        //ValuesHolder.CosmodromeAstroluminitePrice           = model.CosmodromeAstroluminitePrice;
+        //  
+        //ValuesHolder.BedAsteriumPrice                       = model.BedAsteriumPrice;
+        //ValuesHolder.BedEnergohoneyPrice                    = model.BedEnergohoneyPrice;
+        //ValuesHolder.BedAstroluminitePrice                  = model.BedAstroluminitePrice;
+        //  
+        //ValuesHolder.BuildAsteriumPrice                     = model.BuildAsteriumPrice;
+        //ValuesHolder.BuildEnergohoneyPrice                  = model.BuildEnergohoneyPrice;
+        //ValuesHolder.BuildAstroluminitePrice                = model.BuildAstroluminitePrice;
+        //  
+        //ValuesHolder.SupplyAsteriumPrice                    = model.SupplyAsteriumPrice;
+        //ValuesHolder.SupplyEnergohoneyPrice                 = model.SupplyEnergohoneyPrice;
+        //ValuesHolder.SupplyAstroluminitePrice               = model.SupplyAstroluminitePrice;
+        //  
+        //ValuesHolder.ResearchAsteriumPrice                  = model.ResearchAsteriumPrice;
+        //ValuesHolder.ResearchEnergohoneyPrice               = model.ResearchEnergohoneyPrice;
+        //ValuesHolder.ResearchAstroluminitePrice             = model.ResearchAstroluminitePrice;
+        
         ValuesHolder.RepairCost                             = model.RepairCost;
         ValuesHolder.DamageByTide                           = model.DamageByTide;
         ValuesHolder.DamageByTideMultiplier                 = model.DamageByTideMultiplier;
@@ -90,11 +92,11 @@ public class ValueManager : MonoBehaviour
         ValuesHolder.EnergohoneyConsumeMultiplierByRoom     = model.EnergohoneyConsumeMultiplierByRoom;
     }
 
-    public void TryGetBalance()
+    public void TryGetConfig()
     {
         path = Application.isEditor ? Application.dataPath + "/Resources" : path = Directory.GetCurrentDirectory();
-        if (!File.Exists(path + "/Balance.json")) MakeTemplate(path);
-        model = JsonConvert.DeserializeObject<Constants>(File.ReadAllText(path + "/Balance.json"));
+        if (!File.Exists(path + "/config.json")) MakeTemplate(path);
+        model = JsonConvert.DeserializeObject<Constants>(File.ReadAllText(path + "/config.json"));
     }
 
     public void MakeTemplate(string path)
@@ -134,37 +136,49 @@ public class ValueManager : MonoBehaviour
             SellPrototype = 3,
             SellUrsowaks = 5,
 
-            ElevatorAsteriumPrice = 10,
-            ElevatorEnergohoneyPrice = 0,
-            ElevatorAstroluminitePrice = 0,
+            RoomsBuildPrice = new()
+            {
+                { RoomType.Elevator,    new(){ { ResourceType.Asterium, 10 }, { ResourceType.Energohoney, 0 }, { ResourceType.Astroluminite, 0 } } },
+                { RoomType.Energohoney, new(){ { ResourceType.Asterium, 20 }, { ResourceType.Energohoney, 25 }, { ResourceType.Astroluminite, 1 } } },
+                { RoomType.Asterium,    new(){ { ResourceType.Asterium, 30 }, { ResourceType.Energohoney, 0 }, { ResourceType.Astroluminite, 3 } } },
+                { RoomType.Cosmodrome,  new(){ { ResourceType.Asterium, 0 }, { ResourceType.Energohoney, 0 }, { ResourceType.Astroluminite, 0 } } },
+                { RoomType.Bed,         new(){ { ResourceType.Asterium, 25 }, { ResourceType.Energohoney, 10 }, { ResourceType.Astroluminite, 0 } } },
+                { RoomType.Build,       new(){ { ResourceType.Asterium, 35 }, { ResourceType.Energohoney, 0 }, { ResourceType.Astroluminite, 3 } } },
+                { RoomType.Supply,      new(){ { ResourceType.Asterium, 30 }, { ResourceType.Energohoney, 5 }, { ResourceType.Astroluminite, 2 } } },
+                { RoomType.Research,    new(){ { ResourceType.Asterium, 25 }, { ResourceType.Energohoney, 0 }, { ResourceType.Astroluminite, 1 } } }
+            },
 
-            EnergohoneyAsteriumPrice = 20,
-            EnergohoneyEnergohoneyPrice = 25,
-            EnergohoneyAstroluminitePrice = 1,
-
-            AsteriyAsteriumPrice = 30,
-            AsteriyEnergohoneyPrice = 0,
-            AsteriyAstroluminitePrice = 3,
-
-            CosmodromeAsteriumPrice = 0,
-            CosmodromeEnergohoneyPrice = 0,
-            CosmodromeAstroluminitePrice = 0,
-
-            BedAsteriumPrice = 25,
-            BedEnergohoneyPrice = 10,
-            BedAstroluminitePrice = 0,
-
-            BuildAsteriumPrice = 35,
-            BuildEnergohoneyPrice = 0,
-            BuildAstroluminitePrice = 3,
-
-            SupplyAsteriumPrice = 30,
-            SupplyEnergohoneyPrice = 5,
-            SupplyAstroluminitePrice = 2,
-
-            ResearchAsteriumPrice = 25,
-            ResearchEnergohoneyPrice = 0,
-            ResearchAstroluminitePrice = 1,
+            //ElevatorAsteriumPrice = 10,
+            //ElevatorEnergohoneyPrice = 0,
+            //ElevatorAstroluminitePrice = 0,
+//
+            //EnergohoneyAsteriumPrice = 20,
+            //EnergohoneyEnergohoneyPrice = 25,
+            //EnergohoneyAstroluminitePrice = 1,
+//
+            //AsteriyAsteriumPrice = 30,
+            //AsteriyEnergohoneyPrice = 0,
+            //AsteriyAstroluminitePrice = 3,
+//
+            //CosmodromeAsteriumPrice = 0,
+            //CosmodromeEnergohoneyPrice = 0,
+            //CosmodromeAstroluminitePrice = 0,
+//
+            //BedAsteriumPrice = 25,
+            //BedEnergohoneyPrice = 10,
+            //BedAstroluminitePrice = 0,
+//
+            //BuildAsteriumPrice = 35,
+            //BuildEnergohoneyPrice = 0,
+            //BuildAstroluminitePrice = 3,
+//
+            //SupplyAsteriumPrice = 30,
+            //SupplyEnergohoneyPrice = 5,
+            //SupplyAstroluminitePrice = 2,
+//
+            //ResearchAsteriumPrice = 25,
+            //ResearchEnergohoneyPrice = 0,
+            //ResearchAstroluminitePrice = 1,
 
             RepairCost = 10,
             DamageByTide = 7,
@@ -173,6 +187,7 @@ public class ValueManager : MonoBehaviour
             EnergohoneyConsumeMultiplierByRoom = 1,
         }; // tm = templateModel
         //Debug.Log(JsonConvert.SerializeObject(tm, Formatting.Indented));
-        File.WriteAllText(path + "/Balance.json", JsonConvert.SerializeObject(tm, Formatting.Indented));
+        File.WriteAllText(path + "/config.json", JsonConvert.SerializeObject(tm, Formatting.Indented));
     }
 }
+

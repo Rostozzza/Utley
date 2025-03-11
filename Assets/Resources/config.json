@@ -31,30 +31,48 @@
   "SellAstroluminite": 0.6,
   "SellPrototype": 3.0,
   "SellUrsowaks": 5.0,
-  "ElevatorAsteriumPrice": 10,
-  "ElevatorEnergohoneyPrice": 0,
-  "ElevatorAstroluminitePrice": 0,
-  "EnergohoneyAsteriumPrice": 20,
-  "EnergohoneyEnergohoneyPrice": 25,
-  "EnergohoneyAstroluminitePrice": 1,
-  "AsteriyAsteriumPrice": 30,
-  "AsteriyEnergohoneyPrice": 0,
-  "AsteriyAstroluminitePrice": 3,
-  "CosmodromeAsteriumPrice": 0,
-  "CosmodromeEnergohoneyPrice": 0,
-  "CosmodromeAstroluminitePrice": 0,
-  "BedAsteriumPrice": 25,
-  "BedEnergohoneyPrice": 10,
-  "BedAstroluminitePrice": 0,
-  "BuildAsteriumPrice": 35,
-  "BuildEnergohoneyPrice": 0,
-  "BuildAstroluminitePrice": 3,
-  "SupplyAsteriumPrice": 30,
-  "SupplyEnergohoneyPrice": 5,
-  "SupplyAstroluminitePrice": 2,
-  "ResearchAsteriumPrice": 25,
-  "ResearchEnergohoneyPrice": 0,
-  "ResearchAstroluminitePrice": 1,
+  "RoomsBuildPrice": {
+    "Elevator": {
+      "Asterium": 10,
+      "Energohoney": 0,
+      "Astroluminite": 0
+    },
+    "Energohoney": {
+      "Asterium": 20,
+      "Energohoney": 25,
+      "Astroluminite": 1
+    },
+    "Asterium": {
+      "Asterium": 30,
+      "Energohoney": 0,
+      "Astroluminite": 3
+    },
+    "Cosmodrome": {
+      "Asterium": 0,
+      "Energohoney": 0,
+      "Astroluminite": 0
+    },
+    "Bed": {
+      "Asterium": 25,
+      "Energohoney": 10,
+      "Astroluminite": 0
+    },
+    "Build": {
+      "Asterium": 35,
+      "Energohoney": 0,
+      "Astroluminite": 3
+    },
+    "Supply": {
+      "Asterium": 30,
+      "Energohoney": 5,
+      "Astroluminite": 2
+    },
+    "Research": {
+      "Asterium": 25,
+      "Energohoney": 0,
+      "Astroluminite": 1
+    }
+  },
   "RepairCost": 10,
   "DamageByTide": 7.0,
   "DamageByTideMultiplier": 1.0,

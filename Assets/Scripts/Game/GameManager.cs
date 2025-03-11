@@ -428,7 +428,9 @@ public class GameManager : MonoBehaviour
 			RoomScript roomScript = building.GetComponent<RoomScript>();
 			var currentHoney = await GetHoney();
 			var currentAstroluminite = await GetAstroluminite();
+			
 			roomScript.GetPrices(out int asteriumCost, out int honeyCost, out int astroluminiteCost);
+
 			if (currentAsterium < asteriumCost || currentHoney < honeyCost || currentAstroluminite < astroluminiteCost)
 			{
 				queuedBuildPositon.GetComponentInChildren<Button>(true).interactable = true;
@@ -496,7 +498,7 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
-			if (currentAsterium < ValuesHolder.ElevatorAsteriumPrice) //😭;
+			if (currentAsterium < ValuesHolder.RoomsBuildPrice[RoomType.Elevator][ResourceType.Asterium]) //😭;
 			{
 				EventManager.callWarning.Invoke($"Не хватает {10 - currentAsterium} астерия.");
 				queuedBuildPositon = null;

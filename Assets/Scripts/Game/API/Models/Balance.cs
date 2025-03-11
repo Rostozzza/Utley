@@ -73,42 +73,63 @@ public class Constants
     public float SellAstroluminite { get; set; }
     public float SellPrototype { get; set; }
     public float SellUrsowaks { get; set; }
+
+    public Dictionary<RoomType, Dictionary<ResourceType, int>> RoomsBuildPrice { get; set; }
     
-    public int ElevatorAsteriumPrice { get; set; }
-    public int ElevatorEnergohoneyPrice { get; set; }
-    public int ElevatorAstroluminitePrice { get; set; }
-
-    public int EnergohoneyAsteriumPrice { get; set; }
-    public int EnergohoneyEnergohoneyPrice { get; set; }
-    public int EnergohoneyAstroluminitePrice { get; set; }
-
-    public int AsteriyAsteriumPrice { get; set; }
-    public int AsteriyEnergohoneyPrice { get; set; }
-    public int AsteriyAstroluminitePrice { get; set; }
-
-    public int CosmodromeAsteriumPrice { get; set; }
-    public int CosmodromeEnergohoneyPrice { get; set; }
-    public int CosmodromeAstroluminitePrice { get; set; }
-
-    public int BedAsteriumPrice { get; set; }
-    public int BedEnergohoneyPrice { get; set; }
-    public int BedAstroluminitePrice { get; set; }
-
-    public int BuildAsteriumPrice { get; set; }
-    public int BuildEnergohoneyPrice { get; set; }
-    public int BuildAstroluminitePrice { get; set; }
-
-    public int SupplyAsteriumPrice { get; set; }
-    public int SupplyEnergohoneyPrice { get; set; }
-    public int SupplyAstroluminitePrice { get; set; }
-
-    public int ResearchAsteriumPrice { get; set; }
-    public int ResearchEnergohoneyPrice { get; set; }
-    public int ResearchAstroluminitePrice { get; set; }
+    //public int ElevatorAsteriumPrice { get; set; }
+    //public int ElevatorEnergohoneyPrice { get; set; }
+    //public int ElevatorAstroluminitePrice { get; set; }
+//
+    //public int EnergohoneyAsteriumPrice { get; set; }
+    //public int EnergohoneyEnergohoneyPrice { get; set; }
+    //public int EnergohoneyAstroluminitePrice { get; set; }
+//
+    //public int AsteriyAsteriumPrice { get; set; }
+    //public int AsteriyEnergohoneyPrice { get; set; }
+    //public int AsteriyAstroluminitePrice { get; set; }
+//
+    //public int CosmodromeAsteriumPrice { get; set; }
+    //public int CosmodromeEnergohoneyPrice { get; set; }
+    //public int CosmodromeAstroluminitePrice { get; set; }
+//
+    //public int BedAsteriumPrice { get; set; }
+    //public int BedEnergohoneyPrice { get; set; }
+    //public int BedAstroluminitePrice { get; set; }
+//
+    //public int BuildAsteriumPrice { get; set; }
+    //public int BuildEnergohoneyPrice { get; set; }
+    //public int BuildAstroluminitePrice { get; set; }
+//
+    //public int SupplyAsteriumPrice { get; set; }
+    //public int SupplyEnergohoneyPrice { get; set; }
+    //public int SupplyAstroluminitePrice { get; set; }
+//
+    //public int ResearchAsteriumPrice { get; set; }
+    //public int ResearchEnergohoneyPrice { get; set; }
+    //public int ResearchAstroluminitePrice { get; set; }
     
     public int RepairCost { get; set; }
     public float DamageByTide { get; set; }
     public float DamageByTideMultiplier { get; set; }
     public float EnergohoneyConsumeMultiplier { get; set; }
     public float EnergohoneyConsumeMultiplierByRoom { get; set; }
+}
+
+public enum RoomType
+{
+    Elevator,
+    Energohoney,
+    Asterium,
+    Cosmodrome,
+    Bed,
+    Build,
+    Supply,
+    Research
+}
+
+public enum ResourceType
+{
+    Asterium,
+    Energohoney,
+    Astroluminite
 }

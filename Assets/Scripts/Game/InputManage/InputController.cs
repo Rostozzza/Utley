@@ -24,7 +24,7 @@ public enum ActionKeys
 public class InputController : MonoBehaviour
 {
     [SerializeField] GameObject prefPrefab;
-    static public Dictionary<ActionKeys, KeyCode> defaultKeyDict = new Dictionary<ActionKeys, KeyCode>()
+    static public Dictionary<ActionKeys, KeyCode> defaultKeyDict = new()
     {
         { ActionKeys.None, KeyCode.None},
         { ActionKeys.Pause, KeyCode.Escape},
