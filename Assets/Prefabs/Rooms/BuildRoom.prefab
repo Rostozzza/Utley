@@ -312,6 +312,7 @@ MonoBehaviour:
   sparks: []
   lamps: []
   baseOfRoom: {fileID: 0}
+  animator: {fileID: 8480971123550035794}
   isEnpowered: 0
   workStr: 
   waitForPermissionToContinue: 0
@@ -29152,6 +29153,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5626453568319467189, guid: f1c536dcfca090e4eb085c0da0f50300, type: 3}
       propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593685790272638172, guid: f1c536dcfca090e4eb085c0da0f50300, type: 3}
+      propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8102839385548444316, guid: f1c536dcfca090e4eb085c0da0f50300, type: 3}

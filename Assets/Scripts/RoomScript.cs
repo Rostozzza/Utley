@@ -46,7 +46,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private GameObject baseOfRoom;
 	private Color defaultLampColor;
 	private Color defaultBaseColor;
-	protected Animator animator;
+	[SerializeField] protected Animator animator;
 	public bool isEnpowered = false;
 	protected RoomStatusController statusPanel;
 	public string workStr;
@@ -196,7 +196,7 @@ public class RoomScript : MonoBehaviour
 		workUI = GetComponentInChildren<RoomWorkUI>(true);
 		audioSource = GetComponent<AudioSource>();
 		statusPanel = GameManager.Instance.roomStatusListController.CreateRoomStatus(this);
-		animator = GetComponentInChildren<Animator>();
+		//animator = GetComponentInChildren<Animator>(); // we have a lot Animators, better to choose by hands;
 		walkPoints = rawWalkPoints.ConvertAll(n => n.transform.position);
 		roomStatsScreen = transform.Find("RoomInfo").gameObject;
 		roomStatsScreen.SetActive(false);

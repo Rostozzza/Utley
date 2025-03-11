@@ -34297,24 +34297,21 @@ PrefabInstance:
       addedObject: {fileID: 7218479795133457127}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
       insertIndex: 1
-      addedObject: {fileID: 6084878682876781797}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
-      insertIndex: 2
       addedObject: {fileID: 8948179324014137779}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
-      insertIndex: 3
+      insertIndex: 2
       addedObject: {fileID: 2825234001401102804}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
-      insertIndex: 4
+      insertIndex: 3
       addedObject: {fileID: 2295036676356505151}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
-      insertIndex: 5
+      insertIndex: 4
       addedObject: {fileID: 1848003964709652335}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
-      insertIndex: 6
+      insertIndex: 5
       addedObject: {fileID: 5844757809136983140}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
-      insertIndex: 7
+      insertIndex: 6
       addedObject: {fileID: 7024664719386837041}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
       insertIndex: -1
@@ -34337,6 +34334,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4563841010688871086}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6084878682876781797}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c4651dd514e263e4cb81d0fddd700be2, type: 3}
       insertIndex: -1
@@ -34553,6 +34553,7 @@ MonoBehaviour:
   sparks: []
   lamps: []
   baseOfRoom: {fileID: 0}
+  animator: {fileID: 6492818043054902958}
   isEnpowered: 1
   workStr: 
   waitForPermissionToContinue: 0
@@ -34853,6 +34854,10 @@ PrefabInstance:
     - target: {fileID: 1370321243622215711, guid: f1c536dcfca090e4eb085c0da0f50300, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593685790272638172, guid: f1c536dcfca090e4eb085c0da0f50300, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8913284530878711227, guid: f1c536dcfca090e4eb085c0da0f50300, type: 3}
       propertyPath: m_Name
