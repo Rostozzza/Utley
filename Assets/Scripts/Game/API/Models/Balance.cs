@@ -113,6 +113,7 @@ public class Constants
     public float DamageByTideMultiplier { get; set; }
     public float EnergohoneyConsumeMultiplier { get; set; }
     public float EnergohoneyConsumeMultiplierByRoom { get; set; }
+    public float EnergohoneyConsumeMultiplierByCycle { get; set; }
 }
 
 public enum RoomType

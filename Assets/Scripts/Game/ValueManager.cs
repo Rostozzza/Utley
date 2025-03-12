@@ -90,6 +90,7 @@ public class ValueManager : MonoBehaviour
         ValuesHolder.DamageByTideMultiplier                 = model.DamageByTideMultiplier;
         ValuesHolder.EnergohoneyConsumeMultiplier           = model.EnergohoneyConsumeMultiplier;
         ValuesHolder.EnergohoneyConsumeMultiplierByRoom     = model.EnergohoneyConsumeMultiplierByRoom;
+        ValuesHolder.EnergohoneyConsumeMultiplierByCycle    = model.EnergohoneyConsumeMultiplierByCycle;
     }
 
     public void TryGetConfig()
@@ -185,6 +186,7 @@ public class ValueManager : MonoBehaviour
             DamageByTideMultiplier = 1,
             EnergohoneyConsumeMultiplier = 1,
             EnergohoneyConsumeMultiplierByRoom = 1,
+            EnergohoneyConsumeMultiplierByCycle = 1,
         }; // tm = templateModel
         //Debug.Log(JsonConvert.SerializeObject(tm, Formatting.Indented));
         File.WriteAllText(path + "/config.json", JsonConvert.SerializeObject(tm, Formatting.Indented));
