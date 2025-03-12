@@ -1134,7 +1134,8 @@ public class RoomScript : MonoBehaviour
 
 	protected float GetModifiedInteractionTime(float bearLevel) => ValuesHolder.StandartInteractionTime * Mathf.Pow(ValuesHolder.InteractionSpeedMultiplyerByLevel, bearLevel) * Mathf.Pow(ValuesHolder.InteractionSpeedMultiplyerByGrade, level);
 	
-	public void GetPrices(out int asteriumCost, out int honeyCost, out int astroluminiteCost)
+	public void GetPrices(out int asteriumCost, out int honeyCost, out int astroluminiteCost) => GetPrices(out asteriumCost, out honeyCost, out astroluminiteCost, resource);
+	public void GetPrices(out int asteriumCost, out int honeyCost, out int astroluminiteCost, Resources resource)
 	{
 		switch (resource)
 		{
@@ -1188,4 +1189,9 @@ public class RoomScript : MonoBehaviour
 				break;
 		}
 	}
+
+    internal void GetPrices(out object asteriumCost, out object honeyCost, out object astroluminiteCost)
+    {
+        throw new NotImplementedException();
+    }
 }

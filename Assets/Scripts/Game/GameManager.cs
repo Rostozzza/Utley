@@ -430,6 +430,7 @@ public class GameManager : MonoBehaviour
 			var currentAstroluminite = await GetAstroluminite();
 			
 			roomScript.GetPrices(out int asteriumCost, out int honeyCost, out int astroluminiteCost);
+			Debug.Log($"<color=purple>ПОЛУЧИЛИ ЦЕНЫ: {asteriumCost} {honeyCost} {astroluminiteCost}</color>");
 
 			if (currentAsterium < asteriumCost || currentHoney < honeyCost || currentAstroluminite < astroluminiteCost)
 			{
@@ -437,9 +438,9 @@ public class GameManager : MonoBehaviour
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
 				elevatorBuildingScreen.SetActive(false);
-				EventManager.callError.Invoke($"Недостаточно {(currentAsterium < roomScript.asteriumCost ? "<color=yellow>" + (Mathf.Abs(currentAsterium - roomScript.asteriumCost)) + "</color>" + " астериума;" : "")}" +
-					$"{(currentHoney < roomScript.honeyCost ? "<color=yellow>" + ((int)Mathf.Abs(currentHoney - roomScript.honeyCost)) + "</color>" + " энергомёда;" : "")}" +
-					$"{(currentAstroluminite < roomScript.astroluminiteCost ? "<color=yellow>" + (Mathf.Abs(currentAstroluminite - roomScript.astroluminiteCost)) + "</color>" + " астролюминита;" : "")}");
+				EventManager.callError.Invoke($"Недостаточно {(currentAsterium < asteriumCost ? "<color=yellow>" + (Mathf.Abs(currentAsterium - asteriumCost)) + "</color>" + " астериума;" : "")}" +
+					$"{(currentHoney < honeyCost ? "<color=yellow>" + ((int)Mathf.Abs(currentHoney - honeyCost)) + "</color>" + " энергомёда;" : "")}" +
+					$"{(currentAstroluminite < astroluminiteCost ? "<color=yellow>" + (Mathf.Abs(currentAstroluminite - astroluminiteCost)) + "</color>" + " астролюминита;" : "")}");
 				return;
 			}
 
@@ -464,34 +465,34 @@ public class GameManager : MonoBehaviour
 				return;
 			}
 
-			if (roomScript.asteriumCost > 0)
+			if (asteriumCost > 0)
 			{
-				await ChangeAsteriy(-roomScript.asteriumCost, new Log
+				await ChangeAsteriy(-asteriumCost, new Log
 				{
-					comment = $"Consumed {Mathf.Abs(roomScript.asteriumCost)} asterium from player {playerName} for building {roomScript.gameObject.name}",
+					comment = $"Consumed {Mathf.Abs(asteriumCost)} asterium from player {playerName} for building {roomScript.gameObject.name}",
 					player_name = playerName,
 
-					resources_changed = new Dictionary<string, float> { { "asterium", -roomScript.asteriumCost } }
+					resources_changed = new Dictionary<string, float> { { "asterium", -asteriumCost } }
 				});
 			}
-			if (roomScript.honeyCost > 0)
+			if (honeyCost > 0)
 			{
-				await ChangeHoney(-roomScript.honeyCost, new Log
+				await ChangeHoney(-honeyCost, new Log
 				{
-					comment = $"Consumed {Mathf.Abs(roomScript.honeyCost)} honey from player {playerName} for building {roomScript.gameObject.name}",
+					comment = $"Consumed {Mathf.Abs(honeyCost)} honey from player {playerName} for building {roomScript.gameObject.name}",
 					player_name = playerName,
 
-					resources_changed = new Dictionary<string, float> { { "honey", -roomScript.honeyCost } }
+					resources_changed = new Dictionary<string, float> { { "honey", -honeyCost } }
 				});
 			}
-			if (roomScript.astroluminiteCost > 0)
+			if (astroluminiteCost > 0)
 			{
-				await ChangeAstroluminite(-roomScript.astroluminiteCost, new Log
+				await ChangeAstroluminite(-astroluminiteCost, new Log
 				{
-					comment = $"Consumed {Mathf.Abs(roomScript.astroluminiteCost)} astroluminite from player {playerName} for building {roomScript.gameObject.name}",
+					comment = $"Consumed {Mathf.Abs(astroluminiteCost)} astroluminite from player {playerName} for building {roomScript.gameObject.name}",
 					player_name = playerName,
 
-					resources_changed = new Dictionary<string, float> { { "astroluminite", -roomScript.astroluminiteCost } }
+					resources_changed = new Dictionary<string, float> { { "astroluminite", -astroluminiteCost } }
 				});
 			}
 			uiResourceShower.UpdateIndicators();
@@ -1336,7 +1337,7 @@ public class GameManager : MonoBehaviour
 	public void ShowAvailableAssignments()
 	{
 		var interestingRooms = allRooms.Where(x => x.GetComponent<RoomScript>() && (x.GetComponentInChildren<ButtonEnRoute>(true) && !x.GetComponentInChildren<ButtonEnRoute>(true).GetComponent<Button>().interactable)).ToList();
-		interestingRooms.ForEach(x => Debug.Log($"<color=\"green\">{x}</color>"));// {x.GetComponentInChildren<ButtonEnRoute>(true)} && {!x.GetComponentInChildren<ButtonEnRoute>(true).GetComponent<Button>().interactable} = {x.GetComponentInChildren<ButtonEnRoute>(true) && !x.GetComponentInChildren<ButtonEnRoute>(true).GetComponent<Button>().interactable}"));
+		//interestingRooms.ForEach(x => Debug.Log($"<color=\"green\">{x}</color>"));// {x.GetComponentInChildren<ButtonEnRoute>(true)} && {!x.GetComponentInChildren<ButtonEnRoute>(true).GetComponent<Button>().interactable} = {x.GetComponentInChildren<ButtonEnRoute>(true) && !x.GetComponentInChildren<ButtonEnRoute>(true).GetComponent<Button>().interactable}"));
 		foreach (var room in interestingRooms)
 		{
 			if (room.TryGetComponent<BuilderRoom>(out BuilderRoom builder))
