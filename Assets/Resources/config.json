@@ -14,7 +14,7 @@
   "EnergohoneyAmountByOneInteraction": 5.0,
   "AsteriumAmountByOneInteraction": 20,
   "GameDuration": 480.0,
-  "CycleDuration": 20.0,
+  "CycleDuration": 120.0,
   "StartPrototype": 0,
   "StartUrsowaks": 0,
   "PrototypeAmountByOneInteraction": 0,
@@ -33,49 +33,51 @@
   "SellUrsowaks": 5.0,
   "RoomsBuildPrice": {
     "Elevator": {
-      "Asterium": 10,
-      "Energohoney": 0,
-      "Astroluminite": 0
+      "AsteriumPrice": 10,
+      "EnergohoneyPrice": 0,
+      "AstroluminitePrice": 0
     },
     "Energohoney": {
-      "Asterium": 20,
-      "Energohoney": 25,
-      "Astroluminite": 1
+      "AsteriumPrice": 20,
+      "EnergohoneyPrice": 25,
+      "AstroluminitePrice": 1
     },
     "Asterium": {
-      "Asterium": 30,
-      "Energohoney": 0,
-      "Astroluminite": 3
+      "AsteriumPrice": 30,
+      "EnergohoneyPrice": 0,
+      "AstroluminitePrice": 3
     },
     "Cosmodrome": {
-      "Asterium": 0,
-      "Energohoney": 0,
-      "Astroluminite": 0
+      "AsteriumPrice": 0,
+      "EnergohoneyPrice": 0,
+      "AstroluminitePrice": 0
     },
     "Bed": {
-      "Asterium": 25,
-      "Energohoney": 10,
-      "Astroluminite": 0
+      "AsteriumPrice": 25,
+      "EnergohoneyPrice": 10,
+      "AstroluminitePrice": 0
     },
     "Build": {
-      "Asterium": 35,
-      "Energohoney": 0,
-      "Astroluminite": 3
+      "AsteriumPrice": 35,
+      "EnergohoneyPrice": 0,
+      "AstroluminitePrice": 3
     },
     "Supply": {
-      "Asterium": 30,
-      "Energohoney": 5,
-      "Astroluminite": 2
+      "AsteriumPrice": 30,
+      "EnergohoneyPrice": 5,
+      "AstroluminitePrice": 2
     },
     "Research": {
-      "Asterium": 25,
-      "Energohoney": 0,
-      "Astroluminite": 1
+      "AsteriumPrice": 25,
+      "EnergohoneyPrice": 0,
+      "AstroluminitePrice": 1
     }
   },
   "RepairCost": 10,
   "DamageByTide": 7.0,
   "DamageByTideMultiplier": 1.0,
   "EnergohoneyConsumeMultiplier": 1.0,
-  "EnergohoneyConsumeMultiplierByRoom": 1.0
+  "EnergohoneyConsumeMultiplierByRoom": 1.0,
+  "EnergohoneyConsumeMultiplierByCycle": 1.0,
+  "EnergohoneyExponent": 1.0
 }

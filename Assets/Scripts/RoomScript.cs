@@ -1140,45 +1140,45 @@ public class RoomScript : MonoBehaviour
 		switch (resource)
 		{
 			case Resources.Energohoney:
-				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Energohoney][ResourceType.Asterium];
-				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Energohoney][ResourceType.Energohoney];
-				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Energohoney][ResourceType.Astroluminite];
+				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Energohoney][ResourceType.AsteriumPrice];
+				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Energohoney][ResourceType.EnergohoneyPrice];
+				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Energohoney][ResourceType.AstroluminitePrice];
 				break;
 
 			case Resources.Asteriy:
-				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Asterium][ResourceType.Asterium];
-				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Asterium][ResourceType.Energohoney];
-				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Asterium][ResourceType.Astroluminite];
+				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Asterium][ResourceType.AsteriumPrice];
+				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Asterium][ResourceType.EnergohoneyPrice];
+				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Asterium][ResourceType.AstroluminitePrice];
 				break;
 
 			case Resources.Cosmodrome:
-				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Cosmodrome][ResourceType.Asterium];
-				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Cosmodrome][ResourceType.Energohoney];
-				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Cosmodrome][ResourceType.Astroluminite];
+				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Cosmodrome][ResourceType.AsteriumPrice];
+				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Cosmodrome][ResourceType.EnergohoneyPrice];
+				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Cosmodrome][ResourceType.AstroluminitePrice];
 				break;
 
 			case Resources.Bed:
-				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Bed][ResourceType.Asterium];
-				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Bed][ResourceType.Energohoney];
-				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Bed][ResourceType.Astroluminite];
+				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Bed][ResourceType.AsteriumPrice];
+				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Bed][ResourceType.EnergohoneyPrice];
+				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Bed][ResourceType.AstroluminitePrice];
 				break;
 
 			case Resources.Build:
-				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Build][ResourceType.Asterium];
-				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Build][ResourceType.Energohoney];
-				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Build][ResourceType.Astroluminite];
+				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Build][ResourceType.AsteriumPrice];
+				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Build][ResourceType.EnergohoneyPrice];
+				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Build][ResourceType.AstroluminitePrice];
 				break;
 
 			case Resources.Supply:
-				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Supply][ResourceType.Asterium];
-				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Supply][ResourceType.Energohoney];
-				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Supply][ResourceType.Astroluminite];
+				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Supply][ResourceType.AsteriumPrice];
+				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Supply][ResourceType.EnergohoneyPrice];
+				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Supply][ResourceType.AstroluminitePrice];
 				break;
 
 			case Resources.Research:
-				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Research][ResourceType.Asterium];
-				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Research][ResourceType.Energohoney];
-				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Research][ResourceType.Astroluminite];
+				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Research][ResourceType.AsteriumPrice];
+				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Research][ResourceType.EnergohoneyPrice];
+				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Research][ResourceType.AstroluminitePrice];
 				break;
 
 			default:

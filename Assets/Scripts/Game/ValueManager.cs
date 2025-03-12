@@ -91,6 +91,8 @@ public class ValueManager : MonoBehaviour
         ValuesHolder.EnergohoneyConsumeMultiplier           = model.EnergohoneyConsumeMultiplier;
         ValuesHolder.EnergohoneyConsumeMultiplierByRoom     = model.EnergohoneyConsumeMultiplierByRoom;
         ValuesHolder.EnergohoneyConsumeMultiplierByCycle    = model.EnergohoneyConsumeMultiplierByCycle;
+
+        ValuesHolder.EnergohoneyExponent                    = model.EnergohoneyExponent;
     }
 
     public void TryGetConfig()
@@ -124,7 +126,7 @@ public class ValueManager : MonoBehaviour
             StartUrsowaks = 0,
             PrototypeAmountByOneInteraction = 0,
             UrsowaksAmountByOneInteraction = 0,
-            StandartInteractionTimeAsteriumComplex = 0,
+            StandartInteractionTimeAsteriumComplex = 18,
             CycleModifier = 1,
             BuyBears = -7,
             BuyHoney = -0.25f,
@@ -139,14 +141,14 @@ public class ValueManager : MonoBehaviour
 
             RoomsBuildPrice = new()
             {
-                { RoomType.Elevator,    new(){ { ResourceType.Asterium, 10 }, { ResourceType.Energohoney, 0 }, { ResourceType.Astroluminite, 0 } } },
-                { RoomType.Energohoney, new(){ { ResourceType.Asterium, 20 }, { ResourceType.Energohoney, 25 }, { ResourceType.Astroluminite, 1 } } },
-                { RoomType.Asterium,    new(){ { ResourceType.Asterium, 30 }, { ResourceType.Energohoney, 0 }, { ResourceType.Astroluminite, 3 } } },
-                { RoomType.Cosmodrome,  new(){ { ResourceType.Asterium, 0 }, { ResourceType.Energohoney, 0 }, { ResourceType.Astroluminite, 0 } } },
-                { RoomType.Bed,         new(){ { ResourceType.Asterium, 25 }, { ResourceType.Energohoney, 10 }, { ResourceType.Astroluminite, 0 } } },
-                { RoomType.Build,       new(){ { ResourceType.Asterium, 35 }, { ResourceType.Energohoney, 0 }, { ResourceType.Astroluminite, 3 } } },
-                { RoomType.Supply,      new(){ { ResourceType.Asterium, 30 }, { ResourceType.Energohoney, 5 }, { ResourceType.Astroluminite, 2 } } },
-                { RoomType.Research,    new(){ { ResourceType.Asterium, 25 }, { ResourceType.Energohoney, 0 }, { ResourceType.Astroluminite, 1 } } }
+                { RoomType.Elevator,    new(){ { ResourceType.AsteriumPrice, 10 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 0 } } },
+                { RoomType.Energohoney, new(){ { ResourceType.AsteriumPrice, 20 }, { ResourceType.EnergohoneyPrice, 25 }, { ResourceType.AstroluminitePrice, 1 } } },
+                { RoomType.Asterium,    new(){ { ResourceType.AsteriumPrice, 30 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 3 } } },
+                { RoomType.Cosmodrome,  new(){ { ResourceType.AsteriumPrice, 0 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 0 } } },
+                { RoomType.Bed,         new(){ { ResourceType.AsteriumPrice, 25 }, { ResourceType.EnergohoneyPrice, 10 }, { ResourceType.AstroluminitePrice, 0 } } },
+                { RoomType.Build,       new(){ { ResourceType.AsteriumPrice, 35 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 3 } } },
+                { RoomType.Supply,      new(){ { ResourceType.AsteriumPrice, 30 }, { ResourceType.EnergohoneyPrice, 5 }, { ResourceType.AstroluminitePrice, 2 } } },
+                { RoomType.Research,    new(){ { ResourceType.AsteriumPrice, 25 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 1 } } }
             },
 
             //ElevatorAsteriumPrice = 10,
@@ -187,6 +189,8 @@ public class ValueManager : MonoBehaviour
             EnergohoneyConsumeMultiplier = 1,
             EnergohoneyConsumeMultiplierByRoom = 1,
             EnergohoneyConsumeMultiplierByCycle = 1,
+
+            EnergohoneyExponent = 1,
         }; // tm = templateModel
         //Debug.Log(JsonConvert.SerializeObject(tm, Formatting.Indented));
         File.WriteAllText(path + "/config.json", JsonConvert.SerializeObject(tm, Formatting.Indented));

@@ -499,7 +499,7 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
-			if (currentAsterium < ValuesHolder.RoomsBuildPrice[RoomType.Elevator][ResourceType.Asterium]) //😭;
+			if (currentAsterium < ValuesHolder.RoomsBuildPrice[RoomType.Elevator][ResourceType.AsteriumPrice]) //😭;
 			{
 				EventManager.callWarning.Invoke($"Не хватает {10 - currentAsterium} астерия.");
 				queuedBuildPositon = null;
@@ -1709,7 +1709,7 @@ public class GameManager : MonoBehaviour
 	public float CalculateHoneyToEat(bool isForSecond = true)
 	{
 		int roomsAmount = allRooms.Where(x => x.TryGetComponent(out RoomScript roomScript) && roomScript.isEnpowered).Count();
-		float honeyToEat = ValuesHolder.EnergohoneyConsumeMultiplier * (roomsAmount * ValuesHolder.EnergohoneyConsumeMultiplierByRoom + ValuesHolder.EnergohoneyConsumeMultiplierByCycle * cycleNumber) / (isForSecond ? 60f : 1f);
+		float honeyToEat = ValuesHolder.EnergohoneyConsumeMultiplier * (roomsAmount * ValuesHolder.EnergohoneyConsumeMultiplierByRoom + ValuesHolder.EnergohoneyConsumeMultiplierByCycle * Mathf.Pow(cycleNumber, ValuesHolder.EnergohoneyExponent)) / (isForSecond ? 60f : 1f);
 		if (season == Season.Freeze)
 		{
 			honeyToEat *= 1.05f + 0.1f * cycleNumber * ValuesHolder.CycleModifier;
