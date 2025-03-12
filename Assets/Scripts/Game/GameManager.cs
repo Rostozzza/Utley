@@ -1724,7 +1724,7 @@ public class GameManager : MonoBehaviour
 			while (isSeasonChanging)
 			{
 				uiResourceShower.UpdateBarsStatuses();
-				seasonTimeLeft = 30f;
+				seasonTimeLeft = ValuesHolder.CycleDuration / 4;
 				while (seasonTimeLeft > 0)
 				{
 					seasonTimeLeft -= Time.deltaTime;
@@ -1761,9 +1761,10 @@ public class GameManager : MonoBehaviour
 
 	public IEnumerator DamageRoomsBySeason()
 	{
+		int meteorAmount = 5;
 		if (isTimeGo)
 		{
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < meteorAmount; i++)
 			{
 				int n = Random.Range(3, 7);
 				List<GameObject> interestRooms = new List<GameObject>();
@@ -1804,7 +1805,7 @@ public class GameManager : MonoBehaviour
 					room.GetComponent<RoomScript>().ChangeDurability(-damage);
 				});
 				if (!ShopManager.Instance.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("TabletHide")) Camera.main.GetComponent<CameraShake>().MeteorImpact();
-				yield return new WaitForSeconds(6f);
+				yield return new WaitForSeconds(ValuesHolder.CycleDuration / (4 * meteorAmount));
 			}
 		}
 	}
