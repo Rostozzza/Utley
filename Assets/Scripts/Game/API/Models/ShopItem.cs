@@ -16,11 +16,24 @@ public class ShopItem : MonoBehaviour
 	public TextMeshProUGUI priceField;
 	public TMP_InputField requestedAmount;
 	public TextMeshProUGUI costOutput;
+	
+	void Start()
+	{
+		GetPrice();
+	}
 
-    void Awake()
-    {
-        GetPrice();
-    }
+	public void ChangeAmount(int value)
+	{
+		if (requestedAmount.text == "")
+		{
+			requestedAmount.text = value > 0 ? value.ToString() : "";
+			UpdateFields();
+			return;
+		}
+		int oldValue = int.Parse(requestedAmount.text);
+		requestedAmount.text = Mathf.Clamp(value + oldValue, 0, 999).ToString();
+		UpdateFields();
+	}
 
 	private void GetPrice()
 	{
@@ -50,25 +63,25 @@ public class ShopItem : MonoBehaviour
 			switch (name)
 			{
 				case "honey":
-				    price = ValuesHolder.SellHoney;
+					price = ValuesHolder.SellHoney;
 					break;
 				case "asterium":
-				    price = ValuesHolder.SellAsterium;
+					price = ValuesHolder.SellAsterium;
 					break;
 				case "astroluminite":
-				    price = ValuesHolder.SellAstroluminite;
+					price = ValuesHolder.SellAstroluminite;
 					break;
 				case "prototype":
-				    price = ValuesHolder.SellPrototype;
+					price = ValuesHolder.SellPrototype;
 					break;
 				case "ursowaks":
-				    price = ValuesHolder.SellUrsowaks;
+					price = ValuesHolder.SellUrsowaks;
 					break;
 			}
 		}
 	}
 
-    public void UpdateFields()
+	public void UpdateFields()
 	{
 		CheckInputField(requestedAmount, costOutput);
 
@@ -103,7 +116,7 @@ public class ShopItem : MonoBehaviour
 
 		if (requestedAmount.text.Length > 0 && int.Parse(requestedAmount.text) <= maxQuantity)
 		{
-			quantityField.text = $"{Mathf.Clamp(quantity - int.Parse(requestedAmount.text),0,99999999)}/{maxQuantity}";
+			quantityField.text = $"{Mathf.Clamp(quantity - int.Parse(requestedAmount.text), 0, 99999999)}/{maxQuantity}";
 		}
 		else
 		{
@@ -127,10 +140,10 @@ public class ShopItem : MonoBehaviour
 
 	public void EraseAllFields()
 	{
-		try {quantityField.text = "";} catch {}
-		try {priceField.text = "";} catch {}
-		try {requestedAmount.text = "";} catch {}
-		try {costOutput.text = "";} catch {}
+		try { quantityField.text = ""; } catch { }
+		try { priceField.text = ""; } catch { }
+		try { requestedAmount.text = ""; } catch { }
+		try { costOutput.text = ""; } catch { }
 		//😁;
 	}
 
