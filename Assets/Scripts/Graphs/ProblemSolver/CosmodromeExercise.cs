@@ -28,6 +28,7 @@ public class CosmodromeExercise : MonoBehaviour
 	[SerializeField] private float generationRadius;
 	[SerializeField] private Transform startAxisTransform;
 	[SerializeField] private Transform endAxisTransform;
+	[SerializeField] private List<GameObject> toDestroyAtEnd;
 
 
 
@@ -75,6 +76,7 @@ public class CosmodromeExercise : MonoBehaviour
 			Debug.Log("ShuffledPoint");
 			Vector3 averagePosition = previousPoint.transform.position + (currentPoint.transform.position - previousPoint.transform.position) / 2;
 			var weight = Instantiate(weightPrefab, pointsParent);
+			toDestroyAtEnd.Add(weight);
 			weight.transform.position = averagePosition;
 			int weightValue = Random.Range(1, difficulty);
 			weight.GetComponentInChildren<TextMeshProUGUI>(true).text = weightValue.ToString();
@@ -94,7 +96,7 @@ public class CosmodromeExercise : MonoBehaviour
 
 		foreach (var point in shufflePoints)
 		{
-			point.ConnectPoints();
+			point.ConnectPoints().ConvertAll(x => x.gameObject);
 		}
 		Debug.Log("GENERATED TASK AND CONNECTED POINTS!");
 		return correctAnswer;
@@ -132,6 +134,7 @@ public class CosmodromeExercise : MonoBehaviour
 		isTaskActive = false;
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
 		gameObject.SetActive(false);
+		answerField.text = "";
 	}
 
 	/// <summary>
@@ -140,6 +143,9 @@ public class CosmodromeExercise : MonoBehaviour
 	public void ClearGraph()
 	{
 		//pointsParent.GetComponentsInChildren<OgePointLogic>(true).ToList().ForEach(p => p.SetColor(Color.white));
+		//gameObjectsToDestroy.ForEach(x => Destroy(x));
+		toDestroyAtEnd.ForEach(x => Destroy(x));
+		shufflePoints.ForEach(x => x.ClearConnectedPoints());
 		pointsParent.GetComponentsInChildren<LineRenderer>(true).ToList().ForEach(line => Destroy(line.gameObject, 1f));
 		pointsParent.GetComponentsInChildren<TextMeshProUGUI>(true).ToList().Where(text => !text.transform.parent.GetComponent<RectMask2D>() && !text.gameObject.CompareTag("dont_destroy_text")).ToList().ForEach(weight => Destroy(weight.gameObject, 1f));
 	}

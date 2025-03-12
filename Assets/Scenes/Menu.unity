@@ -9845,6 +9845,7 @@ MonoBehaviour:
   generationRadius: 0.25
   startAxisTransform: {fileID: 1919209185}
   endAxisTransform: {fileID: 1764474411}
+  gameObjectsToDestroy: []
 --- !u!1 &368314441
 GameObject:
   m_ObjectHideFlags: 0
@@ -37016,7 +37017,7 @@ GameObject:
   - component: {fileID: 1578565635}
   m_Layer: 0
   m_Name: Text (TMP)
-  m_TagString: Untagged
+  m_TagString: dont_destroy_text
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
