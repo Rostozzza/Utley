@@ -1927,6 +1927,11 @@ public class GameManager : MonoBehaviour
 
 	public int GetIsCursorAtUI() => amountIsCursorAtUI;
 
+	public void SetBearsShow(bool set)
+	{
+		bears.ForEach(bear => bear.GetComponentInChildren<Animator>().gameObject.GetComponentsInChildren<SkinnedMeshRenderer>().ToList().ForEach(x => x.enabled = set));
+		bears.ForEach(bear => bear.GetComponentInChildren<Animator>().gameObject.GetComponentsInChildren<MeshRenderer>().ToList().ForEach(x => x.enabled = set));
+	}
 	public enum Season
 	{
 		Calm,

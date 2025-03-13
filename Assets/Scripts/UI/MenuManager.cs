@@ -720,6 +720,7 @@ public class MenuManager : MonoBehaviour
 				break;
 		}
 		GameManager.Instance.SetIsGraphUsing(true);
+		GameManager.Instance.SetBearsShow(false);
 	}
 
 	private IEnumerator WaitForFurnacesEnd(RoomScript room)
@@ -740,6 +741,7 @@ public class MenuManager : MonoBehaviour
 		
 		SetPipesScreen.SetActive(false);
 		(room as EnergohoneyRoom).SetIsSolved(true);
+		GameManager.Instance.SetBearsShow(true);
 		//problemSolverScreen.SetActive(false);
 		//tabletAnimator.SetTrigger("CloseShop");
 	}
@@ -754,6 +756,7 @@ public class MenuManager : MonoBehaviour
 		cosmodromeExercise.gameObject.SetActive(false);
 		problemSolverScreen.SetActive(false);
 		tabletAnimator.SetTrigger("CloseShop");
+		GameManager.Instance.SetBearsShow(true);
 	}
 
 	public enum ProblemType

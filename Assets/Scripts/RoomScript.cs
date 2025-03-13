@@ -283,12 +283,12 @@ public class RoomScript : MonoBehaviour
 	{
 		if (isEnpowered && status == Status.Free && durability > 0 && resource != Resources.Asteriy)
 		{
-			Debug.Log("<color=\"green\">" + gameObject.name + "</color>");
+			//Debug.Log("<color=\"green\">" + gameObject.name + "</color>");
 			assignmentButton.SetActive(true);
 		}
 		else
 		{
-			Debug.Log("<color=\"orange\">" + gameObject.name + "</color>" + "<color=\"red\">" + " isEnpowered=" + (isEnpowered) + " status=" + (status == Status.Free) + " durability=" + (durability > 0) + "</color>");
+			//Debug.Log("<color=\"orange\">" + gameObject.name + "</color>" + "<color=\"red\">" + " isEnpowered=" + (isEnpowered) + " status=" + (status == Status.Free) + " durability=" + (durability > 0) + "</color>");
 		}
 	}
 
@@ -909,7 +909,7 @@ public class RoomScript : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Repairs room to full for 10 asterium
+	/// Repairs room to full
 	/// </summary>
 	public async void RepairRoom()
 	{

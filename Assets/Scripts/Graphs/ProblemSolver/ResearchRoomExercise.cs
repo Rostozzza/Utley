@@ -97,12 +97,12 @@ public class ResearchRoomExercise : MonoBehaviour
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 		if (int.Parse(verticiesAnswer.text) == verticies && int.Parse(ribsAnswer.text) == ribs)
 		{
-			Debug.Log("бепмши нрбер");
+			Debug.Log("О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫");
 			roomToTarget.SetWorkEfficiency(1);
 		}
 		else
 		{
-			Debug.Log("нрбер мебепмши");
+			Debug.Log("О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫");
 			roomToTarget.SetWorkEfficiency(0.8f);
 		}
 		GameManager.Instance.SetIsGraphUsing(false);
@@ -111,6 +111,7 @@ public class ResearchRoomExercise : MonoBehaviour
 		isTaskActive = false;
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
 		gameObject.SetActive(false);
+		GameManager.Instance.SetBearsShow(true);
 	}
 
 	/// <summary>

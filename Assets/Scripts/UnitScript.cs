@@ -447,6 +447,8 @@ public class UnitScript : MonoBehaviour
 		statusPanel.UpdateWorkStr(strFromWork);
 	}
 
+	public Animator GetAnimator() => animator;
+
     public enum States
     {
         Idle,
