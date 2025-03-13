@@ -325,18 +325,39 @@ public class RoomScript : MonoBehaviour
 			return;
 		}
 
-		if (await GameManager.Instance.GetHoney() >= (30 + 10 * (level - 1)))
+		int requireAsterium = ValuesHolder.RoomsBuildPrice[ConvertResourcesToRoomType(resource)][ResourceType.RepairAsteriumCost];
+		int requireAstroluminite = ValuesHolder.RoomsBuildPrice[ConvertResourcesToRoomType(resource)][ResourceType.RepairAstroluminiteCost];
+
+		if (await GameManager.Instance.GetAsteriy()       >= requireAsterium &&
+			await GameManager.Instance.GetAstroluminite() >= requireAstroluminite) //await GameManager.Instance.GetHoney() >= (30 + 10 * (level - 1))
 		{
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
-			await GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)), new Log
+			//await GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)), new Log
+			//{
+			//	comment = $"Consumed {(30 + 10 * (level - 1))} honey for upgrading {this.name} room",
+//
+			//	player_name = GameManager.Instance.playerName,
+			//	resources_changed = new Dictionary<string, float> { { "honey", -(30 + 10 * (level - 1)) } }
+			//});
+
+			await GameManager.Instance.ChangeAsteriy(-requireAsterium, new Log
 			{
-				comment = $"Consumed {(30 + 10 * (level - 1))} honey for upgrading {this.name} room",
+				comment = $"Consumed {requireAsterium} asterium for upgrading {this.name} room",
 
 				player_name = GameManager.Instance.playerName,
-				resources_changed = new Dictionary<string, float> { { "honey", -(30 + 10 * (level - 1)) } }
+				resources_changed = new Dictionary<string, float> { { "asterium", -requireAsterium } }
 			});
+
+			await GameManager.Instance.ChangeAstroluminite(-requireAstroluminite, new Log
+			{
+				comment = $"Consumed {requireAstroluminite} astroluminite for upgrading {this.name} room",
+
+				player_name = GameManager.Instance.playerName,
+				resources_changed = new Dictionary<string, float> { { "astroluminite", -requireAstroluminite } }
+			});
+
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
 			StartCoroutine(Upgrade(button, fixedBuilderRoom));
@@ -344,9 +365,22 @@ public class RoomScript : MonoBehaviour
 		else
 		{
 			Debug.Log("Не хватает ресов для починки!");
-			EventManager.callWarning.Invoke($"Не хватает <color=yellow>{Mathf.CeilToInt((30 + 10 * (level - 1)) - await GameManager.Instance.GetHoney())}</color> энергомеда для починки!");
+			//EventManager.callWarning.Invoke($"Не хватает <color=yellow>{Mathf.CeilToInt((30 + 10 * (level - 1)) - await GameManager.Instance.GetHoney())}</color> энергомеда для починки!");
+			EventManager.callWarning.Invoke(NotEnoughResources(requireAsterium - await GameManager.Instance.GetAsteriy(), requireAstroluminite - await GameManager.Instance.GetAstroluminite()));
 			return;
 		}
+	}
+
+	private string NotEnoughResources(float differenceAsterium, float differenceAstroluminite)
+	{
+		string toReturn = "Не хватает ";
+
+		if (differenceAsterium > 0) toReturn += $"<color=yellow>{Mathf.CeilToInt(differenceAsterium)}</color> астерия, ";
+		if (differenceAstroluminite > 0) toReturn += $"<color=yellow>{Mathf.CeilToInt(differenceAstroluminite)}</color> астролюминита, ";
+
+		toReturn = toReturn[..^2] + " для починки!";
+
+		return toReturn;
 	}
 
 	private IEnumerator Upgrade(GameObject button, GameObject room)
@@ -1190,8 +1224,18 @@ public class RoomScript : MonoBehaviour
 		}
 	}
 
-    internal void GetPrices(out object asteriumCost, out object honeyCost, out object astroluminiteCost)
-    {
-        throw new NotImplementedException();
-    }
+	private RoomType ConvertResourcesToRoomType(Resources resource)
+	{
+	    return resource switch
+	    {
+	        Resources.Energohoney => RoomType.Energohoney,
+	        Resources.Asteriy     => RoomType.Asterium,
+	        Resources.Cosmodrome  => RoomType.Cosmodrome,
+	        Resources.Bed         => RoomType.Bed,
+	        Resources.Build       => RoomType.Build,
+	        Resources.Supply      => RoomType.Supply,
+	        Resources.Research    => RoomType.Research,
+	        _ => throw new ArgumentException(nameof(ConvertResourcesToRoomType), "Unknown room or it's elevator"),
+	    };
+	}
 }

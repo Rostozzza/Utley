@@ -19,7 +19,7 @@
   "StartUrsowaks": 0,
   "PrototypeAmountByOneInteraction": 0,
   "UrsowaksAmountByOneInteraction": 0,
-  "StandartInteractionTimeAsteriumComplex": 0.0,
+  "StandartInteractionTimeAsteriumComplex": 18.0,
   "CycleModifier": 1.0,
   "BuyBears": -7.0,
   "BuyHoney": -0.25,
@@ -35,42 +35,58 @@
     "Elevator": {
       "AsteriumPrice": 10,
       "EnergohoneyPrice": 0,
-      "AstroluminitePrice": 0
+      "AstroluminitePrice": 0,
+      "RepairAsteriumCost": 10,
+      "RepairAstroluminiteCost": 1
     },
     "Energohoney": {
       "AsteriumPrice": 20,
       "EnergohoneyPrice": 25,
-      "AstroluminitePrice": 1
+      "AstroluminitePrice": 1,
+      "RepairAsteriumCost": 10,
+      "RepairAstroluminiteCost": 1
     },
     "Asterium": {
       "AsteriumPrice": 30,
       "EnergohoneyPrice": 0,
-      "AstroluminitePrice": 3
+      "AstroluminitePrice": 3,
+      "RepairAsteriumCost": 10,
+      "RepairAstroluminiteCost": 1
     },
     "Cosmodrome": {
       "AsteriumPrice": 0,
       "EnergohoneyPrice": 0,
-      "AstroluminitePrice": 0
+      "AstroluminitePrice": 0,
+      "RepairAsteriumCost": 10,
+      "RepairAstroluminiteCost": 1
     },
     "Bed": {
       "AsteriumPrice": 25,
       "EnergohoneyPrice": 10,
-      "AstroluminitePrice": 0
+      "AstroluminitePrice": 0,
+      "RepairAsteriumCost": 10,
+      "RepairAstroluminiteCost": 1
     },
     "Build": {
       "AsteriumPrice": 35,
       "EnergohoneyPrice": 0,
-      "AstroluminitePrice": 3
+      "AstroluminitePrice": 3,
+      "RepairAsteriumCost": 10,
+      "RepairAstroluminiteCost": 1
     },
     "Supply": {
       "AsteriumPrice": 30,
       "EnergohoneyPrice": 5,
-      "AstroluminitePrice": 2
+      "AstroluminitePrice": 2,
+      "RepairAsteriumCost": 10,
+      "RepairAstroluminiteCost": 1
     },
     "Research": {
       "AsteriumPrice": 25,
       "EnergohoneyPrice": 0,
-      "AstroluminitePrice": 1
+      "AstroluminitePrice": 1,
+      "RepairAsteriumCost": 10,
+      "RepairAstroluminiteCost": 1
     }
   },
   "RepairCost": 10,
