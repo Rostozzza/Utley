@@ -48,7 +48,7 @@ public class RoomScript : MonoBehaviour
 	private Color defaultBaseColor;
 	[SerializeField] protected Animator animator;
 	public bool isEnpowered = false;
-	protected RoomStatusController statusPanel;
+	[SerializeField] protected RoomStatusController statusPanel;
 	public string workStr;
 	[SerializeField] private bool waitForPermissionToContinue;
 	[SerializeField] protected GameObject assignmentButton;
@@ -803,7 +803,7 @@ public class RoomScript : MonoBehaviour
 		}
 		catch (Exception e)
 		{
-			//Debug.Log("No statusPanel present at this moment!");
+			//Debug.Log("No statusPanel present at this moment! " + name);
 		}
 		if (!isEnpowered)
 		{
@@ -863,6 +863,7 @@ public class RoomScript : MonoBehaviour
 				}
 				InterruptWork();
 				animator.SetTrigger("EndWork");
+				statusPanel.UpdateDurability(durability);
 			}
 		}
 		catch (Exception e)
@@ -870,6 +871,7 @@ public class RoomScript : MonoBehaviour
 			Debug.Log($"An error occured during durability change! Error details: {e.Message}");
 		}
 		UpdateRoomHullView();
+		try { statusPanel.UpdateDurability(durability); } catch {}
 	}
 
 	private IEnumerator LampsBlinking()
