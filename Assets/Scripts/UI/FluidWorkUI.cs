@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class FluidWorkUI : RoomWorkUI
 {
-	protected override IEnumerator WorkProcess(float time, float amountOfUnits, Transform ui)
+	protected override IEnumerator WorkProcess(float time, float amountOfUnits, Transform ui, ResourceType resourceType = ResourceType.None)
 	{
 		animator.SetTrigger("Show");
 		correspondingUI = ui;
