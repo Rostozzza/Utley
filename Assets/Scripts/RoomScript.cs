@@ -219,7 +219,7 @@ public class RoomScript : MonoBehaviour
 			case Resources.Bed:
 				workStr = "Прокачиваем медведей";
 				GameManager.Instance.AddWorkStations(workStationsToOutline);
-				GameManager.Instance.ChangeMaxBearAmount(6);
+				GameManager.Instance.ChangeMaxBearAmount(5);
 				workSound = SoundManager.Instance.livingRoomWorkSound;
 				break;
 			case Resources.Asteriy:

@@ -16,9 +16,19 @@ public class BuildCostRefresher : MonoBehaviour
 
     string CreateCostText(string costStart)
     {
+        int asteriumCost = 0;
+        int honeyCost = 0;
+        int astroluminiteCost = 0;
+
         RoomScript roomScript = FindAnyObjectByType<RoomScript>(); // sorry 😭;
 
-        roomScript.GetPrices(out int asteriumCost, out int honeyCost, out int astroluminiteCost, ConvertResourcesToRoomScriptResources(roomType));
+        if (roomType == RoomType.Elevator) roomScript.GetPrices(out asteriumCost, out honeyCost, out astroluminiteCost, ConvertResourcesToRoomScriptResources(roomType));
+        else
+        {
+            asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Elevator][ResourceType.AsteriumPrice];
+            honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Elevator][ResourceType.EnergohoneyPrice];
+            astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Elevator][ResourceType.AstroluminitePrice];
+        }
 
         string costString = (roomType == RoomType.Elevator) ? $"Ресурсы: {asteriumCost} астерия" : $"Ресурсы: {asteriumCost} астерия, {honeyCost} энергомеда, {astroluminiteCost} астролюминита\n";
 

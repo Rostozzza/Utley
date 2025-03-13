@@ -227,6 +227,8 @@ public class ShopItem : MonoBehaviour
 					break;
 				case "bears":
 					//add new bear
+					if (int.Parse(requestedAmount.text) > GameManager.Instance.maxBearsAmount - GameManager.Instance.playerBears) return; // if player wants more bears, than max cap;
+
 					await GameManager.Instance.SpawnNewBear(int.Parse(requestedAmount.text));
 
 					await ShopManager.Instance.ChangeShopBears(-int.Parse(requestedAmount.text), new Log
