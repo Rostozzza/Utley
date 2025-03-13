@@ -590,6 +590,7 @@ public class MenuManager : MonoBehaviour
 		{
 			yield return null;
 		}
+		canContinueAfter2Cutscene = false;
 	}
 
 	private IEnumerator SkipChecker()
