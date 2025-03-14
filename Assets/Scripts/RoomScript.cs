@@ -988,7 +988,7 @@ public class RoomScript : MonoBehaviour
 		ChangeDurability(0);
 		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
-		status = Status.Free;
+		//status = Status.Free; // ????? why it was here???
 		statusPanel.UpdateStatus(status);
 	}
 
