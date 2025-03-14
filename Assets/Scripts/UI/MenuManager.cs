@@ -411,9 +411,16 @@ public class MenuManager : MonoBehaviour
 	{
 		if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 2)
 		{
-			if (InputController.GetKeyDown(ActionKeys.Pause))
+			if (InputController.GetKeyDown(ActionKeys.Pause) && !(GameManager.Instance.buildingScreen.activeSelf || GameManager.Instance.elevatorBuildingScreen.activeSelf))
 			{
-				Pause();
+				if (ShopManager.Instance.GetIsOpen())
+				{
+					ShopManager.Instance.OpenShop();
+				}
+				else
+				{
+					Pause();
+				}
 			}
 			if (InputController.GetKeyDown(ActionKeys.OpenShop) && !problemSolverScreen.activeSelf && !isPauseMenuActive)
 			{
