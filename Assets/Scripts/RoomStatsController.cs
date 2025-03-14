@@ -31,6 +31,7 @@ public class RoomStatsController : MonoBehaviour
         isStatsActive = set;
 		if (set)
 		{
+            roomScript.UpdateUpgradeView();
 			roomScript.GetRoomStatsScreen().SetActive(true);
 		}
 		else

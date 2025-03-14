@@ -424,18 +424,22 @@ public class RoomScript : MonoBehaviour
 	{
 		roomStatsScreen.SetActive(toggle);
 		UpdateRoomHullView();
+		UpdateUpgradeView();
 	}
 
 	public async void UpdateUpgradeView()
 	{
 		if (level < 3)
 		{
-			var currentHoney = await GameManager.Instance.GetHoney();
+			int requireAsterium = ValuesHolder.RoomsBuildPrice[ConvertResourcesToRoomType(resource)][ResourceType.RepairAsteriumCost];
+			int requireAstroluminite = ValuesHolder.RoomsBuildPrice[ConvertResourcesToRoomType(resource)][ResourceType.RepairAstroluminiteCost];
+
 			var desiredButton = roomStatsScreen.GetComponentsInChildren<TextMeshProUGUI>(true).First(x => x.transform.parent.name.Contains("Improve"));
-			if (currentHoney < (30 + 10 * (level - 1)))
+			if (await GameManager.Instance.GetAsteriy()       < requireAsterium ||
+				await GameManager.Instance.GetAstroluminite() < requireAstroluminite)//(currentHoney < (30 + 10 * (level - 1)));
 			{
 				//desiredButton.GetComponent<Button>() = false;
-				desiredButton.text = $"Не хватает {(int)((30 + 10 * (level - 1)) - currentHoney)} энергомёда!";
+				desiredButton.text = NotEnoughResources(requireAsterium - await GameManager.Instance.GetAsteriy(), requireAstroluminite - await GameManager.Instance.GetAstroluminite());
 			}
 			else
 			{
