@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
 	private bool isCold = false;
 	private bool isFreezing = false;
 	private int predictedAsteriumViews;
+	private List<GameObject> disabledAsteriumViewIcons = new();
 
     public void SetThisFrameSelected(bool value)
 	{
@@ -1015,6 +1016,41 @@ public class GameManager : MonoBehaviour
 		}
 		targetedView.color = Color.grey;
 
+	}
+
+	public void CheckEnpoweredAstriumRooms()
+	{
+		//int amount = allRooms.Select(x => x.TryGetComponent(out RoomScript roomScript)).Where(x => x.resource == RoomScript.Resources.Asteriy).Count();
+		int amountOfUnempowered = 0;
+
+		foreach (var room in allRooms)
+		{
+			if (room.TryGetComponent(out RoomScript roomScript))
+			{
+				if (roomScript.resource == RoomScript.Resources.Asteriy && !roomScript.isEnpowered)
+				{
+					amountOfUnempowered++;
+				}
+			}
+			//amountOfUnempowered++;
+		}
+
+		try
+		{
+			disabledAsteriumViewIcons.ForEach(x => x.SetActive(true));
+			disabledAsteriumViewIcons.Clear();
+		} catch {}
+
+		for (int i = 0; i < amountOfUnempowered; i++)
+		{
+			var targetedView = asteriumRoomView.Where(x => x.color != (Color.red + Color.yellow) / 2f).ToList()[i];
+			if (targetedView == null)
+			{
+				continue;
+			}
+			disabledAsteriumViewIcons.Add(targetedView.gameObject);
+			targetedView.gameObject.SetActive(false);
+		}
 	}
 
 	private void Update()

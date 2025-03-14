@@ -522,6 +522,7 @@ public class RoomScript : MonoBehaviour
 				status = Status.Busy;
 				statusPanel.UpdateStatus(status);
 				fixedBear.GetComponent<UnitScript>().CannotBeSelected();
+				GameManager.Instance.CheckEnpoweredAstriumRooms();
 				cosmodromeSelectScreen.SetActive(true);
 				return;
 			}
