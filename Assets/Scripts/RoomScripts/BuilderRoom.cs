@@ -41,12 +41,8 @@ public class BuilderRoom : RoomScript
         //ShowButton();
     }
     
-    public void SetWait(bool set)
-    {
-        wait = set;
-    }
 
-    public void SetWait(bool set, bool needToLeave)
+    public void SetWait(bool set, bool needToLeave = false)
     {
         wait = set;
         if (needToLeave)

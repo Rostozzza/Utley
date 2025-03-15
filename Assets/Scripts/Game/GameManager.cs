@@ -1284,6 +1284,7 @@ public class GameManager : MonoBehaviour
 				if (obj.GetComponentInParent<BuilderRoom>().fixedBear != null)
 				{
 					enRouteButton.SetButtonState(true);
+					unit.GetComponent<UnitMovement>().SetIsWalkingToWork(false);
 					builderGoesBack = true;
 				}
 				else
