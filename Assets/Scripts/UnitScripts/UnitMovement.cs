@@ -112,7 +112,7 @@ public class UnitMovement : MonoBehaviour
 		GetComponentInChildren<Animator>().SetBool("Walk", true);
 		Debug.Log($"Before distinction: {path.Count}");
 		var newPath = path.Distinct().ToList();
-		Debug.Log(newPath.Count);
+		//Debug.Log(newPath.Count);
 		currentElevator = path[0];
 		foreach (Elevator e in newPath)
 		{

@@ -48,7 +48,7 @@ public class RoomScript : MonoBehaviour
 	private Color defaultBaseColor;
 	[SerializeField] protected Animator animator;
 	public bool isEnpowered = false;
-	protected RoomStatusController statusPanel;
+	[SerializeField] protected RoomStatusController statusPanel;
 	public string workStr;
 	[SerializeField] private bool waitForPermissionToContinue;
 	[SerializeField] protected GameObject assignmentButton;
@@ -219,7 +219,7 @@ public class RoomScript : MonoBehaviour
 			case Resources.Bed:
 				workStr = "Прокачиваем медведей";
 				GameManager.Instance.AddWorkStations(workStationsToOutline);
-				GameManager.Instance.ChangeMaxBearAmount(6);
+				GameManager.Instance.ChangeMaxBearAmount(5);
 				workSound = SoundManager.Instance.livingRoomWorkSound;
 				break;
 			case Resources.Asteriy:
@@ -283,12 +283,12 @@ public class RoomScript : MonoBehaviour
 	{
 		if (isEnpowered && status == Status.Free && durability > 0 && resource != Resources.Asteriy)
 		{
-			Debug.Log("<color=\"green\">" + gameObject.name + "</color>");
+			//Debug.Log("<color=\"green\">" + gameObject.name + "</color>");
 			assignmentButton.SetActive(true);
 		}
 		else
 		{
-			Debug.Log("<color=\"orange\">" + gameObject.name + "</color>" + "<color=\"red\">" + " isEnpowered=" + (isEnpowered) + " status=" + (status == Status.Free) + " durability=" + (durability > 0) + "</color>");
+			//Debug.Log("<color=\"orange\">" + gameObject.name + "</color>" + "<color=\"red\">" + " isEnpowered=" + (isEnpowered) + " status=" + (status == Status.Free) + " durability=" + (durability > 0) + "</color>");
 		}
 	}
 
@@ -325,18 +325,39 @@ public class RoomScript : MonoBehaviour
 			return;
 		}
 
-		if (await GameManager.Instance.GetHoney() >= (30 + 10 * (level - 1)))
+		int requireAsterium = ValuesHolder.RoomsBuildPrice[ConvertResourcesToRoomType(resource)][ResourceType.RepairAsteriumCost];
+		int requireAstroluminite = ValuesHolder.RoomsBuildPrice[ConvertResourcesToRoomType(resource)][ResourceType.RepairAstroluminiteCost];
+
+		if (await GameManager.Instance.GetAsteriy()       >= requireAsterium &&
+			await GameManager.Instance.GetAstroluminite() >= requireAstroluminite) //await GameManager.Instance.GetHoney() >= (30 + 10 * (level - 1))
 		{
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
-			await GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)), new Log
+			//await GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)), new Log
+			//{
+			//	comment = $"Consumed {(30 + 10 * (level - 1))} honey for upgrading {this.name} room",
+//
+			//	player_name = GameManager.Instance.playerName,
+			//	resources_changed = new Dictionary<string, float> { { "honey", -(30 + 10 * (level - 1)) } }
+			//});
+
+			await GameManager.Instance.ChangeAsteriy(-requireAsterium, new Log
 			{
-				comment = $"Consumed {(30 + 10 * (level - 1))} honey for upgrading {this.name} room",
+				comment = $"Consumed {requireAsterium} asterium for upgrading {this.name} room",
 
 				player_name = GameManager.Instance.playerName,
-				resources_changed = new Dictionary<string, float> { { "honey", -(30 + 10 * (level - 1)) } }
+				resources_changed = new Dictionary<string, float> { { "asterium", -requireAsterium } }
 			});
+
+			await GameManager.Instance.ChangeAstroluminite(-requireAstroluminite, new Log
+			{
+				comment = $"Consumed {requireAstroluminite} astroluminite for upgrading {this.name} room",
+
+				player_name = GameManager.Instance.playerName,
+				resources_changed = new Dictionary<string, float> { { "astroluminite", -requireAstroluminite } }
+			});
+
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
 			StartCoroutine(Upgrade(button, fixedBuilderRoom));
@@ -344,9 +365,22 @@ public class RoomScript : MonoBehaviour
 		else
 		{
 			Debug.Log("Не хватает ресов для починки!");
-			EventManager.callWarning.Invoke($"Не хватает <color=yellow>{Mathf.CeilToInt((30 + 10 * (level - 1)) - await GameManager.Instance.GetHoney())}</color> энергомеда для починки!");
+			//EventManager.callWarning.Invoke($"Не хватает <color=yellow>{Mathf.CeilToInt((30 + 10 * (level - 1)) - await GameManager.Instance.GetHoney())}</color> энергомеда для починки!");
+			EventManager.callWarning.Invoke(NotEnoughResources(requireAsterium - await GameManager.Instance.GetAsteriy(), requireAstroluminite - await GameManager.Instance.GetAstroluminite()));
 			return;
 		}
+	}
+
+	private string NotEnoughResources(float differenceAsterium, float differenceAstroluminite)
+	{
+		string toReturn = "Не хватает ";
+
+		if (differenceAsterium > 0) toReturn += $"<color=yellow>{Mathf.CeilToInt(differenceAsterium)}</color> астерия, ";
+		if (differenceAstroluminite > 0) toReturn += $"<color=yellow>{Mathf.CeilToInt(differenceAstroluminite)}</color> астролюминита, ";
+
+		toReturn = toReturn[..^2] + " для починки!";
+
+		return toReturn;
 	}
 
 	private IEnumerator Upgrade(GameObject button, GameObject room)
@@ -390,18 +424,22 @@ public class RoomScript : MonoBehaviour
 	{
 		roomStatsScreen.SetActive(toggle);
 		UpdateRoomHullView();
+		UpdateUpgradeView();
 	}
 
 	public async void UpdateUpgradeView()
 	{
 		if (level < 3)
 		{
-			var currentHoney = await GameManager.Instance.GetHoney();
+			int requireAsterium = ValuesHolder.RoomsBuildPrice[ConvertResourcesToRoomType(resource)][ResourceType.RepairAsteriumCost];
+			int requireAstroluminite = ValuesHolder.RoomsBuildPrice[ConvertResourcesToRoomType(resource)][ResourceType.RepairAstroluminiteCost];
+
 			var desiredButton = roomStatsScreen.GetComponentsInChildren<TextMeshProUGUI>(true).First(x => x.transform.parent.name.Contains("Improve"));
-			if (currentHoney < (30 + 10 * (level - 1)))
+			if (await GameManager.Instance.GetAsteriy()       < requireAsterium ||
+				await GameManager.Instance.GetAstroluminite() < requireAstroluminite)//(currentHoney < (30 + 10 * (level - 1)));
 			{
 				//desiredButton.GetComponent<Button>() = false;
-				desiredButton.text = $"Не хватает {(int)((30 + 10 * (level - 1)) - currentHoney)} энергомёда!";
+				desiredButton.text = NotEnoughResources(requireAsterium - await GameManager.Instance.GetAsteriy(), requireAstroluminite - await GameManager.Instance.GetAstroluminite());
 			}
 			else
 			{
@@ -488,6 +526,7 @@ public class RoomScript : MonoBehaviour
 				status = Status.Busy;
 				statusPanel.UpdateStatus(status);
 				fixedBear.GetComponent<UnitScript>().CannotBeSelected();
+				GameManager.Instance.CheckEnpoweredAstriumRooms();
 				cosmodromeSelectScreen.SetActive(true);
 				return;
 			}
@@ -769,7 +808,7 @@ public class RoomScript : MonoBehaviour
 		}
 		catch (Exception e)
 		{
-			//Debug.Log("No statusPanel present at this moment!");
+			//Debug.Log("No statusPanel present at this moment! " + name);
 		}
 		if (!isEnpowered)
 		{
@@ -829,6 +868,7 @@ public class RoomScript : MonoBehaviour
 				}
 				InterruptWork();
 				animator.SetTrigger("EndWork");
+				statusPanel.UpdateDurability(durability);
 			}
 		}
 		catch (Exception e)
@@ -836,6 +876,7 @@ public class RoomScript : MonoBehaviour
 			Debug.Log($"An error occured during durability change! Error details: {e.Message}");
 		}
 		UpdateRoomHullView();
+		try { statusPanel.UpdateDurability(durability); } catch {}
 	}
 
 	private IEnumerator LampsBlinking()
@@ -873,7 +914,7 @@ public class RoomScript : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Repairs room to full for 10 asterium
+	/// Repairs room to full
 	/// </summary>
 	public async void RepairRoom()
 	{
@@ -951,7 +992,7 @@ public class RoomScript : MonoBehaviour
 		ChangeDurability(0);
 		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
-		status = Status.Free;
+		//status = Status.Free; // ????? why it was here???
 		statusPanel.UpdateStatus(status);
 	}
 
@@ -1134,50 +1175,51 @@ public class RoomScript : MonoBehaviour
 
 	protected float GetModifiedInteractionTime(float bearLevel) => ValuesHolder.StandartInteractionTime * Mathf.Pow(ValuesHolder.InteractionSpeedMultiplyerByLevel, bearLevel) * Mathf.Pow(ValuesHolder.InteractionSpeedMultiplyerByGrade, level);
 	
-	public void GetPrices(out int asteriumCost, out int honeyCost, out int astroluminiteCost)
+	public void GetPrices(out int asteriumCost, out int honeyCost, out int astroluminiteCost) => GetPrices(out asteriumCost, out honeyCost, out astroluminiteCost, resource);
+	public void GetPrices(out int asteriumCost, out int honeyCost, out int astroluminiteCost, Resources resource)
 	{
 		switch (resource)
 		{
 			case Resources.Energohoney:
-				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Energohoney][ResourceType.Asterium];
-				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Energohoney][ResourceType.Energohoney];
-				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Energohoney][ResourceType.Astroluminite];
+				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Energohoney][ResourceType.AsteriumPrice];
+				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Energohoney][ResourceType.EnergohoneyPrice];
+				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Energohoney][ResourceType.AstroluminitePrice];
 				break;
 
 			case Resources.Asteriy:
-				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Asterium][ResourceType.Asterium];
-				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Asterium][ResourceType.Energohoney];
-				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Asterium][ResourceType.Astroluminite];
+				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Asterium][ResourceType.AsteriumPrice];
+				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Asterium][ResourceType.EnergohoneyPrice];
+				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Asterium][ResourceType.AstroluminitePrice];
 				break;
 
 			case Resources.Cosmodrome:
-				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Cosmodrome][ResourceType.Asterium];
-				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Cosmodrome][ResourceType.Energohoney];
-				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Cosmodrome][ResourceType.Astroluminite];
+				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Cosmodrome][ResourceType.AsteriumPrice];
+				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Cosmodrome][ResourceType.EnergohoneyPrice];
+				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Cosmodrome][ResourceType.AstroluminitePrice];
 				break;
 
 			case Resources.Bed:
-				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Bed][ResourceType.Asterium];
-				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Bed][ResourceType.Energohoney];
-				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Bed][ResourceType.Astroluminite];
+				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Bed][ResourceType.AsteriumPrice];
+				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Bed][ResourceType.EnergohoneyPrice];
+				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Bed][ResourceType.AstroluminitePrice];
 				break;
 
 			case Resources.Build:
-				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Build][ResourceType.Asterium];
-				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Build][ResourceType.Energohoney];
-				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Build][ResourceType.Astroluminite];
+				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Build][ResourceType.AsteriumPrice];
+				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Build][ResourceType.EnergohoneyPrice];
+				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Build][ResourceType.AstroluminitePrice];
 				break;
 
 			case Resources.Supply:
-				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Supply][ResourceType.Asterium];
-				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Supply][ResourceType.Energohoney];
-				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Supply][ResourceType.Astroluminite];
+				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Supply][ResourceType.AsteriumPrice];
+				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Supply][ResourceType.EnergohoneyPrice];
+				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Supply][ResourceType.AstroluminitePrice];
 				break;
 
 			case Resources.Research:
-				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Research][ResourceType.Asterium];
-				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Research][ResourceType.Energohoney];
-				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Research][ResourceType.Astroluminite];
+				asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Research][ResourceType.AsteriumPrice];
+				honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Research][ResourceType.EnergohoneyPrice];
+				astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Research][ResourceType.AstroluminitePrice];
 				break;
 
 			default:
@@ -1187,5 +1229,20 @@ public class RoomScript : MonoBehaviour
 				astroluminiteCost = 0;
 				break;
 		}
+	}
+
+	private RoomType ConvertResourcesToRoomType(Resources resource)
+	{
+	    return resource switch
+	    {
+	        Resources.Energohoney => RoomType.Energohoney,
+	        Resources.Asteriy     => RoomType.Asterium,
+	        Resources.Cosmodrome  => RoomType.Cosmodrome,
+	        Resources.Bed         => RoomType.Bed,
+	        Resources.Build       => RoomType.Build,
+	        Resources.Supply      => RoomType.Supply,
+	        Resources.Research    => RoomType.Research,
+	        _ => throw new ArgumentException(nameof(ConvertResourcesToRoomType), "Unknown room or it's elevator"),
+	    };
 	}
 }

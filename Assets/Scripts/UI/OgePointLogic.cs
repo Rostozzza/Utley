@@ -20,11 +20,13 @@ public class OgePointLogic : MonoBehaviour
 		}
 	}
 
-	public void ConnectPoints()
+	public List<LineRenderer> ConnectPoints()
 	{
+		List<LineRenderer> toReturn = new();
 		foreach (OgePointLogic point in connectedPoints)
 		{
-			var lineInstance = Instantiate(line, transform).GetComponent<LineRenderer>();
+			LineRenderer lineInstance = Instantiate(line, transform).GetComponent<LineRenderer>();
+			toReturn.Add(lineInstance);
 			lineInstance.useWorldSpace = true;
 			lineInstance.SetPosition(0, transform.position);
 			lineInstance.SetPosition(1, point.transform.position);
@@ -33,6 +35,7 @@ public class OgePointLogic : MonoBehaviour
 				point.sourcePoints.Add(this);
 			}
 		}
+		return toReturn;
 	}
 
 	public void SetIsUsing(bool set)
@@ -65,4 +68,6 @@ public class OgePointLogic : MonoBehaviour
 	{
 		return sourcePoints;
 	}
+
+	public void ClearConnectedPoints() => connectedPoints.Clear();
 }

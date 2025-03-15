@@ -32,6 +32,7 @@ public class UIResourceShower : MonoBehaviour
     [SerializeField] private GameObject seasonDebuffPanel3;
     [SerializeField] private TextMeshProUGUI seasonDebuffPanelText;
     [SerializeField] private GameObject timeLeftPanel;
+    private Coroutine seasonUpdater;
 
     [Header("Bars with info")]
     [SerializeField] private Image icon;
@@ -163,6 +164,7 @@ public class UIResourceShower : MonoBehaviour
                 break;
             case PointerHint.HintType.Season:
                 seasonPanelText.text = SeasonToText(GameManager.Instance.season);
+                seasonUpdater = StartCoroutine(SeasonToTextUpdater());
                 seasonPanel.SetActive(true);
                 break;
             case PointerHint.HintType.SeasonDebuff:
@@ -221,6 +223,7 @@ public class UIResourceShower : MonoBehaviour
                 break;
             case PointerHint.HintType.Season:
                 seasonPanel.SetActive(false);
+                StopCoroutine(SeasonToTextUpdater());
                 break;
             case PointerHint.HintType.SeasonDebuff:
                 seasonDebuffPanel.SetActive(false);
@@ -236,18 +239,25 @@ public class UIResourceShower : MonoBehaviour
 
     private string SeasonToText(GameManager.Season season)
     {
-        switch (season)
+        string toReturn;
+        toReturn = season switch
         {
-            case GameManager.Season.Calm:
-                return "Спокойная фаза";
-            case GameManager.Season.Storm:
-                return "Буревая фаза";
-            case GameManager.Season.Freeze:
-                return "Морозная фаза";
-            case GameManager.Season.Tide:
-                return "Приливная фаза";
-            default:
-                return "Неизвестная фаза";
+            GameManager.Season.Calm => "Спокойная фаза",
+            GameManager.Season.Storm => "Буревая фаза",
+            GameManager.Season.Freeze => "Морозная фаза",
+            GameManager.Season.Tide => "Приливная фаза",
+            _ => "Неизвестная фаза",
+        };
+        toReturn += $"\nещё <color=yellow>{Mathf.CeilToInt(GameManager.Instance.GetSeasonTimeLeft())}</color> с.";
+        return toReturn;
+    }
+
+    private IEnumerator SeasonToTextUpdater()
+    {
+        while (true)
+        {
+            seasonPanelText.text = SeasonToText(GameManager.Instance.season);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }

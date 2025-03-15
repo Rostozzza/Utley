@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
 	private bool isCold = false;
 	private bool isFreezing = false;
 	private int predictedAsteriumViews;
+	private List<GameObject> disabledAsteriumViewIcons = new();
 
     public void SetThisFrameSelected(bool value)
 	{
@@ -430,6 +431,7 @@ public class GameManager : MonoBehaviour
 			var currentAstroluminite = await GetAstroluminite();
 			
 			roomScript.GetPrices(out int asteriumCost, out int honeyCost, out int astroluminiteCost);
+			Debug.Log($"<color=purple>ПОЛУЧИЛИ ЦЕНЫ: {asteriumCost} {honeyCost} {astroluminiteCost}</color>");
 
 			if (currentAsterium < asteriumCost || currentHoney < honeyCost || currentAstroluminite < astroluminiteCost)
 			{
@@ -437,9 +439,9 @@ public class GameManager : MonoBehaviour
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
 				elevatorBuildingScreen.SetActive(false);
-				EventManager.callError.Invoke($"Недостаточно {(currentAsterium < roomScript.asteriumCost ? "<color=yellow>" + (Mathf.Abs(currentAsterium - roomScript.asteriumCost)) + "</color>" + " астериума;" : "")}" +
-					$"{(currentHoney < roomScript.honeyCost ? "<color=yellow>" + ((int)Mathf.Abs(currentHoney - roomScript.honeyCost)) + "</color>" + " энергомёда;" : "")}" +
-					$"{(currentAstroluminite < roomScript.astroluminiteCost ? "<color=yellow>" + (Mathf.Abs(currentAstroluminite - roomScript.astroluminiteCost)) + "</color>" + " астролюминита;" : "")}");
+				EventManager.callError.Invoke($"Недостаточно {(currentAsterium < asteriumCost ? "<color=yellow>" + (Mathf.Abs(currentAsterium - asteriumCost)) + "</color>" + " астериума;" : "")}" +
+					$"{(currentHoney < honeyCost ? "<color=yellow>" + ((int)Mathf.Abs(currentHoney - honeyCost)) + "</color>" + " энергомёда;" : "")}" +
+					$"{(currentAstroluminite < astroluminiteCost ? "<color=yellow>" + (Mathf.Abs(currentAstroluminite - astroluminiteCost)) + "</color>" + " астролюминита;" : "")}");
 				return;
 			}
 
@@ -464,41 +466,41 @@ public class GameManager : MonoBehaviour
 				return;
 			}
 
-			if (roomScript.asteriumCost > 0)
+			if (asteriumCost > 0)
 			{
-				await ChangeAsteriy(-roomScript.asteriumCost, new Log
+				await ChangeAsteriy(-asteriumCost, new Log
 				{
-					comment = $"Consumed {Mathf.Abs(roomScript.asteriumCost)} asterium from player {playerName} for building {roomScript.gameObject.name}",
+					comment = $"Consumed {Mathf.Abs(asteriumCost)} asterium from player {playerName} for building {roomScript.gameObject.name}",
 					player_name = playerName,
 
-					resources_changed = new Dictionary<string, float> { { "asterium", -roomScript.asteriumCost } }
+					resources_changed = new Dictionary<string, float> { { "asterium", -asteriumCost } }
 				});
 			}
-			if (roomScript.honeyCost > 0)
+			if (honeyCost > 0)
 			{
-				await ChangeHoney(-roomScript.honeyCost, new Log
+				await ChangeHoney(-honeyCost, new Log
 				{
-					comment = $"Consumed {Mathf.Abs(roomScript.honeyCost)} honey from player {playerName} for building {roomScript.gameObject.name}",
+					comment = $"Consumed {Mathf.Abs(honeyCost)} honey from player {playerName} for building {roomScript.gameObject.name}",
 					player_name = playerName,
 
-					resources_changed = new Dictionary<string, float> { { "honey", -roomScript.honeyCost } }
+					resources_changed = new Dictionary<string, float> { { "honey", -honeyCost } }
 				});
 			}
-			if (roomScript.astroluminiteCost > 0)
+			if (astroluminiteCost > 0)
 			{
-				await ChangeAstroluminite(-roomScript.astroluminiteCost, new Log
+				await ChangeAstroluminite(-astroluminiteCost, new Log
 				{
-					comment = $"Consumed {Mathf.Abs(roomScript.astroluminiteCost)} astroluminite from player {playerName} for building {roomScript.gameObject.name}",
+					comment = $"Consumed {Mathf.Abs(astroluminiteCost)} astroluminite from player {playerName} for building {roomScript.gameObject.name}",
 					player_name = playerName,
 
-					resources_changed = new Dictionary<string, float> { { "astroluminite", -roomScript.astroluminiteCost } }
+					resources_changed = new Dictionary<string, float> { { "astroluminite", -astroluminiteCost } }
 				});
 			}
 			uiResourceShower.UpdateIndicators();
 		}
 		else
 		{
-			if (currentAsterium < ValuesHolder.RoomsBuildPrice[RoomType.Elevator][ResourceType.Asterium]) //😭;
+			if (currentAsterium < ValuesHolder.RoomsBuildPrice[RoomType.Elevator][ResourceType.AsteriumPrice]) //😭;
 			{
 				EventManager.callWarning.Invoke($"Не хватает {10 - currentAsterium} астерия.");
 				queuedBuildPositon = null;
@@ -1016,6 +1018,41 @@ public class GameManager : MonoBehaviour
 
 	}
 
+	public void CheckEnpoweredAstriumRooms()
+	{
+		//int amount = allRooms.Select(x => x.TryGetComponent(out RoomScript roomScript)).Where(x => x.resource == RoomScript.Resources.Asteriy).Count();
+		int amountOfUnempowered = 0;
+
+		foreach (var room in allRooms)
+		{
+			if (room.TryGetComponent(out RoomScript roomScript))
+			{
+				if (roomScript.resource == RoomScript.Resources.Asteriy && !roomScript.isEnpowered)
+				{
+					amountOfUnempowered++;
+				}
+			}
+			//amountOfUnempowered++;
+		}
+
+		try
+		{
+			disabledAsteriumViewIcons.ForEach(x => x.SetActive(true));
+			disabledAsteriumViewIcons.Clear();
+		} catch {}
+
+		for (int i = 0; i < amountOfUnempowered; i++)
+		{
+			var targetedView = asteriumRoomView.Where(x => x.color != (Color.red + Color.yellow) / 2f).ToList()[i];
+			if (targetedView == null)
+			{
+				continue;
+			}
+			disabledAsteriumViewIcons.Add(targetedView.gameObject);
+			targetedView.gameObject.SetActive(false);
+		}
+	}
+
 	private void Update()
 	{
 		InputHandler();
@@ -1337,7 +1374,7 @@ public class GameManager : MonoBehaviour
 	public void ShowAvailableAssignments()
 	{
 		var interestingRooms = allRooms.Where(x => x.GetComponent<RoomScript>() && (x.GetComponentInChildren<ButtonEnRoute>(true) && !x.GetComponentInChildren<ButtonEnRoute>(true).GetComponent<Button>().interactable)).ToList();
-		interestingRooms.ForEach(x => Debug.Log($"<color=\"green\">{x}</color>"));// {x.GetComponentInChildren<ButtonEnRoute>(true)} && {!x.GetComponentInChildren<ButtonEnRoute>(true).GetComponent<Button>().interactable} = {x.GetComponentInChildren<ButtonEnRoute>(true) && !x.GetComponentInChildren<ButtonEnRoute>(true).GetComponent<Button>().interactable}"));
+		//interestingRooms.ForEach(x => Debug.Log($"<color=\"green\">{x}</color>"));// {x.GetComponentInChildren<ButtonEnRoute>(true)} && {!x.GetComponentInChildren<ButtonEnRoute>(true).GetComponent<Button>().interactable} = {x.GetComponentInChildren<ButtonEnRoute>(true) && !x.GetComponentInChildren<ButtonEnRoute>(true).GetComponent<Button>().interactable}"));
 		foreach (var room in interestingRooms)
 		{
 			if (room.TryGetComponent<BuilderRoom>(out BuilderRoom builder))
@@ -1709,7 +1746,7 @@ public class GameManager : MonoBehaviour
 	public float CalculateHoneyToEat(bool isForSecond = true)
 	{
 		int roomsAmount = allRooms.Where(x => x.TryGetComponent(out RoomScript roomScript) && roomScript.isEnpowered).Count();
-		float honeyToEat = ValuesHolder.EnergohoneyConsumeMultiplier * (roomsAmount * ValuesHolder.EnergohoneyConsumeMultiplierByRoom + 16 * cycleNumber) / (isForSecond ? 60f : 1f);
+		float honeyToEat = ValuesHolder.EnergohoneyConsumeMultiplier * (roomsAmount * ValuesHolder.EnergohoneyConsumeMultiplierByRoom + ValuesHolder.EnergohoneyConsumeMultiplierByCycle * Mathf.Pow(cycleNumber, ValuesHolder.EnergohoneyExponent)) / (isForSecond ? 60f : 1f);
 		if (season == Season.Freeze)
 		{
 			honeyToEat *= 1.05f + 0.1f * cycleNumber * ValuesHolder.CycleModifier;
@@ -1724,7 +1761,7 @@ public class GameManager : MonoBehaviour
 			while (isSeasonChanging)
 			{
 				uiResourceShower.UpdateBarsStatuses();
-				seasonTimeLeft = 30f;
+				seasonTimeLeft = ValuesHolder.CycleDuration / 4;
 				while (seasonTimeLeft > 0)
 				{
 					seasonTimeLeft -= Time.deltaTime;
@@ -1761,9 +1798,10 @@ public class GameManager : MonoBehaviour
 
 	public IEnumerator DamageRoomsBySeason()
 	{
+		int meteorAmount = 5;
 		if (isTimeGo)
 		{
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < meteorAmount; i++)
 			{
 				int n = Random.Range(3, 7);
 				List<GameObject> interestRooms = new List<GameObject>();
@@ -1804,7 +1842,7 @@ public class GameManager : MonoBehaviour
 					room.GetComponent<RoomScript>().ChangeDurability(-damage);
 				});
 				if (!ShopManager.Instance.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("TabletHide")) Camera.main.GetComponent<CameraShake>().MeteorImpact();
-				yield return new WaitForSeconds(6f);
+				yield return new WaitForSeconds(ValuesHolder.CycleDuration / (4 * meteorAmount));
 			}
 		}
 	}
@@ -1926,6 +1964,11 @@ public class GameManager : MonoBehaviour
 
 	public int GetIsCursorAtUI() => amountIsCursorAtUI;
 
+	public void SetBearsShow(bool set)
+	{
+		bears.ForEach(bear => bear.GetComponentInChildren<Animator>().gameObject.GetComponentsInChildren<SkinnedMeshRenderer>().ToList().ForEach(x => x.enabled = set));
+		bears.ForEach(bear => bear.GetComponentInChildren<Animator>().gameObject.GetComponentsInChildren<MeshRenderer>().ToList().ForEach(x => x.enabled = set));
+	}
 	public enum Season
 	{
 		Calm,

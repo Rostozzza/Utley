@@ -19,12 +19,16 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private string currentPlayerPassword;
 	[SerializeField] private TextMeshProUGUI currentPlayerField;
 	[SerializeField] private GameObject loadingView;
+	[SerializeField] private bool loadingViewShow;
 	[SerializeField] private List<GameObject> tutor;
 	[SerializeField] private bool isPauseMenuActive = false;
+	[SerializeField] private CutsceneSkipper skipper;
+    [SerializeField] private float skipTimer;
 	private Dictionary<LineRenderer, bool> linesStates = new();
 	[Header("Game message settings")]
 	[SerializeField] private NotificationsManager notificationsManager;
 	private Coroutine messageViewRoutine;
+	[SerializeField] private bool isAfterSkip = false;
 	[Header("Screens")]
 	[SerializeField] private GameObject startingScreen;
 	[SerializeField] private GameObject registrationScreen;
@@ -83,7 +87,7 @@ public class MenuManager : MonoBehaviour
 	[Header("Cosmodrome Exercise")]
 	[SerializeField] private CosmodromeExercise cosmodromeExercise;
 
-	public void SetMasterVolume()
+    public void SetMasterVolume()
 	{
 		float volume = masterSlider.value;
 		mixer.SetFloat("MasterVolume", volume < 0.01f ? -80 : Mathf.Log10(volume) * 20);
@@ -126,6 +130,18 @@ public class MenuManager : MonoBehaviour
 				break;
 			}
 			yield return null;
+		}
+	}
+
+	private void TrySetActiveLoadingView(bool set)
+	{
+		if (loadingViewShow)
+		{
+			loadingView.SetActive(set);
+		}
+		else
+		{
+			if (loadingView.activeSelf != false) loadingView.SetActive(false);
 		}
 	}
 
@@ -221,13 +237,19 @@ public class MenuManager : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
+		
+		if (skipper == null)
+		{
+			skipper = GetComponentInChildren<CutsceneSkipper>();
+		}
 	}
 
 	public void Start()
 	{
 		videoPlayer.loopPointReached += OnVideoEnd;
 
-		skipChecker = StartCoroutine(SkipChecker());
+		//skipChecker = StartCoroutine(SkipChecker());
+		skipChecker = skipper.AllowSkipCoroutine(skipTimer);
 		if (PlayerPrefs.GetString("currentPlayer") != "")
 		{
 			currentPLayerName = PlayerPrefs.GetString("currentPlayer");
@@ -378,7 +400,7 @@ public class MenuManager : MonoBehaviour
 		winScreen.GetComponent<CanvasGroup>().alpha = 0f;
 		pauseScreen.SetActive(false);
 		isPauseMenuActive = false;
-		loadingView.SetActive(false);
+		TrySetActiveLoadingView(false);
 	}
 
 	public void Quit()
@@ -390,9 +412,17 @@ public class MenuManager : MonoBehaviour
 	{
 		if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 2)
 		{
-			if (InputController.GetKeyDown(ActionKeys.Pause))
+			if (InputController.GetKeyDown(ActionKeys.Pause) && !(GameManager.Instance.buildingScreen.activeSelf || GameManager.Instance.elevatorBuildingScreen.activeSelf))
 			{
-				Pause();
+				if (isAfterSkip) return;
+				if (ShopManager.Instance.GetIsOpen())
+				{
+					ShopManager.Instance.OpenShop();
+				}
+				else
+				{
+					Pause();
+				}
 			}
 			if (InputController.GetKeyDown(ActionKeys.OpenShop) && !problemSolverScreen.activeSelf && !isPauseMenuActive)
 			{
@@ -424,7 +454,7 @@ public class MenuManager : MonoBehaviour
 
 	public async void Registrate()
 	{
-		loadingView.SetActive(true);
+		TrySetActiveLoadingView(true);
 		var requestedPlayer = await RequestManager.GetPlayer(registrationUsernameField.text);
 		if (requestedPlayer == null)
 		{
@@ -440,14 +470,14 @@ public class MenuManager : MonoBehaviour
 		currentPLayerName = registrationUsernameField.text;
 		currentPlayerPassword = registrationPasswordField.text;
 		PlayerPrefs.SetString("currentPlayer", currentPLayerName);
-		loadingView.SetActive(false);
+		TrySetActiveLoadingView(false);
 	}
 
 	public async void Login()
 	{
-		loadingView.SetActive(true);
+		TrySetActiveLoadingView(true);
 		var requestedPlayer = await RequestManager.GetPlayer(loginUsernameField.text);
-		loadingView.SetActive(false);
+		TrySetActiveLoadingView(false);
 		if (requestedPlayer == null)
 		{
 			return;
@@ -491,7 +521,7 @@ public class MenuManager : MonoBehaviour
 	{
 		buttonsToHide.ForEach(x => x.SetActive(false));
 		buttonsToShow.ForEach(x => x.SetActive(true));
-		loadingView.SetActive(true);
+		TrySetActiveLoadingView(true);
 		mainMenuScreen.SetActive(false);
 		StartCoroutine(LoadingScreenCoroutine(0));
 	}
@@ -500,7 +530,7 @@ public class MenuManager : MonoBehaviour
 	{
 		buttonsToHide.ForEach(x => x.SetActive(false));
 		buttonsToShow.ForEach(x => x.SetActive(true));
-		loadingView.SetActive(true);
+		TrySetActiveLoadingView(true);
 		mainMenuScreen.SetActive(false);
 		StartCoroutine(LoadingScreenCoroutine(1));
 	}
@@ -523,7 +553,7 @@ public class MenuManager : MonoBehaviour
 			loadingBar.value = 0;
 			loadingScreen.SetActive(false);
 			Time.timeScale = 1f;
-			loadingView.SetActive(false);
+			TrySetActiveLoadingView(false);
 			try
 			{
 				GameManager.Instance.asteriy = ValuesHolder.StartAsterium; // 40
@@ -556,18 +586,20 @@ public class MenuManager : MonoBehaviour
 			GameManager.Instance.JsonManager.LoadPlayerFromModel(GameManager.Instance.playerModel);
 			loadingScreen.SetActive(false);
 			Time.timeScale = 1f;
-			loadingView.SetActive(false);
+			TrySetActiveLoadingView(false);
 		}
 	}
 
 	private IEnumerator Cutscene2()
 	{
 		videoPlayer.clip = secondCutscene;
-		skipChecker = StartCoroutine(SkipChecker());
+		//skipChecker = StartCoroutine(SkipChecker());
+		skipChecker = skipper.AllowSkipCoroutine(skipTimer);
 		while (!canContinueAfter2Cutscene)
 		{
 			yield return null;
 		}
+		canContinueAfter2Cutscene = false;
 	}
 
 	private IEnumerator SkipChecker()
@@ -593,18 +625,41 @@ public class MenuManager : MonoBehaviour
 		}
 	}
 
+	public void SkipCutscene()
+	{
+		SkippedCutscene(1);
+		OnVideoEnd(videoPlayer);
+	}
+
+	public void SkippedCutscene(float timer)
+	{
+		isAfterSkip = true;
+		Invoke(nameof(NotAfterSkip), timer); // we must give the player time to release the key;
+	}
+	private void NotAfterSkip() => isAfterSkip = false;
+
+	public void SkipCheckerClear()
+	{
+		skipper.SetFillEnabled(false);
+		if (skipChecker != null)
+		{
+			StopCoroutine(skipChecker);
+			skipChecker = null;
+		}
+	}
+
 	public void OpenTutorial()
 	{
 		buttonsToHide.ForEach(x => x.SetActive(false));
 		buttonsToShow.ForEach(x => x.SetActive(true));
-		loadingView.SetActive(true);
+		TrySetActiveLoadingView(true);
 		mainMenuScreen.SetActive(false);
 		SceneManager.LoadSceneAsync(2);
 		videoPlayer.gameObject.SetActive(false);
 		loadingBar.value = 0;
 		loadingScreen.SetActive(false);
 		Time.timeScale = 1f;
-		loadingView.SetActive(false);
+		TrySetActiveLoadingView(false);
 		try
 		{
 			GameManager.Instance.asteriy = ValuesHolder.StartAsterium;
@@ -632,13 +687,14 @@ public class MenuManager : MonoBehaviour
 			canContinueAfter2Cutscene = true;
 			videoPlayer.gameObject.SetActive(false);
 		}
+		SkipCheckerClear();
 	}
 
 	private async Task ContinueGameAsync(int state)
 	{
 		buttonsToHide.ForEach(x => x.SetActive(false));
 		buttonsToShow.ForEach(x => x.SetActive(true));
-		loadingView.SetActive(true);
+		TrySetActiveLoadingView(true);
 		mainMenuScreen.SetActive(false);
 		StartCoroutine(LoadingScreenCoroutine(state));
 		//SceneManager.LoadSceneAsync(1);
@@ -681,6 +737,7 @@ public class MenuManager : MonoBehaviour
 				break;
 		}
 		GameManager.Instance.SetIsGraphUsing(true);
+		GameManager.Instance.SetBearsShow(false);
 	}
 
 	private IEnumerator WaitForFurnacesEnd(RoomScript room)
@@ -701,6 +758,7 @@ public class MenuManager : MonoBehaviour
 		
 		SetPipesScreen.SetActive(false);
 		(room as EnergohoneyRoom).SetIsSolved(true);
+		GameManager.Instance.SetBearsShow(true);
 		//problemSolverScreen.SetActive(false);
 		//tabletAnimator.SetTrigger("CloseShop");
 	}
@@ -715,6 +773,7 @@ public class MenuManager : MonoBehaviour
 		cosmodromeExercise.gameObject.SetActive(false);
 		problemSolverScreen.SetActive(false);
 		tabletAnimator.SetTrigger("CloseShop");
+		GameManager.Instance.SetBearsShow(true);
 	}
 
 	public enum ProblemType

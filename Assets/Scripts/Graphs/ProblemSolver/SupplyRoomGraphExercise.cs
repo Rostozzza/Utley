@@ -58,6 +58,7 @@ public class SupplyRoomGraphExercise : MonoBehaviour
 		}
 		GameManager.Instance.SetIsGraphUsing(false);
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
+		GameManager.Instance.SetBearsShow(true);
 		return;
 	}
 }

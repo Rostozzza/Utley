@@ -121,6 +121,7 @@ public class NumbersByTableExercise : MonoBehaviour
 	public void SubmitAnswer()
 	{
 		GameManager.Instance.SetIsGraphUsing(true);
+		GameManager.Instance.SetBearsShow(true);
 		for (int i = 0; i < rightAnswers.Count; i++)
 		{
 			if (rightAnswers[i] != int.Parse(allInputFields[i].text))

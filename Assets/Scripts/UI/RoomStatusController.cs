@@ -37,7 +37,7 @@ public class RoomStatusController : MonoBehaviour
 
     private string DurabilityToText(float durability)
     {
-        return Convert.ToString((int)(durability * 100)) + "/100";
+        return Convert.ToString(Mathf.CeilToInt(durability * 100)) + "/100";
     }
 
     private string StatusToText(RoomScript.Status status)
@@ -86,7 +86,7 @@ public class RoomStatusController : MonoBehaviour
                 stateShow.color = Color.black;
                 durabilityShow.color = Color.black;
                 icon.color = Color.black;
-
+                UpdateDurability(0);
                 break;
         }
         stateShow.text = StatusToText(status);

@@ -113,6 +113,8 @@ public class Constants
     public float DamageByTideMultiplier { get; set; }
     public float EnergohoneyConsumeMultiplier { get; set; }
     public float EnergohoneyConsumeMultiplierByRoom { get; set; }
+    public float EnergohoneyConsumeMultiplierByCycle { get; set; }
+    public float EnergohoneyExponent { get; set; }
 }
 
 public enum RoomType
@@ -129,7 +131,9 @@ public enum RoomType
 
 public enum ResourceType
 {
-    Asterium,
-    Energohoney,
-    Astroluminite
+    AsteriumPrice,
+    EnergohoneyPrice,
+    AstroluminitePrice,
+    RepairAsteriumCost,
+    RepairAstroluminiteCost,
 }

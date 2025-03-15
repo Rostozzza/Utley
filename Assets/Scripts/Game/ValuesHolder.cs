@@ -75,4 +75,6 @@ static public class ValuesHolder
     static public float DamageByTideMultiplier { get; set; }
     static public float EnergohoneyConsumeMultiplier { get; set; }
     static public float EnergohoneyConsumeMultiplierByRoom { get; set; }
+    static public float EnergohoneyConsumeMultiplierByCycle { get; set; }
+    static public float EnergohoneyExponent { get; set; }
 }

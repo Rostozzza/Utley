@@ -22,9 +22,9 @@ public class RoomWorkUI : MonoBehaviour
 		resultText = GetComponentInChildren<TextMeshProUGUI>(true);
 	}
 
-	public void StartWork(float time, float amountOfUnits, Transform ui)
+	public void StartWork(float time, float amountOfUnits, Transform ui, ResourceType resourceType = ResourceType.None)
 	{
-		StartCoroutine(WorkProcess(time, amountOfUnits, ui));
+		StartCoroutine(WorkProcess(time, amountOfUnits, ui, resourceType));
 	}
 
 	public void SetWorkUnitSprite(Sprite sprite)
@@ -38,20 +38,33 @@ public class RoomWorkUI : MonoBehaviour
 		workResultSprite = image;
 	}
 
-	protected virtual IEnumerator WorkProcess(float time, float amountOfUnits, Transform ui)
+	protected virtual IEnumerator WorkProcess(float time, float amountOfUnits, Transform ui, ResourceType resourceType)
 	{
 		animator.SetTrigger("Show");
 		correspondingUI = ui;
 		//grid.cellSize.Set(grid.cellSize.x, 0.7538002f - (0.7538002f / amountOfUnits));
 		float timeInterval = time / amountOfUnits;
 		int workResults = 0;
+
+		switch (resourceType)
+		{
+			case ResourceType.Energohoney:
+			grid.cellSize = new Vector2(grid.cellSize.x, grid.cellSize.y / (amountOfUnits / 5)); // autoresize if energohoney amount != 5 (5 because at default it was 5);
+			break;
+			
+			default:
+			break;
+		}
+
 		for (int i = 0; i < amountOfUnits; i++)
 		{
-			yield return new WaitForSeconds(timeInterval);
-			Instantiate(workUnitPrefab, grid.transform).GetComponent<Image>().sprite = workUnitSprite;
+			var unit = Instantiate(workUnitPrefab, grid.transform);
+			unit.GetComponent<Image>().sprite = workUnitSprite;
 			workResults++;
 			resultText.text = $"+{workResults}";
+			yield return new WaitForSeconds(timeInterval);
 		}
+
 		timeInterval = 1f / amountOfUnits;
 		for (int i = 0; i < amountOfUnits; i++)
 		{
@@ -69,6 +82,12 @@ public class RoomWorkUI : MonoBehaviour
 			resultText.text = $"+{workResults}";
 		}
 		animator.SetTrigger("Hide");
+	}
+
+	public enum ResourceType
+	{
+		None,
+		Energohoney,
 	}
 }
 
