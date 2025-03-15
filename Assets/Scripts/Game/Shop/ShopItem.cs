@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class ShopItem : MonoBehaviour
 {
@@ -16,10 +17,13 @@ public class ShopItem : MonoBehaviour
 	public TextMeshProUGUI priceField;
 	public TMP_InputField requestedAmount;
 	public TextMeshProUGUI costOutput;
-	
+
+	[SerializeField] private float currentHNYPrediction = 0;
+
 	void Start()
 	{
 		GetPrice();
+		UpdateFields();
 	}
 
 	public void ChangeAmount(int value)
@@ -31,8 +35,14 @@ public class ShopItem : MonoBehaviour
 			return;
 		}
 		int oldValue = int.Parse(requestedAmount.text);
-		requestedAmount.text = Mathf.Clamp(value + oldValue, 0, 999).ToString();
+		int newValue = Mathf.Clamp(value + oldValue, 0, 999);
+		requestedAmount.text = newValue.ToString();
 		UpdateFields();
+	}
+
+	public float GetCurrentHNYPrediction()
+	{
+		return currentHNYPrediction;
 	}
 
 	private void GetPrice()
@@ -85,34 +95,41 @@ public class ShopItem : MonoBehaviour
 	{
 		CheckInputField(requestedAmount, costOutput);
 
+		string[] toParse = costOutput.text.Split();
+		float currentCost = toParse.Length > 2 ? float.Parse(toParse[1]) : 0f;
+		currentHNYPrediction = (currentCost + price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0));
+		ShopManager.Instance.RecalculateCounters();
 		if (price > 0)
 		{
-			costOutput.text = "+ " + (price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
-
-			if (requestedAmount.text != "")
-			{
-				costOutput.text = (price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
-			}
-			else
-			{
-				costOutput.text = "";
-			}
-
 			return;
 		}
-		else
-		{
-			costOutput.text = "- " + (price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
+		//if (price > 0)
+		//{
+		//	costOutput.text = "<color=green>+ " + (currentCost + price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
 
-			if (requestedAmount.text != "")
-			{
-				costOutput.text = (price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
-			}
-			else
-			{
-				costOutput.text = "";
-			}
-		}
+		//	if (requestedAmount.text != "")
+		//	{
+		//		costOutput.text = "<color=green>+ " + (currentCost + price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
+		//	}
+		//	else
+		//	{
+		//		costOutput.text = "";
+		//	}
+		//	return;
+		//}
+		//else
+		//{
+		//	costOutput.text = "<color=red>- " + (currentCost + price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
+
+		//	if (requestedAmount.text != "")
+		//	{
+		//		costOutput.text = (currentCost + price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
+		//	}
+		//	else
+		//	{
+		//		costOutput.text = "";
+		//	}
+		//}
 
 		if (requestedAmount.text.Length > 0 && int.Parse(requestedAmount.text) <= maxQuantity)
 		{
@@ -129,7 +146,7 @@ public class ShopItem : MonoBehaviour
 		}
 		else
 		{
-			quantityField.color = Color.black;
+			quantityField.color = Color.white;
 		}
 	}
 
