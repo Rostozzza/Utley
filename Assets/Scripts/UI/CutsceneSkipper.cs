@@ -39,10 +39,10 @@ public class CutsceneSkipper : MonoBehaviour
                 fill.fillAmount = amount;
                 TextShake(amount * 2);
             }
-            else
+            else // skip
             {
                 MenuManager.Instance.SkipCutscene();
-                MenuManager.Instance.ClearSkipChecker();
+                MenuManager.Instance.SkipCheckerClear();
                 fill.fillAmount = 0;
                 TextShake(0);
                 yield break;

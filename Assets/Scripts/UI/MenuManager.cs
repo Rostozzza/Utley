@@ -28,6 +28,7 @@ public class MenuManager : MonoBehaviour
 	[Header("Game message settings")]
 	[SerializeField] private NotificationsManager notificationsManager;
 	private Coroutine messageViewRoutine;
+	[SerializeField] private bool isAfterSkip = false;
 	[Header("Screens")]
 	[SerializeField] private GameObject startingScreen;
 	[SerializeField] private GameObject registrationScreen;
@@ -413,6 +414,7 @@ public class MenuManager : MonoBehaviour
 		{
 			if (InputController.GetKeyDown(ActionKeys.Pause) && !(GameManager.Instance.buildingScreen.activeSelf || GameManager.Instance.elevatorBuildingScreen.activeSelf))
 			{
+				if (isAfterSkip) return;
 				if (ShopManager.Instance.GetIsOpen())
 				{
 					ShopManager.Instance.OpenShop();
@@ -625,10 +627,18 @@ public class MenuManager : MonoBehaviour
 
 	public void SkipCutscene()
 	{
+		SkippedCutscene(1);
 		OnVideoEnd(videoPlayer);
 	}
 
-	public void ClearSkipChecker()
+	public void SkippedCutscene(float timer)
+	{
+		isAfterSkip = true;
+		Invoke(nameof(NotAfterSkip), timer); // we must give the player time to release the key;
+	}
+	private void NotAfterSkip() => isAfterSkip = false;
+
+	public void SkipCheckerClear()
 	{
 		skipper.SetFillEnabled(false);
 		if (skipChecker != null)
@@ -677,7 +687,7 @@ public class MenuManager : MonoBehaviour
 			canContinueAfter2Cutscene = true;
 			videoPlayer.gameObject.SetActive(false);
 		}
-		ClearSkipChecker();
+		SkipCheckerClear();
 	}
 
 	private async Task ContinueGameAsync(int state)
