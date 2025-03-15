@@ -9,6 +9,7 @@ using System;
 
 using Random = UnityEngine.Random;
 using UnityEditor;
+using UnityEngine.Video;
 
 public class RoomScript : MonoBehaviour
 {
@@ -60,6 +61,8 @@ public class RoomScript : MonoBehaviour
 	[Header("Progress bar")]
 	[SerializeField] private Image progressBar;
 	[SerializeField] private Image upgradeBar;
+	[Header("Video Work")]
+	[SerializeField] protected List<VideoPlayer> videoPlayers;
 	[Header("Asterium Settings")]
 	[SerializeField] private FlyForType flyForType;
 	[SerializeField] private GameObject cosmodromeSelectScreen;
@@ -192,6 +195,8 @@ public class RoomScript : MonoBehaviour
 
 	protected virtual void Start()
 	{
+		videoPlayers = GetComponentsInChildren<VideoPlayer>(true).ToList();
+		TrySetVideoPlayers(false);
 		if (progressbar) progressbar.gameObject.SetActive(false);
 		workUI = GetComponentInChildren<RoomWorkUI>(true);
 		audioSource = GetComponent<AudioSource>();
@@ -640,6 +645,7 @@ public class RoomScript : MonoBehaviour
 		switch (resource)
 		{
 			case Resources.Asteriy:
+				TrySetVideoPlayers(true);
 				timer = ValuesHolder.StandartInteractionTimeAsteriumComplex;
 				workUI.StartWork(timer, ValuesHolder.AsteriumAmountByOneInteraction, GameManager.Instance.uiResourceShower.asteriyAmountText.transform);
 				while (timer > 0)
@@ -657,6 +663,7 @@ public class RoomScript : MonoBehaviour
 
 					resources_changed = new Dictionary<string, float> { { "asterium", ValuesHolder.AsteriumAmountByOneInteraction } }
 				});
+				TrySetVideoPlayers(false);
 				isReadyForWork = false;
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
 				break;
@@ -1244,5 +1251,17 @@ public class RoomScript : MonoBehaviour
 	        Resources.Research    => RoomType.Research,
 	        _ => throw new ArgumentException(nameof(ConvertResourcesToRoomType), "Unknown room or it's elevator"),
 	    };
+	}
+
+	public void TrySetVideoPlayers(bool set)
+	{
+		if (videoPlayers.Count > 0)
+		{
+			videoPlayers.ForEach(vp => vp.enabled = set);
+		}
+		else
+		{
+			Debug.Log("Нет видео для: " + name);
+		}
 	}
 }

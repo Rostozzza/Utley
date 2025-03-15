@@ -99,6 +99,7 @@ public class ResearchRoomExercise : MonoBehaviour
 		{
 			Debug.Log("������ �����");
 			roomToTarget.SetWorkEfficiency(1);
+			roomToTarget.SetIsSolved(true);
 		}
 		else
 		{

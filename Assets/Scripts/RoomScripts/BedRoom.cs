@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class BedRoom : RoomScript
 {
-	protected override IEnumerator WorkStatus()
+    protected override IEnumerator WorkStatus()
 	{
 		float timer;
 		status = Status.Busy;
@@ -12,6 +13,7 @@ public class BedRoom : RoomScript
 		//fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 		//fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(false);
 		animator.SetTrigger("StartWork");
+		TrySetVideoPlayers(true);
 		//!borrowed part!//
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.creator && (level != 1 && fixedBear.GetComponent<UnitScript>().level != 1))
 		{
@@ -56,6 +58,7 @@ public class BedRoom : RoomScript
 		status = Status.Free;
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("EndWork");
+		TrySetVideoPlayers(false);
 		audioSource.Stop();
 		roomStatsController.RefreshDescription();
 	}
