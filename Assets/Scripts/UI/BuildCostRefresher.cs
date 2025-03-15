@@ -22,7 +22,7 @@ public class BuildCostRefresher : MonoBehaviour
 
         RoomScript roomScript = FindAnyObjectByType<RoomScript>(); // sorry 😭;
 
-        if (roomType == RoomType.Elevator) roomScript.GetPrices(out asteriumCost, out honeyCost, out astroluminiteCost, ConvertResourcesToRoomScriptResources(roomType));
+        if (roomType != RoomType.Elevator) roomScript.GetPrices(out asteriumCost, out honeyCost, out astroluminiteCost, ConvertResourcesToRoomScriptResources(roomType));
         else
         {
             asteriumCost = ValuesHolder.RoomsBuildPrice[RoomType.Elevator][ResourceType.AsteriumPrice];
@@ -30,7 +30,7 @@ public class BuildCostRefresher : MonoBehaviour
             astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Elevator][ResourceType.AstroluminitePrice];
         }
 
-        string costString = (roomType == RoomType.Elevator) ? $"Ресурсы: {asteriumCost} астерия" : $"Ресурсы: {asteriumCost} астерия, {honeyCost} энергомеда, {astroluminiteCost} астролюминита\n";
+        string costString = (roomType == RoomType.Elevator) ? $"Ресурсы:\n{asteriumCost} астерия <sprite=0>\n" : $"Ресурсы:\n{asteriumCost} астерия <sprite=0>\n{honeyCost} энергомеда <sprite=1>\n{astroluminiteCost} астролюминита <sprite=2>\n";
 
         return costString + costStart[costStart.IndexOf("Время")..];
     }
