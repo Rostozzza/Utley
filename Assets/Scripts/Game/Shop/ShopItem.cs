@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class ShopItem : MonoBehaviour
 {
@@ -17,10 +18,32 @@ public class ShopItem : MonoBehaviour
 	public TMP_InputField requestedAmount;
 	public TextMeshProUGUI costOutput;
 
-    void Awake()
-    {
-        GetPrice();
-    }
+	[SerializeField] private float currentHNYPrediction = 0;
+
+	void Start()
+	{
+		GetPrice();
+		UpdateFields();
+	}
+
+	public void ChangeAmount(int value)
+	{
+		if (requestedAmount.text == "")
+		{
+			requestedAmount.text = value > 0 ? value.ToString() : "";
+			UpdateFields();
+			return;
+		}
+		int oldValue = int.Parse(requestedAmount.text);
+		int newValue = Mathf.Clamp(value + oldValue, 0, 999);
+		requestedAmount.text = newValue.ToString();
+		UpdateFields();
+	}
+
+	public float GetCurrentHNYPrediction()
+	{
+		return currentHNYPrediction;
+	}
 
 	private void GetPrice()
 	{
@@ -50,60 +73,67 @@ public class ShopItem : MonoBehaviour
 			switch (name)
 			{
 				case "honey":
-				    price = ValuesHolder.SellHoney;
+					price = ValuesHolder.SellHoney;
 					break;
 				case "asterium":
-				    price = ValuesHolder.SellAsterium;
+					price = ValuesHolder.SellAsterium;
 					break;
 				case "astroluminite":
-				    price = ValuesHolder.SellAstroluminite;
+					price = ValuesHolder.SellAstroluminite;
 					break;
 				case "prototype":
-				    price = ValuesHolder.SellPrototype;
+					price = ValuesHolder.SellPrototype;
 					break;
 				case "ursowaks":
-				    price = ValuesHolder.SellUrsowaks;
+					price = ValuesHolder.SellUrsowaks;
 					break;
 			}
 		}
 	}
 
-    public void UpdateFields()
+	public void UpdateFields()
 	{
 		CheckInputField(requestedAmount, costOutput);
 
+		string[] toParse = costOutput.text.Split();
+		float currentCost = toParse.Length > 2 ? float.Parse(toParse[1]) : 0f;
+		currentHNYPrediction = (currentCost + price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0));
+		ShopManager.Instance.RecalculateCounters();
 		if (price > 0)
 		{
-			costOutput.text = "+ " + (price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
-
-			if (requestedAmount.text != "")
-			{
-				costOutput.text = (price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
-			}
-			else
-			{
-				costOutput.text = "";
-			}
-
 			return;
 		}
-		else
-		{
-			costOutput.text = "- " + (price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
+		//if (price > 0)
+		//{
+		//	costOutput.text = "<color=green>+ " + (currentCost + price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
 
-			if (requestedAmount.text != "")
-			{
-				costOutput.text = (price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
-			}
-			else
-			{
-				costOutput.text = "";
-			}
-		}
+		//	if (requestedAmount.text != "")
+		//	{
+		//		costOutput.text = "<color=green>+ " + (currentCost + price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
+		//	}
+		//	else
+		//	{
+		//		costOutput.text = "";
+		//	}
+		//	return;
+		//}
+		//else
+		//{
+		//	costOutput.text = "<color=red>- " + (currentCost + price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
+
+		//	if (requestedAmount.text != "")
+		//	{
+		//		costOutput.text = (currentCost + price * (requestedAmount.text.Length > 0 ? int.Parse(requestedAmount.text) : 0)).ToString() + " М.Е.Д.";
+		//	}
+		//	else
+		//	{
+		//		costOutput.text = "";
+		//	}
+		//}
 
 		if (requestedAmount.text.Length > 0 && int.Parse(requestedAmount.text) <= maxQuantity)
 		{
-			quantityField.text = $"{Mathf.Clamp(quantity - int.Parse(requestedAmount.text),0,99999999)}/{maxQuantity}";
+			quantityField.text = $"{Mathf.Clamp(quantity - int.Parse(requestedAmount.text), 0, 99999999)}/{maxQuantity}";
 		}
 		else
 		{
@@ -116,7 +146,7 @@ public class ShopItem : MonoBehaviour
 		}
 		else
 		{
-			quantityField.color = Color.black;
+			quantityField.color = Color.white;
 		}
 	}
 
@@ -127,10 +157,10 @@ public class ShopItem : MonoBehaviour
 
 	public void EraseAllFields()
 	{
-		try {quantityField.text = "";} catch {}
-		try {priceField.text = "";} catch {}
-		try {requestedAmount.text = "";} catch {}
-		try {costOutput.text = "";} catch {}
+		try { quantityField.text = ""; } catch { }
+		try { priceField.text = ""; } catch { }
+		try { requestedAmount.text = ""; } catch { }
+		try { costOutput.text = ""; } catch { }
 		//😁;
 	}
 

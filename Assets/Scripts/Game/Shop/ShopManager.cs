@@ -27,6 +27,15 @@ public class ShopManager : MonoBehaviour
 	[SerializeField] private GameObject shopInterface;
 	JsonManager JsonManager;
 	[SerializeField] private bool isOpened = false;
+	[Header("HNY prediction fields")]
+	[SerializeField] private ShopHNYPredictionCounter upperCounter;
+	[SerializeField] private ShopHNYPredictionCounter lowerCounter;
+
+	public void RecalculateCounters()
+	{
+		upperCounter.RecalculateCounter();
+		lowerCounter.RecalculateCounter();
+	}
 
 	public void Awake()
 	{
