@@ -602,6 +602,7 @@ public class GameManager : MonoBehaviour
 			yield return null;
 		}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
+		room.GetComponent<BuilderRoom>().SetWait(true);
 	}
 
 	private async Task SelectAndBuildMainBlock(GameObject building, Transform point)
@@ -1321,7 +1322,6 @@ public class GameManager : MonoBehaviour
 				if (obj.GetComponentInParent<BuilderRoom>().fixedBear != null)
 				{
 					enRouteButton.SetButtonState(true);
-					unit.GetComponent<UnitMovement>().SetIsWalkingToWork(false);
 					builderGoesBack = true;
 				}
 				else
