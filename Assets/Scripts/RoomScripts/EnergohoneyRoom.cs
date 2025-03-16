@@ -41,6 +41,7 @@ public class EnergohoneyRoom : RoomScript
 		fixedBear.GetComponent<UnitScript>().SetBusy(true);
 		fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 		animator.SetTrigger("StartWork");
+		TrySetVideoPlayers(true);
 		fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		//!borrowed part!//
 		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Energohoney, GetWalkPoints(), this.gameObject);
@@ -89,6 +90,7 @@ public class EnergohoneyRoom : RoomScript
 		status = Status.Free;
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("EndWork");
+		TrySetVideoPlayers(false);
 		audioSource.Stop();
 		GameManager.Instance.ChangeHoney(honeyToAdd, new Log
 		{
