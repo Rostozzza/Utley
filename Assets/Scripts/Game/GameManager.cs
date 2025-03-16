@@ -602,6 +602,7 @@ public class GameManager : MonoBehaviour
 			yield return null;
 		}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
+		room.GetComponent<BuilderRoom>().SetWait(true);
 	}
 
 	private async Task SelectAndBuildMainBlock(GameObject building, Transform point)
