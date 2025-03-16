@@ -53,7 +53,7 @@ public class NumbersByTableExercise : MonoBehaviour
 		MenuManager.Instance.problemSolverScreen.SetActive(true);
 		targetedRoom = room;
 		GenerateFromPreset();
-        StartCoroutine(ChangeFOV(78, 0.75f));
+        //StartCoroutine(ChangeFOV(78, 0.75f));
     }
 
 	public void GenerateFromPreset()
@@ -141,7 +141,7 @@ public class NumbersByTableExercise : MonoBehaviour
 				Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 				//MenuManager.Instance.problemSolverScreen.SetActive(false);
 				GameManager.Instance.SetIsGraphUsing(false);
-				targetedRoom.SetIsSolved(true); // idk, maybe false
+				targetedRoom.SetIsSolved(false); // idk, maybe false
         		StartCoroutine(ChangeFOV(60, 1));
 				return;
 			}
@@ -164,7 +164,7 @@ public class NumbersByTableExercise : MonoBehaviour
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 		GameManager.Instance.SetIsGraphUsing(false);
 		targetedRoom.SetIsSolved(true);
-		StartCoroutine(ChangeFOV(60, 1));
+		//StartCoroutine(ChangeFOV(60, 1));
 		//MenuManager.Instance.problemSolverScreen.SetActive(false);
 	}
 
