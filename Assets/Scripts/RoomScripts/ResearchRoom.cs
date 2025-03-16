@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine.Video;
+using System.Linq;
 
 public class ResearchRoom : RoomScript
 {
@@ -11,8 +13,18 @@ public class ResearchRoom : RoomScript
 	[SerializeField] private Sprite prototypeSprite;
 	private float haveAstroluminte;
 	private int haveAsteriy;
+	[SerializeField] private List<GameObject> bottles;
 
-	public override void SetPipes()
+    void Start()
+    {
+        base.Start();
+		
+		bottles.AddRange(GameObject.FindGameObjectsWithTag("bottle"));
+		bottles.ForEach(bottle => bottle.SetActive(false));
+		bottles[Random.Range(0, bottles.Count)].SetActive(true);
+    }
+
+    public override void SetPipes()
 	{
 		Camera.main.GetComponent<CameraController>().GoToTaskPoint(cameraPoint.position, cameraAngle, true);
 		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetBreakingBad, this);
@@ -118,6 +130,7 @@ public class ResearchRoom : RoomScript
 		fixedBear.GetComponent<UnitScript>().StartResearching();
 		fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 		animator.SetTrigger("StartWork");
+		TrySetVideoPlayers(true);
 		fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		//!borrowed part!//
 		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Research, GetWalkPoints(), this.gameObject);
@@ -207,6 +220,7 @@ public class ResearchRoom : RoomScript
 		status = Status.Free;
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("EndWork");
+		TrySetVideoPlayers(false);
 		audioSource.Stop();
 	}
 
@@ -215,5 +229,15 @@ public class ResearchRoom : RoomScript
 		None,
 		Ursowaks,
 		Prototype
+	}
+
+	public override bool CheckIfSolved() => isSolved;
+
+	public override void ShowButton()
+	{
+		if (isEnpowered && status == Status.Free && durability > 0 && CheckIfSolved())
+		{
+			assignmentButton.SetActive(true);
+		}
 	}
 }

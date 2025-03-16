@@ -20,6 +20,7 @@ public class BuilderRoom : RoomScript
         SetWait(true);
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("StartWork");
+        TrySetVideoPlayers(true);
 		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Build, new List<Vector3>(), this.gameObject);
 		fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
         fixedBear.GetComponent<UnitScript>().CanBeSelected();
@@ -35,6 +36,7 @@ public class BuilderRoom : RoomScript
 		statusPanel.UpdateStatus(status);
 		//fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 		animator.SetTrigger("EndWork");
+        TrySetVideoPlayers(false);
 		audioSource.Stop();
         fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
 		roomStatsController.RefreshDescription();
