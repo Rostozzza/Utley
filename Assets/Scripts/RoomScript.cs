@@ -940,7 +940,6 @@ public class RoomScript : MonoBehaviour
 			EventManager.callWarning.Invoke($"Нет свободного <color=yellow>конструктора</color> в комплексе строительства!");
 			return;
 		}
-
 		if (await GameManager.Instance.GetAsteriy() >= ValuesHolder.RepairCost)
 		{
 			GameManager.Instance.ChangeAsteriy(-ValuesHolder.RepairCost, new Log
@@ -972,6 +971,7 @@ public class RoomScript : MonoBehaviour
 	{
 		roomStatsController.SetStatsScreenShow(false);
 		progressBar.transform.parent.gameObject.SetActive(true);
+		room.GetComponent<BuilderRoom>().SetWait(false);
 		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
 		{
 			yield return null;
@@ -987,11 +987,13 @@ public class RoomScript : MonoBehaviour
 		progressBar.transform.parent.gameObject.SetActive(false);
 		progressBar.fillAmount = 0;
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(room.GetComponent<RoomScript>());
+		room.GetComponent<BuilderRoom>().SetWait(true);
 		room.GetComponent<RoomScript>().SetStatus(Status.Free);
 		durability = 1f;
 		ChangeDurability(0);
-		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
-		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
+		//GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
+		//room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		//status = Status.Free; // ????? why it was here???
 		statusPanel.UpdateStatus(status);
 	}
