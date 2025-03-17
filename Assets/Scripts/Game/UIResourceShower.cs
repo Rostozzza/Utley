@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class UIResourceShower : MonoBehaviour
 {
@@ -33,6 +36,8 @@ public class UIResourceShower : MonoBehaviour
     [SerializeField] private TextMeshProUGUI seasonDebuffPanelText;
     [SerializeField] private GameObject timeLeftPanel;
     private Coroutine seasonUpdater;
+    [SerializeField] private Animator temperatureAnimator;
+    [SerializeField] private GameObject temperatureTextToShake;
 
     [Header("Bars with info")]
     [SerializeField] private Image icon;
@@ -79,14 +84,65 @@ public class UIResourceShower : MonoBehaviour
 
 	private IEnumerator TemperatureChanger()
 	{
+        yield return null;
+        bool isDecreasing = false;
 		while (true)
 		{
 			temperatureSlider.value = (GameManager.Instance.GetTemperature() + ValuesHolder.MinTemperature) / (ValuesHolder.MaxTemperature + ValuesHolder.MinTemperature);
 			temperatureDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)GameManager.Instance.GetTemperature()) + " °C";
 			temperatureDynamic2.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)GameManager.Instance.GetTemperature()) + " °C";
+            
+            if (GameManager.Instance.GetIsTemperatureDecreasing() && !isDecreasing) // temp starts decrease;
+            {
+                Debug.Log("Температура начала падать");
+                isDecreasing = true;
+                temperatureAnimator.SetTrigger("MakeAttention");
+                SetVignette(0.3f, 0.25f, Color.blue);
+                ShakeTemperature(2, 2);
+            }
+            if (!GameManager.Instance.GetIsTemperatureDecreasing() && isDecreasing)
+            {
+                Debug.Log("Температура начала расти");
+                isDecreasing = false;
+                temperatureAnimator.SetTrigger("MakeDefault");
+                SetVignette(0, 0.25f, Color.blue);
+            }
+
 			yield return new WaitForSeconds(0.1f);
 		}
 	}
+
+private void SetVignette(float set, float speed, Color color)
+{
+    GameManager.Instance.globalVolume.GetComponent<Volume>().profile.TryGet(out Vignette vignette);
+    StartCoroutine(SmoothVignette(vignette, set, speed, color));
+}
+
+private IEnumerator SmoothVignette(Vignette vignette, float intense, float speed, Color color)
+{
+    vignette.color.value = color;
+    while (vignette.intensity.value < intense - 0.01f || intense + 0.01f < vignette.intensity.value)
+    {
+        vignette.intensity.value += Mathf.Sign(intense - vignette.intensity.value) * Time.deltaTime * speed;
+        yield return null;
+    }
+}
+
+private void ShakeTemperature(float timer, float intensity)
+{
+    StartCoroutine(TemperatureShaker(timer, intensity));
+
+    IEnumerator TemperatureShaker(float timer, float intensity)
+    {
+        Vector2 startPos = temperatureTextToShake.transform.localPosition;
+        while (timer > 0)
+        {
+            temperatureTextToShake.transform.localPosition = startPos + Random.insideUnitCircle * intensity;
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+    }
+}
 
 	private string SeasonToHeaderText(GameManager.Season season)
 	{

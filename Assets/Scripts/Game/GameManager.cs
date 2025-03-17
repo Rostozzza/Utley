@@ -1970,6 +1970,16 @@ public class GameManager : MonoBehaviour
 		bears.ForEach(bear => bear.GetComponentInChildren<Animator>().gameObject.GetComponentsInChildren<SkinnedMeshRenderer>().ToList().ForEach(x => x.enabled = set));
 		bears.ForEach(bear => bear.GetComponentInChildren<Animator>().gameObject.GetComponentsInChildren<MeshRenderer>().ToList().ForEach(x => x.enabled = set));
 	}
+
+/// <summary>
+/// true if decreasing, false if increasing (if doesn't change also false);
+/// </summary>
+/// <returns></returns>
+	public bool GetIsTemperatureDecreasing()
+	{
+		return honey <= 0;
+	}
+
 	public enum Season
 	{
 		Calm,
