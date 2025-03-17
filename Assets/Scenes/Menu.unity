@@ -39223,9 +39223,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1818146191}
     m_Modifications:
+    - target: {fileID: 595101211509278320, guid: b69b8a0ce6d3ce84e81776d8ccc31f54, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 595101211509278320, guid: b69b8a0ce6d3ce84e81776d8ccc31f54, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 595101211509278320, guid: b69b8a0ce6d3ce84e81776d8ccc31f54, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1720294782529139983, guid: b69b8a0ce6d3ce84e81776d8ccc31f54, type: 3}
       propertyPath: m_Name
       value: CutsceneSkipper
+      objectReference: {fileID: 0}
+    - target: {fileID: 1943578845255023565, guid: b69b8a0ce6d3ce84e81776d8ccc31f54, type: 3}
+      propertyPath: maxShakeIntensity
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4170212359807290897, guid: b69b8a0ce6d3ce84e81776d8ccc31f54, type: 3}
       propertyPath: m_Pivot.x
@@ -39258,6 +39274,18 @@ PrefabInstance:
     - target: {fileID: 4170212359807290897, guid: b69b8a0ce6d3ce84e81776d8ccc31f54, type: 3}
       propertyPath: m_SizeDelta.y
       value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170212359807290897, guid: b69b8a0ce6d3ce84e81776d8ccc31f54, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170212359807290897, guid: b69b8a0ce6d3ce84e81776d8ccc31f54, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170212359807290897, guid: b69b8a0ce6d3ce84e81776d8ccc31f54, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4170212359807290897, guid: b69b8a0ce6d3ce84e81776d8ccc31f54, type: 3}
       propertyPath: m_LocalPosition.x
@@ -39306,6 +39334,10 @@ PrefabInstance:
     - target: {fileID: 4170212359807290897, guid: b69b8a0ce6d3ce84e81776d8ccc31f54, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170212359807290897, guid: b69b8a0ce6d3ce84e81776d8ccc31f54, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -11,6 +11,7 @@ public class CutsceneSkipper : MonoBehaviour
     private float amount;
     private float valueForSin = 0;
     [SerializeField] private float blinkSpeed = 1;
+    [SerializeField] private float maxShakeIntensity = 2;
 
     void Awake()
     {
@@ -37,7 +38,7 @@ public class CutsceneSkipper : MonoBehaviour
                     holdTimer -= Time.deltaTime / 2f;
                 }
                 fill.fillAmount = amount;
-                TextShake(amount * 2);
+                TextShake(amount * maxShakeIntensity);
             }
             else // skip
             {

@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2524823}
   - component: {fileID: 2524824}
+  - component: {fileID: 2524825}
   m_Layer: 5
   m_Name: Temperature
   m_TagString: Untagged
@@ -210,6 +211,28 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!95 &2524825
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2524822}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ab98859729982cb4781da238d7959516, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6144359
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,6 +2121,146 @@ Transform:
   - {fileID: 1323258451}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &136291607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 136291608}
+  - component: {fileID: 136291610}
+  - component: {fileID: 136291609}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &136291608
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136291607}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 416739837}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -3.0200043, y: 0}
+  m_SizeDelta: {x: -20.04, y: -8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &136291609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136291607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "\u041D\u0435\u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C
+    \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043A\u043E\u0441\u043C\u0438\u0447\u0435\u0441\u043A\u0438\u0439
+    \u043A\u043E\u0440\u0430\u0431\u043B\u044C\n\u0411\u044B\u0441\u0442\u0440\u0430\u044F
+    \u043F\u043E\u0442\u0435\u0440\u044F \u043F\u0440\u043E\u0447\u043D\u043E\u0441\u0442\u0438
+    \u0443 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043E\u0432"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 99c02c43b6092184a98093d3e21f6a03, type: 2}
+  m_sharedMaterial: {fileID: -5451857785842787390, guid: 99c02c43b6092184a98093d3e21f6a03, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 8.2
+  m_fontSizeBase: 8.2
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &136291610
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136291607}
+  m_CullTransparentMesh: 1
 --- !u!1 &142809294
 GameObject:
   m_ObjectHideFlags: 0
@@ -5800,6 +5963,146 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
+--- !u!1 &332723115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 332723116}
+  - component: {fileID: 332723118}
+  - component: {fileID: 332723117}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &332723116
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332723115}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 504578964}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -14, y: -8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &332723117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332723115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "\u0423\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u0438\u0435 \u043F\u043E\u0442\u0440\u0435\u0431\u043B\u0435\u043D\u0438\u044F
+    \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430\\n\u043D\u0430 10%\\n\u0423\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u0438\u0435
+    \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u0438 \u043F\u0430\u0434\u0435\u043D\u0438\u044F
+    \u0442\u0435\u043C\u043F\u0435\u0440\u0430\u0442\u0443\u0440\u044B\\n\u043D\u0430
+    25%"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 99c02c43b6092184a98093d3e21f6a03, type: 2}
+  m_sharedMaterial: {fileID: -5451857785842787390, guid: 99c02c43b6092184a98093d3e21f6a03, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 8.2
+  m_fontSizeBase: 8.2
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &332723118
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332723115}
+  m_CullTransparentMesh: 1
 --- !u!1 &337378648
 GameObject:
   m_ObjectHideFlags: 0
@@ -7175,6 +7478,82 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416009648}
+  m_CullTransparentMesh: 1
+--- !u!1 &416739836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 416739837}
+  - component: {fileID: 416739839}
+  - component: {fileID: 416739838}
+  m_Layer: 5
+  m_Name: AboutSeasonDebuff (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &416739837
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416739836}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.9996097, y: 0.9996097, z: 0.9996097}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 136291608}
+  m_Father: {fileID: 1893337890}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -159.98996, y: 167.81004}
+  m_SizeDelta: {x: 265.45, y: 28.021}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &416739838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416739836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2f81025a7f87f234db0acf6455c18078, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 33.5
+--- !u!222 &416739839
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416739836}
   m_CullTransparentMesh: 1
 --- !u!1 &418353251
 GameObject:
@@ -8849,7 +9228,7 @@ GameObject:
   - component: {fileID: 493423724}
   m_Layer: 0
   m_Name: OST
-  m_TagString: Untagged
+  m_TagString: BG_music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9265,6 +9644,82 @@ RectTransform:
   m_AnchoredPosition: {x: 192.032, y: -101.8}
   m_SizeDelta: {x: 382.4, y: 203.6}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &504578963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 504578964}
+  - component: {fileID: 504578966}
+  - component: {fileID: 504578965}
+  m_Layer: 5
+  m_Name: AboutSeasonDebuff (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &504578964
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504578963}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.9996097, y: 0.9996097, z: 0.9996097}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 332723116}
+  m_Father: {fileID: 1893337890}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -163.09996, y: 156.9799}
+  m_SizeDelta: {x: 259.2402, y: 49.6817}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &504578965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504578963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2f81025a7f87f234db0acf6455c18078, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 20
+--- !u!222 &504578966
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504578963}
+  m_CullTransparentMesh: 1
 --- !u!1001 &506432484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20522,142 +20977,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1086633765
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1086633766}
-  - component: {fileID: 1086633768}
-  - component: {fileID: 1086633767}
-  m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1086633766
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1086633765}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1233535418}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -14, y: -8}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1086633767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1086633765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: "\u0414\u0435\u0431\u0430\u0444\u0444 \u0441\u0435\u0437\u043E\u043D\u0430"
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 99c02c43b6092184a98093d3e21f6a03, type: 2}
-  m_sharedMaterial: {fileID: 235508042702513954, guid: 17e6a45a562aaaf46af6a98e4e580485, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 8.2
-  m_fontSizeBase: 8.2
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1086633768
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1086633765}
-  m_CullTransparentMesh: 1
 --- !u!1 &1091335880
 GameObject:
   m_ObjectHideFlags: 0
@@ -21549,6 +21868,82 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1151807452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1151807453}
+  - component: {fileID: 1151807455}
+  - component: {fileID: 1151807454}
+  m_Layer: 5
+  m_Name: AboutSeasonDebuff (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1151807453
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151807452}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.9996097, y: 0.9996097, z: 0.9996097}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1800497756}
+  m_Father: {fileID: 1893337890}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -181.42998, y: 172.2001}
+  m_SizeDelta: {x: 222.58, y: 19.245}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1151807454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151807452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2f81025a7f87f234db0acf6455c18078, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 54.7
+--- !u!222 &1151807455
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151807452}
+  m_CullTransparentMesh: 1
 --- !u!1 &1153013421
 GameObject:
   m_ObjectHideFlags: 0
@@ -22999,82 +23394,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1230615512}
-  m_CullTransparentMesh: 1
---- !u!1 &1233535417
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1233535418}
-  - component: {fileID: 1233535420}
-  - component: {fileID: 1233535419}
-  m_Layer: 5
-  m_Name: AboutSeasonDebuff
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1233535418
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1233535417}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1086633766}
-  m_Father: {fileID: 1893337890}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -163.1, y: 156.98}
-  m_SizeDelta: {x: 259.2402, y: 49.6817}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1233535419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1233535417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.8}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2f81025a7f87f234db0acf6455c18078, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 20
---- !u!222 &1233535420
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1233535417}
   m_CullTransparentMesh: 1
 --- !u!1 &1236076306
 GameObject:
@@ -29419,7 +29738,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 220941122}
   m_PlaneDistance: 2
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -32812,6 +33131,143 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 2606328058312651893, guid: f1a5d73b02f50b34e947a54f2c99eeb3, type: 3}
   m_PrefabInstance: {fileID: 1799925980}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1800497755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1800497756}
+  - component: {fileID: 1800497758}
+  - component: {fileID: 1800497757}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1800497756
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800497755}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1151807453}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -14, y: -8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1800497757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800497755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "\u0421\u043D\u0438\u0436\u0435\u043D\u0438\u0435 \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438
+    \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430 \u043D\u0430 10%"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 99c02c43b6092184a98093d3e21f6a03, type: 2}
+  m_sharedMaterial: {fileID: -5451857785842787390, guid: 99c02c43b6092184a98093d3e21f6a03, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 8.2
+  m_fontSizeBase: 8.2
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1800497758
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800497755}
+  m_CullTransparentMesh: 1
 --- !u!1 &1801057806
 GameObject:
   m_ObjectHideFlags: 0
@@ -35386,6 +35842,142 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1885001032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1885001033}
+  - component: {fileID: 1885001035}
+  - component: {fileID: 1885001034}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1885001033
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885001032}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1959857932}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -14, y: -8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1885001034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885001032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "\u042D\u0444\u0444\u0435\u043A\u0442\u043E\u0432 \u043D\u0435\u0442"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 99c02c43b6092184a98093d3e21f6a03, type: 2}
+  m_sharedMaterial: {fileID: -5451857785842787390, guid: 99c02c43b6092184a98093d3e21f6a03, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 8.2
+  m_fontSizeBase: 8.2
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1885001035
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885001032}
+  m_CullTransparentMesh: 1
 --- !u!1 &1892729775
 GameObject:
   m_ObjectHideFlags: 0
@@ -35460,7 +36052,10 @@ RectTransform:
   - {fileID: 1867842574}
   - {fileID: 1598374362}
   - {fileID: 1062375616}
-  - {fileID: 1233535418}
+  - {fileID: 1959857932}
+  - {fileID: 1151807453}
+  - {fileID: 504578964}
+  - {fileID: 416739837}
   - {fileID: 1002906897}
   - {fileID: 1892729776}
   - {fileID: 2066092294}
@@ -35510,12 +36105,14 @@ MonoBehaviour:
   ursowaksPanel: {fileID: 1325187698}
   seasonPanel: {fileID: 1062375615}
   seasonPanelText: {fileID: 1035980223}
-  seasonDebuffPanel: {fileID: 1233535417}
-  seasonDebuffPanel1: {fileID: 0}
-  seasonDebuffPanel2: {fileID: 0}
-  seasonDebuffPanel3: {fileID: 0}
-  seasonDebuffPanelText: {fileID: 1086633767}
+  seasonDebuffPanel: {fileID: 1062375615}
+  seasonDebuffPanel1: {fileID: 1151807452}
+  seasonDebuffPanel2: {fileID: 504578963}
+  seasonDebuffPanel3: {fileID: 416739836}
+  seasonDebuffPanelText: {fileID: 1035980223}
   timeLeftPanel: {fileID: 1002906896}
+  temperatureAnimator: {fileID: 2524825}
+  temperatureTextToShake: {fileID: 202838539}
   icon: {fileID: 2055255900}
   iconDebuff: {fileID: 2038204625}
   seasonHeader: {fileID: 241183640}
@@ -36652,6 +37249,82 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hintType: 3
+--- !u!1 &1959857931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1959857932}
+  - component: {fileID: 1959857934}
+  - component: {fileID: 1959857933}
+  m_Layer: 5
+  m_Name: AboutSeasonDebuff
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1959857932
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959857931}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.9996097, y: 0.9996097, z: 0.9996097}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1885001033}
+  m_Father: {fileID: 1893337890}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -217.92, y: 172.2001}
+  m_SizeDelta: {x: 149.6, y: 19.24}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1959857933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959857931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2f81025a7f87f234db0acf6455c18078, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 42.22
+--- !u!222 &1959857934
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959857931}
+  m_CullTransparentMesh: 1
 --- !u!198 &1960817404 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 2606328058312651893, guid: f1a5d73b02f50b34e947a54f2c99eeb3, type: 3}
@@ -37797,6 +38470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2033803362}
   - component: {fileID: 2033803363}
+  - component: {fileID: 2033803364}
   m_Layer: 0
   m_Name: TutorialManager
   m_TagString: Untagged
@@ -37856,6 +38530,101 @@ MonoBehaviour:
     roomHighlight: {fileID: 0}
     krugPos: {x: 0, y: 0, z: 0}
     krugScale: 0
+  - text: "\u0422\u0432\u043E\u044F \u0437\u0430\u0434\u0430\u0447\u0430 - \u043F\u0440\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C\u0441\u044F
+      \u043D\u0430 \u0431\u0430\u0437\u0435 <color=yellow>\u043E\u0442\u0432\u0435\u0434\u0451\u043D\u043D\u043E\u0435
+      \u0432\u0440\u0435\u043C\u044F</color>."
+    position: {x: 0, y: 0, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 1163276254}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041D\u0430 \u043F\u043B\u0430\u043D\u0435\u0442\u0435 \u041A\u0430\u0442\u0430\u0433\u0438\u0434\u0430
+      \u043E\u0447\u0435\u043D\u044C \u043D\u0438\u0437\u043A\u0430\u044F \u0442\u0435\u043C\u043F\u0435\u0440\u0430\u0442\u0443\u0440\u0430.
+      \u0414\u043B\u044F \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u044F
+      \u0442\u0435\u043F\u043B\u0430 \u0432\u043D\u0443\u0442\u0440\u0438 \u0431\u0430\u0437\u044B
+      \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F <color=yellow>\u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434</color>."
+    position: {x: 0, y: 0, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0422\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u043E\u0442\u0441\u043B\u0435\u0434\u0438\u0442\u044C
+      \u0442\u0435\u043C\u043F\u0435\u0440\u0430\u0442\u0443\u0440\u0443 \u043D\u0430
+      \u0431\u0430\u0437\u0435 \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E
+      \u0448\u043A\u0430\u043B\u044B \u0441\u0432\u0435\u0440\u0445\u0443."
+    position: {x: 0, y: 0, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041A\u0430\u043A \u0442\u043E\u043B\u044C\u043A\u043E \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434
+      \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u0441\u044F, \u0442\u0435\u043C\u043F\u0435\u0440\u0430\u0442\u0443\u0440\u0430
+      \u043D\u0430\u0447\u043D\u0435\u0442 \u043F\u043E\u0441\u0442\u0435\u043F\u0435\u043D\u043D\u043E
+      \u043F\u0430\u0434\u0430\u0442\u044C. \u041A\u043E\u0433\u0434\u0430 \u0442\u0435\u043C\u043F\u0435\u0440\u0430\u0442\u0443\u0440\u0430
+      \u043E\u043F\u0443\u0441\u0442\u0438\u0442\u0441\u044F \u0434\u043E -25\u2103
+      \u0432\u0441\u0435 \u043C\u0435\u0434\u0432\u0435\u0434\u0438 \u0432\u043F\u0430\u0434\u0443\u0442
+      \u0432 \u0441\u043F\u044F\u0447\u043A\u0443."
+    position: {x: 0, y: 0, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0439 \u0441\u043B\u0430\u0439\u0434"
+    position: {x: 0, y: 0, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "\u041A\u0430\u0436\u0434\u0430\u044F \u0431\u0430\u0437\u0430 \u0441\u043E\u0441\u0442\u043E\u0438\u0442
       \u0438\u0437 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043E\u0432.
       \u0427\u0442\u043E\u0431\u044B \u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C
@@ -37880,32 +38649,775 @@ MonoBehaviour:
     roomHighlight: {fileID: 0}
     krugPos: {x: 0, y: 0, z: 0}
     krugScale: 0
-  - text: "\u0422\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u0443\u0437\u043D\u0430\u0442\u044C
-      \u0431\u043E\u043B\u0435\u0435 \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u0443\u044E
-      \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E \u043E \u043A\u0430\u0436\u0434\u043E\u043C
-      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0435. \u0414\u043B\u044F
-      \u044D\u0442\u043E\u0433\u043E \u0442\u0435\u0431\u0435 \u043D\u0443\u0436\u043D\u043E
-      \u0432\u043E\u0439\u0442\u0438 \u0432 \u0440\u0435\u0436\u0438\u043C \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u0438
+  - text: "<color=\"yellow\">\u041A\u043B\u0438\u043A\u043E\u043C \u043C\u044B\u0448\u0438
+      (\u041B\u041A\u041C - \u043B\u0435\u0432\u0430\u044F \u043A\u043D\u043E\u043F\u043A\u0430
+      \u043C\u044B\u0448\u0438)</color> \u043F\u043E \u043A\u043E\u0441\u043C\u043E\u0434\u0440\u043E\u043C\u0443
+      \u043F\u043E\u0441\u043C\u043E\u0442\u0440\u0438 \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E
+      \u043E \u043D\u0435\u043C. \u0410\u043D\u0430\u043B\u043E\u0433\u0438\u0447\u043D\u043E
+      \u043F\u043E\u0437\u043D\u0430\u043A\u043E\u043C\u044C\u0441\u044F \u0441\u043E
+      \u0432\u0441\u0435\u043C\u0438 \u043F\u043E\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u043C\u0438
+      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0430\u043C\u0438. \u0412\u044B\u0439\u0434\u0438
+      \u0438\u0437 \u0440\u0435\u0436\u0438\u043C\u0430 \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u0438
       \u043D\u0430\u0436\u0430\u0442\u0438\u0435\u043C \u043A\u043B\u0430\u0432\u0438\u0448\u0438
       <color=\"yellow\">[i]</color> \u043D\u0430 \u043A\u043B\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0435
-      \u0438\u043B\u0438 \u043D\u0430\u0436\u0430\u0442\u0438\u0435\u043C \u043A\u043D\u043E\u043F\u043A\u0438
-      \u0441 \u0431\u0443\u043A\u0432\u043E\u0439 <color=\"yellow\">i</color> \u0432
-      \u0432\u0435\u0440\u0445\u043D\u0435\u043C \u043B\u0435\u0432\u043E\u043C \u0443\u0433\u043B\u0443."
-    position: {x: -152, y: 73.54, z: 0}
+      \u0438\u043B\u0438 \u043D\u0430\u0436\u0430\u0432 \u043A\u043D\u043E\u043F\u043A\u0443
+      \u0441 \u0431\u0443\u043A\u0432\u043E\u0439 <color=\"yellow\">i</color> \u0441\u043B\u0435\u0432\u0430
+      \u0441\u0432\u0435\u0440\u0445\u0443"
+    position: {x: 169.73, y: -116.5, z: 0}
     scale: 1
     pointer:
-      target: {fileID: 708579818}
-      angleZ: 141.38
+      target: {fileID: 0}
+      angleZ: 0
       offset: 0
     pointers: []
-    conditionsSequence: 01000000
+    conditionsSequence: 0600000001000000
     buttonToCheck: {fileID: 708579819}
     keyToCheck: 105
     tagToCheck: 
     roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 3562911849079285427}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041F\u043E\u0437\u043D\u0430\u043A\u043E\u043C\u044C\u0441\u044F \u0441\u043E
+      \u0432\u0441\u0435\u043C\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F\u043C\u0438
+      \u043A\u043B\u0438\u043A\u043D\u0443\u0432 \u043C\u044B\u0448\u044C\u044E(<color=\"yellow\">\u041B\u041A\u041C</color>)
+      \u043F\u043E \u0438\u043D\u0434\u0438\u043A\u0430\u0442\u043E\u0440\u0443 \u043A\u0430\u0436\u0434\u043E\u0433\u043E
+      \u043C\u0435\u0434\u0432\u0435\u0434\u044F \u0432 \u0441\u043F\u0438\u0441\u043A\u0435
+      \u043C\u043E\u043D\u0438\u0442\u043E\u0440\u043E\u0432 \u0441\u043F\u0440\u0430\u0432\u0430.
+      \u041E\u0431\u0440\u0430\u0442\u0438 \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u0435,
+      \u0447\u0442\u043E \u043F\u043E \u043A\u043B\u0438\u043A\u0443 \u043D\u0430
+      \u0438\u043D\u0434\u0438\u043A\u0430\u0442\u043E\u0440 \u043C\u0435\u0434\u0432\u0435\u0434\u044C
+      \u0432\u044B\u0431\u0438\u0440\u0430\u0435\u0442\u0441\u044F \u043D\u0430 \u043A\u0430\u0440\u0442\u0435
+      \u0431\u0430\u0437\u044B. \u0422\u0430\u043A\u0436\u0435 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
+      \u043C\u043E\u0436\u043D\u043E \u0432\u044B\u0431\u0440\u0430\u0442\u044C \u043A\u043B\u0438\u043A\u043E\u043C(<color=\"yellow\">\u041B\u041A\u041C</color>)
+      \u043F\u043E \u0441\u0430\u043C\u043E\u043C\u0443 \u043C\u0435\u0434\u0432\u0435\u0434\u044E
+      \u0438\u043B\u0438 \u043D\u0430\u0436\u0430\u0442\u0438\u0435\u043C \u0446\u0438\u0444\u0440\u043E\u0432\u043E\u0439
+      <color=\"yellow\">\u043A\u043B\u0430\u0432\u0438\u0448\u0438 \u043D\u0430 \u043A\u043B\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0435</color>
+      \u043E\u0442 <color=\"yellow\">1</color> \u0434\u043E <color=\"yellow\">4</color>.
+      \u041F\u043E\u0441\u043B\u0435 \u0432\u044B\u0431\u043E\u0440\u0430 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
+      \u0444\u043E\u043A\u0443\u0441 \u043A\u0430\u043C\u0435\u0440\u044B \u043F\u0435\u0440\u0435\u043D\u0435\u0441\u0435\u0442\u0441\u044F
+      \u043D\u0430 \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0433\u043E \u043C\u0435\u0434\u0432\u0435\u0434\u044F. "
+    position: {x: -31.51, y: 73.54, z: 0}
+    scale: 0.9
+    pointer:
+      target: {fileID: 1496771814}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 03000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
     roomHighlight: {fileID: 0}
-    krugPos: {x: -352.5, y: 206.58998, z: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0427\u0442\u043E\u0431\u044B \u043F\u0435\u0440\u0435\u043C\u0435\u0441\u0442\u0438\u0442\u044C
+      \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0433\u043E \u043C\u0435\u0434\u0432\u0435\u0434\u044F
+      \u043A\u043B\u0438\u043A\u043D\u0438 \u041F\u041A\u041C(\u043F\u0440\u0430\u0432\u043E\u0439
+      \u043A\u043D\u043E\u043F\u043A\u043E\u0439 \u043C\u044B\u0448\u0438) \u043D\u0430
+      \u043D\u0443\u0436\u043D\u0443\u044E \u0442\u043E\u0447\u043A\u0443 \u0431\u0430\u0437\u044B.
+      \u041C\u0435\u0434\u0432\u0435\u0434\u044C \u0441\u0430\u043C \u043F\u0440\u043E\u0441\u0442\u0440\u043E\u0438\u0442
+      \u043C\u0430\u0440\u0448\u0440\u0443\u0442 \u0438 \u043F\u0440\u0438\u0434\u0435\u0442
+      \u0442\u0443\u0434\u0430. \u041E\u0442\u043F\u0440\u0430\u0432\u044C \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0433\u043E
+      \u043C\u0435\u0434\u0432\u0435\u0434\u044F \u043D\u0430 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430."
+    position: {x: -14.6, y: 82.1, z: 0}
+    scale: 1
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 04000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 1398197919}
+    roomHighlight: {fileID: 1999178390}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041F\u043E\u0437\u043D\u0430\u043A\u043E\u043C\u044C\u0441\u044F \u0441
+      \u0438\u043D\u0434\u0438\u043A\u0430\u0442\u043E\u0440\u0430\u043C\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043E\u0432
+      \u0432 \u0441\u043F\u0438\u0441\u043A\u0435 \u0441\u043B\u0435\u0432\u0430.
+      \u041F\u043E \u043A\u043B\u0438\u043A\u0443 (<color=\"yellow\">\u041B\u041A\u041C</color>)
+      \u043D\u0430 \u0438\u043D\u0434\u0438\u043A\u0430\u0442\u043E\u0440 \u0444\u043E\u043A\u0443\u0441
+      \u043A\u0430\u043C\u0435\u0440\u044B \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u0438\u0442\u0441\u044F
+      \u043D\u0430 \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441."
+    position: {x: -76.57, y: 73.54, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 929357052}
+      angleZ: 180
+      offset: 0
+    pointers: []
+    conditionsSequence: 07000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0422\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u043D\u0430\u0437\u043D\u0430\u0447\u0430\u0442\u044C
+      \u043C\u0435\u0434\u0432\u0435\u0434\u0435\u0439 \u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0443.
+      \u0412\u044B\u0431\u0435\u0440\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
+      \u043F\u0430\u0441\u0435\u0447\u043D\u0438\u043A\u0430 \u041C\u0430\u0448\u0443
+      \u0432 \u043F\u0440\u0430\u0432\u043E\u0439 \u043F\u0430\u043D\u0435\u043B\u0438
+      \u0438\u043B\u0438 \u043D\u0430\u0436\u0430\u0442\u0438\u0435\u043C \u043A\u043B\u0430\u0432\u0438\u0448\u0438
+      1. \u041A\u043B\u0438\u043A\u043D\u0438(\u041B\u041A\u041C) \u043F\u043E \u043A\u043D\u043E\u043F\u043A\u0435
+      \u0432 \u043B\u0435\u0432\u043E\u043C \u0432\u0435\u0440\u0445\u043D\u0435\u043C
+      \u0443\u0433\u043B\u0443 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0430
+      \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430.
+      \u0412 \u0441\u043B\u0443\u0447\u0430\u0435 \u0443\u0441\u043F\u0435\u0445\u0430
+      \u041C\u0430\u0448\u0430 \u0434\u043E\u043B\u0436\u043D\u0430 \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C\u0441\u044F
+      \u0432 \u044D\u0442\u043E\u0442 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u0438 \u043D\u0430\u0447\u0430\u0442\u044C \u0434\u043E\u0431\u044B\u0432\u0430\u0442\u044C
+      \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434. \u041E\u0431 \u044D\u0442\u043E\u043C
+      \u0442\u0435\u0431\u0435 \u0441\u043E\u043E\u0431\u0449\u0438\u0442 \u043F\u0440\u043E\u0433\u0440\u0435\u0441\u0441\u0431\u0430\u0440
+      \u0432 \u043B\u0435\u0432\u043E\u0439 \u0447\u0430\u0441\u0442\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0430"
+    position: {x: 169.73, y: -116.5, z: 0}
+    scale: 1
+    pointer:
+      target: {fileID: 681016907}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 08000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 1398197919}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0412\u044B\u0431\u0435\u0440\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
+      \u043F\u0435\u0440\u0432\u043E\u043F\u0440\u043E\u0445\u043E\u0434\u0446\u0430
+      \u0414\u0430\u0448\u0443(\u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E
+      \u0441\u043F\u0438\u0441\u043A\u0430 \u043C\u043E\u043D\u0438\u0442\u043E\u0440\u043E\u0432
+      \u0441\u043F\u0440\u0430\u0432\u0430 \u0438\u043B\u0438 \u043A\u043B\u0430\u0432\u0438\u0448\u0438
+      2) \u0438 \u043E\u0442\u043F\u0440\u0430\u0432\u044C \u0435\u0433\u043E \u043D\u0430
+      \u0440\u0430\u0431\u043E\u0442\u0443 \u043D\u0430 \u043A\u043E\u0441\u043C\u043E\u0434\u0440\u043E\u043C.
+      \u0412 \u043F\u043E\u044F\u0432\u0438\u0432\u0448\u0435\u043C\u0441\u044F \u043C\u0435\u043D\u044E
+      \u0432\u044B\u0431\u0435\u0440\u0438 \"\u0414\u043E\u0431\u044B\u0442\u044C
+      \u0430\u0441\u0442\u0435\u0440\u0438\u0439\". \u0423\u0447\u0442\u0438, \u0447\u0442\u043E
+      \u0435\u0441\u043B\u0438 \u0441\u0435\u0439\u0447\u0430\u0441 \u043F\u0440\u0438\u043B\u0438\u0432\u043D\u0430\u044F
+      \u0444\u0430\u0437\u0430, \u0442\u043E \u0442\u044B \u043D\u0435 \u043C\u043E\u0436\u0435\u0448\u044C
+      \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043A\u043E\u0441\u043C\u0438\u0447\u0435\u0441\u043A\u0438\u0439
+      \u0447\u0435\u043B\u043D\u043E\u043A \u043D\u0430 \u0434\u043E\u0431\u044B\u0447\u0443
+      \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432."
+    position: {x: 169.73, y: -116.5, z: 0}
+    scale: 0.9
+    pointer:
+      target: {fileID: 707844076}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 08000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 3562911849079285424}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0412\u044B\u0431\u0435\u0440\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
+      \u0442\u0432\u043E\u0440\u0446\u0430 \u041D\u0438\u043A\u0438\u0442\u0443 (\u0441
+      \u043F\u043E\u043C\u043E\u0449\u044C\u044E \u0441\u043F\u0438\u0441\u043A\u0430
+      \u043C\u043E\u043D\u0438\u0442\u043E\u0440\u043E\u0432 \u0441\u043F\u0440\u0430\u0432\u0430
+      \u0438\u043B\u0438 \u043A\u043B\u0430\u0432\u0438\u0448\u0438 4) \u0438 \u043E\u0442\u043F\u0440\u0430\u0432\u044C
+      \u0435\u0433\u043E \u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0443 \u0432
+      \u0436\u0438\u043B\u043E\u0439 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441(\u0442\u0430\u043C,
+      \u0433\u0434\u0435 \u043A\u0440\u043E\u0432\u0430\u0442\u0438)."
+    position: {x: 90, y: -116.5, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 08000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 496612051}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0412\u044B\u0431\u0435\u0440\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F
+      \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 \u0423\u0442\u043B\u0435\u044F(\u0441
+      \u043F\u043E\u043C\u043E\u0449\u044C\u044E \u0441\u043F\u0438\u0441\u043A\u0430
+      \u043C\u043E\u043D\u0438\u0442\u043E\u0440\u043E\u0432 \u0441\u043F\u0440\u0430\u0432\u0430
+      \u0438\u043B\u0438 \u043A\u043B\u0430\u0432\u0438\u0448\u0438 3) \u0438 \u043E\u0442\u043F\u0440\u0430\u0432\u044C
+      \u0435\u0433\u043E \u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0443 \u0432
+      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430
+      (\u0432 \u0441\u0430\u043C\u043E\u043C \u043D\u0438\u0437\u0443)."
+    position: {x: 169.73, y: -116.5, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 1340397990}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 08000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 1196657644}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0422\u0435\u043F\u0435\u0440\u044C \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C
+      \u0441\u0442\u0440\u043E\u0438\u0442\u044C! \u0427\u0442\u043E\u0431\u044B
+      \u0432\u043E\u0439\u0442\u0438 \u0432 \u0440\u0435\u0436\u0438\u043C \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430
+      \u043D\u0430\u0436\u043C\u0438 \u043A\u043B\u0430\u0432\u0438\u0448\u0438 [b]
+      \u043D\u0430 \u043A\u043B\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0435 \u0438\u043B\u0438
+      \u043D\u0430\u0436\u0430\u0432 \u043A\u043D\u043E\u043F\u043A\u0443 \u0441
+      \u043C\u043E\u043B\u043E\u0442\u043A\u043E\u043C \u0432 \u043B\u0435\u0432\u043E\u043C
+      \u0432\u0435\u0440\u0445\u043D\u0435\u043C \u0443\u0433\u043B\u0443 \u044D\u043A\u0440\u0430\u043D\u0430."
+    position: {x: -78, y: 73.54, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 535176800}
+      angleZ: 141.38
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 535176801}
+    keyToCheck: 98
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: -382.60007, y: 206.58998, z: 0}
     krugScale: 0.5
+  - text: "\u041D\u0430\u0436\u043C\u0438 \u043D\u0430 \u043F\u043B\u044E\u0441\u0438\u043A
+      \u0440\u044F\u0434\u043E\u043C \u0441 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043E\u043C
+      \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430."
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 1912480332}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 195394983}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0412\u044B\u0431\u0435\u0440\u0438 \u0432 \u043F\u043E\u044F\u0432\u0438\u0432\u0448\u0435\u043C\u0441\u044F
+      \u0441\u043F\u0438\u0441\u043A\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430.
+      \u041E\u0431\u0440\u0430\u0442\u0438 \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u0435,
+      \u0447\u0442\u043E \u043F\u043E\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u0442\u0440\u0430\u0442\u0438\u0442
+      \u0440\u0435\u0441\u0443\u0440\u0441\u044B!"
+    position: {x: 157.2, y: 112.6, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 641803799}
+      angleZ: 270
+      offset: 1
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 1716720647}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0412\u044B\u0439\u0434\u0438 \u0438\u0437 \u0440\u0435\u0436\u0438\u043C\u0430
+      \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430
+      \u043D\u0430\u0436\u0430\u0442\u0438\u0435\u043C [b] \u043D\u0430 \u043A\u043B\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0435,
+      \u0438\u043B\u0438 \u043D\u0430\u0436\u0430\u0432 \u043D\u0430 \u0438\u043A\u043E\u043D\u043A\u0443
+      \u0441 \u043C\u043E\u043B\u043E\u0442\u043E\u0447\u043A\u043E\u043C \u0432
+      \u043F\u0440\u0430\u0432\u043E\u043C \u0432\u0435\u0440\u0445\u043D\u0435\u043C
+      \u0443\u0433\u043B\u0443."
+    position: {x: -78, y: 73.54, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 535176800}
+      angleZ: 141.38
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 535176801}
+    keyToCheck: 98
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: -382.8, y: 204.4, z: 0}
+    krugScale: 0.5
+  - text: "\u041D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u043D\u043E\u0432\u044C
+      \u043F\u043E\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u044B
+      \u0442\u0440\u0435\u0431\u0443\u044E\u0442 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438.
+      \u041D\u0430\u0436\u043C\u0438 \u043D\u0430 \u0448\u0435\u0441\u0442\u0435\u0440\u0435\u043D\u043A\u0443
+      \u0432 \u043F\u0440\u0430\u0432\u043E\u043C \u0432\u0435\u0440\u0445\u043D\u0435\u043C
+      \u0443\u0433\u043B\u0443 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0430,
+      \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C
+      \u0435\u0433\u043E. \u0415\u0441\u043B\u0438 \u0442\u044B \u0440\u0435\u0448\u0438\u0448\u044C
+      \u043D\u0435\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E, \u0442\u043E
+      \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C
+      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0430 \u0431\u0443\u0434\u0435\u0442
+      \u0441\u043D\u0438\u0436\u0435\u043D\u0430; \u043F\u043E\u0432\u0442\u043E\u0440\u043D\u0430\u044F
+      \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u0430
+      \u043B\u0438\u0448\u044C \u0441\u043F\u0443\u0441\u0442\u044F \u0432\u0440\u0435\u043C\u044F."
+    position: {x: 195, y: -117.99, z: 0}
+    scale: 1
+    pointer:
+      target: {fileID: 2008664475}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 09000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041A\u0430\u0436\u0434\u044B\u0439 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u043D\u0430\u0441\u0442\u0440\u0430\u0438\u0432\u0430\u0435\u0442\u0441\u044F
+      \u043F\u043E \u0441\u0432\u043E\u0435\u043C\u0443. \u041F\u043E\u043D\u044F\u0442\u044C,
+      \u043A\u0430\u043A \u043D\u0443\u0436\u043D\u043E \u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C
+      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u043C\u043E\u0436\u043D\u043E
+      \u043F\u043E \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0435 \u0432
+      \u043B\u0435\u0432\u043E\u043C \u0432\u0435\u0440\u0445\u043D\u0435\u043C \u0443\u0433\u043B\u0443.
+      \u041D\u0430\u0436\u043C\u0438 \u041B\u041A\u041C, \u0447\u0442\u043E\u0431\u044B
+      \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C."
+    position: {x: 31.1, y: 112.6, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 1801057807}
+      angleZ: 180
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0427\u0442\u043E\u0431\u044B \u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C
+      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430
+      \u0442\u0435\u0431\u0435 \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E
+      \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E \u043F\u043E\u0434\u0430\u0442\u044C
+      \u043F\u0438\u0442\u0430\u043D\u0438\u0435 \u043D\u0430 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u0433\u0435\u043D\u0435\u0440\u0430\u0442\u043E\u0440.
+      \u0414\u043B\u044F \u044D\u0442\u043E\u0433\u043E \u043F\u043E\u0441\u0447\u0438\u0442\u0430\u0439
+      \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C
+      \u0432\u044B\u0434\u0435\u043B\u0435\u043D\u043D\u044B\u0445 \u043A\u0440\u0430\u0441\u043D\u044B\u043C
+      \u0443\u043B\u044C\u0435\u0432 (\u043F\u0440\u043E\u0441\u0443\u043C\u043C\u0438\u0440\u0443\u0439
+      \u0447\u0438\u0441\u043B\u0430 \u043C\u0435\u0436\u0434\u0443 \u043D\u0438\u043C\u0438)
+      \u0438 \u0432\u0432\u0435\u0434\u0438 \u043F\u043E\u043B\u0443\u0447\u0438\u0432\u0448\u0435\u0435\u0441\u044F
+      \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435 \u0432 \u043F\u043E\u043B\u0435
+      \u0432\u0432\u043E\u0434\u0430 \u043F\u043E\u0434 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u0433\u0435\u043D\u0435\u0440\u0430\u0442\u043E\u0440\u043E\u043C."
+    position: {x: 201, y: 116, z: 0}
+    scale: 1
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 0a000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041E\u0431\u0440\u0430\u0442\u0438 \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u0435
+      \u043D\u0430 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u044F.
+      \u041E\u043D \u043D\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442,
+      \u0442\u0430\u043A \u043A\u0430\u043A \u043D\u0430 \u043D\u0435\u0433\u043E
+      \u043D\u0435 \u043F\u043E\u0434\u0430\u043D\u043E \u043F\u0438\u0442\u0430\u043D\u0438\u0435.
+      \u0427\u0442\u043E\u0431\u044B \u043F\u043E\u0434\u0430\u0442\u044C \u043F\u0438\u0442\u0430\u043D\u0438\u0435,
+      \u043F\u043E\u0441\u0442\u0440\u043E\u0439 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u0441\u043D\u0430\u0431\u0436\u0435\u043D\u0438\u044F \u0440\u044F\u0434\u043E\u043C."
+    position: {x: 171, y: -118, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 73273328}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 1006031558}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041E\u0442\u043F\u0440\u0430\u0432\u044C \u043E\u0441\u0432\u043E\u0431\u043E\u0434\u0438\u0432\u0448\u0435\u0433\u043E\u0441\u044F
+      \u043C\u0435\u0434\u0432\u0435\u0434\u044F \u043D\u0430 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u0439 \u0438
+      \u0441\u043E\u0437\u0434\u0430\u0439 \u0443\u0440\u0441\u043E\u0432\u0430\u043A\u0441.
+      \u0423\u0440\u0441\u043E\u0432\u0430\u043A\u0441 \u043A\u0440\u0430\u0439\u043D\u0435
+      \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C \u043C\u0438\u0440\u0443
+      \u043C\u0435\u0434\u0432\u0435\u0434\u0435\u0439 \u0438 \u043C\u043E\u0436\u0435\u0442
+      \u0431\u044B\u0442\u044C \u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D
+      \u0442\u043E\u043B\u044C\u043A\u043E \u043D\u0430 \u044D\u0442\u043E\u0439
+      \u043F\u043B\u0430\u043D\u0435\u0442\u0435."
+    position: {x: -190, y: -118, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 1006031559}
+      angleZ: 141
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 1006031557}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0422\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u0443\u043B\u0443\u0447\u0448\u0430\u0442\u044C
+      \u043D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u044B,
+      \u0447\u0442\u043E\u0431\u044B \u0443\u0432\u0435\u043B\u0438\u0447\u0438\u0442\u044C
+      \u0438\u0445 \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C.
+      \u0412\u043E\u0439\u0434\u0438 \u0432 \u0440\u0435\u0436\u0438\u043C \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u043E,
+      \u043D\u0430\u0436\u043C\u0438 \u041B\u041A\u041C \u043D\u0430 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430
+      \u0438 \u0432\u044B\u0431\u0435\u0440\u0438 \u043F\u0443\u043D\u043A\u0442
+      \"\u0423\u043B\u0443\u0447\u0448\u0438\u0442\u044C\". \u041E\u0431\u0440\u0430\u0442\u0438
+      \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u0435, \u0447\u0442\u043E \u0443
+      \u0442\u0435\u0431\u044F \u0434\u043E\u043B\u0436\u043D\u043E \u0431\u044B\u0442\u044C
+      \u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430."
+    position: {x: 0, y: -120, z: 0}
+    scale: 0.9
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 1999178390}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0421\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0435\u043C \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u044B
+      \u0442\u0435\u0440\u044F\u044E\u0442 \u0441\u0432\u043E\u044E \u043F\u0440\u043E\u0447\u043D\u043E\u0441\u0442\u044C.
+      \u0427\u0442\u043E\u0431\u044B \u043F\u043E\u0447\u0438\u043D\u0438\u0442\u044C
+      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u043D\u0430\u0436\u043C\u0438
+      \u043A\u043D\u043E\u043F\u043A\u0443 \"\u0427\u0438\u043D\u0438\u0442\u044C\"
+      \u043D\u0430 \u043D\u0443\u0436\u043D\u043E\u043C \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0435
+      \u0432 \u0440\u0435\u0436\u0438\u043C\u0435 \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430.
+      \u041F\u043E\u0447\u0438\u043D\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434\u0430"
+    position: {x: 0, y: -120, z: 0}
+    scale: 0.9
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 1999178390}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0422\u0432\u043E\u0439 \u043C\u0435\u0434\u0432\u0435\u0434\u044C, \u043D\u0430\u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044B\u0439
+      \u0432 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u0439
+      \u0437\u0430\u0432\u0435\u0440\u0448\u0438\u043B \u0441\u0432\u043E\u044E \u0440\u0430\u0431\u043E\u0442\u0443!
+      \u0422\u0435\u043F\u0435\u0440\u044C \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C
+      \u043F\u043E\u0434\u0430\u0440\u0438\u0442\u044C \u0432\u0430\u043A\u0446\u0438\u043D\u0443
+      \u043C\u0438\u0440\u0443 \u0411\u0435\u0440\u043B\u043E\u0433\u0438, \u0447\u0442\u043E\u0431\u044B
+      \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u041C.\u0415.\u0414.\u044B
+      (\u043C\u0435\u0434\u0432\u0435\u0436\u044C\u0438 \u0435\u0434\u0438\u043D\u0438\u0446\u044B
+      \u0434\u0430\u0440\u0430). \u041E\u0442\u043A\u0440\u043E\u0439 \u0443\u043D\u0438\u043A\u0430\u043B\u044C\u043D\u044B\u0439
+      \u043F\u043B\u0430\u043D\u0448\u0435\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0446\u0430
+      \u0423\u0442\u043B\u0435\u044F \u043D\u0430\u0436\u0430\u0442\u0438\u0435\u043C
+      \u043A\u043B\u0430\u0432\u0438\u0448\u0438 [e] \u043D\u0430 \u043A\u043B\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0435
+      \u0438\u043B\u0438 \u043D\u0430\u0436\u0430\u0432 \u043D\u0430 \u0438\u043A\u043E\u043D\u043A\u0443
+      \u043F\u043B\u0430\u043D\u0448\u0435\u0442 \u0432 \u043F\u0440\u0430\u0432\u043E\u043C
+      \u0432\u0435\u0440\u0445\u043D\u0435\u043C \u0443\u0433\u043B\u0443."
+    position: {x: 75.5, y: 0.5, z: 0}
+    scale: 1
+    pointer:
+      target: {fileID: 511216556}
+      angleZ: 45
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 511216557}
+    keyToCheck: 101
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 379.9, y: 165.3, z: 0}
+    krugScale: 0.5
+  - text: "\u041C.\u0415.\u0414. - \u044D\u0442\u043E \u043F\u043E\u043A\u0430\u0437\u0430\u0442\u0435\u043B\u044C
+      \u043B\u043E\u044F\u043B\u044C\u043D\u043E\u0441\u0442\u0438 \u043C\u0438\u0440\u0430
+      \u0411\u0435\u0440\u043B\u043E\u0433\u0438 \u043A \u0442\u0435\u0431\u0435,
+      \u043F\u043E\u0432\u044B\u0448\u0430\u0439 \u0435\u0433\u043E, \u043E\u0442\u0434\u0430\u0432\u0430\u044F
+      \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u044B\u0435 \u043C\u0438\u0440\u0443
+      \u0411\u0435\u0440\u043B\u043E\u0433\u0438 \u0440\u0435\u0441\u0443\u0440\u0441\u044B.
+      \u0421\u0435\u0439\u0447\u0430\u0441 \u043E\u0442\u0434\u0430\u0439 \u0442\u043E\u043B\u044C\u043A\u043E
+      \u0447\u0442\u043E \u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u043D\u044B\u0439
+      \u0443\u0440\u0441\u043E\u0432\u0430\u043A\u0441, \u0432\u0432\u0435\u0434\u044F
+      \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0443\u0440\u0441\u043E\u0432\u0430\u043A\u0441\u0430,
+      \u043A\u043E\u0442\u043E\u0440\u043E\u0435 \u0442\u044B \u0445\u043E\u0447\u0435\u0448\u044C
+      \u043E\u0442\u0434\u0430\u0442\u044C, \u043F\u043E\u0434 \u0438\u043A\u043E\u043D\u043A\u043E\u0439
+      \u0443\u0440\u0441\u043E\u0432\u0430\u043A\u0441\u0430. \u0427\u0435\u043C
+      \u0431\u043E\u043B\u044C\u0448\u0435 \u041C.\u0415.\u0414\u0430 \u0442\u0435\u043C
+      \u043B\u0443\u0447\u0448\u0435!!"
+    position: {x: 0, y: -160, z: 0}
+    scale: 1
+    pointer:
+      target: {fileID: 906660349}
+      angleZ: -45
+      offset: 0
+    pointers: []
+    conditionsSequence: 0b000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 134.9, y: 105, z: 0}
+    krugScale: 0.75
+  - text: "\u0421 \u0442\u0435\u0447\u0435\u043D\u0438\u0435\u043C \u0432\u0440\u0435\u043C\u0435\u043D\u0438
+      \u043D\u0430 \u043F\u043B\u0430\u043D\u0435\u0442\u0435 \u043C\u0435\u043D\u044F\u044E\u0442\u0441\u044F
+      \u0444\u0430\u0437\u044B. \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0437\u0430\u0442\u0440\u0443\u0434\u043D\u044F\u044E\u0442
+      \u0432\u044B\u0436\u0438\u0432\u0430\u043D\u0438\u0435 \u043D\u0430 \u0431\u0430\u0437\u0435.
+      \u0421 \u0442\u0435\u0447\u0435\u043D\u0438\u0435\u043C \u0432\u0440\u0435\u043C\u0435\u043D\u0438
+      \u043D\u0435\u0433\u0430\u0442\u0438\u0432\u043D\u044B\u0435 \u044D\u0444\u0444\u0435\u043A\u0442\u044B
+      \u0444\u0430\u0437 \u0443\u0441\u0438\u043B\u0438\u0432\u0430\u044E\u0442\u0441\u044F!
+      \u041F\u043E\u044D\u0442\u043E\u043C\u0443 \u043F\u043E\u0441\u0442\u043E\u044F\u043D\u043D\u043E
+      \u0440\u0430\u0441\u0448\u0438\u0440\u044F\u0439 \u0438 \u0443\u043B\u0443\u0447\u0448\u0430\u0439
+      \u0441\u0432\u043E\u044E \u0431\u0430\u0437\u0443. \u041D\u0430\u0436\u043C\u0438
+      \u041B\u041A\u041C, \u0447\u0442\u043E\u0431\u044B \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C."
+    position: {x: 195, y: -117.99, z: 0}
+    scale: 0.9
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0422\u044B \u0433\u043E\u0442\u043E\u0432, \u0447\u0442\u043E\u0431\u044B
+      \u0441\u0442\u0430\u0442\u044C \u043D\u0430\u0441\u0442\u043E\u044F\u0449\u0438\u043C
+      \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0446\u0435\u043C! \u0418\u043C\u0435\u043D\u0435\u043C
+      \u0441\u0432\u044F\u0442\u043E\u0439 \u043F\u0447\u0435\u043B\u044B \u0438
+      \u0445\u0440\u0430\u0431\u0440\u043E\u0433\u043E \u043C\u0435\u0434\u0432\u0435\u0434\u044F
+      \u043F\u043E\u0441\u0432\u044F\u0449\u0430\u044E \u0442\u0435\u0431\u044F \u0432
+      \u0423\u041F\u0420\u0410\u0412\u041B\u0415\u041D\u0426\u042B. \u0421\u0442\u0430\u043D\u044C
+      \u043C\u0435\u0434\u0432\u0435\u0434\u0435\u043C, \u043A\u043E\u0442\u043E\u0440\u044B\u0439
+      \u0441\u043C\u043E\u0433!"
+    position: {x: 0, y: 0, z: 0}
+    scale: 2
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0439 \u0441\u043B\u0430\u0439\u0434"
+    position: {x: 0, y: 0, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  textOutput: {fileID: 432270029}
+  tutorialView: {fileID: 94874731}
+  startGameButton: {fileID: 760564991}
+  pointerSlots: []
+  pointerPrefab: {fileID: 1914244455409487036, guid: c280cc053adab3b409c8628063711174, type: 3}
+--- !u!114 &2033803364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033803360}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821027e06d226b14ca21ce933184709b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kruzhochek: {fileID: 382548864}
+  tutorialCanvas: {fileID: 1633323105}
+  sequence:
+  - text: "\u041F\u0440\u0438\u0432\u0435\u0442, \u0438\u0433\u0440\u043E\u043A!
+      \u041C\u0435\u043D\u044F \u0437\u043E\u0432\u0443\u0442 <color=\"yellow\">\u041C\u0438\u0448\u0430</color>.
+      \u041C\u043E\u044F \u0437\u0430\u0434\u0430\u0447\u0430 - \u043F\u043E\u0434\u0433\u043E\u0442\u043E\u0432\u0438\u0442\u044C
+      \u0442\u0435\u0431\u044F \u043A \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044E
+      \u0431\u0430\u0437\u043E\u0439. \u0414\u043B\u044F \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0435\u043D\u0438\u0435
+      \u043D\u0430\u0436\u043C\u0438 <color=\"yellow\">\u041B\u041A\u041C (\u043B\u0435\u0432\u0443\u044E
+      \u043A\u043D\u043E\u043F\u043A\u0443 \u043C\u044B\u0448\u0438)</color>"
+    position: {x: 169.73, y: -116.5, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0422\u0432\u043E\u044F \u0437\u0430\u0434\u0430\u0447\u0430 - \u043F\u0440\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C\u0441\u044F
+      \u043D\u0430 \u0431\u0430\u0437\u0435 <color=yellow>\u043E\u0442\u0432\u0435\u0434\u0451\u043D\u043D\u043E\u0435
+      \u0432\u0440\u0435\u043C\u044F</color>."
+    position: {x: 0, y: 0, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 1163276254}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041D\u0430 \u043F\u043B\u0430\u043D\u0435\u0442\u0435 \u041A\u0430\u0442\u0430\u0433\u0438\u0434\u0430
+      \u043E\u0447\u0435\u043D\u044C \u043D\u0438\u0437\u043A\u0430\u044F \u0442\u0435\u043C\u043F\u0435\u0440\u0430\u0442\u0443\u0440\u0430.
+      \u0414\u043B\u044F \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u044F
+      \u0442\u0435\u043F\u043B\u0430 \u0432\u043D\u0443\u0442\u0440\u0438 \u0431\u0430\u0437\u044B
+      \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F <color=yellow>\u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434</color>."
+    position: {x: 0, y: 0, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0422\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u043E\u0442\u0441\u043B\u0435\u0434\u0438\u0442\u044C
+      \u0442\u0435\u043C\u043F\u0435\u0440\u0430\u0442\u0443\u0440\u0443 \u043D\u0430
+      \u0431\u0430\u0437\u0435 \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E
+      \u0448\u043A\u0430\u043B\u044B \u0441\u0432\u0435\u0440\u0445\u0443."
+    position: {x: 0, y: 0, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041A\u0430\u043A \u0442\u043E\u043B\u044C\u043A\u043E \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434
+      \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u0441\u044F, \u0442\u0435\u043C\u043F\u0435\u0440\u0430\u0442\u0443\u0440\u0430
+      \u043D\u0430\u0447\u043D\u0435\u0442 \u043F\u043E\u0441\u0442\u0435\u043F\u0435\u043D\u043D\u043E
+      \u043F\u0430\u0434\u0430\u0442\u044C. \u041A\u043E\u0433\u0434\u0430 \u0442\u0435\u043C\u043F\u0435\u0440\u0430\u0442\u0443\u0440\u0430
+      \u043E\u043F\u0443\u0441\u0442\u0438\u0442\u0441\u044F \u0434\u043E -25\u2103
+      \u0432\u0441\u0435 \u043C\u0435\u0434\u0432\u0435\u0434\u0438 \u0432\u043F\u0430\u0434\u0443\u0442
+      \u0432 \u0441\u043F\u044F\u0447\u043A\u0443."
+    position: {x: 0, y: 0, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0439 \u0441\u043B\u0430\u0439\u0434"
+    position: {x: 0, y: 0, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 708579819}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041A\u0430\u0436\u0434\u0430\u044F \u0431\u0430\u0437\u0430 \u0441\u043E\u0441\u0442\u043E\u0438\u0442
+      \u0438\u0437 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043E\u0432.
+      \u0427\u0442\u043E\u0431\u044B \u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C
+      \u0431\u0430\u0437\u0443 \u043D\u0430\u0436\u043C\u0438 <color=\"yellow\">\u0421\u041A\u041C
+      (\u0441\u0440\u0435\u0434\u043D\u044E\u044E \u043A\u043D\u043E\u043F\u043A\u0443
+      \u043C\u044B\u0448\u0438, \u043A\u043E\u043B\u0435\u0441\u0438\u043A\u043E)</color>
+      \u0438 \u043F\u0440\u043E\u0432\u0435\u0434\u0438 \u043C\u044B\u0448\u044C\u044E
+      \u0438\u043B\u0438 \u043F\u043E\u0434\u043D\u0435\u0441\u0438 <color=\"yellow\">\u043A\u0443\u0440\u0441\u043E\u0440</color>
+      \u043A \u043B\u044E\u0431\u043E\u043C\u0443 \u043A\u0440\u0430\u044E \u044D\u043A\u0440\u0430\u043D\u0430."
+    position: {x: 169.73, y: -116.5, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 00000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
   - text: "<color=\"yellow\">\u041A\u043B\u0438\u043A\u043E\u043C \u043C\u044B\u0448\u0438
       (\u041B\u041A\u041C - \u043B\u0435\u0432\u0430\u044F \u043A\u043D\u043E\u043F\u043A\u0430
       \u043C\u044B\u0448\u0438)</color> \u043F\u043E \u043A\u043E\u0441\u043C\u043E\u0434\u0440\u043E\u043C\u0443
@@ -39501,6 +41013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: 
   isAPIActive: 0
+  playerAsteriumDifficulty: 1
   ui: {fileID: 327177501}
   asteriumRoomView:
   - {fileID: 1043319213}
