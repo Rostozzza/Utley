@@ -8,8 +8,8 @@ public class ChoicesFormer : MonoBehaviour
 {
     [SerializeField] private GameObject prefab;
     [SerializeField] private List<RoomType> roomsToCreate;
-    [Tooltip("Order should match with RoomType except Cosmodrome")][SerializeField] private List<GameObject> roomPrefabs;
-    [Tooltip("Order should match with RoomType except Cosmodrome")][SerializeField] private List<Sprite> roomIcons;
+    [Tooltip("Order should match with RoomType except Cosmodrome (leave empty)")][SerializeField] private List<GameObject> roomPrefabs;
+    [Tooltip("Order should match with RoomType except Cosmodrome (leave empty)")][SerializeField] private List<Sprite> roomIcons;
     void Awake()
     {
         foreach (var room in roomsToCreate)

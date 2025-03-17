@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 	public string playerName;
 	public Player playerModel;
 	public bool isAPIActive;
+	[SerializeField] int playerAsteriumDifficulty = 1;
 	[Header("Cosmodrome settings")]
 	[SerializeField] private GameObject ui;
 	[SerializeField] private List<Image> asteriumRoomView;
