@@ -21,7 +21,7 @@ public class BuilderRoom : RoomScript
 		statusPanel.UpdateStatus(status);
 		animator.SetTrigger("StartWork");
         TrySetVideoPlayers(true);
-		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Build, new List<Vector3>(), this.gameObject);
+		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Build, GetWalkPoints(), this.gameObject);
 		fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
         fixedBear.GetComponent<UnitScript>().CanBeSelected();
 

@@ -25,7 +25,7 @@ public class NumbersByTableExercise : MonoBehaviour
 	[SerializeField] private List<int> rightAnswers;
 	[SerializeField] private List<TaskPreset> tasksPresets;
 	[SerializeField] private List<GameObject> taskPrefabs;
-	[SerializeField] private int playerDifficulty = 1; // sorry for using this instead of (difficulty). Idk how your var is working
+	//[SerializeField] private int playerDifficulty = 1; // sorry for using this instead of (difficulty). Idk how your var is working
 	private RoomScript targetedRoom;
 	private bool isListenerAdded = false;
 
@@ -58,8 +58,10 @@ public class NumbersByTableExercise : MonoBehaviour
 
 	public void GenerateFromPreset()
 	{
+		//tasksPresets.ForEach(p => Debug.Log($"<color=purple>{p.difficultLevel}</color>"));
 		Camera.main.GetComponent<CameraController>().SetCameraLock(true);
-		var preset = tasksPresets[tasksPresets.FindIndex(x => x.difficultLevel == TaskDifficultByPlayerDifficult(playerDifficulty))]; //[Random.Range(gridRange, Mathf.Clamp(gridRange + 2, 0, tasksPresets.Count))]; // also now task finds by player difficuty. I think it's makes more sense if we using "templates"
+		//Debug.Log(tasksPresets.FindIndex(x => x.difficultLevel == TaskDifficultByPlayerDifficult(GameManager.Instance.GetPlayerAsteriumDifficulty())));
+		var preset = tasksPresets[tasksPresets.FindIndex(x => x.difficultLevel == TaskDifficultByPlayerDifficult(GameManager.Instance.GetPlayerAsteriumDifficulty()))]; //[Random.Range(gridRange, Mathf.Clamp(gridRange + 2, 0, tasksPresets.Count))]; // also now task finds by player difficuty. I think it's makes more sense if we using "templates"
 		task = preset.task;
 		rightAnswers = preset.answers;
 		allInputFields = preset.fields;
@@ -83,13 +85,12 @@ public class NumbersByTableExercise : MonoBehaviour
 	{
 		if (isPositive)
 		{
-			playerDifficulty++;
+			GameManager.Instance.ChangePlayerAsteriumDifficulty(1);
 		}
 		else
 		{
-			playerDifficulty--;
+			GameManager.Instance.ChangePlayerAsteriumDifficulty(-1);
 		}
-		playerDifficulty = Math.Clamp(playerDifficulty, 1, 999);
 	}
 
 	private IEnumerator ConnectAllPoints()
@@ -160,6 +161,7 @@ public class NumbersByTableExercise : MonoBehaviour
 		targetedRoom.SetWorkEfficiency(1f);
 		GameManager.Instance.TryProcessingRawAsterium();
 		Debug.Log("ВЕРНО");
+		ChangePlayerDifficulty(true);
 		Camera.main.GetComponent<CameraController>().GoToTaskPoint(Vector3.zero, Vector3.zero);
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 		GameManager.Instance.SetIsGraphUsing(false);

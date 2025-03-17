@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 	public string playerName;
 	public Player playerModel;
 	public bool isAPIActive;
-	[SerializeField] int playerAsteriumDifficulty = 1;
+	[SerializeField] private int playerAsteriumDifficulty = 1;
 	[Header("Cosmodrome settings")]
 	[SerializeField] private GameObject ui;
 	[SerializeField] private List<Image> asteriumRoomView;
@@ -1978,6 +1978,13 @@ public class GameManager : MonoBehaviour
 	public bool GetIsTemperatureDecreasing()
 	{
 		return honey <= 0;
+	}
+
+	public int GetPlayerAsteriumDifficulty() => playerAsteriumDifficulty;
+	public void ChangePlayerAsteriumDifficulty(int level)
+	{
+		playerAsteriumDifficulty += level;
+		playerAsteriumDifficulty = Math.Clamp(playerAsteriumDifficulty, 1, 999);
 	}
 
 	public enum Season

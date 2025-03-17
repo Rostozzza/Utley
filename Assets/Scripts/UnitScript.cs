@@ -234,7 +234,7 @@ public class UnitScript : MonoBehaviour
 				walkingCoroutine = null;
 				break;
 			case RoomScript.Resources.Build:
-				walkingCoroutine = StartCoroutine(BuildBehaviour(obj));
+				walkingCoroutine = StartCoroutine(BuildBehaviour(walkPoints[0], obj));
 				while (obj.GetComponent<BuilderRoom>().GetWait())
 				{
 					yield return null;
@@ -280,9 +280,22 @@ public class UnitScript : MonoBehaviour
 		GetComponentInChildren<Animator>().SetBool("Work", false);
 	}
 
-	private IEnumerator BuildBehaviour(GameObject obj)
+	private IEnumerator BuildBehaviour(Vector3 workPoint, GameObject obj)
 	{
 		EventManager.onBearWorkStarted.Invoke(GetComponent<UnitMovement>().currentRoom);
+
+		//GetComponentInChildren<Animator>().StopPlayback();
+		GetComponentInChildren<Animator>().speed = 0.5f;
+		GetComponentInChildren<Animator>().SetBool("Walk", true);
+		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(workPoint.x - transform.position.x), 0);
+		while (!(workPoint.x - 0.01f <= transform.position.x && transform.position.x <= workPoint.x + 0.01f))
+			{
+				transform.Translate(new Vector3(Mathf.Sign(workPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
+				yield return null;
+			}
+		GetComponentInChildren<Animator>().SetBool("Walk", false);
+		GetComponentInChildren<Animator>().speed = 1f;
+
 		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
 		GetComponentInChildren<Animator>().SetBool("Work", true);
 		while (obj.GetComponent<BuilderRoom>().GetWait())
