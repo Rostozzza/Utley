@@ -144,6 +144,7 @@ public class NumbersByTableExercise : MonoBehaviour
 				GameManager.Instance.SetIsGraphUsing(false);
 				targetedRoom.SetIsSolved(false); // idk, maybe false
         		StartCoroutine(ChangeFOV(60, 1));
+				Camera.main.GetComponent<CameraShake>().SetCameraShakeByMeteor(true);
 				return;
 			}
 		}
@@ -166,6 +167,7 @@ public class NumbersByTableExercise : MonoBehaviour
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 		GameManager.Instance.SetIsGraphUsing(false);
 		targetedRoom.SetIsSolved(true);
+		Camera.main.GetComponent<CameraShake>().SetCameraShakeByMeteor(true);
 		//StartCoroutine(ChangeFOV(60, 1));
 		//MenuManager.Instance.problemSolverScreen.SetActive(false);
 	}

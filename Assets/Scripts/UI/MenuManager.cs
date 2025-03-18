@@ -726,7 +726,6 @@ public class MenuManager : MonoBehaviour
 				cosmodromeExercise.gameObject.SetActive(true);
 				StartCoroutine(WaitForResistorsCountEnd(room));
 				tabletAnimator.SetTrigger("OpenShop");
-				
 				//room.SetWorkEfficiency(1); // temp solution;
 				break;
 			case ProblemType.SetBreakingBad:
@@ -738,6 +737,7 @@ public class MenuManager : MonoBehaviour
 		}
 		GameManager.Instance.SetIsGraphUsing(true);
 		GameManager.Instance.SetBearsShow(false);
+		Camera.main.GetComponent<CameraShake>().SetCameraShakeByMeteor(false);
 	}
 
 	private IEnumerator WaitForFurnacesEnd(RoomScript room)
@@ -759,6 +759,7 @@ public class MenuManager : MonoBehaviour
 		SetPipesScreen.SetActive(false);
 		(room as EnergohoneyRoom).SetIsSolved(true);
 		GameManager.Instance.SetBearsShow(true);
+		Camera.main.GetComponent<CameraShake>().SetCameraShakeByMeteor(true);
 		//problemSolverScreen.SetActive(false);
 		//tabletAnimator.SetTrigger("CloseShop");
 	}
@@ -775,6 +776,7 @@ public class MenuManager : MonoBehaviour
 		problemSolverScreen.SetActive(false);
 		tabletAnimator.SetTrigger("CloseShop");
 		GameManager.Instance.SetBearsShow(true);
+		Camera.main.GetComponent<CameraShake>().SetCameraShakeByMeteor(true);
 	}
 
 	public enum ProblemType

@@ -13,12 +13,18 @@ public class CameraShake : MonoBehaviour
 	[Header("Shake settings")]
 	[SerializeField] private float force;
 	[SerializeField] private float length;
+	[SerializeField] private bool shake;
 	[Header("Abberation settings")]
 	[SerializeField] private Volume volume;
 	[SerializeField] private float abberationLength;
 	[SerializeField] private float abberationIntensity;
 
 	public void MeteorImpact()
+	{
+		if (shake) ShakeCamera();
+	}
+
+	private void ShakeCamera()
 	{
 		StartCoroutine(ImpactCoroutine());
 		StartCoroutine(AbberationDrain());
@@ -53,4 +59,6 @@ public class CameraShake : MonoBehaviour
 		}
 		abberation.intensity.value = 0;
 	}
+
+	public void SetCameraShakeByMeteor(bool set) => shake = set;
 }

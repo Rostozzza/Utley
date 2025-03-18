@@ -5,6 +5,8 @@ public class CameraController : MonoBehaviour
 {
 	[SerializeField] float sensetive = 0.1f;
 	[SerializeField] private float zoom = -20;
+	[SerializeField] private float minCap = -20;
+	[SerializeField] private float maxCap = -10;
 	private int left, top, right, bottom;
 	private bool needToMoveByMousePos;
 	private bool isScroll = true;
@@ -111,7 +113,7 @@ public class CameraController : MonoBehaviour
 		{
 			if (Input.mouseScrollDelta.y != 0 && isScroll)
 			{
-				zoom = GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(Input.mouseScrollDelta.y + zoom, -20, -10);
+				zoom = GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(Input.mouseScrollDelta.y + zoom, minCap, maxCap);
 			}
 			else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
 			{
@@ -142,6 +144,7 @@ public class CameraController : MonoBehaviour
 		{
 
 			zoom += value * Time.deltaTime * 10;
+			zoom = Mathf.Clamp(zoom, minCap, maxCap);
 			CameraMove();
 			yield return null;
 		}
@@ -153,7 +156,7 @@ public class CameraController : MonoBehaviour
 		Camera.main.transform.position = new Vector3(
 		Mathf.Clamp(Camera.main.transform.position.x, -25f, 25f),
 		Mathf.Clamp(Camera.main.transform.position.y, -19f, 17.5f),
-		GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(zoom, -20, -10)
+		GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(zoom, minCap, maxCap)
 		);
 	}
 
