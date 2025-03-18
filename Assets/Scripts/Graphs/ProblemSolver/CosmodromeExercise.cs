@@ -17,6 +17,8 @@ public class CosmodromeExercise : MonoBehaviour
 	[HideInInspector] public bool isTaskActive = false;
 	private int ribs;
 	private int verticies;
+	[SerializeField] private List<GameObject> templates;
+	[SerializeField] private GameObject activeTemplate;
 	[Header("Task Generator")]
 	[SerializeField][Range(3, 50)] private int difficulty;
 	[SerializeField][Range(0f, 1f)] private float radiusRandomOffset;
@@ -34,9 +36,10 @@ public class CosmodromeExercise : MonoBehaviour
 
 	private void ResetShuffledPoints()
 	{
-		shufflePoints = pointsParent.GetComponentsInChildren<OgePointLogic>(true).ToList();
-		shufflePoints.Remove(startPoint);
-		shufflePoints.Remove(endPoint);
+		//shufflePoints = pointsParent.GetComponentsInChildren<OgePointLogic>(true).ToList();
+		//shufflePoints.Remove(startPoint);
+		//shufflePoints.Remove(endPoint);
+		shufflePoints = activeTemplate.GetComponentsInChildren<OgePointLogic>().ToList();
 	}
 
 	/// <summary>
@@ -59,16 +62,21 @@ public class CosmodromeExercise : MonoBehaviour
 
 		correctAnswer = 0;
 
-		ResetShuffledPoints();
 
 		var previousPoint = startPoint;
 		int cycles = shufflePoints.Count;
 		float radiansAngle = Mathf.Atan2(startAxis.y, startAxis.x);
 		dir = new Vector2(Mathf.Cos(radiansAngle), Mathf.Sin(radiansAngle));
 
+		activeTemplate = templates[Random.Range(0, templates.Count)]; //Random.Range(0, templates.Count)
+
+		correctAnswer = activeTemplate.GetComponent<CosmodromeTemplateStorage>().GetRightAnswer();
+
+		ResetShuffledPoints();
+
 		shufflePoints.ForEach(point => point.GetComponent<Image>().enabled = true);
 
-		for (int i = 0; i < cycles; i++)
+		/*for (int i = 0; i < cycles; i++)
 		{
 			int randNum = Random.Range(0, shufflePoints.Count);
 			var currentPoint = shufflePoints[randNum];
@@ -92,7 +100,9 @@ public class CosmodromeExercise : MonoBehaviour
 			dir = new Vector2(Mathf.Cos(radiansAngle), Mathf.Sin(radiansAngle));
 		}
 		previousPoint.AddPointToConnected(endPoint);
-		shufflePoints.Remove(previousPoint);
+		shufflePoints.Remove(previousPoint); */
+
+		activeTemplate.SetActive(true);
 
 		ResetShuffledPoints();
 
@@ -137,7 +147,8 @@ public class CosmodromeExercise : MonoBehaviour
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
 		gameObject.SetActive(false);
 		answerField.text = "";
-		
+		activeTemplate.SetActive(false);
+
 		shufflePoints.ForEach(point => point.GetComponent<Image>().enabled = false);
 	}
 
@@ -149,9 +160,9 @@ public class CosmodromeExercise : MonoBehaviour
 		//pointsParent.GetComponentsInChildren<OgePointLogic>(true).ToList().ForEach(p => p.SetColor(Color.white));
 		//gameObjectsToDestroy.ForEach(x => Destroy(x));
 		toDestroyAtEnd.ForEach(x => Destroy(x));
-		shufflePoints.ForEach(x => x.ClearConnectedPoints());
+		//shufflePoints.ForEach(x => x.ClearConnectedPoints());
 		pointsParent.GetComponentsInChildren<LineRenderer>(true).ToList().ForEach(line => Destroy(line.gameObject, 1f));
-		pointsParent.GetComponentsInChildren<TextMeshProUGUI>(true).ToList().Where(text => !text.transform.parent.GetComponent<RectMask2D>() && !text.gameObject.CompareTag("dont_destroy_text")).ToList().ForEach(weight => Destroy(weight.gameObject, 1f));
+		//pointsParent.GetComponentsInChildren<TextMeshProUGUI>(true).ToList().Where(text => !text.transform.parent.GetComponent<RectMask2D>() && !text.gameObject.CompareTag("dont_destroy_text")).ToList().ForEach(weight => Destroy(weight.gameObject, 1f));
 	}
 
 	/// <summary>
