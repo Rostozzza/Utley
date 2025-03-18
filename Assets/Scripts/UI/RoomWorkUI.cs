@@ -14,12 +14,14 @@ public class RoomWorkUI : MonoBehaviour
 	[SerializeField] protected Transform correspondingUI;
 	[SerializeField] protected Sprite workResultSprite;
 	protected GridLayoutGroup grid;
+	private Vector2 startGridSize;
 
 	public void Start()
 	{
 		animator = GetComponent<Animator>();
 		grid = GetComponentInChildren<GridLayoutGroup>(true);
 		resultText = GetComponentInChildren<TextMeshProUGUI>(true);
+		startGridSize = grid.cellSize;
 	}
 
 	public void StartWork(float time, float amountOfUnits, Transform ui, ResourceType resourceType = ResourceType.None)
@@ -49,7 +51,7 @@ public class RoomWorkUI : MonoBehaviour
 		switch (resourceType)
 		{
 			case ResourceType.Energohoney:
-			grid.cellSize = new Vector2(grid.cellSize.x, grid.cellSize.y / (amountOfUnits / 5)); // autoresize if energohoney amount != 5 (5 because at default it was 5);
+			grid.cellSize = new Vector2(startGridSize.x, startGridSize.y / (amountOfUnits / 5)); // autoresize if energohoney amount != 5 (5 because at default it was 5);
 			break;
 			
 			default:
