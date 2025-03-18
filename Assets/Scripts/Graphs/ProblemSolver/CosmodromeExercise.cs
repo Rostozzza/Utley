@@ -66,6 +66,8 @@ public class CosmodromeExercise : MonoBehaviour
 		float radiansAngle = Mathf.Atan2(startAxis.y, startAxis.x);
 		dir = new Vector2(Mathf.Cos(radiansAngle), Mathf.Sin(radiansAngle));
 
+		shufflePoints.ForEach(point => point.GetComponent<Image>().enabled = true);
+
 		for (int i = 0; i < cycles; i++)
 		{
 			int randNum = Random.Range(0, shufflePoints.Count);
@@ -135,6 +137,8 @@ public class CosmodromeExercise : MonoBehaviour
 		MenuManager.Instance.problemSolverScreen.SetActive(false);
 		gameObject.SetActive(false);
 		answerField.text = "";
+		
+		shufflePoints.ForEach(point => point.GetComponent<Image>().enabled = false);
 	}
 
 	/// <summary>

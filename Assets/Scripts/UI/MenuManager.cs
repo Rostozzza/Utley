@@ -767,6 +767,7 @@ public class MenuManager : MonoBehaviour
 	{
 		problemSolverScreen.SetActive(true);
 		yield return new WaitForSeconds(1.5f);
+		//for (int i = 0; i < 10; i++) yield return null;
 		//yield return cosmodromeResistors.AnswerWaiter(room);
 		yield return cosmodromeExercise.AnswerWaiter(room);
 		//cosmodromeResistors.HideSample();
