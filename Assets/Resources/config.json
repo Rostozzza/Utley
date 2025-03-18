@@ -1,25 +1,25 @@
 {
   "StartAstroluminite": 6,
-  "StartAsterium": 40,
+  "StartAsterium": 20,
   "StartEnergohoney": 40.0,
   "InteractionSpeedMultiplyerByLevel": 0.95,
   "InteractionSpeedMultiplyerByGrade": 0.95,
   "MaxTemperature": 20.0,
   "MinTemperature": 25.0,
-  "StandartInteractionTime": 18.0,
+  "StandartInteractionTime": 23.0,
   "InteracionTimeMultiplyerByCorrectJob": 0.75,
   "DurationLoss": 4.0,
   "RepairSpeed": 3.0,
-  "AstroluminiteAmountByOneInteraction": 8,
-  "EnergohoneyAmountByOneInteraction": 8.0,
-  "AsteriumAmountByOneInteraction": 20,
-  "GameDuration": 480.0,
-  "CycleDuration": 120.0,
+  "AstroluminiteAmountByOneInteraction": 6,
+  "EnergohoneyAmountByOneInteraction": 9.0,
+  "AsteriumAmountByOneInteraction": 25,
+  "GameDuration": 960.0,
+  "CycleDuration": 240.0,
   "StartPrototype": 0,
   "StartUrsowaks": 0,
-  "PrototypeAmountByOneInteraction": 0,
-  "UrsowaksAmountByOneInteraction": 0,
-  "StandartInteractionTimeAsteriumComplex": 18.0,
+  "PrototypeAmountByOneInteraction": 1,
+  "UrsowaksAmountByOneInteraction": 1,
+  "StandartInteractionTimeAsteriumComplex": 35.0,
   "CycleModifier": 1.0,
   "BuyBears": -7.0,
   "BuyHoney": -0.25,
@@ -36,64 +36,64 @@
       "AsteriumPrice": 10,
       "EnergohoneyPrice": 0,
       "AstroluminitePrice": 0,
-      "RepairAsteriumCost": 10,
+      "RepairAsteriumCost": 15,
       "RepairAstroluminiteCost": 1
     },
     "Energohoney": {
       "AsteriumPrice": 20,
       "EnergohoneyPrice": 25,
       "AstroluminitePrice": 1,
-      "RepairAsteriumCost": 10,
+      "RepairAsteriumCost": 15,
       "RepairAstroluminiteCost": 1
     },
     "Asterium": {
       "AsteriumPrice": 30,
       "EnergohoneyPrice": 0,
       "AstroluminitePrice": 3,
-      "RepairAsteriumCost": 10,
+      "RepairAsteriumCost": 15,
       "RepairAstroluminiteCost": 1
     },
     "Cosmodrome": {
       "AsteriumPrice": 0,
       "EnergohoneyPrice": 0,
       "AstroluminitePrice": 0,
-      "RepairAsteriumCost": 10,
+      "RepairAsteriumCost": 15,
       "RepairAstroluminiteCost": 1
     },
     "Bed": {
       "AsteriumPrice": 25,
       "EnergohoneyPrice": 10,
       "AstroluminitePrice": 0,
-      "RepairAsteriumCost": 10,
+      "RepairAsteriumCost": 15,
       "RepairAstroluminiteCost": 1
     },
     "Build": {
       "AsteriumPrice": 35,
       "EnergohoneyPrice": 0,
       "AstroluminitePrice": 3,
-      "RepairAsteriumCost": 10,
+      "RepairAsteriumCost": 15,
       "RepairAstroluminiteCost": 1
     },
     "Supply": {
       "AsteriumPrice": 30,
       "EnergohoneyPrice": 5,
       "AstroluminitePrice": 2,
-      "RepairAsteriumCost": 10,
+      "RepairAsteriumCost": 15,
       "RepairAstroluminiteCost": 1
     },
     "Research": {
       "AsteriumPrice": 25,
       "EnergohoneyPrice": 0,
       "AstroluminitePrice": 1,
-      "RepairAsteriumCost": 10,
+      "RepairAsteriumCost": 15,
       "RepairAstroluminiteCost": 1
     }
   },
-  "RepairCost": 10,
+  "RepairCost": 15,
   "DamageByTide": 7.0,
   "DamageByTideMultiplier": 1.0,
   "EnergohoneyConsumeMultiplier": 1.0,
   "EnergohoneyConsumeMultiplierByRoom": 1.0,
-  "EnergohoneyConsumeMultiplierByCycle": 1.0,
-  "EnergohoneyExponent": 1.0
+  "EnergohoneyConsumeMultiplierByCycle": 12.5,
+  "EnergohoneyExponent": 1.2
 }

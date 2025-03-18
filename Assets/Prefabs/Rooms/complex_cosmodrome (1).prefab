@@ -10888,7 +10888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.946, y: 1.891}
+  m_AnchoredPosition: {x: -4.946, y: 1.891}
   m_SizeDelta: {x: 1.1813, y: 1.1813}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4364321381400515985
@@ -32805,7 +32805,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7015049151806767862
@@ -34555,6 +34555,7 @@ MonoBehaviour:
   baseOfRoom: {fileID: 0}
   animator: {fileID: 6492818043054902958}
   isEnpowered: 1
+  statusPanel: {fileID: 0}
   workStr: 
   waitForPermissionToContinue: 0
   assignmentButton: {fileID: 201630722402361656}
@@ -34563,6 +34564,7 @@ MonoBehaviour:
   workSound: {fileID: 0}
   progressBar: {fileID: 4088837013308186573}
   upgradeBar: {fileID: 8446779388434495133}
+  videoPlayers: []
   flyForType: 0
   cosmodromeSelectScreen: {fileID: 2014563838939230301}
   isReadyForWork: 0
