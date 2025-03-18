@@ -213,7 +213,14 @@ public class RoomScript : MonoBehaviour
 		lamps.ForEach(x => x.GetComponent<Renderer>().material.EnableKeyword("_EMISSION"));
 		sparks = transform.GetComponentsInChildren<ParticleSystem>().Where(x => !x.CompareTag("permanentParticle")).ToList();
 		defaultLampColor = lamps[0].GetComponent<Renderer>().material.color;
-		baseOfRoom = transform.Find("base").gameObject;
+		if (resource != Resources.Cosmodrome)
+		{
+			baseOfRoom = transform.Find("base").gameObject;
+		}
+		else
+		{
+			baseOfRoom = transform.Find("aedasd").Find("base").gameObject;
+		}
 		defaultBaseColor = baseOfRoom.GetComponent<Renderer>().material.color;
 		foreach (var button in GetComponentsInChildren<Button>().Where(x => !x.CompareTag("dont_hide_button")))
 		{
