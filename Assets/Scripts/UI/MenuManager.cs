@@ -338,7 +338,6 @@ public class MenuManager : MonoBehaviour
 		{
 			return;
 		}
-
 		SwitchHideLinesVFX(true);
 		pauseScreen.SetActive(true);
 		//SetPipesScreen.SetActive(!numberSummation.isTaskActive);

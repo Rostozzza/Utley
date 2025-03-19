@@ -345,7 +345,7 @@ public class RoomScript : MonoBehaviour
 		{
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
-			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
+			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this,true);
 			//await GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)), new Log
 			//{
 			//	comment = $"Consumed {(30 + 10 * (level - 1))} honey for upgrading {this.name} room",
@@ -419,7 +419,7 @@ public class RoomScript : MonoBehaviour
 		//durability = 1f;
 		ChangeDurability(0);
 		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
-		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
+		//room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		status = Status.Free;
 		level += 1;
 		if (level == 3)
@@ -967,8 +967,12 @@ public class RoomScript : MonoBehaviour
 			int timeToRepair = (int)((1 - durability) * 100 / ValuesHolder.RepairSpeed); //((1 - durability) * 100 / 3);
 			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
-			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
-			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this);
+			if (fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
+			{
+				fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopCoroutine(fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine);
+			}
+			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine = null;
+			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this,true);
 			StartCoroutine(Repair(timeToRepair, fixedBuilderRoom));
 		}
 		else
@@ -977,8 +981,6 @@ public class RoomScript : MonoBehaviour
 			EventManager.callWarning.Invoke($"Не хватает <color=yellow>{ValuesHolder.RepairCost - await GameManager.Instance.GetAsteriy()}</color> астерия для починки!");
 			return;
 		}
-
-		
 	}
 
 	private IEnumerator Repair(int time, GameObject room)
@@ -986,7 +988,7 @@ public class RoomScript : MonoBehaviour
 		roomStatsController.SetStatsScreenShow(false);
 		progressBar.transform.parent.gameObject.SetActive(true);
 		room.GetComponent<BuilderRoom>().SetWait(false);
-		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
+		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoom != this)
 		{
 			yield return null;
 		}
@@ -1001,12 +1003,12 @@ public class RoomScript : MonoBehaviour
 		progressBar.transform.parent.gameObject.SetActive(false);
 		progressBar.fillAmount = 0;
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
-		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(room.GetComponent<RoomScript>());
+		//room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(room.GetComponent<RoomScript>());
 		room.GetComponent<BuilderRoom>().SetWait(true);
 		room.GetComponent<RoomScript>().SetStatus(Status.Free);
 		durability = 1f;
 		ChangeDurability(0);
-		//GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
+		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
 		//room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		//status = Status.Free; // ????? why it was here???
 		statusPanel.UpdateStatus(status);

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using System.Linq;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class UnitMovement : MonoBehaviour
 {
@@ -24,15 +25,26 @@ public class UnitMovement : MonoBehaviour
 		this.isWalkingToWork = isWalkingToWork;
 	}
 
-	public void MoveToRoom(RoomScript target)
+	public IEnumerator WorkWalkWaiter()
 	{
-		if (isWalkingToWork)
+		while (true)
 		{
-			return;
+			yield return null;
 		}
-		if (isTransitioning)
+	}
+
+	public void MoveToRoom(RoomScript target, bool isBuilderTarget = false)
+	{
+		if (!isBuilderTarget)
 		{
-			return;
+			if (isWalkingToWork)
+			{
+				return;
+			}
+			if (isTransitioning)
+			{
+				return;
+			}
 		}
 		List<Elevator> branch = new List<Elevator>();
 		this.target = target;
@@ -56,7 +68,7 @@ public class UnitMovement : MonoBehaviour
 			foreach (var startElevator in currentRoom.connectedElevators)
 			{
 				Debug.Log("--------Pair:--------");
-				var result = GetBranch(targetElevator, startElevator, new List<Elevator> { startElevator}).Distinct().ToList();
+				var result = GetBranch(targetElevator, startElevator, new List<Elevator> { startElevator }).Distinct().ToList();
 				result.ForEach(e => { Debug.Log(e.name); });
 				branch = ((result.Count < branch.Count && result.Count > 0) || branch.Count == 0) ? result : branch;
 			}
@@ -141,7 +153,7 @@ public class UnitMovement : MonoBehaviour
 							isTransitioning = false;
 						}
 						GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
-						while (Mathf.Abs(transform.position.y-room.transform.position.y) > 0.1f)
+						while (Mathf.Abs(transform.position.y - room.transform.position.y) > 0.1f)
 						{
 							transform.Translate(new Vector3(0, (room.transform.position.y - transform.position.y) * 100, 0).normalized * Time.deltaTime * speed / 2f);
 							yield return null;
@@ -222,6 +234,7 @@ public class UnitMovement : MonoBehaviour
 			transform.Translate(new Vector3(0, 0, -1) * speed * Time.deltaTime);
 			yield return null;
 		}
+		transform.position = new Vector3(transform.position.x, transform.position.y, -1);
 		isTransitioning = false;
 		//gameObject.GetComponent<UnitScript>().State = UnitScript.States.Walk;
 		if (target.transform.position.x + 1.24f < transform.position.x)
@@ -242,7 +255,7 @@ public class UnitMovement : MonoBehaviour
 				yield return null;
 			}
 		}
-		
+
 		EventManager.onBearReachedDestination.Invoke(target);
 		currentRoutine = null;
 		GetComponentInChildren<Animator>().SetBool("Walk", false);

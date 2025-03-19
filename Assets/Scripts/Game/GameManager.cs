@@ -552,7 +552,7 @@ public class GameManager : MonoBehaviour
 		{
 			float minLen = Vector3.Distance(queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms[0].transform.position, queuedBuildPositon.transform.position);
 			RoomScript nearestRoom = queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms.OrderBy(x => x.transform.position.y).ToList()[0];
-			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(nearestRoom);
+			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(nearestRoom,true);
 		}
 		else
 		{
@@ -560,11 +560,11 @@ public class GameManager : MonoBehaviour
 			{
 				float minLen = Vector3.Distance(queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms[0].transform.position, queuedBuildPositon.transform.position);
 				RoomScript nearestRoom = queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms.OrderBy(x => x.transform.position.y).ToList()[0];
-				fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(nearestRoom);
+				fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(nearestRoom,true);
 			}
 			else
 			{
-				fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(queuedBuildPositon.transform.parent.parent.GetComponent<RoomScript>());
+				fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(queuedBuildPositon.transform.parent.parent.GetComponent<RoomScript>(),true);
 			}
 		}
 		StartCoroutine(SelectAndBuildWaiter(building, fixedBuilderRoom, queuedBuildPositon.transform));
@@ -601,12 +601,12 @@ public class GameManager : MonoBehaviour
 		SelectAndBuildMainBlock(building, point).Wait();
 		Debug.Log("NoT DEAD after building");
 		StartCoroutine(WalkAndStartWork(room.GetComponent<BuilderRoom>().fixedBear, room));
-		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
+		room.GetComponent<BuilderRoom>().SetWait(true);
+		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null && room.GetComponent<BuilderRoom>().GetWait())
 		{
 			yield return null;
 		}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
-		room.GetComponent<BuilderRoom>().SetWait(true);
 	}
 
 	private async Task SelectAndBuildMainBlock(GameObject building, Transform point)
@@ -1307,7 +1307,8 @@ public class GameManager : MonoBehaviour
 
 	public void WalkAndWork(GameObject unit, GameObject obj)
 	{
-		StartCoroutine(WalkAndStartWork(unit, obj));
+		//if (obj.GetComponentInParent<BuilderRoom>() && obj.GetComponentInParent<BuilderRoom>().fixedBear != null) unit.GetComponent<UnitMovement>().currentRoutine = StartCoroutine(unit.GetComponent<UnitMovement>().WorkWalkWaiter());
+		StartCoroutine(WalkAndStartWork(unit,obj));
 	}
 
 	private IEnumerator WalkAndStartWork(GameObject unit, GameObject obj) // needs to wait for walk and after we starting work
@@ -1316,7 +1317,10 @@ public class GameManager : MonoBehaviour
 		//Debug.Log(unit + "|" + obj);
 		if (!unit.GetComponent<UnitMovement>().IsWalkingToWork())
 		{
-			unit.GetComponent<UnitMovement>().StopAllCoroutines();
+			if (unit.GetComponent<UnitMovement>().currentRoutine != null)
+			{
+				unit.GetComponent<UnitMovement>().StopCoroutine(unit.GetComponent<UnitMovement>().currentRoutine);
+			}
 			unit.GetComponent<UnitMovement>().MoveToRoom(obj.GetComponentInParent<RoomScript>());
 			unit.GetComponent<UnitMovement>().SetIsWalkingToWork(true);
 			if (selectedUnit) selectedUnit.GetComponent<UnitScript>().SetMarker(false);
