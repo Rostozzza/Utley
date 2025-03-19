@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private bool isCursorAtUIDontScroll;
     [SerializeField] private int amountIsCursorAtUI;
 	private bool wasSelectedThisFrame = false;
+	[SerializeField] private bool isExerciseOpen = false;
+	[SerializeField] private GameObject guideCanvas;
 	[Header("Building settings")]
 	[SerializeField] private GameObject buildingLoading;
 	public GameObject buildingScreen;
@@ -1991,6 +1993,17 @@ public class GameManager : MonoBehaviour
 		playerAsteriumDifficulty += level;
 		playerAsteriumDifficulty = Math.Clamp(playerAsteriumDifficulty, 1, 999);
 	}
+
+	public void ShowGuideByButton()
+	{
+		MenuManager.Instance.GetGuideManager().gameObject.SetActive(true);
+		MenuManager.Instance.GetGuideManager().ShowGuideByButton();
+	}
+
+	public bool GetIsExerciseOpen() => isExerciseOpen;
+	public void SetIsExerciseOpen(bool set) => isExerciseOpen = set;
+
+	public GameObject GetGuideCanvas() => guideCanvas;
 
 	public enum Season
 	{

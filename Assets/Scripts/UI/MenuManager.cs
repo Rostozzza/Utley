@@ -24,6 +24,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private bool isPauseMenuActive = false;
 	[SerializeField] private CutsceneSkipper skipper;
     [SerializeField] private float skipTimer;
+	[SerializeField] private GuideManager guideManager;
 	private Dictionary<LineRenderer, bool> linesStates = new();
 	[Header("Game message settings")]
 	[SerializeField] private NotificationsManager notificationsManager;
@@ -450,7 +451,7 @@ public class MenuManager : MonoBehaviour
 					Pause();
 				}
 			}
-			if (InputController.GetKeyDown(ActionKeys.OpenShop) && !problemSolverScreen.activeSelf && !isPauseMenuActive)
+			if (InputController.GetKeyDown(ActionKeys.OpenShop) && !problemSolverScreen.activeSelf && !isPauseMenuActive && !GameManager.Instance.GetIsExerciseOpen())
 			{
 				shopScreen.SetActive(true);
 				Debug.Log("OPEN SHOP");
@@ -728,11 +729,13 @@ public class MenuManager : MonoBehaviour
 
 	public void CallProblemSolver(ProblemType type, RoomScript room)
 	{
+		GameManager.Instance.SetIsExerciseOpen(true);
 		shopScreen.SetActive(false);
 		switch (type)
 		{
 			case ProblemType.SetPipes:
 				//SetPipesScreen.SetActive(true);
+				guideManager.SetGuideType(GuideManager.GuideTypes.Energohoney); // Reference to same exercises;
 				StartCoroutine(WaitForNumberSummationEnd(room));
 				break;
 			case ProblemType.SetFurnaces:
@@ -786,6 +789,7 @@ public class MenuManager : MonoBehaviour
 		(room as EnergohoneyRoom).SetIsSolved(true);
 		GameManager.Instance.SetBearsShow(true);
 		Camera.main.GetComponent<CameraShake>().SetCameraShakeByMeteor(true);
+		GameManager.Instance.SetIsExerciseOpen(false);
 		//problemSolverScreen.SetActive(false);
 		//tabletAnimator.SetTrigger("CloseShop");
 	}
@@ -803,7 +807,12 @@ public class MenuManager : MonoBehaviour
 		tabletAnimator.SetTrigger("CloseShop");
 		GameManager.Instance.SetBearsShow(true);
 		Camera.main.GetComponent<CameraShake>().SetCameraShakeByMeteor(true);
+		GameManager.Instance.SetIsExerciseOpen(false);
 	}
+
+	public void SetTablet(bool set) => tabletAnimator.SetTrigger(set ? "OpenShop" : "CloseShop");
+
+	public GuideManager GetGuideManager() => guideManager;
 
 	public enum ProblemType
 	{
