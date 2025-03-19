@@ -5,13 +5,14 @@ public class CameraController : MonoBehaviour
 {
 	[SerializeField] float sensetive = 0.1f;
 	[SerializeField] private float zoom = -20;
+	[SerializeField] private float minCap = -20;
+	[SerializeField] private float maxCap = -10;
 	private int left, top, right, bottom;
 	private bool needToMoveByMousePos;
 	private bool isScroll = true;
 	Coroutine moving = null;
 	Coroutine changingZoom = null;
 	public bool isCameraLocked = false;
-	private Vector3 startPosUI;
 
 	private Vector3 lastPoint;
 
@@ -31,7 +32,6 @@ public class CameraController : MonoBehaviour
 		matrixBlender = GetComponent<MatrixBlender>();
 		ortho = Matrix4x4.Ortho(-Camera.main.orthographicSize * Camera.main.aspect, Camera.main.orthographicSize * Camera.main.aspect, -Camera.main.orthographicSize, Camera.main.orthographicSize, Camera.main.nearClipPlane, Camera.main.farClipPlane);
 		perspective = Matrix4x4.Perspective(Camera.main.fieldOfView, Camera.main.aspect, Camera.main.nearClipPlane, Camera.main.farClipPlane);
-		startPosUI = GameManager.Instance.transform.position;
 	}
 
 	public void GoToTaskPoint(Vector3 position, Vector3 rotation, bool isOrtho = false)
@@ -46,11 +46,13 @@ public class CameraController : MonoBehaviour
 		{
 			GameManager.Instance.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 1;
 			//GameManager.Instance.transform.position = startPosUI + new Vector3(position.x + 1000, position.y);
+			GameManager.Instance.GetComponentInChildren<Canvas>().planeDistance = 2;
 		}
 		else
 		{
 			GameManager.Instance.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 0;
 			//GameManager.Instance.transform.position = startPosUI;
+			GameManager.Instance.GetComponentInChildren<Canvas>().planeDistance = -10;
 		}
 		//GameManager.Instance.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = orthoOn ? 1 : 0;//.gameObject.SetActive(orthoOn);
 		moving = StartCoroutine(FloatTorwards(orthoOn ? lastPoint : position, orthoOn ? Vector3.zero : rotation, orthoOn ? 60f : 90f, orthoOn));
@@ -111,7 +113,7 @@ public class CameraController : MonoBehaviour
 		{
 			if (Input.mouseScrollDelta.y != 0 && isScroll)
 			{
-				zoom = GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(Input.mouseScrollDelta.y + zoom, -20, -10);
+				zoom = GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(Input.mouseScrollDelta.y + zoom, minCap, maxCap);
 			}
 			else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
 			{
@@ -142,6 +144,7 @@ public class CameraController : MonoBehaviour
 		{
 
 			zoom += value * Time.deltaTime * 10;
+			zoom = Mathf.Clamp(zoom, minCap, maxCap);
 			CameraMove();
 			yield return null;
 		}
@@ -153,7 +156,7 @@ public class CameraController : MonoBehaviour
 		Camera.main.transform.position = new Vector3(
 		Mathf.Clamp(Camera.main.transform.position.x, -25f, 25f),
 		Mathf.Clamp(Camera.main.transform.position.y, -19f, 17.5f),
-		GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(zoom, -20, -10)
+		GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(zoom, minCap, maxCap)
 		);
 	}
 

@@ -9,6 +9,7 @@ public class BedRoom : RoomScript
 		float timer;
 		status = Status.Busy;
 		statusPanel.UpdateStatus(status);
+		fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		//fixedBear.GetComponent<UnitScript>().SetBusy(true);
 		//fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
 		//fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(false);
@@ -57,6 +58,7 @@ public class BedRoom : RoomScript
 		}
 		status = Status.Free;
 		statusPanel.UpdateStatus(status);
+		fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		animator.SetTrigger("EndWork");
 		TrySetVideoPlayers(false);
 		audioSource.Stop();

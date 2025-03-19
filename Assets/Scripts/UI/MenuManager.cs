@@ -90,19 +90,27 @@ public class MenuManager : MonoBehaviour
     public void SetMasterVolume()
 	{
 		float volume = masterSlider.value;
-		mixer.SetFloat("MasterVolume", volume < 0.01f ? -80 : Mathf.Log10(volume) * 20);
+		PlayerPrefs.SetFloat("MasterVolume", volume);
+		SetMixerVolume("MasterVolume", volume);
 	}
 
 	public void SetSFXVolume()
 	{
 		float volume = SFXSlider.value;
-		mixer.SetFloat("SFXVolume", volume < 0.01f ? -80 : Mathf.Log10(volume) * 20);
+		PlayerPrefs.SetFloat("SFXVolume", volume);
+		SetMixerVolume("SFXVolume", volume);
 	}
 
 	public void SetMusicVolume()
 	{
 		float volume = musicSlider.value;
-		mixer.SetFloat("MusicVolume", volume < 0.01f ? -80 : Mathf.Log10(volume) * 20);
+		PlayerPrefs.SetFloat("MusicVolume", volume);
+		SetMixerVolume("MusicVolume", volume);
+	}
+
+	private void SetMixerVolume(string name, float value)
+	{
+		mixer.SetFloat(name, value < 0.01f ? -80 : Mathf.Log10(value) * 20);
 	}
 
 	public void ShowLoseScreen()
@@ -281,6 +289,25 @@ public class MenuManager : MonoBehaviour
 				BGMusicSource = GameObject.FindGameObjectWithTag("BG_music").GetComponent<AudioSource>();
 			}
 		};
+
+		if (PlayerPrefs.HasKey("MasterVolume")) 
+		{
+			float volume = PlayerPrefs.GetFloat("MasterVolume");
+			SetMixerVolume("MasterVolume", volume);
+			masterSlider.value = volume;
+		}
+		if (PlayerPrefs.HasKey("SFXVolume"))
+		{
+			float volume = PlayerPrefs.GetFloat("SFXVolume");
+			SetMixerVolume("SFXVolume", volume);
+			SFXSlider.value = volume;
+		}
+		if (PlayerPrefs.HasKey("MusicVolume"))
+		{
+			float volume = PlayerPrefs.GetFloat("MusicVolume");
+			SetMixerVolume("MusicVolume", volume);
+			musicSlider.value = volume;
+		}
 	}
 
 	private void SwitchHideLinesVFX(bool setPauseMenuAfter) // switch because it's assumes that it will be only changing.
@@ -725,7 +752,6 @@ public class MenuManager : MonoBehaviour
 				cosmodromeExercise.gameObject.SetActive(true);
 				StartCoroutine(WaitForResistorsCountEnd(room));
 				tabletAnimator.SetTrigger("OpenShop");
-				
 				//room.SetWorkEfficiency(1); // temp solution;
 				break;
 			case ProblemType.SetBreakingBad:
@@ -737,6 +763,7 @@ public class MenuManager : MonoBehaviour
 		}
 		GameManager.Instance.SetIsGraphUsing(true);
 		GameManager.Instance.SetBearsShow(false);
+		Camera.main.GetComponent<CameraShake>().SetCameraShakeByMeteor(false);
 	}
 
 	private IEnumerator WaitForFurnacesEnd(RoomScript room)
@@ -758,6 +785,7 @@ public class MenuManager : MonoBehaviour
 		SetPipesScreen.SetActive(false);
 		(room as EnergohoneyRoom).SetIsSolved(true);
 		GameManager.Instance.SetBearsShow(true);
+		Camera.main.GetComponent<CameraShake>().SetCameraShakeByMeteor(true);
 		//problemSolverScreen.SetActive(false);
 		//tabletAnimator.SetTrigger("CloseShop");
 	}
@@ -766,6 +794,7 @@ public class MenuManager : MonoBehaviour
 	{
 		problemSolverScreen.SetActive(true);
 		yield return new WaitForSeconds(1.5f);
+		//for (int i = 0; i < 10; i++) yield return null;
 		//yield return cosmodromeResistors.AnswerWaiter(room);
 		yield return cosmodromeExercise.AnswerWaiter(room);
 		//cosmodromeResistors.HideSample();
@@ -773,6 +802,7 @@ public class MenuManager : MonoBehaviour
 		problemSolverScreen.SetActive(false);
 		tabletAnimator.SetTrigger("CloseShop");
 		GameManager.Instance.SetBearsShow(true);
+		Camera.main.GetComponent<CameraShake>().SetCameraShakeByMeteor(true);
 	}
 
 	public enum ProblemType

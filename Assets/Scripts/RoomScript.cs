@@ -213,7 +213,14 @@ public class RoomScript : MonoBehaviour
 		lamps.ForEach(x => x.GetComponent<Renderer>().material.EnableKeyword("_EMISSION"));
 		sparks = transform.GetComponentsInChildren<ParticleSystem>().Where(x => !x.CompareTag("permanentParticle")).ToList();
 		defaultLampColor = lamps[0].GetComponent<Renderer>().material.color;
-		baseOfRoom = transform.Find("base").gameObject;
+		if (resource != Resources.Cosmodrome)
+		{
+			baseOfRoom = transform.Find("base").gameObject;
+		}
+		else
+		{
+			baseOfRoom = transform.Find("aedasd").Find("base").gameObject;
+		}
 		defaultBaseColor = baseOfRoom.GetComponent<Renderer>().material.color;
 		foreach (var button in GetComponentsInChildren<Button>().Where(x => !x.CompareTag("dont_hide_button")))
 		{
@@ -371,7 +378,7 @@ public class RoomScript : MonoBehaviour
 		{
 			Debug.Log("Не хватает ресов для починки!");
 			//EventManager.callWarning.Invoke($"Не хватает <color=yellow>{Mathf.CeilToInt((30 + 10 * (level - 1)) - await GameManager.Instance.GetHoney())}</color> энергомеда для починки!");
-			EventManager.callWarning.Invoke(NotEnoughResources(requireAsterium - await GameManager.Instance.GetAsteriy(), requireAstroluminite - await GameManager.Instance.GetAstroluminite()));
+			EventManager.callWarning.Invoke(NotEnoughResources(requireAsterium - await GameManager.Instance.GetAsteriy(), requireAstroluminite - await GameManager.Instance.GetAstroluminite()) + " для улучшения!");
 			return;
 		}
 	}
@@ -383,7 +390,7 @@ public class RoomScript : MonoBehaviour
 		if (differenceAsterium > 0) toReturn += $"<color=yellow>{Mathf.CeilToInt(differenceAsterium)}</color> астерия, ";
 		if (differenceAstroluminite > 0) toReturn += $"<color=yellow>{Mathf.CeilToInt(differenceAstroluminite)}</color> астролюминита, ";
 
-		toReturn = toReturn[..^2] + " для починки!";
+		toReturn = toReturn[..^2];
 
 		return toReturn;
 	}
@@ -444,7 +451,7 @@ public class RoomScript : MonoBehaviour
 				await GameManager.Instance.GetAstroluminite() < requireAstroluminite)//(currentHoney < (30 + 10 * (level - 1)));
 			{
 				//desiredButton.GetComponent<Button>() = false;
-				desiredButton.text = NotEnoughResources(requireAsterium - await GameManager.Instance.GetAsteriy(), requireAstroluminite - await GameManager.Instance.GetAstroluminite());
+				desiredButton.text = NotEnoughResources(requireAsterium - await GameManager.Instance.GetAsteriy(), requireAstroluminite - await GameManager.Instance.GetAstroluminite()) + " для улучшения!";
 			}
 			else
 			{
@@ -971,7 +978,7 @@ public class RoomScript : MonoBehaviour
 		else
 		{
 			Debug.Log("Не хватает ресов для починки!");
-			EventManager.callWarning.Invoke($"Не хватает <color=yellow>{10 - await GameManager.Instance.GetAsteriy()}</color> астерия для починки!");
+			EventManager.callWarning.Invoke($"Не хватает <color=yellow>{ValuesHolder.RepairCost - await GameManager.Instance.GetAsteriy()}</color> астерия для починки!");
 			return;
 		}
 	}

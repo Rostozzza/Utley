@@ -14,6 +14,7 @@ public class ResearchRoom : RoomScript
 	private float haveAstroluminte;
 	private int haveAsteriy;
 	[SerializeField] private List<GameObject> bottles;
+	[SerializeField] private int chosenTemplate;
 
     void Start()
     {
@@ -21,8 +22,11 @@ public class ResearchRoom : RoomScript
 		
 		bottles.AddRange(GameObject.FindGameObjectsWithTag("bottle"));
 		bottles.ForEach(bottle => bottle.SetActive(false));
-		bottles[Random.Range(0, bottles.Count)].SetActive(true);
+		chosenTemplate = Random.Range(0, bottles.Count);
+		bottles[chosenTemplate].SetActive(true);
     }
+
+	public int GetChosenTemplate() => chosenTemplate;
 
     public override void SetPipes()
 	{

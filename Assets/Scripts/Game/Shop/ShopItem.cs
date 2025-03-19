@@ -12,6 +12,13 @@ public class ShopItem : MonoBehaviour
 	public int quantity;
 	public string name;
 	public string comment;
+
+	[NonSerialized] private float priceReference;
+	[NonSerialized] private int maxQuantityReference;
+	[NonSerialized] private int quantityReference;
+	[NonSerialized] private string nameReference;
+	[NonSerialized] private string commentReference;
+
 	public Type type;
 	public TextMeshProUGUI quantityField;
 	public TextMeshProUGUI priceField;
@@ -23,6 +30,27 @@ public class ShopItem : MonoBehaviour
 	void Start()
 	{
 		GetPrice();
+		UpdateFields();
+		SetReferenceValues();
+		EventManager.onGameEnd.AddListener(ApplyReferenceValues);
+	}
+
+	private void SetReferenceValues()
+	{
+		priceReference = price;
+		maxQuantityReference = maxQuantity;
+		quantityReference = quantity;
+		nameReference = name;
+		commentReference = comment;
+	}
+
+	private void ApplyReferenceValues(bool smth)
+	{
+		price = priceReference;
+		maxQuantity = maxQuantityReference;
+		quantity = quantityReference;
+		name = nameReference;
+		comment = commentReference;
 		UpdateFields();
 	}
 
@@ -157,7 +185,7 @@ public class ShopItem : MonoBehaviour
 
 	public void EraseAllFields()
 	{
-		try { quantityField.text = ""; } catch { }
+		//try { quantityField.text = ""; } catch { }
 		try { priceField.text = ""; } catch { }
 		try { requestedAmount.text = ""; } catch { }
 		try { costOutput.text = ""; } catch { }
