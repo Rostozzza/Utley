@@ -18,11 +18,22 @@ public class ResearchRoomExercise : MonoBehaviour
 	[Header("Task Generator")]
 	[SerializeField][Range(3, 50)] private int difficulty;
 	[SerializeField] private GameObject weightPrefab;
+	[SerializeField] private ResearchRoom roomScript;
+	[SerializeField] private List<GameObject> pointsTemplates;
+	[SerializeField] private int chosenTemplate;
 	[SerializeField] private List<OgePointLogic> points;
 	public LineRenderer lineRenderer;
 
+	void Start()
+	{
+		roomScript = GetComponentInParent<ResearchRoom>();
+		
+	}
+
 	public void StartExercise(RoomScript room)
 	{
+		chosenTemplate = roomScript.GetChosenTemplate();
+		points = pointsTemplates[chosenTemplate].transform.GetComponentsInChildren<OgePointLogic>().ToList();
 		StartCoroutine(AnswerWaiter(room));
 	}
 
@@ -35,8 +46,9 @@ public class ResearchRoomExercise : MonoBehaviour
 	{
 		verticies = Random.Range(steps, steps + 6);
 		ribs = 0;
-		points = pointsParent.GetComponentsInChildren<OgePointLogic>().ToList();
-		pointsParent = points[0].transform.parent;
+		points = pointsTemplates[chosenTemplate].transform.GetComponentsInChildren<OgePointLogic>().ToList();
+		Debug.Log(chosenTemplate + " ПОИНТС ПАРЕНТ");
+		pointsParent = pointsTemplates[chosenTemplate].transform;
 		int randomPointIndex = Random.Range(0, Mathf.Clamp(verticies, 0, points.Count));
 		
 		var currentPoint = points[randomPointIndex];
@@ -85,7 +97,7 @@ public class ResearchRoomExercise : MonoBehaviour
 	/// <returns></returns>
 	private IEnumerator AnswerWaiter(RoomScript roomToTarget)
 	{
-		pointsParent = roomToTarget.transform;
+		pointsParent = pointsTemplates[chosenTemplate].transform;
 		GenerateTask();
 		Camera.main.GetComponent<CameraController>().SetCameraLock(true);
 		while (!answerTrigger)
