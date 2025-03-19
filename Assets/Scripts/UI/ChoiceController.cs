@@ -16,4 +16,5 @@ public class ChoiceController : MonoBehaviour
     }
 
     public void SetMaster(ChoicesFormer master) => this.master = master;
+    public RoomType GetRoomType() => roomType;
 }

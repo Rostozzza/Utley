@@ -9,6 +9,7 @@ public class BuildCostRefresher : MonoBehaviour
     [SerializeField] private string costStart;
     void Start()
     {
+        roomType = GetComponentInParent<ChoiceController>().GetRoomType();
         cost = GetComponent<TextMeshProUGUI>();
         costStart = cost.text;
         cost.text = CreateCostText(costStart);
