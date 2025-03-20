@@ -721,6 +721,7 @@ MonoBehaviour:
   currentElevator: {fileID: 0}
   currentRoom: {fileID: 0}
   offsetX: 1.225
+  isWalkingToWork: 0
 --- !u!114 &3524326224878864990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,6 +751,8 @@ MonoBehaviour:
   bearModel:
     Level: 0
   isBearBusy: 0
+  statusPanel: {fileID: 0}
+  priorityInStatusPanel: 0
   statsScreen: {fileID: 0}
   nameField: {fileID: 0}
   qualificationField: {fileID: 0}
@@ -1625,7 +1628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 769f9d3c3d2e4314a80461b353229f26, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4
+      value: -1.52
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 769f9d3c3d2e4314a80461b353229f26, type: 3}
       propertyPath: m_LocalPosition.z

@@ -22,6 +22,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private bool loadingViewShow;
 	[SerializeField] private List<GameObject> tutor;
 	[SerializeField] private bool isPauseMenuActive = false;
+	[SerializeField] private bool isPauseMenuSettingsActive = false;
 	[SerializeField] private CutsceneSkipper skipper;
     [SerializeField] private float skipTimer;
 	[SerializeField] private GuideManager guideManager;
@@ -448,7 +449,11 @@ public class MenuManager : MonoBehaviour
 				}
 				else
 				{
-					Pause();
+					if (!isPauseMenuSettingsActive)
+					{
+						if (!isPauseMenuActive) Pause();
+						else Resume();
+					}
 				}
 			}
 			if (InputController.GetKeyDown(ActionKeys.OpenShop) && !problemSolverScreen.activeSelf && !isPauseMenuActive && !GameManager.Instance.GetIsExerciseOpen())
@@ -478,6 +483,8 @@ public class MenuManager : MonoBehaviour
 			}
 		}
 	}
+
+	public void SetIsPauseMenuSettingsActive(bool set) => isPauseMenuSettingsActive = set;
 
 	public async void Registrate()
 	{
