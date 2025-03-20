@@ -195,6 +195,14 @@ public class RoomScript : MonoBehaviour
 
 	protected virtual void Start()
 	{
+		try
+		{
+			GameObject.FindGameObjectsWithTag("UI_canvas").ToList().ForEach(x => x.GetComponent<Canvas>().worldCamera = Camera.main.GetComponentsInChildren<Camera>()[1]);
+		}
+		catch
+		{
+			GameObject.FindGameObjectsWithTag("UI_canvas").ToList().ForEach(x => x.GetComponent<Canvas>().worldCamera = Camera.main);
+		}
 		videoPlayers = GetComponentsInChildren<VideoPlayer>(true).ToList();
 		TrySetVideoPlayers(false);
 		if (progressbar) progressbar.gameObject.SetActive(false);
