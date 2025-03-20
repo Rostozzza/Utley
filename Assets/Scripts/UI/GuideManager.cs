@@ -38,6 +38,7 @@ public class GuideManager : MonoBehaviour
 
     public enum GuideTypes
     {
-        Energohoney
+        Energohoney,
+        Supply
     }
 }
