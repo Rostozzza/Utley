@@ -33,7 +33,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private List<Transform> rawWalkPoints;
 	//private Vector3[] walkPoints;
 	private List<Vector3> walkPoints;
-	[SerializeField] protected TextMeshProUGUI timeShow;
+	//[SerializeField] protected TextMeshProUGUI timeShow;
 	[SerializeField] public GameObject fixedBear;
 	[SerializeField] private List<GameObject> workStationsToOutline;
 	private TextMeshProUGUI hullPercentage;
