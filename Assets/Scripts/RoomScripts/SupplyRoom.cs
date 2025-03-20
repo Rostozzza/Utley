@@ -179,7 +179,7 @@ public class SupplyRoom : RoomScript
 		}
 		while (timer > 0)
 		{
-			timeShow.text = SecondsToTimeToShow(timer);
+			//timeShow.text = SecondsToTimeToShow(timer);
 			timer -= Time.deltaTime;
 			yield return null;
 		}
@@ -187,7 +187,7 @@ public class SupplyRoom : RoomScript
 		{
 			fixedBear.GetComponent<UnitScript>().LevelUpBear();
 		}
-		timeShow.text = "";
+		//timeShow.text = "";
 		fixedBear.GetComponent<UnitScript>().SetBusy(false);
 		//!borrowed part!//
 		fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");

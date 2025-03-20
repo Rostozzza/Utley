@@ -72,7 +72,7 @@ public class EnergohoneyRoom : RoomScript
 			timer -= Time.deltaTime;
 			yield return null;
 		}
-		timeShow.text = "";
+		//timeShow.text = "";
 		
 		GameManager.Instance.uiResourceShower.UpdateIndicators();
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)
@@ -81,7 +81,6 @@ public class EnergohoneyRoom : RoomScript
 		}
 		fixedBear.GetComponent<UnitScript>().SetBusy(false);
 		//!borrowed part!//
-		Debug.Log("ПЕРЕСТАЛИ ДОБЫВАТЬ МЕД");
 		fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
 		if (fixedBear != null)
 		{

@@ -607,7 +607,7 @@ public class RoomScript : MonoBehaviour
 	{
 		if (GameManager.Instance.FlyForRawAsterium() && GameManager.Instance.season != GameManager.Season.Tide)
 		{
-			timeShow.gameObject.SetActive(true);
+			//timeShow.gameObject.SetActive(true);
 			StartCoroutine(WorkStatus());
 			roomStatsController.RefreshDescription();
 		}
@@ -627,7 +627,7 @@ public class RoomScript : MonoBehaviour
 		fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		if (resource == Resources.Cosmodrome)
 		{
-			timeShow.gameObject.SetActive(false);
+			//timeShow.gameObject.SetActive(false);
 			cosmodromeSelectScreen.SetActive(false);
 			status = Status.Free;
 			statusPanel.UpdateStatus(status);
@@ -738,7 +738,7 @@ public class RoomScript : MonoBehaviour
 				{
 					fixedBear.GetComponent<UnitScript>().LevelUpBear();
 				}
-				timeShow.gameObject.SetActive(false);
+				//timeShow.gameObject.SetActive(false);
 				cosmodromeSelectScreen.SetActive(false);
 				fixedBear.GetComponent<UnitScript>().CanBeSelected();
 				break;

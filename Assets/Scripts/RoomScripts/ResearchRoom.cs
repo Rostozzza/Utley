@@ -178,7 +178,7 @@ public class ResearchRoom : RoomScript
 			timer -= Time.deltaTime;
 			yield return null;
 		}
-		timeShow.text = "";
+		//timeShow.text = "";
 
 		switch (waitOption)
 		{
