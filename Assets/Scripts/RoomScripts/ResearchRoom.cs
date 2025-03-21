@@ -202,8 +202,8 @@ public class ResearchRoom : RoomScript
 				break;
 			default:
 				break;
-		roomStatsController.RefreshDescription();
 		}
+		roomStatsController.RefreshDescription();
 
 		GameManager.Instance.uiResourceShower.UpdateIndicators();
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.bioengineer)
