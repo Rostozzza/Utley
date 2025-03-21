@@ -109,7 +109,7 @@ public class ValueManager : MonoBehaviour
             StartAstroluminite = 6,
             StartAsterium = 20,
             StartEnergohoney = 40.0f,
-            InteractionSpeedMultiplyerByLevel = 0.95f,
+            InteractionSpeedMultiplyerByLevel = 0.85f,
             InteractionSpeedMultiplyerByGrade = 0.95f,
             MaxTemperature = 20.0f,
             MinTemperature = 25.0f,
@@ -126,7 +126,7 @@ public class ValueManager : MonoBehaviour
             StartUrsowaks = 0,
             PrototypeAmountByOneInteraction = 1,
             UrsowaksAmountByOneInteraction = 1,
-            StandartInteractionTimeAsteriumComplex = 35.0f,
+            StandartInteractionTimeAsteriumComplex = 40f,
             CycleModifier = 1.0f,
             BuyBears = -7.0f,
             BuyHoney = -0.25f,
@@ -156,8 +156,8 @@ public class ValueManager : MonoBehaviour
             DamageByTideMultiplier = 1.0f,
             EnergohoneyConsumeMultiplier = 1.0f,
             EnergohoneyConsumeMultiplierByRoom = 1.0f,
-            EnergohoneyConsumeMultiplierByCycle = 12.5f,
-            EnergohoneyExponent = 1.2f,
+            EnergohoneyConsumeMultiplierByCycle = 9.5f,
+            EnergohoneyExponent = 1f,
         };
         //Debug.Log(JsonConvert.SerializeObject(tm, Formatting.Indented));
         File.WriteAllText(path + "/config.json", JsonConvert.SerializeObject(tm, Formatting.Indented));
