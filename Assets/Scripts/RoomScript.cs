@@ -67,6 +67,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private FlyForType flyForType;
 	[SerializeField] private GameObject cosmodromeSelectScreen;
 	public bool isReadyForWork = false;
+	[SerializeField] public GameObject takeALookButton;
 	[SerializeField] private GameObject coneierScreen;
 	[Header("Work Settings")]
 	protected float SpeedByBearLevelCoef = ValuesHolder.InteractionSpeedMultiplyerByLevel;
@@ -1071,9 +1072,12 @@ public class RoomScript : MonoBehaviour
 	public virtual void SetPipes()
 	{
 		Camera.main.GetComponent<CameraController>().GoToTaskPoint(cameraPoint.position, cameraAngle, true);
+		if (resource == Resources.Asteriy) SetTakeALookButtonShow(true);
 		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetFurnaces, this);
 		HideSetPipesButtonScreen();
 	}
+
+	public void SetTakeALookButtonShow(bool set) => takeALookButton.SetActive(set);
 
 	private IEnumerator ConstantResistorSetCaller(float cooldownTime) // No more constant. Just calls chain with infinity loop.
 	{
@@ -1283,4 +1287,7 @@ public class RoomScript : MonoBehaviour
 			Debug.Log("Нет видео для: " + name);
 		}
 	}
+
+	public Vector3 GetCameraPosition() => cameraPoint.position;
+	public Vector3 GetCameraAngle() => cameraAngle;
 }

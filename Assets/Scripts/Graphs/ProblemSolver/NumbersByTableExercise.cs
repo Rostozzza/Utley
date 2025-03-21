@@ -10,6 +10,11 @@ using Unity.Mathematics;
 
 public class NumbersByTableExercise : MonoBehaviour
 {
+	[Header("Take A Look Settings")]
+	[SerializeField] private bool closeToTable = false;
+	[SerializeField] private Transform closeToTablePoint;
+	private Dictionary<LineRenderer, bool> linesStates = new();
+	[Space]
 	[Header("Grid Settings")]
 	[SerializeField] private GridLayoutGroup grid;
 	[SerializeField] private GameObject gridCellPrefab;
@@ -139,6 +144,7 @@ public class NumbersByTableExercise : MonoBehaviour
 				//MenuManager.Instance.tabletAnimator.SetTrigger("CloseShop");
 				targetedRoom.SetWorkEfficiency(0.2f);
 				Camera.main.GetComponent<CameraController>().GoToTaskPoint(Vector3.zero, Vector3.zero);
+				targetedRoom.SetTakeALookButtonShow(false);
 				Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 				//MenuManager.Instance.problemSolverScreen.SetActive(false);
 				GameManager.Instance.SetIsGraphUsing(false);
@@ -165,6 +171,7 @@ public class NumbersByTableExercise : MonoBehaviour
 		Debug.Log("ВЕРНО");
 		ChangePlayerDifficulty(true);
 		Camera.main.GetComponent<CameraController>().GoToTaskPoint(Vector3.zero, Vector3.zero);
+		targetedRoom.SetTakeALookButtonShow(false);
 		Camera.main.GetComponent<CameraController>().SetCameraLock(false);
 		GameManager.Instance.SetIsGraphUsing(false);
 		targetedRoom.SetIsSolved(true);
@@ -186,5 +193,55 @@ public class NumbersByTableExercise : MonoBehaviour
 			yield return null;
 		}
 		Camera.main.fieldOfView = targetFOV;
+	}
+
+	public void TakeALookByButton()
+	{
+		if (!closeToTable)
+		{
+			TakeALook(closeToTablePoint.position, Vector3.zero);
+			targetedRoom.takeALookButton.GetComponentInChildren<TextMeshProUGUI>().text = "Вернуться";
+			SetHideLinesVFX(true);
+		}
+		else
+		{
+			ReturnToMainPoint(targetedRoom.GetCameraPosition(), targetedRoom.GetCameraAngle());
+			targetedRoom.takeALookButton.GetComponentInChildren<TextMeshProUGUI>().text = "Взглянуть";
+			SetHideLinesVFX(false);
+		}
+		
+		closeToTable = !closeToTable;
+
+
+
+		void TakeALook(Vector3 point, Vector3 angle)
+		{
+			Camera.main.GetComponent<CameraController>().FloatTowards(point, angle);
+		}
+
+		void ReturnToMainPoint(Vector3 point, Vector3 angle)
+		{
+			Camera.main.GetComponent<CameraController>().FloatTowards(point, angle);
+		}
+
+		void SetHideLinesVFX(bool set) // switch because it's assumes that it will be only changing.
+		{
+			if (!set) // from menu to game
+			{
+				foreach (LineRenderer line in linesStates.Keys)
+				{
+					line.enabled = linesStates[line];
+				}
+			}
+			else // from game to menu
+			{
+				List<LineRenderer> lines = FindObjectsByType<LineRenderer>(FindObjectsSortMode.None).ToList();
+				Dictionary<LineRenderer, bool> newLinesStates = new();
+				foreach (var line in lines) newLinesStates.Add(line, line.enabled);
+				linesStates = newLinesStates;
+
+				lines.ForEach(x => x.enabled = false);
+			}
+		}
 	}
 }
