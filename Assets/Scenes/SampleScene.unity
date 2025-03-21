@@ -843,6 +843,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1074841106188723965, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
+      propertyPath: connectedRooms.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074841106188723965, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
+      propertyPath: 'connectedRooms.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1993918277}
+    - target: {fileID: 1074841106188723965, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
+      propertyPath: connectedElevators.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074841106188723965, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
       propertyPath: 'connectedElevators.Array.data[0]'
       value: 
       objectReference: {fileID: 737861180}
@@ -29749,6 +29761,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7403409793845794150, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: connectedRooms.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7403409793845794150, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: 'connectedRooms.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1605550347}
+    - target: {fileID: 7403409793845794150, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: connectedElevators.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7403409793845794150, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
       propertyPath: 'connectedElevators.Array.data[0]'
       value: 
       objectReference: {fileID: 737861180}
@@ -32312,6 +32336,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2212405224928843374, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
       propertyPath: isSolved
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212405224928843374, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: connectedElevators.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2212405224928843374, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
@@ -41210,6 +41238,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1234976984716336758, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
+      propertyPath: connectedRooms.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234976984716336758, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
+      propertyPath: 'connectedRooms.Array.data[0]'
+      value: 
+      objectReference: {fileID: 557004525}
+    - target: {fileID: 1234976984716336758, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
       propertyPath: connectedElevators.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -41399,6 +41435,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3619905054894839651, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
   m_PrefabInstance: {fileID: 1993918275}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1993918277 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1234976984716336758, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
+  m_PrefabInstance: {fileID: 1993918275}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993918276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1841e854cbd66154ea77d9a6556d4004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1994070544
 GameObject:
   m_ObjectHideFlags: 0
@@ -43648,6 +43695,10 @@ PrefabInstance:
     - target: {fileID: 1188632918139870894, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: m_Intensity
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264120715950172156, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
+      propertyPath: connectedElevators.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1264120715950172156, guid: 728e89d648f7ead47a11f56ba40b7173, type: 3}
       propertyPath: 'connectedElevators.Array.data[0]'
