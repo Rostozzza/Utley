@@ -746,6 +746,7 @@ public class MenuManager : MonoBehaviour
 				StartCoroutine(WaitForNumberSummationEnd(room));
 				break;
 			case ProblemType.SetFurnaces:
+				guideManager.SetGuideType(GuideManager.GuideTypes.Asterium);
 				numbersByTable.gameObject.SetActive(true);
 				StartCoroutine(WaitForFurnacesEnd(room));
 				//tabletAnimator.SetTrigger("OpenShop");
