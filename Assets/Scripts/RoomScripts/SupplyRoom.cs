@@ -65,9 +65,9 @@ public class SupplyRoom : RoomScript
 
 	public async Task GetRoomsToUnpower()
 	{
-		var horizontalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 17f
+		var horizontalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 9f //17f
 																	&& x.transform.position.y == transform.position.y && x.GetComponent<RoomScript>()).ToList();
-		var verticalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.y - transform.position.y) <= 9f
+		var verticalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.y - transform.position.y) <= 5f //9f
 																	&& x.transform.position.x == transform.position.x && x.GetComponent<RoomScript>()).ToList();
 		var diagonalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 9f
 																	&& Mathf.Abs(x.transform.position.y - transform.position.y) <= 5f && x.GetComponent<RoomScript>()).ToList();
@@ -94,11 +94,19 @@ public class SupplyRoom : RoomScript
 
 	public override void ChangeDurability(float hp)
 	{
-		if (durability < hp)
+		bool isUnempoweredRooms = false;
+		if (durability <= hp)
 		{
 			GetRoomsToUnpower();
+			Debug.Log("<color=red>ПЫТАЕМСЯ ОБЕСТОЧИТЬ КОМНАТЫ</color>");
+			isUnempoweredRooms = true;
 		}
 		base.ChangeDurability(hp);
+		if (durability <= 0 && !isUnempoweredRooms)
+		{
+			GetRoomsToUnpower();
+			Debug.Log("<color=red>ПЫТАЕМСЯ ОБЕСТОЧИТЬ КОМНАТЫ</color>");
+		}
 	}
 
 	public void InitializeGraph()
