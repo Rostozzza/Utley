@@ -308,18 +308,37 @@ public class UnitScript : MonoBehaviour
 	private IEnumerator BedroomWalkBehaviour(List<Vector3> walkPoints, GameObject obj)
 	{
 		Vector3 chosenPoint;
-		chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
+		chosenPoint = walkPoints[Random.Range(0, walkPoints.Count)];
 		GetComponentInChildren<Animator>().StopPlayback();
-		GetComponentInChildren<Animator>().speed = 0.5f;
-		GetComponentInChildren<Animator>().SetBool("Walk", true);
-		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(chosenPoint.x - transform.position.x), 0);
-		while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
+		while (obj.GetComponent<RoomScript>().status == RoomScript.Status.Busy)
 		{
-			transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
+            yield return WalkToPoint(walkPoints[Random.Range(0, walkPoints.Count)]);
+            yield return Work(5f);
 			yield return null;
+        }
+
+		IEnumerator WalkToPoint(Vector3 chosenPoint)
+		{
+			GetComponentInChildren<Animator>().speed = 0.5f;
+			GetComponentInChildren<Animator>().SetBool("Walk", true);
+			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(chosenPoint.x - transform.position.x), 0);
+			while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
+			{
+				transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
+				yield return null;
+			}
+			GetComponentInChildren<Animator>().SetBool("Walk", false);
+			GetComponentInChildren<Animator>().speed = 1f;
 		}
-		GetComponentInChildren<Animator>().SetBool("Walk", false);
-		GetComponentInChildren<Animator>().speed = 1f;
+
+		IEnumerator Work(float time)
+		{
+			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
+			GetComponentInChildren<Animator>().speed = 1f;
+			GetComponentInChildren<Animator>().SetBool("Work", true);
+			yield return new WaitForSeconds(5f);
+			GetComponentInChildren<Animator>().SetBool("Work", false);
+		}
 	}
 
 	private IEnumerator EnergohoneyWalkBehaviour(List<Vector3> walkPoints, GameObject obj)

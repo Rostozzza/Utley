@@ -72,7 +72,7 @@ public class EnergohoneyRoom : RoomScript
 			timer -= Time.deltaTime;
 			yield return null;
 		}
-		timeShow.text = "";
+		//timeShow.text = "";
 		
 		GameManager.Instance.uiResourceShower.UpdateIndicators();
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.beekeeper)

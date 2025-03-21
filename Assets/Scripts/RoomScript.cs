@@ -33,7 +33,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] private List<Transform> rawWalkPoints;
 	//private Vector3[] walkPoints;
 	private List<Vector3> walkPoints;
-	[SerializeField] protected TextMeshProUGUI timeShow;
+	//[SerializeField] protected TextMeshProUGUI timeShow;
 	[SerializeField] public GameObject fixedBear;
 	[SerializeField] private List<GameObject> workStationsToOutline;
 	private TextMeshProUGUI hullPercentage;
@@ -195,6 +195,14 @@ public class RoomScript : MonoBehaviour
 
 	protected virtual void Start()
 	{
+		try
+		{
+			GameObject.FindGameObjectsWithTag("UI_canvas").ToList().ForEach(x => x.GetComponent<Canvas>().worldCamera = Camera.main.GetComponentsInChildren<Camera>()[1]);
+		}
+		catch
+		{
+			GameObject.FindGameObjectsWithTag("UI_canvas").ToList().ForEach(x => x.GetComponent<Canvas>().worldCamera = Camera.main);
+		}
 		videoPlayers = GetComponentsInChildren<VideoPlayer>(true).ToList();
 		TrySetVideoPlayers(false);
 		if (progressbar) progressbar.gameObject.SetActive(false);
@@ -607,7 +615,7 @@ public class RoomScript : MonoBehaviour
 	{
 		if (GameManager.Instance.FlyForRawAsterium() && GameManager.Instance.season != GameManager.Season.Tide)
 		{
-			timeShow.gameObject.SetActive(true);
+			//timeShow.gameObject.SetActive(true);
 			StartCoroutine(WorkStatus());
 			roomStatsController.RefreshDescription();
 		}
@@ -627,7 +635,7 @@ public class RoomScript : MonoBehaviour
 		fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		if (resource == Resources.Cosmodrome)
 		{
-			timeShow.gameObject.SetActive(false);
+			//timeShow.gameObject.SetActive(false);
 			cosmodromeSelectScreen.SetActive(false);
 			status = Status.Free;
 			statusPanel.UpdateStatus(status);
@@ -738,7 +746,7 @@ public class RoomScript : MonoBehaviour
 				{
 					fixedBear.GetComponent<UnitScript>().LevelUpBear();
 				}
-				timeShow.gameObject.SetActive(false);
+				//timeShow.gameObject.SetActive(false);
 				cosmodromeSelectScreen.SetActive(false);
 				fixedBear.GetComponent<UnitScript>().CanBeSelected();
 				break;
