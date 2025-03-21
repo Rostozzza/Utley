@@ -752,6 +752,7 @@ public class MenuManager : MonoBehaviour
 				break;
 			case ProblemType.SetSupply:
 				//problemSolverScreen.SetActive(true);
+				guideManager.SetGuideType(GuideManager.GuideTypes.Supply);
 				//graphExercise.gameObject.SetActive(true);
 				graphExercise = room.GetComponentInChildren<SupplyRoomGraphExercise>(true);//Vector3(-3.0999999,5.69999981,0.5)
 				graphExercise.gameObject.SetActive(true);                                   //Vector3(31.2199955,343.100006,0)
@@ -759,16 +760,16 @@ public class MenuManager : MonoBehaviour
 				//tabletAnimator.SetTrigger("OpenShop");
 				break;
 			case ProblemType.SetResistors:
+				guideManager.SetGuideType(GuideManager.GuideTypes.Cosmodrome);
 				cosmodromeExercise.gameObject.SetActive(true);
 				StartCoroutine(WaitForResistorsCountEnd(room));
 				tabletAnimator.SetTrigger("OpenShop");
 				//room.SetWorkEfficiency(1); // temp solution;
 				break;
 			case ProblemType.SetBreakingBad:
+				guideManager.SetGuideType(GuideManager.GuideTypes.Research);
 				room.GetComponentInChildren<ResearchRoomExercise>(true).gameObject.SetActive(true);
 				room.GetComponentInChildren<ResearchRoomExercise>(true).StartExercise(room);
-				break;
-			case ProblemType.SetCosmodrome:
 				break;
 		}
 		GameManager.Instance.SetIsGraphUsing(true);

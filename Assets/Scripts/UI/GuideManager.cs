@@ -39,6 +39,9 @@ public class GuideManager : MonoBehaviour
     public enum GuideTypes
     {
         Energohoney,
-        Supply
+        Supply,
+        Cosmodrome,
+        Research,
+        Asterium
     }
 }
