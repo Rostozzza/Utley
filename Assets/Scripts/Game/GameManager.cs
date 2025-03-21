@@ -594,6 +594,7 @@ public class GameManager : MonoBehaviour
 			}
 		}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(true);
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(queuedBuildPositon.transform.position.x - transform.position.x), 0);
 		yield return new WaitForSeconds(5);
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().LevelUpBear();
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);

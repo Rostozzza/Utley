@@ -288,11 +288,11 @@ public class UnitScript : MonoBehaviour
 		GetComponentInChildren<Animator>().speed = 0.5f;
 		GetComponentInChildren<Animator>().SetBool("Walk", true);
 		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(workPoint.x - transform.position.x), 0);
-		while (!(workPoint.x - 0.01f <= transform.position.x && transform.position.x <= workPoint.x + 0.01f))
-			{
-				transform.Translate(new Vector3(Mathf.Sign(workPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
-				yield return null;
-			}
+		while (!(workPoint.x - 0.05f <= transform.position.x && transform.position.x <= workPoint.x + 0.05f))
+		{
+			transform.Translate(new Vector3(Mathf.Sign(workPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
+			yield return null;
+		}
 		GetComponentInChildren<Animator>().SetBool("Walk", false);
 		GetComponentInChildren<Animator>().speed = 1f;
 
