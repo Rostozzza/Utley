@@ -1,0 +1,1651 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &501175454968248414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7842882400362132312}
+  m_Layer: 5
+  m_Name: pointerOnSticker
+  m_TagString: Untagged
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7842882400362132312
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501175454968248414}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8243385277029328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -182.2, y: 150.4}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1187813133380145436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3188385429201320235}
+  - component: {fileID: 9009819720741766080}
+  m_Layer: 0
+  m_Name: TutorialManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3188385429201320235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187813133380145436}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.9045258, y: 10.978309, z: -17.529507}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8243385277029328}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9009819720741766080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187813133380145436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821027e06d226b14ca21ce933184709b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kruzhochek: {fileID: 9206235207362155392}
+  tutorialCanvas: {fileID: 8243385277029328}
+  sequence:
+  - text: "\u041F\u0440\u0438\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044E, \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0435\u0446!
+      \u041C\u0435\u043D\u044F \u0437\u043E\u0432\u0443\u0442 \u041C\u0430\u0448\u0430
+      \u0438 \u044F \u043E\u0431\u0443\u0447\u0443 \u0442\u0435\u0431\u044F \u043E\u0441\u043D\u043E\u0432\u0430\u043C
+      \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u043D\u0430\u0448\u0435\u0439
+      \u0431\u0430\u0437\u043E\u0439"
+    position: {x: 169.73, y: -116.5, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0427\u0442\u043E\u0431\u044B \u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C
+      \u0431\u0430\u0437\u0443 \u0437\u0430\u0436\u043C\u0438 <color=\"yellow\">\u0421\u041A\u041C
+      (\u0441\u0440\u0435\u0434\u043D\u044E\u044E \u043A\u043D\u043E\u043F\u043A\u0443
+      \u043C\u044B\u0448\u0438, \u043A\u043E\u043B\u0435\u0441\u0438\u043A\u043E)</color>
+      \u0438 \u043F\u0440\u043E\u0432\u0435\u0434\u0438 \u043C\u044B\u0448\u044C\u044E
+      \u0438\u043B\u0438 \u043F\u043E\u0434\u043D\u0435\u0441\u0438 <color=\"yellow\">\u043A\u0443\u0440\u0441\u043E\u0440</color>
+      \u043A \u043B\u044E\u0431\u043E\u043C\u0443 \u043A\u0440\u0430\u044E \u044D\u043A\u0440\u0430\u043D\u0430."
+    position: {x: 169.73, y: -116.5, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 00000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0422\u0432\u043E\u044F \u0437\u0430\u0434\u0430\u0447\u0430 - \u043F\u0440\u043E\u0434\u0435\u0440\u0436\u0430\u0442\u044C\u0441\u044F
+      \u043D\u0430 \u0431\u0430\u0437\u0435 <color=yellow>\u043E\u0442\u0432\u0435\u0434\u0451\u043D\u043D\u043E\u0435
+      \u0432\u0440\u0435\u043C\u044F</color>."
+    position: {x: 0, y: 0, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041D\u0430 \u043F\u043B\u0430\u043D\u0435\u0442\u0435 \u041A\u0430\u0442\u0430\u0433\u0438\u0434\u0430
+      \u043F\u043E\u0433\u043E\u0434\u043D\u044B\u0435 \u0443\u0441\u043B\u043E\u0432\u0438\u044F
+      \u043C\u043E\u0436\u043D\u043E \u0440\u0430\u0437\u0434\u0435\u043B\u0438\u0442\u044C
+      \u043D\u0430 <color=red>4 \u0444\u0430\u0437\u044B</color>, \u0441\u043C\u0435\u043D\u044F\u044E\u0449\u0438\u0435\u0441\u044F
+      \u043F\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0438. \u0423\u0437\u043D\u0430\u0442\u044C
+      \u0432\u0440\u0435\u043C\u044F \u0434\u043E \u043A\u043E\u043D\u0446\u0430
+      \u0442\u0435\u043A\u0443\u0449\u0435\u0439 \u0444\u0430\u0437\u044B, \u0430
+      \u0442\u0430\u043A \u0436\u0435 \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E
+      \u043E \u043D\u0435\u0439 \u043C\u043E\u0436\u043D\u043E <color=yellow>\u043D\u0430\u0432\u0435\u0434\u044F\u0441\u044C
+      \u043D\u0430 \u043F\u0430\u043D\u0435\u043B\u044C \u0441\u0432\u0435\u0440\u0445\u0443</color>."
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0414\u043B\u044F \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u044F
+      \u0442\u0435\u043F\u043B\u0430 \u0432\u043D\u0443\u0442\u0440\u0438 \u0431\u0430\u0437\u044B
+      \u043F\u0430\u0441\u0441\u0438\u0432\u043D\u043E \u0440\u0430\u0441\u0445\u043E\u0434\u0443\u0435\u0442\u0441\u044F
+      <color=yellow>\u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0435\u0434</color><sprite=1>.
+      \u0415\u0441\u043B\u0438 \u043E\u043D \u0443\u043F\u0430\u0434\u0451\u0442
+      \u0434\u043E <color=red>\u043D\u0443\u043B\u044F</color> - \u0431\u0430\u0437\u0430
+      \u043D\u0430\u0447\u043D\u0451\u0442 <color=red>\u0441\u0442\u0440\u0435\u043C\u0438\u0442\u0435\u043B\u044C\u043D\u043E
+      \u0437\u0430\u043C\u0435\u0440\u0437\u0430\u0442\u044C</color>"
+    position: {x: 0, y: 0, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0422\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u043E\u0442\u0441\u043B\u0435\u0434\u0438\u0442\u044C
+      \u0442\u0435\u043C\u043F\u0435\u0440\u0430\u0442\u0443\u0440\u0443 \u043D\u0430
+      \u0431\u0430\u0437\u0435 \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E
+      \u0448\u043A\u0430\u043B\u044B \u0441\u0432\u0435\u0440\u0445\u0443."
+    position: {x: 0, y: 0, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041F\u043E\u043B\u0443\u0447\u0430\u0442\u044C <color=yellow>\u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0451\u0434</color><sprite=1>
+      \u043C\u043E\u0436\u043D\u043E \u0434\u0432\u0443\u043C\u044F \u0441\u043F\u043E\u0441\u043E\u0431\u0430\u043C\u0438:
+      <color=yellow>\u0440\u0430\u0431\u043E\u0442\u043E\u0439</color> \u043D\u0430
+      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0435 \u0438 <color=yellow>\u043F\u043E\u043A\u0443\u043F\u043A\u043E\u0439</color>.
+      \u0420\u0430\u0441\u0441\u043C\u043E\u0442\u0440\u0438\u043C \u043A\u0430\u0436\u0434\u044B\u0439
+      \u0438\u0437 \u043D\u0438\u0445 \u043F\u043E \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435."
+    position: {x: 169.73, y: -116.5, z: 0}
+    scale: 1
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041D\u0430\u0447\u043D\u0451\u043C \u0441 \u0440\u0430\u0431\u043E\u0442\u044B.
+      \u0414\u043B\u044F \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0451\u0434\u0430<sprite=1>
+      \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0451\u0434\u0430."
+    position: {x: -31.51, y: 73.54, z: 0}
+    scale: 0.9
+    pointer:
+      target: {fileID: 0}
+      angleZ: -90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0414\u0430\u0432\u0430\u0439 \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u043C
+      \u043C\u0435\u0434\u0432\u0435\u0434\u044F \u043D\u0430 \u044D\u0442\u043E\u0442
+      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441. \u0412\u044B\u0431\u0435\u0440\u0438
+      \u043C\u0435\u0434\u0432\u0435\u0434\u044F \u043D\u0430\u0436\u0430\u0432 <color=yellow>\u041F\u041A\u041C</color>
+      \u043F\u043E \u043D\u0435\u043C\u0443 \u0438\u043B\u0438 \u043F\u043E \u043E\u0434\u043D\u043E\u0439
+      \u0438\u0437 \u043F\u0430\u043D\u0435\u043B\u0435\u0439 \u0441\u043F\u0440\u0430\u0432\u0430."
+    position: {x: -14.6, y: 82.1, z: 0}
+    scale: 1
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 03000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041D\u0430\u0436\u0430\u0432 <color=yellow>\u041B\u041A\u041C</color>
+      \u043D\u0430 \u044D\u0442\u0443 \u043A\u043D\u043E\u043F\u043A\u0443, <color=yellow>\u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0439
+      \u043C\u0435\u0434\u0432\u0435\u0434\u044C</color> \u043D\u0430\u043F\u0440\u0430\u0432\u0438\u0442\u0441\u044F
+      \u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C \u0432 \u0434\u0430\u043D\u043D\u044B\u0439
+      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441."
+    position: {x: -76.57, y: 73.54, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: -90
+      offset: 0
+    pointers: []
+    conditionsSequence: 08000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041E\u0431\u0440\u0430\u0442\u0438 \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u044F,
+      \u0447\u0442\u043E \u043F\u043E\u043A\u0430 \u043C\u0435\u0434\u0432\u0435\u0434\u044C
+      \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u043D\u0430 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0435,
+      \u0435\u0433\u043E <color=red>\u043D\u0435\u043B\u044C\u0437\u044F \u0432\u044B\u0431\u0440\u0430\u0442\u044C</color>."
+    position: {x: 169.73, y: -116.5, z: 0}
+    scale: 1
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0420\u0430\u0441\u0441\u043C\u043E\u0442\u0440\u0438\u043C \u0432\u0442\u043E\u0440\u043E\u0439
+      \u0441\u043F\u043E\u0441\u043E\u0431. \u041E\u0442\u043A\u0440\u043E\u0435\u043C
+      \u043C\u0430\u0433\u0430\u0437\u0438\u043D \u043D\u0430 \u043A\u043B\u0430\u0432\u0438\u0448\u0443
+      <color=yellow>E</color>."
+    position: {x: 169.73, y: -116.5, z: 0}
+    scale: 0.9
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 101
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0412 \u043C\u0430\u0433\u0430\u0437\u0438\u043D\u0435 \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C
+      \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C <color=yellow>\u041C.\u0415.\u0414.</color>(<color=yellow>\u041C</color>\u0435\u0434\u0432\u0435\u0436\u044C\u0438
+      <color=yellow>\u0415</color>\u0434\u0438\u043D\u0438\u0446\u044B <color=yellow>\u0414</color>\u0430\u0440\u0430),
+      \u043E\u0442\u0434\u0430\u0432\u0430\u044F \u0440\u0435\u0441\u0443\u0440\u0441\u044B"
+    position: {x: 90, y: -116.5, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 0
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "<color=yellow>\u041C.\u0415.\u0414.</color> \u043C\u043E\u0436\u043D\u043E
+      \u0442\u0440\u0430\u0442\u0438\u0442\u044C \u043D\u0430 \u0440\u0435\u0441\u0443\u0440\u0441\u044B,
+      \u0432\u043A\u043B\u044E\u0447\u0430\u044F <color=yellow>\u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0451\u0434</color><sprite=1>"
+    position: {x: 169.73, y: -116.5, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0422\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u043F\u0440\u043E\u0434\u0430\u0432\u0430\u0442\u044C
+      \u0441\u0442\u0430\u043D\u0434\u0430\u0440\u0442\u043D\u044B\u0435 \u0440\u0435\u0441\u0443\u0440\u0441\u044B,
+      \u043E\u0434\u043D\u0430\u043A\u043E \u0441\u0430\u043C\u044B\u043C\u0438 \u043F\u0440\u0438\u0431\u044B\u043B\u044C\u043D\u044B\u043C\u0438
+      \u0431\u0443\u0434\u0443\u0442 \u0440\u0435\u0441\u0443\u0440\u0441\u044B,
+      \u0432\u044B\u0440\u0430\u0431\u0430\u0442\u044B\u0432\u0430\u0435\u043C\u044B\u0435
+      \u043D\u0430 <color=yellow>\u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0435
+      \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u044F</color>"
+    position: {x: -78, y: 73.54, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 141.38
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: -382.60007, y: 206.58998, z: 0}
+    krugScale: 0.5
+  - text: "\u0417\u0430\u043A\u0440\u043E\u0439\u0442\u0435 \u043C\u0430\u0433\u0430\u0437\u0438\u043D,
+      \u043D\u0430\u0436\u0430\u0432 <color=yellow>ESC</color>"
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 27
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0422\u0435\u043F\u0435\u0440\u044C, \u0443\u0437\u043D\u0430\u0432 \u043E\u0441\u043D\u043E\u0432\u044B,
+      \u0440\u0430\u0441\u0441\u043C\u043E\u0442\u0440\u0438\u043C \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u044B
+      \u0438\u0437 \u043A\u043E\u0442\u043E\u0440\u044B\u0445 \u0441\u0442\u0440\u043E\u0438\u0442\u0441\u044F
+      \u043D\u0430\u0448\u0430 \u0431\u0430\u0437\u0430."
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041D\u0430\u0447\u043D\u0451\u043C \u0441 \u0440\u0430\u043D\u0435\u0435
+      \u0443\u043F\u043E\u043C\u044F\u043D\u0443\u0442\u043E\u0433\u043E <color=yellow>\u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0430
+      \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u044F</color>.
+      \u041E\u043D \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C \u0434\u043B\u044F
+      \u043F\u0435\u0440\u0435\u0440\u0430\u0431\u043E\u0442\u043A\u0438 <color=yellow>\u0410\u0441\u0442\u0440\u043E\u043B\u044E\u043C\u0438\u043D\u0438\u0442\u0430</color>
+      \u0432 \u0441\u0430\u043C\u044B\u0435 \u0432\u043E\u0441\u0442\u0440\u0435\u0431\u043E\u0432\u0430\u043D\u043D\u044B\u0435
+      \u0442\u043E\u0432\u0430\u0440\u044B \u0432 <color=yellow>\u043C\u0430\u0433\u0430\u0437\u0438\u043D\u0435</color>"
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "<color=yellow>\u041A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u0441\u043D\u0430\u0431\u0436\u0435\u043D\u0438\u044F</color>
+      \u043E\u0442\u0432\u0435\u0447\u0430\u0435\u0442 \u0437\u0430 \u044D\u043B\u0435\u043A\u0442\u0440\u0438\u0447\u0435\u0441\u0442\u0432\u043E
+      \u043D\u0430 \u0431\u0430\u0437\u0435. \u0415\u0441\u043B\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u044B
+      \u0440\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u044B <color=red>\u0441\u043B\u0438\u0448\u043A\u043E\u043C
+      \u0434\u0430\u043B\u0435\u043A\u043E</color> \u043E\u0442 \u043D\u0435\u0433\u043E
+      - \u043E\u043D\u0438 <color=red>\u043D\u0435 \u0431\u0443\u0434\u0443\u0442
+      \u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C</color>."
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "<color=yellow>\u041A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u043F\u0435\u0440\u0435\u0440\u0430\u0431\u043E\u0442\u043A\u0438
+      \u0430\u0441\u0442\u0435\u0440\u0438\u044F</color> \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438
+      \u043D\u0430\u0447\u0438\u043D\u0430\u0435\u0442 \u0441\u0432\u043E\u044E \u0440\u0430\u0431\u043E\u0442\u0443
+      \u043F\u043E\u0441\u043B\u0435 <color=yellow>\u043F\u0440\u0438\u043B\u0451\u0442\u0430
+      \u043A\u043E\u0441\u043C\u043E\u043B\u0451\u0442\u0430 \u0441 \u0430\u0441\u0442\u0435\u0440\u0438\u0435\u043C</color>.
+      \u0415\u0441\u043B\u0438 \u043D\u0435\u0442\u0443 \u0441\u0432\u043E\u0431\u043E\u0434\u043D\u044B\u0445
+      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043E\u0432 \u043F\u043E \u043F\u0435\u0440\u0435\u0440\u0430\u0431\u043E\u0442\u043A\u0435
+      - <color=red>\u043D\u0435\u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E \u043B\u0435\u0442\u0430\u0442\u044C
+      \u0437\u0430 \u0430\u0441\u0442\u0435\u0440\u0438\u0435\u043C</color>."
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "<color=yellow>\u0416\u0438\u043B\u043E\u0439 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441</color>
+      \u043E\u0442\u0432\u0435\u0447\u0430\u0435\u0442 \u0437\u0430 \u0431\u043B\u0430\u0433\u043E\u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432\u043E
+      \u043C\u0435\u0434\u0432\u0435\u0434\u0435\u0439. \u041F\u043E \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044E
+      \u0440\u0430\u0431\u043E\u0442\u044B \u043D\u0430 \u043D\u0451\u043C, \u0432\u0441\u0435
+      \u043C\u0435\u0434\u0432\u0435\u0434\u0438 \u043F\u043E\u043B\u0443\u0447\u0430\u0442
+      <color=green>\u0431\u043E\u043D\u0443\u0441 \u043A \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u0438</color>."
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "<color=yellow>\u041A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430</color>
+      - \u043E\u0441\u043E\u0431\u0435\u043D\u043D\u044B\u0439 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441.
+      \u041D\u0430 \u043D\u0435\u0433\u043E \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E
+      <color=yellow>\u043E\u0434\u0438\u043D \u0440\u0430\u0437</color> \u043D\u0430\u0437\u043D\u0430\u0447\u0438\u0442\u044C
+      \u043C\u0435\u0434\u0432\u0435\u0434\u044F. \u041F\u043E\u0441\u043B\u0435
+      \u044D\u0442\u043E\u0433\u043E, \u043A\u043E\u0433\u0434\u0430 \u0442\u0435\u0431\u0435
+      \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0447\u0442\u043E
+      \u043B\u0438\u0431\u043E \u043F\u043E\u0441\u0442\u0440\u043E\u0438\u0442\u044C,
+      \u044D\u0442\u043E\u0442 \u043C\u0435\u0434\u0432\u0435\u0434\u044C <color=yellow>\u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438</color>
+      \u0441\u0434\u0435\u043B\u0430\u0435\u0442 \u044D\u0442\u043E."
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "<color=yellow>\u041A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438
+      \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0451\u0434\u0430</color> \u0434\u0435\u043B\u0430\u0435\u0442
+      \u0440\u043E\u0432\u043D\u043E \u0442\u043E, \u0447\u0442\u043E \u0433\u043E\u0432\u043E\u0440\u0438\u0442
+      \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 - \u0432\u044B\u0440\u0430\u0431\u0430\u0442\u044B\u0432\u0430\u0435\u0442
+      \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0451\u0434<sprite=1>. \u041D\u0435
+      \u0437\u0430\u0431\u044B\u0432\u0430\u0439\u0442\u0435 \u0447\u0442\u043E \u043F\u043E
+      \u043E\u043A\u043E\u043D\u0447\u0430\u043D\u0438\u044E \u0440\u0430\u0431\u043E\u0442\u044B
+      \u043D\u0430 \u043D\u0451\u043C \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E
+      \u043F\u043E\u0432\u0442\u043E\u0440\u043D\u043E \u043D\u0430\u0437\u043D\u0430\u0447\u0438\u0442\u044C
+      \u043C\u0435\u0434\u0432\u0435\u0434\u044F \u043D\u0430 \u044D\u0442\u043E\u0442
+      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u0434\u043B\u044F \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0435\u043D\u0438\u044F
+      \u043F\u0440\u043E\u0438\u0437\u0432\u043E\u0434\u0441\u0442\u0432\u0430."
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "<color=yellow>\u041A\u043E\u0441\u043C\u043E\u0434\u0440\u043E\u043C</color>
+      \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0434\u043E\u0431\u044B\u0432\u0430\u0442\u044C
+      \u0440\u0435\u0441\u0443\u0440\u0441\u044B: <color=yellow>\u0430\u0441\u0442\u0440\u043E\u043B\u044E\u043C\u0438\u043D\u0438\u0442</color>
+      \u0438 <color=yellow>\u0430\u0441\u0442\u0435\u0440\u0438\u0439</color>. \u0410\u0441\u0442\u0435\u0440\u0438\u044E
+      \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u0430 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0430
+      \u0432 \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044E\u0449\u0435\u043C
+      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0435 \u043F\u0435\u0440\u0435\u0434
+      \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435\u043C."
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0415\u0441\u043B\u0438 \u0442\u044B \u0432\u0434\u0440\u0443\u0433 \u0437\u0430\u0431\u0443\u0434\u0435\u0448\u044C,
+      \u0434\u043B\u044F \u0447\u0435\u0433\u043E \u043D\u0443\u0436\u0435\u043D
+      \u043A\u0430\u043A\u043E\u0439 \u043B\u0438\u0431\u043E \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441,
+      \u043D\u0430\u0436\u043C\u0438 \u043F\u043E \u043D\u0435\u043C\u0443 <color=yellow>\u041F\u041A\u041C</color>
+      \u0447\u0442\u043E\u0431\u044B \u0443\u0432\u0438\u0434\u0435\u0442\u044C \u043A\u0440\u0430\u0442\u043A\u0443\u044E
+      \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E \u043E \u043D\u0451\u043C."
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0422\u0435\u043F\u0435\u0440\u044C \u0434\u0430\u0432\u0430\u0439 \u0443\u0437\u043D\u0430\u0435\u043C
+      \u043A\u0430\u043A \u0440\u0430\u0441\u0448\u0438\u0440\u044F\u0442\u044C \u043D\u0430\u0448\u0443
+      \u0431\u0430\u0437\u0443. \u0414\u043B\u044F \u044D\u0442\u043E\u0433\u043E
+      \u043D\u0430\u0437\u043D\u0430\u0447\u044C <color=yellow>\u0423\u0442\u043B\u0435\u044F</color>
+      \u043D\u0430 <color=yellow>\u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430</color>."
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 08000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0422\u0435\u043F\u0435\u0440\u044C \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C
+      \u0441\u0442\u0440\u043E\u0438\u0442\u044C! \u041D\u0430\u0436\u043C\u0438
+      \u043A\u043B\u0430\u0432\u0438\u0448\u0443 <color=yellow>b</color> \u0438\u043B\u0438
+      \u043D\u0430 \u043A\u043D\u043E\u043F\u043A\u0443 \u0441\u0432\u0435\u0440\u0445\u0443"
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 98
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0414\u0430\u0432\u0430\u0439 \u043F\u043E\u0441\u0442\u0440\u043E\u0438\u043C
+      \u0435\u0449\u0451 \u043E\u0434\u0438\u043D <color=yellow>\u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u043F\u043E \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0435 \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0451\u0434\u0430</color>.
+      \u041D\u0430\u0436\u043C\u0438 \u043D\u0430 <color=yellow>\u043F\u043B\u044E\u0441</color>
+      \u0440\u044F\u0434\u043E\u043C \u0441 <color=yellow>\u041A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u043E\u043C
+      \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430</color>"
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u0412\u044B\u0431\u0435\u0440\u0438 \u0432 \u0441\u043F\u0438\u0441\u043A\u0435
+      <color=yellow>\u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441 \u0432\u044B\u0440\u0430\u0431\u043E\u0442\u043A\u0438
+      \u044D\u043D\u0435\u0440\u0433\u043E\u043C\u0451\u0434\u0430</color>. \u041E\u0431\u0440\u0430\u0442\u0438
+      \u0432\u043D\u0438\u043C\u0430\u043D\u0438\u0435 \u0447\u0442\u043E \u043F\u043E\u0441\u0442\u0440\u043E\u0439\u043A\u0430
+      <color=red>\u0440\u0430\u0441\u0445\u043E\u0434\u0443\u0435\u0442 \u0440\u0435\u0441\u0443\u0440\u0441\u044B</color>."
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 01000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041D\u043E\u0432\u044B\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u044B
+      \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0441\u043D\u0430\u0447\u0430\u043B\u0430
+      <color=yellow>\u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C</color>.
+      \u0414\u043B\u044F \u044D\u0442\u043E\u0433\u043E \u043D\u0430\u0436\u043C\u0438
+      \u043D\u0430 <color=yellow>\u0448\u0435\u0441\u0442\u0435\u0440\u0451\u043D\u043A\u0443</color>
+      \u0432\u043D\u0443\u0442\u0440\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0430
+      \u0438 <color=yellow>\u0440\u0435\u0448\u0438 \u0437\u0430\u0434\u0430\u0447\u043A\u0443</color>.
+      \u0415\u0441\u043B\u0438 \u0440\u0435\u0448\u0438\u0442\u044C \u0435\u0451
+      \u043D\u0435\u0432\u0435\u0440\u043D\u043E - \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441
+      \u0431\u0443\u0434\u0435\u0442 <color=red>\u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C
+      \u0445\u0443\u0436\u0435</color> \u0438\u043B\u0438 <color=red>\u043D\u0435
+      \u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C \u0441\u043E\u0432\u0441\u0435\u043C</color>."
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 0a000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  - text: "\u041D\u0435 \u0441\u0442\u043E\u0438\u0442 \u0437\u0430\u0431\u044B\u0432\u0430\u0442\u044C
+      \u043F\u0440\u043E \u0443\u0436\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044E\u0449\u0438\u0435
+      \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u044B. \u0418\u0445 \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E 
+      <color=yellow>\u0447\u0438\u043D\u0438\u0442\u044C, \u0442\u0440\u0430\u0442\u044F
+      \u0430\u0441\u0442\u0435\u0440\u0438\u0439, \u0430 \u0442\u0430\u043A \u0436\u0435
+      \u043F\u043E \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u0438
+      <color=green>\u0443\u043B\u0443\u0447\u0448\u0430\u0442\u044C</color>. \u0414\u043B\u044F
+      \u044D\u0442\u043E\u0433\u043E \u043D\u0430\u0436\u043C\u0438 <color=yellow>\u041F\u041A\u041C</color>
+      \u043F\u043E \u0438\u043D\u0442\u0435\u0440\u0435\u0441\u0443\u044E\u0449\u0435\u043C\u0443
+      \u0442\u0435\u0431\u044F \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0443
+      \u0438 \u0432\u044B\u0431\u0435\u0440\u0438 \u0438\u043D\u0442\u0435\u0440\u0435\u0441\u0443\u044E\u0449\u0435\u0435
+      \u0442\u0435\u0431\u044F \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435."
+    position: {x: 72.7, y: 93.8, z: 0}
+    scale: 0
+    pointer:
+      target: {fileID: 0}
+      angleZ: 90
+      offset: 0
+    pointers: []
+    conditionsSequence: 05000000
+    buttonToCheck: {fileID: 0}
+    keyToCheck: 0
+    tagToCheck: 
+    roomToCheck: {fileID: 0}
+    roomHighlight: {fileID: 0}
+    krugPos: {x: 0, y: 0, z: 0}
+    krugScale: 0
+  textOutput: {fileID: 2840393887886120380}
+  tutorialView: {fileID: 7106921629360022408}
+  startGameButton: {fileID: 8053343722803969289}
+  pointerSlots: []
+  pointerPrefab: {fileID: 1914244455409487036, guid: c280cc053adab3b409c8628063711174, type: 3}
+--- !u!1 &2209696314644042696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8243385277029328}
+  - component: {fileID: 9119838109287589688}
+  - component: {fileID: 7716277515843526317}
+  - component: {fileID: 6891525017686929494}
+  m_Layer: 5
+  m_Name: TutorialCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8243385277029328
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2209696314644042696}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4927616830314303868}
+  - {fileID: 777201416472187138}
+  - {fileID: 615049813691048728}
+  - {fileID: 7842882400362132312}
+  - {fileID: 7386723225083605913}
+  - {fileID: 8819202737533754951}
+  m_Father: {fileID: 3188385429201320235}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!223 &9119838109287589688
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2209696314644042696}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 1
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 2
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 32767
+  m_TargetDisplay: 0
+--- !u!114 &7716277515843526317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2209696314644042696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!114 &6891525017686929494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2209696314644042696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!1 &3711200334093412311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1644439954277822391}
+  - component: {fileID: 3795903497740044035}
+  - component: {fileID: 2840393887886120380}
+  m_Layer: 5
+  m_Name: TutorialText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1644439954277822391
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3711200334093412311}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7106921629360022408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -51.99, y: 0.33}
+  m_SizeDelta: {x: 203.42, y: 119.72}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3795903497740044035
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3711200334093412311}
+  m_CullTransparentMesh: 1
+--- !u!114 &2840393887886120380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3711200334093412311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 99c02c43b6092184a98093d3e21f6a03, type: 2}
+  m_sharedMaterial: {fileID: -5451857785842787390, guid: 99c02c43b6092184a98093d3e21f6a03, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 1.24
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &4767650594839747815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7386723225083605913}
+  m_Layer: 5
+  m_Name: pointerOnShop
+  m_TagString: Untagged
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7386723225083605913
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4767650594839747815}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8243385277029328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 134.9, y: 105}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &6479874701432276115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4927616830314303868}
+  m_Layer: 5
+  m_Name: Tutorial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4927616830314303868
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6479874701432276115}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7106921629360022408}
+  m_Father: {fileID: 8243385277029328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &6806682028472900529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 934605540772184544}
+  - component: {fileID: 8198439041203985732}
+  - component: {fileID: 2596752700032600114}
+  m_Layer: 0
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &934605540772184544
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6806682028472900529}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8819202737533754951}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -1.4700012, y: 0.000036239624}
+  m_SizeDelta: {x: -6.76, y: -7.91}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8198439041203985732
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6806682028472900529}
+  m_CullTransparentMesh: 1
+--- !u!114 &2596752700032600114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6806682028472900529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "\u041D\u0430\u0447\u0430\u0442\u044C \u0441\u0432\u043E\u044E \u043F\u0435\u0440\u0432\u0443\u044E
+    \u0441\u043C\u0435\u043D\u0443"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 99c02c43b6092184a98093d3e21f6a03, type: 2}
+  m_sharedMaterial: {fileID: -5451857785842787390, guid: 99c02c43b6092184a98093d3e21f6a03, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 9.08
+  m_fontSizeBase: 9.08
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 8.2
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 1
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &8053343722803969289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8819202737533754951}
+  - component: {fileID: 1307349043517384255}
+  - component: {fileID: 1306897446462231656}
+  - component: {fileID: 1239799638113310260}
+  - component: {fileID: 3786894884532588152}
+  m_Layer: 0
+  m_Name: NewGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &8819202737533754951
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8053343722803969289}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.03, y: 1.03, z: 1.03}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 934605540772184544}
+  m_Father: {fileID: 8243385277029328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -161.1}
+  m_SizeDelta: {x: 173.99, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1307349043517384255
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8053343722803969289}
+  m_CullTransparentMesh: 1
+--- !u!114 &1306897446462231656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8053343722803969289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 42649406fb7bcf849b45cde68fc35e70, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 15
+--- !u!114 &1239799638113310260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8053343722803969289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 3
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1306897446462231656}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6479874701432276115}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SetIsGameRunning
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SetTimeGo
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 2209696314644042696}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!95 &3786894884532588152
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8053343722803969289}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d4d043a3d68e8e749810be30c2f83225, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &8709578232000593173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7106921629360022408}
+  - component: {fileID: 5891280005256986315}
+  - component: {fileID: 8443126972455631153}
+  m_Layer: 5
+  m_Name: TutorialView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7106921629360022408
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8709578232000593173}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 1644439954277822391}
+  m_Father: {fileID: 4927616830314303868}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 216.43, y: -79.37}
+  m_SizeDelta: {x: 389.78, y: 204.63}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5891280005256986315
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8709578232000593173}
+  m_CullTransparentMesh: 1
+--- !u!114 &8443126972455631153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8709578232000593173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 8062ac0a8fa6a2b448b79ef034162093, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &9206235207362155392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 777201416472187138}
+  - component: {fileID: 7787951223987587697}
+  - component: {fileID: 8806609182984723297}
+  m_Layer: 5
+  m_Name: Krug
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &777201416472187138
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9206235207362155392}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8243385277029328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -382.8, y: 204.4}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7787951223987587697
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9206235207362155392}
+  m_CullTransparentMesh: 1
+--- !u!114 &8806609182984723297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9206235207362155392}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.8039216, b: 0.08627451, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 6024c030ee45aff44b9907f715e97cd7, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1001 &5395028092843842325
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8243385277029328}
+    m_Modifications:
+    - target: {fileID: 1914244455409487036, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_Name
+      value: Pointer
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914244455409487036, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.3306792
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.9437432
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 57.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 141.38
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c280cc053adab3b409c8628063711174, type: 3}
+--- !u!224 &615049813691048728 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4780542397338384397, guid: c280cc053adab3b409c8628063711174, type: 3}
+  m_PrefabInstance: {fileID: 5395028092843842325}
+  m_PrefabAsset: {fileID: 0}

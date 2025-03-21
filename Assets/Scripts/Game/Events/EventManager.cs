@@ -63,6 +63,11 @@ public static class EventManager
 	/// </summary>
 	public static UnityEvent onToMenuButton = new UnityEvent();
 
+	/// <summary>
+	/// Triggered when player selected room to build
+	/// </summary>
+	public static UnityEvent<RoomType> onRoomQueuedForBuild = new UnityEvent<RoomType>();
+
 	#region Notification system
 	/// <summary>
 	/// Invoke error through this event. Pass error message into Invoke()

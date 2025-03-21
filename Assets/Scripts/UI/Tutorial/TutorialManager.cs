@@ -78,7 +78,8 @@ public class TutorialManager : MonoBehaviour
 		None,
 		OnSupplyRoomSolved,
 		OnSupplyRoomSettingsOpened,
-		OnRoomUpgraded
+		OnRoomUpgraded,
+		OnEnergohoneyRoomBuilt
 	}
 
 	private void Start()
@@ -257,6 +258,11 @@ public class TutorialManager : MonoBehaviour
 					yield return WaitForEvent();
 					EventManager.onRoomUpgraded.RemoveListener(StopWaiting);
 					break;
+				case Condition.OnEnergohoneyRoomBuilt:
+					EventManager.onRoomQueuedForBuild.AddListener(StopWaitingForEnergohoneyRoomCheck);
+					yield return WaitForEvent();
+					EventManager.onRoomQueuedForBuild.RemoveListener(StopWaitingForEnergohoneyRoomCheck);
+					break;
 
 			}
 			yield return null;
@@ -317,6 +323,16 @@ public class TutorialManager : MonoBehaviour
 	private void StopWaitingForRoomCheck(RoomScript room)
 	{
 		if (room.GetType() == roomToCheck.GetType())
+		{
+			Debug.Log("reached room!");
+			isButtonPressed = true;
+			StopCoroutine(WaitForEvent());
+		}
+	}
+
+	private void StopWaitingForEnergohoneyRoomCheck(RoomType room)
+	{
+		if (room == RoomType.Energohoney)
 		{
 			Debug.Log("reached room!");
 			isButtonPressed = true;

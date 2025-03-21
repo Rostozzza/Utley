@@ -15,13 +15,15 @@ public class ChoicesFormer : MonoBehaviour
         foreach (var room in roomsToCreate)
         {
             GameObject createdRoom = Instantiate(prefab, transform);
+            createdRoom.GetComponentInChildren<Button>(true).gameObject.name = room.ToString();
             FillPrefab(room, createdRoom.GetComponent<ChoiceController>());
         }
     }
 
     public void BuildChosenRoom(RoomType roomType)
     {
-        GameManager.Instance.SelectAndBuild(roomPrefabs[(int)roomType]);
+		EventManager.onRoomQueuedForBuild.Invoke(roomType);
+		GameManager.Instance.SelectAndBuild(roomPrefabs[(int)roomType]);
     }
 
     private void FillPrefab(RoomType room, ChoiceController prefabScript)

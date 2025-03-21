@@ -22,6 +22,7 @@ public class FluidWorkUI : RoomWorkUI
 			resultText.text = $"{(int)((timer / time)*100f)}%";
 			yield return null;
 		}
+
 		while (timer / time > 0f)
 		{
 			timer -= Time.deltaTime*10f;
