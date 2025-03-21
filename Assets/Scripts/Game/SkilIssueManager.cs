@@ -133,7 +133,7 @@ public class SkillIssueManager : MonoBehaviour
 			{
 				if (now == killYourself.Count - 1)
 				{
-					Time.timeScale = Time.timeScale == 2f ? 1f : 2f;
+					Time.timeScale = Time.timeScale == 10f ? 1f : 10f;
 					Debug.Log($"Timescale: {Time.timeScale}");
 					Debug.Log($"Breakage!: {now}");
 					break;

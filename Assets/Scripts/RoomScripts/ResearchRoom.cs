@@ -40,8 +40,6 @@ public class ResearchRoom : RoomScript
 		if (status != Status.Destroyed && isEnpowered)
 		{
 			fixedBear = bear;
-			fixedBear.GetComponent<UnitScript>().SetWorkStr(workStr);
-			fixedBear.GetComponent<UnitScript>().GetStatusPanel().UpdateLoveWork(false);
 			if (resource == Resources.Cosmodrome)
 			{
 				status = Status.Busy;
@@ -103,6 +101,7 @@ public class ResearchRoom : RoomScript
 	{
 		workUI = workUI as FluidWorkUI;
 		yield return SelectOption();
+		if (waitOption == Type.Leave) yield break; // 😁;
 
 		yield return GetHaveResources();
 
@@ -202,8 +201,8 @@ public class ResearchRoom : RoomScript
 				break;
 			default:
 				break;
-		roomStatsController.RefreshDescription();
 		}
+		roomStatsController.RefreshDescription();
 
 		GameManager.Instance.uiResourceShower.UpdateIndicators();
 		if (fixedBear.GetComponent<UnitScript>().job == Qualification.bioengineer)
@@ -232,7 +231,8 @@ public class ResearchRoom : RoomScript
 	{
 		None,
 		Ursowaks,
-		Prototype
+		Prototype,
+		Leave
 	}
 
 	public override bool CheckIfSolved() => isSolved;
