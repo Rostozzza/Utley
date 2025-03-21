@@ -26321,6 +26321,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6a70607a7eb97498073c99d199ea9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1398197920 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1458037989015496847, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+  m_PrefabInstance: {fileID: 1398197918}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1398197922 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2097626594887498254, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
@@ -38659,8 +38664,8 @@ MonoBehaviour:
     position: {x: -76.57, y: 73.54, z: 0}
     scale: 0
     pointer:
-      target: {fileID: 0}
-      angleZ: 180
+      target: {fileID: 1398197920}
+      angleZ: -90
       offset: 0
     pointers: []
     conditionsSequence: 08000000
@@ -38746,7 +38751,13 @@ MonoBehaviour:
     roomHighlight: {fileID: 0}
     krugPos: {x: 0, y: 0, z: 0}
     krugScale: 0
-  - text: 
+  - text: "\u0422\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u043F\u0440\u043E\u0434\u0430\u0432\u0430\u0442\u044C
+      \u0441\u0442\u0430\u043D\u0434\u0430\u0440\u0442\u043D\u044B\u0435 \u0440\u0435\u0441\u0443\u0440\u0441\u044B,
+      \u043E\u0434\u043D\u0430\u043A\u043E \u0441\u0430\u043C\u044B\u043C\u0438 \u043F\u0440\u0438\u0431\u044B\u043B\u044C\u043D\u044B\u043C\u0438
+      \u0431\u0443\u0434\u0443\u0442 \u0440\u0435\u0441\u0443\u0440\u0441\u044B,
+      \u0432\u044B\u0440\u0430\u0431\u0430\u0442\u044B\u0432\u0430\u0435\u043C\u044B\u0435
+      \u043D\u0430 <color=yellow>\u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0441\u0435
+      \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u044F</color>"
     position: {x: -78, y: 73.54, z: 0}
     scale: 0
     pointer:
@@ -38754,7 +38765,7 @@ MonoBehaviour:
       angleZ: 141.38
       offset: 0
     pointers: []
-    conditionsSequence: 0c000000
+    conditionsSequence: 05000000
     buttonToCheck: {fileID: 535176801}
     keyToCheck: 0
     tagToCheck: 
