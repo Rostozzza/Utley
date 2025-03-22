@@ -19,6 +19,7 @@ public class TutorialManager : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI textOutput;
 	[SerializeField] private Transform tutorialView;
 	[SerializeField] private GameObject startGameButton;
+	private Coroutine floatRoutine;
 	[Header("Pointer Settings")]
 	public List<GameObject> pointerSlots;
 	[SerializeField] private GameObject pointerPrefab;
@@ -79,7 +80,8 @@ public class TutorialManager : MonoBehaviour
 		OnSupplyRoomSolved,
 		OnSupplyRoomSettingsOpened,
 		OnRoomUpgraded,
-		OnEnergohoneyRoomBuilt
+		OnEnergohoneyRoomBuilt,
+		OnResearchroomSolved
 	}
 
 	private void Start()
@@ -139,7 +141,8 @@ public class TutorialManager : MonoBehaviour
 			{
 				tutorialView.localScale = new Vector3(part.scale, part.scale, part.scale);
 			}
-			tutorialView.localPosition = part.position;
+			//tutorialView.localPosition = part.position;
+			floatRoutine = StartCoroutine(FloatToPosition(part.position));
 			textOutput.text = part.text;
 			yield return ConditionWaiter(part.conditionsSequence, part.buttonToCheck, part.tagToCheck, part.roomToCheck);
 			if (part.roomHighlight != null)
@@ -158,6 +161,15 @@ public class TutorialManager : MonoBehaviour
 		GameManager.Instance.honey = ValuesHolder.StartEnergohoney; // MAKE METHODS IN GAMEMANAGER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		GameManager.Instance.HNY = 0; // MAKE METHODS IN GAMEMANAGER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		GameManager.Instance.prototype = 0; // MAKE METHODS IN GAMEMANAGER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	private IEnumerator FloatToPosition(Vector2 pos)
+	{
+		while (Vector2.Distance(tutorialView.localPosition, pos) > 1f)
+		{
+			tutorialView.localPosition = Vector2.Lerp(tutorialView.localPosition, pos, Time.deltaTime * 15f);
+			yield return null;
+		}
 	}
 
 	/// <summary>
@@ -263,6 +275,11 @@ public class TutorialManager : MonoBehaviour
 					yield return WaitForEvent();
 					EventManager.onRoomQueuedForBuild.RemoveListener(StopWaitingForEnergohoneyRoomCheck);
 					break;
+				case Condition.OnResearchroomSolved:
+					EventManager.onResearchSettingsSolved.AddListener(StopWaiting);
+					yield return WaitForEvent();
+					EventManager.onResearchSettingsSolved.RemoveListener(StopWaiting);
+					break;
 
 			}
 			yield return null;
@@ -332,7 +349,7 @@ public class TutorialManager : MonoBehaviour
 
 	private void StopWaitingForEnergohoneyRoomCheck(RoomType room)
 	{
-		if (room == RoomType.Energohoney)
+		if (room == RoomType.Research)
 		{
 			Debug.Log("reached room!");
 			isButtonPressed = true;

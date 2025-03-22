@@ -68,6 +68,11 @@ public static class EventManager
 	/// </summary>
 	public static UnityEvent<RoomType> onRoomQueuedForBuild = new UnityEvent<RoomType>();
 
+	/// <summary>
+	/// Triggered when player solves research room settings
+	/// </summary>
+	public static UnityEvent onResearchSettingsSolved = new UnityEvent();
+
 	#region Notification system
 	/// <summary>
 	/// Invoke error through this event. Pass error message into Invoke()
