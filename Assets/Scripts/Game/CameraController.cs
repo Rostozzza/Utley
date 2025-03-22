@@ -47,14 +47,12 @@ public class CameraController : MonoBehaviour
 			GameManager.Instance.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 1;
 			//GameManager.Instance.transform.position = startPosUI + new Vector3(position.x + 1000, position.y);
 			GameManager.Instance.GetComponentInChildren<Canvas>().planeDistance = 2;
-			GameManager.Instance.GetGuideCanvas().SetActive(false);
 		}
 		else
 		{
 			GameManager.Instance.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 0;
 			//GameManager.Instance.transform.position = startPosUI;
 			GameManager.Instance.GetComponentInChildren<Canvas>().planeDistance = -10;
-			GameManager.Instance.GetGuideCanvas().SetActive(true);
 		}
 		//GameManager.Instance.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = orthoOn ? 1 : 0;//.gameObject.SetActive(orthoOn);
 		moving = StartCoroutine(FloatTorwards(orthoOn ? lastPoint : position, orthoOn ? Vector3.zero : rotation, orthoOn ? 60f : 90f, orthoOn));

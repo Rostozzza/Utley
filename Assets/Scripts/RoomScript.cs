@@ -1107,7 +1107,7 @@ public class RoomScript : MonoBehaviour
 
 	public void SetResistors() // God is displeased;
 	{
-		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetResistors, this);
+		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetCosmodrome, this);
 	}
 
 	public void SetConeierScreen(bool set)

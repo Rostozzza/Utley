@@ -734,8 +734,9 @@ public class MenuManager : MonoBehaviour
 		//SceneManager.LoadSceneAsync(1);
 	}
 
-	public void CallProblemSolver(ProblemType type, RoomScript room)
+	public void CallProblemSolver(ProblemType type, RoomScript room) // OnExerciseEnter;
 	{
+		GameManager.Instance.GetGuideCanvas().SetActive(true);
 		GameManager.Instance.SetIsExerciseOpen(true);
 		shopScreen.SetActive(false);
 		switch (type)
@@ -759,8 +760,9 @@ public class MenuManager : MonoBehaviour
 				graphExercise.InitializeTask(room);
 				//tabletAnimator.SetTrigger("OpenShop");
 				break;
-			case ProblemType.SetResistors:
+			case ProblemType.SetCosmodrome:
 				guideManager.SetGuideType(GuideManager.GuideTypes.Cosmodrome);
+				GetComponent<Canvas>().sortingOrder = 9500;
 				cosmodromeExercise.gameObject.SetActive(true);
 				StartCoroutine(WaitForResistorsCountEnd(room));
 				tabletAnimator.SetTrigger("OpenShop");
@@ -798,6 +800,7 @@ public class MenuManager : MonoBehaviour
 		GameManager.Instance.SetBearsShow(true);
 		Camera.main.GetComponent<CameraShake>().SetCameraShakeByMeteor(true);
 		GameManager.Instance.SetIsExerciseOpen(false);
+		MenuManager.Instance.OnExerciseExit();
 		//problemSolverScreen.SetActive(false);
 		//tabletAnimator.SetTrigger("CloseShop");
 	}
@@ -816,6 +819,13 @@ public class MenuManager : MonoBehaviour
 		GameManager.Instance.SetBearsShow(true);
 		Camera.main.GetComponent<CameraShake>().SetCameraShakeByMeteor(true);
 		GameManager.Instance.SetIsExerciseOpen(false);
+		GetComponent<Canvas>().sortingOrder = 10000;
+		MenuManager.Instance.OnExerciseExit();
+	}
+
+	public void OnExerciseExit()
+	{
+		GameManager.Instance.GetGuideCanvas().SetActive(false);
 	}
 
 	public void SetTablet(bool set) => tabletAnimator.SetTrigger(set ? "OpenShop" : "CloseShop");
@@ -827,8 +837,7 @@ public class MenuManager : MonoBehaviour
 		SetPipes,
 		SetFurnaces,
 		SetSupply,
-		SetResistors,
-		SetBreakingBad,
-		SetCosmodrome
+		SetCosmodrome,
+		SetBreakingBad
 	}
 }

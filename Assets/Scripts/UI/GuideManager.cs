@@ -8,38 +8,44 @@ public class GuideManager : MonoBehaviour
     [SerializeField] private GuideTypes guideType;
     [SerializeField] private bool isGuideOpen = false;
     [SerializeField] private Dictionary<LineRenderer, bool> linesStates = new();
+    [SerializeField] private bool wasTabletOpenBeforeGuide = false;
 
     public void SetGuideType(GuideTypes type) => guideType = type;
 
     public void ShowGuideByButton()
     {
         if (GetIsGuideOpen()) return;
+        SetWasTabletOpen(MenuManager.Instance.tabletAnimator.GetCurrentAnimatorStateInfo(0).IsName("New State") || MenuManager.Instance.tabletAnimator.GetCurrentAnimatorStateInfo(0).IsName("TabletHide"));
         SetIsGuideOpen(true);
         ShowGuide(guideType);
     }
 
     public void ShowGuide(GuideTypes type)
     {
-        MenuManager.Instance.SetTablet(true);
+        if (!GetWasTabletOpen()) MenuManager.Instance.SetTablet(true);
         slides[(int)type].SetActive(true);
-        Invoke(nameof(StopTime), MenuManager.Instance.tabletAnimator.GetCurrentAnimatorStateInfo(0).length);
+        Invoke(nameof(StopTimeDelayed), MenuManager.Instance.tabletAnimator.GetCurrentAnimatorStateInfo(0).length);
         SetHideLinesVFX(true);
+        if (type == GuideTypes.Cosmodrome) MenuManager.Instance.GetComponent<Canvas>().sortingOrder = 10000; // forgive me God;
     }
 
     public void HideGuide()
     {
-        MenuManager.Instance.SetTablet(false);
+        if (!GetWasTabletOpen()) MenuManager.Instance.SetTablet(false);
         slides.ForEach(slide => slide.SetActive(false));
-        gameObject.SetActive(false);
         Time.timeScale = 1;
         SetIsGuideOpen(false);
         Invoke(nameof(ShowLinesDelayed), MenuManager.Instance.tabletAnimator.GetCurrentAnimatorStateInfo(0).length);
+        if (guideType == GuideTypes.Cosmodrome) MenuManager.Instance.GetComponent<Canvas>().sortingOrder = 9500;
+        gameObject.SetActive(false);
     }
 
-    private void StopTime() => Time.timeScale = 0;
+    private void StopTimeDelayed() => Time.timeScale = 0;
     private void ShowLinesDelayed() => SetHideLinesVFX(false);
     private void SetIsGuideOpen(bool set) => isGuideOpen = set;
     private bool GetIsGuideOpen() => isGuideOpen;
+    private void SetWasTabletOpen(bool set) => wasTabletOpenBeforeGuide = set;
+    private bool GetWasTabletOpen() => wasTabletOpenBeforeGuide;
 
     public enum GuideTypes
     {
