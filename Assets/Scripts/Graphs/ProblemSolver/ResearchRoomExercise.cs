@@ -118,6 +118,7 @@ public class ResearchRoomExercise : MonoBehaviour
 			Debug.Log("����� ��������");
 			roomToTarget.SetWorkEfficiency(0.8f);
 		}
+		EventManager.onResearchSettingsSolved.Invoke();
 		GameManager.Instance.SetIsGraphUsing(false);
 		Camera.main.GetComponent<CameraController>().GoToTaskPoint(Vector3.zero, Vector3.zero);
 		ClearGraph();

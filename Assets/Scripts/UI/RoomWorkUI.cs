@@ -66,9 +66,9 @@ public class RoomWorkUI : MonoBehaviour
 			resultText.text = $"+{workResults}";
 			yield return new WaitForSeconds(timeInterval);
 		}
-
+		animator.SetTrigger("Hide");
 		timeInterval = 1f / amountOfUnits;
-		for (int i = 0; i < amountOfUnits; i++)
+		for (int i = (int)amountOfUnits; i > 0; i--)
 		{
 			yield return new WaitForSeconds(timeInterval);
 			Destroy(grid.transform.GetChild(0).gameObject);
@@ -83,7 +83,7 @@ public class RoomWorkUI : MonoBehaviour
 			workResults--;
 			resultText.text = $"+{workResults}";
 		}
-		animator.SetTrigger("Hide");
+		
 	}
 
 	public enum ResourceType

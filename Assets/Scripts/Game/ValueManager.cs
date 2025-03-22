@@ -132,7 +132,7 @@ public class ValueManager : MonoBehaviour
             BuyHoney = -0.27f,
             BuyTime = -3.0f,
             BuyTemperatureBoost = -7.0f,
-            BuyAsterium = -0.15f,
+            BuyAsterium = -0.17f,
             SellHoney = 0.2f,
             SellAsterium = 0.1f,
             SellAstroluminite = 0.6f,
@@ -156,7 +156,7 @@ public class ValueManager : MonoBehaviour
             DamageByTideMultiplier = 1.0f,
             EnergohoneyConsumeMultiplier = 1.0f,
             EnergohoneyConsumeMultiplierByRoom = 1.0f,
-            EnergohoneyConsumeMultiplierByCycle = 8.2f,
+            EnergohoneyConsumeMultiplierByCycle = 5.2f,
             EnergohoneyExponent = 1f,
         };
         //Debug.Log(JsonConvert.SerializeObject(tm, Formatting.Indented));
