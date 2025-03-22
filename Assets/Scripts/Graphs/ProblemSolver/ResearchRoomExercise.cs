@@ -128,6 +128,7 @@ public class ResearchRoomExercise : MonoBehaviour
 		GameManager.Instance.SetBearsShow(true);
 		Camera.main.GetComponent<CameraShake>().SetCameraShakeByMeteor(true);
 		GameManager.Instance.SetIsExerciseOpen(false);
+		MenuManager.Instance.OnExerciseExit();
 	}
 
 	/// <summary>

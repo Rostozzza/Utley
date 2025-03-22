@@ -1225,7 +1225,7 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-		if (InputController.GetKeyDown(ActionKeys.BuildMode)) SetModeByButton((int)Mode.Build);
+		if (InputController.GetKeyDown(ActionKeys.BuildMode) && !GetIsExerciseOpen()) SetModeByButton((int)Mode.Build);
 		//else if (Input.GetKeyDown(KeyCode.I)) SetModeByButton((int)Mode.Info);
 	}
 

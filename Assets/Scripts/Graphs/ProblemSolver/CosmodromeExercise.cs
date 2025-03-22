@@ -31,6 +31,8 @@ public class CosmodromeExercise : MonoBehaviour
 	[SerializeField] private Transform startAxisTransform;
 	[SerializeField] private Transform endAxisTransform;
 	[SerializeField] private List<GameObject> toDestroyAtEnd;
+	[SerializeField] private int templateIndex;
+	[SerializeField] private int? previousTemplate = null;
 
 
 
@@ -68,7 +70,12 @@ public class CosmodromeExercise : MonoBehaviour
 		float radiansAngle = Mathf.Atan2(startAxis.y, startAxis.x);
 		dir = new Vector2(Mathf.Cos(radiansAngle), Mathf.Sin(radiansAngle));
 
-		activeTemplate = templates[Random.Range(0, templates.Count)]; //Random.Range(0, templates.Count)
+		do templateIndex = Random.Range(0, templates.Count);
+		while (templateIndex == previousTemplate);
+		
+		previousTemplate = templateIndex;
+
+		activeTemplate = templates[templateIndex]; //Random.Range(0, templates.Count)
 
 		correctAnswer = activeTemplate.GetComponent<CosmodromeTemplateStorage>().GetRightAnswer();
 
@@ -171,6 +178,15 @@ public class CosmodromeExercise : MonoBehaviour
 	/// <param name="answerHolder"></param>
 	public void GiveAnswer()
 	{
+		try
+		{
+			int.Parse(answerField.text);
+		}
+		catch
+		{
+			return;
+		}
+
 		answerTrigger = true;
 	}
 }

@@ -27,6 +27,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private float skipTimer;
 	[SerializeField] private GuideManager guideManager;
 	private Dictionary<LineRenderer, bool> linesStates = new();
+	[SerializeField] private int sortingOrderBeforePause;
 	[Header("Game message settings")]
 	[SerializeField] private NotificationsManager notificationsManager;
 	private Coroutine messageViewRoutine;
@@ -339,6 +340,10 @@ public class MenuManager : MonoBehaviour
 		{
 			return;
 		}
+
+		sortingOrderBeforePause = GetComponent<Canvas>().sortingOrder;
+		GetComponent<Canvas>().sortingOrder = 20000;
+
 		SwitchHideLinesVFX(true);
 		pauseScreen.SetActive(true);
 		//SetPipesScreen.SetActive(!numberSummation.isTaskActive);
@@ -360,6 +365,8 @@ public class MenuManager : MonoBehaviour
 		{
 			return;
 		}
+		
+		GetComponent<Canvas>().sortingOrder = sortingOrderBeforePause;
 
 		SwitchHideLinesVFX(false);
 		//SetPipesScreen.SetActive(numberSummation.isTaskActive);
