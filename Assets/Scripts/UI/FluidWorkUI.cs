@@ -30,7 +30,7 @@ public class FluidWorkUI : RoomWorkUI
 			fluidImage.fillAmount = timer / 1f;
 			yield return null;
 		}
-
+		animator.SetTrigger("Hide");
 		resultImage.GetComponent<Image>().fillAmount = 0;
 		try
 		{
@@ -46,6 +46,6 @@ public class FluidWorkUI : RoomWorkUI
 		catch { }
 		resultText.text = "";
 		resultImage.GetComponent<Image>().fillAmount = 0;
-		animator.SetTrigger("Hide");
+		
 	}
 }
