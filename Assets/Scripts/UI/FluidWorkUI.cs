@@ -23,6 +23,8 @@ public class FluidWorkUI : RoomWorkUI
 			yield return null;
 		}
 		timer = 1f;
+
+		animator.SetTrigger("Hide");
 		while (timer > 0f)
 		{
 			timer -= Time.deltaTime;
@@ -30,7 +32,6 @@ public class FluidWorkUI : RoomWorkUI
 			fluidImage.fillAmount = timer / 1f;
 			yield return null;
 		}
-		animator.SetTrigger("Hide");
 		resultImage.GetComponent<Image>().fillAmount = 0;
 		try
 		{
