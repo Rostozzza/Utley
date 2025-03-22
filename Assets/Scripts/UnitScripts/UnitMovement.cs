@@ -78,6 +78,16 @@ public class UnitMovement : MonoBehaviour
 		currentRoutine = StartCoroutine(Move(branch));
 	}
 
+	private IEnumerator MoveToX(float x, float speed)
+	{
+		Vector3 targetPos = new(x, transform.position.y, transform.position.z);
+		while (transform.position != targetPos)
+		{
+			transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+			yield return null;
+		}
+	}
+
 	private IEnumerator MoveByOne()
 	{
 		GetComponentInChildren<Animator>().SetBool("Walk", true);
@@ -85,22 +95,24 @@ public class UnitMovement : MonoBehaviour
 		if (target.transform.position.x < transform.position.x)
 		{
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, -90, 0);
-			while (target.transform.position.x + 1.24f < transform.position.x)
-			{
-				transform.Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
-
-				yield return null;
-			}
+			//while (target.transform.position.x + 1.24f < transform.position.x)
+			//{
+			//	transform.Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
+//
+			//	yield return null;
+			//}
+			yield return MoveToX(target.transform.position.x + 1.24f, speed);
 		}
 		else
 		{
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90, 0);
-			while (target.transform.position.x + 1.24f > transform.position.x)
-			{
-				transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
-
-				yield return null;
-			}
+			//while (target.transform.position.x + 1.24f > transform.position.x)
+			//{
+			//	transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+//
+			//	yield return null;
+			//}
+			yield return MoveToX(target.transform.position.x + 1.24f, speed);
 		}
 		currentRoutine = null;
 		GetComponentInChildren<Animator>().SetBool("Walk", false);
@@ -174,20 +186,22 @@ public class UnitMovement : MonoBehaviour
 			if (e.transform.position.x + 1.24f < transform.position.x)
 			{
 				GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, -90, 0);
-				while (e.transform.position.x + 1.24f < transform.position.x)
-				{
-					transform.Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
-					yield return null;
-				}
+				//while (e.transform.position.x + 1.24f < transform.position.x)
+				//{
+				//	transform.Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
+				//	yield return null;
+				//}
+				yield return MoveToX(e.transform.position.x + 1.24f, speed);
 			}
 			else
 			{
 				GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90, 0);
-				while (e.transform.position.x + 1.24f > transform.position.x)
-				{
-					transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
-					yield return null;
-				}
+				//while (e.transform.position.x + 1.24f > transform.position.x)
+				//{
+				//	transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+				//	yield return null;
+				//}
+				yield return MoveToX(e.transform.position.x + 1.24f, speed);
 			}
 			isTransitioning = true;
 			while (0.698f > transform.position.z)
@@ -240,20 +254,22 @@ public class UnitMovement : MonoBehaviour
 		if (target.transform.position.x + 1.24f < transform.position.x)
 		{
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, -90, 0);
-			while (target.transform.position.x + 1.24f < transform.position.x)
-			{
-				transform.Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
-				yield return null;
-			}
+			//while (target.transform.position.x + 1.24f < transform.position.x)
+			//{
+			//	transform.Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
+			//	yield return null;
+			//}
+			yield return MoveToX(target.transform.position.x + 1.24f, speed);
 		}
 		else
 		{
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90, 0);
-			while (target.transform.position.x + 1.24f > transform.position.x)
-			{
-				transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
-				yield return null;
-			}
+			//while (target.transform.position.x + 1.24f > transform.position.x)
+			//{
+			//	transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+			//	yield return null;
+			//}
+			yield return MoveToX(target.transform.position.x + 1.24f, speed);
 		}
 
 		EventManager.onBearReachedDestination.Invoke(target);
