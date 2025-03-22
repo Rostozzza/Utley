@@ -15,7 +15,7 @@ public class GuideManager : MonoBehaviour
     public void ShowGuideByButton()
     {
         if (GetIsGuideOpen()) return;
-        SetWasTabletOpen(MenuManager.Instance.tabletAnimator.GetCurrentAnimatorStateInfo(0).IsName("New State") || MenuManager.Instance.tabletAnimator.GetCurrentAnimatorStateInfo(0).IsName("TabletHide"));
+        SetWasTabletOpen(MenuManager.Instance.tabletAnimator.GetCurrentAnimatorStateInfo(0).IsName("TabletShow"));
         SetIsGuideOpen(true);
         ShowGuide(guideType);
     }
