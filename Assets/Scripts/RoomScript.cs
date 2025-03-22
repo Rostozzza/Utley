@@ -349,16 +349,16 @@ public class RoomScript : MonoBehaviour
 		int requireAsterium = ValuesHolder.RoomsBuildPrice[ConvertResourcesToRoomType(resource)][ResourceType.RepairAsteriumCost];
 		int requireAstroluminite = ValuesHolder.RoomsBuildPrice[ConvertResourcesToRoomType(resource)][ResourceType.RepairAstroluminiteCost];
 
-		if (await GameManager.Instance.GetAsteriy()       >= requireAsterium &&
+		if (await GameManager.Instance.GetAsteriy() >= requireAsterium &&
 			await GameManager.Instance.GetAstroluminite() >= requireAstroluminite) //await GameManager.Instance.GetHoney() >= (30 + 10 * (level - 1))
 		{
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
-			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this,true);
+			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this, true);
 			//await GameManager.Instance.ChangeHoney(-(30 + 10 * (level - 1)), new Log
 			//{
 			//	comment = $"Consumed {(30 + 10 * (level - 1))} honey for upgrading {this.name} room",
-//
+			//
 			//	player_name = GameManager.Instance.playerName,
 			//	resources_changed = new Dictionary<string, float> { { "honey", -(30 + 10 * (level - 1)) } }
 			//});
@@ -425,6 +425,7 @@ public class RoomScript : MonoBehaviour
 		upgradeBar.fillAmount = 0;
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
 		room.GetComponent<RoomScript>().SetStatus(Status.Free);
+		room.GetComponent<BuilderRoom>().SetWait(true);
 		//durability = 1f;
 		ChangeDurability(0);
 		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
@@ -456,7 +457,7 @@ public class RoomScript : MonoBehaviour
 			int requireAstroluminite = ValuesHolder.RoomsBuildPrice[ConvertResourcesToRoomType(resource)][ResourceType.RepairAstroluminiteCost];
 
 			var desiredButton = roomStatsScreen.GetComponentsInChildren<TextMeshProUGUI>(true).First(x => x.transform.parent.name.Contains("Improve"));
-			if (await GameManager.Instance.GetAsteriy()       < requireAsterium ||
+			if (await GameManager.Instance.GetAsteriy() < requireAsterium ||
 				await GameManager.Instance.GetAstroluminite() < requireAstroluminite)//(currentHoney < (30 + 10 * (level - 1)));
 			{
 				//desiredButton.GetComponent<Button>() = false;
@@ -899,7 +900,7 @@ public class RoomScript : MonoBehaviour
 			Debug.Log($"An error occured during durability change! Error details: {e.Message}");
 		}
 		UpdateRoomHullView();
-		try { statusPanel.UpdateDurability(durability); } catch {}
+		try { statusPanel.UpdateDurability(durability); } catch { }
 	}
 
 	private IEnumerator LampsBlinking()
@@ -981,7 +982,7 @@ public class RoomScript : MonoBehaviour
 				fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopCoroutine(fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine);
 			}
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine = null;
-			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this,true);
+			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this, true);
 			StartCoroutine(Repair(timeToRepair, fixedBuilderRoom));
 		}
 		else
@@ -1018,7 +1019,7 @@ public class RoomScript : MonoBehaviour
 		durability = 1f;
 		ChangeDurability(0);
 		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
-		//room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		//status = Status.Free; // ????? why it was here???
 		statusPanel.UpdateStatus(status);
 	}
@@ -1130,12 +1131,12 @@ public class RoomScript : MonoBehaviour
 			if (set)
 			{
 				if (efficiencyAnim.GetCurrentAnimatorStateInfo(0).IsName("HideCompletely") && !CheckIfSolved())
-				efficiencyAnim.SetTrigger("UnHideCompletely");
+					efficiencyAnim.SetTrigger("UnHideCompletely");
 			}
 			else
 			{
 				if (!efficiencyAnim.GetCurrentAnimatorStateInfo(0).IsName("HideCompletely"))
-				efficiencyAnim.SetTrigger("HideCompletely");
+					efficiencyAnim.SetTrigger("HideCompletely");
 			}
 		}
 		else
@@ -1163,26 +1164,26 @@ public class RoomScript : MonoBehaviour
 	{
 		if (fixedBear == null) return false;
 		Qualification job = fixedBear.GetComponent<UnitScript>().job;
-        switch (resource)
-        {
-            case Resources.Energohoney:
-                return job == Qualification.beekeeper;
-            case Resources.Supply:
-                return job == Qualification.coder;
-            case Resources.Cosmodrome:
-                return job == Qualification.researcher;
-            case Resources.Research:
-                return job == Qualification.bioengineer;
-            case Resources.Bed:
-                return job == Qualification.creator;
-            case Resources.Asteriy:
-                return false;
-            case Resources.Build:
-                return job == Qualification.builder;
-            default:
+		switch (resource)
+		{
+			case Resources.Energohoney:
+				return job == Qualification.beekeeper;
+			case Resources.Supply:
+				return job == Qualification.coder;
+			case Resources.Cosmodrome:
+				return job == Qualification.researcher;
+			case Resources.Research:
+				return job == Qualification.bioengineer;
+			case Resources.Bed:
+				return job == Qualification.creator;
+			case Resources.Asteriy:
+				return false;
+			case Resources.Build:
+				return job == Qualification.builder;
+			default:
 				Debug.Log("<color=red>ЧТО-ТО НЕ ТАК</color>");
-                return false;
-        }
+				return false;
+		}
 	}
 
 	public enum Resources
@@ -1204,7 +1205,7 @@ public class RoomScript : MonoBehaviour
 	}
 
 	protected float GetModifiedInteractionTime(float bearLevel) => ValuesHolder.StandartInteractionTime * Mathf.Pow(ValuesHolder.InteractionSpeedMultiplyerByLevel, bearLevel) * Mathf.Pow(ValuesHolder.InteractionSpeedMultiplyerByGrade, level);
-	
+
 	public void GetPrices(out int asteriumCost, out int honeyCost, out int astroluminiteCost) => GetPrices(out asteriumCost, out honeyCost, out astroluminiteCost, resource);
 	public void GetPrices(out int asteriumCost, out int honeyCost, out int astroluminiteCost, Resources resource)
 	{
@@ -1263,17 +1264,17 @@ public class RoomScript : MonoBehaviour
 
 	private RoomType ConvertResourcesToRoomType(Resources resource)
 	{
-	    return resource switch
-	    {
-	        Resources.Energohoney => RoomType.Energohoney,
-	        Resources.Asteriy     => RoomType.Asterium,
-	        Resources.Cosmodrome  => RoomType.Cosmodrome,
-	        Resources.Bed         => RoomType.Bed,
-	        Resources.Build       => RoomType.Build,
-	        Resources.Supply      => RoomType.Supply,
-	        Resources.Research    => RoomType.Research,
-	        _ => throw new ArgumentException(nameof(ConvertResourcesToRoomType), "Unknown room or it's elevator"),
-	    };
+		return resource switch
+		{
+			Resources.Energohoney => RoomType.Energohoney,
+			Resources.Asteriy => RoomType.Asterium,
+			Resources.Cosmodrome => RoomType.Cosmodrome,
+			Resources.Bed => RoomType.Bed,
+			Resources.Build => RoomType.Build,
+			Resources.Supply => RoomType.Supply,
+			Resources.Research => RoomType.Research,
+			_ => throw new ArgumentException(nameof(ConvertResourcesToRoomType), "Unknown room or it's elevator"),
+		};
 	}
 
 	public void TrySetVideoPlayers(bool set)
