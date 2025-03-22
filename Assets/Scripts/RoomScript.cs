@@ -429,7 +429,7 @@ public class RoomScript : MonoBehaviour
 		ChangeDurability(0);
 		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
 		//room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
-		status = Status.Free;
+		//status = Status.Free; // 😭;
 		level += 1;
 		if (level == 3)
 		{
