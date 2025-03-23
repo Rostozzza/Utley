@@ -18,6 +18,7 @@ public class ButtonToBuild : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (createdPanel != null) Destroy(createdPanel);
         createdPanel = GetComponentInParent<ChoicesFormer>().ShowRoomPanel(roomType, transform);//GetComponentInParent<ChoicesFormer>().transform.parent);
     }
 
