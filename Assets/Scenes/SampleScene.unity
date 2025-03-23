@@ -862,6 +862,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SupplyRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 4516258937783852247, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5712600974167352161, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7410566657196924022, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.8
@@ -2941,6 +2949,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2840780573247899132, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2861380098175265383, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -3658,6 +3670,7 @@ MonoBehaviour:
   speed: 5
   isBusy: 0
   animator: {fileID: 2089784801}
+  isMovingAtWork: 0
   selectable: 1
   furSlot: {fileID: 0}
   topSlot: {fileID: 0}
@@ -13648,6 +13661,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1834032288102885784, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2743876564508728058, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: connectedRooms.Array.size
       value: 4
@@ -13676,6 +13693,10 @@ PrefabInstance:
       propertyPath: 'connectedElevators.Array.data[0]'
       value: 
       objectReference: {fileID: 737861180}
+    - target: {fileID: 4367869984568237132, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4528248147335911951, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -13683,6 +13704,10 @@ PrefabInstance:
     - target: {fileID: 5253349184228087923, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: m_Name
       value: Room1x1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030580305124427778, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -13758,6 +13783,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1834032288102885784, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2743876564508728058, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: connectedRooms.Array.size
       value: 2
@@ -13778,9 +13807,17 @@ PrefabInstance:
       propertyPath: 'connectedElevators.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4367869984568237132, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5253349184228087923, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: m_Name
       value: Room1x1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030580305124427778, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2743876564508728058, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
@@ -26263,6 +26300,7 @@ MonoBehaviour:
   speed: 5
   isBusy: 0
   animator: {fileID: 1157715736}
+  isMovingAtWork: 0
   selectable: 1
   furSlot: {fileID: 0}
   topSlot: {fileID: 0}
@@ -29537,6 +29575,7 @@ MonoBehaviour:
   speed: 5
   isBusy: 0
   animator: {fileID: 0}
+  isMovingAtWork: 0
   selectable: 1
   furSlot: {fileID: 0}
   topSlot: {fileID: 0}
@@ -29758,6 +29797,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2097626594887498254, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771024790098217084, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7403409793845794150, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
@@ -30543,6 +30586,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1834032288102885784, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2743876564508728058, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: connectedRooms.Array.size
       value: 2
@@ -30563,9 +30610,17 @@ PrefabInstance:
       propertyPath: 'connectedElevators.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4367869984568237132, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5253349184228087923, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: m_Name
       value: Room1x1 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030580305124427778, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2743876564508728058, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
@@ -32346,6 +32401,10 @@ PrefabInstance:
       propertyPath: 'connectedElevators.Array.data[0]'
       value: 
       objectReference: {fileID: 737861180}
+    - target: {fileID: 3302107640904810970, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5108185118676973433, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -32356,6 +32415,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5790142876807057328, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622730283588863520, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7578359609187239277, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
@@ -33784,6 +33847,7 @@ MonoBehaviour:
   speed: 5
   isBusy: 0
   animator: {fileID: 1092961795}
+  isMovingAtWork: 0
   selectable: 1
   furSlot: {fileID: 0}
   topSlot: {fileID: 0}
@@ -36551,6 +36615,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 173426271292609831, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1834032288102885784, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1834032288102885784, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
@@ -41308,6 +41376,10 @@ PrefabInstance:
     - target: {fileID: 3619905054894839651, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
       propertyPath: m_Name
       value: LivingRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686490771277568776, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4383677075970992988, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
       propertyPath: m_fontAsset
