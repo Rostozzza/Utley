@@ -64,7 +64,13 @@ public class SupplyRoom : RoomScript
 		catch { }
 	}
 
-	public void GetRoomsToUnpower()
+    public override void Enpower()
+    {
+		isEnpowered = true;
+		ChangeDurability(0);
+    }
+
+    public void GetRoomsToUnpower()
 	{
 		var horizontalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 9f //17f
 																	&& x.transform.position.y == transform.position.y && x.GetComponent<RoomScript>()).ToList();
