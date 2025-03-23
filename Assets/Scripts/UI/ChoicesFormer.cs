@@ -10,14 +10,20 @@ public class ChoicesFormer : MonoBehaviour
     [SerializeField] private List<RoomType> roomsToCreate;
     [Tooltip("Order should match with RoomType except Cosmodrome (leave empty)")][SerializeField] private List<GameObject> roomPrefabs;
     [Tooltip("Order should match with RoomType except Cosmodrome (leave empty)")][SerializeField] private List<Sprite> roomIcons;
-    void Awake()
+    //void Awake()
+    //{
+    //    foreach (var room in roomsToCreate)
+    //    {
+    //        GameObject createdRoom = Instantiate(prefab, transform);
+    //        FillPrefab(room, createdRoom.GetComponent<ChoiceController>());
+    //    }
+    //}
+
+    public GameObject ShowRoomPanel(RoomType room)
     {
-        foreach (var room in roomsToCreate)
-        {
-            GameObject createdRoom = Instantiate(prefab, transform);
-            createdRoom.GetComponentInChildren<Button>(true).gameObject.name = room.ToString();
-            FillPrefab(room, createdRoom.GetComponent<ChoiceController>());
-        }
+        GameObject createdRoom = Instantiate(prefab, transform);
+        FillPrefab(room, createdRoom.GetComponent<ChoiceController>());
+        return createdRoom;
     }
 
     public void BuildChosenRoom(RoomType roomType)
