@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class UnitScript : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class UnitScript : MonoBehaviour
 	[SerializeField] public float speed = 5f;
 	[SerializeField] public bool isBusy;
     [SerializeField] private Animator animator;
+    [SerializeField] private bool isMovingAtWork;
 	private bool onLadder;
 	private Rigidbody rb;
 	private Vector3 dir;
@@ -112,7 +115,7 @@ public class UnitScript : MonoBehaviour
 
 	private IEnumerator WalkCycle()
 	{
-		yield return new WaitForSeconds(2 + Random.value * 3f);
+		yield return new WaitForSeconds(3 + Random.value * 2f);
 		float startX = transform.position.x;
 		while (true)
 		{
@@ -133,10 +136,24 @@ public class UnitScript : MonoBehaviour
 
 	private IEnumerator MoveToX(float x, float speed)
 	{
+		//List<Vector3> logOfPositionsWhileMoving = new();
 		Vector3 targetPos = new(x, transform.position.y, transform.position.z);
 		while (transform.position != targetPos)
 		{
+			//logOfPositionsWhileMoving.Add(transform.position);
+			//if (logOfPositionsWhileMoving.Count > 10) logOfPositionsWhileMoving.RemoveAt(0);
+
 			transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+			//if (job == Qualification.builder) Debug.Log(targetPos + " | " + transform.position);
+
+			//Vector3 sumOfMoving = new();
+			//logOfPositionsWhileMoving.ForEach(x => sumOfMoving += x);
+			//if (sumOfMoving.magnitude < (Vector3.one * 0.1f).magnitude)
+			//{
+			//	Debug.Log("ПРЕРВАНО");
+			//	yield break;
+			//}
+			
 			yield return null;
 		}
 	}
@@ -222,6 +239,7 @@ public class UnitScript : MonoBehaviour
 
 	public IEnumerator MoveInRoom(RoomScript.Resources roomType, List<Vector3> walkPoints, GameObject obj)
 	{
+		isMovingAtWork = false;
 		Coroutine walkingCoroutine;
 		switch (roomType)
 		{
@@ -265,6 +283,7 @@ public class UnitScript : MonoBehaviour
 				break;
 		}
 		GetComponentInChildren<Animator>().speed = 1f;
+		isMovingAtWork = true;
 	}
 
 	private IEnumerator ResearchBehaviour(List<Vector3> walkPoints, GameObject obj)
@@ -308,7 +327,7 @@ public class UnitScript : MonoBehaviour
 		yield return MoveToX(workPoint.x, 1);
 		GetComponentInChildren<Animator>().SetBool("Walk", false);
 		GetComponentInChildren<Animator>().speed = 1f;
-
+		yield return null;
 		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
 		GetComponentInChildren<Animator>().SetBool("Work", true);
 		while (obj.GetComponent<BuilderRoom>().GetWait())
