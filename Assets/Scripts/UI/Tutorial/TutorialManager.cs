@@ -143,7 +143,17 @@ public class TutorialManager : MonoBehaviour
 			}
 			//tutorialView.localPosition = part.position;
 			floatRoutine = StartCoroutine(FloatToPosition(part.position));
-			textOutput.text = part.text;
+
+			//textOutput.text = part.text;
+			if (part.conditionsSequence.Count == 1 && part.conditionsSequence[0] == Condition.OnClickLMB) 
+			{
+				textOutput.text = part.text + "\n<size=50%>Нажми <color=yellow>ЛКМ</color> чтобы продолжить.";
+			}
+			else
+			{
+				textOutput.text = part.text;
+			}
+
 			yield return ConditionWaiter(part.conditionsSequence, part.buttonToCheck, part.tagToCheck, part.roomToCheck);
 			if (part.roomHighlight != null)
 			{
