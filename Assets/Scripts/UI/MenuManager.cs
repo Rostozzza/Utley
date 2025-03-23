@@ -238,6 +238,8 @@ public class MenuManager : MonoBehaviour
 
 	public void Awake()
 	{
+		if (!Application.isEditor) CheckPlayerPrefs();
+
 		if (Instance == null)
 		{
 			Instance = this;
@@ -252,6 +254,25 @@ public class MenuManager : MonoBehaviour
 		if (skipper == null)
 		{
 			skipper = GetComponentInChildren<CutsceneSkipper>();
+		}
+	}
+
+	private void CheckPlayerPrefs()
+	{
+		string nowVersion = Application.dataPath.Split("/")[^2];
+		string savedAt = "version";
+
+		if (PlayerPrefs.HasKey(savedAt))
+		{
+			if (nowVersion != PlayerPrefs.GetString(savedAt))
+			{
+				PlayerPrefs.DeleteAll();
+			}
+		}
+		else
+		{
+			PlayerPrefs.DeleteAll();
+			PlayerPrefs.SetString(savedAt, nowVersion);
 		}
 	}
 
