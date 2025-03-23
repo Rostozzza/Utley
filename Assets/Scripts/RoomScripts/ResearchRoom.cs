@@ -20,7 +20,7 @@ public class ResearchRoom : RoomScript
     {
         base.Start();
 		
-		bottles.AddRange(GameObject.FindGameObjectsWithTag("bottle"));
+		//bottles.AddRange(GameObject.FindGameObjectsWithTag("bottle"));
 		bottles.ForEach(bottle => bottle.SetActive(false));
 		chosenTemplate = Random.Range(0, bottles.Count);
 		bottles[chosenTemplate].SetActive(true);
@@ -33,6 +33,7 @@ public class ResearchRoom : RoomScript
 		Camera.main.GetComponent<CameraController>().GoToTaskPoint(cameraPoint.position, cameraAngle, true);
 		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetBreakingBad, this);
 		HideSetPipesButtonScreen();
+		MakeUICanvas();
 	}
 
 	public override async void StartWork(GameObject bear)

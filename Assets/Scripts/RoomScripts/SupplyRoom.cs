@@ -27,6 +27,7 @@ public class SupplyRoom : RoomScript
 		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetSupply, this);
 		Camera.main.GetComponent<CameraController>().GoToTaskPoint(cameraPoint.position, cameraAngle, true);
 		HideSetPipesButtonScreen();
+		MakeUICanvas();
 	}
 
 	public void GetRoomsToEnpower()

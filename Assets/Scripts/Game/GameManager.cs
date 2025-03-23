@@ -1229,7 +1229,7 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-		if (InputController.GetKeyDown(ActionKeys.BuildMode)) SetModeByButton((int)Mode.Build);
+		if (InputController.GetKeyDown(ActionKeys.BuildMode) && !GetIsExerciseOpen()) SetModeByButton((int)Mode.Build);
 		//else if (Input.GetKeyDown(KeyCode.I)) SetModeByButton((int)Mode.Info);
 	}
 
@@ -1854,7 +1854,7 @@ public class GameManager : MonoBehaviour
 					Debug.Log(room.name + " задамажен фазой на " + damage);
 					room.GetComponent<RoomScript>().ChangeDurability(-damage);
 				});
-				if (!ShopManager.Instance.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("TabletHide")) Camera.main.GetComponent<CameraShake>().MeteorImpact();
+				if (!ShopManager.Instance.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("TabletShow")) Camera.main.GetComponent<CameraShake>().MeteorImpact();
 				yield return new WaitForSeconds(ValuesHolder.CycleDuration / (4 * meteorAmount));
 			}
 		}

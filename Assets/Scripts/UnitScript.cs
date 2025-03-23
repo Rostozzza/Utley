@@ -120,13 +120,24 @@ public class UnitScript : MonoBehaviour
 			GetComponentInChildren<Animator>().speed = 0.4f;
 			GetComponentInChildren<Animator>().SetBool("Walk", true);
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(randPosToWalkX - transform.position.x), 0);
-			while (!(randPosToWalkX - 0.01f <= transform.position.x && transform.position.x <= randPosToWalkX + 0.01f))
-			{
-				transform.Translate(new Vector3(Mathf.Sign(randPosToWalkX - transform.position.x), 0, 0) * Time.deltaTime);
-				yield return null;
-			}
+			//while (!(randPosToWalkX - 0.01f <= transform.position.x && transform.position.x <= randPosToWalkX + 0.01f))
+			//{
+			//	transform.Translate(new Vector3(Mathf.Sign(randPosToWalkX - transform.position.x), 0, 0) * Time.deltaTime);
+			//	yield return null;
+			//}
+			yield return MoveToX(randPosToWalkX, 1);
 			GetComponentInChildren<Animator>().SetBool("Walk", false);
 			yield return new WaitForSeconds(2 + Random.value * 5);
+		}
+	}
+
+	private IEnumerator MoveToX(float x, float speed)
+	{
+		Vector3 targetPos = new(x, transform.position.y, transform.position.z);
+		while (transform.position != targetPos)
+		{
+			transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+			yield return null;
 		}
 	}
 
@@ -264,11 +275,12 @@ public class UnitScript : MonoBehaviour
 		GetComponentInChildren<Animator>().speed = 0.5f;
 		GetComponentInChildren<Animator>().SetBool("Walk", true);
 		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(chosenPoint.x - transform.position.x), 0);
-		while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
-		{
-			transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
-			yield return null;
-		}
+		//while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
+		//{
+		//	transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
+		//	yield return null;
+		//}
+		yield return MoveToX(chosenPoint.x, 1);
 		GetComponentInChildren<Animator>().SetBool("Walk", false);
 		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
 		GetComponentInChildren<Animator>().speed = 1f;
@@ -288,11 +300,12 @@ public class UnitScript : MonoBehaviour
 		GetComponentInChildren<Animator>().speed = 0.5f;
 		GetComponentInChildren<Animator>().SetBool("Walk", true);
 		GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(workPoint.x - transform.position.x), 0);
-		while (!(workPoint.x - 0.05f <= transform.position.x && transform.position.x <= workPoint.x + 0.05f))
-		{
-			transform.Translate(new Vector3(Mathf.Sign(workPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
-			yield return null;
-		}
+		//while (!(workPoint.x - 0.05f <= transform.position.x && transform.position.x <= workPoint.x + 0.05f))
+		//{
+		//	transform.Translate(new Vector3(Mathf.Sign(workPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
+		//	yield return null;
+		//}
+		yield return MoveToX(workPoint.x, 1);
 		GetComponentInChildren<Animator>().SetBool("Walk", false);
 		GetComponentInChildren<Animator>().speed = 1f;
 
@@ -322,11 +335,12 @@ public class UnitScript : MonoBehaviour
 			GetComponentInChildren<Animator>().speed = 0.5f;
 			GetComponentInChildren<Animator>().SetBool("Walk", true);
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(chosenPoint.x - transform.position.x), 0);
-			while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
-			{
-				transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
-				yield return null;
-			}
+			//while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
+			//{
+			//	transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
+			//	yield return null;
+			//}
+			yield return MoveToX(chosenPoint.x, 1);
 			GetComponentInChildren<Animator>().SetBool("Walk", false);
 			GetComponentInChildren<Animator>().speed = 1f;
 		}
@@ -352,11 +366,12 @@ public class UnitScript : MonoBehaviour
 			GetComponentInChildren<Animator>().SetBool("Walk", true);
 			chosenPoint = walkPoints[Random.Range(0, walkPoints.Count - 1)];
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(chosenPoint.x - transform.position.x), 0);
-			while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
-			{
-				transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
-				yield return null;
-			}
+			//while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
+			//{
+			//	transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
+			//	yield return null;
+			//}
+			yield return MoveToX(chosenPoint.x, 1);
 			GetComponentInChildren<Animator>().SetBool("Walk", false);
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
 			GetComponentInChildren<Animator>().speed = 1f;
@@ -367,11 +382,12 @@ public class UnitScript : MonoBehaviour
 			GetComponentInChildren<Animator>().SetBool("Walk", true);
 			chosenPoint = walkPoints[3];
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 90 * Mathf.Sign(chosenPoint.x - transform.position.x), 0);
-			while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
-			{
-				transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
-				yield return null;
-			}
+			//while (!(chosenPoint.x - 0.01f <= transform.position.x && transform.position.x <= chosenPoint.x + 0.01f))
+			//{
+			//	transform.Translate(new Vector3(Mathf.Sign(chosenPoint.x - transform.position.x), 0, 0) * Time.deltaTime);
+			//	yield return null;
+			//}
+			yield return MoveToX(chosenPoint.x, 1);
 			GetComponentInChildren<Animator>().SetBool("Walk", false);
 			GetComponentInChildren<Animator>().transform.eulerAngles = new Vector3(0, 0, 0);
 			GetComponentInChildren<Animator>().speed = 1f;
