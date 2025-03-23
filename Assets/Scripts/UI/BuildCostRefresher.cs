@@ -33,7 +33,26 @@ public class BuildCostRefresher : MonoBehaviour
 
         string costString = (roomType == RoomType.Elevator) ? $"Ресурсы:\n{asteriumCost} астерия <sprite=0>\n" : $"Ресурсы:\n{asteriumCost} астерия <sprite=0>\n{honeyCost} энергомеда <sprite=1>\n{astroluminiteCost} астролюминита <sprite=2>\n";
 
-        return costString + costStart[costStart.IndexOf("Время")..];
+        string timeString = (roomType == RoomType.Elevator) ? "" : (roomType == RoomType.Asterium) ? $"Время: {ValuesHolder.StandartInteractionTimeAsteriumComplex}\n" : $"Время: {ValuesHolder.StandartInteractionTime}\n";
+
+        string traditionString = (roomType == RoomType.Elevator) ? "" : $"Традиция: {ResourceToEfficBearText(roomType)}" ; 
+
+        return costString + timeString + traditionString;
+    }
+
+    private string ResourceToEfficBearText(RoomType resource)
+    {
+        return resource switch
+        {
+            RoomType.Energohoney => "Пасечник",
+            RoomType.Supply      => "Программист",
+            RoomType.Cosmodrome  => "Первопроходец",
+            RoomType.Research    => "Биоинженер",
+            RoomType.Bed         => "Творец",
+            RoomType.Asterium    => "Нет",
+            RoomType.Build       => "Конструктор",
+            _ => "Что-то пошло не так",
+        };
     }
 
     private RoomScript.Resources ConvertResourcesToRoomScriptResources(RoomType resourceType)
