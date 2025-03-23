@@ -521,6 +521,7 @@ public class RoomScript : MonoBehaviour
 		}
 		GameManager.Instance.QueueBuildPos(button);
 		GameManager.Instance.buildingScreen.SetActive(true);
+		GameManager.Instance.buildingScreen.GetComponent<Animator>().SetTrigger("Show");
 	}
 
 	/// <summary>

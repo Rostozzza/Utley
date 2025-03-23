@@ -308,6 +308,7 @@ public class GameManager : MonoBehaviour
 	public void QueueBuildPos(GameObject queuePos)
 	{
 		queuedBuildPositon = queuePos;
+		buildingScreen.GetComponent<Animator>().SetTrigger("Hide");
 		buildingScreen.SetActive(false);
 		elevatorBuildingScreen.SetActive(false);
 	}
@@ -352,6 +353,8 @@ public class GameManager : MonoBehaviour
 		else
 		{
 			buildingScreen.SetActive(false);
+
+			buildingScreen.GetComponent<Animator>().SetTrigger("Hide");
 			elevatorBuildingScreen.SetActive(false);
 		}
 		if (mode == Mode.Info)
@@ -442,6 +445,8 @@ public class GameManager : MonoBehaviour
 				queuedBuildPositon.GetComponentInChildren<Button>(true).interactable = true;
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
+
+				buildingScreen.GetComponent<Animator>().SetTrigger("Hide");
 				elevatorBuildingScreen.SetActive(false);
 				Debug.Log("<color=red>KYS");
 				EventManager.callError.Invoke($"Недостаточно {(currentAsterium < asteriumCost ? "<color=yellow>" + (Mathf.Abs(currentAsterium - asteriumCost)) + "</color>" + " астериума;" : "")}" +
@@ -465,6 +470,8 @@ public class GameManager : MonoBehaviour
 				EventManager.callWarning.Invoke($"Назначьте персонажа на комплекс строительства.");
 				queuedBuildPositon.GetComponentInChildren<Button>(true).interactable = true;
 				queuedBuildPositon = null;
+
+				buildingScreen.GetComponent<Animator>().SetTrigger("Hide");
 				buildingScreen.SetActive(false);
 				elevatorBuildingScreen.SetActive(false);
 				return;
@@ -509,6 +516,8 @@ public class GameManager : MonoBehaviour
 			{
 				EventManager.callWarning.Invoke($"Не хватает {10 - currentAsterium} астерия.");
 				queuedBuildPositon = null;
+
+				buildingScreen.GetComponent<Animator>().SetTrigger("Hide");
 				buildingScreen.SetActive(false);
 				elevatorBuildingScreen.SetActive(false);
 				queuedBuildPositon.GetComponentInChildren<Button>(true).interactable = true;
@@ -529,6 +538,8 @@ public class GameManager : MonoBehaviour
 				Debug.Log("Нет свободных строительных комплексов!");
 				EventManager.callWarning.Invoke($"Назначьте персонажа на комплекс строительства.");
 				queuedBuildPositon = null;
+
+				buildingScreen.GetComponent<Animator>().SetTrigger("Hide");
 				buildingScreen.SetActive(false);
 				elevatorBuildingScreen.SetActive(false);
 				return;
@@ -576,6 +587,8 @@ public class GameManager : MonoBehaviour
 		}
 		StartCoroutine(SelectAndBuildWaiter(building, fixedBuilderRoom, queuedBuildPositon.transform, buildMovementTarget));
 		Debug.Log("NoT DEAD");
+
+		buildingScreen.GetComponent<Animator>().SetTrigger("Hide");
 		buildingScreen.SetActive(false);
 		elevatorBuildingScreen.SetActive(false);
 	}
@@ -1137,6 +1150,8 @@ public class GameManager : MonoBehaviour
 		}
 		else if (InputController.GetKeyDown(ActionKeys.Quit) && (buildingScreen.activeSelf || elevatorBuildingScreen.activeSelf))
 		{
+
+			buildingScreen.GetComponent<Animator>().SetTrigger("Hide");
 			buildingScreen.SetActive(false);
 			elevatorBuildingScreen.SetActive(false);
 		}
