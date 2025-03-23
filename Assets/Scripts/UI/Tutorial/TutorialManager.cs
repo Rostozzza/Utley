@@ -142,6 +142,7 @@ public class TutorialManager : MonoBehaviour
 				tutorialView.localScale = new Vector3(part.scale, part.scale, part.scale);
 			}
 			//tutorialView.localPosition = part.position;
+			if (floatRoutine != null) StopCoroutine(floatRoutine);
 			floatRoutine = StartCoroutine(FloatToPosition(part.position));
 
 			//textOutput.text = part.text;
