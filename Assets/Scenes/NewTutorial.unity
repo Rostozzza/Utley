@@ -907,7 +907,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9201217118259842118, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
@@ -10406,7 +10407,9 @@ PrefabInstance:
       value: "\u0422\u0435\u043F\u0435\u0440\u044C \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C
         \u0441\u0442\u0440\u043E\u0438\u0442\u044C! \u041D\u0430\u0436\u043C\u0438
         \u043A\u043B\u0430\u0432\u0438\u0448\u0443 <color=yellow>b</color> \u0438\u043B\u0438
-        \u043D\u0430 \u043A\u043D\u043E\u043F\u043A\u0443 \u0441\u0432\u0435\u0440\u0445\u0443"
+        \u043D\u0430 \u043A\u043D\u043E\u043F\u043A\u0443 \u0441 \u043C\u043E\u043B\u043E\u0442\u043E\u0447\u043A\u043E\u043C
+        \u0432 \u043B\u0435\u0432\u043E\u043C \u0432\u0435\u0440\u0445\u043D\u0435\u043C
+        \u0443\u0433\u043B\u0443 \u044D\u043A\u0440\u0430\u043D\u0430"
       objectReference: {fileID: 0}
     - target: {fileID: 9009819720741766080, guid: 7af7d8a5317dad64f85b5efbe0e85ff8, type: 3}
       propertyPath: sequence.Array.data[18].text
@@ -10877,7 +10880,7 @@ PrefabInstance:
     - target: {fileID: 9009819720741766080, guid: 7af7d8a5317dad64f85b5efbe0e85ff8, type: 3}
       propertyPath: sequence.Array.data[14].buttonToCheck
       value: 
-      objectReference: {fileID: 744157940}
+      objectReference: {fileID: 0}
     - target: {fileID: 9009819720741766080, guid: 7af7d8a5317dad64f85b5efbe0e85ff8, type: 3}
       propertyPath: sequence.Array.data[15].buttonToCheck
       value: 
@@ -14557,6 +14560,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 8579644920238721060, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+    - {fileID: 5643643438846625326, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 173426271292609831, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
       insertIndex: -1
@@ -14656,6 +14660,7 @@ PrefabInstance:
     - {fileID: 2743876564508728058, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8579644920238721060, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+    - {fileID: 5643643438846625326, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
@@ -14664,17 +14669,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 173426271292609831, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
   m_PrefabInstance: {fileID: 744157938}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &744157940 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6030580305124427778, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
-  m_PrefabInstance: {fileID: 744157938}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &746143975
 GameObject:
   m_ObjectHideFlags: 0
@@ -30674,7 +30668,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 737861180}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7472300179576622346, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
@@ -31495,6 +31490,7 @@ PrefabInstance:
     - {fileID: 2743876564508728058, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8579644920238721060, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
+    - {fileID: 5643643438846625326, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a4ecfba49d615145a93083a2a26ea0b, type: 3}
@@ -33287,7 +33283,8 @@ PrefabInstance:
       value: AsteriumRecycle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2492745562586233494, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
@@ -42361,7 +42358,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4510961703215051970, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
