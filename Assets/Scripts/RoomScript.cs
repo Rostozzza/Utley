@@ -194,7 +194,7 @@ public class RoomScript : MonoBehaviour
 		roomStatsController.SetRoomScript(this);
 	}
 
-	protected virtual void Start()
+	protected void MakeUICanvas()
 	{
 		try
 		{
@@ -204,6 +204,11 @@ public class RoomScript : MonoBehaviour
 		{
 			GameObject.FindGameObjectsWithTag("UI_canvas").ToList().ForEach(x => x.GetComponent<Canvas>().worldCamera = Camera.main);
 		}
+	}
+
+	protected virtual void Start()
+	{
+		MakeUICanvas();
 		videoPlayers = GetComponentsInChildren<VideoPlayer>(true).ToList();
 		TrySetVideoPlayers(false);
 		if (progressbar) progressbar.gameObject.SetActive(false);
@@ -1076,6 +1081,7 @@ public class RoomScript : MonoBehaviour
 		if (resource == Resources.Asteriy) SetTakeALookButtonShow(true);
 		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetFurnaces, this);
 		HideSetPipesButtonScreen();
+		MakeUICanvas();
 	}
 
 	public void SetTakeALookButtonShow(bool set) => takeALookButton.SetActive(set);

@@ -107,6 +107,7 @@ public class EnergohoneyRoom : RoomScript
 		Camera.main.GetComponent<CameraController>().GoToTaskPoint(cameraPoint.position,cameraAngle,true);
 		MenuManager.Instance.CallProblemSolver(MenuManager.ProblemType.SetPipes,this);
 		HideSetPipesButtonScreen();
+		MakeUICanvas();
 	}
 
 	public override bool CheckIfSolved() => isSolved;
