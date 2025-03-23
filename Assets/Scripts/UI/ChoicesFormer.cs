@@ -19,9 +19,9 @@ public class ChoicesFormer : MonoBehaviour
     //    }
     //}
 
-    public GameObject ShowRoomPanel(RoomType room)
+    public GameObject ShowRoomPanel(RoomType room, Transform parent)
     {
-        GameObject createdRoom = Instantiate(prefab, transform);
+        GameObject createdRoom = Instantiate(prefab, parent);
         FillPrefab(room, createdRoom.GetComponent<ChoiceController>());
         return createdRoom;
     }

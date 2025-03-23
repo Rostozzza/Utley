@@ -18,8 +18,7 @@ public class ButtonToBuild : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        createdPanel = GetComponentInParent<ChoicesFormer>().ShowRoomPanel(roomType);
-        createdPanel.transform.position += new Vector3(0, 100);
+        createdPanel = GetComponentInParent<ChoicesFormer>().ShowRoomPanel(roomType, transform);//GetComponentInParent<ChoicesFormer>().transform.parent);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -30,5 +29,6 @@ public class ButtonToBuild : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void BuildByButton()
     {
         GetComponentInParent<ChoicesFormer>().BuildChosenRoom(roomType);
+        if (createdPanel != null) Destroy(createdPanel);
     }
 }
