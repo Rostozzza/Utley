@@ -30,8 +30,7 @@ public class BuildCostRefresher : MonoBehaviour
             honeyCost = ValuesHolder.RoomsBuildPrice[RoomType.Elevator][ResourceType.EnergohoneyPrice];
             astroluminiteCost = ValuesHolder.RoomsBuildPrice[RoomType.Elevator][ResourceType.AstroluminitePrice];
         }
-
-        string costString = (roomType == RoomType.Elevator) ? $"Ресурсы:\n{asteriumCost} астерия <sprite=0>\n" : $"Ресурсы:\n{asteriumCost} астерия <sprite=0>\n{honeyCost} энергомеда <sprite=1>\n{astroluminiteCost} астролюминита <sprite=2>\n";
+        string costString = (roomType == RoomType.Elevator) ? $"Ресурсы:\n{asteriumCost} астерия <sprite=0>\n" : $"{(asteriumCost > 0 ? $"Ресурсы:\n{asteriumCost} астерия <sprite=0>\n" : "")}{(honeyCost > 0 ? $"{honeyCost} энергомеда <sprite=1>\n" : "")}{(astroluminiteCost > 0 ? $"{astroluminiteCost} астролюминита <sprite=2>\n" : "")}"; //god left us
 
         string timeString = (roomType == RoomType.Elevator) ? "" : (roomType == RoomType.Asterium) ? $"Время: {ValuesHolder.StandartInteractionTimeAsteriumComplex}\n" : $"Время: {ValuesHolder.StandartInteractionTime}\n";
 
