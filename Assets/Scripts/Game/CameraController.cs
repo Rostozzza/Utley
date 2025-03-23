@@ -160,7 +160,7 @@ public class CameraController : MonoBehaviour
 	{
 		Camera.main.transform.position = new Vector3(
 		Mathf.Clamp(Camera.main.transform.position.x, -25f, 25f),
-		Mathf.Clamp(Camera.main.transform.position.y, -19f, 13.2f),
+		Mathf.Clamp(Camera.main.transform.position.y, -18f, 13.2f),
 		GameManager.Instance.mode == GameManager.Mode.Build ? -20f : Mathf.Clamp(zoom, minCap, maxCap)
 		);
 	}

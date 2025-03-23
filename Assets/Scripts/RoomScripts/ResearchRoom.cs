@@ -20,7 +20,7 @@ public class ResearchRoom : RoomScript
     {
         base.Start();
 		
-		bottles.AddRange(GameObject.FindGameObjectsWithTag("bottle"));
+		//bottles.AddRange(GameObject.FindGameObjectsWithTag("bottle"));
 		bottles.ForEach(bottle => bottle.SetActive(false));
 		chosenTemplate = Random.Range(0, bottles.Count);
 		bottles[chosenTemplate].SetActive(true);

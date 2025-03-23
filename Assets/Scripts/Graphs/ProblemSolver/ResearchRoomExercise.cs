@@ -27,7 +27,6 @@ public class ResearchRoomExercise : MonoBehaviour
 	void Start()
 	{
 		roomScript = GetComponentInParent<ResearchRoom>();
-		
 	}
 
 	public void StartExercise(RoomScript room)
