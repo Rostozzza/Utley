@@ -1367,9 +1367,9 @@ public class GameManager : MonoBehaviour
 				if ((builderGoesBack) ? !enRouteButton.IsButtonPressed() : enRouteButton.IsButtonPressed())//(obj.GetComponentInParent<RoomScript>().resource == RoomScript.Resources.Build) ? obj.GetComponentInParent<BuilderRoom>().fixedBear != null && !enRouteButton.IsButtonPressed() : enRouteButton.IsButtonPressed())
 				{
 					Debug.Log("Отменили");
-					unit.GetComponent<UnitMovement>().StopAllCoroutines();
+					if (unit.GetComponent<UnitMovement>().currentRoutine != null) unit.GetComponent<UnitMovement>().StopCoroutine(unit.GetComponent<UnitMovement>().currentRoutine);
 					unit.GetComponent<UnitMovement>().SetIsWalkingToWork(false);
-					unit.GetComponent<UnitMovement>().MoveToRoom(unit.GetComponent<UnitMovement>().currentRoom);
+					unit.GetComponent<UnitMovement>().MoveToRoom(unit.GetComponent<UnitMovement>().currentRoom,ignoreTransition: true);
 					break;
 				}
 				yield return null;
