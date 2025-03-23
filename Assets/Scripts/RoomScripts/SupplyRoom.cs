@@ -36,7 +36,7 @@ public class SupplyRoom : RoomScript
 																	&& x.transform.position.y == transform.position.y && x.GetComponent<RoomScript>()).ToList();
 		var verticalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.y - transform.position.y) <= 5f //9f
 																	&& x.transform.position.x == transform.position.x && x.GetComponent<RoomScript>()).ToList();
-		var diagonalRooms = GameManager.Instance.allRooms.Where(x =>Mathf.Abs(x.transform.position.x - transform.position.x) <= 9f
+		var diagonalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 9f
 																	&& Mathf.Abs(x.transform.position.y - transform.position.y) <= 5f && x.GetComponent<RoomScript>()).ToList();
 		poweredRooms = horizontalRooms;
 		poweredRooms.AddRange(verticalRooms);
@@ -64,7 +64,7 @@ public class SupplyRoom : RoomScript
 		catch { }
 	}
 
-	public async Task GetRoomsToUnpower()
+	public void GetRoomsToUnpower()
 	{
 		var horizontalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 9f //17f
 																	&& x.transform.position.y == transform.position.y && x.GetComponent<RoomScript>()).ToList();
@@ -75,6 +75,16 @@ public class SupplyRoom : RoomScript
 		poweredRooms = horizontalRooms;
 		poweredRooms.AddRange(verticalRooms);
 		poweredRooms.AddRange(diagonalRooms);
+
+		List<SupplyRoom> supplyRooms = GameManager.Instance.allRooms.Where(x => x.GetComponent<SupplyRoom>()).Select(x=>x.GetComponent<SupplyRoom>()).Distinct().ToList();
+
+		poweredRooms = poweredRooms.Distinct().ToList();
+
+		foreach (var supplyRoom in supplyRooms)
+		{
+			if (poweredRooms.Contains(supplyRoom.gameObject)) poweredRooms.Remove(supplyRoom.gameObject);
+		}
+
 		foreach (var room in poweredRooms.Distinct())
 		{
 			if (room.GetComponent<RoomScript>() == this)

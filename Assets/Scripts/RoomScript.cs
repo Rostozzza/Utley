@@ -333,7 +333,6 @@ public class RoomScript : MonoBehaviour
 		{
 			if (room.GetComponent<BuilderRoom>().GetWait() && room.GetComponent<RoomScript>().fixedBear)
 			{
-				room.GetComponent<RoomScript>().SetStatus(Status.Busy);
 				fixedBuilderRoom = room;
 				break;
 			}
@@ -357,6 +356,7 @@ public class RoomScript : MonoBehaviour
 		if (await GameManager.Instance.GetAsteriy() >= requireAsterium &&
 			await GameManager.Instance.GetAstroluminite() >= requireAstroluminite) //await GameManager.Instance.GetHoney() >= (30 + 10 * (level - 1))
 		{
+			fixedBuilderRoom.GetComponent<RoomScript>().SetStatus(Status.Busy);
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(this, true);
@@ -413,7 +413,7 @@ public class RoomScript : MonoBehaviour
 	{
 		upgradeBar.transform.parent.gameObject.SetActive(true);
 		roomStatsController.SetStatsScreenShow(false);
-		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
+		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoom != this)
 		{
 			yield return null;
 		}
@@ -434,7 +434,7 @@ public class RoomScript : MonoBehaviour
 		//durability = 1f;
 		ChangeDurability(0);
 		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
-		//room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
+		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		//status = Status.Free; // 😭;
 		level += 1;
 		if (level == 3)
@@ -952,7 +952,6 @@ public class RoomScript : MonoBehaviour
 		{
 			if (room.GetComponent<BuilderRoom>().GetWait() && room.GetComponent<RoomScript>().fixedBear)
 			{
-				room.GetComponent<RoomScript>().SetStatus(Status.Busy);
 				fixedBuilderRoom = room;
 				break;
 			}
@@ -978,6 +977,7 @@ public class RoomScript : MonoBehaviour
 
 				resources_changed = new Dictionary<string, float> { { "asterium", -ValuesHolder.RepairCost } }
 			});
+			fixedBuilderRoom.GetComponent<RoomScript>().SetStatus(Status.Busy);
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
 			int timeToRepair = (int)((1 - durability) * 100 / ValuesHolder.RepairSpeed); //((1 - durability) * 100 / 3);
 			fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
@@ -1002,7 +1002,6 @@ public class RoomScript : MonoBehaviour
 	{
 		roomStatsController.SetStatsScreenShow(false);
 		progressBar.transform.parent.gameObject.SetActive(true);
-		room.GetComponent<BuilderRoom>().SetWait(false);
 		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoom != this)
 		{
 			yield return null;
