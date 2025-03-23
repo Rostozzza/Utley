@@ -443,6 +443,7 @@ public class GameManager : MonoBehaviour
 				queuedBuildPositon = null;
 				buildingScreen.SetActive(false);
 				elevatorBuildingScreen.SetActive(false);
+				Debug.Log("<color=red>KYS");
 				EventManager.callError.Invoke($"Недостаточно {(currentAsterium < asteriumCost ? "<color=yellow>" + (Mathf.Abs(currentAsterium - asteriumCost)) + "</color>" + " астериума;" : "")}" +
 					$"{(currentHoney < honeyCost ? "<color=yellow>" + ((int)Mathf.Abs(currentHoney - honeyCost)) + "</color>" + " энергомёда;" : "")}" +
 					$"{(currentAstroluminite < astroluminiteCost ? "<color=yellow>" + (Mathf.Abs(currentAstroluminite - astroluminiteCost)) + "</color>" + " астролюминита;" : "")}");
@@ -454,7 +455,6 @@ public class GameManager : MonoBehaviour
 			{
 				if (room.GetComponent<BuilderRoom>().GetWait() && room.GetComponent<BuilderRoom>().fixedBear)
 				{
-					room.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Busy);
 					fixedBuilderRoom = room;
 					break;
 				}
@@ -470,6 +470,7 @@ public class GameManager : MonoBehaviour
 				return;
 			}
 
+			fixedBuilderRoom.GetComponent<RoomScript>().SetStatus(RoomScript.Status.Busy);
 			if (asteriumCost > 0)
 			{
 				await ChangeAsteriy(-asteriumCost, new Log
@@ -548,11 +549,15 @@ public class GameManager : MonoBehaviour
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().StopAllCoroutines();
 		fixedBuilderRoom.GetComponent<BuilderRoom>().SetWait(false);
+
+		RoomScript buildMovementTarget = null ;
+
 		if (building.CompareTag("elevator") && queuedBuildPositon.transform.parent.parent.CompareTag("elevator"))
 		{
 			float minLen = Vector3.Distance(queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms[0].transform.position, queuedBuildPositon.transform.position);
 			RoomScript nearestRoom = queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms.OrderBy(x => x.transform.position.y).ToList()[0];
 			fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(nearestRoom,true);
+			buildMovementTarget = nearestRoom;
 		}
 		else
 		{
@@ -561,23 +566,26 @@ public class GameManager : MonoBehaviour
 				float minLen = Vector3.Distance(queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms[0].transform.position, queuedBuildPositon.transform.position);
 				RoomScript nearestRoom = queuedBuildPositon.transform.parent.GetComponentInParent<Elevator>().connectedRooms.OrderBy(x => x.transform.position.y).ToList()[0];
 				fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(nearestRoom,true);
+				buildMovementTarget = nearestRoom;
 			}
 			else
 			{
 				fixedBuilderRoom.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(queuedBuildPositon.transform.parent.parent.GetComponent<RoomScript>(),true);
+				buildMovementTarget = queuedBuildPositon.transform.parent.parent.GetComponent<RoomScript>();
 			}
 		}
-		StartCoroutine(SelectAndBuildWaiter(building, fixedBuilderRoom, queuedBuildPositon.transform));
+		StartCoroutine(SelectAndBuildWaiter(building, fixedBuilderRoom, queuedBuildPositon.transform, buildMovementTarget));
 		Debug.Log("NoT DEAD");
 		buildingScreen.SetActive(false);
 		elevatorBuildingScreen.SetActive(false);
 	}
 
-	private IEnumerator SelectAndBuildWaiter(GameObject building, GameObject room, Transform point)
+	private IEnumerator SelectAndBuildWaiter(GameObject building, GameObject room, Transform point, RoomScript roomToWaitFor)
 	{
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
-		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null)
+		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoom != roomToWaitFor)
 		{
+			Debug.Log("waiting");
 			yield return null;
 		}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", true);
@@ -603,10 +611,6 @@ public class GameManager : MonoBehaviour
 		Debug.Log("NoT DEAD after building");
 		StartCoroutine(WalkAndStartWork(room.GetComponent<BuilderRoom>().fixedBear, room));
 		room.GetComponent<BuilderRoom>().SetWait(true);
-		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoutine != null && room.GetComponent<BuilderRoom>().GetWait())
-		{
-			yield return null;
-		}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 	}
 
