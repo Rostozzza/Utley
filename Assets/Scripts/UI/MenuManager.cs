@@ -767,6 +767,7 @@ public class MenuManager : MonoBehaviour
 		GameManager.Instance.GetGuideCanvas().SetActive(true);
 		GameManager.Instance.SetIsExerciseOpen(true);
 		shopScreen.SetActive(false);
+		SetNearClipPlain(0.01f);
 		switch (type)
 		{
 			case ProblemType.SetPipes:
@@ -854,11 +855,14 @@ public class MenuManager : MonoBehaviour
 	public void OnExerciseExit()
 	{
 		GameManager.Instance.GetGuideCanvas().SetActive(false);
+		SetNearClipPlain(1);
 	}
 
 	public void SetTablet(bool set) => tabletAnimator.SetTrigger(set ? "OpenShop" : "CloseShop");
 
 	public GuideManager GetGuideManager() => guideManager;
+
+	public void SetNearClipPlain(float set) => Camera.main.nearClipPlane = set;
 
 	public enum ProblemType
 	{
