@@ -408,7 +408,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: 1
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -4189,6 +4189,7 @@ MonoBehaviour:
   speed: 5
   isBusy: 0
   animator: {fileID: 2089784801}
+  isMovingAtWork: 0
   selectable: 1
   furSlot: {fileID: 0}
   topSlot: {fileID: 0}
@@ -21952,6 +21953,7 @@ MonoBehaviour:
   speed: 5
   isBusy: 0
   animator: {fileID: 1157715736}
+  isMovingAtWork: 0
   selectable: 1
   furSlot: {fileID: 0}
   topSlot: {fileID: 0}
@@ -25199,6 +25201,7 @@ MonoBehaviour:
   speed: 5
   isBusy: 0
   animator: {fileID: 0}
+  isMovingAtWork: 0
   selectable: 1
   furSlot: {fileID: 0}
   topSlot: {fileID: 0}
@@ -29909,6 +29912,7 @@ MonoBehaviour:
   speed: 5
   isBusy: 0
   animator: {fileID: 1092961795}
+  isMovingAtWork: 0
   selectable: 1
   furSlot: {fileID: 0}
   topSlot: {fileID: 0}
