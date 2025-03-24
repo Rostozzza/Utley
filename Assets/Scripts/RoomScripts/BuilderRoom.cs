@@ -47,7 +47,7 @@ public class BuilderRoom : RoomScript
     public void SetWait(bool set, bool needToLeave = false)
     {
         wait = set;
-        if (needToLeave)
+        if (needToLeave || set)
         {
             fixedBear.GetComponent<UnitScript>().CanBeSelected();
 		    status = Status.Free;
