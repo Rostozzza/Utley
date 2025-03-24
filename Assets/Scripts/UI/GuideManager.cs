@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GuideManager : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class GuideManager : MonoBehaviour
         slides.ForEach(slide => slide.SetActive(false));
         Time.timeScale = 1;
         SetIsGuideOpen(false);
-        Invoke(nameof(ShowLinesDelayed), MenuManager.Instance.tabletAnimator.GetCurrentAnimatorStateInfo(0).length);
+        Invoke(nameof(ShowLinesDelayed), guideType == GuideTypes.Cosmodrome ? 0 : MenuManager.Instance.tabletAnimator.GetCurrentAnimatorStateInfo(0).length);
         if (guideType == GuideTypes.Cosmodrome) MenuManager.Instance.GetComponent<Canvas>().sortingOrder = 9500;
         gameObject.SetActive(false);
     }
