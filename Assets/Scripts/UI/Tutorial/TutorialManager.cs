@@ -212,7 +212,6 @@ public class TutorialManager : MonoBehaviour
 					button.onClick.AddListener(StopWaiting);
 					yield return WaitForEvent();
 					button.onClick.RemoveListener(StopWaiting);
-					Debug.Log("Sosal?");
 					isButtonPressed = false;
 					break;
 				case Condition.OnClickLMB:
