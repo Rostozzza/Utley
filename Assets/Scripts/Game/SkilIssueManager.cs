@@ -12,15 +12,15 @@ public class SkillIssueManager : MonoBehaviour
 
 	public void Update()
 	{
-		HandleSosi();
-		HandleGoida();
-		HandleHui();
+		HandleResources();
+		HandleSpeedTime();
+		HandleRepairRooms();
 	}
 
 	/// <summary>
-	/// L + Ratio
+	/// time boost
 	/// </summary>
-	private void HandleGoida() // time boost;
+	private void HandleSpeedTime() // time boost;
 	{
 		if (!Input.GetKeyDown(KeyCode.Keypad3) || copeRoutine != null)
 		{
@@ -30,13 +30,13 @@ public class SkillIssueManager : MonoBehaviour
 		{
 			StopCoroutine(copeRoutine);
 		}
-		copeRoutine = StartCoroutine(Goida(0.5f, 0, new List<KeyCode> { KeyCode.Keypad3, KeyCode.Keypad2, KeyCode.Keypad1 }));
+		copeRoutine = StartCoroutine(SpeedTime(0.5f, 0, new List<KeyCode> { KeyCode.Keypad3, KeyCode.Keypad2, KeyCode.Keypad1 }));
 	}
 
 	/// <summary>
-	/// Cope.
+	/// resources
 	/// </summary>
-	private void HandleSosi() // mnogo resursov;
+	private void HandleResources() // mnogo resursov;
 	{
 		if (!Input.GetKeyDown(KeyCode.Keypad1) || copeRoutine != null)
 		{
@@ -46,13 +46,13 @@ public class SkillIssueManager : MonoBehaviour
 		{
 			StopCoroutine(copeRoutine);
 		}
-		copeRoutine = StartCoroutine(Sosi(0.5f, 0, new List<KeyCode> { KeyCode.Keypad1, KeyCode.Keypad2, KeyCode.Keypad1 }));
+		copeRoutine = StartCoroutine(Resouces(0.5f, 0, new List<KeyCode> { KeyCode.Keypad1, KeyCode.Keypad2, KeyCode.Keypad1 }));
 	}
 
 	/// <summary>
-	/// ur mom
+	/// unbreakable rooms
 	/// </summary>
-	private void HandleHui() // unbreakable rooms;
+	private void HandleRepairRooms() // unbreakable rooms;
 	{
 		if (!Input.GetKeyDown(KeyCode.Keypad7) || copeRoutine != null)
 		{
@@ -62,10 +62,10 @@ public class SkillIssueManager : MonoBehaviour
 		{
 			StopCoroutine(copeRoutine);
 		}
-		copeRoutine = StartCoroutine(Hui(0.5f, 0, new List<KeyCode> { KeyCode.Keypad7, KeyCode.Keypad8, KeyCode.Keypad9 }));
+		copeRoutine = StartCoroutine(RepairRooms(0.5f, 0, new List<KeyCode> { KeyCode.Keypad7, KeyCode.Keypad8, KeyCode.Keypad9 }));
 	}
 
-	private IEnumerator Hui(float timeLeft, int now, List<KeyCode> killYourself)
+	private IEnumerator RepairRooms(float timeLeft, int now, List<KeyCode> killYourself)
 	{
 		while (timeLeft > 0)
 		{
@@ -75,11 +75,11 @@ public class SkillIssueManager : MonoBehaviour
 				if (now == killYourself.Count - 1)
 				{
 					GameManager.Instance.allRooms.Where(x => x.GetComponent<RoomScript>()).ToList().ForEach(x => x.GetComponent<RoomScript>().SetDurability(1) );
-					Debug.Log("HUI");
+					Debug.Log("Repaired rooms");
 					Debug.Log($"Breakage!: {now}");
 					break;
 				}
-				yield return Hui(timeLeft, now + 1, killYourself);
+				yield return RepairRooms(timeLeft, now + 1, killYourself);
 				Debug.Log($"Breakage!: {now}");
 				break;
 			}
@@ -92,7 +92,7 @@ public class SkillIssueManager : MonoBehaviour
 		yield return null;
 	}
 
-	private IEnumerator Sosi(float timeLeft, int now, List<KeyCode> killYourself)
+	private IEnumerator Resouces(float timeLeft, int now, List<KeyCode> killYourself)
 	{
 		while (timeLeft > 0)
 		{
@@ -107,11 +107,11 @@ public class SkillIssueManager : MonoBehaviour
 					GameManager.Instance.ChangePrototype(100000000,new Log());
 					GameManager.Instance.ChangeUrsowaks(10000000000, new Log());
 					GameManager.Instance.ChangeHoney(10000000000, new Log());
-					Debug.Log("SOSI");
+					Debug.Log("Resources");
 					Debug.Log($"Breakage!: {now}");
 					break;
 				}
-				yield return Sosi(timeLeft, now + 1, killYourself);
+				yield return Resouces(timeLeft, now + 1, killYourself);
 				Debug.Log($"Breakage!: {now}");
 				break;
 			}
@@ -124,7 +124,7 @@ public class SkillIssueManager : MonoBehaviour
 		yield return null;
 	}
 
-	private IEnumerator Goida(float timeLeft, int now, List<KeyCode> killYourself)
+	private IEnumerator SpeedTime(float timeLeft, int now, List<KeyCode> killYourself)
 	{
 		while (timeLeft > 0)
 		{
@@ -133,12 +133,12 @@ public class SkillIssueManager : MonoBehaviour
 			{
 				if (now == killYourself.Count - 1)
 				{
-					Time.timeScale = Time.timeScale == 10f ? 1f : 10f;
+					Time.timeScale = Time.timeScale == 2f ? 1f : 2f;
 					Debug.Log($"Timescale: {Time.timeScale}");
 					Debug.Log($"Breakage!: {now}");
 					break;
 				}
-				yield return Goida(timeLeft, now + 1, killYourself);
+				yield return SpeedTime(timeLeft, now + 1, killYourself);
 				Debug.Log($"Breakage!: {now}");
 				break;
 			}
