@@ -1,0 +1,1 @@
+using System.Collections.Generic;using UnityEngine;public class RandomTile : MonoBehaviour{[SerializeField]private List<Sprite> sprites;void Awake()=>GetComponent<SpriteRenderer>().sprite=sprites[Random.Range(0, sprites.Count)];}
