@@ -89,6 +89,9 @@ public class MenuManager : MonoBehaviour
 	public bool isPlayerLoadable = false;
 	[Header("Cosmodrome Exercise")]
 	[SerializeField] private CosmodromeExercise cosmodromeExercise;
+	[Header("Guide Settings")]
+    private Vector3 startGuideButtonPos;
+	private ProblemType lastProblemType;
 
     public void SetMasterVolume()
 	{
@@ -768,6 +771,10 @@ public class MenuManager : MonoBehaviour
 		GameManager.Instance.SetIsExerciseOpen(true);
 		shopScreen.SetActive(false);
 		SetNearClipPlain(0.01f);
+		startGuideButtonPos = GameManager.Instance.GetGuideCanvas().GetComponentInChildren<Button>().transform.localPosition;
+		if (type == ProblemType.SetCosmodrome) GameManager.Instance.GetGuideCanvas().GetComponentInChildren<Button>().transform.localPosition = new Vector3(-333, 145, 0);
+		lastProblemType = type;
+
 		switch (type)
 		{
 			case ProblemType.SetPipes:
@@ -856,6 +863,7 @@ public class MenuManager : MonoBehaviour
 	{
 		GameManager.Instance.GetGuideCanvas().SetActive(false);
 		SetNearClipPlain(1);
+        if (lastProblemType == ProblemType.SetCosmodrome) GameManager.Instance.GetGuideCanvas().GetComponentInChildren<Button>().transform.localPosition = startGuideButtonPos;
 	}
 
 	public void SetTablet(bool set) => tabletAnimator.SetTrigger(set ? "OpenShop" : "CloseShop");
