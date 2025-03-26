@@ -901,6 +901,7 @@ GameObject:
   - component: {fileID: 3087870908900581400}
   - component: {fileID: 8634957134487957953}
   - component: {fileID: 8012957286382583277}
+  - component: {fileID: 4442348246668154274}
   m_Layer: 0
   m_Name: ButtonLeft
   m_TagString: Untagged
@@ -1047,6 +1048,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
+--- !u!114 &4442348246668154274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715183966404325914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e33845730118cc4bbb91785570c13ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &740672406506770061
 GameObject:
   m_ObjectHideFlags: 0
@@ -2047,6 +2060,7 @@ GameObject:
   - component: {fileID: 7096036074937372195}
   - component: {fileID: 6925216221189409264}
   - component: {fileID: 861333500227439562}
+  - component: {fileID: 1817877154095899245}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: dont_hide_button
@@ -2167,6 +2181,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1817877154095899245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822112398433817975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e33845730118cc4bbb91785570c13ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1842697619605752974
 GameObject:
   m_ObjectHideFlags: 0
@@ -3040,6 +3066,7 @@ GameObject:
   - component: {fileID: 3655358785803859618}
   - component: {fileID: 5161887137411190640}
   - component: {fileID: 7580133428364044365}
+  - component: {fileID: 7560291597971820544}
   m_Layer: 0
   m_Name: ButtonRight
   m_TagString: Untagged
@@ -3186,6 +3213,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
+--- !u!114 &7560291597971820544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2186538050795713245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e33845730118cc4bbb91785570c13ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2346624182318558965
 GameObject:
   m_ObjectHideFlags: 0
@@ -8473,6 +8512,7 @@ GameObject:
   - component: {fileID: 2694103892652049589}
   - component: {fileID: 1057102493285066255}
   - component: {fileID: 6177540711765823202}
+  - component: {fileID: 6069981937704396670}
   m_Layer: 5
   m_Name: UrsowaksButton
   m_TagString: assignment
@@ -8595,6 +8635,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6069981937704396670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902201022600142777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e33845730118cc4bbb91785570c13ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2902856957942452026
 GameObject:
   m_ObjectHideFlags: 0
@@ -15872,6 +15924,7 @@ GameObject:
   - component: {fileID: 3897651702604730552}
   - component: {fileID: 2981812422068571287}
   - component: {fileID: 8343715658714316222}
+  - component: {fileID: 6308434674309312308}
   m_Layer: 5
   m_Name: Prototype
   m_TagString: assignment
@@ -15994,6 +16047,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6308434674309312308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5193309106974260902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e33845730118cc4bbb91785570c13ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5241743977479959208
 GameObject:
   m_ObjectHideFlags: 0
@@ -16232,6 +16297,7 @@ GameObject:
   - component: {fileID: 91456880556803891}
   - component: {fileID: 2368426496193403257}
   - component: {fileID: 2919911155007709829}
+  - component: {fileID: 6755943581278479617}
   m_Layer: 0
   m_Name: AssignUnit
   m_TagString: assignment
@@ -16352,6 +16418,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6755943581278479617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5345335411503232681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e33845730118cc4bbb91785570c13ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5512884542211894025
 GameObject:
   m_ObjectHideFlags: 0
@@ -34187,6 +34265,7 @@ GameObject:
   - component: {fileID: 1890066561522352278}
   - component: {fileID: 6695326978584896970}
   - component: {fileID: 2971885464930992468}
+  - component: {fileID: 3389584745454032815}
   m_Layer: 5
   m_Name: Button
   m_TagString: dont_hide_button
@@ -34308,6 +34387,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3389584745454032815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827533403990199562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e33845730118cc4bbb91785570c13ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8838136395279324470
 GameObject:
   m_ObjectHideFlags: 0

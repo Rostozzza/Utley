@@ -487,6 +487,7 @@ GameObject:
   - component: {fileID: 4431224287107480741}
   - component: {fileID: 1826425636719420038}
   - component: {fileID: 1030566967617680449}
+  - component: {fileID: 4400611585426781208}
   m_Layer: 0
   m_Name: EnRoute
   m_TagString: dont_hide_button
@@ -620,6 +621,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 8102839385548444316}
   buttonImage: {fileID: 887490728217073632}
+--- !u!114 &4400611585426781208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5208109492769698211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e33845730118cc4bbb91785570c13ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5307094995097818981
 GameObject:
   m_ObjectHideFlags: 0

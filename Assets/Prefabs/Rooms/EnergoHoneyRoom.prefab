@@ -6574,6 +6574,7 @@ GameObject:
   - component: {fileID: 1715486728359983938}
   - component: {fileID: 7903979612330046539}
   - component: {fileID: 2715949048377235495}
+  - component: {fileID: 6945562424993524603}
   m_Layer: 0
   m_Name: ButtonLeft
   m_TagString: Untagged
@@ -6720,6 +6721,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
+--- !u!114 &6945562424993524603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125443277709292945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e33845730118cc4bbb91785570c13ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2175493362392767693
 GameObject:
   m_ObjectHideFlags: 0
@@ -13856,6 +13869,7 @@ GameObject:
   - component: {fileID: 194606703820735619}
   - component: {fileID: 6285819679958758025}
   - component: {fileID: 7150890815794446519}
+  - component: {fileID: 1247275350356266395}
   m_Layer: 0
   m_Name: AssignUnit
   m_TagString: assignment
@@ -13976,6 +13990,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1247275350356266395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4757649533446852092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e33845730118cc4bbb91785570c13ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4808550996730266953
 GameObject:
   m_ObjectHideFlags: 0
@@ -25540,6 +25566,7 @@ GameObject:
   - component: {fileID: 1573186021399163700}
   - component: {fileID: 3771024790098217084}
   - component: {fileID: 1064950672448377991}
+  - component: {fileID: 165618635630891731}
   m_Layer: 0
   m_Name: ButtonRight
   m_TagString: Untagged
@@ -25686,6 +25713,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
+--- !u!114 &165618635630891731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7472300179576622346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e33845730118cc4bbb91785570c13ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7513744893942144709
 GameObject:
   m_ObjectHideFlags: 0
