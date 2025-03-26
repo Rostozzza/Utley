@@ -209,6 +209,8 @@ public class UnitScript : MonoBehaviour
 
 	public void SelectUnit()
 	{
+		SoundManager.Instance.PlaySoundOnce(SoundManager.Instance.bearSelectSound, SoundManager.MixerGroup.SFX);
+
 		GameManager.Instance.selectedUnit = gameObject;
 		EventManager.onBearSelected.Invoke();
 

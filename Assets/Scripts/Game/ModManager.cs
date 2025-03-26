@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Collections;
 
-public class ValueManager : MonoBehaviour
+public class ModManager : MonoBehaviour
 {
     public Constants model;
     private string path;

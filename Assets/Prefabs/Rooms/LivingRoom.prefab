@@ -180,7 +180,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
+  m_Intensity: 5
   m_Range: 5
   m_SpotAngle: 145.4852
   m_InnerSpotAngle: 145.4852
@@ -961,7 +961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5620814085529330885
 Transform:
   m_ObjectHideFlags: 0
@@ -1192,7 +1192,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
+  m_Intensity: 5
   m_Range: 5
   m_SpotAngle: 145.4852
   m_InnerSpotAngle: 145.4852
@@ -1658,6 +1658,7 @@ MonoBehaviour:
   flyForType: 0
   cosmodromeSelectScreen: {fileID: 0}
   isReadyForWork: 0
+  takeALookButton: {fileID: 0}
   coneierScreen: {fileID: 0}
   workUI: {fileID: 0}
   efficiencyDownPanel: {fileID: 0}
@@ -1845,6 +1846,7 @@ GameObject:
   - component: {fileID: 318912549746530590}
   - component: {fileID: 1212404339466599348}
   - component: {fileID: 6198987744778735605}
+  - component: {fileID: 1957718003927764580}
   m_Layer: 0
   m_Name: AssignUnit
   m_TagString: assignment
@@ -1965,6 +1967,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1957718003927764580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3926930305590724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e33845730118cc4bbb91785570c13ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4002847912507904230
 GameObject:
   m_ObjectHideFlags: 0
@@ -2086,6 +2100,7 @@ GameObject:
   - component: {fileID: 9092169073452111034}
   - component: {fileID: 3686490771277568776}
   - component: {fileID: 1184218322188624734}
+  - component: {fileID: 2156393256908363349}
   m_Layer: 0
   m_Name: ButtonRight
   m_TagString: Untagged
@@ -2232,6 +2247,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
+--- !u!114 &2156393256908363349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4510961703215051970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e33845730118cc4bbb91785570c13ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4551847696788332382
 GameObject:
   m_ObjectHideFlags: 0
@@ -2336,7 +2363,7 @@ Transform:
   m_GameObject: {fileID: 4757092404206190076}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0961, y: 1.7289, z: -0.9503}
+  m_LocalPosition: {x: 2, y: 1.7289, z: -0.114}
   m_LocalScale: {x: 2.7045872, y: 0.40054905, z: 1.5791072}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2705,6 +2732,7 @@ GameObject:
   - component: {fileID: 423143812457941184}
   - component: {fileID: 5514793571320039697}
   - component: {fileID: 2535120260436788124}
+  - component: {fileID: 4092247276096397092}
   m_Layer: 0
   m_Name: ButtonLeft
   m_TagString: Untagged
@@ -2851,6 +2879,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
+--- !u!114 &4092247276096397092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5160566688733615867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e33845730118cc4bbb91785570c13ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5212364540852424031
 GameObject:
   m_ObjectHideFlags: 0
