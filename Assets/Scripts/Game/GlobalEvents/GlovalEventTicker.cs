@@ -12,11 +12,6 @@ public class GlobalEventTicker : MonoBehaviour
 	[SerializeField] private GameObject eventPrefab;
 	[SerializeField] private Transform eventsParent; 
 
-	public void Start()
-	{
-		StartTicker();
-	}
-
 	public void KillActiveEvent(GlobalEvent globalEvent)
 	{
 		if (activeEvents.Contains(globalEvent)) activeEvents.Remove(globalEvent);

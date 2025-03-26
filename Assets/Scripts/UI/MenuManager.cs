@@ -231,6 +231,7 @@ public class MenuManager : MonoBehaviour
 	{
 		isAPIActive = true;
 		JsonManager = new JsonManager(isAPIActive);
+		eventTicker.StartTicker();
 		if (isPlayerLoadable)
 		{
 			continueGameButton.SetActive(true);
