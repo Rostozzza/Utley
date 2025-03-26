@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.24705882, g: 0.24705882, b: 0.24705882, a: 1}
+  m_AmbientSkyColor: {r: 0.5773585, g: 0.5773585, b: 0.5773585, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 0.62
@@ -739,6 +739,14 @@ PrefabInstance:
     - target: {fileID: 4516258937783852247, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
       propertyPath: m_Interactable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4651979387170411296, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
+      propertyPath: m_Intensity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5567482617383232383, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
+      propertyPath: m_Intensity
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5712600974167352161, guid: 8efd065d61ac55c4aad3bf2eff6a373b, type: 3}
       propertyPath: m_Interactable
@@ -2432,6 +2440,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1796900286312091380, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
+      propertyPath: m_Intensity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1796900286312091380, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
       propertyPath: m_Shadows.m_Type
       value: 1
       objectReference: {fileID: 0}
@@ -2486,6 +2498,10 @@ PrefabInstance:
     - target: {fileID: 4726088687645800080, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843901736332672904, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
+      propertyPath: m_Intensity
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4843901736332672904, guid: 0056dcec5a63d924fbb79908ced0935f, type: 3}
       propertyPath: m_Shadows.m_Type
@@ -26703,6 +26719,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnergoHoneyRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 1630918245071077505, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2097626594887498254, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.8
@@ -26743,9 +26763,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2711997747166926409, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_Intensity
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3771024790098217084, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
       propertyPath: m_Interactable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197293802033969619, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
+      propertyPath: m_Intensity
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7403409793845794150, guid: 5074c9c8126514345a24ef06622a34f9, type: 3}
       propertyPath: connectedRooms.Array.size
@@ -28704,9 +28732,17 @@ PrefabInstance:
       propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7241502815381382635, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: m_Intensity
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7578359609187239277, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
       propertyPath: m_Name
       value: AsteriumRecycle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8448755545643332021, guid: daabfad1b191a1a4790e6312b70192b7, type: 3}
+      propertyPath: m_Intensity
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36671,6 +36707,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 737861180}
     - target: {fileID: 1871731902070241174, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
+      propertyPath: m_Intensity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871731902070241174, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
       propertyPath: m_Shadows.m_Type
       value: 1
       objectReference: {fileID: 0}
@@ -36805,6 +36845,10 @@ PrefabInstance:
     - target: {fileID: 7035902096984744849, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347816820653399335, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
+      propertyPath: m_Intensity
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7347816820653399335, guid: 6155184dc4e99bc4c9fa053f0a628f9b, type: 3}
       propertyPath: m_Shadows.m_Type
