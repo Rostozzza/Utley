@@ -11,7 +11,7 @@ using UnityEngine.Networking;
 
 public class RequestManager
 {
-	public string UUID = "85820b3e-e70b-4696-9954-dbed1d942244";
+	public string UUID = "260a5fa9-7531-407b-98c9-a306564d49ad";
 	public bool isAPIActive;
 	public GameManager gameManagerInstance;
 
@@ -30,38 +30,38 @@ public class RequestManager
 	/// <exception cref="Exception"></exception>
 	public async Task<Dictionary<string,string>> UpdatePlayerResources(string username, Dictionary<string, string> resources)
 	{
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/";
+		string url = $"http://final.2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/";
 		using HttpClient client = new HttpClient();
 		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, url);
 		Dictionary<string,Dictionary<string,string>> jsonBody = new Dictionary<string, Dictionary<string, string>>();
 		jsonBody.Add("resources",resources);	
 		string resourcesToUpdateFormatted = JsonConvert.SerializeObject(jsonBody);
 		request.Content = new StringContent(resourcesToUpdateFormatted, Encoding.UTF8, "application/json");
-		//Debug.Log(resourcesToUpdateFormatted);
+		//EventManager.callWarning.Invoke(resourcesToUpdateFormatted);
 		try
 		{
 			var response = await client.SendAsync(request);
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to update player resources. Status code: {response.StatusCode}");
+				EventManager.callWarning.Invoke($"Failed to update player resources. Status code: {response.StatusCode}");
 				return null;
 			}
 
 			var responseBody = await response.Content.ReadAsStringAsync();
-			//Debug.Log($"Saved resources: {responseBody}");
+			//EventManager.callWarning.Invoke($"Saved resources: {responseBody}");
 			//var responseResources = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseBody);
 			return null;
 		}
 		catch (Exception e)
 		{
-			Debug.Log($"Failed to update player resources. Check your internet connection. Error details: {e.Message}");
+			EventManager.callWarning.Invoke($"Failed to update player resources. Check your internet connection. Error details: {e.Message}");
 			return null;
 		}
 	}
 
 	public async Task<Dictionary<string, int>> UpdateShopResources(string username, string shopName, Dictionary<string, int> resources)
 	{
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/shops/{shopName}/";
+		string url = $"http://final.2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/shops/{shopName}/";
 		using HttpClient client = new HttpClient();
 		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, url);
 		Dictionary<string, Dictionary<string, int>> jsonBody = new Dictionary<string, Dictionary<string, int>>();
@@ -72,7 +72,7 @@ public class RequestManager
 			var response = await client.SendAsync(request);
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to update player's shop resources. Status code: {response.StatusCode}");
+				EventManager.callWarning.Invoke($"Failed to update player's shop resources. Status code: {response.StatusCode}");
 				return null;
 			}
 
@@ -82,14 +82,40 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			Debug.Log($"Failed to update player's shop resources. Check your internet connection. Error details: {e.Message}");
+			EventManager.callWarning.Invoke($"Failed to update player's shop resources. Check your internet connection. Error details: {e.Message}");
 			return null;
 		}
 	}
 	#endregion
 
 	#region GET
-
+	
+	#region GLOBAL_EVENTS
+	public async Task<List<GlobalEvent>> GetAllGlobalEvents()
+	{
+		List<GlobalEvent> globalEvents= new List<GlobalEvent>();
+		string url = $"https://final.2025.nti-gamedev.ru/api/games/{UUID}/events/";
+		HttpClient client = new HttpClient();
+		try
+		{
+			var response = await client.GetAsync(url);
+			if (!response.IsSuccessStatusCode)
+			{
+				EventManager.callWarning.Invoke($"<color=red>Failed to get events. Status code: {response.StatusCode}");
+				return null;
+			}
+			var responceBody = await response.Content.ReadAsStringAsync();
+			globalEvents = JsonConvert.DeserializeObject<List<GlobalEvent>>(responceBody);
+			return globalEvents;
+		}
+		catch (Exception e)
+		{
+			EventManager.callWarning.Invoke($"<color=red>Failed to get events. Check your internet connection. Error details: {e.Message}");
+			return null;
+		}
+	}
+	
+	#endregion
 	/// <summary>
 	/// Returns list of all registered players
 	/// </summary>
@@ -98,14 +124,14 @@ public class RequestManager
 	public async Task<List<Player>> GetAllPlayers()
 	{
 		List<Player> players = new List<Player>();
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/";
+		string url = $"http://final.2025.nti-gamedev.ru/api/games/{UUID}/players/";
 		HttpClient client = new HttpClient();
 		try
 		{
 			var response = await client.GetAsync(url);
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to create a new player. Status code: {response.StatusCode}");
+				EventManager.callWarning.Invoke($"Failed to create a new player. Status code: {response.StatusCode}");
 				return null;
 			}
 			var responceBody = await response.Content.ReadAsStringAsync();
@@ -114,7 +140,7 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			Debug.Log($"Failed to create a new player. Check your internet connection. Error details: {e.Message}");
+			EventManager.callWarning.Invoke($"Failed to create a new player. Check your internet connection. Error details: {e.Message}");
 			return null;
 		}
 	}
@@ -128,27 +154,27 @@ public class RequestManager
 	public async Task<Player> GetPlayer(string name)
 	{
 		Player player = new Player();
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{name}/";
+		string url = $"http://final.2025.nti-gamedev.ru/api/games/{UUID}/players/{name}/";
 		using HttpClient client = new HttpClient();
 		try
 		{
-			//Debug.Log($"Awaiting responce for player {name}..");
+			//EventManager.callWarning.Invoke($"Awaiting responce for player {name}..");
 			var response = await client.GetAsync(url);
-			//Debug.Log("Got responce!");
+			//EventManager.callWarning.Invoke("Got responce!");
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to get selected player. Status code: {response.StatusCode}");
+				//EventManager.callWarning.Invoke($"Failed to get selected player. Status code: {response.StatusCode}");
 				return null;
 			}
 			var responceBody = await response.Content.ReadAsStringAsync();
-			//Debug.Log(responceBody);
+			//EventManager.callWarning.Invoke(responceBody);
 			player = JsonConvert.DeserializeObject<Player>(responceBody);
-			//Debug.Log(float.Parse(player.resources["honey"]));
+			//EventManager.callWarning.Invoke(float.Parse(player.resources["honey"]));
 			return player;
 		}
 		catch (Exception e)
 		{
-			Debug.Log($"Failed to get selected player. Check your internet connection. Error details: {e.Message}");
+			//EventManager.callWarning.Invoke($"Failed to get selected player. Check your internet connection. Error details: {e.Message}");
 			return null;
 		}
 	}
@@ -161,7 +187,7 @@ public class RequestManager
 	/// <exception cref="Exception"></exception>
 	public async Task<List<Log>> GetPlayerLogs(string name)
 	{
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{name}/";
+		string url = $"http://final.2025.nti-gamedev.ru/api/games/{UUID}/players/{name}/";
 		List<Log> logs = new List<Log>();
 		HttpClient client = new HttpClient();
 		try
@@ -169,7 +195,7 @@ public class RequestManager
 			var response = await client.GetAsync(url);
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to get player's logs. Status code: {response.StatusCode}");
+				EventManager.callWarning.Invoke($"Failed to get player's logs. Status code: {response.StatusCode}");
 				return null;
 			}
 			var responseBody = await response.Content.ReadAsStringAsync();
@@ -179,7 +205,7 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			Debug.Log($"Failed to get player's logs. Check your internet connection. Error details: {e.Message}");
+			EventManager.callWarning.Invoke($"Failed to get player's logs. Check your internet connection. Error details: {e.Message}");
 			return null;
 		}
 	}
@@ -192,7 +218,7 @@ public class RequestManager
 	/// <exception cref="Exception"></exception>
 	public async Task<List<Shop>> GetPlayerShops(string name)
 	{
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{name}/shops/";
+		string url = $"http://final.2025.nti-gamedev.ru/api/games/{UUID}/players/{name}/shops/";
 		List<Shop> shops = new List<Shop>();
 		HttpClient client = new HttpClient();
 
@@ -201,7 +227,7 @@ public class RequestManager
 			var response = await client.GetAsync(url);
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to get player's shops. Status code: {response.StatusCode}");
+				EventManager.callWarning.Invoke($"Failed to get player's shops. Status code: {response.StatusCode}");
 				return null;
 			}
 			var responseBody = await response.Content.ReadAsStringAsync();
@@ -211,7 +237,7 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			Debug.Log($"Failed to get player's shops. Check your internet connection. Error details: {e.Message}");
+			EventManager.callWarning.Invoke($"Failed to get player's shops. Check your internet connection. Error details: {e.Message}");
 			return null;
 		}
 	}
@@ -225,7 +251,7 @@ public class RequestManager
 	/// <exception cref="Exception"></exception>
 	public async Task<Shop> GetPlayerShop(string name, string shopName)
 	{
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{name}/shops/{shopName}/";
+		string url = $"http://final.2025.nti-gamedev.ru/api/games/{UUID}/players/{name}/shops/{shopName}/";
 		Shop shop = new Shop();
 		HttpClient client = new HttpClient();
 		try
@@ -233,7 +259,7 @@ public class RequestManager
 			var response = await client.GetAsync(url);
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to get player's shop. Status code: {response.StatusCode}");
+				EventManager.callWarning.Invoke($"Failed to get player's shop. Status code: {response.StatusCode}");
 				return null;
 			}
 			var responseBody = await response.Content.ReadAsStringAsync();
@@ -243,7 +269,7 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			Debug.Log($"Failed to get player's shop. Check your internet connection. Error details: {e.Message}");
+			EventManager.callWarning.Invoke($"Failed to get player's shop. Check your internet connection. Error details: {e.Message}");
 			return null;
 		}
 	}
@@ -257,7 +283,7 @@ public class RequestManager
 	/// <exception cref="Exception"></exception>
 	public async Task<List<Log>> GetShopLogs(string name, string shopName)
 	{
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{name}/shops/{shopName}/logs/";
+		string url = $"http://final.2025.nti-gamedev.ru/api/games/{UUID}/players/{name}/shops/{shopName}/logs/";
 		List<Log> logs = new List<Log>();
 		HttpClient client = new HttpClient();
 		try
@@ -265,7 +291,7 @@ public class RequestManager
 			var response = await client.GetAsync(url);
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to get shop's logs. Status code: {response.StatusCode}");
+				EventManager.callWarning.Invoke($"Failed to get shop's logs. Status code: {response.StatusCode}");
 				return null;
 			}
 			var responseBody = await response.Content.ReadAsStringAsync();
@@ -275,7 +301,7 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			Debug.Log($"Failed to get shop's logs. Check your internet connection. Error details: {e.Message}");
+			EventManager.callWarning.Invoke($"Failed to get shop's logs. Check your internet connection. Error details: {e.Message}");
 			return null;
 		}
 	}
@@ -287,7 +313,7 @@ public class RequestManager
 	/// <exception cref="Exception"></exception>
 	public async Task<List<Log>> GetAllLogs()
 	{
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/logs/";
+		string url = $"http://final.2025.nti-gamedev.ru/api/games/{UUID}/logs/";
 		List<Log> logs = new List<Log>();
 		HttpClient client = new HttpClient();
 		try
@@ -295,7 +321,7 @@ public class RequestManager
 			var response = client.GetAsync(url).Result;
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to get logs. Status code: {response.StatusCode}");
+				EventManager.callWarning.Invoke($"Failed to get logs. Status code: {response.StatusCode}");
 				return null;
 			}
 			var responseBody = await response.Content.ReadAsStringAsync();
@@ -305,7 +331,7 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			Debug.Log($"Failed to get logs. Check your internet connection. Error details: {e.Message}");
+			EventManager.callWarning.Invoke($"Failed to get logs. Check your internet connection. Error details: {e.Message}");
 			return null;
 		}
 	}
@@ -320,26 +346,29 @@ public class RequestManager
 	/// <exception cref="Exception"></exception>
 	public async Task<Player> CreatePlayer(Player newPlayer)
 	{
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/";
+		string url = $"http://final.2025.nti-gamedev.ru/api/games/{UUID}/players/";
 		using HttpClient client = new HttpClient();
 		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
 		request.Content = new StringContent(JsonConvert.SerializeObject(newPlayer), Encoding.UTF8, "application/json");
+		Debug.Log(await request.Content.ReadAsStringAsync());
 		try
 		{
-			var response = await client.SendAsync(request);
+			var response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(newPlayer), Encoding.UTF8, "application/json"));
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to create a new player. Status code: {response.StatusCode}. model: {response.StatusCode}");
+				EventManager.callWarning.Invoke($"Failed to create a new player. Status code: {response.StatusCode}. model: {response.StatusCode}");
 				return null;
 			}
 
 			var responseBody = await response.Content.ReadAsStringAsync();
-			newPlayer = JsonConvert.DeserializeObject<Player>(responseBody);
-			return newPlayer;
+			Debug.Log(responseBody);
+			//newPlayer = JsonConvert.DeserializeObject<Player>(responseBody);
+			Debug.Log("Kaif");
+			return null;
 		}
 		catch (Exception e)
 		{
-			Debug.Log($"Failed to create a new player. Check your internet connection. Error details: {e.Message}");
+			EventManager.callWarning.Invoke($"Failed to create a new player. Check your internet connection. Error details: {e.Message}");
 			return null;
 		}
 	}
@@ -352,25 +381,25 @@ public class RequestManager
 	/// <exception cref="Exception"></exception>
 	public async Task<Log> CreateLog(Log log)
 	{
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/logs/";
+		string url = $"http://final.2025.nti-gamedev.ru/api/games/{UUID}/logs/";
 		using HttpClient client = new HttpClient();
 		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
 		if (log.shop_name == null)
 		{
 			request.Content = new StringContent(JsonConvert.SerializeObject(log).Replace("\"shop_name\":null,",""), Encoding.UTF8, "application/json");
-			Debug.Log($"Log: {JsonConvert.SerializeObject(log).Replace("\"shop_name\":null,", "")}");
+			EventManager.callWarning.Invoke($"Log: {JsonConvert.SerializeObject(log).Replace("\"shop_name\":null,", "")}");
 		}
 		else
 		{
 			request.Content = new StringContent(JsonConvert.SerializeObject(log), Encoding.UTF8, "application/json");
-			Debug.Log($"Log: {JsonConvert.SerializeObject(log)}");
+			EventManager.callWarning.Invoke($"Log: {JsonConvert.SerializeObject(log)}");
 		}
 		try
 		{
 			var response = await client.SendAsync(request);
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to create a new log. Status code: {response.StatusCode}");
+				EventManager.callWarning.Invoke($"Failed to create a new log. Status code: {response.StatusCode}");
 				return null;
 			}
 			Log responceLog;
@@ -380,7 +409,7 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			Debug.Log($"Failed to create a new log. Check your internet connection. Error details: {e.Message}");
+			EventManager.callWarning.Invoke($"Failed to create a new log. Check your internet connection. Error details: {e.Message}");
 			return null;
 		}
 	}
@@ -394,7 +423,7 @@ public class RequestManager
 	/// <exception cref="Exception"></exception>
 	public async Task<Shop> CreateShop(string username, Shop shop)
 	{
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/shops/";
+		string url = $"http://final.2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/shops/";
 		using HttpClient client = new HttpClient();
 		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
 		request.Content = new StringContent(JsonConvert.SerializeObject(shop), Encoding.UTF8, "application/json");
@@ -403,17 +432,17 @@ public class RequestManager
 			var response = await client.SendAsync(request);
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to create a new shop. Status code: {response.StatusCode}");
+				EventManager.callWarning.Invoke($"Failed to create a new shop. Status code: {response.StatusCode}");
 				return null;
 			}
 			Shop responceLog;
 			var responseBody = await response.Content.ReadAsStringAsync();
-			responceLog = JsonConvert.DeserializeObject<Shop>(responseBody);
-			return responceLog;
+			//responceLog = JsonConvert.DeserializeObject<Shop>(responseBody);
+			return null;
 		}
 		catch (Exception e)
 		{
-			Debug.Log($"Failed to create a new shop. Check your internet connection. Error details: {e.Message}");
+			EventManager.callWarning.Invoke($"Failed to create a new shop. Check your internet connection. Error details: {e.Message}");
 			return null;
 		}
 	}
@@ -426,7 +455,7 @@ public class RequestManager
 	/// <exception cref="Exception"></exception>
 	public async Task<Log> CreateShopLog(Log playerLog)
 	{
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/logs/";
+		string url = $"http://final.2025.nti-gamedev.ru/api/games/{UUID}/logs/";
 		using HttpClient client = new HttpClient();
 		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
 		request.Content = new StringContent(JsonConvert.SerializeObject(playerLog), Encoding.UTF8, "application/json");
@@ -435,7 +464,7 @@ public class RequestManager
 			var response = await client.SendAsync(request);
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to create a new log. Status code: {response.StatusCode}");
+				EventManager.callWarning.Invoke($"Failed to create a new log. Status code: {response.StatusCode}");
 				return null;
 			}
 			Log responceLog;
@@ -445,7 +474,7 @@ public class RequestManager
 		}
 		catch (Exception e)
 		{
-			Debug.Log($"Failed to create a new log. Check your internet connection. Error details: {e.Message}");
+			EventManager.callWarning.Invoke($"Failed to create a new log. Check your internet connection. Error details: {e.Message}");
 			return null;
 		}
 	}
@@ -454,7 +483,7 @@ public class RequestManager
 	#region DELETE
 	public async Task DeletePlayer(string username)
 	{
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/";
+		string url = $"http://final.2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/";
 		using HttpClient client = new HttpClient();
 		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, url);
 		try
@@ -462,18 +491,18 @@ public class RequestManager
 			var response = await client.SendAsync(request);
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to delete player. Status code: {response.StatusCode}");
+				EventManager.callWarning.Invoke($"Failed to delete player. Status code: {response.StatusCode}");
 			}
 		}
 		catch (Exception e)
 		{
-			Debug.Log($"Failed to delete player. Check your internet connection. Error details: {e.Message}");
+			EventManager.callWarning.Invoke($"Failed to delete player. Check your internet connection. Error details: {e.Message}");
 		}
 	}
 
 	public async Task DeletePlayerShop(string username, string shopName)
 	{
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/shops/{shopName}/";
+		string url = $"http://final.2025.nti-gamedev.ru/api/games/{UUID}/players/{username}/shops/{shopName}/";
 		using HttpClient client = new HttpClient();
 		HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, url);
 		try
@@ -481,12 +510,12 @@ public class RequestManager
 			var response = await client.SendAsync(request);
 			if (!response.IsSuccessStatusCode)
 			{
-				Debug.Log($"Failed to delete player's shop. Status code: {response.StatusCode}");
+				EventManager.callWarning.Invoke($"Failed to delete player's shop. Status code: {response.StatusCode}");
 			}
 		}
 		catch (Exception e)
 		{
-			Debug.Log($"Failed to delete player's shop. Check your internet connection. Error details: {e.Message}");
+			EventManager.callWarning.Invoke($"Failed to delete player's shop. Check your internet connection. Error details: {e.Message}");
 		}
 	}
 	#endregion
@@ -495,20 +524,20 @@ public class RequestManager
 	//TRYING OUT COROUTINES FOR NETCODE. STOLEN FROM UNITY'S ORIGINAL IMPLEMENTATION OF UNITYWEBREQUEST
 	public IEnumerator GetPlayerEnum(string name)
 	{
-		string url = $"https://2025.nti-gamedev.ru/api/games/{UUID}/players/{name}/";
+		string url = $"http://final.2025.nti-gamedev.ru/api/games/{UUID}/players/{name}/";
 		UnityWebRequest request = UnityWebRequest.Get(url);
 
 		yield return request.SendWebRequest();
 
 		if (request.result != UnityWebRequest.Result.Success)
 		{
-			Debug.Log(request.error);
+			EventManager.callWarning.Invoke(request.error);
 			yield return null;
 		}
 		else
 		{
 			// Show results as text
-			Debug.Log(request.downloadHandler.text);
+			EventManager.callWarning.Invoke(request.downloadHandler.text);
 			var player = JsonConvert.DeserializeObject<Player>(request.downloadHandler.text);
 			if (isAPIActive)
 			{

@@ -5,6 +5,7 @@ using System;
 using static NotificationTypes;
 using UnityEngine.Events;
 using System.Linq;
+using TMPro;
 
 public class NotificationsManager : MonoBehaviour
 {
@@ -35,12 +36,22 @@ public class NotificationsManager : MonoBehaviour
 		notification.GetComponent<Notification>().InitializeNotification(type, message);
 		return null;
 	}
+	public UnityAction CreateNotification(GlobalEvent globalEvent, NotificationType type)
+	{
+		if (activeNotificationTexts.Count > 0) return null;
+
+		var notification = Instantiate(prefab, notificationGrid);
+		notification.GetComponentInChildren<TextMeshProUGUI>().text = globalEvent.name;
+		notification.GetComponent<Notification>().InitializeNotification(type, globalEvent.text);
+		return null;
+	}
 
 	public void Start()
 	{
 		EventManager.callError.AddListener(error => { CreateNotification(error, NotificationTypes.error); });
 		EventManager.callWarning.AddListener(warning => { CreateNotification(warning, NotificationTypes.warning); });
 		EventManager.callMessage.AddListener(message => { CreateNotification(message, NotificationTypes.message); });
+		EventManager.callGlobalEventNotification.AddListener(globalEvent => { CreateNotification(globalEvent, NotificationTypes.globalEvent); });
 	}
 
 	public void AddActiveNotificationText(Notification notification) => activeNotificationTexts.Add(notification);

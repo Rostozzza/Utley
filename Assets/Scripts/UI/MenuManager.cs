@@ -13,8 +13,8 @@ public class MenuManager : MonoBehaviour
 {
 	public static MenuManager Instance;
 
-	JsonManager JsonManager = new JsonManager(true);
-	RequestManager RequestManager = new RequestManager(true);
+	public JsonManager JsonManager = new JsonManager(true);
+	public RequestManager RequestManager = new RequestManager(true);
 	[SerializeField] private string currentPLayerName;
 	[SerializeField] private string currentPlayerPassword;
 	[SerializeField] private TextMeshProUGUI currentPlayerField;
@@ -92,6 +92,10 @@ public class MenuManager : MonoBehaviour
 	[Header("Guide Settings")]
     private Vector3 startGuideButtonPos;
 	private ProblemType lastProblemType;
+	[Header("Global Events Settings")]
+	[SerializeField] private GlobalEventTicker eventTicker;
+
+	public GlobalEventTicker GetEventTicker() => eventTicker;
 
     public void SetMasterVolume()
 	{
@@ -227,6 +231,7 @@ public class MenuManager : MonoBehaviour
 	{
 		isAPIActive = true;
 		JsonManager = new JsonManager(isAPIActive);
+		eventTicker.StartTicker();
 		if (isPlayerLoadable)
 		{
 			continueGameButton.SetActive(true);
@@ -519,6 +524,7 @@ public class MenuManager : MonoBehaviour
 
 	public async void Registrate()
 	{
+		Debug.Log("PIZDEEEEV");
 		TrySetActiveLoadingView(true);
 		var requestedPlayer = await RequestManager.GetPlayer(registrationUsernameField.text);
 		if (requestedPlayer == null)
@@ -545,6 +551,7 @@ public class MenuManager : MonoBehaviour
 		TrySetActiveLoadingView(false);
 		if (requestedPlayer == null)
 		{
+			Debug.Log("<color=red>KMS");
 			return;
 		}
 		if (requestedPlayer.resources["password"] != loginPasswordField.text)
