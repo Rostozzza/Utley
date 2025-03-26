@@ -37,5 +37,10 @@ public static class NotificationTypes
 		shakeTime = 0,
 		bgColor = Color.blue
 	};
+	public static NotificationType globalEvent = new NotificationType
+	{
+		screenTime = 2.5f,
+		bgColor = Color.white
+	};
 	#endregion
 }

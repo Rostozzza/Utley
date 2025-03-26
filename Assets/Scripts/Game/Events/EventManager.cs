@@ -80,7 +80,7 @@ public static class EventManager
 	public static UnityEvent<string> callError = new UnityEvent<string>();
 
 	/// <summary>
-	/// Invoke warning through this event. Pass warning message into Invoke()
+	/// Invoke warning through this event. Pass warning message into Invoke()f
 	/// </summary>
 	public static UnityEvent<string> callWarning = new UnityEvent<string>();
 
@@ -88,5 +88,10 @@ public static class EventManager
 	/// Invoke standart notification through this event. Pass message into Invoke()
 	/// </summary>
 	public static UnityEvent<string> callMessage = new UnityEvent<string>();
+
+	/// <summary>
+	/// Invoke event notification that will
+	/// </summary>
+	public static UnityEvent<GlobalEvent> callGlobalEventNotification = new UnityEvent<GlobalEvent>();
 	#endregion
 }

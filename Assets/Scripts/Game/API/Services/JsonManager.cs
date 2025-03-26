@@ -14,7 +14,6 @@ public class JsonManager
 		this.isAPIActive = isAPIActive;
 		requestManager = new RequestManager(isAPIActive);
 	}
-
 	public async Task<Player> SavePlayerToJson(string playerName)
 	{
 		Player playerModel = new Player();
@@ -70,7 +69,8 @@ public class JsonManager
 		playerModel.resources.Add("HNY", "0");
 		playerModel.resources.Add("bears", "4");
 		playerModel.resources.Add("password", password);
-		string serializedPlayer = JsonConvert.SerializeObject(playerModel);
+		string serializedPlayer = JsonConvert.SerializeObject(playerModel,Formatting.Indented);
+		Debug.Log(serializedPlayer); 
 		//File.WriteAllText(path, serializedPlayer);
 		var rerponce = await requestManager.CreatePlayer(playerModel);
 		return rerponce;
