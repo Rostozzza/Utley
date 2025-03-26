@@ -194,7 +194,7 @@ public class SupplyRoom : RoomScript
 		else
 		{
 			//timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
-			timer = ValuesHolder.StandartInteractionTime;
+			timer = (float)ValuesHolder.StandartInteractionTime;
 		}
 		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Supply, GetWalkPoints(), this.gameObject);
 		timer = 120f;

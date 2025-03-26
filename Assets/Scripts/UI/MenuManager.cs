@@ -621,11 +621,11 @@ public class MenuManager : MonoBehaviour
 			TrySetActiveLoadingView(false);
 			try
 			{
-				GameManager.Instance.asteriy = ValuesHolder.StartAsterium; // 40
-				GameManager.Instance.honey = ValuesHolder.StartEnergohoney; // 40
-				GameManager.Instance.astroluminite = ValuesHolder.StartAstroluminite; // 6
-				GameManager.Instance.prototype = ValuesHolder.StartPrototype;
-				GameManager.Instance.ursowaks = ValuesHolder.StartUrsowaks;
+				GameManager.Instance.asteriy = (int)ValuesHolder.StartAsterium; // 40
+				GameManager.Instance.honey = (float)ValuesHolder.StartEnergohoney; // 40
+				GameManager.Instance.astroluminite = (float)ValuesHolder.StartAstroluminite; // 6
+				GameManager.Instance.prototype = (float)ValuesHolder.StartPrototype;
+				GameManager.Instance.ursowaks = (float)ValuesHolder.StartUrsowaks;
 				GameManager.Instance.playerBears = 4; // 4
 				GameManager.Instance.uiResourceShower.UpdateIndicators();
 			}
@@ -727,9 +727,9 @@ public class MenuManager : MonoBehaviour
 		TrySetActiveLoadingView(false);
 		try
 		{
-			GameManager.Instance.asteriy = ValuesHolder.StartAsterium;
-			GameManager.Instance.honey = ValuesHolder.StartEnergohoney;
-			GameManager.Instance.astroluminite = ValuesHolder.StartAstroluminite;
+			GameManager.Instance.asteriy = (int)ValuesHolder.StartAsterium;
+			GameManager.Instance.honey = (float)ValuesHolder.StartEnergohoney;
+			GameManager.Instance.astroluminite = (int)ValuesHolder.StartAstroluminite;
 			GameManager.Instance.playerBears = 4;
 			GameManager.Instance.uiResourceShower.UpdateIndicators();
 		}

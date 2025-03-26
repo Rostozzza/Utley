@@ -70,10 +70,10 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] public GameObject takeALookButton;
 	[SerializeField] private GameObject coneierScreen;
 	[Header("Work Settings")]
-	protected float SpeedByBearLevelCoef = ValuesHolder.InteractionSpeedMultiplyerByLevel;
-	protected float SpeedByRoomLevelCoef = ValuesHolder.InteractionSpeedMultiplyerByGrade;
-	protected float StandartInteractionTime = ValuesHolder.StandartInteractionTime;
-	protected float SpeedByUsingSuitableBearCoef = ValuesHolder.InteracionTimeMultiplyerByCorrectJob;
+	protected float SpeedByBearLevelCoef = (float)ValuesHolder.InteractionSpeedMultiplyerByLevel;
+	protected float SpeedByRoomLevelCoef = (float)ValuesHolder.InteractionSpeedMultiplyerByGrade;
+	protected float StandartInteractionTime = (float)ValuesHolder.StandartInteractionTime;
+	protected float SpeedByUsingSuitableBearCoef = (float)ValuesHolder.InteracionTimeMultiplyerByCorrectJob;
 	protected float efficientyCoeficent = 1f;
 	[SerializeField] protected RoomWorkUI workUI;
 	[SerializeField] private GameObject efficiencyDownPanel;
@@ -669,8 +669,8 @@ public class RoomScript : MonoBehaviour
 		{
 			case Resources.Asteriy:
 				TrySetVideoPlayers(true);
-				timer = ValuesHolder.StandartInteractionTimeAsteriumComplex;
-				workUI.StartWork(timer, ValuesHolder.AsteriumAmountByOneInteraction, GameManager.Instance.uiResourceShower.asteriyAmountText.transform);
+				timer = (float)ValuesHolder.StandartInteractionTimeAsteriumComplex;
+				workUI.StartWork(timer, (int)ValuesHolder.AsteriumAmountByOneInteraction, GameManager.Instance.uiResourceShower.asteriyAmountText.transform);
 				while (timer > 0)
 				{
 					//timeShow.text = SecondsToTimeToShow(timer);
@@ -679,12 +679,12 @@ public class RoomScript : MonoBehaviour
 				}
 				//timeShow.text = "";
 				GameManager.Instance.WithdrawRawAsterium();
-				GameManager.Instance.ChangeAsteriy(ValuesHolder.AsteriumAmountByOneInteraction, new Log
+				GameManager.Instance.ChangeAsteriy((int)ValuesHolder.AsteriumAmountByOneInteraction, new Log
 				{
 					comment = $"Added {ValuesHolder.AsteriumAmountByOneInteraction} asterium to player {GameManager.Instance.playerName} for processing raw asterium from spaceship",
 					player_name = GameManager.Instance.playerName,
 
-					resources_changed = new Dictionary<string, float> { { "asterium", ValuesHolder.AsteriumAmountByOneInteraction } }
+					resources_changed = new Dictionary<string, float> { { "asterium", (int)ValuesHolder.AsteriumAmountByOneInteraction } }
 				});
 				TrySetVideoPlayers(false);
 				isReadyForWork = false;
@@ -706,7 +706,7 @@ public class RoomScript : MonoBehaviour
 				{
 					//timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
 					//timer = StandartInteractionTime * (level > 1 ? (1 - (1 - SpeedByRoomLevelCoef) * level) : 1);
-					timer = ValuesHolder.StandartInteractionTime;
+					timer = (float)ValuesHolder.StandartInteractionTime;
 				}
 				if (fixedBear.GetComponent<UnitScript>().isBoosted)
 				{
@@ -739,12 +739,12 @@ public class RoomScript : MonoBehaviour
 						GameManager.Instance.DeliverRawAsterium();
 						break;
 					case FlyForType.Astroluminite:
-						GameManager.Instance.ChangeAstroluminite(ValuesHolder.AstroluminiteAmountByOneInteraction, new Log
+						GameManager.Instance.ChangeAstroluminite((int)ValuesHolder.AstroluminiteAmountByOneInteraction, new Log
 						{
 							comment = $"Added {ValuesHolder.AstroluminiteAmountByOneInteraction} astroluminite to player {GameManager.Instance.playerName} from spaceship",
 							player_name = GameManager.Instance.playerName,
 
-							resources_changed = new Dictionary<string, float> { { "astroluminite", ValuesHolder.AstroluminiteAmountByOneInteraction } }
+							resources_changed = new Dictionary<string, float> { { "astroluminite", (int)ValuesHolder.AstroluminiteAmountByOneInteraction } }
 						});
 						break;
 				}
@@ -1210,7 +1210,7 @@ public class RoomScript : MonoBehaviour
 		Destroyed
 	}
 
-	protected float GetModifiedInteractionTime(float bearLevel) => ValuesHolder.StandartInteractionTime * Mathf.Pow(ValuesHolder.InteractionSpeedMultiplyerByLevel, bearLevel) * Mathf.Pow(ValuesHolder.InteractionSpeedMultiplyerByGrade, level);
+	protected float GetModifiedInteractionTime(float bearLevel) => (float)ValuesHolder.StandartInteractionTime * Mathf.Pow((float)ValuesHolder.InteractionSpeedMultiplyerByLevel, bearLevel) * Mathf.Pow((float)ValuesHolder.InteractionSpeedMultiplyerByGrade, level);
 
 	public void GetPrices(out int asteriumCost, out int honeyCost, out int astroluminiteCost) => GetPrices(out asteriumCost, out honeyCost, out astroluminiteCost, resource);
 	public void GetPrices(out int asteriumCost, out int honeyCost, out int astroluminiteCost, Resources resource)

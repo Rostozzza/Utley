@@ -6,7 +6,6 @@ using System.Collections;
 public class ModManager : MonoBehaviour
 {
     public Constants model;
-    private string path;
 
     private void Awake()
     {
@@ -52,38 +51,6 @@ public class ModManager : MonoBehaviour
         ValuesHolder.SellUrsowaks                           = model.SellUrsowaks;
 
         ValuesHolder.RoomsBuildPrice                        = model.RoomsBuildPrice;
-
-        //ValuesHolder.ElevatorAsteriumPrice                  = model.ElevatorAsteriumPrice;
-        //ValuesHolder.ElevatorEnergohoneyPrice               = model.ElevatorEnergohoneyPrice;
-        //ValuesHolder.ElevatorAstroluminitePrice             = model.ElevatorAstroluminitePrice;
-        // 
-        //ValuesHolder.EnergohoneyAsteriumPrice               = model.EnergohoneyAsteriumPrice;
-        //ValuesHolder.EnergohoneyEnergohoneyPrice            = model.EnergohoneyEnergohoneyPrice;
-        //ValuesHolder.EnergohoneyAstroluminitePrice          = model.EnergohoneyAstroluminitePrice;
-        // 
-        //ValuesHolder.AsteriyAsteriumPrice                   = model.AsteriyAsteriumPrice;
-        //ValuesHolder.AsteriyEnergohoneyPrice                = model.AsteriyEnergohoneyPrice;
-        //ValuesHolder.AsteriyAstroluminitePrice              = model.AsteriyAstroluminitePrice;
-        //  
-        //ValuesHolder.CosmodromeAsteriumPrice                = model.CosmodromeAsteriumPrice;
-        //ValuesHolder.CosmodromeEnergohoneyPrice             = model.CosmodromeEnergohoneyPrice;
-        //ValuesHolder.CosmodromeAstroluminitePrice           = model.CosmodromeAstroluminitePrice;
-        //  
-        //ValuesHolder.BedAsteriumPrice                       = model.BedAsteriumPrice;
-        //ValuesHolder.BedEnergohoneyPrice                    = model.BedEnergohoneyPrice;
-        //ValuesHolder.BedAstroluminitePrice                  = model.BedAstroluminitePrice;
-        //  
-        //ValuesHolder.BuildAsteriumPrice                     = model.BuildAsteriumPrice;
-        //ValuesHolder.BuildEnergohoneyPrice                  = model.BuildEnergohoneyPrice;
-        //ValuesHolder.BuildAstroluminitePrice                = model.BuildAstroluminitePrice;
-        //  
-        //ValuesHolder.SupplyAsteriumPrice                    = model.SupplyAsteriumPrice;
-        //ValuesHolder.SupplyEnergohoneyPrice                 = model.SupplyEnergohoneyPrice;
-        //ValuesHolder.SupplyAstroluminitePrice               = model.SupplyAstroluminitePrice;
-        //  
-        //ValuesHolder.ResearchAsteriumPrice                  = model.ResearchAsteriumPrice;
-        //ValuesHolder.ResearchEnergohoneyPrice               = model.ResearchEnergohoneyPrice;
-        //ValuesHolder.ResearchAstroluminitePrice             = model.ResearchAstroluminitePrice;
         
         ValuesHolder.RepairCost                             = model.RepairCost;
         ValuesHolder.DamageByTide                           = model.DamageByTide;
@@ -97,12 +64,25 @@ public class ModManager : MonoBehaviour
 
     public void TryGetConfig()
     {
-        path = Application.isEditor ? Application.dataPath + "/Resources" : path = Directory.GetCurrentDirectory();
-        if (!File.Exists(path + "/config.json")) MakeTemplate(path);
-        model = JsonConvert.DeserializeObject<Constants>(File.ReadAllText(path + "/config.json"));
+        //path = Application.isEditor ? Application.dataPath + "/Resources" : path = Directory.GetCurrentDirectory();
+        //if (!File.Exists(path + "/config.json")) MakeTemplate(path);
+        //model = JsonConvert.DeserializeObject<Constants>(File.ReadAllText(path + "/config.json"));
+
+        string path;
+
+        path = Application.isEditor ? Application.dataPath + "/Resources/Mods/Config" : Directory.GetCurrentDirectory() + "/Mods/Config";
+        if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+        string[] files = Directory.GetFiles(path);
+        if (files.Length > 0)
+        {
+            foreach (string file in files)
+            {
+                //if (file)
+            }
+        }
     }
 
-    public void MakeTemplate(string path)
+    public Constants MakeTemplate(string path)
     {
         Constants tm = new()
         {
@@ -141,14 +121,14 @@ public class ModManager : MonoBehaviour
 
             RoomsBuildPrice = new()
             {
-                { RoomType.Elevator,    new(){ { ResourceType.AsteriumPrice, 10 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 0 }, { ResourceType.RepairAsteriumCost, 15 }, { ResourceType.RepairAstroluminiteCost, 1 } } },
-                { RoomType.Energohoney, new(){ { ResourceType.AsteriumPrice, 20 }, { ResourceType.EnergohoneyPrice, 25 }, { ResourceType.AstroluminitePrice, 1 }, { ResourceType.RepairAsteriumCost, 15 }, { ResourceType.RepairAstroluminiteCost, 1 } } },
-                { RoomType.Asterium,    new(){ { ResourceType.AsteriumPrice, 30 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 3 }, { ResourceType.RepairAsteriumCost, 15 }, { ResourceType.RepairAstroluminiteCost, 1 } } },
-                { RoomType.Cosmodrome,  new(){ { ResourceType.AsteriumPrice, 0 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 0 }, { ResourceType.RepairAsteriumCost, 15 }, { ResourceType.RepairAstroluminiteCost, 1 } } },
-                { RoomType.Bed,         new(){ { ResourceType.AsteriumPrice, 25 }, { ResourceType.EnergohoneyPrice, 10 }, { ResourceType.AstroluminitePrice, 0 }, { ResourceType.RepairAsteriumCost, 15 }, { ResourceType.RepairAstroluminiteCost, 1 } } },
-                { RoomType.Build,       new(){ { ResourceType.AsteriumPrice, 35 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 3 }, { ResourceType.RepairAsteriumCost, 15 }, { ResourceType.RepairAstroluminiteCost, 1 } } },
-                { RoomType.Supply,      new(){ { ResourceType.AsteriumPrice, 30 }, { ResourceType.EnergohoneyPrice, 5 }, { ResourceType.AstroluminitePrice, 2 }, { ResourceType.RepairAsteriumCost, 15 }, { ResourceType.RepairAstroluminiteCost, 1 } } },
-                { RoomType.Research,    new(){ { ResourceType.AsteriumPrice, 25 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 1 }, { ResourceType.RepairAsteriumCost, 15 }, { ResourceType.RepairAstroluminiteCost, 1 } } }
+                { RoomType.Elevator,    new(){ { ResourceType.AsteriumPrice, 10 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 0 } } },
+                { RoomType.Energohoney, new(){ { ResourceType.AsteriumPrice, 20 }, { ResourceType.EnergohoneyPrice, 25 }, { ResourceType.AstroluminitePrice, 1 } } },
+                { RoomType.Asterium,    new(){ { ResourceType.AsteriumPrice, 30 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 3 } } },
+                { RoomType.Cosmodrome,  new(){ { ResourceType.AsteriumPrice, 0 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 0 } } },
+                { RoomType.Bed,         new(){ { ResourceType.AsteriumPrice, 25 }, { ResourceType.EnergohoneyPrice, 10 }, { ResourceType.AstroluminitePrice, 0 } } },
+                { RoomType.Build,       new(){ { ResourceType.AsteriumPrice, 35 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 3 } } },
+                { RoomType.Supply,      new(){ { ResourceType.AsteriumPrice, 30 }, { ResourceType.EnergohoneyPrice, 5 }, { ResourceType.AstroluminitePrice, 2 } } },
+                { RoomType.Research,    new(){ { ResourceType.AsteriumPrice, 25 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 1 } } }
             },
 
             RepairCost = 15,
@@ -160,7 +140,8 @@ public class ModManager : MonoBehaviour
             EnergohoneyExponent = 1f,
         };
         //Debug.Log(JsonConvert.SerializeObject(tm, Formatting.Indented));
-        File.WriteAllText(path + "/config.json", JsonConvert.SerializeObject(tm, Formatting.Indented));
+       // File.WriteAllText(path + "/config.json", JsonConvert.SerializeObject(tm, Formatting.Indented));
+       return tm;
     }
 }
 

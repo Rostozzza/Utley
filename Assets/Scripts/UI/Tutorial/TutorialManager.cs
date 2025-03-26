@@ -167,9 +167,9 @@ public class TutorialManager : MonoBehaviour
 		}
 		startGameButton.SetActive(true);
 		SetGameManagerSettings(true);
-		GameManager.Instance.astroluminite = ValuesHolder.StartAstroluminite; // MAKE METHODS IN GAMEMANAGER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		GameManager.Instance.asteriy = ValuesHolder.StartAsterium; // MAKE METHODS IN GAMEMANAGER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		GameManager.Instance.honey = ValuesHolder.StartEnergohoney; // MAKE METHODS IN GAMEMANAGER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		GameManager.Instance.astroluminite = (float)ValuesHolder.StartAstroluminite; // MAKE METHODS IN GAMEMANAGER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		GameManager.Instance.asteriy = (int)ValuesHolder.StartAsterium; // MAKE METHODS IN GAMEMANAGER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		GameManager.Instance.honey = (float)ValuesHolder.StartEnergohoney; // MAKE METHODS IN GAMEMANAGER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		GameManager.Instance.HNY = 0; // MAKE METHODS IN GAMEMANAGER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		GameManager.Instance.prototype = 0; // MAKE METHODS IN GAMEMANAGER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	}

@@ -36,7 +36,11 @@ public class SoundManager : MonoBehaviour
 	{
 		var audioMixerGroup = audioMixerGroups[(int)output];
 
-		if (audio == null || audioMixerGroup == null) Debug.Log("<color=red>НЕ СМОГЛИ СЫГРАТЬ ЗВУК</color>");
+		if (audio == null || audioMixerGroup == null)
+		{
+			Debug.Log("<color=red>НЕ СМОГЛИ СЫГРАТЬ ЗВУК</color>");
+			return;
+		}
 
 		var audioSource = Camera.main.gameObject.AddComponent<AudioSource>();
 		audioSource.clip = audio;

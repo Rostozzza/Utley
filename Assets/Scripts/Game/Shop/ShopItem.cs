@@ -80,19 +80,19 @@ public class ShopItem : MonoBehaviour
 			switch (name)
 			{
 				case "bears":
-					price = ValuesHolder.BuyBears;
+					price = (float)ValuesHolder.BuyBears;
 					break;
 				case "honey":
-					price = ValuesHolder.BuyHoney;
+					price = (float)ValuesHolder.BuyHoney;
 					break;
 				case "time":
-					price = ValuesHolder.BuyTime;
+					price = (float)ValuesHolder.BuyTime;
 					break;
 				case "temperatureBoost":
-					price = ValuesHolder.BuyTemperatureBoost;
+					price = (float)ValuesHolder.BuyTemperatureBoost;
 					break;
 				case "asterium":
-					price = ValuesHolder.BuyAsterium;
+					price = (float)ValuesHolder.BuyAsterium;
 					break;
 			}
 		}
@@ -101,19 +101,19 @@ public class ShopItem : MonoBehaviour
 			switch (name)
 			{
 				case "honey":
-					price = ValuesHolder.SellHoney;
+					price = (float)ValuesHolder.SellHoney;
 					break;
 				case "asterium":
-					price = ValuesHolder.SellAsterium;
+					price = (float)ValuesHolder.SellAsterium;
 					break;
 				case "astroluminite":
-					price = ValuesHolder.SellAstroluminite;
+					price = (float)ValuesHolder.SellAstroluminite;
 					break;
 				case "prototype":
-					price = ValuesHolder.SellPrototype;
+					price = (float)ValuesHolder.SellPrototype;
 					break;
 				case "ursowaks":
-					price = ValuesHolder.SellUrsowaks;
+					price = (float)ValuesHolder.SellUrsowaks;
 					break;
 			}
 		}

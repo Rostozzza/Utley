@@ -43,9 +43,9 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private Sprite selectedInfoButton;
 	[SerializeField] public List<BearStatusController> bearsToMoveOn;
 	[SerializeField] private bool isGraphUsing = false;
-	[SerializeField] private float timeLeft = ValuesHolder.GameDuration; // doesn't work, go to Awake and change;
+	[SerializeField] private float timeLeft = (float)ValuesHolder.GameDuration; // doesn't work, go to Awake and change;
 	[SerializeField] private float seasonTimeLeft;
-	[SerializeField] private float temperature = ValuesHolder.MaxTemperature;
+	[SerializeField] private float temperature = (float)ValuesHolder.MaxTemperature;
 	[SerializeField] private float timePast = 0f;
 	[SerializeField] private bool isGameRunning = true;
 	[SerializeField] private bool isTimeGo = true;
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
 
 	public void BoostTemperature()
 	{
-		temperature = ValuesHolder.MaxTemperature;
+		temperature = (float)ValuesHolder.MaxTemperature;
 		Debug.Log("Boosted temperature!");
 	}
 
@@ -289,7 +289,7 @@ public class GameManager : MonoBehaviour
 			Instance = this;
 			//DontDestroyOnLoad(gameObject);
 		}
-		timeLeft = ValuesHolder.GameDuration;
+		timeLeft = (float)ValuesHolder.GameDuration;
 		skyBG = GameObject.FindGameObjectWithTag("skyBG");
 		StartCoroutine(ConstantDurabilityDamager((int)ValuesHolder.DurationLoss));
 		StartCoroutine(ConstantEnergohoneyConsumer());
@@ -1777,7 +1777,7 @@ public class GameManager : MonoBehaviour
 		float honeyToEat = ValuesHolder.EnergohoneyConsumeMultiplier * (roomsAmount * ValuesHolder.EnergohoneyConsumeMultiplierByRoom + ValuesHolder.EnergohoneyConsumeMultiplierByCycle * Mathf.Pow(cycleNumber, ValuesHolder.EnergohoneyExponent)) / (isForSecond ? 60f : 1f);
 		if (season == Season.Freeze)
 		{
-			honeyToEat *= 1.05f + 0.1f * cycleNumber * ValuesHolder.CycleModifier;
+			honeyToEat *= 1.05f + 0.1f * cycleNumber * (float)ValuesHolder.CycleModifier;
 		}
 		return honeyToEat;
 	}
@@ -1789,7 +1789,7 @@ public class GameManager : MonoBehaviour
 			while (isSeasonChanging)
 			{
 				uiResourceShower.UpdateBarsStatuses();
-				seasonTimeLeft = ValuesHolder.CycleDuration / 4;
+				seasonTimeLeft = (float)ValuesHolder.CycleDuration / 4;
 				while (seasonTimeLeft > 0)
 				{
 					seasonTimeLeft -= Time.deltaTime;
@@ -1870,7 +1870,7 @@ public class GameManager : MonoBehaviour
 					room.GetComponent<RoomScript>().ChangeDurability(-damage);
 				});
 				if (!ShopManager.Instance.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("TabletShow")) Camera.main.GetComponent<CameraShake>().MeteorImpact();
-				yield return new WaitForSeconds(ValuesHolder.CycleDuration / (4 * meteorAmount));
+				yield return new WaitForSeconds((float)ValuesHolder.CycleDuration / (4 * meteorAmount));
 			}
 		}
 	}
@@ -1919,7 +1919,7 @@ public class GameManager : MonoBehaviour
 				Debug.Log("ПОРАЖЕНИЕ");
 				MenuManager.Instance.ShowLoseScreen();
 			}
-			temperature = Mathf.Clamp(temperature, -ValuesHolder.MinTemperature, ValuesHolder.MaxTemperature);
+			temperature = Mathf.Clamp(temperature, -(float)ValuesHolder.MinTemperature, (float)ValuesHolder.MaxTemperature);
 			yield return null;
 		}
 	}

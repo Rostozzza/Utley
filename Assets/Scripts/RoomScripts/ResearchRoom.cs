@@ -150,7 +150,7 @@ public class ResearchRoom : RoomScript
 		else
 		{
 			//timer = StandartInteractionTime * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
-			timer = ValuesHolder.StandartInteractionTime;
+			timer = (float)ValuesHolder.StandartInteractionTime;
 			//timer = 18f * 1.25f * (1 - 0.25f * (level - 1));
 		}
 		if (fixedBear.GetComponent<UnitScript>().isBoosted)
@@ -183,21 +183,21 @@ public class ResearchRoom : RoomScript
 		switch (waitOption)
 		{
 			case Type.Ursowaks:
-				GameManager.Instance.ChangeUrsowaks(ValuesHolder.UrsowaksAmountByOneInteraction, new Log
+				GameManager.Instance.ChangeUrsowaks((int)ValuesHolder.UrsowaksAmountByOneInteraction, new Log
 				{
 					comment = $"Player {GameManager.Instance.playerName} manufactured {ValuesHolder.UrsowaksAmountByOneInteraction} ursowaks",
 					 
 					player_name = GameManager.Instance.playerName,
-					resources_changed = new Dictionary<string, float> { { "ursowaks", ValuesHolder.UrsowaksAmountByOneInteraction } }
+					resources_changed = new Dictionary<string, float> { { "ursowaks", (int)ValuesHolder.UrsowaksAmountByOneInteraction } }
 				});
 				break;
 			case Type.Prototype:
-				GameManager.Instance.ChangePrototype(ValuesHolder.PrototypeAmountByOneInteraction, new Log
+				GameManager.Instance.ChangePrototype((int)ValuesHolder.PrototypeAmountByOneInteraction, new Log
 				{
 					comment = $"Player {GameManager.Instance.playerName} manufactured {ValuesHolder.PrototypeAmountByOneInteraction} prototype",
 					 
 					player_name = GameManager.Instance.playerName,
-					resources_changed = new Dictionary<string, float> { { "prototype", ValuesHolder.PrototypeAmountByOneInteraction } }
+					resources_changed = new Dictionary<string, float> { { "prototype", (int)ValuesHolder.PrototypeAmountByOneInteraction } }
 				});
 				break;
 			default:

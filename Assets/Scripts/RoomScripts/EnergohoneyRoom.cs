@@ -57,7 +57,7 @@ public class EnergohoneyRoom : RoomScript
 		{
 			//timer = 45f * 1.25f * (1 - 0.25f * (level - 1));
 			//timer = (StandartInteractionTime + 5) * (level > 1 ? (1 - ( 1 - SpeedByRoomLevelCoef) * level) : 1);
-			timer = ValuesHolder.StandartInteractionTime;
+			timer = (float)ValuesHolder.StandartInteractionTime;
 		}
 		if (fixedBear.GetComponent<UnitScript>().isBoosted)
 		{

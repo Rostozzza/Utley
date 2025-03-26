@@ -88,7 +88,7 @@ public class UIResourceShower : MonoBehaviour
         bool isDecreasing = false;
 		while (true)
 		{
-			temperatureSlider.value = (GameManager.Instance.GetTemperature() + ValuesHolder.MinTemperature) / (ValuesHolder.MaxTemperature + ValuesHolder.MinTemperature);
+			temperatureSlider.value = (GameManager.Instance.GetTemperature() + (float)ValuesHolder.MinTemperature) / ((float)ValuesHolder.MaxTemperature + (float)ValuesHolder.MinTemperature);
 			temperatureDynamic.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)GameManager.Instance.GetTemperature()) + " °C";
 			temperatureDynamic2.GetComponent<TextMeshProUGUI>().text = Convert.ToString((int)GameManager.Instance.GetTemperature()) + " °C";
             
