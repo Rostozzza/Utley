@@ -623,7 +623,7 @@ public class GameManager : MonoBehaviour
 		SelectAndBuildMainBlock(building, point).Wait();
 		Debug.Log("NoT DEAD after building");
 		StartCoroutine(WalkAndStartWork(room.GetComponent<BuilderRoom>().fixedBear, room));
-		room.GetComponent<BuilderRoom>().SetWait(true);
+		room.GetComponent<BuilderRoom>().SetWait(true,true);
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
 	}
 
@@ -1377,7 +1377,7 @@ public class GameManager : MonoBehaviour
 			//bool builderRoomCondition = (obj.GetComponentInParent<RoomScript>().resource == RoomScript.Resources.Build) && (obj.GetComponentInParent<BuilderRoom>().fixedBear != null) && unit.GetComponent<UnitMovement>().IsWalkingToWork();
 			if ((!enRouteButton.IsButtonPressed() && unit.GetComponent<UnitMovement>().IsWalkingToWork()) || builderGoesBack)//(builderGoesBack) ? unit.GetComponent<UnitMovement>().IsWalkingToWork() : !enRouteButton.IsButtonPressed() && unit.GetComponent<UnitMovement>().IsWalkingToWork())// || builderRoomCondition)
 			{
-				if (obj.GetComponentInParent<RoomScript>().resource == RoomScript.Resources.Build) obj.GetComponentInParent<BuilderRoom>().SetWait(true);
+				if (obj.GetComponentInParent<RoomScript>().resource == RoomScript.Resources.Build) obj.GetComponentInParent<BuilderRoom>().SetWait(true,true);
 				obj.GetComponentInParent<RoomScript>().StartWork(unit);
 				enRouteButton.SetButtonState(true);
 				unit.GetComponent<UnitScript>().SetMarker(false);

@@ -430,7 +430,7 @@ public class RoomScript : MonoBehaviour
 		upgradeBar.fillAmount = 0;
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
 		room.GetComponent<RoomScript>().SetStatus(Status.Free);
-		room.GetComponent<BuilderRoom>().SetWait(true);
+		room.GetComponent<BuilderRoom>().SetWait(true, true);
 		//durability = 1f;
 		ChangeDurability(0);
 		GameManager.Instance.WalkAndWork(room.GetComponent<BuilderRoom>().fixedBear, room);
@@ -1019,7 +1019,7 @@ public class RoomScript : MonoBehaviour
 		progressBar.fillAmount = 0;
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", false);
 		//room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().MoveToRoom(room.GetComponent<RoomScript>());
-		room.GetComponent<BuilderRoom>().SetWait(true);
+		room.GetComponent<BuilderRoom>().SetWait(true, true);
 		room.GetComponent<RoomScript>().SetStatus(Status.Free);
 		durability = 1f;
 		ChangeDurability(0);
