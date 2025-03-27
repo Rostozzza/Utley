@@ -18,6 +18,7 @@ public class SoundManager : MonoBehaviour
 	public AudioClip aiRoomWorkSound;
 	[Header("Environment")]
 	public AudioClip impactSound;
+	public AudioClip beeBuildSound;
 	[Header("Mono")]
 	public AudioClip clickSound;
 	public AudioClip bearSelectSound;

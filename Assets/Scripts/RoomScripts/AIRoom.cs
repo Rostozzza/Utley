@@ -49,5 +49,7 @@ public class AIRoom : RoomScript
         {
             if (audioSource.isPlaying) audioSource.Stop();
         }
+
+        GameManager.Instance.uiResourceShower.SetAIBoost(isEnpowered);
     }
 }
