@@ -79,22 +79,23 @@ public class ModManager : MonoBehaviour
 
 	private void ParseCondigSprites()
 	{
-		var files = Directory.GetFiles(path+"Asssets/Config");
+		var files = Directory.GetFiles(path+"/Assets/Config");
+		if (files.Length == 0) return;
 		foreach (var file in files)
 		{
 			Texture2D SpriteTexture = new Texture2D(2, 2);
 			SpriteTexture.LoadImage(File.ReadAllBytes(file));
-			Sprite NewSprite = Sprite.Create(SpriteTexture, new Rect(0, 0, SpriteTexture.width, SpriteTexture.height), new Vector2(0, 0));
+			Sprite NewSprite = Sprite.Create(SpriteTexture, new Rect(0, 0, 0, 0), new Vector2(0, 0));
 			earthSprites.Add(NewSprite);
 		}
 	}
 
 	public void TryGetMods()
 	{
-		path = Application.isEditor ? Application.dataPath + "/Resources/Mods" : path = Directory.GetCurrentDirectory() + "/Mods";
-		if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-		if (!File.Exists(path + "Data/config.json")) MakeTemplate();
-		model = JsonConvert.DeserializeObject<Constants>(File.ReadAllText(path + "Data/config.json"));
+		path = Application.isEditor ? Application.dataPath + "\\Resources\\Mods" : path = Directory.GetCurrentDirectory() + "/Mods";
+		//if (!Directory.Exists(path+"/Data")) Directory.CreateDirectory(path + "\\Data");
+		if (!File.Exists(path + "\\Data/config.json")) MakeTemplate();
+		model = JsonConvert.DeserializeObject<Constants>(File.ReadAllText(path + "\\Data\\config.json"));
 		ParseCondigSprites();
 		SetValuesHolder();
 		if (!Directory.Exists(path))
@@ -135,6 +136,8 @@ public class ModManager : MonoBehaviour
 					break;
 				case "Events":
 					ParseEvents(dataRepo);
+					break;
+				case "Config":
 					break;
 				default:
 					EventManager.callError.Invoke($"Неизвестная директория {dataRepo}!");
