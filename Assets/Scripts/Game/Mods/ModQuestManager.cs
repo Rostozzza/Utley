@@ -81,7 +81,7 @@ public class ModQuestManager : MonoBehaviour
 					{
 						questViews[conditions.IndexOf(quest)].GetComponent<Image>().enabled = true;
 						conditions.Remove(quest);
-						yield break;
+						break;
 					}
 					yield return null;
 				}
@@ -93,7 +93,7 @@ public class ModQuestManager : MonoBehaviour
 					{
 						questViews[conditions.IndexOf(quest)].GetComponent<Image>().enabled = true;
 						conditions.Remove(quest);
-						yield break;
+						break;
 					}
 					yield return null;
 				}
@@ -117,10 +117,11 @@ public class ModQuestManager : MonoBehaviour
 					{
 						questViews[conditions.IndexOf(quest)].GetComponent<Image>().enabled = true;
 						conditions.Remove(quest);
-						yield break;
+						break;
 					}
 					yield return null;
 				}
+				break;
 			case "Prototype":
 				while (true)
 				{
@@ -128,7 +129,7 @@ public class ModQuestManager : MonoBehaviour
 					{
 						questViews[conditions.IndexOf(quest)].GetComponent<Image>().enabled = true;
 						conditions.Remove(quest);
-						yield break;
+						break;
 					}
 					yield return null;
 				}
@@ -140,7 +141,7 @@ public class ModQuestManager : MonoBehaviour
 					{
 						questViews[conditions.IndexOf(quest)].GetComponent<Image>().enabled = true;
 						conditions.Remove(quest);
-						yield break;
+						break;
 					}
 					yield return null;
 				}
@@ -152,7 +153,7 @@ public class ModQuestManager : MonoBehaviour
 					{
 						questViews[conditions.IndexOf(quest)].GetComponent<Image>().enabled = true;
 						conditions.Remove(quest);
-						yield break;
+						break;
 					}
 					yield return null;
 				}

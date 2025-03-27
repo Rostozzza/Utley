@@ -26,7 +26,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private bool isPauseMenuActive = false;
 	[SerializeField] private bool isPauseMenuSettingsActive = false;
 	[SerializeField] private CutsceneSkipper skipper;
-    [SerializeField] private float skipTimer;
+	[SerializeField] private float skipTimer;
 	[SerializeField] private GuideManager guideManager;
 	private Dictionary<LineRenderer, bool> linesStates = new();
 	[SerializeField] private int sortingOrderBeforePause;
@@ -92,14 +92,14 @@ public class MenuManager : MonoBehaviour
 	[Header("Cosmodrome Exercise")]
 	[SerializeField] private CosmodromeExercise cosmodromeExercise;
 	[Header("Guide Settings")]
-    private Vector3 startGuideButtonPos;
+	private Vector3 startGuideButtonPos;
 	private ProblemType lastProblemType;
 	[Header("Global Events Settings")]
 	[SerializeField] private GlobalEventTicker eventTicker;
 
 	public GlobalEventTicker GetEventTicker() => eventTicker;
 
-    public void SetMasterVolume()
+	public void SetMasterVolume()
 	{
 		float volume = masterSlider.value;
 		PlayerPrefs.SetFloat("MasterVolume", volume);
@@ -268,7 +268,7 @@ public class MenuManager : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
-		
+
 		if (skipper == null)
 		{
 			skipper = GetComponentInChildren<CutsceneSkipper>();
@@ -332,7 +332,7 @@ public class MenuManager : MonoBehaviour
 			}
 		};
 
-		if (PlayerPrefs.HasKey("MasterVolume")) 
+		if (PlayerPrefs.HasKey("MasterVolume"))
 		{
 			float volume = PlayerPrefs.GetFloat("MasterVolume");
 			SetMixerVolume("MasterVolume", volume);
@@ -395,7 +395,8 @@ public class MenuManager : MonoBehaviour
 		try
 		{
 			GameObject.FindGameObjectWithTag("tutorial").GetComponent<Canvas>().sortingOrder = 9999; // God left us;
-		} catch {}
+		}
+		catch { }
 	}
 
 	public void Resume()
@@ -404,7 +405,7 @@ public class MenuManager : MonoBehaviour
 		{
 			return;
 		}
-		
+
 		GetComponent<Canvas>().sortingOrder = sortingOrderBeforePause;
 
 		SwitchHideLinesVFX(false);
@@ -419,7 +420,8 @@ public class MenuManager : MonoBehaviour
 		try
 		{
 			GameObject.FindGameObjectWithTag("tutorial").GetComponent<Canvas>().sortingOrder = 32767; // 😭;
-		} catch {}
+		}
+		catch { }
 	}
 
 	public void ToMenu()
@@ -623,7 +625,7 @@ public class MenuManager : MonoBehaviour
 		{
 			yield return Cutscene2();
 		}
-		var operation = SceneManager.LoadSceneAsync(1); // #ABOBA   1 - default, 3 - ai, 4 - pchols
+		var operation = SceneManager.LoadSceneAsync(eventTicker.activeEvents.FirstOrDefault(x => x.name == "AiEvent") != null ? 3 : (eventTicker.activeEvents.FirstOrDefault(x => x.name == "InvasionEvent") != null ? 4 : 1)); // #ABOBA   1 - default, 3 - ai, 4 - pchols
 		loadingScreen.SetActive(true);
 		while (!operation.isDone)
 		{
@@ -658,8 +660,8 @@ public class MenuManager : MonoBehaviour
 				yield return JsonManager.RefillExistingShop(currentPLayerName);
 				yield return JsonManager.ResetExistingPlayer(currentPLayerName, currentPlayerPassword);
 			}
-			yield return RequestManager.GetPlayerEnum(currentPLayerName);
-			ShopManager.Instance.isAPIActive = true;
+			//yield return RequestManager.GetPlayerEnum(currentPLayerName);
+			//ShopManager.Instance.isAPIActive = true;
 			//Debug.Log(GameManager.Instance.playerModel.resources["elevators"]);
 			GameManager.Instance.isAPIActive = isAPIActive;
 			GameManager.Instance.JsonManager = new JsonManager(isAPIActive);
@@ -847,7 +849,7 @@ public class MenuManager : MonoBehaviour
 		//problemSolverScreen.SetActive(true);
 		//yield return new WaitForSeconds(1.5f);
 		yield return numberSummation.AnswerWaiter(room);
-		
+
 		SetPipesScreen.SetActive(false);
 		(room as EnergohoneyRoom).SetIsSolved(true);
 		GameManager.Instance.SetBearsShow(true);
@@ -880,7 +882,7 @@ public class MenuManager : MonoBehaviour
 	{
 		GameManager.Instance.GetGuideCanvas().SetActive(false);
 		SetNearClipPlain(1);
-        if (lastProblemType == ProblemType.SetCosmodrome) GameManager.Instance.GetGuideCanvas().GetComponentInChildren<Button>().transform.localPosition = startGuideButtonPos;
+		if (lastProblemType == ProblemType.SetCosmodrome) GameManager.Instance.GetGuideCanvas().GetComponentInChildren<Button>().transform.localPosition = startGuideButtonPos;
 	}
 
 	public void SetTablet(bool set) => tabletAnimator.SetTrigger(set ? "OpenShop" : "CloseShop");
