@@ -1805,7 +1805,7 @@ public class GameManager : MonoBehaviour
 						cycleNumber++;
 						break;
 					case Season.Calm:
-						ChangeSeason(Season.Storm);
+						ChangeSeason(Season.Freeze); // cutted
 						break;
 					case Season.Storm:
 						ChangeSeason(Season.Freeze);
