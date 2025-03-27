@@ -5,6 +5,9 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEngine.UI;
+using static TutorialManager;
+using System.IO;
 
 public class ModEvents : MonoBehaviour
 {
@@ -77,6 +80,12 @@ public class ModEvents : MonoBehaviour
 				eventViews.Add(newEventInstance);
 				previewEvents.Add(newEvent);
 				newEventInstance.GetComponent<GlobalEventInstance>().InitializeEventInstance(model);
+
+				Texture2D SpriteTexture = new Texture2D(2, 2);
+				SpriteTexture.LoadImage(File.ReadAllBytes(newEvent.icon_path));
+				Sprite NewSprite = Sprite.Create(SpriteTexture, new Rect(0, 0, SpriteTexture.width, SpriteTexture.height), new Vector2(0, 0));
+
+				newEventInstance.GetComponentsInChildren<Image>()[1].sprite = NewSprite;
 				EventManager.callWarning.Invoke(newEvent.name);
 			}
 			if (timeBetween <= 0 && activeEvents.FirstOrDefault(x => x.name == newEvent.name) == null && timeBetween > -newEvent.duration_in_minutes)

@@ -6,10 +6,7 @@ public class SpriteFiller : MonoBehaviour
 	[SerializeField] private Image fieldToFill;
 	public string _name;
 
-	private void Awake()
-	{
-		MenuManager.Instance.gameObject.GetComponentInChildren<ModManager>().AddSpriteFiller(this);
-	}
+
 
 	public void FillSprite(byte[] bytes)
 	{

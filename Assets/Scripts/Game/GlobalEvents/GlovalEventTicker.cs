@@ -3,12 +3,14 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
+using System.Linq;
 
 public class GlobalEventTicker : MonoBehaviour
 {
 	private Coroutine tickerRoutione;
 	[SerializeField] private float tickRate = 120f;
 	private List<GlobalEvent> activeEvents;
+	public List<GlobalEventInstance> eventViews;
 	[SerializeField] private GameObject eventPrefab;
 	[SerializeField] private Transform eventsParent;
 
@@ -16,7 +18,12 @@ public class GlobalEventTicker : MonoBehaviour
 	{
 		if (activeEvents.Contains(globalEvent)) activeEvents.Remove(globalEvent);
 	}
-
+	public void KillTicker()
+	{
+		activeEvents = new List<GlobalEvent>();
+		eventViews = new List<GlobalEventInstance>();
+		if (tickerRoutione != null) StopCoroutine(tickerRoutione);
+	}
 	public void StartTicker()
 	{
 		if (tickerRoutione != null) StopCoroutine(tickerRoutione);
@@ -25,41 +32,21 @@ public class GlobalEventTicker : MonoBehaviour
 
 	private IEnumerator Ticker()
 	{
+		while (!eventsParent.gameObject.activeInHierarchy) yield return null;
 		yield return RecieveGlobalEvents();
 		while (MenuManager.Instance.isAPIActive)
 		{
 			yield return new WaitForSeconds(tickRate);
+			while (!eventsParent.gameObject.activeInHierarchy) yield return null;
 			yield return RecieveGlobalEvents();
 		}
 	}
 
-	public void TryAddModEvent(LocalEvent newEvent)
-	{
-		DateTime eventTime = DateTime.Parse(newEvent.start_date_time[..^1]);
-		int timeBetween = (int)eventTime.Subtract(DateTime.UtcNow.AddHours(3)).TotalMinutes;
-		Debug.Log(DateTime.UtcNow.AddHours(3));
-		GlobalEvent model = new GlobalEvent {
-			name = newEvent.name,
-			text = newEvent.description,
-			duration_in_minutes = newEvent.duration_in_minutes,
-			start_date_time = newEvent.start_date_time
-		};
-		if (timeBetween <= 15)
-		{
-			var newEventInstance = Instantiate(eventPrefab, eventsParent);
-			newEventInstance.GetComponent<GlobalEventInstance>().InitializeEventInstance(model);
-			EventManager.callWarning.Invoke(newEvent.name);
-		}
-		if (timeBetween <= 0)
-		{
-			activeEvents.Add(model);
-			Debug.Log("EVENT ACTIVE");
-		}
-	}
 
 	private async Task RecieveGlobalEvents()
 	{
 		List<GlobalEvent> list = await MenuManager.Instance.RequestManager.GetAllGlobalEvents();
+		Debug.Log($"<color=yellow>Events: {list.Count}");
 		if (list == null || list.Count == 0)
 		{
 			//Take info from saved data (if present);
@@ -69,20 +56,21 @@ public class GlobalEventTicker : MonoBehaviour
 		foreach (var globalEvent in list)
 		{
 			DateTime eventTime = DateTime.Parse(globalEvent.start_date_time[..^1]);
-			int timeBetween = (int)eventTime.Subtract(DateTime.UtcNow.AddHours(3)).TotalMinutes;
+			float timeBetween = (float)eventTime.Subtract(DateTime.UtcNow.AddHours(3)).TotalMinutes;
 			Debug.Log(DateTime.UtcNow.AddHours(3));
-			if (timeBetween <= 15)
+			if (timeBetween <= 15 && timeBetween > -globalEvent.duration_in_minutes)
 			{
 				var newEventInstance = Instantiate(eventPrefab, eventsParent);
 				newEventInstance.GetComponent<GlobalEventInstance>().InitializeEventInstance(globalEvent);
 				EventManager.callWarning.Invoke(globalEvent.name);
-			}
-			if (timeBetween <= 0)
-			{
-				activeEvents.Add(globalEvent);
+				if (timeBetween <= 0 && timeBetween > -globalEvent.duration_in_minutes)
+				{
+					activeEvents.Add(globalEvent);
 
-				Debug.Log("EVENT ACTIVE");
+					Debug.Log("EVENT ACTIVE");
+				}
 			}
+
 		}
 	}
 }

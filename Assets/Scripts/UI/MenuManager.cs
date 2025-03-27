@@ -13,6 +13,8 @@ public class MenuManager : MonoBehaviour
 {
 	public static MenuManager Instance;
 
+	public bool isModded = false;
+
 	public JsonManager JsonManager = new JsonManager(true);
 	public RequestManager RequestManager = new RequestManager(true);
 	[SerializeField] private string currentPLayerName;
@@ -232,16 +234,24 @@ public class MenuManager : MonoBehaviour
 		isAPIActive = true;
 		JsonManager = new JsonManager(isAPIActive);
 		eventTicker.StartTicker();
-		if (isPlayerLoadable)
-		{
-			continueGameButton.SetActive(true);
-		}
 	}
 	public void DeactivateAPI()
 	{
 		isAPIActive = false;
 		JsonManager = new JsonManager(isAPIActive);
-		continueGameButton.SetActive(false);
+		eventTicker.KillTicker();
+	}
+
+	public void ActivateMods()
+	{
+		isModded = true;
+		JsonManager = new JsonManager(isAPIActive);
+		GetComponent<ModManager>().TryGetMods();
+	}
+	public void DeactivateMods()
+	{
+		isModded = false;
+		GetComponent<ModManager>().TryGetMods();
 	}
 
 	public void Awake()

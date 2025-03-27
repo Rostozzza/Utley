@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GlobalEventInstance : MonoBehaviour
 {
-	private GlobalEvent model;
+	public GlobalEvent model;
 	private Coroutine eventRoutine;
 	[SerializeField] private TextMeshProUGUI header;
 	[SerializeField] private TextMeshProUGUI description;

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,24 +16,24 @@ public class ModQuestManager : MonoBehaviour
 	public void AddCondition(Quest condition)
 	{
 		conditions.Add(condition);
-		Debug.Log("<color=green>ADDED");
-		Debug.Log(condition.condition.Key);
-		Debug.Log(condition.condition.Value);
 	}
 
 	public void Awake()
 	{
 		SceneManager.activeSceneChanged += (Scene old, Scene newS) =>
 		{
-			if (newS.buildIndex == 0)
+			if (MenuManager.Instance.isModded)
 			{
-				ClearAllConditions();
-				return;
-			}
-			if (newS.buildIndex == 1)
-			{
-				InitializeConditions();
-				return;
+				if (newS.buildIndex == 0)
+				{
+					ClearAllConditions();
+					return;
+				}
+				if (newS.buildIndex == 1)
+				{
+					InitializeConditions();
+					return;
+				}
 			}
 		};
 	}
@@ -59,6 +60,10 @@ public class ModQuestManager : MonoBehaviour
 		{
 			var conditionView = Instantiate(questViewPrefab, questsParent);
 			questViews.Add(conditionView);
+			Texture2D SpriteTexture = new Texture2D(2, 2);
+			SpriteTexture.LoadImage(File.ReadAllBytes(condition.icon_path));
+			Sprite NewSprite = Sprite.Create(SpriteTexture, new Rect(0, 0, SpriteTexture.width, SpriteTexture.height), new Vector2(0, 0));
+			conditionView.GetComponentsInChildren<Image>()[1].sprite = NewSprite;
 			conditionView.GetComponentInChildren<TextMeshProUGUI>().text = $"<b>>><u>{condition.name}</b></u>: {condition.description}";
 			StartCoroutine(StartConditionChecker(condition));
 		}

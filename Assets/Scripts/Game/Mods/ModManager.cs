@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
+using static TutorialManager;
 
 public class ModManager : MonoBehaviour
 {
@@ -13,39 +13,25 @@ public class ModManager : MonoBehaviour
 	[SerializeField] private ModQuestManager questManager;
 	[SerializeField] private ModEvents eventsManager;
 	[Header("Visuals")]
-	[SerializeField] private List<SpriteFiller> spriteFillerList;
+	[SerializeField] public List<Sprite> earthSprites = new List<Sprite>();
 
 	public ModEvents GetModEventsManager() => eventsManager;
 
-	public void AddSpriteFiller(SpriteFiller filler)
-	{
-		spriteFillerList.Add(filler);
-	}
-
-	public void ClearSpriteFillers()
-	{
-		spriteFillerList = new List<SpriteFiller>();
-	}
 
 	private void Start()
 	{
-		Debug.Log(JsonConvert.DeserializeObject<LocalEvent>(JsonConvert.SerializeObject(new LocalEvent
-		{
-			name = "TestEvent",
-			description = "локально игрет",
-			start_date_time = "2025-03-27T11:00:00Z",
-			duration_in_minutes = 5,
-			multipliers = new Dictionary<string, float>() { { "EnergohoneyGain", 2 } }
-		})).start_date_time);
-
-		model = MakeTemplate();
+		path = Application.isEditor ? Application.dataPath + "/Resources/Mods" : path = Directory.GetCurrentDirectory() + "/Mods";
+		if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+		if (!File.Exists(path + "/config.json")) MakeTemplate();
+		model = JsonConvert.DeserializeObject<Constants>(File.ReadAllText(path + "/config.json"));
 		SetValuesHolder();
-		TryGetMods();
+		//TryGetMods();
 		//Debug.Log(ValuesHolder.GameDuration);
 	}
 
 	private void SetValuesHolder()
 	{
+
 		ValuesHolder.StartAstroluminite = model.StartAstroluminite;
 		ValuesHolder.StartAsterium = model.StartAsterium;
 		ValuesHolder.StartEnergohoney = model.StartEnergohoney;
@@ -91,28 +77,33 @@ public class ModManager : MonoBehaviour
 		ValuesHolder.EnergohoneyExponent = model.EnergohoneyExponent;
 	}
 
+	private void ParseCondigSprites()
+	{
+		var files = Directory.GetFiles(path+"Asssets/Config");
+		foreach (var file in files)
+		{
+			Texture2D SpriteTexture = new Texture2D(2, 2);
+			SpriteTexture.LoadImage(File.ReadAllBytes(file));
+			Sprite NewSprite = Sprite.Create(SpriteTexture, new Rect(0, 0, SpriteTexture.width, SpriteTexture.height), new Vector2(0, 0));
+			earthSprites.Add(NewSprite);
+		}
+	}
+
 	public void TryGetMods()
 	{
-		//path = Application.isEditor ? Application.dataPath + "/Resources" : path = Directory.GetCurrentDirectory();
-		//if (!File.Exists(path + "/config.json")) MakeTemplate(path);
-		//model = JsonConvert.DeserializeObject<Constants>(File.ReadAllText(path + "/config.json"));
+		path = Application.isEditor ? Application.dataPath + "/Resources/Mods" : path = Directory.GetCurrentDirectory() + "/Mods";
+		if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+		if (!File.Exists(path + "Data/config.json")) MakeTemplate();
+		model = JsonConvert.DeserializeObject<Constants>(File.ReadAllText(path + "Data/config.json"));
+		ParseCondigSprites();
+		SetValuesHolder();
 		if (!Directory.Exists(path))
 		{
 			Directory.CreateDirectory(path);
 			EventManager.callError.Invoke("Папки Mods не было в файлах игры!");
 			return;
 		}
-		string[] mods = Directory.GetDirectories(path);
-
-		if (mods.Length == 0)
-		{
-			EventManager.callError.Invoke("Нет модов в папке Mods!");
-			return;
-		}
-		foreach (string mod in mods)
-		{
-			ParseMod(mod);
-		}
+		ParseMod();
 		//try
 		//{
 		//	model = JsonConvert.DeserializeObject<Constants>(File.ReadAllText(path + "/config.json"));
@@ -128,27 +119,18 @@ public class ModManager : MonoBehaviour
 	/// Parses individal mod
 	/// </summary>
 	/// <param name="directoryPath"></param>
-	private void ParseMod(string directoryPath)
+	private void ParseMod()
 	{
-		string[] repos = Directory.GetDirectories(directoryPath);
+		string[] dataRepos = Directory.GetFiles(path + "\\Data");
+		string[] assetsRepos = Directory.GetDirectories(path + "\\Assets");
 
-		if (repos.Length == 0)
-		{
-			EventManager.callError.Invoke($"Мод {directoryPath.Split("\\")[^1]} не содержит в себе контента!");
-			return;
-		}
-		Debug.Log(repos[0]);
-		string modDataPath = repos.First(x => x.Split("\\")[^1] == "Data");
-		//string modAssetsPath = repos.First(x => x.Split("/")[^1] == "Assets");
-
-		string[] dataRepos = Directory.GetDirectories(modDataPath);
-		
 		foreach (string dataRepo in dataRepos)
 		{
 			Debug.Log(dataRepo.Split("\\")[^1]);
+			if (dataRepo.Contains(".meta")) continue;
 			switch (dataRepo.Split("\\")[^1])
 			{
-				case "Quests":
+				case "Quests.json":
 					ParseQuests(dataRepo);
 					break;
 				case "Events":
@@ -185,57 +167,55 @@ public class ModManager : MonoBehaviour
 		{
 			string fileName = file.Split("\\")[^1];
 			Debug.Log(fileName);
-			spriteFillerList.FirstOrDefault(x => x._name == fileName);
-			//Texture2D texture = new Texture2D(2, 2);
-			//texture.LoadImage(File.ReadAllBytes(file));
-
+			//spriteFillerList.FirstOrDefault(x => x._name == fileName);
+			Texture2D texture = new Texture2D(256, 256);
+			texture.LoadImage(File.ReadAllBytes(file));
+			Texture2D SpriteTexture = new Texture2D(2, 2);
+			SpriteTexture.LoadImage(File.ReadAllBytes(file));
+			Sprite NewSprite = Sprite.Create(SpriteTexture, new Rect(0, 0, SpriteTexture.width, SpriteTexture.height), new Vector2(0, 0));
 		}
 	}
 
+
 	private void ParseEvents(string eventsPath)
 	{
-		string[] events = Directory.GetFiles(eventsPath);
-		Debug.Log($"<color=red>{events[0]} and {events[1]}");
-		if (events.Length == 0)
-		{
-			Debug.Log("<color=red>СОСО");
-			EventManager.callError.Invoke("Папка Events пуста!");
-			return;
-		}
 		eventsManager.ResetTicker();
-		foreach (string localEvent in events)
+		string rawQuestContent = File.ReadAllText(eventsPath);
+		List<LocalEvent> events = null;
+		try { events = JsonConvert.DeserializeObject<List<LocalEvent>>(rawQuestContent); }
+		catch (Exception e) { EventManager.callError.Invoke($"Файл Events содержит ошибки!"); }
+		if (events != null)
 		{
-			if (localEvent.Contains(".meta")) continue;
-			string rawEventContent = File.ReadAllText(localEvent);
-			LocalEvent newEvent = null;
-			Debug.Log(rawEventContent); 
-			try { newEvent = JsonConvert.DeserializeObject<LocalEvent>(rawEventContent); Debug.Log($"<color=yellow>{newEvent.start_date_time}"); }
-			catch (Exception e) { EventManager.callError.Invoke($"Файл {localEvent.Split("\\")[^1]} содержит ошибки!"); continue; }
-			Debug.Log(newEvent.name);
-			eventsManager.localEvents.Add(newEvent);
+			foreach (var quest in events)
+			{
+				Debug.Log($"<color=green>{quest.name}");
+				quest.icon_path = path + "\\Assets\\" + quest.icon_path;
+				eventsManager.localEvents.Add(quest);
+			}
 		}
 		eventsManager.StartTicker();
 	}
 
 	private void ParseQuests(string questsPath)
 	{
-		string[] quests = Directory.GetFiles(questsPath);
-		if (quests.Length == 0)
+		Debug.Log("<color=red>PARSING QUESTS");
+		string rawQuestContent = File.ReadAllText(questsPath);
+		List<Quest> quests = null;
+		//Debug.Log(JsonConvert.SerializeObject(new List<Quest> {new Quest { name="Test",description="test",condition=new KeyValuePair<string, int>("SurviveFor",920)} }));
+		try { quests = JsonConvert.DeserializeObject<List<Quest>>(rawQuestContent); }
+		catch (Exception e) { EventManager.callError.Invoke($"Файл Quests содержит ошибки!"); }
+		if (quests != null)
 		{
-			EventManager.callError.Invoke("Папка Quests пуста!");
-			return;
-		}
-		foreach (string quest in quests)
-		{
-			string rawQuestContent = File.ReadAllText(quest);
-			Quest newQuest = null;
-			try { newQuest = JsonConvert.DeserializeObject<Quest>(rawQuestContent); }
-			catch (Exception e) { EventManager.callError.Invoke($"Файл {quest.Split("/")[^1]} содержит ошибки!"); continue; }
-			questManager.AddCondition(newQuest);
+            foreach (var quest in quests)
+			{
+				Debug.Log($"<color=green>{quest.name}");
+				quest.icon_path = path+"\\Assets\\"+quest.icon_path;
+				questManager.AddCondition(quest);
+			}
 		}
 	}
 
-	public Constants MakeTemplate()
+	public void MakeTemplate()
 	{
 		Constants tm = new()
 		{
@@ -293,8 +273,7 @@ public class ModManager : MonoBehaviour
 			EnergohoneyExponent = 1f,
 		};
 		//Debug.Log(JsonConvert.SerializeObject(tm, Formatting.Indented));
-		// File.WriteAllText(path + "/config.json", JsonConvert.SerializeObject(tm, Formatting.Indented));
-		return tm;
+		File.WriteAllText(path + "/config.json", JsonConvert.SerializeObject(tm, Formatting.Indented));
 	}
 }
 
