@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class EnergohoneyRoom : RoomScript
 {
 	[SerializeField] GameObject setPipesButtonScreen;
+	[SerializeField] public List<Renderer> renderersToChangeMaterialOnEvent;
+	[SerializeField] public List<GameObject> pipes;
 	
 
     protected override void Start()
     {
+		pipes[(SceneManager.GetActiveScene().buildIndex == 4) ? 0 : 1].SetActive(false); 
         base.Start();
     }
 

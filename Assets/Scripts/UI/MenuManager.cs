@@ -613,7 +613,7 @@ public class MenuManager : MonoBehaviour
 		{
 			yield return Cutscene2();
 		}
-		var operation = SceneManager.LoadSceneAsync(1);
+		var operation = SceneManager.LoadSceneAsync(1); // #ABOBA   1 - default, 3 - ai, 4 - pchols
 		loadingScreen.SetActive(true);
 		while (!operation.isDone)
 		{

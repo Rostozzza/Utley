@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using TMPro;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class SupplyRoom : RoomScript
 {
@@ -12,6 +13,7 @@ public class SupplyRoom : RoomScript
 	public bool isSoft = false;
 	GameObject graph;
 	[SerializeField] private List<GameObject> poweredRooms;
+	[SerializeField] private List<GameObject> laptops;
 
 	protected override void Start()
 	{
@@ -21,6 +23,7 @@ public class SupplyRoom : RoomScript
 		{
 			GetRoomsToEnpower();
 		}
+		laptops[(SceneManager.GetActiveScene().buildIndex == 3) ? 0 : 1].SetActive(false); 
 	}
 	public override void SetPipes()
 	{

@@ -48,6 +48,7 @@ public class UIResourceShower : MonoBehaviour
     [SerializeField] private List<Sprite> icons;
     [SerializeField] private List<Sprite> iconsDebuff;
     [SerializeField] private TextMeshProUGUI timeLeft;
+    [SerializeField] private GameObject AIBoostShow;
 
 	private void Start()
 	{
@@ -56,6 +57,7 @@ public class UIResourceShower : MonoBehaviour
 		temperaturePanel.SetActive(false);
 		asteriumPanel.SetActive(false);
 		bearPanel.SetActive(false);
+        AIBoostShow.SetActive(false);
 		StartCoroutine(TimeChanger());
 		StartCoroutine(TemperatureChanger());
 	}
@@ -315,5 +317,10 @@ private void ShakeTemperature(float timer, float intensity)
             seasonPanelText.text = SeasonToText(GameManager.Instance.season);
             yield return new WaitForSeconds(0.5f);
         }
+    }
+
+    public void SetAIBoost(bool set)
+    {
+        AIBoostShow.SetActive(set);
     }
 }

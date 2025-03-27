@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
+using System.Collections;
 
-public class EnergohoneyUnpowerer : MonoBehaviour
+public class AIWorldChanger : MonoBehaviour
 {
     [SerializeField] private Material corruptedMaterial;
 
@@ -11,7 +9,6 @@ public class EnergohoneyUnpowerer : MonoBehaviour
     {
         EventManager.onAnyEnpower.AddListener(UnempowerEnergohoney);
         EventManager.onBuildedRoom.AddListener(UnempowerEnergohoney);
-        EventManager.onBuildedRoom.AddListener(PlaySound);
         UnempowerEnergohoney();
     }
 
@@ -19,35 +16,26 @@ public class EnergohoneyUnpowerer : MonoBehaviour
     {
         foreach (var room in GameManager.Instance.allRooms)
         {
-            if (room.TryGetComponent(out EnergohoneyRoom energohoney))
+            if (room.TryGetComponent(out RoomScript roomScript))
             {
-                StartCoroutine(DisableRoomDelayed(energohoney));
+                StartCoroutine(DisableRoomDelayed(roomScript));
             }
         }
     }
 
-    private IEnumerator DisableRoomDelayed(EnergohoneyRoom energohoney)
+    private IEnumerator DisableRoomDelayed(RoomScript room)
     {
         yield return null;
         yield return null;
         yield return null;
-        energohoney.Unpower();
-        energohoney.GetBaseOfRoom().GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
-        energohoney.SetConeierScreenShow(false);
-        energohoney.renderersToChangeMaterialOnEvent.ForEach(renderer => renderer.material = corruptedMaterial);
+        room.renderersToChangeMaterialOnEventAI.ForEach(renderer => renderer.material = corruptedMaterial);
         //energohoney.gameObject.GetComponentsInChildren<Renderer>().ToList().Where(x => x.material == defaultMaterial).ToList().ForEach(y => y.material = corruptedMaterial);
         //energohoney.GetBaseOfRoom().GetComponent<Renderer>().material.SetTexture("", emissive);
-    }
-
-    private void PlaySound()
-    {
-        SoundManager.Instance.PlaySoundOnce(SoundManager.Instance.beeBuildSound, SoundManager.MixerGroup.SFX);
     }
 
     void OnDestroy()
     {
         EventManager.onAnyEnpower.RemoveListener(UnempowerEnergohoney);
         EventManager.onBuildedRoom.RemoveListener(UnempowerEnergohoney);
-        EventManager.onBuildedRoom.RemoveListener(PlaySound);
     }
 }

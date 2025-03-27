@@ -22,6 +22,7 @@ public class RoomScript : MonoBehaviour
 	[SerializeField] public int asteriumCost;
 	[SerializeField] public int honeyCost;
 	[SerializeField] public int astroluminiteCost;
+	[SerializeField] public List<Renderer> renderersToChangeMaterialOnEventAI;
 	[Header("Camera task settings")]
 	[SerializeField] protected Transform cameraPoint;
 	[SerializeField] protected Vector3 cameraAngle;
