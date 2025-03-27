@@ -25,6 +25,7 @@ public class GlobalEventInstance : MonoBehaviour
 
 	private IEnumerator Countdown(bool isPreEvent)
 	{
+		Debug.Log("<color=yellow>Counddown");
 		if (isPreEvent)
 		{
 			while (DateTime.Parse(model.start_date_time[..^1]) > DateTime.UtcNow.AddHours(3))
@@ -44,8 +45,14 @@ public class GlobalEventInstance : MonoBehaviour
 			countdownImage.fillAmount = waitFor / (model.duration_in_minutes*60f);
 			yield return null;
 		}
-
-		MenuManager.Instance.GetEventTicker().KillActiveEvent(model);
+		try
+		{
+			MenuManager.Instance.GetEventTicker().KillActiveEvent(model);
+		}
+		catch
+		{
+			MenuManager.Instance.GetComponentInChildren<ModManager>().GetModEventsManager().KillActiveEvent(model);
+		}
 	}
 
 	protected string SecondsToTimeToShow(float seconds) // left - minutes, right - seconds. no hours.

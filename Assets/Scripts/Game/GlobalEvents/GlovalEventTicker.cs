@@ -10,7 +10,7 @@ public class GlobalEventTicker : MonoBehaviour
 	[SerializeField] private float tickRate = 120f;
 	private List<GlobalEvent> activeEvents;
 	[SerializeField] private GameObject eventPrefab;
-	[SerializeField] private Transform eventsParent; 
+	[SerializeField] private Transform eventsParent;
 
 	public void KillActiveEvent(GlobalEvent globalEvent)
 	{
@@ -30,6 +30,30 @@ public class GlobalEventTicker : MonoBehaviour
 		{
 			yield return new WaitForSeconds(tickRate);
 			yield return RecieveGlobalEvents();
+		}
+	}
+
+	public void TryAddModEvent(LocalEvent newEvent)
+	{
+		DateTime eventTime = DateTime.Parse(newEvent.start_date_time[..^1]);
+		int timeBetween = (int)eventTime.Subtract(DateTime.UtcNow.AddHours(3)).TotalMinutes;
+		Debug.Log(DateTime.UtcNow.AddHours(3));
+		GlobalEvent model = new GlobalEvent {
+			name = newEvent.name,
+			text = newEvent.description,
+			duration_in_minutes = newEvent.duration_in_minutes,
+			start_date_time = newEvent.start_date_time
+		};
+		if (timeBetween <= 15)
+		{
+			var newEventInstance = Instantiate(eventPrefab, eventsParent);
+			newEventInstance.GetComponent<GlobalEventInstance>().InitializeEventInstance(model);
+			EventManager.callWarning.Invoke(newEvent.name);
+		}
+		if (timeBetween <= 0)
+		{
+			activeEvents.Add(model);
+			Debug.Log("EVENT ACTIVE");
 		}
 	}
 
@@ -56,7 +80,7 @@ public class GlobalEventTicker : MonoBehaviour
 			if (timeBetween <= 0)
 			{
 				activeEvents.Add(globalEvent);
-				
+
 				Debug.Log("EVENT ACTIVE");
 			}
 		}
