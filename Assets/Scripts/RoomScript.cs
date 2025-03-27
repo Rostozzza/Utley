@@ -274,6 +274,9 @@ public class RoomScript : MonoBehaviour
 				workStr = "Исследуем технологии";
 				workSound = SoundManager.Instance.energohoneyRoomWorkSound;
 				break;
+			case Resources.AI:
+				workSound = SoundManager.Instance.aiRoomWorkSound;
+				break;
 				// in case Research - workStr = "Исследуем технологии"
 				//default:
 				//	if (workStationsToOutline.Count > 0)
@@ -292,6 +295,25 @@ public class RoomScript : MonoBehaviour
 		}
 		SetConeierScreenShow(isEnpowered);
 		sparks.ForEach(y => y.Stop());
+
+		CheckAndFillRoomInAllRooms();
+	}
+
+	private void CheckAndFillRoomInAllRooms()
+	{
+		bool foundThisScript = false;
+		foreach (var room in GameManager.Instance.allRooms)
+		{
+			if (room.TryGetComponent(out RoomScript roomScript))
+			{
+				if (roomScript == this)
+				{
+					foundThisScript = true;
+					break;
+				}
+			}
+		}
+		if (!foundThisScript) GameManager.Instance.allRooms.Add(gameObject);
 	}
 
 	public void AssignWorkForSelectedBear()
@@ -320,7 +342,7 @@ public class RoomScript : MonoBehaviour
 
 	public virtual void HideButton()
 	{
-		if (resource != Resources.Asteriy)
+		if (resource != Resources.Asteriy && assignmentButton != null)
 		{
 			assignmentButton.SetActive(false);
 		}
@@ -347,6 +369,13 @@ public class RoomScript : MonoBehaviour
 		{
 			Debug.Log("Нет свободных строительных комплексов!");
 			EventManager.callWarning.Invoke($"Нет свободного <color=yellow>конструктора</color> в комплексе строительства!");
+			return;
+		}
+
+		if (level >= 3)
+		{
+			Debug.Log("Уже максимальный уровень!");
+			EventManager.callWarning.Invoke($"Уровень уже максимальный!");
 			return;
 		}
 
@@ -390,7 +419,7 @@ public class RoomScript : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("Не хватает ресов для починки!");
+			Debug.Log("Не хватает ресов для улучшения!");
 			//EventManager.callWarning.Invoke($"Не хватает <color=yellow>{Mathf.CeilToInt((30 + 10 * (level - 1)) - await GameManager.Instance.GetHoney())}</color> энергомеда для починки!");
 			EventManager.callWarning.Invoke(NotEnoughResources(requireAsterium - await GameManager.Instance.GetAsteriy(), requireAstroluminite - await GameManager.Instance.GetAstroluminite()) + " для улучшения!");
 			return;
@@ -456,6 +485,7 @@ public class RoomScript : MonoBehaviour
 
 	public async void UpdateUpgradeView()
 	{
+		if (resource == Resources.AI) return;
 		if (level < 3)
 		{
 			int requireAsterium = ValuesHolder.RoomsBuildPrice[ConvertResourcesToRoomType(resource)][ResourceType.RepairAsteriumCost];
@@ -670,6 +700,7 @@ public class RoomScript : MonoBehaviour
 			case Resources.Asteriy:
 				TrySetVideoPlayers(true);
 				timer = (float)ValuesHolder.StandartInteractionTimeAsteriumComplex;
+				if (GameManager.Instance.GetIsEventAIEnpowered()) timer *= 0.5f;
 				workUI.StartWork(timer, (int)ValuesHolder.AsteriumAmountByOneInteraction, GameManager.Instance.uiResourceShower.asteriyAmountText.transform);
 				while (timer > 0)
 				{
@@ -713,6 +744,7 @@ public class RoomScript : MonoBehaviour
 					timer *= 0.9f;
 				}
 				timer *= 1 + (1 - efficientyCoeficent); // for RESISTORS exercise;
+				if (GameManager.Instance.GetIsEventAIEnpowered()) timer *= 0.5f;
 				(workUI as FluidWorkUI).StartWork(timer, 20, GameManager.Instance.uiResourceShower.astroluminiteAmountText.transform); // I wanted to placer ValuesHolder var where "20", but there is 20 for astroluminite??? idk, better to leave unchanged
 				fixedBear.SetActive(false);
 				while (timer > 0)
@@ -890,6 +922,7 @@ public class RoomScript : MonoBehaviour
 			}
 			else
 			{
+				baseOfRoom.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
 				SetLampsOn(false);
 				if (blinks != null)
 				{
@@ -1200,7 +1233,8 @@ public class RoomScript : MonoBehaviour
 		Bed,
 		Build,
 		Supply,
-		Research
+		Research,
+		AI
 	}
 
 	public enum Status
@@ -1297,4 +1331,5 @@ public class RoomScript : MonoBehaviour
 
 	public Vector3 GetCameraPosition() => cameraPoint.position;
 	public Vector3 GetCameraAngle() => cameraAngle;
+	public GameObject GetBaseOfRoom() => baseOfRoom;
 }

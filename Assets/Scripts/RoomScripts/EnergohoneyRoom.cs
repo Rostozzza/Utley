@@ -63,6 +63,7 @@ public class EnergohoneyRoom : RoomScript
 		{
 			timer *= 0.9f;
 		}
+		if (GameManager.Instance.GetIsEventAIEnpowered()) timer *= 0.5f;
 		int honeyToAdd = (GameManager.Instance.season != GameManager.Season.Storm) ? (int)ValuesHolder.EnergohoneyAmountByOneInteraction : (int)(ValuesHolder.EnergohoneyAmountByOneInteraction * (1 - 0.15f + 0.03f * (GameManager.Instance.cycleNumber * ValuesHolder.CycleModifier)));
 		workUI.StartWork(timer, honeyToAdd, GameManager.Instance.uiResourceShower.energoHoneyAmountText.transform, RoomWorkUI.ResourceType.Energohoney);
 		EventManager.onBearWorkStarted.Invoke(this);

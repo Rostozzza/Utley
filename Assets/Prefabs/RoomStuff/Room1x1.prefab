@@ -1665,6 +1665,7 @@ GameObject:
   - component: {fileID: 2743876564508728058}
   - component: {fileID: 4341014070407133732}
   - component: {fileID: 895371806372438072}
+  - component: {fileID: 2985804641912477129}
   m_Layer: 0
   m_Name: Room1x1
   m_TagString: elevator
@@ -1753,7 +1754,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392cea8f6778fdf4db0c3ef415a7812d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elevator: {fileID: 5253349184228087923}
 --- !u!114 &895371806372438072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1785,6 +1785,23 @@ MonoBehaviour:
   ForceRightDoor: 0
   ForceTopDoor: 0
   ForceBottomDoor: 0
+--- !u!114 &2985804641912477129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5253349184228087923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705fdecb97c8b544da292a41e4a54826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 8843190631143911271}
+  - {fileID: 2345989565838392851}
+  - {fileID: 8579644920238721060}
+  - {fileID: 5643643438846625326}
 --- !u!1 &5541155190602434595
 GameObject:
   m_ObjectHideFlags: 0

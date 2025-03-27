@@ -157,6 +157,7 @@ public class ResearchRoom : RoomScript
 		{
 			timer *= 0.9f;
 		}
+		if (GameManager.Instance.GetIsEventAIEnpowered()) timer *= 0.5f;
 		switch (waitOption)
 		{
 			case Type.Ursowaks:

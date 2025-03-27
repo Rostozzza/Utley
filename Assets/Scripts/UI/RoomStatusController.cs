@@ -23,11 +23,11 @@ public class RoomStatusController : MonoBehaviour
 
     public void Init(GameObject obj, string name, float durability, RoomScript.Status status, RoomScript.Resources resource)
     {
-        this.obj = obj;
-        roomName.text = name;
-        durabilityShow.text = DurabilityToText(durability);
-        stateShow.text = StatusToText(status);
-        icon.sprite = ResourceTypeToSprite(resource);
+        //this.obj = obj;
+        //roomName.text = name;
+        //durabilityShow.text = DurabilityToText(durability);
+        //stateShow.text = StatusToText(status);
+        //icon.sprite = ResourceTypeToSprite(resource);
     }
 
     private Sprite ResourceTypeToSprite(RoomScript.Resources resource)
@@ -89,7 +89,7 @@ public class RoomStatusController : MonoBehaviour
                 UpdateDurability(0);
                 break;
         }
-        stateShow.text = StatusToText(status);
+        //stateShow.text = StatusToText(status);
     }
 
     public void MoveToObject()

@@ -9,7 +9,7 @@ public class ModManager : MonoBehaviour
 
     private void Awake()
     {
-        TryGetConfig();
+        TryGetMods();
 
         SetValuesHolder();
         Debug.Log(ValuesHolder.GameDuration);
@@ -62,27 +62,28 @@ public class ModManager : MonoBehaviour
         ValuesHolder.EnergohoneyExponent                    = model.EnergohoneyExponent;
     }
 
-    public void TryGetConfig()
+    public void TryGetMods()
     {
         //path = Application.isEditor ? Application.dataPath + "/Resources" : path = Directory.GetCurrentDirectory();
         //if (!File.Exists(path + "/config.json")) MakeTemplate(path);
         //model = JsonConvert.DeserializeObject<Constants>(File.ReadAllText(path + "/config.json"));
 
         string path;
-
-        path = Application.isEditor ? Application.dataPath + "/Resources/Mods/Config" : Directory.GetCurrentDirectory() + "/Mods/Config";
+        path = Application.isEditor ? Application.dataPath + "/Resources/Mods" : Directory.GetCurrentDirectory() + "/Mods";
         if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-        string[] files = Directory.GetFiles(path);
-        if (files.Length > 0)
+        
+        try
+        { 
+            model = JsonConvert.DeserializeObject<Constants>(File.ReadAllText(path + "/config.json"));
+        }
+        catch
         {
-            foreach (string file in files)
-            {
-                //if (file)
-            }
+            model = MakeTemplate();
+            EventManager.callError.Invoke("Не удалось загрузить мод. планету!");
         }
     }
 
-    public Constants MakeTemplate(string path)
+    public Constants MakeTemplate()
     {
         Constants tm = new()
         {
@@ -121,14 +122,14 @@ public class ModManager : MonoBehaviour
 
             RoomsBuildPrice = new()
             {
-                { RoomType.Elevator,    new(){ { ResourceType.AsteriumPrice, 10 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 0 } } },
-                { RoomType.Energohoney, new(){ { ResourceType.AsteriumPrice, 20 }, { ResourceType.EnergohoneyPrice, 25 }, { ResourceType.AstroluminitePrice, 1 } } },
-                { RoomType.Asterium,    new(){ { ResourceType.AsteriumPrice, 30 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 3 } } },
-                { RoomType.Cosmodrome,  new(){ { ResourceType.AsteriumPrice, 0 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 0 } } },
-                { RoomType.Bed,         new(){ { ResourceType.AsteriumPrice, 25 }, { ResourceType.EnergohoneyPrice, 10 }, { ResourceType.AstroluminitePrice, 0 } } },
-                { RoomType.Build,       new(){ { ResourceType.AsteriumPrice, 35 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 3 } } },
-                { RoomType.Supply,      new(){ { ResourceType.AsteriumPrice, 30 }, { ResourceType.EnergohoneyPrice, 5 }, { ResourceType.AstroluminitePrice, 2 } } },
-                { RoomType.Research,    new(){ { ResourceType.AsteriumPrice, 25 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 1 } } }
+                { RoomType.Elevator,    new(){ { ResourceType.AsteriumPrice, 10 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 0 }, { ResourceType.RepairAsteriumCost, 15 }, { ResourceType.RepairAstroluminiteCost, 1 } } },
+                { RoomType.Energohoney, new(){ { ResourceType.AsteriumPrice, 20 }, { ResourceType.EnergohoneyPrice, 25 }, { ResourceType.AstroluminitePrice, 1 }, { ResourceType.RepairAsteriumCost, 15 }, { ResourceType.RepairAstroluminiteCost, 1 } } },
+                { RoomType.Asterium,    new(){ { ResourceType.AsteriumPrice, 30 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 3 }, { ResourceType.RepairAsteriumCost, 15 }, { ResourceType.RepairAstroluminiteCost, 1 } } },
+                { RoomType.Cosmodrome,  new(){ { ResourceType.AsteriumPrice, 0 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 0 }, { ResourceType.RepairAsteriumCost, 15 }, { ResourceType.RepairAstroluminiteCost, 1 } } },
+                { RoomType.Bed,         new(){ { ResourceType.AsteriumPrice, 25 }, { ResourceType.EnergohoneyPrice, 10 }, { ResourceType.AstroluminitePrice, 0 }, { ResourceType.RepairAsteriumCost, 15 }, { ResourceType.RepairAstroluminiteCost, 1 } } },
+                { RoomType.Build,       new(){ { ResourceType.AsteriumPrice, 35 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 3 }, { ResourceType.RepairAsteriumCost, 15 }, { ResourceType.RepairAstroluminiteCost, 1 } } },
+                { RoomType.Supply,      new(){ { ResourceType.AsteriumPrice, 30 }, { ResourceType.EnergohoneyPrice, 5 }, { ResourceType.AstroluminitePrice, 2 }, { ResourceType.RepairAsteriumCost, 15 }, { ResourceType.RepairAstroluminiteCost, 1 } } },
+                { RoomType.Research,    new(){ { ResourceType.AsteriumPrice, 25 }, { ResourceType.EnergohoneyPrice, 0 }, { ResourceType.AstroluminitePrice, 1 }, { ResourceType.RepairAsteriumCost, 15 }, { ResourceType.RepairAstroluminiteCost, 1 } } }
             },
 
             RepairCost = 15,

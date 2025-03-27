@@ -15,6 +15,7 @@ public class SoundManager : MonoBehaviour
 	public AudioClip supplyRoomWorkSound;
 	public AudioClip energohoneyRoomWorkSound;
 	public AudioClip builderRoomWorkSound;
+	public AudioClip aiRoomWorkSound;
 	[Header("Environment")]
 	public AudioClip impactSound;
 	[Header("Mono")]

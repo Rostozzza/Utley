@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
 	private bool wasSelectedThisFrame = false;
 	[SerializeField] private bool isExerciseOpen = false;
 	[SerializeField] private GameObject guideCanvas;
+	[SerializeField] private bool isEventAIEnpowered = false;
 	[Header("Building settings")]
 	[SerializeField] private GameObject buildingLoading;
 	public GameObject buildingScreen;
@@ -598,7 +599,6 @@ public class GameManager : MonoBehaviour
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CannotBeSelected();
 		while (room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitMovement>().currentRoom != roomToWaitFor)
 		{
-			Debug.Log("waiting");
 			yield return null;
 		}
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponentInChildren<Animator>().SetBool("Work", true);
@@ -625,6 +625,7 @@ public class GameManager : MonoBehaviour
 		StartCoroutine(WalkAndStartWork(room.GetComponent<BuilderRoom>().fixedBear, room));
 		room.GetComponent<BuilderRoom>().SetWait(true,true);
 		room.GetComponent<BuilderRoom>().fixedBear.GetComponent<UnitScript>().CanBeSelected();
+		EventManager.onBuildedRoom.Invoke();
 	}
 
 	private async Task SelectAndBuildMainBlock(GameObject building, Transform point)
@@ -2024,6 +2025,9 @@ public class GameManager : MonoBehaviour
 	public void SetIsExerciseOpen(bool set) => isExerciseOpen = set;
 
 	public GameObject GetGuideCanvas() => guideCanvas;
+
+	public void SetIsEventAIEnpowered(bool set) => isEventAIEnpowered = set;
+	public bool GetIsEventAIEnpowered() => isEventAIEnpowered;
 
 	public enum Season
 	{

@@ -32,6 +32,7 @@ public class SupplyRoom : RoomScript
 
 	public void GetRoomsToEnpower()
 	{
+		EventManager.onAnyEnpower.Invoke();
 		var horizontalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.x - transform.position.x) <= 9f //17f earlier range was longer;
 																	&& x.transform.position.y == transform.position.y && x.GetComponent<RoomScript>()).ToList();
 		var verticalRooms = GameManager.Instance.allRooms.Where(x => Mathf.Abs(x.transform.position.y - transform.position.y) <= 5f //9f

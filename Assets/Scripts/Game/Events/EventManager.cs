@@ -73,6 +73,10 @@ public static class EventManager
 	/// </summary>
 	public static UnityEvent onResearchSettingsSolved = new UnityEvent();
 
+	public static UnityEvent onAnyEnpower = new UnityEvent();
+
+	public static UnityEvent onBuildedRoom = new();
+
 	#region Notification system
 	/// <summary>
 	/// Invoke error through this event. Pass error message into Invoke()

@@ -47,19 +47,15 @@ public class BuilderRoom : RoomScript
     public void SetWait(bool set, bool needToLeave = false)
     {
         wait = set;
-        try
-        {
-            if (needToLeave)
-            {
-                fixedBear.GetComponent<UnitScript>().CanBeSelected();
-                status = Status.Free;
-                fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
-                animator.SetTrigger("EndWork");
-                audioSource.Stop();
-                InterruptWork();
-            }
-        }
-        catch { }
+        //if (needToLeave)
+        //{
+        //    fixedBear.GetComponent<UnitScript>().CanBeSelected();
+		//    status = Status.Free;
+        //    fixedBear.GetComponent<UnitScript>().SetWorkStr("Не занят");
+		//    animator.SetTrigger("EndWork");
+		//    audioSource.Stop();
+        //    InterruptWork();
+        //}
     }
 
     public bool GetWait()

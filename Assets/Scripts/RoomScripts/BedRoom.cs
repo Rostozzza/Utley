@@ -30,6 +30,7 @@ public class BedRoom : RoomScript
 		}
 		fixedBear.GetComponent<UnitScript>().StartMoveInRoom(Resources.Bed, GetWalkPoints(), this.gameObject);
 		timer = 150f;
+		if (GameManager.Instance.GetIsEventAIEnpowered()) timer *= 0.5f;
 		//if (fixedBear.GetComponent<UnitScript>().isBoosted)
 		//{
 		//	timer *= 0.9f;

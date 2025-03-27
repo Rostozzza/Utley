@@ -82,6 +82,7 @@ public class RoomStatsController : MonoBehaviour
             RoomScript.Resources.Bed         => "Улучшает медведей",
             RoomScript.Resources.Asteriy     => "Перерабатывает астерий",
             RoomScript.Resources.Build       => "Ремонтирует и улучшает комплексы",
+            RoomScript.Resources.AI          => "Ускоряет все остальные комплексы",
             _ => "Что-то пошло не так",
         };
     }
@@ -97,6 +98,7 @@ public class RoomStatsController : MonoBehaviour
             RoomScript.Resources.Bed         => "Творец",
             RoomScript.Resources.Asteriy     => "Нет",
             RoomScript.Resources.Build       => "Конструктор",
+            RoomScript.Resources.AI          => "Нет",
             _ => "Что-то пошло не так",
         };
     }
@@ -112,6 +114,7 @@ public class RoomStatsController : MonoBehaviour
             RoomScript.Resources.Bed         => "Жилой комплекс",
             RoomScript.Resources.Asteriy     => "Комплекс переработки астерия",
             RoomScript.Resources.Build       => "Комплекс строительства",
+            RoomScript.Resources.AI          => "ИИ комплекс",
             _ => "Что-то пошло не так",
         };
     }
@@ -127,6 +130,7 @@ public class RoomStatsController : MonoBehaviour
             RoomScript.Resources.Bed         => "Увеличивает максимальное количество персонала на базе. Взаимодействие с комплексом воодушевляет 3-ех случайных медведей, увеличивая эффективность их работы на 10%. Улучшение увеличивает скорость взаимодействия. Эффективный специалист — творец.",
             RoomScript.Resources.Asteriy     => "Перерабатывает поставляемый необработанный астерий с космодрома. Взаимодействие начинается автоматически, если есть необработанный астерий. Улучшение повышает скорость переработки 1 единицы астерия.",
             RoomScript.Resources.Build       => "Комплекс строительства увеличивает количество одновременных действий в режиме строительства. Взаимодействие с комплексом назначает ответственного рабочего, который будет выполнять работу. Улучшение увеличивает скорость выполнения работ. Эффективный специалист — конструктор.",
+            RoomScript.Resources.AI          => "Позволяет ускорить все остальные комплексы на 50%. Требует два источника питания в виде двух комплексов снабжения поблизости.",
             _ => "Что-то пошло не так",
         };
     }
