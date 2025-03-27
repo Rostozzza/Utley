@@ -9,7 +9,7 @@ public class GlobalEventTicker : MonoBehaviour
 {
 	private Coroutine tickerRoutione;
 	[SerializeField] private float tickRate = 120f;
-	private List<GlobalEvent> activeEvents;
+	public List<GlobalEvent> activeEvents;
 	public List<GlobalEventInstance> eventViews;
 	[SerializeField] private GameObject eventPrefab;
 	[SerializeField] private Transform eventsParent;

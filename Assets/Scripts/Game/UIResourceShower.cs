@@ -57,7 +57,11 @@ public class UIResourceShower : MonoBehaviour
 		temperaturePanel.SetActive(false);
 		asteriumPanel.SetActive(false);
 		bearPanel.SetActive(false);
-        AIBoostShow.SetActive(false);
+        try
+        {
+            AIBoostShow.SetActive(false);
+        }
+        catch { }
 		StartCoroutine(TimeChanger());
 		StartCoroutine(TemperatureChanger());
 	}
